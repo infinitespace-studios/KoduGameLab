@@ -1,0 +1,77 @@
+name: Build Kodu Game Lab (Multi-Platform)
+
+on:
+  push:
+    branches: [ monogame ]
+  pull_request:
+    branches: [ monogame ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore main/Boku/boku.csproj
+      
+    - name: Build
+      run: dotnet build main/Boku/boku.csproj --no-restore --configuration Release
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: boku-windows
+        path: main/Boku/bin/Release/net9.0/
+        
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore main/Boku/boku.csproj
+      
+    - name: Build
+      run: dotnet build main/Boku/boku.csproj --no-restore --configuration Release
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: boku-linux
+        path: main/Boku/bin/Release/net9.0/
+        
+  build-macos:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore main/Boku/boku.csproj
+      
+    - name: Build
+      run: dotnet build main/Boku/boku.csproj --no-restore --configuration Release
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: boku-macos
+        path: main/Boku/bin/Release/net9.0/

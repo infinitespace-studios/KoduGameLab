@@ -1,0 +1,25 @@
+name: Build Kodu Game Lab
+
+on:
+  push:
+    branches: [ monogame ]
+  pull_request:
+    branches: [ monogame ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore main/Boku/boku.csproj
+      
+    - name: Build
+      run: dotnet build main/Boku/boku.csproj --no-restore --configuration Release
