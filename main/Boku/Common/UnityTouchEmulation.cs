@@ -6,8 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using TouchHook;
+using System.Windows.Forms;
+
 namespace Boku.Common
 {
+    public static class Input
+    {
+        #region Members
+        // Contains a list of touch objects which store the data sent from TouchHook messages
+        private static List<EventTouch> eventTouches = new List<EventTouch>();
+        // Contains a static list of touch for this frame
+        private static List<Touch> touchesThisFrame = new List<Touch>();
+        // Contains a list of toucheventargs that needs processing
+        private static List<TouchEventArgs> recordEventArgs = new List<TouchEventArgs>();
+        
+        private static WM_TouchHook cwTouchHook = null;
+
+        #endregion Members
+
         #region Accessors
 
         public static int EventTouchCount
@@ -120,6 +137,7 @@ namespace Boku.Common
                     break;
                 }
             }
+        }
 
         private static void TouchUpHandler(object sender, TouchEventArgs e)
         {

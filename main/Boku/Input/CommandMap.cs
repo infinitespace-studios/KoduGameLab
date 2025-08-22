@@ -345,16 +345,6 @@ namespace Boku.Input
         protected void LateBindEvents()
         {
             Debug.Assert(false, "Is any of this actually used???");
-                                        MethodInfo addHandler = eventSource.GetAddMethod();
-                                        Object[] invokeParams = { eventHandler };
-                                        addHandler.Invoke(command, invokeParams);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
 
         /// <summary>

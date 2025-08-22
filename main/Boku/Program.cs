@@ -599,7 +599,8 @@ namespace Boku
                 {
                     // GamerServices was not initialized at the time of the crash, so forward it to the OS.
                     throw;
-                } // !XBOX
+                }
+#endif // !XBOX
             }
 #endif // GLOBAL_CATCH
 
@@ -753,6 +754,8 @@ namespace Boku
             }
             catch { }
         }
+#endif
     }
 
 }   // end of namespace Boku
+
