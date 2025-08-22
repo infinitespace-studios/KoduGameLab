@@ -355,7 +355,6 @@ namespace Boku.Input
                     }
                 }
             }
-#endif
         }
 
         /// <summary>

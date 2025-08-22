@@ -677,7 +677,6 @@ namespace Boku.Common
                     }
                 }
             }
-#endif
 
             if(BokuSettings.Settings.UseSystemFontRendering)
             {
@@ -717,7 +716,6 @@ namespace Boku.Common
                     {
                         if(BokuSettings.Settings.UseSystemFontRendering)
                         {
-#endif
                         }
                         else
                         {

@@ -187,7 +187,7 @@ namespace Boku.Common.ParticleSystem
                         // MG only supports starting from 0.
                         int numParticles = endIndex;
                         device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, numParticles * 4, 0, numParticles * 2);
-#else
+
                         int numParticles = numActiveParticles;
                         device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, startIndex * 4, numParticles * 4, startIndex * 6, numParticles * 2);
 #endif
@@ -199,7 +199,7 @@ namespace Boku.Common.ParticleSystem
                         // MG only supports starting from 0.
                         int numParticles = endIndex;
                         device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, maxParticles * 4, 0, maxParticles * 2);
-#else
+
                         int numParticles = maxParticles - startIndex;
                         device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, startIndex * 4, numParticles * 4, startIndex * 6, numParticles * 2);
                         numParticles = numActiveParticles - numParticles;

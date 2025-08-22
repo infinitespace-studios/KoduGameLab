@@ -8726,7 +8726,7 @@ namespace Boku.Base
                 }
             }
         } // end DebugDisplay
-#else
+
         public override void DebugDisplay(Camera camera)
         {
             DisplayCollisions(camera);

@@ -838,7 +838,6 @@ namespace Boku.Programming
                 }
             }
 
-#else
             InGame.Clear(Color.Transparent);
 #endif
 
@@ -1415,7 +1414,7 @@ p { page-break-before: always; }
             image.SaveAsPng(stream, image.Width, image.Height);
             url += Convert.ToBase64String(stream.ToArray(), Base64FormattingOptions.None);
             stream.Close();
-#else
+
             WriteTilePng(@"tilemap\images", item);
             string url = "images/" + item.upid + ".png";
             return url;

@@ -303,7 +303,6 @@ namespace Boku
                                 touch.position = pos;
                             }
                         }
-#endif
 
                         if (touch != null)
                         {
@@ -1837,7 +1836,6 @@ namespace Boku
                 // Render dialog.
                 ssquad.Render(rtFull, shared.rtDisplayPosition + BokuGame.ScreenPosition, newSize, @"TexturedRegularAlpha");
 
-#if NETFX_CORE
                 VirtualKeyboard.Render();
             }   // end of SaveLevelDialog RenderObj Render()
 

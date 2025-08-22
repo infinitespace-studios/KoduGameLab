@@ -61,7 +61,7 @@ namespace Boku.Programming
                     actionObject = pair.Key;
                 }
             }
-#else
+
             // find the highest priority action
             ActionSet prioritizedSet = null;
             foreach (KeyValuePair<Reflex, ActionSet> pair in itemSets)

@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.IO;
 
     using Windows.UI.Popups;
-#endif
 
 namespace Boku.Common.Localization
 {
@@ -141,7 +140,6 @@ namespace Boku.Common.Localization
                 return result;
             }
 
-#if NETFX_CORE
             XmlReader reader = null;
             Stream stream = null;
 

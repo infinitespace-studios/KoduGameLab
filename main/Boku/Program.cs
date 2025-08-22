@@ -306,8 +306,7 @@ namespace Boku
                     {
                         if (string.IsNullOrEmpty(commandLineLang))
                         {
-                        if (Windows.System.UserProfile.GlobalizationPreferences.Languages.Count > 0)
-#endif
+                            if (Windows.System.UserProfile.GlobalizationPreferences.Languages.Count > 0)
                             {
                                 try
                                 {
@@ -754,7 +753,6 @@ namespace Boku
             }
             catch { }
         }
-#endif
     }
 
 }   // end of namespace Boku

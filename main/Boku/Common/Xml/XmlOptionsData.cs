@@ -15,7 +15,6 @@ using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 
     using Windows.Foundation;
-#endif
 
 using Boku;
 using BokuShared;
@@ -248,7 +247,7 @@ namespace Boku.Common.Xml
             {
                 if (String.IsNullOrEmpty(Instance.username))
                 {
-#if NETFX_CORE
+
                     Instance.username = GetCurrentUsername();
                 }
                 return Instance.username;

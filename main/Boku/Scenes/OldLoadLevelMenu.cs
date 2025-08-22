@@ -166,7 +166,7 @@ namespace Boku
                 {
 #if !XBOX360
                     files = Storage.GetFiles(path, filter, SearchOption.TopDirectoryOnly);
-#else
+
                     files = Storage.GetFiles(path, filter);
 #endif
                 }
@@ -833,7 +833,7 @@ namespace Boku
         }
 #if HIDE_MISSIONS
         private Tab curTab = Tab.MyWorlds;
-#else
+
         private Tab curTab = Tab.Missions;
 #endif
 

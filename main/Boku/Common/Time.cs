@@ -171,10 +171,10 @@ namespace Boku.Common
 #if DEBUG
 #if Debug_CountTerrainVerts
                 fps = String.Format("{0:F1} fps ave:{1:####.00}ms verts:{2:####} tris:{3:####}", Time.FrameRate, 1000.0f / Time.FrameRate, Boku.SimWorld.Terra.Terrain.VertCounter_Debug, Boku.SimWorld.Terra.Terrain.TriCounter_Debug);
-#else
+
                 fps = String.Format("{0:F1} fps ave:{3:####.00}ms ", Time.FrameRate, minMS, maxMS, 1000.0f / Time.FrameRate) + " " + DebugString;
 #endif
-#else
+
                 fps = String.Format("{0:F1} fps", Time.FrameRate);
 #endif
                 return fps;

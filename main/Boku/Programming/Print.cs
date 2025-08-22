@@ -489,7 +489,6 @@ namespace Boku.Programming
         }
 
         static bool firstTime = true;
-#endif
         private static void SendToPrinter(string fullPath)
         {
             // Do nothing here.  At least the users can go find the Kode.txt

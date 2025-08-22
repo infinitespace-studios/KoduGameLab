@@ -707,7 +707,7 @@ namespace Boku.Common
             {
 #if XBOX
                 // Do nothing?
-#else
+
                 throw new FileNotFoundException(String.Format("File not found in {0}: {1}", sources, name));
 #endif
             }
@@ -952,7 +952,7 @@ namespace Boku.Common
             }
 
             return File.GetLastWriteTimeUtc(Combine(PathBase(StorageSource.TitleSpace), name));
-#else
+
             // Hm, how to implement correctly on Xbox...
             return new DateTime(0);
 #endif
@@ -975,7 +975,7 @@ namespace Boku.Common
             {
                 File.SetLastWriteTimeUtc(Combine(PathBase(StorageSource.TitleSpace), name), dateTimeUtc);
             }
-#else
+
             // Hm, how to implement on Xbox...
 #endif
         }

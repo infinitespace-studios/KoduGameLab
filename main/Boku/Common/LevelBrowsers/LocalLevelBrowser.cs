@@ -14,7 +14,6 @@ using Boku.Common.Sharing;
     using System.Threading.Tasks;
     using Windows.Foundation;
     using Windows.System.Threading;
-#endif
 
 using BokuShared;
 
@@ -45,7 +44,6 @@ namespace Boku.Common
 
         public bool Working
         {
-#if NETFX_CORE
             get { return working; }
         }
 

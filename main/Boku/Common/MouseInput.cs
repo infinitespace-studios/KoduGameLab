@@ -340,7 +340,7 @@ namespace Boku.Common
                 {
                     state = new MouseState(state.X - (int)BokuGame.ScreenPosition.X, state.Y - (int)BokuGame.ScreenPosition.Y, state.ScrollWheelValue, state.LeftButton, state.MiddleButton, state.RightButton, state.XButton1, state.XButton2);
                 }
-#else
+
                 if (!initialized)
                 {
                     MouseWorker worker = new MouseWorker();

@@ -1687,7 +1687,7 @@ namespace Boku
                 {
                     parent.InsertReflex(null);
                 }
-#else
+
                 bool blank = false;
                 for (int i = 0; i < parent.ActivePanels.Count; i++)
                 {
@@ -1723,7 +1723,6 @@ namespace Boku
 
 #endif  // !NETFX_CORE
                 }   // end if Running
-#endif
             }
         }   // end of class UpdateObj
 

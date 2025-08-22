@@ -8,7 +8,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 namespace Boku.Common
 {
-        #endregion Members
 
         #region Accessors
 
@@ -59,10 +58,8 @@ namespace Boku.Common
 
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
         private const int mouseId = 1000;
-        private static void MouseDownHandler(object sender, MouseEventArgs e)
-#else
+        
         private static void TouchDownHandler(object sender, TouchEventArgs e)
-#endif
         {
             TouchEventArgs eva = new TouchEventArgs();
             eva.id = e.id;
@@ -76,7 +73,7 @@ namespace Boku.Common
             {
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
                 if( t.fingerId == mouseId )
-#else
+
                 if (t.fingerId == e.id)
 #endif
                 {
@@ -107,7 +104,7 @@ namespace Boku.Common
                 found = new EventTouch(screenPosition);
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
                 found.fingerId = mouseId;// e.id;
-#else
+
                 found.fingerId = e.id;
 #endif
                 //found.deltaPosition = new Vector2();
@@ -125,7 +122,7 @@ namespace Boku.Common
 
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
         private static void MouseMoveHandler(object sender, MouseEventArgs e)
-#else
+
         private static void TouchMoveHandler(object sender, TouchEventArgs e)
 #endif
         {
@@ -135,7 +132,7 @@ namespace Boku.Common
             {
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
                 if( t.fingerId == mouseId )
-#else
+
                 if (t.fingerId == e.id)
 #endif
                 {
@@ -192,7 +189,7 @@ namespace Boku.Common
 
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
         private static void MouseUpHandler(object sender, MouseEventArgs e)
-#else
+
         private static void TouchUpHandler(object sender, TouchEventArgs e)
 #endif
         {
@@ -214,7 +211,7 @@ namespace Boku.Common
             {
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
                 if( t.fingerId == mouseId )
-#else
+
                 if (t.fingerId == e.id)
 #endif
                 {
@@ -273,7 +270,7 @@ namespace Boku.Common
         {
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
             touchHook = new WM_MouseHook(BokuGame.bokuGame.Window.Handle);
-#else
+
             IntPtr mainformHandle = MainForm.Instance.Handle;
             IntPtr xnaControlHandle = XNAControl.Instance.Handle;
             cwTouchHook = new WM_TouchHook(xnaControlHandle, TouchHook.HookType.WH_CALLWNDPROC);
@@ -287,7 +284,7 @@ namespace Boku.Common
             touchHook.MouseDown += new EventHandler<MouseEventArgs>(MouseDownHandler);
             touchHook.MouseMove += new EventHandler<MouseEventArgs>(MouseMoveHandler);
             touchHook.MouseUp += new EventHandler<MouseEventArgs>(MouseUpHandler);
-#else
+
             cwTouchHook.TouchDown += new EventHandler<TouchEventArgs>(TouchDownHandler);
             cwTouchHook.TouchMove += new EventHandler<TouchEventArgs>(TouchMoveHandler);
             cwTouchHook.TouchUp += new EventHandler<TouchEventArgs>(TouchUpHandler);
@@ -554,7 +551,6 @@ namespace Boku.Common
         }
     }
 
-#endif
 
     public class Touch
     {

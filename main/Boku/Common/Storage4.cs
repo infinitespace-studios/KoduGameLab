@@ -890,8 +890,6 @@ namespace Boku.Common
             return result;
         }   // end of GetHashedMachineID()
 
-#else // not NETFX_CORE
-
         /// <summary>
         /// One time init of storage.
         /// </summary>
@@ -1431,17 +1429,6 @@ namespace Boku.Common
         // Methods common to .Net and NETFX_CORE
         //
 
-        public static StreamWriter OpenStreamWriter(string filePath, Encoding encoding = null)
-        {
-            Stream stream = OpenWrite(filePath);
-            StreamWriter sw = null;
-            if (stream != null)
-            {
-                sw = encoding == null ? new StreamWriter(stream) : new StreamWriter(stream, encoding);
-            }
-            return sw;
-        }
-
         #endregion
 
         #region Internal
@@ -1481,6 +1468,17 @@ namespace Boku.Common
             }
             return total;
         }   // end of Concat()
+
+        public static StreamWriter OpenStreamWriter(string filePath, Encoding encoding = null)
+        {
+            Stream stream = OpenWrite(filePath);
+            StreamWriter sw = null;
+            if (stream != null)
+            {
+                sw = encoding == null ? new StreamWriter(stream) : new StreamWriter(stream, encoding);
+            }
+            return sw;
+        }
 
         #endregion
 

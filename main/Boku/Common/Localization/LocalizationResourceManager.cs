@@ -145,7 +145,7 @@ namespace Boku.Common.Localization
             tw.WriteLine(text);
             tw.Close();
         }
-#else
+
         static public void LocalesDebugPrint(string text)
         {
             // Do nothing...

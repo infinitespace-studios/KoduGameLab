@@ -12,7 +12,6 @@ using System.Text.RegularExpressions;
 
     using Windows.Foundation;
     using Windows.System;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -254,7 +253,7 @@ namespace Boku
                 if (focusIndex < HyperlinkList.Count)
                 {
                     string urlString = CreateURLFromTwitterLink(HyperlinkList[focusIndex]);
-#if NETFX_CORE
+
                     Uri uri = new Uri(urlString);
                     IAsyncOperation<bool> op = Launcher.LaunchUriAsync(uri);
                     op.AsTask<bool>().Wait();

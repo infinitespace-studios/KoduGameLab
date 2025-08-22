@@ -162,7 +162,7 @@ namespace Boku.SimWorld
             // Copy local data to vertex buffer.
 #if !XBOX360
             vbuf[i].SetData<Terrain.SkirtVertex>(vertices[i], 0, NumVertices ); //, SetDataOptions.Discard);
-#else
+
             vbuf[i].SetData<Terrain.SkirtVertex>(vertices[i], 0, NumVertices ); // , SetDataOptions.None);
 #endif
         }

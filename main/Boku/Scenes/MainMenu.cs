@@ -938,7 +938,6 @@ namespace Boku
                     menu.Active = true;
                 }
             }
-#endif
             if (WinStoreHelpers.RunningAsUWP)
             {
                 // IMPORT

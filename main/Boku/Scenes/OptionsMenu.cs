@@ -9,7 +9,6 @@ using System.IO;
 using System.Net;
 
 using Windows.System;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -118,7 +117,6 @@ namespace Boku
                     // Deactivate dialog.
                     dialog.Deactivate();
 
-#if NETFX_CORE
                     Windows.UI.Xaml.Application.Current.Exit();
                 };
                 changeLanguageMessage = new ModularMessageDialog(

@@ -371,7 +371,6 @@ namespace Boku
                     }
 
                     InGame.RestoreRenderTarget();
-#else
 
                     try
                     {

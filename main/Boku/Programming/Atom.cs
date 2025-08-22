@@ -50,7 +50,7 @@ namespace Boku.Programming
 #if Debug_ShowMissingStrings
         [XmlAttribute]
         public string label = "MISSING LABEL";
-#else
+
         [XmlAttribute]
         public string label;
 #endif
@@ -81,7 +81,7 @@ namespace Boku.Programming
 #if Debug_ShowMissingStrings
         [XmlElement(ElementName = "description", DataType = "string")]
         public string description = "MISSING DESCRIPTION";
-#else
+
         [XmlElement(ElementName = "description", DataType = "string")]
         public string description;
 #endif

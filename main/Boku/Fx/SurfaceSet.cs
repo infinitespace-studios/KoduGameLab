@@ -327,7 +327,7 @@ namespace Boku.Fx
                 checkerMap = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Checker");
             }
         }
-#else
+
         private void LoadTextures()
         {
             // surface editor doesn't load the textures

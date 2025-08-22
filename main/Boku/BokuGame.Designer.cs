@@ -107,7 +107,6 @@ namespace Boku
 
         }   // end of BokuGame InitializeComponent()
 
-#if NETFX_CORE
         static GraphicsDeviceManager graphics = null;
 
     }   // end of partial class BokuGame
