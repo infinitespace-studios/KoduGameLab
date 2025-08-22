@@ -1159,6 +1159,7 @@ namespace Boku.Common
 #if IMPORT_DEBUG
                 LevelPackage.DebugPrint("FileExists threw an error");
                 LevelPackage.DebugPrint(e.ToString());
+#endif
             }
 
 #if IMPORT_DEBUG
@@ -1422,8 +1423,6 @@ namespace Boku.Common
 
             return MACAddress;
         }   // end of GetHashedMACAddress()
-
-#endif
 
         //
         // Methods common to .Net and NETFX_CORE

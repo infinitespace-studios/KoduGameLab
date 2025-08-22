@@ -1497,46 +1497,6 @@ namespace Boku.Common
             // Calc width for all words.
             // Since SystemFont adds padding at the beginning and end of a rendered string we
             // subtract off an esitmate of that padding so that wrapped text is closer to correct.
-#if !NETFX_CORE
-            float estimatedPadding = GetFont().systemFont.Padding;
-            estimatedPadding = 0;
-            for (int i = 0; i < words.Count; i++)
-            {
-                if (words[i].icon == TextHelper.ControlInputs.none)
-                {
-                    // Plain text word.
-                    words[i].width = (int)(Math.Max(0, GetFont().MeasureString(words[i].str).X - 2.0f * estimatedPadding));
-                }
-                else if (words[i].icon == TextHelper.ControlInputs.key)
-                {
-                    // Keycaps, both kinds.
-                    if (words[i].keyIcon == TextHelper.ControlInputs.none)
-                    {
-                        // Keycap with text.
-                        int strWidth = (int)GetFont().MeasureString(words[i].str).X + 6;
-                        words[i].width = (int)Math.Max(ButtonSize.X * 40.0f / 64.0f, strWidth);
-                    }
-                    else
-                    {
-                        // Keycap with icon.
-                        words[i].width = (int)(ButtonSize.X * 40.0f / 64.0f);
-                    }
-                }
-                else if (words[i].icon == TextHelper.ControlInputs.programmingTile)
-                {
-                    // Programming tile.
-                    words[i].width = ButtonWidth;
-                }
-                else if (words[i].icon != TextHelper.ControlInputs.none)
-                {
-                    // Standard button.
-                    words[i].width = ButtonWidth;
-                }
-                else
-                {
-                }
-
-            }
 
             return words;
         }   // end of SplitIntoWords()
