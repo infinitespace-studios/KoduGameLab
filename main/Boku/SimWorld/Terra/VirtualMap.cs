@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -48,7 +47,7 @@ namespace Boku.SimWorld.Terra
         /// All tiles (and heightmaps) share the following:
         ///     Size in pixels
         ///     Size in world space
-        ///     
+        ///
         /// A tile is:
         ///     a heightmap
         ///     a mask of which materials are used
@@ -462,9 +461,9 @@ namespace Boku.SimWorld.Terra
 
             // Note:  If the file fails to open the problem may be that the user
             // is blocked from opeing .raw files.  From one email:
-            //      We've got to the bottom of the issue we were having.  We use FSRM 
-            //      here across the schools with the Microsoft file type list for exclusions, 
-            //      and .raw is (was) on the blocked list, so Kodu couldn't write the 
+            //      We've got to the bottom of the issue we were having.  We use FSRM
+            //      here across the schools with the Microsoft file type list for exclusions,
+            //      and .raw is (was) on the blocked list, so Kodu couldn't write the
             //      Terrain file in SavedGames.
 
             /*
@@ -524,7 +523,7 @@ namespace Boku.SimWorld.Terra
                 filename = "Content\\Xml\\Levels\\Stuff\\TerrainHeightMaps\\30e0bd73-fa87-4849-9610-42dfb9ec5403.Raw";
                 fs = Storage4.OpenRead(filename, StorageSource.All);
             }
-            
+
             BinaryReader br = new BinaryReader(fs);
 
             int v = br.ReadInt32();
@@ -596,7 +595,7 @@ namespace Boku.SimWorld.Terra
                         AddCost(map);
 
                         // HACK -- We've seen a couple of instances where terrain gets deleted but
-                        // it's not really deleted.  In particular the material value is set to 
+                        // it's not really deleted.  In particular the material value is set to
                         // TerrainMaterial.EmptyMatIdx but the height doesn't get reset to 0.  So,
                         // here we look though the color map and for every square marked empty we
                         // ensure that the height is 0.
@@ -610,7 +609,6 @@ namespace Boku.SimWorld.Terra
                                 }
                             }
                         }
-
 
                         ++MapCount;
                     }
@@ -748,7 +746,6 @@ namespace Boku.SimWorld.Terra
             }
         }
 
-
         /// <summary>
         /// Render all cubes with given material from given angle(face).
         /// </summary>
@@ -776,7 +773,6 @@ namespace Boku.SimWorld.Terra
                         tile.Render_FA(device, camera, matIdx);
                 }
         }
-
 
         /// <summary>
         /// Load up device dependent resources.
@@ -872,7 +868,7 @@ namespace Boku.SimWorld.Terra
 
                 if (oldMaps != null)
                 {
-                    Debug.Assert(oldTiles != null); // maps not null but tiles is? 
+                    Debug.Assert(oldTiles != null); // maps not null but tiles is?
                     Debug.Assert(oldColors != null); // maps not null but colors are?
                     Debug.Assert(oldWaterMaps != null); // maps not null but water maps are?
                     Debug.Assert(oldWaterTiles != null); // maps not null but water tiles are?
@@ -956,7 +952,7 @@ namespace Boku.SimWorld.Terra
 
         /// <summary>
         /// Perform LOS check from p0 to p1. Return true if ray hits terrain.
-        /// If true, return distance from p0 to hit point in hitDist. 
+        /// If true, return distance from p0 to hit point in hitDist.
         /// If not true, hitDist indeterminate.
         /// </summary>
         /// <param name="p0"></param>
@@ -968,7 +964,7 @@ namespace Boku.SimWorld.Terra
             losCheckHeightMaps.Clear();
 
             Ray ray = new Ray(p0, p1 - p0);
-            // Get the distance between the points and use 
+            // Get the distance between the points and use
             // that to normalize the direction vector.
             float distance = ray.Direction.Length();
 
@@ -1014,12 +1010,12 @@ namespace Boku.SimWorld.Terra
                 return true;
             if (hw.X > minMaxH.Y)
                 return true;
-            
+
             // step is the height difference from the land height in hw (where we want to go)
             // compared to prevH.X which is the land height where we currently are.
             // The problem is that this doesn't account for roads which can raise the height
             // of a character.  Probably a better definition of step would be the difference
-            // from where we currently are (actor's height) to hw.X.  This allows roads to be 
+            // from where we currently are (actor's height) to hw.X.  This allows roads to be
             // used as bridges across canyons.
             float step = hw.X - prevH.X;
             step = hw.X - curActorHeight;
@@ -1031,12 +1027,12 @@ namespace Boku.SimWorld.Terra
             if (step < maxStep.Y)
                 return true; // too far to fall
             */
-                        
-            /* 
+
+            /*
             // TODO (****)
             // Should land/water transition stop actors?  Or should this
             // be based on actor's domain???
-              
+
             if ((prevH.Y <= maxStep.Z) && (hw.Y > maxStep.Z))
                 return true; // transited land to water
             if ((prevH.Y > maxStep.W) && (hw.Y <= maxStep.W))
@@ -1363,7 +1359,7 @@ namespace Boku.SimWorld.Terra
         }
 
         /// <summary>
-        /// Return the smoothed normal for a position in space. Undefined space has normal 
+        /// Return the smoothed normal for a position in space. Undefined space has normal
         /// pointed straight up.
         /// </summary>
         /// <param name="pos"></param>
@@ -2564,7 +2560,7 @@ namespace Boku.SimWorld.Terra
         }
 
         /// <summary>
-        /// Test whether the sample is labeled with no water or a different water body. 
+        /// Test whether the sample is labeled with no water or a different water body.
         /// true if either.
         /// </summary>
         /// <param name="label"></param>
@@ -2582,7 +2578,7 @@ namespace Boku.SimWorld.Terra
         /// <summary>
         /// 0.0 is off end of world, 0.5f is wet but a different water body,
         /// 1.0 is dry land or same water body.
-        /// 
+        ///
         /// </summary>
         /// <param name="label"></param>
         /// <param name="mapCoord"></param>
@@ -2732,21 +2728,21 @@ namespace Boku.SimWorld.Terra
             if (lhs.mapIdx.X > rhs.mapIdx.X)
                 return 1;
             /// Map grid X is equal.
-            /// 
+            ///
             /// Second key, map grid Y.
             if (lhs.mapIdx.Y < rhs.mapIdx.Y)
                 return -1;
             if (lhs.mapIdx.Y > rhs.mapIdx.Y)
                 return 1;
             /// Map grid Y is equal.
-            /// 
+            ///
             /// Third key, coord X
             if (lhs.coord.X < rhs.coord.X)
                 return -1;
             if (lhs.coord.X > rhs.coord.X)
                 return 1;
             /// Coord X is equal.
-            /// 
+            ///
             /// Last key, coord Y.
             if (lhs.coord.Y < rhs.coord.Y)
                 return -1;
@@ -2758,7 +2754,7 @@ namespace Boku.SimWorld.Terra
         }
 
         /// <summary>
-        /// Class to feed into FillGeneric to select and cache all 
+        /// Class to feed into FillGeneric to select and cache all
         /// contiguous sample points of given material.
         /// </summary>
         public class FloodSelect
@@ -3396,7 +3392,6 @@ namespace Boku.SimWorld.Terra
 
         #endregion MaterialSelect
 
-
         #region Internal
         #region GenerateList
         static private void FlipOrder(List<HeightMap> heightMaps)
@@ -3694,7 +3689,6 @@ namespace Boku.SimWorld.Terra
                 (int)((pos.X - Min.X) / (Max.X - Min.X) * VirtualSize.X),
                 (int)((pos.Y - Min.Y) / (Max.Y - Min.Y) * VirtualSize.Y));
 
-
             return p;
         }
         public Vector2 VirtualIndexToWorld(int iVirt, int jVirt)
@@ -3796,7 +3790,6 @@ namespace Boku.SimWorld.Terra
             return new Vector3(MapCoordToWorld(mapCoord), h);
         }
         #endregion RemappingIndices
-
 
         #region Sorting
         private int[] waterFaceOrder = new int[Tile.NumFaces];
@@ -3916,10 +3909,8 @@ namespace Boku.SimWorld.Terra
             return hood;
         }
 
-
-
         /// <summary>
-        /// Return (possibly null) HeightMap at given coordinates, or NULL if 
+        /// Return (possibly null) HeightMap at given coordinates, or NULL if
         /// coordinates out of bounds.
         /// </summary>
         private HeightMap GetHeightMap(int i, int j)
@@ -3971,7 +3962,6 @@ namespace Boku.SimWorld.Terra
             return null;
         }
         #endregion LookupMaps
-
 
         #region Bookkeeping
         /// <summary>
@@ -4275,7 +4265,6 @@ namespace Boku.SimWorld.Terra
                 }
             }
         }
-
 
         #endregion Bookkeeping
 

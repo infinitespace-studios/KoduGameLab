@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -190,7 +189,7 @@ namespace Boku.Common
         /// </summary>
         /// <param name="ray">The ray to test.</param>
         /// <param name="maxDist">Max distance that ray extends.</param>
-        /// <param name="dist">Distance to the nearest hit along the ray.  
+        /// <param name="dist">Distance to the nearest hit along the ray.
         /// Only valid if the function returns true.</param>
         /// <returns>Boolean whether or not the ray hist the box.</returns>
         public bool Intersect(Ray ray, float maxDist, ref float dist)
@@ -208,7 +207,7 @@ namespace Boku.Common
             invDir.Z = ray.Direction.Z == 0.0f ? 0.0f : 1.0f / ray.Direction.Z;
 
             // First check sides with normal along X axis.
-            if (invDir.X != 0.0) 
+            if (invDir.X != 0.0)
             {
                 // enters the slab here...
                 tmin = (min.X - ray.Position.X) * invDir.X;
@@ -216,10 +215,10 @@ namespace Boku.Common
                 tmax = (max.X - ray.Position.X) * invDir.X;
 
                 // but we may have to swap...
-                if (tmin < tmax) 
+                if (tmin < tmax)
                 {
                     // if exited closer than we thought, update
-                    if (tmax < dmax) 
+                    if (tmax < dmax)
                     {
                         dmax = tmax;
                         if (dmax < rayeps)
@@ -232,14 +231,14 @@ namespace Boku.Common
                     {
                         dmin = tmin;
                     }
-                } 
-                else 
+                }
+                else
                 {
                     // if exited closer than we thought, update
-                    if (tmin < dmax) 
+                    if (tmin < dmax)
                     {
                         dmax = tmin;
-                        if (dmax < rayeps) 
+                        if (dmax < rayeps)
                         {
                             return false;
                         }
@@ -264,9 +263,8 @@ namespace Boku.Common
                 }
             }
 
-
             // Check sides with normal along Y axis.
-            if (invDir.Y != 0.0) 
+            if (invDir.Y != 0.0)
             {
                 // enters the slab here...
                 tmin = (min.Y - ray.Position.Y) * invDir.Y;
@@ -274,13 +272,13 @@ namespace Boku.Common
                 tmax = (max.Y - ray.Position.Y) * invDir.Y;
 
                 // but we may have to swap...
-                if (tmin < tmax) 
+                if (tmin < tmax)
                 {
                     // if exited closer than we thought, update
-                    if (tmax < dmax) 
+                    if (tmax < dmax)
                     {
                         dmax = tmax;
-                        if (dmax < rayeps) 
+                        if (dmax < rayeps)
                         {
                             return false;
                         }
@@ -292,10 +290,10 @@ namespace Boku.Common
                     }
                 } else {
                     // if exited closer than we thought, update
-                    if (tmin < dmax) 
+                    if (tmin < dmax)
                     {
                         dmax = tmin;
-                        if (dmax < rayeps) 
+                        if (dmax < rayeps)
                         {
                             return false;
                         }
@@ -320,7 +318,7 @@ namespace Boku.Common
                 }
             }
 
-            // Check sides with normal along Z axis.            
+            // Check sides with normal along Z axis.
             if (invDir.Z != 0.0)
             {
                 // enters the slab here...
@@ -385,5 +383,3 @@ namespace Boku.Common
     }   // end of class AABB
 
 }   // end of namespace Boku.Common
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -23,8 +22,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filters GameThings based upon their classification properties
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class ClassificationFilter : Filter
     {
@@ -62,10 +61,10 @@ namespace Boku.Programming
 
             bool match = true;  // By default, don't filter.
 
-            // Skip if no sensor category 
+            // Skip if no sensor category
             if (MatchType != ClassificationType.None)
             {
-                switch(MatchType) 
+                switch(MatchType)
                 {
                     case ClassificationType.Object:
                         if (string.IsNullOrEmpty(classification.name))
@@ -106,7 +105,7 @@ namespace Boku.Programming
                         {
                             match = false;
                         }
-                        
+
                         break;
                     case ClassificationType.Expression:
                         match =
@@ -125,7 +124,7 @@ namespace Boku.Programming
                         match = OnMatch(sensorTarget.Classification);
                         break;
                 }
-                // TODO (****) Remove this once we're sure the changes are 
+                // TODO (****) Remove this once we're sure the changes are
                 // good so that we get decent perf in debug, too.
                 /*
                 if (classification.name != "building" && classification.name != "bot")

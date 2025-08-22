@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #region Using
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,6 @@ using Microsoft.Xna.Framework.Storage;
 
 using System.Xml.Serialization;
 #endregion Using
-
 
 /* This is an extension of the Storage class defined in Storage.cs
  * The goal here is to isolate the graphics dependencies so that it's easier to
@@ -188,7 +186,6 @@ namespace Boku.Common
 
         }
 
-
         /// <summary>
         /// Load a texture from a given stream.
         /// </summary>
@@ -241,7 +238,7 @@ namespace Boku.Common
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        /// 
+        ///
         static public Texture2D TextureLoad(string name)
         {
             return TextureLoad(name, false);
@@ -347,7 +344,7 @@ namespace Boku.Common
 
         public enum TextureFileType
         {
-            png, 
+            png,
             jpg,
             dds
         }

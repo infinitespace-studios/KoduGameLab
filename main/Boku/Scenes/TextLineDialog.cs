@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.IO;
 using System.Collections;
@@ -78,7 +77,7 @@ namespace Boku
 
             textLineEditor = new TextLineEditor(textBox, initalText);
 
-        } 
+        }
 
         /// <summary>
         /// Recreate render targets
@@ -88,7 +87,6 @@ namespace Boku
         {
             BokuGame.DeviceReset(textLineEditor, device);
         }
-
 
         #region Public
 
@@ -110,7 +108,6 @@ namespace Boku
             }
 
         }   // end of Update()
-
 
         private void HandleGamepadInput()
         {
@@ -281,7 +278,6 @@ namespace Boku
             var dialogMin = center - new Vector2(dialogWidth / 2, dialogHeight / 2);
             var dialogMax = center + new Vector2(dialogWidth / 2, dialogHeight / 2);
 
-
             // Top and bottom of dialog.
             var size = new Vector2(dialogWidth, whiteTop.Height);
             Vector2 pos = dialogMin;
@@ -336,7 +332,7 @@ namespace Boku
         }   // end of Render()
 
         #region Members
- 
+
         private enum States
         {
             Inactive,
@@ -360,7 +356,6 @@ namespace Boku
             Debug.Assert(false, "This object is not designed to be put into any lists.");
             return true;
         }   // end of Refresh()
-
 
         override public void Activate()
         {
@@ -392,6 +387,6 @@ namespace Boku
             state = States.Inactive;
         }   // End of Deactivate()
 
-    }   // end of class 
+    }   // end of class
 
 }   // end of namespace Boku

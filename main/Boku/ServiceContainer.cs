@@ -26,7 +26,6 @@ namespace Boku
     {
         Dictionary<Type, object> services = new Dictionary<Type, object>();
 
-
         /// <summary>
         /// Adds a new service to the collection.
         /// </summary>
@@ -34,7 +33,6 @@ namespace Boku
         {
             services.Add(typeof(T), service);
         }
-
 
         /// <summary>
         /// Looks up the specified service.

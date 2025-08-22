@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -155,7 +154,6 @@ namespace Boku
 
             }   // end of Vertex
 
-
             public RenderObj(GraphicsDevice device, ref Shared shared, Vector4 diffuse)
             {
                 this.device = device;
@@ -226,7 +224,6 @@ namespace Boku
                 // Copy to vertex buffer.
                 vbuf.SetData<Vertex>(localVerts);
 
-
                 // Create index buffer.
                 if (ibuf == null)
                 {
@@ -251,7 +248,6 @@ namespace Boku
                 ibuf.SetData<ushort>(localIBuf);
 
             }   // end of RenderObj Init()
-
 
             public override void Render(Camera camera)
             {
@@ -296,7 +292,6 @@ namespace Boku
 
             }
         }   // end of class RenderObj
-
 
         //
         //  LightColumn
@@ -383,6 +378,3 @@ namespace Boku
     }   // end of class LightColumn
 
 }   // end of namespace Boku
-
-
-

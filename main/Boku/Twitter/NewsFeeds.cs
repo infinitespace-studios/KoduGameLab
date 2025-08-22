@@ -30,7 +30,6 @@ using Boku.UI2D;
 using Boku.Fx;
 using Boku.Common.Localization;
 
-
 namespace Boku
 {
     public class NewsFeeds
@@ -51,7 +50,7 @@ namespace Boku
         private OpState currentState = OpState.Idle;
         private IAsyncResult getFeedResult = null;
         private double opStartTime = 0;
-        
+
         /// <summary>
         ///  unprocesses string data representing each news item
         /// </summary>
@@ -72,7 +71,6 @@ namespace Boku
 
         }
 
-        
         //static bool getFeedComplete = false;
         public void BeginFetchNews()
         {
@@ -160,7 +158,7 @@ namespace Boku
             // &count=2&include_entities=true
             string htmlURL = baseUrl;// +"&count=" + items;
             Uri uri = new Uri(htmlURL);
-            return uri; 
+            return uri;
         }
 
         bool RequestFeed(string url)
@@ -173,8 +171,8 @@ namespace Boku
 
                 request.ContentType = "application/json";
                 request.BeginGetResponse(new AsyncCallback(ReadFeedCallback), request);
-                
-                sent = true;                
+
+                sent = true;
             }
             catch (Exception ex)
             {
@@ -197,7 +195,7 @@ namespace Boku
                   new StreamReader(response.GetResponseStream()))
                 {
                     string resultString = streamReader1.ReadToEnd();
-                    //Handle single quote. 
+                    //Handle single quote.
                     //Not sure why this is needed since quotes are handled correctly.
                     resultString = resultString.Replace("\\u0027", "'");
                     rawGetData = resultString;
@@ -223,7 +221,7 @@ namespace Boku
             List<FeedMs> allFeeds = new List<FeedMs>();
             try
             {
-                // For some reason the WinRT Json Serializer doesn't want to 
+                // For some reason the WinRT Json Serializer doesn't want to
                 // deserialize our objects so we'll just have to do it manually.
                 //var items = Deserialize<List<Dictionary<string, string>>>(rawGetData);
 
@@ -339,7 +337,6 @@ namespace Boku
             return index;
         }
 
-
 /*
         /// <summary>
         /// Once the tweets have been retrieved, this will return the list of tweets as Tweet
@@ -397,9 +394,9 @@ namespace Boku
 */
         public void Update()
         {
-            if (currentState != OpState.Retrieving) 
+            if (currentState != OpState.Retrieving)
             {
-                return; 
+                return;
             }
 
 /*            if ( getFeedResult.IsCompleted )
@@ -414,7 +411,7 @@ namespace Boku
                 }
 
             }
-    
+
             //  newsClips = listCaller.EndInvoke(getFeedsResult);
             else if(Time.GameTimeTotalSeconds > opStartTime)
             {

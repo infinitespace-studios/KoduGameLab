@@ -53,12 +53,11 @@ namespace Boku.Common.Xml
         public string creator;
 
         /// <summary>
-        /// Level linking - which levels link to this level, and which levels does this level link to.  We don't need 
+        /// Level linking - which levels link to this level, and which levels does this level link to.  We don't need
         /// Genre here, we can assume linked levels always match the genre of the level they're linking from/to.
         /// </summary>
         public Guid? LinkedFromLevel = null;
         public Guid? LinkedToLevel = null;
-
 
         /// <summary>
         /// The last modified time of the world. Always expressed in UTC.
@@ -74,7 +73,7 @@ namespace Boku.Common.Xml
         /// <summary>
         /// If set, this field's value will be used as the level's timestamp the next time it is written to disk.
         /// After use, this field is cleared. Value must be UTC.
-        /// 
+        ///
         /// (****) I _think_ this is being used so that downloading a world doesn't cause its date to change.
         /// Sadly this comment just says _what_ is happening, not _why_.
         /// </summary>
@@ -166,9 +165,8 @@ namespace Boku.Common.Xml
         public List<ChangeHistoryEntry> changeHistory = new List<ChangeHistoryEntry>();
 
         public string checksum = "";
-        public DateTime lastSaveTime = DateTime.MinValue;//Used to determin if level is owned by user. 
+        public DateTime lastSaveTime = DateTime.MinValue;//Used to determin if level is owned by user.
                                                          //Note it should usually be the same as lastWriteTime but not the same as Modified.
-
 
 #if !ADDIN
         public List<Step> tutorialSteps = new List<Step>();
@@ -433,7 +431,6 @@ namespace Boku.Common.Xml
             }
 
         }   // end of FixUpNaNs()
-
 
         public override void OnLoadFromFile(string filename)
         {

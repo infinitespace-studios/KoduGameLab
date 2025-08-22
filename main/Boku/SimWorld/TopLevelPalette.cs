@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -72,7 +71,7 @@ namespace Boku
         private const float fullWidth = (numIcons - 1) * 96.0f;     // Width of center section when fully open in pixels.
         private const float fullFrameWidth = 9.0f;                  // Extra width of frame when palette is open.
         private const float iconCenterBase = 0.5f;                  // U coord for icon texture at center of palette when palette is open.
-        
+
         private float centerWidth = 0.0f;               // Width of center section.  Collapses to 0 when in badge mode.
         private float frameWidth = 0.0f;                // Current frame extra width.  This is 0 when palette is in badge mode.
         private float iconCenter = iconCenterBase;      // Move to center over current selection when palette closes into badge mode.
@@ -97,7 +96,7 @@ namespace Boku
 
         #region Accessors
         /// <summary>
-        /// By default this is always on.  May be used to 
+        /// By default this is always on.  May be used to
         /// turn the palette off for screenshots or ???
         /// </summary>
         public bool Active
@@ -108,7 +107,7 @@ namespace Boku
         public bool Open
         {
             get { return open; }
-            set 
+            set
             {
                 if (open != value)
                 {
@@ -198,7 +197,7 @@ namespace Boku
                         twitch.Start();
                     }
                     {
-                        // Move icon center.  We shouldn't see this changing when the palette in in "badge" mode 
+                        // Move icon center.  We shouldn't see this changing when the palette in in "badge" mode
                         // but just in case we decide to use it this way, make sure the right icon is showing.
                         // iconCenter = centered over selected icon
                         float offsetUV = 1.0f / numIcons;
@@ -272,7 +271,7 @@ namespace Boku
             Open = true;
             Open = false;
 
-            // Make scale relative to screen height.  Assume that 720p is max 
+            // Make scale relative to screen height.  Assume that 720p is max
             // size we want to adjust for.
             float height = BokuGame.bokuGame.GraphicsDevice.Viewport.Height;
             height = MathHelper.Min(height, 720.0f);
@@ -299,7 +298,7 @@ namespace Boku
             pos.Y = -pos.Y;
             size.Y = -size.Y;
 
-            // This is how wide the center section of the 
+            // This is how wide the center section of the
             // screen is in UV coords for the icon texture.
             float widthU = (numIcons - 1.0f) / numIcons * frameWidth / fullFrameWidth;
             widthU *= 0.5f; // We only need half.
@@ -309,7 +308,7 @@ namespace Boku
                                 // to adjust for the scaling in U at the ends of the palette shape.  Right
                                 // now it's ad hoc.  If numIcons changes then foo needs to be adjusted to
                                 // Make sure the icons at either end of the palette maintain their correct
-                                // aspect ratio.  
+                                // aspect ratio.
                                 // for numIcons==4 foo should be 0.325, for numIcons==5 foo should be 0.255
             vertices[0] = new Vertex(new Vector2(pos.X, pos.Y + size.Y),                            new Vector2(-0.25f + frameOffset, 1.0f), new Vector2(-0.25f, 1.0f), new Vector2(iconCenter - widthU - foo, 1.0f));
             vertices[1] = new Vertex(new Vector2(pos.X, pos.Y),                                     new Vector2(-0.25f + frameOffset, 0.0f), new Vector2(-0.25f, 0.0f), new Vector2(iconCenter - widthU - foo, 0.0f));
@@ -369,7 +368,7 @@ namespace Boku
 
             if (decl == null)
             {
-                decl = new VertexDeclaration(graphics.GraphicsDevice, elements);            
+                decl = new VertexDeclaration(graphics.GraphicsDevice, elements);
             }
 
             if (iconTexture == null)
@@ -403,5 +402,3 @@ namespace Boku
     }   // end of class TopLevelPalette
 
 }   // end of namespace Boku
-
-

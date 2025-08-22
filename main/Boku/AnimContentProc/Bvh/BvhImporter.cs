@@ -4,7 +4,7 @@
 /*
  * BvhImporter.cs
  * Copyright (c) 2006, 2007 Michael Nikonov, David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -126,7 +126,7 @@ namespace Xclna.Xna.Animation.Reader
                     if (line!=null && line.StartsWith("OFFSET"))
                     {
                         string[] data = line.Split(whiteSpace);
-                        //couldn't get the .NET 2.0 version of Split() working, 
+                        //couldn't get the .NET 2.0 version of Split() working,
                         //therefore this ugly hack
                         List<string> coords = new List<string>();
                         foreach (string s in data)
@@ -197,7 +197,7 @@ namespace Xclna.Xna.Animation.Reader
             while ((line = readLine()) != null)
             {
                 string[] ss = line.Split(whiteSpace);
-                //couldn't get the .NET 2.0 version of Split() working, 
+                //couldn't get the .NET 2.0 version of Split() working,
                 //therefore this ugly hack
                 List<string> data = new List<string>();
                 foreach (string s in ss)
@@ -218,7 +218,7 @@ namespace Xclna.Xna.Animation.Reader
                 }
                 foreach (BoneInfo b in bones)
                 {
-                    // Many applications export BVH in such a way that bone translation 
+                    // Many applications export BVH in such a way that bone translation
                     // needs to be aplied in every frame.
                     Matrix translation = b.bone.Transform;
                     Vector3 t = new Vector3();
@@ -227,7 +227,7 @@ namespace Xclna.Xna.Animation.Reader
                     t.Z = b["Zposition"];
                     if (t.Length() != 0.0f)
                     {
-                        // Some applications export BVH with translation channels for every bone. 
+                        // Some applications export BVH with translation channels for every bone.
                         // In this case, bone translation should not be applied.
                         translation = Matrix.CreateTranslation(t);
                     }

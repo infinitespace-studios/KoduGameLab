@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,14 +30,14 @@ namespace Boku.Programming
         private float arc;                  // Sensor arc in radians.
         private float range = 1000.0f;      // Range of sensor
 
-        private float arcCosine = 1.0f;     // Cosine of arc/2 used to compare against the 
-                                            // dot product of the device normal and the 
+        private float arcCosine = 1.0f;     // Cosine of arc/2 used to compare against the
+                                            // dot product of the device normal and the
                                             // direction to the object being sensed.  This
                                             // is just here so we arent' calling Math.Cos()
                                             // for every object * every sensor * every frame.
 
-        private Vector3 worldSpaceNormal;   // This is the device normal transformed from the actor's local 
-                                            // space into world space.  We cache this here so it's only 
+        private Vector3 worldSpaceNormal;   // This is the device normal transformed from the actor's local
+                                            // space into world space.  We cache this here so it's only
                                             // calculated once per frame.
 
         #endregion
@@ -55,7 +54,7 @@ namespace Boku.Programming
         }
 
         /// <summary>
-        /// The arc width of the sensor in radians.  An arc equal to Pi 
+        /// The arc width of the sensor in radians.  An arc equal to Pi
         /// would cover a full sphere.  Pi/2 would be a hemisphere.
         /// </summary>
         public float Arc
@@ -110,11 +109,11 @@ namespace Boku.Programming
 
     /// <summary>
     /// Senses GameThings without any occluders
-    /// 
+    ///
     /// This sensor demonstrates the MountKey feature, and is only usable on a Saucer or Blimp
-    /// 
+    ///
     /// TODO This is way too much like the SightSensor to leave as a seperate class...
-    /// 
+    ///
     /// </summary>
     public class ScanSensor : Sensor
     {
@@ -189,7 +188,6 @@ namespace Boku.Programming
             senseSet.Finialize();
         }
 
-
         public override void ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {
             List<Filter> filters = reflex.Filters;
@@ -233,7 +231,7 @@ namespace Boku.Programming
                 /// Didn't come up with anything, try searching our memory
                 if (SearchMemory(gameActor, reflex))
                 {
-                    /// Find nearest again, but don't check LOS. This matches old 
+                    /// Find nearest again, but don't check LOS. This matches old
                     /// behavior, which assumes that if we remember it, we could see it.
                     reflex.targetSet.Finialize();
                 }
@@ -244,7 +242,7 @@ namespace Boku.Programming
                 gameActor.Brain.Memory.MemorizeThing(reflex.targetSet.Nearest.GameThing);
             }
             reflex.targetSet.Action = TestObjectSet(reflex);
-            
+
         }   // end of ComposeSensorTargetSet()
 
         #endregion

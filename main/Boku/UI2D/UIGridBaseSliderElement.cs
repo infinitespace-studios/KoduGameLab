@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -19,7 +18,7 @@ using Boku.Fx;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// Common functionality used for sliders.  The actual instances will 
+    /// Common functionality used for sliders.  The actual instances will
     /// differ in whether they are integer or float valued.
     /// </summary>
     public abstract class UIGridBaseSliderElement : UIGridElement
@@ -506,9 +505,3 @@ namespace Boku.UI2D
     }   // end of class UIGridBaseSliderElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

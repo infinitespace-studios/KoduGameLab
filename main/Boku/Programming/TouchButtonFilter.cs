@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of on-screen touch button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class TouchButtonFilter : Filter
     {

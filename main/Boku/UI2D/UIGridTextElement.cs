@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -138,9 +137,3 @@ namespace Boku.UI2D
     }   // end of class UIGridTextElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

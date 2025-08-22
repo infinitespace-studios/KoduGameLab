@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -208,7 +207,7 @@ namespace Boku
 
         // c'tor
         public TouchEditToolBox()
-        {           
+        {
         }   // end of MouseEditToolBox c'tor
 
         /// <summary>
@@ -269,7 +268,6 @@ namespace Boku
 
         }   // end of MouseEditToolBox Render()
 
-
         public void RestartCurrentTool()
         {
             if (activeTool != null)
@@ -315,7 +313,6 @@ namespace Boku
             WaterPicker.Hidden = true;
         }
 
-
         public void LoadContent(bool immediate)
         {
 
@@ -355,5 +352,3 @@ namespace Boku
     }   // end of class MouseEditToolBox
 
 }   // end of namespace Boku
-
-

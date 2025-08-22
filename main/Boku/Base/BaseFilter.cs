@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,7 +56,6 @@ namespace Boku.Base
                 new FilterVertex(new Vector2(1.0f, 1.0f))
             };
 
-
         // c'tor
         protected BaseFilter()
         {
@@ -83,7 +81,6 @@ namespace Boku.Base
 
         }   // end of BaseFilter SetUvToPos()
 
-
         public virtual void LoadContent(bool immediate)
         {
         }   // end of BaseFilter LoadContent()
@@ -94,7 +91,7 @@ namespace Boku.Base
             if (vbuf == null)
             {
                 vbuf = new VertexBuffer(device, typeof(FilterVertex), 4, BufferUsage.WriteOnly);
-                
+
                 vbuf.SetData<FilterVertex>(localVerts);
             }
 
@@ -113,5 +110,3 @@ namespace Boku.Base
     }   // end of class BaseFilter
 
 }   // end of namespace Boku.Common
-
-

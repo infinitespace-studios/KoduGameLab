@@ -22,7 +22,7 @@ namespace Boku.Programming
 {
     public class NullModifier : Modifier
     {
-        
+
         public NullModifier()
         {
             this.upid = ProgrammingElement.upidNull;

@@ -65,4 +65,3 @@ namespace TouchHook
         public GestureState state;
     }
 }
-

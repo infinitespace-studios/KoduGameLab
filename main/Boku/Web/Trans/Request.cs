@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +11,6 @@ using Boku.Common.Sharing;
 
     using Boku.Common;
 #endif
-
 
 namespace Boku.Web.Trans
 {
@@ -360,7 +358,7 @@ namespace Boku.Web.Trans
                 StreamReader reader = new StreamReader(stream);
                 string result = reader.ReadToEnd();
                 byte[] buffer = Encoding.UTF8.GetBytes(result);
-                
+
                 WebRequestCompleteArg arg = new WebRequestCompleteArg();
                 arg.result = WebResult.Complete;
                 arg.responseBody = buffer;

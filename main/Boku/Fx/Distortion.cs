@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from SimWorld namespace
 
 using System;
@@ -416,7 +415,6 @@ namespace Boku.Fx
             bumpRate = new Vector4(0.017f, 0.11f, 0.019f, -0.09f);
             //bumpRate = new Vector4(0.00f, 0.0f, 0.0f, -0.0f);
 
-
             birth = 0.0f;
             bloom = false;
             minScale = new Vector3(1.0f);
@@ -427,7 +425,6 @@ namespace Boku.Fx
             doBump = false;
             bumpTint = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
         }
-
 
         /// <summary>
         /// project a bumpy skin onto the target.
@@ -456,12 +453,12 @@ namespace Boku.Fx
             // The cross product and dot products with (1,0,0) could obviously be optimized,
             // but it's clearer what's happening leaving it in general form.
             float theta = (float)Math.Atan2(
-                Vector3.Dot(Vector3.Cross(axU, Vector3.UnitX), Vector3.UnitZ), 
+                Vector3.Dot(Vector3.Cross(axU, Vector3.UnitX), Vector3.UnitZ),
                 Vector3.Dot(axU, Vector3.UnitX)
                 );
 
             float phi = (float)Math.Atan2(
-                Vector3.Cross(axV, Vector3.UnitZ).Length(), 
+                Vector3.Cross(axV, Vector3.UnitZ).Length(),
                 Vector3.Dot(axV, Vector3.UnitZ)
                 );
             if (posToCam.Z > 0.0f)

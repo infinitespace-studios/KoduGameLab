@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -38,8 +37,6 @@ namespace Boku.SimWorld
 
         #region Accessors
         #endregion
-
-
 
         public struct Vertex : IVertexType
         {
@@ -113,10 +110,9 @@ namespace Boku.SimWorld
 
         }   // end of Compass Update()
 
-
         public void Render(Camera camera)
         {
-            // Call the compass update from within the render to ensure that 
+            // Call the compass update from within the render to ensure that
             // we're really using the right camera to set the position.
             Update(camera);
 
@@ -140,7 +136,6 @@ namespace Boku.SimWorld
                 device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 4, 0, 2);
             }
         }   // end of Compass Render()
-
 
         public void LoadContent(bool immediate)
         {

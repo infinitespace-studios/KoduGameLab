@@ -136,7 +136,7 @@ namespace Boku.Common.Xml
         // Does this make the saved files cleaner?  If so, ok.
         // If not, this just seems like too much crap is dumped here
         // and it makes these values difficult to work with.
-        // Are these ever even written or are they read only?  If 
+        // Are these ever even written or are they read only?  If
         // read only then they definitely don't need to be nullable.
 
         //Base
@@ -159,7 +159,7 @@ namespace Boku.Common.Xml
         public bool? Tumbles;                   // DynamicProp
         public float? SlopeThreshold;           // Puck
         public float? Radius;                   // Puck
-        public float? RotationRate;             // Saucer, Puck        
+        public float? RotationRate;             // Saucer, Puck
         public float? MaxVerticalAcceleration;  // FloatInAir
         public float? MaxVerticalSpeed;         // FloatInAir
         public float? MaxAltitude;              // FloatInAir
@@ -172,7 +172,6 @@ namespace Boku.Common.Xml
         public float? Overshoot;                // Swim
         public PipeChassis.PipeTypeEnum? PipeType;// Pipe
 
-        
         /// <summary>
         /// Assigns each applicable member of the given chassis
         /// the value of the respective member in this instance
@@ -180,7 +179,7 @@ namespace Boku.Common.Xml
         /// </summary>
         /// <param name="chassis">
         /// Should be the same type as this instances' Type
-        /// member. Otherwise, chassis specific settings (such as 
+        /// member. Otherwise, chassis specific settings (such as
         /// the PuckChassis' Radius member) will not be set.
         /// </param>
         public void CopyTo(BaseChassis chassis)
@@ -577,10 +576,10 @@ namespace Boku.Common.Xml
         /// <summary>
         /// World space radius of the collision sphere.
         /// </summary>
-        public float CollisionRadius 
-        { 
-            get; 
-            set; 
+        public float CollisionRadius
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -621,7 +620,7 @@ namespace Boku.Common.Xml
         }
 
         /// <summary>
-        /// This is the minimum height of the object.  An object at 
+        /// This is the minimum height of the object.  An object at
         /// this height should appear to be sitting on the ground.
         /// </summary>
         public float MinHeight
@@ -880,7 +879,6 @@ namespace Boku.Common.Xml
             set { roverHillEndPitch = value; }
         }
 
-
         /// <summary>
         /// The unscaled, default scan range
         /// </summary>
@@ -1088,7 +1086,6 @@ namespace Boku.Common.Xml
             set { sensorsData = value; }
         }
 
-
         [XmlElement("SharedIdle")]
         public XmlSharedIdle SharedIdleData
         {
@@ -1184,7 +1181,7 @@ namespace Boku.Common.Xml
         #endregion
 
         /// <summary>
-        /// Save a named resource, using file naming convention. 
+        /// Save a named resource, using file naming convention.
         /// Currently unused, actor xml's are hand made.
         /// </summary>
         /// <param name="name"></param>

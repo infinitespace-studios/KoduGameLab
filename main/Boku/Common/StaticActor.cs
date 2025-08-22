@@ -102,7 +102,6 @@ namespace Boku.Common
             }
         }
 
-
         public StaticActor(XmlStaticActor xml)
         {
             NonLocalizedName = xml.NonLocalizedName;

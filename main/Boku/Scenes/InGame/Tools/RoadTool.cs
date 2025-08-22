@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -153,5 +152,3 @@ namespace Boku.Scenes.InGame.Tools
     }   // class RoadTool
 
 }   // end of namespace Boku.Scenes.InGame.Tools
-
-

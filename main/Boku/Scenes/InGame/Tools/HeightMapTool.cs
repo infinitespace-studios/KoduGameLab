@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -98,7 +97,7 @@ namespace Boku.Scenes.InGame.Tools
             Boku.InGame.inGame.Cursor3D.Hidden = true;
 
             PickerX = brushPicker;      // Assign X button to brush picker and activate.
-            brushPicker.BrushSet = Brush2DManager.BrushType.All 
+            brushPicker.BrushSet = Brush2DManager.BrushType.All
                 | Brush2DManager.BrushType.StretchedAll
                 | Brush2DManager.BrushType.Selection;
 
@@ -115,5 +114,3 @@ namespace Boku.Scenes.InGame.Tools
     }   // class HeightMapTool
 
 }   // end of namespace Boku.Scenes.InGame.Tools
-
-

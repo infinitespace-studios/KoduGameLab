@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Xml;
 using System.Xml.Serialization;
@@ -60,7 +59,7 @@ namespace Boku.Input
             public bool Pressed
             {
                 get { return pressed; }
-                set 
+                set
                 {
                     if (pressed != value)
                     {
@@ -140,7 +139,6 @@ namespace Boku.Input
                 this.texture = texture;
                 this.value = value;
             }
-
 
             /// <summary>
             /// c'tor for special keys.
@@ -254,7 +252,7 @@ namespace Boku.Input
             #endregion
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns>Returns true if autorepeating.</returns>
             public bool Update()
@@ -370,7 +368,7 @@ namespace Boku.Input
             #endregion
 
             #region Internal
-            
+
             public void LoadContent(bool immediate)
             {
             }
@@ -390,7 +388,6 @@ namespace Boku.Input
             #endregion
 
         }   // end of class Key
-
 
     }   // end of class VirtualKeyboard
 

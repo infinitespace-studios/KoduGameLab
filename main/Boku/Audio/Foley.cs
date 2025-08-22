@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,11 +15,11 @@ using Boku.SimWorld.Terra;
 namespace Boku.Audio
 {
     /// <summary>
-    /// A manager class that provides a layer between the game code and 
-    /// directly playing the audio cues.  The intention is to allow a 
-    /// better way to throttle the playing of foley sounds so that they 
+    /// A manager class that provides a layer between the game code and
+    /// directly playing the audio cues.  The intention is to allow a
+    /// better way to throttle the playing of foley sounds so that they
     /// don't slam performance.
-    /// 
+    ///
     /// Features:
     /// We can prevent the same sound from being played twice in the same frame.
     /// We can easily control how much of a time gap to wait before allowing another instance of a sound to be played.
@@ -51,8 +50,8 @@ namespace Boku.Audio
 
             private string soundName = null;                // The resouce name of the sound we're playing.
 
-            private int frame = -1;                         // The last frame this sound was played.  
-                                                            // This allows us to ensure that we don't 
+            private int frame = -1;                         // The last frame this sound was played.
+                                                            // This allows us to ensure that we don't
                                                             // trigger the same sound twice per frame.
             private double timeGap = 0.1;                   // Minimum time between instances of this sound.
             private double lastTime = 0.0f;                 // Last time this sound was played.
@@ -507,7 +506,6 @@ namespace Boku.Audio
                 fanLoop = new FoleySound(@"sfx_kodu_fan_loop", 0.1);
             }
 
-
             //
             // Effects
             //
@@ -676,7 +674,6 @@ namespace Boku.Audio
                 win = new FoleySound(@"UI_Win", 0.05);
             }
 
-
             //
             // UI Sounds
             //
@@ -715,7 +712,6 @@ namespace Boku.Audio
             {
                 noBudget = new FoleySound(@"No Budget", 0.0);
             }
-
 
             //
             // Collision Sounds
@@ -785,7 +781,7 @@ namespace Boku.Audio
             {
                 //Debug.Assert(false, "Why do we have an invalid material here?");
                 // Why?  Well because we sometimes clear the material in the feeler
-                // collision testing.  So it's no longer a valid way to tell what 
+                // collision testing.  So it's no longer a valid way to tell what
                 // terrain we're over.  In general, it works when we're on the ground
                 // but not when jumping.  Argh.
 
@@ -1052,7 +1048,7 @@ namespace Boku.Audio
         {
             vanish.Play(emitter);
         }   // end of PlayVanish()
-        
+
         //Rover-specific KAs
         public static void PlayBeam(GameThing emitter)
         {
@@ -1309,7 +1305,6 @@ namespace Boku.Audio
         {
             win.Play();
         }   // end of PlayWin()
-
 
         //
         // UI sounds

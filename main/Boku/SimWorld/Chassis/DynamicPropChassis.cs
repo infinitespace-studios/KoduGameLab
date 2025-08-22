@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +16,7 @@ using Boku.SimWorld.Terra;
 namespace Boku.SimWorld.Chassis
 {
     /// <summary>
-    /// Simple chassis used for props that can be kicked around, 
+    /// Simple chassis used for props that can be kicked around,
     /// e.g. fruit and rocks.
     /// </summary>
     public class DynamicPropChassis : BaseChassis
@@ -106,7 +105,6 @@ namespace Boku.SimWorld.Chassis
             dustEmitter.RemoveFromManager();
         }
 
-
         public override void InitDefaults()
         {
             base.InitDefaults();
@@ -135,7 +133,6 @@ namespace Boku.SimWorld.Chassis
                 && Moving)
             {
                 float dt = (float)Time.GameTimeFrameSeconds;
-
 
                 floating = false;
                 inWater = false;
@@ -223,7 +220,7 @@ namespace Boku.SimWorld.Chassis
                     ApplyDesiredMovement(movement, desiredMovement);
                 }
             }   // end of if moving
-            else if (state != GameActor.State.Active 
+            else if (state != GameActor.State.Active
                 && thing.ActorHoldingThis == null
                 && state != GameThing.State.Dead
                 && state != GameThing.State.Squashed
@@ -407,7 +404,7 @@ namespace Boku.SimWorld.Chassis
             // Note that this only affects the XY axes, not the vertical.
             float deltaV = (float)Math.Sqrt(Math.Abs(2.0f * Gravity * deltaZ));
 
-            // Get direction apply new velocity.  The 0.5 factor is not "correct" 
+            // Get direction apply new velocity.  The 0.5 factor is not "correct"
             // but the movement looks better with it in.
             Vector3 slopeNormal = Terrain.GetNormal(position);
             slopeNormal.Z = 0.0f;
@@ -550,7 +547,6 @@ namespace Boku.SimWorld.Chassis
                 CheckSplash(thing, collCenter, vel);
             }
         }
-
 
         public override void CollisionResponse(Movement movement)
         {

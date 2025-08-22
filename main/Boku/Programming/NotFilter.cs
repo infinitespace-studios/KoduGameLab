@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -46,7 +45,7 @@ namespace Boku.Programming
         public override bool MatchAction(Reflex reflex, out object param)
         {
             param = null; // doesn't effect match action
-            return true; 
+            return true;
         }
     }
 }

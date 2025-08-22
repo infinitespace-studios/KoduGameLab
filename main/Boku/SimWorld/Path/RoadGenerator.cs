@@ -187,8 +187,8 @@ namespace Boku.SimWorld.Path
         /// <param name="first">edge of start of the arc</param>
         /// <param name="second">edge of end of the arc</param>
         public abstract bool NewFan(
-            Road.Intersection isect, 
-            Road.Section first, 
+            Road.Intersection isect,
+            Road.Section first,
             Road.Section second,
             List<Road.RenderObj> fans);
 
@@ -202,9 +202,9 @@ namespace Boku.SimWorld.Path
         /// <param name="height"></param>
         /// <returns></returns>
         public virtual bool GetHeight(
-            Vector3 p0, 
-            Vector3 p1, 
-            Vector3 pos, 
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 pos,
             ref float height)
         {
             return false;
@@ -219,8 +219,8 @@ namespace Boku.SimWorld.Path
         /// <param name="height"></param>
         /// <returns></returns>
         public virtual bool GetHeight(
-            Vector3 center, 
-            Vector3 pos, 
+            Vector3 center,
+            Vector3 pos,
             ref float height)
         {
             return false;
@@ -300,9 +300,8 @@ namespace Boku.SimWorld.Path
 
         }
 
-
         #region TrimGeometry
-        
+
         /// <summary>
         /// Trim all geometry for two sections by the bisecting plane (if appropriate)
         /// </summary>
@@ -315,7 +314,6 @@ namespace Boku.SimWorld.Path
             {
                 return false;
             }
-
 
             WayPoint.Node node0 = null;
             WayPoint.Node node1 = null;
@@ -391,7 +389,7 @@ namespace Boku.SimWorld.Path
         /// <param name="idxOut"></param>
         /// <param name="vtxData"></param>
         /// <returns></returns>
-        static public bool TrimIndexedTriList(List<Vector4> planes, 
+        static public bool TrimIndexedTriList(List<Vector4> planes,
             List<Int16> idxIn,
             List<Int16> idxOut,
             List<RoadVertex> vtxData)
@@ -427,7 +425,7 @@ namespace Boku.SimWorld.Path
                     baryIn.Add(new Vector3(1.0f, 0.0f, 0.0f));
                     baryIn.Add(new Vector3(0.0f, 1.0f, 0.0f));
                     baryIn.Add(new Vector3(0.0f, 0.0f, 1.0f));
-                    
+
                     baryOut.Clear();
 
                     // Run the triangle through the trimmer
@@ -452,7 +450,6 @@ namespace Boku.SimWorld.Path
 
                         // In either case, we append any new vertices to the end of
                         // the vertex list, and add the new indices to the output list
-
 
                         Int16 idxPivot = AddVertex(vtxData, baryOut[0], idx0, idx1, idx2);
 
@@ -607,7 +604,7 @@ namespace Boku.SimWorld.Path
         #endregion TrimGeometry
 
         #region Utility
-        
+
         /// <summary>
         /// Find the node shared by two sections and the unshared nodes
         /// </summary>

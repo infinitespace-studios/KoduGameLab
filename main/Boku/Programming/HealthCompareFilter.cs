@@ -24,7 +24,7 @@ namespace Boku.Programming
     ///  Is - trigger when the actor's health becomes the given value.
     ///  Above - trigger when the actor's health becomes above the given value.
     ///  Below - trigger when the actor's health becomes below the given value.
-    ///  
+    ///
     /// NOTE These filters have been archived in favor of using the score comparison filters.
     /// </summary>
     public class HealthCompareFilter : Filter
@@ -118,7 +118,7 @@ namespace Boku.Programming
                             pointsBase += scoreFilter.points;
                         }
                     }
-                    
+
                     if (filter is ScoreBucketFilter)
                     {
                     }

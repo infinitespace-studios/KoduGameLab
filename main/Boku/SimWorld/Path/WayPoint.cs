@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,44 +19,44 @@ using Boku.SimWorld.Terra;
 
 namespace Boku.SimWorld.Path
 {
-    /// 
+    ///
     /// Terms:
     ///     Node:  A point in the world which also has some memory of being visited.
     ///     Edge:  A connection between two Nodes.
     ///     Path:  A connected collection of Nodes and Edges that shares a common color.  Nodes and Edges
     ///             can only belong to a single path, they cannot be shared.  If two Nodes from differing
-    ///             Paths are joined by an edge then thier Paths are joined into one Path.  If a Node or 
+    ///             Paths are joined by an edge then thier Paths are joined into one Path.  If a Node or
     ///             Edge is deleted causing a Path to no longer be connected then it is split into
     ///             multiple paths.
-    /// 
+    ///
     /// Usage:
     ///     When an actor needs to find a nearby path you should call GetNearestPath(color, position).  This
     ///     will return the path closest to 'position' matching 'color'.
-    /// 
+    ///
     ///     Given the path you can then find the nearest edge by calling GetNearestEdgeFromPath(path, position).
-    /// 
+    ///
     ///     Once you have the edge you can decide how to use it.  If you want to find the nodes connected by
-    ///     the edge they are edge.Node0 and edge.Node1.  These each have a Position accessor on them for 
-    ///     getting their location.  If instead of going toward the nodes you first want to get on the path 
+    ///     the edge they are edge.Node0 and edge.Node1.  These each have a Position accessor on them for
+    ///     getting their location.  If instead of going toward the nodes you first want to get on the path
     ///     you can call edge.NearestPoint(position).  This will return the point on the edge closest to 'position'.
-    /// 
+    ///
     ///     When an actor arrives at a node it can call GetNextNodeFromPath(path, curNode, object).  This takes the
     ///     'path', finds the collection of edges connected to 'curNode' and then finds the next node which has
-    ///     least recently been visited by 'object'.  There's also a GetNextEdgeFromPath(path, curNode, object) call 
+    ///     least recently been visited by 'object'.  There's also a GetNextEdgeFromPath(path, curNode, object) call
     ///     if you prefer to get the edge rather than the path.
     ///
-    ///     After an actor has arrived at a node and queried for the next edge to traverse it should call 
-    ///     node.SetVisitedTime(object) where 'object' is probably just 'this'.  The SetVisitedTime call sets 
+    ///     After an actor has arrived at a node and queried for the next edge to traverse it should call
+    ///     node.SetVisitedTime(object) where 'object' is probably just 'this'.  The SetVisitedTime call sets
     ///     the last visited time and associates that time with the 'object' reference.
-    /// 
-    ///     Note that both the SetVisited and GetNext* calls can be passed a null for 'object'.  This will cause all 
+    ///
+    ///     Note that both the SetVisited and GetNext* calls can be passed a null for 'object'.  This will cause all
     ///     the actors' visited time information to be shared.
-    /// 
+    ///
     ///     An implication of this whole thing is that actors will need to remember what path they are on and what
-    ///     node they are heading toward.  (And the edge if you're having them go toward the edge before going 
+    ///     node they are heading toward.  (And the edge if you're having them go toward the edge before going
     ///     toward the node).  Becoming "distracted" and forgetting what path you're on is fine but it's not something
     ///     that you want to do every frame.
-    /// 
+    ///
     /// <summary>
     /// The WayPoint class provides a home for the static functions that deal with waypoints
     /// and also provides a namespace wrapper since the inside classes have such generic names.
@@ -107,8 +106,8 @@ namespace Boku.SimWorld.Path
         public static float RoadCost
         {
             get { return roadCost; }
-            set 
-            { 
+            set
+            {
                 roadCost = value;
                 if (roadCost < 0)
                     roadCost = 0;
@@ -389,7 +388,7 @@ namespace Boku.SimWorld.Path
         }   // end of WayPoint MergePaths()
 
         /// <summary>
-        /// Scans through all the edges of all the paths.  If if finds an edge 
+        /// Scans through all the edges of all the paths.  If if finds an edge
         /// connecting two nodes in different paths then it merges those paths.
         /// </summary>
         static private void MergePaths()
@@ -586,7 +585,7 @@ namespace Boku.SimWorld.Path
         public static Edge CreateNewEdge(Node n0, Node n1)
         {
             // Note the c'tor takes care of adding the new edge to
-            // the right path and merging paths if two have been 
+            // the right path and merging paths if two have been
             // joined by the creation of the new edge.
             Edge e = new Edge(n0, n1);
 
@@ -642,7 +641,7 @@ namespace Boku.SimWorld.Path
                 {
                     if (p.Edges.Count == 0)
                     {
-                        // This path must only have a single node 
+                        // This path must only have a single node
                         // so check that instead of the edges.
                         Node n = p.Nodes[0];
                         float dist2 = Vector3.DistanceSquared(n.Position, position);
@@ -709,9 +708,9 @@ namespace Boku.SimWorld.Path
         }   // end of WayPoint GetNearestEdgeFromPath()
 
         /// <summary>
-        /// Returns the next node in the path.  "Next" is calculated by taking all the possible 
-        /// edges, eliminating the one the actor just came in on and then randomly selecting among 
-        /// the remaining ones biasing the selection toward nodes which have been visited least 
+        /// Returns the next node in the path.  "Next" is calculated by taking all the possible
+        /// edges, eliminating the one the actor just came in on and then randomly selecting among
+        /// the remaining ones biasing the selection toward nodes which have been visited least
         /// recently.  If a path has only a single node this will always be returned.
         /// </summary>
         /// <param name="path">The path the actor is on.</param>
@@ -734,11 +733,11 @@ namespace Boku.SimWorld.Path
         }   // end of WayPoint GetNextNodeFromPath()
 
         /// <summary>
-        /// Returns the next edge in the path.  "Next" is calculated by taking all the possible 
-        /// edges, eliminating the one the actor just came in on and then randomly selecting among 
-        /// the remaining ones biasing the selection toward nodes which have been visited least 
-        /// recently.  If a path has only a single node this _will_ return null.  
-        /// 
+        /// Returns the next edge in the path.  "Next" is calculated by taking all the possible
+        /// edges, eliminating the one the actor just came in on and then randomly selecting among
+        /// the remaining ones biasing the selection toward nodes which have been visited least
+        /// recently.  If a path has only a single node this _will_ return null.
+        ///
         /// Note, this should be called before calling SetVisitedTime() in the actor otherwise
         /// the actor's previous node will be the current one and not the actual previous one.
         /// TODO Refactor this because this is a lame restriction.
@@ -753,7 +752,7 @@ namespace Boku.SimWorld.Path
 
             Node prevNode = Node.PrevNode.GetPrevNode(actor);
 
-            // Create a temp list with all the edges connecting to the 
+            // Create a temp list with all the edges connecting to the
             // curNode except for the edge we just came in from.
             List<Edge> edges = scratchEdges;
             edges.Clear();
@@ -782,7 +781,7 @@ namespace Boku.SimWorld.Path
 
             if (edges.Count == 0)
             {
-                // If the count is 0 that means that we're at a dead end and 
+                // If the count is 0 that means that we're at a dead end and
                 // need to return along the edge we came in on.  If there's no
                 // edges in the path then create a fake edge and return that.
                 if (path.Edges.Count > 0)
@@ -913,9 +912,3 @@ namespace Boku.SimWorld.Path
     }   // end of class WayPoint
 
 }   // end of namespace Boku.SimWorld
-
-
-
-
-
-

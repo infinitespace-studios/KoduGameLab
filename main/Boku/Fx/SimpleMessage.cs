@@ -60,11 +60,11 @@ namespace Boku.Fx
         /// </summary>
         public Texture2D Texture
         {
-            get 
+            get
             {
                 if (textures.Count == 0)
                     return null;
-                return textures[CurrentTexture]; 
+                return textures[CurrentTexture];
             }
         }
         /// <summary>
@@ -73,10 +73,10 @@ namespace Boku.Fx
         public double Period
         {
             get { return 1.0 / frequency; }
-            set 
+            set
             {
                 Debug.Assert(value > 0);
-                frequency = 1.0 / value; 
+                frequency = 1.0 / value;
             }
         }
         /// <summary>

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #region Debug Defines
 //#define MF_SKIPSOME       // Drop a single batch from each render, to see what the batch breakdown is.
 //#define MF_RENDERSOLO     // Don't use the bounds tree, just render the list.
@@ -24,7 +23,7 @@ using Boku.Common;
 
 namespace Boku.SimWorld.Terra
 {
-    
+
     /// <summary>
     /// System for collapsing many small batches into larger spatially organized batches.
     /// </summary>
@@ -197,13 +196,13 @@ namespace Boku.SimWorld.Terra
         private class Node
         {
             /// <summary>
-            /// No accessors, this is just a struct. 
+            /// No accessors, this is just a struct.
             /// Actually, it's a class now, but it used to be a struct.
             /// It's really still a struct, we just need it to be a ref type
             /// so we can update Cull while it's in the List<>. - mf
             /// </summary>
             #region Members
-            
+
             /// <summary>
             /// Index into the batch list of the owning BatchCache.
             /// </summary>
@@ -294,7 +293,7 @@ namespace Boku.SimWorld.Terra
 #else // MF_HOLDFRUSTUM
                 Frustum frustum = camera.Frustum;
 #endif // MF_HOLDFRUSTUM
-                
+
                 Cull = frustum.CullTest(Min, Max);
 
                 if (Cull == Frustum.CullResult.PartiallyInside)
@@ -352,7 +351,7 @@ namespace Boku.SimWorld.Terra
             private static Frustum _holdFrustum = null;
 #endif // MF_HOLDFRUSTUM
 
-            /// <summary> 
+            /// <summary>
             /// Recursive render down to batches without cull checking.
             /// </summary>
             /// <param name="camera"></param>
@@ -494,7 +493,7 @@ namespace Boku.SimWorld.Terra
         /// Prepare to accept data for processing.
         /// </summary>
         /// <param name="indexPatterns">
-        /// The order in which indices are added to the index buffers. Must 
+        /// The order in which indices are added to the index buffers. Must
         /// have element length equal to 4. Note that the number of index
         /// patterns passed will determine the number of index buffers created
         /// (one per pattern).
@@ -643,7 +642,7 @@ namespace Boku.SimWorld.Terra
 
             /// Pick a sorting direction and sort
             AABB totalBounds = SortRange(lo, hi);
-            
+
             /// Split near as possible to median by bytes
             int middle = FindMedian(totalBounds, sumBytes, lo, hi);
             Debug.Assert((middle >= lo) && (middle <= hi));
@@ -659,8 +658,8 @@ namespace Boku.SimWorld.Terra
             group.Right = Partition<VertexType>(middle + 1, hi);
             nodes[myNode] = new Node(group.Left, group.Right, myBounds);
 
-             //we should be able to assert here that the children bounds have 
-             //an aspect ratio 0.5 <= ratio <= 2.0 
+             //we should be able to assert here that the children bounds have
+             //an aspect ratio 0.5 <= ratio <= 2.0
 
             return myNode;
         }
@@ -993,5 +992,5 @@ namespace Boku.SimWorld.Terra
         }
         #endregion Internal
     }
-    
+
 }

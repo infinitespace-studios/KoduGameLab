@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -19,7 +18,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
-    /// and creates a texture on the fly into which the slider and the 
+    /// and creates a texture on the fly into which the slider and the
     /// associated text string are rendered.
     /// </summary>
     public class UIGridModularFloatSliderElement : UIGridBaseModularSliderElement
@@ -154,7 +153,6 @@ namespace Boku.UI2D
 
         #endregion
 
-
         // c'tor
         /// <summary>
         /// Simple c'tor using a blob to hold the common data.
@@ -281,9 +279,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularFloatSliderElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

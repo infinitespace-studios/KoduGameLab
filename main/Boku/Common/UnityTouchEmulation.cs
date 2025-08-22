@@ -10,12 +10,11 @@ namespace Boku.Common
 {
         #endregion Members
 
-
         #region Accessors
 
         public static int EventTouchCount
         {
-            get 
+            get
             {
                 return eventTouches.Count;
             }
@@ -53,7 +52,6 @@ namespace Boku.Common
         }
 
         #endregion Accessors
-
 
         #region Event Handlers
 
@@ -153,7 +151,7 @@ namespace Boku.Common
                 return;
             }
 #endif
-            // If we don't have a touch then something went wrong... we should only be moving 
+            // If we don't have a touch then something went wrong... we should only be moving
             // existing touches, not new ones.
             if (found == null)
             {
@@ -185,7 +183,6 @@ namespace Boku.Common
 
             Vector2 deltaPosition = found.position - oldPosition;
             found.deltaPosition = deltaPosition;
-
 
             found.deltaPosition = deltaPosition;
             //found.tapCount = 0;
@@ -228,7 +225,7 @@ namespace Boku.Common
                 }
             }
 
-            // If we don't have a touch then something went wrong... we should have up events on 
+            // If we don't have a touch then something went wrong... we should have up events on
             // existing touches, not new ones.
             if (found == null)
             {
@@ -243,7 +240,7 @@ namespace Boku.Common
             //{
             //    Console.WriteLine("Touch Up on same event?  Setting delayed end... {0}", found.fingerId);
 
-            //    // This is part of the bug where we get a touch down and up as part of the same message queue... 
+            //    // This is part of the bug where we get a touch down and up as part of the same message queue...
             //    // so to fix it we delay the touch end by one frame
             //    found.delayedEnd = true;
             //}
@@ -301,7 +298,7 @@ namespace Boku.Common
 
             //store the max touch count detected at startup
             TouchInput.TouchAvailable = cwTouchHook.IsTouchAvailable();
-            TouchInput.MaxTouchCount = cwTouchHook.GetMaxTouches();            
+            TouchInput.MaxTouchCount = cwTouchHook.GetMaxTouches();
 #endif
         }
 
@@ -309,7 +306,7 @@ namespace Boku.Common
         {
             if (index < 0 || index >= touchesThisFrame.Count)
             {
-                throw new IndexOutOfRangeException("Attempting to retrieve a touch using a bad index: " + index.ToString()); 
+                throw new IndexOutOfRangeException("Attempting to retrieve a touch using a bad index: " + index.ToString());
             }
             return touchesThisFrame[index];
         }
@@ -320,7 +317,7 @@ namespace Boku.Common
             eventstring = "";
             foreach (EventTouch t in eventTouches)
             {
-                eventstring += "id="+t.fingerId.ToString() 
+                eventstring += "id="+t.fingerId.ToString()
                               +",ph="+t.phase.ToString()
                               +",isOld="+t.isOld.ToString()
                               +",isNew="+t.isNew.ToString()
@@ -411,7 +408,7 @@ namespace Boku.Common
                 {
                     case TouchPhase.Began:
                     {
-                        // Set the {t} object to stationary, this will be updated to moved if needed or copied into the 
+                        // Set the {t} object to stationary, this will be updated to moved if needed or copied into the
                         // {touch} object next frame. This way we only see the Began phase for one frame.
                         eventTouch.phase = TouchPhase.Stationary;
                         eventTouch.isOld = false;
@@ -466,7 +463,7 @@ namespace Boku.Common
                 //touch.tapCount = eventTouch.tapCount;
 
                 currentTouchThisFrame.deltaTime = eventTouch.deltaTime;
-            
+
                 // Here we handle any touch-up messages whose processing is to be delayed by a frame.
                 // We set the 'touches' phase to ended, which will then be propogated to
                 // 'touchesThisFrame' on the following frame.
@@ -530,7 +527,7 @@ namespace Boku.Common
             public EventTouch(Vector2 touchPosition)
             {
                 position = touchPosition;
-                
+
                 deltaPosition = new Vector2();
                 timeDelta = 0.0f;
                 //tapCount = 0;
@@ -565,7 +562,7 @@ namespace Boku.Common
         public Vector2 position;
         public Vector2 deltaPosition;
         public float deltaTime;
-        //public int tapCount; 
+        //public int tapCount;
         public TouchPhase phase;
     }
 

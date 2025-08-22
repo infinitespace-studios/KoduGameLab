@@ -104,7 +104,7 @@ namespace Boku.Common.Localization
             }
         }
 
-        public static Dictionary<string, List<string>> ReadToDictionary(string fileName, string testName) 
+        public static Dictionary<string, List<string>> ReadToDictionary(string fileName, string testName)
         {
             // DebugLog.WriteLine("ReadToDictionary1");
 
@@ -115,7 +115,7 @@ namespace Boku.Common.Localization
             if(dict == null)
             {
                 // DebugLog.WriteLine("    failed read, trying titlespace");
-                // If we're here the file read failed.  This seems to happen when the 
+                // If we're here the file read failed.  This seems to happen when the
                 // version downloaded from the server is bad.  So, delete the file
                 // so it gets downloaded again on next startup and then read the file
                 // from the TitleSpace.
@@ -123,7 +123,7 @@ namespace Boku.Common.Localization
                 dict = ReadToDictionary(fileName, 1, StorageSource.TitleSpace, testName);
             }
 
-            return dict; 
+            return dict;
         }
 
         public static Dictionary<string, List<string>> ReadToDictionary(string fileName, int startDepth, StorageSource source, string testName)
@@ -322,7 +322,7 @@ namespace Boku.Common.Localization
                     {
                         return;
                     }
-                    
+
                     reportWriter.WriteLine(fileName + " - Identical to " + DefaultLanguage + ": " + message);
                 }
                 catch (Exception e)

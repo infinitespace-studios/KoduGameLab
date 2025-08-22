@@ -20,11 +20,10 @@ namespace Boku.Input
 {
     public delegate void InputCommandButtonDelegate( Object sender, EventArgs args);
 
-
     /// <summary>
     /// This represents an intermediate abstraction specific to push buttons
     /// It will manage two states (wasPressed and wasReleased) for this input command
-    /// 
+    ///
     /// There is currently no need to use this class outside this module as all
     /// usefull classes are represented below
     /// </summary>
@@ -141,6 +140,6 @@ namespace Boku.Input
                 InputCommandButtonDelegate e = (InputCommandButtonDelegate)result.AsyncState;
                 e.EndInvoke(result);
             }
-             */ 
+             */
     }
 }

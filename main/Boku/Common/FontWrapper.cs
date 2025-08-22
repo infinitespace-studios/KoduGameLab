@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -66,7 +65,7 @@ namespace Boku.Common
 
             return result;
         }   // end of MeasureString()
-    
+
     }   // end of class FontWrapper
 
 }   // end of namespace Boku.Common

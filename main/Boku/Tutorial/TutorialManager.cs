@@ -6,14 +6,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-
 namespace Boku.Tutorial
 {
     public delegate void GameAction(); // render or update
 
     /// <summary>
     /// This singleton class represents the manager for any running tutorials
-    /// 
+    ///
     /// </summary>
     public class TutorialManager
     {
@@ -49,7 +48,7 @@ namespace Boku.Tutorial
             {
                 Stop();
             }
-            else 
+            else
             {
                 if (this.tutorial == null || tutorialId != this.tutorial.GetType().Name)
                 {
@@ -88,6 +87,5 @@ namespace Boku.Tutorial
             }
         }
 
- 
     }
 }

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -31,7 +30,7 @@ namespace TileProcessor
     //        System.Diagnostics.Debugger.Launch();
     //        return context.BuildAsset<TextureContent, TextureContent>(texture, "MyTextureProcessor");
     //    }
-    //} 
+    //}
 	#endregion
 
     [ContentProcessor]
@@ -45,7 +44,7 @@ namespace TileProcessor
             bool collapsed = BokuPipeline.MaterialsGroup.PreProcess(input);
 
             // stash our model content so that we can use it to look up meshes
-            // 
+            //
             ModelContent model = base.Process(input, context);
 
             FindBBoxesRecurse(input, model);
@@ -70,13 +69,10 @@ namespace TileProcessor
 
             return model;
 
-
-
             //NodeContentCollection ncc = input.Children;
 
             //parseChildren(ncc);
             //ModelContent mc2 = base.Process(input, context);
-
 
             //mc2.Meshes[0].MeshParts[0];
             //int nMeshes = mc2.Meshes.Count;
@@ -121,7 +117,6 @@ namespace TileProcessor
                     maxBox.Y = Math.Max(maxBox.Y, x.Y);
                     maxBox.Z = Math.Max(maxBox.Z, x.Z);
                 }
-
 
                 // find the output mesh corresponding to the meshcontent object we're processing
                 // (conversion has already happened; we're just looking at them after the fact

@@ -15,19 +15,19 @@ namespace Cab
 {
     /// <summary>
     /// Creates a CAB archive.
-    /// 
+    ///
     /// Usage:
-    /// 
+    ///
     ///     Compressor comp = new Compressor();
     ///     comp.Create(@"C:\MyCabFiles", @"MyArchive.cab");
     ///     comp.AddFile(null, "personal.xml");
     ///     comp.AddFile(null, "virus.exe");
     ///     comp.Destroy();
-    ///     
+    ///
     ///  Limitations:
     ///     The underlying system component "cabinet.dll" does not support
     ///     multithreaded usage. We do nothing to improve on this.
-    ///     
+    ///
     /// </summary>
     public partial class Compressor
     {
@@ -51,7 +51,6 @@ namespace Cab
         }
 
     }   // end of partial class Compressor
-
 
     partial class Compressor
     {

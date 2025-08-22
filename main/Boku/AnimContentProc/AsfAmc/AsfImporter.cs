@@ -4,7 +4,7 @@
 /*
  * AsfImporter.cs
  * Copyright (c) 2006, 2007 Michael Nikonov, David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -80,7 +80,7 @@ namespace Xclna.Xna.Animation.Reader
             root.Transform = Matrix.Identity;
             bones = new NamedValueDictionary<BoneContent>();
             bones.Add("root", root);
-            if (!File.Exists(filename)) 
+            if (!File.Exists(filename))
                 throw new InvalidContentException("file " + filename + " not found");
             reader = new StreamReader(filename);
             string line;
@@ -108,20 +108,20 @@ namespace Xclna.Xna.Animation.Reader
         {
             string line=reader.ReadLine();
             ++currentLine;
-            if (line != null) 
+            if (line != null)
                 line=line.Trim();
             return line;
         }
 
         private BoneContent importBone()
         {
-            /* example (dof and limits are optional): 
-             * 
+            /* example (dof and limits are optional):
+             *
              *   begin
-                     id 2 
+                     id 2
                      name lfemur
-                     direction 0.34202 -0.939693 0  
-                     length 7.16147  
+                     direction 0.34202 -0.939693 0
+                     length 7.16147
                      axis 0 0 20  XYZ
                     dof rx ry rz
                     limits (-160.0 20.0)
@@ -132,7 +132,7 @@ namespace Xclna.Xna.Animation.Reader
             BoneContent bone = new BoneContent();
             string line;
             line = readLine();
-            if (line == ":hierarchy") 
+            if (line == ":hierarchy")
                 return null;
             if (line!="begin")
                 throw new InvalidContentException("no hierarchy found", cId);

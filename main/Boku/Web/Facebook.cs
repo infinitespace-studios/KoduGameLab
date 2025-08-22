@@ -28,7 +28,7 @@ namespace Boku.Web
             public string Name;
             public Texture2D SquareImage;
         }
-        
+
         static UserInfo user = new UserInfo();
 
         static BrowserForm form = null;
@@ -90,7 +90,7 @@ namespace Boku.Web
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="callback"></param>
         /// <param name="state"></param>

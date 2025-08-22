@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -144,7 +143,7 @@ namespace Boku.UI2D
 
             effect.CurrentTechnique = technique;
 
-            // We need to push the near plane out more than is normal for UI 
+            // We need to push the near plane out more than is normal for UI
             // so that the material cubes don't render behind the terrain.
             Camera cam = camera;
             cam.NearClip = 6.0f;
@@ -178,7 +177,7 @@ namespace Boku.UI2D
 
                 // Note: Indexing into shaders doesn't work with MG.  Apparently it
                 // was some hack done in XNA related to the Effect code they used.
-                // Anyway, instead of using this indexing we need to pick and set 
+                // Anyway, instead of using this indexing we need to pick and set
                 // the right technique which we do further down from here.
 
             if (MaterialPicker.FabricMode)
@@ -246,7 +245,7 @@ namespace Boku.UI2D
                 }
 
                 TerrainMaterial mat = TerrainMaterial.Get(materialIndex);
-                
+
                 int lightNum = Boku.Fx.Luz.Count;
                 if (lightNum > 6)
                 {
@@ -539,7 +538,7 @@ namespace Boku.UI2D
                 // WTF? If we have 37 vertices the indices should be
                 // in the range 0..36 inclusive.  Instead they're 1..37.
                 // How did this ever work?
-                // Ok, in the call to DrawPrimitives -1 was passed as the vertexOffset.  
+                // Ok, in the call to DrawPrimitives -1 was passed as the vertexOffset.
                 // Also, the number of vertices was passed as 36 instead of the actual 37.
                 // The end result is that this more or less worked on nVidia and Intel chipsets
                 // but totally failed to render on ATI chipsets.  DON"T DO THIS!

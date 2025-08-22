@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -94,7 +92,7 @@ namespace Boku
         private const float kUIToWaveHeight = 1.0f / kWaveHeightToUI;
 
         private const int kMaxScoreLabelLength = 260;//Value is in pixels
-        
+
         private List<UIGridElement> gridElements = new List<UIGridElement>();
 
         private UIGridModularButtonElement changeHistory;
@@ -125,7 +123,6 @@ namespace Boku
 
         private UIGridModularNextLevelElement nextLevel;
 
-
         private CommandMap commandMap = new CommandMap("EditWorldParameters");     // Placeholder for stack.
 
         private bool active = false;
@@ -137,7 +134,7 @@ namespace Boku
         private Control editTypeForActor = Control.SIZEOF;
 
         private static bool cameraSetMode = false;  // Used to indicate we're only temporarily exiting so we can let the user set the camera position.
-        private int initialCameraMode = -1;         // This is the camera mode when activated.  We need to keep this around to see if it has changed when we exit. 
+        private int initialCameraMode = -1;         // This is the camera mode when activated.  We need to keep this around to see if it has changed when we exit.
 
         private static bool nextLevelMode = false;  // Used to indicate we're only temporarily exiting so we can let the user set the next level
 
@@ -216,7 +213,7 @@ namespace Boku
                 else
                 {
                     UIGridElement prevE = grid.SelectionElement;
-                    
+
                     HandleTouchInput();
                     HandleMouseInput();
                     HandleGamepadInput();
@@ -792,7 +789,7 @@ namespace Boku
                     blob.height = 1.25f;
                     sky = new UIGridModularPictureListElement(blob, Strings.Localize("editWorldParams.skyPictureList"));
 
-                    // Note that the first color is what you see when looking straight 
+                    // Note that the first color is what you see when looking straight
                     // down and the last is what you see looking straight up.  The alpha
                     // channel is used to define where in the gradient range each color
                     // appears.  0.0 = straight down, 1.0 = straight up.
@@ -981,7 +978,7 @@ namespace Boku
                     gridElements.Add(windMin);
                 }
                 else  if (setupType == ControlSetup.AddToGridEditWorld && controlType == Control.WindMin)
-                {                    
+                {
                     grid.Add(windMin, 0, (int)Control.WindMin);
                 }
 
@@ -1162,8 +1159,8 @@ namespace Boku
                     gridElements.Add(musicVolume);
                 }
                 else if (setupType == ControlSetup.AddToGridEditWorld && controlType == Control.MusicVolume)
-                { 
-                    grid.Add(musicVolume, 0, (int)Control.MusicVolume); 
+                {
+                    grid.Add(musicVolume, 0, (int)Control.MusicVolume);
                 }
             }
             #endregion
@@ -1184,7 +1181,7 @@ namespace Boku
                         {
                             Scoreboard.Score scoreObj = Scoreboard.GetScoreboardScore(scoreColor);
                             Debug.Assert(null != scoreObj);
-                            
+
                             // Note:  The text we get back is localized so we
                             // can't just use Utils.EnumParse to get back the enum value.
                             if(entry.Text == Strings.Localize("editWorldParams.loudLabel"))
@@ -1286,7 +1283,7 @@ namespace Boku
             }
             #endregion
 
-            #region score persistence settings 
+            #region score persistence settings
             {
                 if (setupType == ControlSetup.Initialize)
                 {
@@ -1333,7 +1330,6 @@ namespace Boku
             }
             #endregion
 
-            
             #region Touch GUI Button Visibility
             {
                 if (setupType == ControlSetup.Initialize)
@@ -1376,15 +1372,14 @@ namespace Boku
                                     //Deterimine if text will fit on the button.
                                     bool valid = GUIButtonManager.TestLabelFit(textBlob.RawText);
                                     return valid;
-                                }; 
+                                };
                                 editingButton = button;
                                 InGame.inGame.shared.textLineDialog.Activate(callback, button.Label, validateCallback);
                             }
                             else
                             {
                             }
-                            
-                            
+
                             InGame.IsLevelDirty = true;
                         };
                         ctl.AddText(Strings.Localize("editWorldParams.labeledButton"));
@@ -1408,7 +1403,6 @@ namespace Boku
                 }
             }
             #endregion
-
 
             #region Virtual Controller Visibility
             {
@@ -1470,7 +1464,6 @@ namespace Boku
             }
             #endregion
 
-
             if (setupType == ControlSetup.Initialize)
             {
                 // Set grid properties.
@@ -1493,7 +1486,7 @@ namespace Boku
         // Should be called after all UI elements are setup on the grid
         private void SetupGridHelp()
         {
-            // Loop over all the elements in the grid.  For any that have 
+            // Loop over all the elements in the grid.  For any that have
             // help, set the flag so they display Y button for help.
             for (int i = 0; i < grid.ActualDimensions.Y; i++)
             {
@@ -1523,7 +1516,7 @@ namespace Boku
         {
             buttonLabel = buttonLabel.Replace("\r", "");
 
-            //Buttons used to allow a single new line. 
+            //Buttons used to allow a single new line.
             //Now they autowrap via text blob so replace
             //old \n with space.
             buttonLabel = buttonLabel.Replace("\r", " ");
@@ -1571,7 +1564,7 @@ namespace Boku
             SetupControl( ControlSetup.AddToGridEditWorld, Control.FirstTouchGUIButton);
             SetupControl( ControlSetup.AddToGridEditWorld, Control.FirstScoreType );
             SetupControl( ControlSetup.AddToGridEditWorld, Control.FirstScorePersistFlag );
-            
+
             SetupGridHelp();
         }
 
@@ -1609,7 +1602,7 @@ namespace Boku
         public void OnSelect(UIGrid grid)
         {
             // Normally the grid wil deactivate itself when a selection is made.
-            // In the options/settings case there are some elements that ignore 
+            // In the options/settings case there are some elements that ignore
             // the Select action letting it get to the grid which then deactivates
             // itself.  We don't want that to happen so set the grid active here.
             grid.Active = true;
@@ -1657,7 +1650,7 @@ namespace Boku
                         SetupControl(ControlSetup.AddToGridReflexData, Control.LightRig);
 
                         if (reflexData.WorldLightChangeEnabled)
-                        {                            
+                        {
                             lightRig.SetValue(reflexData.WorldLightChangeIndex);
                         }
                         else
@@ -1727,7 +1720,7 @@ namespace Boku
         public void Activate()
         {
             if (!active)
-            {                
+            {
                 editMode = EditMode.ChangeSettingMode;
 
                 //make sure we clean up the data
@@ -1846,14 +1839,13 @@ namespace Boku
                 for (int i = 0; i < (int)Classification.ColorInfo.Count; ++i)
                 {
                     //Score settings by color.
-                    
+
                     Classification.Colors color = (Classification.Colors)((int)Classification.ColorInfo.First + i);
                     Scoreboard.Score scoreObj = Scoreboard.GetScoreboardScore(color);
 
-
-                    //Kinda a weird way to set current setting.  Grabs Enum actual sring and creates loc key from it.  
+                    //Kinda a weird way to set current setting.  Grabs Enum actual sring and creates loc key from it.
                     //If ENUM chagnes this breaks :s.  Should consider re-implementing.
-                    
+
                     //make sure we localize the value - the odd way this is implemented means if we don't, the values
                     //won't persist between languages!!
                     string locKey = "editWorldParams." + scoreObj.Visibility.ToString().ToLower();
@@ -1861,7 +1853,7 @@ namespace Boku
                     {
                         locKey += "Label";
                     }
-                    
+
                     scoreTypes[i].SetValue(Strings.Localize(locKey));
 
                     //initialize the persistance values per score
@@ -1888,8 +1880,6 @@ namespace Boku
                         touchGuiButtons[i].SetValue(Strings.Localize("editWorldParams.labeledButton"));
                     }
                 }
-
-
 
                 showVirtualController.Check = InGame.ShowVirtualController;
                 if (InGame.XmlWorldData.LinkedToLevel != null)
@@ -2039,5 +2029,3 @@ namespace Boku
     }   // end of class EditWorldParameters
 
 }
-
-

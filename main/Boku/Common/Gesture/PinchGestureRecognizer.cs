@@ -34,10 +34,9 @@ namespace Boku.Common.Gesture
 
             Invalid,
         }
-        
+
         private float k_MovementAlongLineDot = 0.75f;
         private float k_MovementAlongLineDot_PostBegin = 0.6f; //Allow a bigger range of side motion to the gesture to allow rotation/pinch
-
 
         const float k_PinchStaticDeadZone = 10.0f;
         const float k_MinDeltaDistance = 8.0f; //min accumulated distance before checking for failure
@@ -48,9 +47,8 @@ namespace Boku.Common.Gesture
 
         //how long fingers stop moving before pinch gesture fails
         const float k_PinchIdleTimeout = 0.50f;
-        
-        const int kNumTouchesRequired = 2;
 
+        const int kNumTouchesRequired = 2;
 
         public PinchGestureRecognizer()
         {
@@ -65,7 +63,6 @@ namespace Boku.Common.Gesture
             return kNumTouchesRequired;
         }
 
-
         private int[] m_FingerIdx;
         private Vector2[] m_AccumulatedDelta;
         private Vector2[] m_PreviousPosition;
@@ -73,23 +70,21 @@ namespace Boku.Common.Gesture
 
         private bool m_bPinching = false;
         private float m_originalDist = 0.0f;
-        
+
         private float m_Scale = 1.0f;
         private float m_DeltaScale = 0.0f;
 
         private Vector2 m_averagePosition;
-        
-        
+
         private double m_IdleTime = 0;
         private float m_StaticTime = 0.0f;
         private PinchState m_pinchState;
-
 
         public bool IsPinching
         {
             get { return IsValidated; }
         }
-        
+
         public float Scale
         {
             get{ return m_Scale; }
@@ -97,7 +92,7 @@ namespace Boku.Common.Gesture
 
         public float DeltaScale
         {
-            get{ return (IsPinching ? m_DeltaScale : 0.0f); } 
+            get{ return (IsPinching ? m_DeltaScale : 0.0f); }
         }
 
         public bool IsPinchStateValid
@@ -110,7 +105,7 @@ namespace Boku.Common.Gesture
         /// The average position between the two fingers when this gesture was last active
         /// </summary>
         public Vector2 AveragePosition
-        { 
+        {
             get { return m_averagePosition; }
         }
 
@@ -141,7 +136,6 @@ namespace Boku.Common.Gesture
 
             m_bPinching = false;
         }
-
 
         protected override void OnTouchReleased(TouchContact[] touches)
         {

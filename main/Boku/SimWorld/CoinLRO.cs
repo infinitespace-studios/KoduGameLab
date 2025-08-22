@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -25,10 +24,10 @@ namespace Boku.SimWorld
     {
         private static CoinSRO sroInstance = null;
 
-        private CoinSRO() 
+        private CoinSRO()
             : base(@"Models\coin")
         {
-        }   
+        }
 
         /// <summary>
         /// Returns a static, shareable instance of a star sro.
@@ -41,6 +40,6 @@ namespace Boku.SimWorld
                 sroInstance.XmlActor = Coin.XmlActor;
             }
             return sroInstance;
-        }   
-    } 
-} 
+        }
+    }
+}

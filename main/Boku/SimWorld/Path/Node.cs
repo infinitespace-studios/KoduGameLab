@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace Boku.SimWorld.Path
         {
             #region HelperClasses
             /// <summary>
-            /// A helper class to keep track of the last time 
+            /// A helper class to keep track of the last time
             /// this node was visited by a particular actor.
             /// </summary>
             protected class TimeStamp
@@ -43,7 +42,7 @@ namespace Boku.SimWorld.Path
 
             /// <summary>
             /// A static helper class to keep track of the last node that
-            /// was visited by a given actor.  Used in a static array so 
+            /// was visited by a given actor.  Used in a static array so
             /// that there's only a single entry per actor.
             /// </summary>
             public class PrevNode
@@ -204,7 +203,7 @@ namespace Boku.SimWorld.Path
             public Vector3 Position
             {
                 get { return position; }
-                set 
+                set
                 {
                     position.X = value.X;
                     position.Y = value.Y;
@@ -412,13 +411,13 @@ namespace Boku.SimWorld.Path
                 return NodeRenderPosition(Position, Height, asRoad);
             }
             public static void Render(
-                Camera camera, 
-                Vector3 pos, 
+                Camera camera,
+                Vector3 pos,
                 float height,
-                Vector4 color, 
+                Vector4 color,
                 bool asRoad,
-                Path path, 
-                bool isEdit, 
+                Path path,
+                bool isEdit,
                 bool isSelect,
                 bool isMouse,
                 bool isTarget,
@@ -558,7 +557,7 @@ namespace Boku.SimWorld.Path
             /// <returns></returns>
             public void SetVisitedTime(Object actor)
             {
-                // Update the PrevNode list.  Do this first 
+                // Update the PrevNode list.  Do this first
                 // in case actor gets nulled out.
                 PrevNode.SetPrevNode(actor, this);
 
@@ -567,7 +566,7 @@ namespace Boku.SimWorld.Path
                     actor = null;
                 }
 
-                // See if we've already got an entry for this 
+                // See if we've already got an entry for this
                 // actor.  If so, update it.
                 for (int i = 0; i < timestamps.Count; i++)
                 {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -47,13 +46,11 @@ namespace Boku
             private Object snapObject = null;               // The Object we last snapped to.
             private float snapLerp = 0.15f;                 // How strong the snap is.
 
-
             // c'tor
             public TweakObjectUpdateObj(InGame parent, ref Shared shared)
                 : base(parent, ref shared)
             {
             }   // end of TweakObjectUpdateObj c'tor
-
 
             /// <summary>
             /// TweakObjectUpdateObj Update()
@@ -123,7 +120,7 @@ namespace Boku
                             {
                                 InGame.IsLevelDirty = true;
 
-                                // Hide the color palette and then return.  If we just fall 
+                                // Hide the color palette and then return.  If we just fall
                                 // through then the color palette will be re-enabled.
                                 ColorPalette.Active = false;
                             }
@@ -149,7 +146,7 @@ namespace Boku
                             parent.CurrentUpdateMode = UpdateMode.EditObjectParameters;
                             InGame.IsLevelDirty = true;
 
-                            // Hide the color palette and then return.  If we just fall 
+                            // Hide the color palette and then return.  If we just fall
                             // through then the color palette will be re-enabled.
                             ColorPalette.Active = false;
                             return;
@@ -163,7 +160,6 @@ namespace Boku
                 }   // end if we have input focus.
 
             }   // end of TweakObjectUpdateObj Update()
-
 
             /// <summary>
             /// Check if the cursor is close enough to anything to have that
@@ -212,7 +208,7 @@ namespace Boku
                 }
                 else
                 {
-                    // See if we've moved far enough away from the 
+                    // See if we've moved far enough away from the
                     // previous snap to reset.
                     GameThing thing = snapObject as GameThing;
                     Vector3 delta = new Vector3();
@@ -242,8 +238,8 @@ namespace Boku
                     }
                 }
 
-                // We've now found the nearest object.  If close enough, keep it 
-                // and turn the cursor blue to indicate it is in focus.  If not 
+                // We've now found the nearest object.  If close enough, keep it
+                // and turn the cursor blue to indicate it is in focus.  If not
                 // close enough set the cursor to white and null the focus object.
                 const float nearThreshold = 0.5f;
                 if (distance > nearThreshold)
@@ -290,7 +286,7 @@ namespace Boku
                 if (thing != null)
                 {
                     ColorPalette.Active = true;
-                    // If there's no active node then make sure that the color displayed by 
+                    // If there's no active node then make sure that the color displayed by
                     // the palette matches the color of the object under the cursor.
                     shared.curObjectColor = ColorPalette.GetIndexFromColor(thing.ClassColor);
                 }
@@ -299,7 +295,6 @@ namespace Boku
                     // WayPointEdit takes care of colors itself.
                     ColorPalette.Active = shared.editWayPoint.Active;
                 }
-
 
                 if (ColorPalette.Active)
                 {
@@ -336,7 +331,6 @@ namespace Boku
                 }   // end if WayPointColorPalette is active.
 
             }   // end of UpdateColorPalette()
-
 
             //
             // TODO (****) These are (mostly) identical to the one in InGameEditObject.  Should figure out how to share.
@@ -397,7 +391,6 @@ namespace Boku
                 get { return parent.cursor3D.Position; }
             }
 
-
             public override void Activate()
             {
                 base.Activate();
@@ -432,5 +425,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

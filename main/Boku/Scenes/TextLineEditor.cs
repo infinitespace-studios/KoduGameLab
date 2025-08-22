@@ -14,7 +14,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-
 using Boku.Base;
 using Boku.Common;
 using Boku.Common.Xml;
@@ -50,14 +49,14 @@ namespace Boku
             public TextBlob blob = null;
 
             public AABB2D location { get; set; }       // Postion on screen
-            
+
             public AABB2D aHitBox = new AABB2D();       // Mouse hit region for <A> Save.
             public AABB2D bHitBox = new AABB2D();       // Mouse hit region for <B> Back.
 
             public AABB2D textAreaHitBox = new AABB2D();    // Mouse hit region for text area.
 
             public int cursorPosition = 0;      // Current cursor position.
-            // 0 is before the 1st character, 1 is between 
+            // 0 is before the 1st character, 1 is between
             // the 1st and 2nd characters, etc.
 
             public int topLine = 0;             // Which line of the text is being shown at the default starting position.
@@ -67,7 +66,6 @@ namespace Boku
             public int textWidth = 9999;
 
             public int textVisibleLines = 1;   // How many lines can we see in the window?
-
 
             public string iconName;
             public DateTime lastKeyPressedAt;
@@ -205,7 +203,6 @@ namespace Boku
                 bool bSave = false;
                 bool bCanceled = false;
 
-
                 if (null != touch)
                 {
                     parent.touchedThisFrame = true;
@@ -223,7 +220,6 @@ namespace Boku
 
                 bCanceled = bCanceled || pad.ButtonB.WasPressed || shared.bHitBox.LeftPressed(hit);
                 bSave = bSave || pad.ButtonA.WasPressed || KeyboardInput.WasPressed(Keys.Escape) || shared.aHitBox.LeftPressed(hit);
-
 
                 if (bCanceled)
                 {
@@ -428,8 +424,8 @@ namespace Boku
             }   // end of UpdateObj KeyInput()
 
             /// <summary>
-            /// User has accepted the currently edited string.  We don't need to 
-            /// copy to the current position since it should already be there.  
+            /// User has accepted the currently edited string.  We don't need to
+            /// copy to the current position since it should already be there.
             /// So, just turn off editing.
             /// </summary>
             public void Accept()
@@ -474,7 +470,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class TextInput UpdateObj  
+        }   // end of class TextInput UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -537,7 +533,7 @@ namespace Boku
                 newViewport.Y = (int)shared.location.Min.Y;
                 newViewport.Width = (int)shared.location.Size.X - (int)iconOffset.X;
                 newViewport.Height = (int)shared.location.Size.Y;
-                device.Viewport = newViewport; 
+                device.Viewport = newViewport;
 
                     //handle horizontal scrolling
                 var offset = 0;
@@ -597,7 +593,6 @@ namespace Boku
                 {
                     iconTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath +shared.iconName);
                 }
-                
 
             }   // end of InitDeviceResources()
 
@@ -617,7 +612,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class TextInput RenderObj     
+        }   // end of class TextInput RenderObj
 
         #region Members
 
@@ -667,7 +662,7 @@ namespace Boku
             shared = new Shared(this);
             shared.location = location;
 
-            // Set the hit box for the text area.  
+            // Set the hit box for the text area.
             shared.textAreaHitBox.Set(shared.location);
 
             // Create the RenderObject and UpdateObject parts of this mode.
@@ -682,7 +677,7 @@ namespace Boku
             shared.textOffset = 0;
 
             shared.iconName = iconName;
-            // We use the updateObj for this deserialization since the text callbacks 
+            // We use the updateObj for this deserialization since the text callbacks
             // belong to it.  Otherwise nothing will ever hook up right.
             //commandMap = CommandMap.Deserialize(updateObj, @"TextEditor.Xml");
 
@@ -690,7 +685,7 @@ namespace Boku
 
         public void OnSelect(UIGrid grid)
         {
-            // We should never actually get here.  The TextEditor UpdateObj 
+            // We should never actually get here.  The TextEditor UpdateObj
             // should consume all 'A' presses before the grids get them...
 
             Debug.Assert(false);
@@ -699,7 +694,7 @@ namespace Boku
 
         public void OnCancel(UIGrid grid)
         {
-            // We should never actually get here.  The TextEditor UpdateObj 
+            // We should never actually get here.  The TextEditor UpdateObj
             // should consume all 'B' presses before the grids get them...
 
             Debug.Assert(false);

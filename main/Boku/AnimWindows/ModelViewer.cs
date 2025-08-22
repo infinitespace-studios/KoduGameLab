@@ -4,7 +4,7 @@
 /*
  * ModelViewer.cs
  * Copyright (c) 2006 Michael Nikonov, David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -167,7 +167,7 @@ namespace Xclna.Xna.Animation
         {
             get { return world; }
         }
-        
+
         /// <summary>
         /// The view matrix of the camera.
         /// </summary>
@@ -202,7 +202,6 @@ namespace Xclna.Xna.Animation
             MouseState state = Mouse.GetState();
             KeyboardState ks = Keyboard.GetState();
 
-        
             // Adjust the zoom
             if (state.ScrollWheelValue != lastState.ScrollWheelValue)
             {
@@ -223,8 +222,6 @@ namespace Xclna.Xna.Animation
                     cameraPosition, Vector3.Zero,
                     up);
             }
-
-
 
             // Update the view if the user drags the mouse
             if ((state.LeftButton == ButtonState.Pressed
@@ -264,13 +261,9 @@ namespace Xclna.Xna.Animation
 
                     }
 
-
                 }
 
             }
-
-
-
 
             view = Matrix.CreateLookAt(
              cameraPosition, Vector3.Zero,
@@ -302,7 +295,6 @@ namespace Xclna.Xna.Animation
             lastState = state;
             lastKeyboardState = keyboardState;
 
-
 #endif
         }
 
@@ -314,7 +306,6 @@ namespace Xclna.Xna.Animation
     /// </summary>
     public class ModelViewer : DrawableGameComponent
     {
-
 
         // The effects
         List<Effect> effects = new List<Effect>();
@@ -331,8 +322,6 @@ namespace Xclna.Xna.Animation
         {
             get { return animator; }
         }
-
-
 
         /// <summary>
         /// Creates a new instance of ModelViewer.
@@ -364,13 +353,10 @@ namespace Xclna.Xna.Animation
 
         }
 
-
-
         // Initialize the effects so the models look reasonable and the lighting
         // Is as it is in the directx Mesh viewer
         private void InitializeEffects(Model model)
         {
-
 
             foreach (ModelMesh mesh in model.Meshes)
             {
@@ -409,16 +395,13 @@ namespace Xclna.Xna.Animation
         public IModelViewerCamera Camera
         {
             get { return cam; }
-            set 
+            set
             {
                 if (value == null)
                     throw new ArgumentNullException("Camera can not be null.");
                 cam = value;
             }
         }
-
-
-
 
         /// <summary>
         /// Updates the ModelViewer.

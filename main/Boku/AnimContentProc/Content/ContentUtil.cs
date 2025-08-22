@@ -4,7 +4,7 @@
 /*
  * ContentUtil.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -70,7 +70,6 @@ namespace Xclna.Xna.Animation.Content
         /// </summary>
         public const long TICKS_PER_60FPS = TimeSpan.TicksPerSecond / 60;
 
-
         /// <summary>
         /// Gets info on what skinning info a vertex element array contains.
         /// </summary>
@@ -97,8 +96,6 @@ namespace Xclna.Xna.Animation.Content
 
         }
 
-
-
         /// <summary>
         /// Reflects a matrix across the Z axis by multiplying both the Z
         /// column and the Z row by -1 such that the Z,Z element stays intact.
@@ -115,7 +112,6 @@ namespace Xclna.Xna.Animation.Content
             m.M33 *= -1;
             m.M34 *= -1;
         }
-
 
         private static void SortFrames(ref AnimationKeyframe[] frames)
         {
@@ -171,7 +167,6 @@ namespace Xclna.Xna.Animation.Content
                 if (!keyframeTimes.ContainsKey(frame.Time))
                     keyframeTimes.Add(frame.Time, null);
 
-
             IList<TimeSpan> times = keyframeTimes.Keys;
 
             // Allocate the interpolated frame matrices
@@ -198,7 +193,6 @@ namespace Xclna.Xna.Animation.Content
 
         }
 
-
         private static void InitializeFrames(ref AnimationKeyframe[] frames)
         {
             SortFrames(ref frames);
@@ -210,7 +204,6 @@ namespace Xclna.Xna.Animation.Content
                 frames = newFrames;
             }
         }
-
 
         private static Quaternion qStart, qEnd, qResult;
         private static Vector3 curTrans, nextTrans, lerpedTrans;
@@ -228,7 +221,7 @@ namespace Xclna.Xna.Animation.Content
         public static Matrix SlerpMatrix(Matrix start, Matrix end,
             float slerpAmount)
         {
-            // Get rotation components and interpolate (not completely accurate but I don't want 
+            // Get rotation components and interpolate (not completely accurate but I don't want
             // to get into polar decomposition and this seems smooth enough)
             Quaternion.CreateFromRotationMatrix(ref start, out qStart);
             Quaternion.CreateFromRotationMatrix(ref end, out qEnd);
@@ -288,11 +281,10 @@ namespace Xclna.Xna.Animation.Content
         public static Matrix CalculateSquareRoot(Matrix A, int iterations)
         {
 
-
             return CalculateSquareRoot(A, Matrix.Identity, iterations);
         }
 
-        // Interpolates a set of animation key frames to align with 
+        // Interpolates a set of animation key frames to align with
         // a set of times and copies it into the destination array.
         private static void InterpFrames(
             ref AnimationKeyframe[] source,

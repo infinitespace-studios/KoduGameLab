@@ -46,7 +46,7 @@ namespace BokuPreBoot
         /* Perform a load-time init of the UI based on whether the hardware is *capable* of
          * shader model 3. Note that there are subsequent constraint passes if a user
          * chooses shader model 2 explicitly. This one only relates to hardware constraint.
-         * 
+         *
          * This is done before the settings are loaded into the UI, so we will also
          * constrain the settings before they are used to intialize the UI
          */
@@ -80,7 +80,7 @@ namespace BokuPreBoot
             {
                 StatusTB.Text = @"This computer does not support HiDef; only Standard graphics options will be available, and Advanced features will be disabled.";
                 ShadMod3RB.Enabled = false;
-                // We don't actually set the checked / unchecked state of any UI; instead we constrain the 
+                // We don't actually set the checked / unchecked state of any UI; instead we constrain the
                 // settings file, and it will set all the control values properly.
                 BokuSettings.ConstrainToReach();
             }
@@ -212,7 +212,7 @@ namespace BokuPreBoot
                     // if we're loading, the incoming set will already be constrained elsewhere
                     // if the user, however, is setting shader model 2, we need to constrain appropriately
                     CopyUIToSettings();
-                    
+
                     // TODO (****)  Figure out where to check for Reach v HiDef hw and constrain here.
                     //BokuSettings.ConstrainToShaderModel2();
 

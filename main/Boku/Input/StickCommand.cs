@@ -31,8 +31,8 @@ namespace Boku.Input
 
     /// <summary>
     /// This represents the abstraction for game pad stick input command
-    /// It exposes a 2d vector for the position of the stick 
-    /// 
+    /// It exposes a 2d vector for the position of the stick
+    ///
     /// There is currently no need to use this class outside this module as all
     /// usefull classes are represented below
     /// </summary>
@@ -75,7 +75,7 @@ namespace Boku.Input
         public event InputCommandButtonDelegate LeftPress;
         public event InputCommandButtonDelegate UpLeftPress;
         public event InputCommandStickDelegate PositionPress;
- 
+
         /// <summary>
         /// RepeatPress event, when state changes auto repeats pressed these are triggered
         /// </summary>
@@ -243,7 +243,7 @@ namespace Boku.Input
             if (GamePadInput.GetGamePad(this.playerIndex).IsConnected)
             {
                 Position = StickValue();
-                
+
                 if (timerAutoRepeat.Running)
                 {
                     timerAutoRepeat.Update();
@@ -265,7 +265,7 @@ namespace Boku.Input
 
         protected void FirePressedEvent(DigitalPosition digpos)
         {
-            
+
             switch (digpos)
             {
                 case DigitalPosition.centered:
@@ -319,7 +319,7 @@ namespace Boku.Input
                     }
                     break;
             }
-            
+
         }
         protected void FireRepeatEvent(DigitalPosition digpos)
         {
@@ -433,7 +433,7 @@ namespace Boku.Input
                     }
                     break;
             }
-            
+
         }
         protected const double valueEdge = 0.6;
         protected DigitalPosition CalcDigitalPosition(Vector2 value)

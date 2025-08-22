@@ -18,7 +18,6 @@ using Microsoft.Xna.Framework.Storage;
 using Boku.Base;
 using Boku.Common;
 
-
 namespace Boku.Programming
 {
     /// <summary>

@@ -304,7 +304,7 @@ namespace Boku.SimWorld.Path
 
             // Sometimes after multiple device resets we can get here with
             // a bad shadow texture.  At this point we can just set it to
-            // null rendering a frame without shadows and then everything 
+            // null rendering a frame without shadows and then everything
             // will be back to normal next frame.
             if (shadowTexture != null && (shadowTexture.IsDisposed || shadowTexture.GraphicsDevice.IsDisposed))
             {
@@ -414,9 +414,9 @@ namespace Boku.SimWorld.Path
             {
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
-                vertBuff = new VertexBuffer(device, 
-                    typeof(RoadGenerator.RoadVertex), 
-                    numVerts, 
+                vertBuff = new VertexBuffer(device,
+                    typeof(RoadGenerator.RoadVertex),
+                    numVerts,
                     BufferUsage.WriteOnly);
 
                 vertBuff.SetData<RoadGenerator.RoadVertex>(Verts);
@@ -428,7 +428,7 @@ namespace Boku.SimWorld.Path
         {
             BokuGame.Release(ref indexBuff);
             int numIndices = NumIndices;
-            
+
             if (numIndices > 0)
             {
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;

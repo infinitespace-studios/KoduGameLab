@@ -19,7 +19,6 @@ using Microsoft.Xna.Framework.Storage;
 using Boku.Base;
 using Boku.Common;
 
-
 namespace Boku.Programming
 {
     public class ResetModifier : Modifier
@@ -37,7 +36,6 @@ namespace Boku.Programming
 
         [XmlAttribute]
         public Resets reset;
-
 
         public override ProgrammingElement Clone()
         {

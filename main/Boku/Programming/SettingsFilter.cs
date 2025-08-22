@@ -23,11 +23,11 @@ using Boku.Input;
 namespace Boku.Programming
 {
     /// <summary>
-    /// Filter that just exists as a placeholder.  Actual value is 
+    /// Filter that just exists as a placeholder.  Actual value is
     /// extracted when scores are accumulated.
-    /// 
+    ///
     /// Used for MaxHealth, BlipDamage, MissileDamage... (so far)
-    /// 
+    ///
     /// </summary>
     public class SettingsFilter : Filter
     {

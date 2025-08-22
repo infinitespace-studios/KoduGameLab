@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of gamepad button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class GamePadTriggerFilter : Filter
     {

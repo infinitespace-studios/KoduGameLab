@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -88,17 +87,17 @@ namespace Boku.SimWorld.Path
         #region IBounding Members
         public BoundingBox BoundingBox
         {
-            get 
+            get
             {
                 Vector3 max = new Vector3(RenderRadius);
                 max = Vector3.Transform(max, matrixSro);
                 max = Vector3.Transform(max, local.Matrix);
-                return new BoundingBox(-max, max); 
+                return new BoundingBox(-max, max);
             }
         }
         public BoundingSphere BoundingSphere
         {
-            get 
+            get
             {
                 BoundingSphere sphere = new BoundingSphere(new Vector3(), RenderRadius);
                 Matrix final = this.matrixSro * local.Matrix;
@@ -118,7 +117,6 @@ namespace Boku.SimWorld.Path
             this.matrixSro = Matrix.CreateScale(desiredRadius / RenderRadius);
 
         }   // end of WayPointMenuItem c'tor
-
 
         public override void Render(Camera camera)
         {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -18,7 +17,7 @@ using Boku.Base;
 namespace Boku.Common
 {
     /// <summary>
-    /// A container for gamepad controller button textures 
+    /// A container for gamepad controller button textures
     /// since they can potentially be used all over.
     /// </summary>
     public class ButtonTextures // : INeedsDeviceReset does this statically...
@@ -465,7 +464,7 @@ namespace Boku.Common
         {
           get { return missile; }
         }
-        public static Texture2D Octopus 
+        public static Texture2D Octopus
         {
             get { return octopus; }
         }
@@ -662,7 +661,7 @@ namespace Boku.Common
             backButtonXbox360 = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\UI2D\BackButton");
             startButtonXboxOne = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\UI2D\StartButtonXboxOne");
             backButtonXboxOne = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\UI2D\BackButtonXboxOne");
-            
+
             gamepad = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Buttons\Gamepad");
             keyboard = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Buttons\Keyboard");
             mouse = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Buttons\Mouse");
@@ -904,4 +903,4 @@ namespace Boku.Common
 
     }   // end of class ButtonTextures
 
-}   // end of namespace Boku.Common   
+}   // end of namespace Boku.Common

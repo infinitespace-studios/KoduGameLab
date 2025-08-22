@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +23,7 @@ namespace Boku.Animatics
             /// <summary>
             /// Index of my destination in the matrix palette.
             /// </summary>
-            public readonly int PaletteIndex; 
+            public readonly int PaletteIndex;
 
             /// <summary>
             /// Name of my bone.

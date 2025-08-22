@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -84,7 +82,7 @@ namespace Boku
             //public List<string> textLines = null;   // The text broken into individual lines.
 
             public int cursorPosition = 0;      // Current cursor position.
-            // 0 is before the 1st character, 1 is between 
+            // 0 is before the 1st character, 1 is between
             // the 1st and 2nd characters, etc.
 
             public int topLine = 0;             // Which line of the text is being shown at the default starting position.
@@ -117,7 +115,7 @@ namespace Boku
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
                 // We're rendering the camera specific parts into a 1024x768 rendertarget and
-                // then copying (with masking) into the 1280x720 rt and finally cropping it 
+                // then copying (with masking) into the 1280x720 rt and finally cropping it
                 // as needed for 4:3 display.
                 camera = new PerspectiveUICamera();
                 camera.Resolution = new Point(1280, 720);
@@ -231,7 +229,6 @@ namespace Boku
                 }
                 hit = (hit - shared.renderPosition + BokuGame.ScreenPosition) / shared.renderScale;
 
-
                 // Touch input
                 TouchContact touch = TouchInput.GetOldestTouch();
                 Vector2 touchHit = Vector2.Zero;
@@ -254,7 +251,6 @@ namespace Boku
                 bool bSave = false;
                 bool bCanceled = false;
 
-
                 if (null != touch)
                 {
                     parent.touchedThisFrame = true;
@@ -272,7 +268,6 @@ namespace Boku
 
                 bCanceled = bCanceled || pad.ButtonB.WasPressed || shared.bHitBox.LeftPressed(hit);
                 bSave = bSave || pad.ButtonA.WasPressed || KeyboardInput.WasPressed(Keys.Escape) || shared.aHitBox.LeftPressed(hit);
-
 
                 if (bCanceled)
                 {
@@ -673,8 +668,8 @@ namespace Boku
             }   // end of UpdateObj KeyInput()
 
             /// <summary>
-            /// User has accepted the currently edited string.  We don't need to 
-            /// copy to the current position since it should already be there.  
+            /// User has accepted the currently edited string.  We don't need to
+            /// copy to the current position since it should already be there.
             /// So, just turn off editing.
             /// </summary>
             public void Accept()
@@ -704,7 +699,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class TextEditor UpdateObj  
+        }   // end of class TextEditor UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -772,7 +767,7 @@ namespace Boku
                 pos = new Vector2(shared.textMargin, shared.textTop + shared.textOffset);
                 shared.blob.RenderWithButtons(pos, darkTextColor, renderCursor: true);
 
-                // Set the hit box for the text area.  Add 200 to the width to 
+                // Set the hit box for the text area.  Add 200 to the width to
                 // allow clicking to the right to get to the end of the line.
                 pos.Y += shared.topLine * shared.blob.TotalSpacing;
                 shared.textAreaHitBox.Set(pos, pos + new Vector2(shared.textWidth + 200, shared.textVisibleLines * shared.blob.TotalSpacing));
@@ -873,7 +868,7 @@ namespace Boku
                 }
 
                 //If in label edit mode, hide these buttons and invalidate the hit boxes.
-                //All other modes is the contrary. 
+                //All other modes is the contrary.
                 if (shared.IsTargetModeLabel)
                 {
                     shared.leftJustifyHitBox.Set(new Vector2(-1, -1), new Vector2(-1, -1));
@@ -1020,7 +1015,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class TextEditor RenderObj     
+        }   // end of class TextEditor RenderObj
 
         #region Members
 
@@ -1073,7 +1068,7 @@ namespace Boku
             updateObj = new UpdateObj(this, shared);
             renderObj = new RenderObj(shared);
 
-            // We use the updateObj for this deserialization since the text callbacks 
+            // We use the updateObj for this deserialization since the text callbacks
             // belong to it.  Otherwise nothing will ever hook up right.
             //commandMap = CommandMap.Deserialize(updateObj, @"TextEditor.Xml");
 
@@ -1081,7 +1076,7 @@ namespace Boku
 
         public void OnSelect(UIGrid grid)
         {
-            // We should never actually get here.  The TextEditor UpdateObj 
+            // We should never actually get here.  The TextEditor UpdateObj
             // should consume all 'A' presses before the grids get them...
 
             Debug.Assert(false);
@@ -1090,7 +1085,7 @@ namespace Boku
 
         public void OnCancel(UIGrid grid)
         {
-            // We should never actually get here.  The TextEditor UpdateObj 
+            // We should never actually get here.  The TextEditor UpdateObj
             // should consume all 'B' presses before the grids get them...
 
             Debug.Assert(false);
@@ -1104,10 +1099,10 @@ namespace Boku
             {
                 // HACK -- In the programming editor if the cursor is on one tile and the user
                 // clicks on another tile which happens to be the "say" tile the cursor is moved
-                // and then the text editor is activated.  The problem is that because of the 
-                // delayed refresh the command stack gets out of sync.  What happens is that the 
+                // and then the text editor is activated.  The problem is that because of the
+                // delayed refresh the command stack gets out of sync.  What happens is that the
                 // commandMap for the text editor is pushed onto the stack and then the next frame
-                // the old tile is deactivated and the new tile activated.  This leaves the 
+                // the old tile is deactivated and the new tile activated.  This leaves the
                 // ReflexCard CommandMap at the top of the stack instead of the TextEditor.
                 // So, detect and apply the bandaid.
                 if (CommandStack.Peek().name == "ReflexCard")
@@ -1141,10 +1136,10 @@ namespace Boku
         }
 
         /// <summary>
-        /// Activate the text editor.  Currently we have 3 valid 
-        /// modes "say" for the 'say' actuator text, "said" for 
+        /// Activate the text editor.  Currently we have 3 valid
+        /// modes "say" for the 'say' actuator text, "said" for
         /// the said filter text and "comment" for using the editor
-        /// to comment on levels via Socl.  
+        /// to comment on levels via Socl.
         /// The targetMode determines where the resulting text is placed
         /// in the reflex and the options given to the user at the
         /// bottom of the edit box.
@@ -1239,8 +1234,6 @@ namespace Boku
                 shared.mode = 0;
                 shared.topLine = 0;
                 shared.textOffset = 0;
-
-
 
                 updateObj.Activate();
             }

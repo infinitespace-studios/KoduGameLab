@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -20,7 +19,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
-    /// and creates a texture on the fly into which the checkbox and the 
+    /// and creates a texture on the fly into which the checkbox and the
     /// associated text string are rendered.
     /// </summary>
     public class UIGridCheckboxElement : UIGridElement
@@ -72,10 +71,10 @@ namespace Boku.UI2D
         public bool Check
         {
             get { return check; }
-            set 
-            { 
-                check = value; 
-                dirty = true; 
+            set
+            {
+                check = value;
+                dirty = true;
             }
         }
         /// <summary>
@@ -327,11 +326,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }   // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -372,7 +369,6 @@ namespace Boku.UI2D
                 int height = diffuse.Height;
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
-                
 
                 // Render the checkbox.
                 int margin = 24;

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -314,7 +313,7 @@ namespace Cab
         }   // end of GetFolderFromPath()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="filename"></param>
@@ -387,7 +386,7 @@ namespace Cab
         }   // end of GetStorageFile()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="filename"></param>

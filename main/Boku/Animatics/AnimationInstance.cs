@@ -64,10 +64,10 @@ namespace Boku.Animatics
         /// </summary>
         public Matrix[] Palette
         {
-            get 
+            get
             {
                 Update();
-                return palette; 
+                return palette;
             }
         }
         /// <summary>
@@ -98,9 +98,9 @@ namespace Boku.Animatics
         /// </summary>
         public Matrix[] LocalToWorldList
         {
-            get 
+            get
             {
-                Update(); 
+                Update();
                 return localToWorld;
             }
         }
@@ -174,7 +174,7 @@ namespace Boku.Animatics
             inst.boneDict = Bone.Dict.Extract(model.Bones);
             if (inst.boneDict == null)
                 return null;
-            
+
             inst.skinList = SkinDataList.Extract(model);
             if (inst.skinList == null)
                 return null;
@@ -244,7 +244,7 @@ namespace Boku.Animatics
             }
         }
         /// <summary>
-        /// Copy the default transforms out of the bones. 
+        /// Copy the default transforms out of the bones.
         /// </summary>
         private void SetDefaultTransforms()
         {
@@ -331,8 +331,8 @@ namespace Boku.Animatics
 ///
 ///		for(int i = [0,skinInfo.count])
 ///			info = skinInfo[i]
-///			palette[skinInfo[i].PaletteIndex] 
-///                = skinInfo[i].InverseBindPoseTransform 
+///			palette[skinInfo[i].PaletteIndex]
+///                = skinInfo[i].InverseBindPoseTransform
 ///                    * localToBoneToWorld[skinInfo[i].BoneIndex];
 ///
 ///         So InverseBindPose == ModelToLocal
@@ -342,14 +342,14 @@ namespace Boku.Animatics
 ///	AnimationInstance(Model model)
 ///	{
 ///	    Pull the AnimationDict out of the model (via tag "Animations")
-///	    
+///
 ///     Make the BoneDict out of the model's bonelist
-///     
+///
 ///     Pull the SkinDataList out of the model (via tag "SkinInfo")
-/// 
+///
 ///     Allocate the localToWorld[model.Bones.Count]
 ///     Initialize localToWorld[] via model.CopyAbsoluteBoneTransformsTo(localToWorld);
-/// 
+///
 ///     Allocate the palette
 ///	}
 ///

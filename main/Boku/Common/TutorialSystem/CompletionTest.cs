@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,8 +49,8 @@ namespace Boku.Common.TutorialSystem
         public string Args
         {
             get { return args; }
-            set 
-            { 
+            set
+            {
                 args = value;
                 char[] separators = { ' ' };
                 argList = args.Split(separators);
@@ -127,7 +126,7 @@ namespace Boku.Common.TutorialSystem
         /// <summary>
         /// Allows a timer to be used to wait for n seconds.  Returns true after the time has passed.
         /// This is a slightly strange test since it actually has some persistent state.
-        /// 
+        ///
         /// args: a simple number (may be floating point) representing the number of seconds to wait.
         /// </summary>
         private bool Timer()
@@ -179,7 +178,7 @@ namespace Boku.Common.TutorialSystem
         ///     "apple 2" -- triggers if exactly 2 apples exist.
         ///     "apple 4 min" -- triggers if 4 or more apples exist.
         ///     "apple 2 delta" -- triggers when 3 apples have been added.
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private bool BotCount()
@@ -252,18 +251,17 @@ namespace Boku.Common.TutorialSystem
             }
         }   // end of BotCount()
 
-
         /// <summary>
         /// Allows the testing of specific kode sequences.
         /// args:   (optional) page n - specifies the page to look on.  Otherwise all pages are checked.
         ///         (optional) reflex n - specifies the reflex to test.  Otherwise all reflexes are tested.
         ///         (optional) indent n - specifies the required indent level of the reflex.  Otherwise all levels are valid.
         ///         list of 0 or more tile upids.
-        ///         Groups of tiles can be OR'd together using paraentheses to add flexibility.  For instance 
+        ///         Groups of tiles can be OR'd together using paraentheses to add flexibility.  For instance
         ///             (filter.ArrowKeys,filter.WASDKeys) will trigger if either tile is present.
-        ///         
+        ///
         ///         returns true if ALL the tiles are found on the specified page/reflex.
-        /// 
+        ///
         /// Examples:
         ///     NOTE:  and  allow the greater-than and less-than symbols to be used in Xml.
         ///     "sensor.eyes" -- triggers if the "see" sensor is used anywhere in this bot's programming.
@@ -271,7 +269,7 @@ namespace Boku.Common.TutorialSystem
         ///     "reflex 1 actuator.movement selector.wander" -- triggers when "move wander" is programmed in the first refex.
         ///     "page 2 reflex 3 actuator.switchtask modifier.taskc -- triggers when the 3rd reflex of page 2 is "switch page3".
         ///     "reflex 2 indent 1 actuator.movement selector.wander" -- triggers when "move wander" is programmed and indented 1 level.
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private bool Kode()
@@ -354,7 +352,7 @@ namespace Boku.Common.TutorialSystem
                                                         break;
                                                     }
                                                 }
-                                                
+
                                                 // We found all the tiles listed.
                                                 if (reflexMatches)
                                                 {
@@ -369,7 +367,6 @@ namespace Boku.Common.TutorialSystem
                         }   // end of page is the one we're looking for.
                     }   // end of loop over tasks.
                 }   // end if actor != null.
-
 
                 return false;
             }
@@ -396,7 +393,7 @@ namespace Boku.Common.TutorialSystem
         /// Allows testing to detect the usage of terrain tools.
         /// As with other tests, having more than one arg indicates that you want
         /// each of the triggers to fire, not just one.
-        /// 
+        ///
         /// args:   paint -- triggers when terrain material is changed.
         ///         add -- triggers when terrain is added
         ///         delete -- triggers when terrain is deleted
@@ -474,9 +471,9 @@ namespace Boku.Common.TutorialSystem
         /// Allows testing for mode change.
         /// args:   list of modes to test for
         ///         triggers when in a mode not on the list
-        ///         
+        ///
         /// Generally this is used to detect when the user has left a mode.  For instance
-        /// it can be used to give info to the user about the material picker and will 
+        /// it can be used to give info to the user about the material picker and will
         /// trigger once the user makes a selection and leaves the material picker.
         /// </summary>
         /// <returns></returns>
@@ -507,7 +504,7 @@ namespace Boku.Common.TutorialSystem
         /// Forces the camera to move to a specific character.
         /// args:   Name of character to move to.  This needs to be the name that
         ///         appears over the character when in focus in the editor.
-        ///         
+        ///
         /// This should be used with a target mode of MosueEditObject, GamepadEditObject or MouseCameraMove.
         /// </summary>
         /// <returns></returns>
@@ -554,8 +551,6 @@ namespace Boku.Common.TutorialSystem
                 return true;
             }
         }   // end of Settings()
-
-
 
         private bool Blank()
         {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -61,7 +60,7 @@ namespace Boku.Analyses
                         pages.Add(taskid);
                         if (taskid == 1)
                         {
-                            reached.Add(taskid, true);                           
+                            reached.Add(taskid, true);
                         }
                         else
                         {
@@ -110,7 +109,7 @@ namespace Boku.Analyses
                                 }
                             }
                         }
-                   
+
                     }
 
                 }
@@ -140,7 +139,7 @@ namespace Boku.Analyses
                         {
                             updateUsage(usage, reflex.Data.Sensor.upid);
                         }
-                        if (reflex.Data.Filters != null)                            
+                        if (reflex.Data.Filters != null)
                         {
                             foreach (Filter f in reflex.Data.Filters)
                             {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -17,7 +16,7 @@ using Boku.Common;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// UI Grid element used for 2d terrain editing brushes.  Basically it's just a 
+    /// UI Grid element used for 2d terrain editing brushes.  Basically it's just a
     /// wrapper around the standard 2d texture element adding the brush index.
     /// </summary>
     public class UIGrid2DBrushElement : UIGrid2DTextureElement

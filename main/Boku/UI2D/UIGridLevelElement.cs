@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Text;
 using System.Collections;
@@ -56,8 +55,8 @@ namespace Boku.UI2D
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry.
     /// This one is specialized for displaying tiles for the load level menu.
-    /// 
-    /// The tiles display the thumbnail from the level with the title 
+    ///
+    /// The tiles display the thumbnail from the level with the title
     /// overlayed at the bottom of the tile.  If the title is too long
     /// to fit it should fade out at the end to indicate this.
     /// </summary>
@@ -242,7 +241,6 @@ namespace Boku.UI2D
 
         }   // TwitchedOrientation()
 
-
         public void RenderToTexture()
         {
             dirty = false;
@@ -264,7 +262,7 @@ namespace Boku.UI2D
                 {
                     quad.Render(Thumbnail, new Vector2(-crop, 0.0f), new Vector2(rt.Width + crop, rt.Height), @"TexturedNoAlpha");
                 }
-                catch 
+                catch
                 {
                     // At this point what has probably happened is that the thumbnail data has been lost or corrupted
                     // so we need to force it to reload and then set the dirty flag on this element so the rt is redone.
@@ -286,8 +284,8 @@ namespace Boku.UI2D
 
                 // Render the title background.
                 quad.Render(
-                    new Vector4(0, 0, 0, 0.25f), 
-                    new Vector2(0, kTextPosY), 
+                    new Vector4(0, 0, 0, 0.25f),
+                    new Vector2(0, kTextPosY),
                     new Vector2(rt.Width, titleSize.Y));
 
                 // Render the title text.
@@ -354,11 +352,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }   // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -617,9 +613,3 @@ namespace Boku.UI2D
     }   // end of class UIGridLevelElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

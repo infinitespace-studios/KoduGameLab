@@ -134,7 +134,7 @@ namespace Boku.SimWorld.Collision
                 return AlreadyTouching(startPositionOther, centerCenterDelta * Radius / (radius + Radius), ref collPrim);
             }
 
-            /// The aren't touching. The only degeneracies to worry about 
+            /// The aren't touching. The only degeneracies to worry about
             /// are that they aren't moving, they miss each other, or
             /// they hit outside range p0->p1.
             /// They aren't moving shows up as p1==p0.
@@ -174,7 +174,7 @@ namespace Boku.SimWorld.Collision
                 normalOld,
                 Center + delta * (float)t,
                 ref collPrim);
-             
+
         }   // end of Collide()
 
         /// <summary>

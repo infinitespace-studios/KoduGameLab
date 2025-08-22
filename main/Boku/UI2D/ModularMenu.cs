@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -269,8 +268,8 @@ namespace Boku.UI2D
         public Matrix WorldMatrix
         {
             get { return worldMatrix; }
-            set 
-            { 
+            set
+            {
                 worldMatrix = value;
                 invWorldMatrix = Matrix.Invert(worldMatrix);
             }
@@ -305,7 +304,7 @@ namespace Boku.UI2D
         }
 
         /// <summary>
-        /// Special case flag which tells the menu to also accept the 
+        /// Special case flag which tells the menu to also accept the
         /// start button for cancelling as well as the B button.
         /// Only used to allow toggling of the mini-hub.
         /// </summary>
@@ -474,7 +473,7 @@ namespace Boku.UI2D
                     {
                         // If the mouse is over the menu, move the selection index to the item under the mouse.
                         // On mouse down, make the item (if any) under the mouse the ClickedOnItem.
-                        // On mouse up, if the mouse is still over the ClickedOnItem, activate it.  If not, just clear ClickedOnItem. 
+                        // On mouse up, if the mouse is still over the ClickedOnItem, activate it.  If not, just clear ClickedOnItem.
 
                         Vector2 hitUV = MouseInput.GetHitUV(camera, ref invWorldMatrix, width, height, useRtCoords);
 
@@ -561,12 +560,12 @@ namespace Boku.UI2D
                                 // Touch input
                                 // If the user touched the menu, move the selection index to the item under the touch.
                                 // On touch down, make the item (if any) under the contact the touchedItem.
-                                // On touch up, if the touch is still over the touchedItem, activate it.  If not, just clear touchedItem. 
+                                // On touch up, if the touch is still over the touchedItem, activate it.  If not, just clear touchedItem.
 
                                 Vector2 touchHitUV = TouchInput.GetHitUV(touch.position, camera, ref invWorldMatrix, width, height, useRtCoords);
 
                                 // See what UI element we are over, if anything.  If it hits, set that item to being selected but only if the touch has moved.
-                                // This emulates how the mouse is being handled by allowing the input to change only if the touch has moved. If a user moves 
+                                // This emulates how the mouse is being handled by allowing the input to change only if the touch has moved. If a user moves
                                 // the gamepad or keyboard but doesn't move their touch contact, then the selection won't flicker back and forth and feel 'broken'
                                 int touchOverIndex = -1;
                                 for (int index = 0; index < itemList.Count; index++)
@@ -781,7 +780,7 @@ namespace Boku.UI2D
 
                 // Restore write channels.
                 device.BlendState = BlendState.NonPremultiplied;
- 
+
                 // Restore backbuffer.
                 InGame.RestoreRenderTarget();
 
@@ -842,7 +841,7 @@ namespace Boku.UI2D
         }   // end of UIGridModularMenu SetValue()
 
         /// <summary>
-        /// Returns the index associated with the text. 
+        /// Returns the index associated with the text.
         /// Returns -1 if not found.
         /// </summary>
         /// <param name="text"></param>
@@ -861,7 +860,6 @@ namespace Boku.UI2D
 
             return result;
         }   // end of GetIndex()
-
 
         bool contentLoaded;
         public void LoadContent(bool immediate)
@@ -983,9 +981,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularMenu
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

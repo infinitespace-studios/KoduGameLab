@@ -48,9 +48,9 @@ namespace Boku
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // panel3
-            // 
+            //
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.textBoxLiveId);
             this.panel3.Controls.Add(this.buttonClose);
@@ -61,9 +61,9 @@ namespace Boku
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(552, 59);
             this.panel3.TabIndex = 5;
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -74,9 +74,9 @@ namespace Boku
             this.label3.Size = new System.Drawing.Size(245, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Your Windows Live ID (optional):";
-            // 
+            //
             // textBoxLiveId
-            // 
+            //
             this.textBoxLiveId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxLiveId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxLiveId.Location = new System.Drawing.Point(-1, 35);
@@ -85,9 +85,9 @@ namespace Boku
             this.textBoxLiveId.Size = new System.Drawing.Size(308, 23);
             this.textBoxLiveId.TabIndex = 0;
             this.textBoxLiveId.Text = "anonymous@microsoft.com";
-            // 
+            //
             // buttonClose
-            // 
+            //
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -99,9 +99,9 @@ namespace Boku
             this.buttonClose.TabIndex = 1;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
-            // 
+            //
             // buttonSendAndClose
-            // 
+            //
             this.buttonSendAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSendAndClose.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonSendAndClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -113,9 +113,9 @@ namespace Boku
             this.buttonSendAndClose.TabIndex = 2;
             this.buttonSendAndClose.Text = "Send and Close";
             this.buttonSendAndClose.UseVisualStyleBackColor = true;
-            // 
+            //
             // panel1
-            // 
+            //
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -124,9 +124,9 @@ namespace Boku
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(552, 54);
             this.panel1.TabIndex = 6;
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -136,9 +136,9 @@ namespace Boku
             this.label2.Size = new System.Drawing.Size(509, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "Please send us this crash report so that we may correct the problem.";
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -148,9 +148,9 @@ namespace Boku
             this.label1.Size = new System.Drawing.Size(382, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Kodu experienced a fatal error and must close.";
-            // 
+            //
             // textBoxError
-            // 
+            //
             this.textBoxError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxError.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,9 +163,9 @@ namespace Boku
             this.textBoxError.Size = new System.Drawing.Size(552, 150);
             this.textBoxError.TabIndex = 0;
             this.textBoxError.TabStop = false;
-            // 
+            //
             // panel5
-            // 
+            //
             this.panel5.Controls.Add(this.label4);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(9, 214);
@@ -173,9 +173,9 @@ namespace Boku
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(552, 32);
             this.panel5.TabIndex = 7;
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -185,9 +185,9 @@ namespace Boku
             this.label4.Size = new System.Drawing.Size(506, 17);
             this.label4.TabIndex = 0;
             this.label4.Text = "Please provide any additional information you think might be helpful:";
-            // 
+            //
             // textBoxAddInfo
-            // 
+            //
             this.textBoxAddInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBoxAddInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAddInfo.Location = new System.Drawing.Point(9, 246);
@@ -197,9 +197,9 @@ namespace Boku
             this.textBoxAddInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxAddInfo.Size = new System.Drawing.Size(552, 116);
             this.textBoxAddInfo.TabIndex = 0;
-            // 
+            //
             // ErrorForm
-            // 
+            //
             this.AcceptButton = this.buttonSendAndClose;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -245,7 +245,6 @@ namespace Boku
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox textBoxLiveId;
         public System.Windows.Forms.TextBox textBoxAddInfo;
-
 
     }
 }

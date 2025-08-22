@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
     {
         #region Members
 
-        // This is the ID of the help overlay associated with the tool.  Add the text strings for the 
+        // This is the ID of the help overlay associated with the tool.  Add the text strings for the
         // help overlay in HelpOverlay.Xml.
         private string helpOverlayID = null;
         private string helpOverlayMagicBrushID = null;
@@ -117,7 +116,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
             }
         }
         /// <summary>
-        /// The string used to identify which help overlay 
+        /// The string used to identify which help overlay
         /// to activate while this tool is active.
         /// </summary>
         public string HelpOverlayID
@@ -126,7 +125,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
             set { helpOverlayID = value; }
         }
         /// <summary>
-        /// The string used to identify which help overlay 
+        /// The string used to identify which help overlay
         /// to activate while this tool is active and the
         /// magic brush is in action.
         /// </summary>
@@ -324,7 +323,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
         }   // end of BaseMouseEditTool Update()
 
         /// <summary>
-        /// Override this to provide a place to initialize 
+        /// Override this to provide a place to initialize
         /// anything that needs to be done on a per-use basis.
         /// </summary>
         public virtual void OnActivate()
@@ -651,7 +650,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
                         MiddleAudioEnd();
                     }
 
-
                     if (MouseInput.Right.WasReleased)
                     {
                         float editSpeed = 1.0f;
@@ -811,7 +809,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 Boku.InGame.IsLevelDirty = true;
             }
         }
-        
+
         public bool oldInAction=false;
 
         /// <summary>
@@ -893,7 +891,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 oldInAction=isInAction;
             }
         }
-		
+
         /// <summary>
         /// Apply commands in material select mode.
         /// </summary>
@@ -907,7 +905,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
         {
             isInAction = false;
 
-            if (TouchInput.TouchCount==1 && TouchInput.Touches[0].phase != TouchPhase.Ended && 
+            if (TouchInput.TouchCount==1 && TouchInput.Touches[0].phase != TouchPhase.Ended &&
                 shared.currentTouchAction != ToolBar.TouchControls.BrushActionIDs.NUMBER_OF_Buttons && shared.editBrushAllowedForTouch)
             {
                 if ((shared.currentTouchAction == ToolBar.TouchControls.BrushActionIDs.baBrushMore) ||

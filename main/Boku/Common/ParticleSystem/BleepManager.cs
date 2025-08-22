@@ -22,29 +22,29 @@ namespace Boku.Common.ParticleSystem
         internal struct Bleep
         {
             /// <summary>
-            /// Current position. Render position.z will vary from this. 
+            /// Current position. Render position.z will vary from this.
             /// </summary>
-            public Vector3 Position; 
+            public Vector3 Position;
             /// <summary>
             /// Constant velocity
             /// </summary>
-            public Vector3 Velocity;  
+            public Vector3 Velocity;
             /// <summary>
             /// How high above position we start life.
             /// </summary>
-            public float StartHeight; 
+            public float StartHeight;
             /// <summary>
             /// time left to live
             /// </summary>
-            public float TTL; 
+            public float TTL;
             /// <summary>
             /// total time to live
             /// </summary>
-            public float Life; 
+            public float Life;
             /// <summary>
             /// color we are fired as
             /// </summary>
-            public Color Color; 
+            public Color Color;
             /// <summary>
             /// The number of hit-points this missile takes from its target
             /// </summary>
@@ -52,7 +52,7 @@ namespace Boku.Common.ParticleSystem
             /// <summary>
             /// Payload to deliver on impact.
             /// </summary>
-            public GameThing.Verbs VerbPayload; 
+            public GameThing.Verbs VerbPayload;
             /// <summary>
             /// When this bleep will hit the terrain (same as Life if never).
             /// </summary>
@@ -191,8 +191,8 @@ namespace Boku.Common.ParticleSystem
         /// <param name="color"></param>
         /// <param name="verbPayload"></param>
         /// <returns></returns>
-        public bool Fire(GameActor shooter, 
-            Vector3 targetPos, 
+        public bool Fire(GameActor shooter,
+            Vector3 targetPos,
             Classification.Colors color,
             GameThing.Verbs verbPayload,
             int damage)
@@ -236,7 +236,7 @@ namespace Boku.Common.ParticleSystem
                 shooter.ActiveBleeps.Bleeps.Add(bleep);
 
                 // Increment the number of active bleeps.  Without this, on the
-                // current frame we can end up shooting enough new bleeps to 
+                // current frame we can end up shooting enough new bleeps to
                 // exceed the max.
                 ++numActiveBleeps;
 
@@ -322,7 +322,7 @@ namespace Boku.Common.ParticleSystem
             }
             if (numActiveBleeps > 0)
             {
-                UpdateBuffer(numActiveBleeps);                
+                UpdateBuffer(numActiveBleeps);
             }
         }
 
@@ -373,7 +373,7 @@ namespace Boku.Common.ParticleSystem
         /// </summary>
         public override void PostRender()
         {
-        } 
+        }
 
         /// <summary>
         /// Render the currently active bleeps. Currently only renders on normal pass.
@@ -395,9 +395,9 @@ namespace Boku.Common.ParticleSystem
                         EffectPass pass = effect.CurrentTechnique.Passes[i];
                         pass.Apply();
                         device.DrawIndexedPrimitives(
-                            PrimitiveType.TriangleList, 
-                            0, 0, 
-                            numVerts, 
+                            PrimitiveType.TriangleList,
+                            0, 0,
+                            numVerts,
                             0, numTris);
                     }
                 }
@@ -471,14 +471,13 @@ namespace Boku.Common.ParticleSystem
             {
                 Vector3 total = end - start;
                 float invRangeSq = bleep.Life / total.LengthSquared();
-                
+
                 Vector3 toTerraHit = terrainHitPos - start;
 
                 ttTerraHit = Vector3.Dot(toTerraHit, total) * invRangeSq;
             }
             return ttTerraHit;
         }
-
 
         /// <summary>
         /// Test to see if a bleep hit anything, object or terrain.
@@ -496,7 +495,7 @@ namespace Boku.Common.ParticleSystem
             bool hitTerrain = bleep.Life - bleep.TTL >= bleep.TTTerraHit;
             if (hitTerrain)
             {
-                /// terrain hit is current position 
+                /// terrain hit is current position
                 /// - what we've travelled already (vel * (life - ttl))
                 /// + time from beginning to terrain hit (vel * ttTerraHit)
                 /// We use end as current position because we've already updated TTL

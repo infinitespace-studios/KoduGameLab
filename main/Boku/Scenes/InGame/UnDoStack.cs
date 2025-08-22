@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -67,7 +65,7 @@ namespace Boku
 
             private static Color noHoverColor = Color.White;
             private static Color hoverColor = new Color(50, 255, 50);
-            
+
             #endregion Members
 
             #region Accessors
@@ -140,8 +138,8 @@ namespace Boku
             private static int IdxAt
             {
                 get { return _idxAt; }
-                set 
-                { 
+                set
+                {
                     _idxAt = value;
                     if (_idxAt != XmlOptionsData.LastAutoSave)
                     {
@@ -191,7 +189,7 @@ namespace Boku
             /// Store the current top of the stack again, presumably
             /// because the name changed.  This makers sure that the
             /// autosave is up to date.
-            /// 
+            ///
             /// TODO (****) Right now this is only used after saving the level
             /// to update the level's name, description, and ???.  Should we
             /// just be able to update those directly?
@@ -265,7 +263,7 @@ namespace Boku
                 int lastAuto = XmlOptionsData.LastAutoSave;
                 if (lastAuto >= 0)
                 {
-                    string fullPath = BokuGame.Settings.MediaPath 
+                    string fullPath = BokuGame.Settings.MediaPath
                         + BokuGame.UnDoPath
                         + @"AutoSave"
                         + lastAuto.ToString()
@@ -443,7 +441,6 @@ namespace Boku
 
                 return result;
             }
-
 
             /// <summary>
             /// Filename at the current location in stack (the currently loaded one).

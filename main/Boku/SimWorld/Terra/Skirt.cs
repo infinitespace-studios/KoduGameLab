@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -151,7 +150,6 @@ namespace Boku.SimWorld
 
         }   // end of Skirt Update()
 
-
         public void LoadGraphicsContent(GraphicsDeviceManager graphics)
         {
             GraphicsDevice device = graphics.GraphicsDevice;
@@ -182,6 +180,3 @@ namespace Boku.SimWorld
     }   // end of class Skirt
 
 }   // end of namespace Boku.SimWorld
-
-
-

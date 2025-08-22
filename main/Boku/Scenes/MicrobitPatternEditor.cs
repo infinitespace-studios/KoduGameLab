@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -80,9 +78,9 @@ namespace Boku
             get { return active; }
         }
 
-        public bool WasTouchedThisFrame 
-        { 
-            get { return touchedThisFrame; } 
+        public bool WasTouchedThisFrame
+        {
+            get { return touchedThisFrame; }
         }
 
         #endregion
@@ -240,7 +238,7 @@ namespace Boku
         }   // end of Activate()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="saveChanges">Should the updated values be saved out to the reflex?</param>
         public void Deactivate(bool saveChanges)
@@ -275,7 +273,7 @@ namespace Boku
             if (active)
             {
                 InGame.SetViewportToScreen();
-                
+
                 camera.Resolution = new Point((int)BokuGame.ScreenSize.X, (int)BokuGame.ScreenSize.Y);
                 camera.Recalc();
                 camera.Update();
@@ -624,7 +622,7 @@ namespace Boku
                     pos.Y -= size.Y / 2.0f;
 
                     pos.X -= size.X + 2 * margin;
-                    
+
                     cancelButton.Render(pos, useBatch: false);
                     size = saveButton.GetSize();
                     pos.X -= size.X + margin;
@@ -658,7 +656,6 @@ namespace Boku
             {
                 rightStickTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\HelpCard\RightStick");
             }
-
 
         }   // end of LoadContent()
 

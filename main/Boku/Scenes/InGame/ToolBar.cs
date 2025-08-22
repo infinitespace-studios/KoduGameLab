@@ -145,7 +145,7 @@ namespace Boku
 
             #endregion
         }
-        
+
         /// <summary>
         /// Elements that live in the ToolBar.  All measurements are in pixels.
         /// </summary>
@@ -175,12 +175,12 @@ namespace Boku
             public Vector2 Position
             {
                 get { return position; }
-                set 
+                set
                 {
                     if (position != value)
                     {
                         // No twitch here.  The value depends on the Size and we use that twitch for smoothing
-                        position = value; 
+                        position = value;
                         parent.dirty = true;
                     }
                 }
@@ -361,7 +361,6 @@ namespace Boku
             #endregion
         }
 
-        
         /// <summary>
         /// Touch buttons associated with the ToolBar paint options/actions
         /// </summary>
@@ -451,7 +450,6 @@ namespace Boku
             private int DefaultActionBtnWidth = 76;
             private int DefaultActionBtnHeight = 76;
 
-
             #endregion
 
             #region Accessors
@@ -472,10 +470,10 @@ namespace Boku
                     // TODO (****) *** Does all the code support this changing????
                     if (BokuGame.ScreenSize.Y <= 800)
                         return new Vector2(42.0f, 42.0f);
-                    if (BokuGame.ScreenSize.Y < 1024)                    
+                    if (BokuGame.ScreenSize.Y < 1024)
                         return new Vector2(64.0f, 64.0f);
                     else
-                        return new Vector2(DefaultActionBtnWidth, DefaultActionBtnHeight); 
+                        return new Vector2(DefaultActionBtnWidth, DefaultActionBtnHeight);
                 }
             }
 
@@ -492,7 +490,7 @@ namespace Boku
                 private void CreateButton(BrushActionIDs baId, string text, string path, UI2D.Shared.GetFont font, bool toggleButton, Vector2 labelOffset)
                 {
                     Texture2D image = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + path);
-                       
+
                     Color color= new Color(0.7f,0.7f,0.7f);
                     GetTexture getTexture = delegate() { return image; };
                     Button btn = new Button(text, color, getTexture, font);
@@ -511,7 +509,6 @@ namespace Boku
                         totalBtnLength += (int)brushOptionButtons[brushOptionButtons.Count - 1].button.GetSize().X;
                     }
                 }
-   
 
             #endregion
 
@@ -529,7 +526,7 @@ namespace Boku
                     CreateButton(BrushActionIDs.baPaintMaterial, "", @"Textures\ToolMenu\brushAction_paint", font, true, Vector2.Zero);
                     CreateButton(BrushActionIDs.baBrushCubic, "", @"Textures\ToolMenu\brushAction_brushCubic", font, false, Vector2.Zero);
                     CreateButton(BrushActionIDs.baBrushSmooth, "", @"Textures\ToolMenu\brushAction_brushSmooth", font, false, Vector2.Zero);
-                    
+
                     //Terrain
                     CreateButton(BrushActionIDs.baTerrainRaise, "", @"Textures\ToolMenu\brushAction_terrainRaise", font, true, Vector2.Zero);
                     CreateButton(BrushActionIDs.baTerrainLower, "", @"Textures\ToolMenu\brushAction_terrainLower", font, true, Vector2.Zero);
@@ -541,12 +538,12 @@ namespace Boku
                     //Water
                     CreateButton(BrushActionIDs.baWaterRaise, "", @"Textures\ToolMenu\brushAction_waterRaise", font, true, Vector2.Zero);
                     CreateButton(BrushActionIDs.baWaterLower, "", @"Textures\ToolMenu\brushAction_waterLower", font, true, Vector2.Zero);
-                    
+
                     //Path
                     CreateButton(BrushActionIDs.baAllPath, "", @"Textures\ToolMenu\brushAction_allPath", font, false, Vector2.Zero);
                     CreateButton(BrushActionIDs.baNormalPath, "", @"Textures\ToolMenu\brushAction_normalPath", font, false, Vector2.Zero);
                     CreateButton(BrushActionIDs.baNode, "", @"Textures\ToolMenu\brushAction_node", font, true, Vector2.Zero);
-                    
+
                     //General Delete
                     CreateButton(BrushActionIDs.baDelete, "", @"Textures\ToolMenu\brushAction_delete", font, true, Vector2.Zero);
 
@@ -554,11 +551,9 @@ namespace Boku
                     CreateButton(BrushActionIDs.baBrushMore, "", @"Textures\ToolMenu\brushAction_brushBigger", font, false, Vector2.Zero);
                     CreateButton(BrushActionIDs.baBrushLess, "", @"Textures\ToolMenu\brushAction_brushSmaller", font, false, Vector2.Zero);
 
-
-
                     //Create the undo button
                     Texture2D image = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\ToolMenu\Undo");
-                       
+
                     Color color= new Color(0.7f,0.7f,0.7f);
                     GetTexture getTexture = delegate() { return image; };
                     Button undoBtn = new Button(Strings.Localize("undoStack.undo"), color, getTexture, labelFont);
@@ -569,7 +564,6 @@ namespace Boku
 
                     undoButton = new BrushActionButton(BrushActionIDs.baUndoButton, undoBtn);
                     undoButton.isToggleBtn = false;
-
 
                     //Create the redo button
                     Texture2D redoImage = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\ToolMenu\Redo");
@@ -585,7 +579,6 @@ namespace Boku
                     redoButton.isToggleBtn = false;
 
                 }
-
 
                 public int GetButtonIndex(BrushActionIDs baId)
                 {
@@ -620,7 +613,7 @@ namespace Boku
                 {
                     int buttonIndex = GetButtonIndex(baId);
                     if (buttonIndex >= 0 && buttonIndex < brushOptionButtons.Count && brushOptionButtons[buttonIndex].visible)
-                    {    
+                    {
                         brushOptionButtons[buttonIndex].ToggleOn = toggledOn;
 
                         if( toggledOn )
@@ -679,7 +672,6 @@ namespace Boku
                     totalBtnLength = 0;
                     totalBtnGap = 0;
                 }
-
 
                 private void HideButton(int buttonIndex)
                 {
@@ -752,7 +744,6 @@ namespace Boku
                     if (IsOverUIDeadZone(touch))
                         return true;
 
-
                     for (int i = 0; i < brushOptionButtons.Count; i++)
                     {
                         if (brushOptionButtons[i].visible)
@@ -805,9 +796,9 @@ namespace Boku
                     }
 
                     //check undo/redo
-                    topLeft.X = BokuGame.bokuGame.GraphicsDevice.Viewport.Width - 
-                                            undoButton.button.GetSize().X - 
-                                            redoButton.button.GetSize().X - 
+                    topLeft.X = BokuGame.bokuGame.GraphicsDevice.Viewport.Width -
+                                            undoButton.button.GetSize().X -
+                                            redoButton.button.GetSize().X -
                                             buttonGap*2.0f - pixelsFromEdge - extraDeadSpace;
                     topLeft.Y = 0; //right to edge of screen
                     bottomRight.X = BokuGame.bokuGame.GraphicsDevice.Viewport.Width; //right to edge of screen
@@ -851,7 +842,7 @@ namespace Boku
                         }
                         return true;
                     }
-                    
+
                     if (btnIdx == currentToggleBtnIdx) // untoggle if same button
                     {
                         currentToggleBtnIdx = -1;
@@ -867,14 +858,14 @@ namespace Boku
 
                         //Toggle boolean
                         brushOptionButtons[btnIdx].ToggleOn ^= true;
-                        
+
                         currentToggleBtnIdx = btnIdx;
                         InGame.inGame.shared.currentTouchAction = brushOptionButtons[btnIdx].id;
                     }
 
-                    // toggle state to the pressed button    
+                    // toggle state to the pressed button
                     brushOptionButtons[btnIdx].button.SetHoverState( brushOptionButtons[btnIdx].ToggleOn ? touch.position : new Vector2(-1.0f, -1.0f) );
-                    
+
                     return true;
                 }
 
@@ -906,7 +897,6 @@ namespace Boku
                     bool actionHandled = false;
                     bool isOverAButton = false;
                     Brush2DManager.Brush2D brush = Brush2DManager.GetBrush(Boku.InGame.inGame.shared.editBrushIndex);
-
 
                     if (IsTapped(BrushActionIDs.baBrushCubic, touch, touch.position))
                     {
@@ -974,8 +964,6 @@ namespace Boku
                                     //either way, update touched state so we know which object we're touching (only changes when touch is "Began")
                                     //SetTouchedState(touch, i);
 
-                                    
-
                                     if (brushOptionButtons[i].button.Box.Touched(touch, touch.position))
                                     {
                                         //if we finished touching, it's a toggle button, and no hold recognized, toggle the button
@@ -1009,7 +997,7 @@ namespace Boku
                     if (undoButton.visible && undoButton.button.Box.Contains(touch.position))
                     {
                         isOverAButton = true;
-                        //work with the current system for now, which keeps track of the bounding box touched and verifies it's the same 
+                        //work with the current system for now, which keeps track of the bounding box touched and verifies it's the same
                         //touched object on untouch - needs some refactoring if there is time, quite a lot of duplication
                         if (touch.TouchedObject == null && touch.phase == TouchPhase.Began)
                         {
@@ -1047,7 +1035,7 @@ namespace Boku
                     {
                         undoButton.button.SetHoverState(new Vector2(-1.0f, -1.0f));
                     }
-                    
+
                     if (redoButton.visible && redoButton.button.Box.Contains(touch.position))
                     {
                         isOverAButton = true;
@@ -1176,7 +1164,7 @@ namespace Boku
         private int focusIndex = -1;
         private RenderTarget2D rt = null;
         private int width = -1;             // Current width of rendered toolbar.
-        
+
         private Vector2 position;           // Where the toolbar gets rendered based on centering and overscan.
         private float scale = 1.0f;         // Scaling factor applied to toolbar texture.  Generally will be 1.0
                                             // unless we're on a small screen where we need to shrink the toolbar.
@@ -1211,7 +1199,7 @@ namespace Boku
 
         private Vector2 selectedSize = new Vector2(128, 128);
         private Vector2 unselectedSize = new Vector2(64, 64);
-        
+
         #endregion
 
         #region Accessors
@@ -1222,7 +1210,7 @@ namespace Boku
 
         public InGame.BaseEditUpdateObj.ToolMode CurrentMode
         {
-            get 
+            get
             {
                 if (focusIndex >= 0)
                 {
@@ -1427,7 +1415,7 @@ namespace Boku
                     }
                     break;
                 case InGame.BaseEditUpdateObj.ToolMode.Paths:
-                    
+
                     EditPathsTool pathTool = EditPathsTool.GetInstance() as EditPathsTool;
                     if (TouchBrushControls.IsToggled(TouchControls.BrushActionIDs.baNode))
                     {
@@ -1484,7 +1472,7 @@ namespace Boku
                         }
                         else
                         {
-                            PaintTool.GetInstance().HelpOverlayID = "MouseEditTerrainPaintCubic"; 
+                            PaintTool.GetInstance().HelpOverlayID = "MouseEditTerrainPaintCubic";
                         }
                     }
                     else if (TouchBrushControls.IsToggled(TouchControls.BrushActionIDs.baDelete))
@@ -1504,9 +1492,8 @@ namespace Boku
                         TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baBrushCubic);
                         TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baBrushSmooth);
                         TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baPaintMaterial);
-                        TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baDelete);            
-            
-                        
+                        TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baDelete);
+
                         if( GamePadInput.InputMode.Touch == GamePadInput.ActiveMode )
                         {
                             TouchBrushControls.SetToggle( TouchControls.BrushActionIDs.baPaintMaterial, true );
@@ -1519,7 +1506,7 @@ namespace Boku
                     break;
 
                 case InGame.BaseEditUpdateObj.ToolMode.TerrainRaiseLower:
-                    
+
                     if( TouchBrushControls.IsToggled(TouchControls.BrushActionIDs.baTerrainRaise) )
                     {
                         RaiseLowerTool.GetInstance().HelpOverlayID = "MouseEditTerrainRaising";
@@ -1553,8 +1540,7 @@ namespace Boku
                     break;
 
                 case InGame.BaseEditUpdateObj.ToolMode.TerrainSpikeyHilly:
-                    
-                    
+
                     if (TouchBrushControls.IsToggled(TouchControls.BrushActionIDs.baSmooth))
                     {
                         SpikeyHillyTool.GetInstance().HelpOverlayID = "MouseEditTerrainSpikeyHilly_ToggleSmooth";
@@ -1571,7 +1557,7 @@ namespace Boku
                     {
                         SpikeyHillyTool.GetInstance().HelpOverlayID = "MouseEditTerrainSpikeyHilly";
                     }
-                    
+
                     if (resetPaintActionButtons)
                     {
                         TouchBrushControls.ClearPaintButtons();
@@ -1581,7 +1567,7 @@ namespace Boku
                         TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baHilly);
                         TouchBrushControls.ShowBrushActionButton(TouchControls.BrushActionIDs.baSmooth);
                     }
-                    
+
                     // Set current help overlay.
                     HelpOverlay.ReplaceTop(SpikeyHillyTool.GetInstance().HelpOverlayID);
 
@@ -1632,7 +1618,7 @@ namespace Boku
                         //Debug.WriteLine(">Setting Water Default.");
                         WaterTool.GetInstance().HelpOverlayID = "MouseEditWaterRaiseLower" ;
                     }
-                    
+
                     if (resetPaintActionButtons)
                     {
                         TouchBrushControls.ClearPaintButtons();
@@ -1655,7 +1641,7 @@ namespace Boku
                     {
                         DeleteObjectsTool.GetInstance().HelpOverlayID = "MouseEditDeleteObjects";
                     }
-                    
+
                     if (resetPaintActionButtons)
                     {
                         TouchBrushControls.ClearPaintButtons();
@@ -1714,7 +1700,7 @@ namespace Boku
             // If we've made any changes, take a snapshot.
             if (InGame.IsLevelDirty)
             {
-                
+
                 InGame.UnDoStack.Store();
             }
             GameActor actor = InGame.inGame.mouseEditUpdateObj.ToolBox.EditObjectsToolInstance.FocusActor;
@@ -1746,7 +1732,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns>True if user made a selection.  False if nothing or hovering.</returns>
         public bool HandleMouseInput()
@@ -1777,7 +1763,7 @@ namespace Boku
                 {
                     InGame.UnDoStack.Store();
                 }
-                
+
                 InGame.UnDoStack.ReDo();
             }
             if (InGame.UnDoStack.UndoHitBox.LeftPressed(rawMouseHit + BokuGame.ScreenPosition))
@@ -1865,7 +1851,7 @@ namespace Boku
 
         public bool IsOverUIButton(TouchContact touch, bool ignoreOnDrag)
         {
-            
+
             bool bOverUI = false;
 
             if (null != touch)
@@ -1881,7 +1867,6 @@ namespace Boku
                 // Transform touch position into rt coords.
                 touchHitUV -= position;
                 touchHitUV /= scale;
-
 
                 if (!InGame.inGame.mouseEditUpdateObj.ToolBox.PickersActive)
                 {
@@ -1917,10 +1902,9 @@ namespace Boku
 
             return false;
         }
-        
-        
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns>True if user made a selection.  False if nothing .</returns>
         public bool HandleTouchInput()
@@ -1951,7 +1935,7 @@ namespace Boku
 
             if (CurrentModeInternal == InGame.BaseEditUpdateObj.ToolMode.EditObject)
             {
-                if (TouchGestureManager.Get().RotateGesture.IsRotating || 
+                if (TouchGestureManager.Get().RotateGesture.IsRotating ||
                     TouchGestureManager.Get().PinchGesture.IsPinching ||
                     TouchGestureManager.Get().DragGesture.IsDragging )
                 return false;
@@ -1969,11 +1953,11 @@ namespace Boku
             for (int i = 0; i < TouchInput.TouchCount; i++)
             {
                 TouchContact touch = TouchInput.GetTouchContactByIndex(i);
-                
+
                 // Touch input
                 // If the user touched the menu, move the selection index to the item under the touch.
                 // On touch down, make the item (if any) under the contact the touchedItem.
-                // On touch up, if the touch is still over the touchedItem, activate it.  If not, just clear touchedItem. 
+                // On touch up, if the touch is still over the touchedItem, activate it.  If not, just clear touchedItem.
                 Vector2 touchHitUV = touch.position;// TouchInput.GetHitUV(touch.position, camera, ref invWorldMatrix, width, height, affectedByOverscan);
 
                 // Handle change of text color for hover.
@@ -2115,13 +2099,13 @@ namespace Boku
 
             // Another case where after device reset the system thinks that the rt is still set on the device
             // and throws when GetTexture2D is called.  This only happens for the first frame and so is
-            // easily ignored.  
+            // easily ignored.
             try
             {
                 Vector2 size = scale * new Vector2(rt.Width, rt.Height);
                 SpriteBatch batch = UI2D.Shared.SpriteBatch;
                 Rectangle rect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
-                
+
                 batch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
                 {
                     batch.Draw(rt, rect, Color.White);
@@ -2131,7 +2115,7 @@ namespace Boku
             catch
             {
             }
-            
+
             if ((GamePadInput.ActiveMode == GamePadInput.InputMode.Touch))
             {
                 if ( touchBrushControls != null)

@@ -4,7 +4,7 @@
 /*
  * Util.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -24,9 +24,6 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-
-
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
@@ -93,10 +90,6 @@ namespace Xclna.Xna.Animation
 
         }
 
-
-
-
-
         /// <summary>
         /// Reflects a matrix across the Z axis by multiplying both the Z
         /// column and the Z row by -1 such that the Z,Z element stays intact.
@@ -114,8 +107,6 @@ namespace Xclna.Xna.Animation
             m.M34 *= -1;
         }
 
-
-
         private static T Max<T>(params T[] items) where T : IComparable
         {
             IComparable max = null;
@@ -132,7 +123,6 @@ namespace Xclna.Xna.Animation
             return (T)max;
         }
 
-        
         /// <summary>
         /// Converts from an array of bytes to any vertex type.
         /// </summary>
@@ -153,7 +143,6 @@ namespace Xclna.Xna.Animation
             return verts;
         }
 
-
         private static Quaternion qStart, qEnd, qResult;
         private static Vector3 curTrans, nextTrans, lerpedTrans;
         private static Vector3 curScale, nextScale, lerpedScale;
@@ -172,7 +161,7 @@ namespace Xclna.Xna.Animation
         {
             if (start == end)
                 return start;
-            // Get rotation components and interpolate (not completely accurate but I don't want 
+            // Get rotation components and interpolate (not completely accurate but I don't want
             // to get into polar decomposition and this seems smooth enough)
             Quaternion.CreateFromRotationMatrix(ref start, out qStart);
             Quaternion.CreateFromRotationMatrix(ref end, out qEnd);
@@ -221,7 +210,7 @@ namespace Xclna.Xna.Animation
         /// <param name="slerpAmount">Ratio of interpolation</param>
         /// <param name="result">Stores the result of hte interpolation.</param>
         public static void SlerpMatrix(
-            ref Matrix start, 
+            ref Matrix start,
             ref Matrix end,
             float slerpAmount,
             out Matrix result)
@@ -231,7 +220,7 @@ namespace Xclna.Xna.Animation
                 result = start;
                 return;
             }
-            // Get rotation components and interpolate (not completely accurate but I don't want 
+            // Get rotation components and interpolate (not completely accurate but I don't want
             // to get into polar decomposition and this seems smooth enough)
             Quaternion.CreateFromRotationMatrix(ref start, out qStart);
             Quaternion.CreateFromRotationMatrix(ref end, out qEnd);
@@ -271,7 +260,6 @@ namespace Xclna.Xna.Animation
             result.M33 += lerpedScale.Z;
         }
 
-
         /// <summary>
         /// Determines whether or not a ModelMeshPart is skinned.
         /// </summary>
@@ -282,7 +270,7 @@ namespace Xclna.Xna.Animation
             VertexElement[] ves = meshPart.VertexDeclaration.GetVertexElements();
             foreach (VertexElement ve in ves)
             {
-                //(BlendIndices with UsageIndex = 0) specifies matrix indices for fixed-function vertex 
+                //(BlendIndices with UsageIndex = 0) specifies matrix indices for fixed-function vertex
                 // processing using indexed paletted skinning.
                 if (ve.VertexElementUsage == VertexElementUsage.BlendIndices
                     && ve.UsageIndex == 0)
@@ -323,15 +311,6 @@ namespace Xclna.Xna.Animation
             return false;
         }
 
-
-         
     }
-
-
-
-
-
-
-
 
 }

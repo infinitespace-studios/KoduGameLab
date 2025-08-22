@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses when something is given to the GameActor
-    /// 
-    /// This sensor demonstrates another of the few Event based sensors.  
+    ///
+    /// This sensor demonstrates another of the few Event based sensors.
     /// It will only get updated when an actual item is given to the game actor.
     /// </summary>
     public class GivenObjectSensor : Sensor
@@ -59,7 +58,6 @@ namespace Boku.Programming
         public override void FinishUpdate(GameActor gameActor)
         {
         }
-
 
         public override void ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {

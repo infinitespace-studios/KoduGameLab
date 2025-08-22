@@ -22,13 +22,13 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Triggers actions (verb) on the GameActor
-    /// 
-    /// this general purpose class can be used to expose actions that 
-    /// GameActors support.  
-    /// There are three types (valency) of Verbs supported; 
-    /// Intransitive, Transitive, and Ditransitive (see definitions of a verb).  
-    /// The triggering of the different valency will cause the GameActor and 
-    /// an alternate to be called with one of several Verb handling calls.  
+    ///
+    /// this general purpose class can be used to expose actions that
+    /// GameActors support.
+    /// There are three types (valency) of Verbs supported;
+    /// Intransitive, Transitive, and Ditransitive (see definitions of a verb).
+    /// The triggering of the different valency will cause the GameActor and
+    /// an alternate to be called with one of several Verb handling calls.
     /// These are DoDirectObjectVerb and DoSubjectVerb and the order and subject will be
     /// different based upon the valency.
     /// </summary>
@@ -49,7 +49,6 @@ namespace Boku.Programming
             base.CopyTo(clone);
             clone.Verb = this.Verb;
         }
-
 
         protected override bool ActuatorUpdate(Reflex reflex)
         {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,7 +48,7 @@ namespace Boku.Programming
 
         #endregion
 
-        #region Public 
+        #region Public
 
         public SightSensor()
         {
@@ -72,7 +71,7 @@ namespace Boku.Programming
             sightSet.Clear();
             base.Reset(reflex);
         }
-        
+
         public override void StartUpdate(GameActor gameActor)
         {
             sightSet.Clear();
@@ -126,7 +125,6 @@ namespace Boku.Programming
                 }
             }
 
-
             reflex.targetSet.Action = TestObjectSet(reflex);
 
             if (reflex.targetSet.Action)
@@ -141,7 +139,7 @@ namespace Boku.Programming
             {
                 reflex.targetSet.Clear();
             }
-            
+
         }   // end of ComposeSensorTargetSet()
 
         #endregion

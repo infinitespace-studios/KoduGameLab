@@ -77,7 +77,6 @@ namespace Boku.SimWorld
 
         #endregion Public
 
-
         #region Animation
 
         /// <summary>

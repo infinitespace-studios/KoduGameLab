@@ -52,7 +52,7 @@ namespace BokuShared
         // The 'special' tags are stripped when the save dialog is opened and must be explicitly set each save.
         Special = SampleWorlds | StarterWorlds | Lessons | FinishedWorlds,
 
-        // The 'buckets' group are used by the load level menu.  They are treated 
+        // The 'buckets' group are used by the load level menu.  They are treated
         // differently (as an AND rather than an OR) when filtering.
         // Even though MyWorlds should normally be here, it is taken care of in
         // the filtering since it also requires comparing the user's name to the creator's.

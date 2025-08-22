@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // Uncomment this to see debug spew about the help overlay stack.
 //#define DEBUG_SPEW
 
@@ -171,7 +170,6 @@ namespace Boku.Common
                 Entry.CopyLocalized(touchBottom, src.touchBottom);
             }   // end of CopyLocalized()
 
-
         }   // end of class Overlay
 
         private static bool active = true;                  // Controls whether or not we render.
@@ -194,8 +192,8 @@ namespace Boku.Common
         private static Texture2D titleSafe = null;
 #endif
 
-        // Currently the help overlay content is arranged into two groups 
-        // which reside on the left and at the bottom of the screen.  
+        // Currently the help overlay content is arranged into two groups
+        // which reside on the left and at the bottom of the screen.
         // The following variables define the position and size of these
         // groups for rendering to the screen.  The data for the vertices
         // is filled in when the overlay texture is rebuilt.
@@ -249,7 +247,7 @@ namespace Boku.Common
         public static Texture2D ToolIcon
         {
             get { return toolIcon; }
-            set 
+            set
             {
                 if (toolIcon != value)
                 {
@@ -470,7 +468,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Removes the specific overlay from the stack.  
+        /// Removes the specific overlay from the stack.
         /// Searches the stack from the top down.
         /// </summary>
         public static void Remove(string id)
@@ -506,7 +504,6 @@ namespace Boku.Common
 
             suppressYButton = false;
         }   // end of HelpOverlay Remove()
-
 
         /// <summary>
         /// Clear the help overlay stack.
@@ -559,7 +556,7 @@ namespace Boku.Common
         public static void RefreshTexture()
         {
             // If the Window has grown, re-allocate the overlayRT to match.  Note that we don't bother
-            // to shrink the rt if the window shrinks. 
+            // to shrink the rt if the window shrinks.
             if ((int)BokuGame.ScreenSize.X > overlayRT.Width || (int)BokuGame.ScreenSize.Y > overlayRT.Height)
             {
                 ReleaseRenderTargets();
@@ -608,7 +605,7 @@ namespace Boku.Common
                             break;
                     }
 
-                    // A bit of a hack.  If we are using a modal tool menu then we lock down the camera 
+                    // A bit of a hack.  If we are using a modal tool menu then we lock down the camera
                     // when the menu is active.  So, also force the help level to mid so that we don't
                     // show the tips for moving the camera.
                     desiredHelpLevel = XmlOptionsData.HelpLevel;
@@ -756,7 +753,7 @@ namespace Boku.Common
 
                                     int width = (int)(screenSize.X / 2.0f);
                                     blob.Width = width;
-                                    blob.Justification = Boku.UI2D.UIGridElement.Justification.Left; 
+                                    blob.Justification = Boku.UI2D.UIGridElement.Justification.Left;
                                     pos = new Vector2(leftButtonPosition, y);
 
                                     bool skipBlanks = true;     // Are we skipping blank lines at the beginning?
@@ -853,7 +850,7 @@ namespace Boku.Common
 
                                     int width = (int)(screenSize.X / 2.0f);
                                     blob.Width = width;
-                                    blob.Justification = Boku.UI2D.UIGridElement.Justification.Left; 
+                                    blob.Justification = Boku.UI2D.UIGridElement.Justification.Left;
                                     pos = new Vector2(leftButtonPosition, y);
 
                                     bool skipBlanks = true;     // Are we skipping blank lines at the beginning?
@@ -1061,8 +1058,8 @@ namespace Boku.Common
                     }
                     batch.End();
 
-                    // As part of the HelpOverlay if we're in the tool menu 
-                    // render the appropriate tool icon into the upper 
+                    // As part of the HelpOverlay if we're in the tool menu
+                    // render the appropriate tool icon into the upper
                     // right-hand corner of the screen.
                     if (toolIcon != null && !toolIcon.GraphicsDevice.IsDisposed)
                     {
@@ -1119,10 +1116,10 @@ namespace Boku.Common
                     quad.Render(texture, foreColor.ToVector4(), new Vector2(x, y + verticalOffset), new Vector2(buttonSize), @"TexturedRegularAlpha");
 
                     string text = TextHelper.FilterInvalidCharacters(entry.text);
-                    
+
                     TextHelper.DrawString(Font, text, new Vector2(x + buttonSize + buttonLabelMargin + 1, y + 1), shadowColor);
                     TextHelper.DrawString(Font, text, new Vector2(x + buttonSize + buttonLabelMargin, y), foreColor);
-                    
+
                     // Adjust drawing region.
                     leftGroupPosition.X = MathHelper.Min(leftGroupPosition.X, x);
                     leftGroupPosition.Y = MathHelper.Min(leftGroupPosition.Y, y);
@@ -1310,7 +1307,7 @@ namespace Boku.Common
                                 {
                                     // dict[key] = localDict[key];
                                     // Previously we treated overlays as a unit and replaced
-                                    // them all or nothing.  Now we only want to replace on 
+                                    // them all or nothing.  Now we only want to replace on
                                     // a per Entery basis if the Entry has been localized.
                                     dict[key].CopyLocalized(localDict[key]);
                                 }
@@ -1346,7 +1343,6 @@ namespace Boku.Common
             return success;
         }   // end of XmlOverlayData ReadFromXml()
 
-
         private static XmlOverlayData Load(string filename)
         {
             XmlOverlayData data = null;
@@ -1373,11 +1369,11 @@ namespace Boku.Common
                 Storage4.Close(stream);
             }
 
-            // If we don't have data.  Delete the server version of 
+            // If we don't have data.  Delete the server version of
             // the file and try loading the TitleSpace version.
             if (data == null)
             {
-                // Don't delete the server version since this might actually be someone 
+                // Don't delete the server version since this might actually be someone
                 // trying to do a localization.
                 //Storage4.Delete(filename);
 
@@ -1402,6 +1398,5 @@ namespace Boku.Common
         }   // end of Load()
 
     }   // end of class XmlOverlayData
-
 
 }   // end of namespace Boku.Common

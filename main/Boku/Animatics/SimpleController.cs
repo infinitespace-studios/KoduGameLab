@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 using Microsoft.Xna.Framework;
 
-
 namespace Boku.Animatics
 {
     public class SimpleController : BaseController
@@ -38,7 +37,7 @@ namespace Boku.Animatics
         public bool OneMoreLoop
         {
             get { return oneMore; }
-            set 
+            set
             {
                 oneMore = value;
                 if (oneMore)
@@ -46,7 +45,7 @@ namespace Boku.Animatics
             }
         }
         /// <summary>
-        /// Speed scalar for this animation. 
+        /// Speed scalar for this animation.
         /// </summary>
         public double Speed
         {
@@ -79,7 +78,7 @@ namespace Boku.Animatics
         #region Public
 
         /// <summary>
-        /// Try to make a simple controller of the animation of given name 
+        /// Try to make a simple controller of the animation of given name
         /// in the container inst. May return null (e.g. if the named animation doesn't exist).
         /// </summary>
         /// <param name="inst"></param>
@@ -113,7 +112,7 @@ namespace Boku.Animatics
         /// <param name="advTicks"></param>
         public override void Update(long time)
         {
-            Debug.Assert((Weight >= -kWeightTol) && (Weight <= 1.0f + kWeightTol), 
+            Debug.Assert((Weight >= -kWeightTol) && (Weight <= 1.0f + kWeightTol),
                 "Do we need to clamp this on input?");
 
             AdvanceTime(time);

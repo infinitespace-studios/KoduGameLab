@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,7 +37,7 @@ namespace Boku.Audio
         /// </summary>
         public string Name
         {
-            get 
+            get
             {
                 return cue != null ? cue.Name : "";
             }
@@ -49,7 +48,7 @@ namespace Boku.Audio
         /// </summary>
         public bool IsPlaying
         {
-            get 
+            get
             {
                 return cue != null ? cue.IsPlaying : false;
             }
@@ -60,7 +59,7 @@ namespace Boku.Audio
         /// </summary>
         public bool IsComplete
         {
-            get 
+            get
             {
                 return cue != null ? played && cue.IsStopped : played;
             }
@@ -102,8 +101,8 @@ namespace Boku.Audio
         internal GameThing Emitter
         {
             get { return thing; }
-            set 
-            { 
+            set
+            {
                 thing = value;
                 if (thing != null)
                 {
@@ -122,7 +121,6 @@ namespace Boku.Audio
 
         #region Public
 
-        
         /// <summary>
         /// Set up with a sound and an optional thing to follow.
         /// Doesn't start playing, that requires a separate call.

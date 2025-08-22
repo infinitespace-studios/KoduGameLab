@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filters based upon whether a named sound (or one of its descendents) is currently playing.
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class SoundFilter : Filter
     {

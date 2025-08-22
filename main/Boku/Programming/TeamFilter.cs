@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Used as a Parameter Filter used by the GameScoredSensor
-    /// 
+    ///
     /// </summary>
     public class TeamFilter : Filter
     {

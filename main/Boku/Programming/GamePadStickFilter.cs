@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of the gamepad stick input
-    /// 
+    ///
     /// </summary>
     public class GamePadStickFilter : Filter
     {
@@ -81,7 +81,7 @@ namespace Boku.Programming
                             || (reflex.Selector is MoveUpDownSelector)
                             || (reflex.Selector is MoveUpSelector);
             bool isYaw = !isPitch && reflex.Data.IsMovement();
-                            
+
             bool match = false;
             param = null;
             if (this.stickCommands.Count != 0)
@@ -127,7 +127,7 @@ namespace Boku.Programming
                 param = this.stickPosition;
                 match = (this.stickPosition != Vector2.Zero); // only if not centered
             }
-            
+
             return match;
         }
 

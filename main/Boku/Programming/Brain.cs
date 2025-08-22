@@ -103,7 +103,6 @@ namespace Boku.Programming
             stunnedUntil = 0f;
         }
 
- 
         [XmlIgnore]
         public GameActor GameActor
         {
@@ -203,7 +202,7 @@ namespace Boku.Programming
         public void UpdateActuators()
         {
             Vector3 prevPosition = GameActor.Movement.Position;
-            
+
             ActiveTask.UpdateActuators();
 
             // If immobile, lock us down.
@@ -222,7 +221,7 @@ namespace Boku.Programming
             {
                 task.Reset();
             }
-            
+
             RegisterReflexSupportedObject();
 
             if (resetStun)
@@ -255,7 +254,7 @@ namespace Boku.Programming
             for (int indexTask = 0; indexTask < tasks.Count; indexTask++)
             {
                 Task task = tasks[indexTask];
-                
+
                 task.Brain = this;
                 task.Fixup(atLoadTime: true, incomingLanguageVersion: int.Parse(InGame.XmlWorldData.KCodeVersion));
             }
@@ -290,7 +289,7 @@ namespace Boku.Programming
 
         /// <summary>
         /// This function will Register any objects that should be registered when used by a reflex.
-        /// 
+        ///
         /// This is used by things like the scores and GUI buttons which only appear onscreen
         /// when used in an actor's kode.
         /// </summary>
@@ -314,13 +313,13 @@ namespace Boku.Programming
                         }
                     }
 
-                    //Register Color Touch Button 
+                    //Register Color Touch Button
                     foreach (Filter filter in reflex.Filters)
                     {
                         if (filter is GUIButtonFilter)
                         {
                             Classification.Colors eColor = (filter as GUIButtonFilter).color;
-                            
+
                             if( eColor >= (Classification.Colors)Classification.ColorInfo.First &&
                                 eColor <= (Classification.Colors)Classification.ColorInfo.Last)
                             {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // Controls whether or not the mouse input is on a seperate thread.
 // The idea is to have mouse input be on it's own thread so that
 // on slow machines we don't miss mouse clicks.
@@ -11,7 +10,7 @@
 #define THREADED_MOUSE_INPUT
 
 /// This define changes the behavior from having ingame cursors track the
-/// mouse when the window has no focus(when defined) to ignoring mouse 
+/// mouse when the window has no focus(when defined) to ignoring mouse
 /// without window focus.
 /// In either case, clicks are ignored without focus, including a click
 /// that brings the window back into focus.
@@ -104,7 +103,7 @@ namespace Boku.Common
                     // Adjust position for tutorial mode.
                     state = new MouseState(x, y, wheel, left, middle, right, x1, x2);
 
-                    // When transitioning from not active to active we want to ignore all the buttons 
+                    // When transitioning from not active to active we want to ignore all the buttons
                     // until they've been released.
                     if (active && !prevActive)
                     {
@@ -133,7 +132,7 @@ namespace Boku.Common
                             }
                             else
                             {
-                                // Update X,Y of last entry.  (We do this just by replacing the whole 
+                                // Update X,Y of last entry.  (We do this just by replacing the whole
                                 // entry since X,Y is the only thing that changed.)
                                 int index = MouseInput.MouseStateQueue.Count - 1;
                                 MouseInput.MouseStateQueue[index].state = state;
@@ -281,7 +280,7 @@ namespace Boku.Common
 
         /// <summary>
         /// Return true if any buttons were pressed this frame, or the mouse moved, or
-        /// the scroll wheel scrolled. 
+        /// the scroll wheel scrolled.
         /// </summary>
         public static bool WasTouched
         {
@@ -326,10 +325,10 @@ namespace Boku.Common
                     clickedOnObject = null;
                 }
 
-#if NETFX_CORE || !THREADED_MOUSE_INPUT               
+#if NETFX_CORE || !THREADED_MOUSE_INPUT
                 MouseState state = Mouse.GetState();
 
-                // Looks like in .net 4.5 there is SystemParameters.SwapButtons but that 
+                // Looks like in .net 4.5 there is SystemParameters.SwapButtons but that
                 // doesn't seem to work with WinRT.  Color me surprised.  SO just assume
                 // that the mouse buttons aren't swapped.
                 if (false)
@@ -469,7 +468,6 @@ namespace Boku.Common
 
             return mousePosition;
         }   // end of GetMouseInRtCoords()
-
 
         /// <summary>
         /// Returns the mouse position but adjusted for using a rt that has
@@ -752,7 +750,6 @@ namespace Boku.Common
             return result;
         }   // end of AtWindowRight()
 
-
         /// <summary>
         /// Debug helper...
         /// </summary>
@@ -771,7 +768,7 @@ namespace Boku.Common
             // gets offset.  We don't want to consider this a mouse move.  So
             // in typical hacky fashion we only look for moves in both axes
             // over a certain amount (in this case 32 which I just made up).
-            // This is because the amount of offset based on tutorial mode 
+            // This is because the amount of offset based on tutorial mode
             // is twitched into place so it looks just like a small mouse move.
             int dx = Math.Abs(prevPosition.X - curPosition.X);
             int dy = Math.Abs(prevPosition.Y - curPosition.Y);

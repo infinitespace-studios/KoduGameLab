@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -158,7 +157,6 @@ namespace Boku.Common
                 // Put hit position back in place.
                 hitPosition += t * dir;
             }
-
 
             return hit;
         }   // end of RaySweptEllipsoid()

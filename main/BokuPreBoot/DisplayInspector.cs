@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 //using System.Windows.Forms;
 using System.Collections.Generic;
@@ -56,8 +55,6 @@ public struct DEVMODE1
     public int dmPanningHeight;
 };
 
-
-
 class User_32
 {
     [DllImport("user32.dll")]
@@ -66,7 +63,6 @@ class User_32
     // special value to query for the current display settings.
     public const int ENUM_CURRENT_SETTINGS = -1;
 }
-
 
 namespace BokuPreBoot
 {
@@ -100,7 +96,7 @@ namespace BokuPreBoot
             return str;
         }
     }
-    
+
     class DisplayInspector
     {
         // Return the resolution of the current display device.

@@ -18,7 +18,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-
 using Boku.Base;
 using Boku.Common;
 using Boku.Common.Xml;
@@ -79,7 +78,7 @@ namespace Boku
         #endregion
 
         #region Accessors
-        
+
         public bool Active
         {
             get { return active; }
@@ -132,7 +131,6 @@ namespace Boku
 
             }
 
-
         }   // end of c'tor
 
         public void Update()
@@ -158,7 +156,7 @@ namespace Boku
                 // Update help square's positioning to line up with current selection.
                 Vector3 selectionElementOffset = grid.SelectionElement.Position - grid.ScrollOffset;
                 helpSquare.Position = new Vector2(helpSquare.Position.X, selectionElementOffset.Y);
- 
+
                 // For each element in the grid, calc it's screen space Y position
                 // and give it a slight twist around the Y axis based on this.
                 // Note this assumes that this grid is 1d vertical.
@@ -216,7 +214,7 @@ namespace Boku
             if (touch != null)
             {
                 Vector2 hitHelpUV = Vector2.Zero;
-                hitHelpUV = TouchInput.GetHitUV(touch.position, camera, ref mat, helpSquare.Size, 
+                hitHelpUV = TouchInput.GetHitUV(touch.position, camera, ref mat, helpSquare.Size,
                     helpSquare.Size, true);
 
                 if (grid.SelectionElement.ShowHelpButton)
@@ -240,7 +238,7 @@ namespace Boku
 
                 // Check if mouse hitting current selection object.  Or should this be done in the object?
                 mat = Matrix.Invert(focusElement.WorldMatrix);
-                Vector2 hitFocusUV = TouchInput.GetHitUV(touch.position, camera, ref mat, focusElement.Size.X, 
+                Vector2 hitFocusUV = TouchInput.GetHitUV(touch.position, camera, ref mat, focusElement.Size.X,
                     focusElement.Size.Y, true);
                 bool focusElementHit = false;
 
@@ -266,7 +264,7 @@ namespace Boku
 
                         UIGridElement e = grid.Get(0, i);
                         mat = Matrix.Invert(e.WorldMatrix);
-                        Vector2 hitUV = TouchInput.GetHitUV(touch.position, camera, ref mat, e.Size.X, 
+                        Vector2 hitUV = TouchInput.GetHitUV(touch.position, camera, ref mat, e.Size.X,
                             e.Size.Y, true);
 
                         if (hitUV.X >= 0 && hitUV.X < 1 && hitUV.Y >= 0 && hitUV.Y < 1)
@@ -507,7 +505,7 @@ namespace Boku
         public void OnSelect(UIGrid grid)
         {
             // Normally the grid wil deactivate itself when a selection is made.
-            // In the options/settings case there are some elements that ignore 
+            // In the options/settings case there are some elements that ignore
             // the Select action letting it get to the grid which then deactivates
             // itself.  We don't want that to happen so set the grid active here.
             grid.Active = true;
@@ -587,7 +585,6 @@ namespace Boku
             blob.selectedColor = new Color(new Vector3(5, 180, 160) / 255.0f);
             blob.normalMapName = @"Slant0Smoothed5NormalMap";
             blob.justify = UIGridModularCheckboxElement.Justification.Left;
-
 
             //
             // Create elements here.
@@ -679,7 +676,7 @@ namespace Boku
                                 native += c;
                             }
                         }
-                        
+
                         language.AddText(lang.NameInEnglish + " : " + native, lang.Language);
                     }
                     else
@@ -903,11 +900,9 @@ namespace Boku
             }
             #endregion
 
-
             showVersion = new UIGridModularButtonElement(blob, Strings.Localize("shareHub.appName") + " (" + Program2.ThisVersion.ToString() + ", " + Program2.SiteOptions.Product + ")", null, null, null, null);
             showVersion.HelpID = "Version";
             grid.Add(showVersion, 0, index++);
-
 
             //
             // Set grid properties.
@@ -917,7 +912,7 @@ namespace Boku
             grid.Wrap = false;
             grid.LocalMatrix = Matrix.Identity;
 
-            // Loop over al the elements in the grid.  For any that have 
+            // Loop over al the elements in the grid.  For any that have
             // help, set the flag so they display Y button for help.
             for (int i = 0; i < grid.ActualDimensions.Y; i++)
             {
@@ -959,6 +954,5 @@ namespace Boku
         #endregion
 
     }   // end of class OptionsMenu
-
 
 }   // end of namespace Boku.Scenes

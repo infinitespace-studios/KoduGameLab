@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -51,7 +50,7 @@ namespace Boku.Fx
             effect.Parameters["PixelSize"].SetValue(pixelSize);
 
             const float pixelOffset = 0.5f;
-            //const float pixelOffset = 0.0f;            
+            //const float pixelOffset = 0.0f;
             Vector4 fullOffset = new Vector4(
                 pixelOffset / device.Viewport.Width,
                 pixelOffset / device.Viewport.Height,
@@ -75,7 +74,7 @@ namespace Boku.Fx
             effect.Parameters["DOF_MinBlur"].SetValue(new Vector2(minBlur, blurScale));
 
             // Adjustement needed to deal with the confusion that
-            // arises when 
+            // arises when
             Vector2 screenScale = new Vector2(fullImage.Width / BokuGame.ScreenSize.X, fullImage.Height / BokuGame.ScreenSize.Y);
             effect.Parameters["ScreenScale"].SetValue(screenScale);
 
@@ -148,6 +147,3 @@ namespace Boku.Fx
     }   // end of class DOF_Filter
 
 }   // end of Boku.Common
-
-
-

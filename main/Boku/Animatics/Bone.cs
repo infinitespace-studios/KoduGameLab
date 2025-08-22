@@ -1,14 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 
 namespace Boku.Animatics
 {
@@ -107,7 +105,7 @@ namespace Boku.Animatics
             /// <param name="dst"></param>
             /// <returns></returns>
             private static Bone AddBoneSubtree(
-                ModelBone modelBone, 
+                ModelBone modelBone,
                 Bone[] dst)
             {
                 int index = modelBone.Index;

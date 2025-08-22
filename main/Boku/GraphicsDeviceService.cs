@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,17 +26,13 @@ namespace Boku
     {
         #region Fields
 
-
         // Singleton device service instance.
         static GraphicsDeviceService singletonInstance;
-
 
         // Keep track of how many controls are sharing the singletonInstance.
         static int referenceCount;
 
-
         #endregion
-
 
         /// <summary>
         /// Constructor is private, because this is a singleton class:
@@ -71,7 +66,6 @@ namespace Boku
                 parameters.MultiSampleCount = 1;
             }
 
-
             foreach (GraphicsAdapter ga in GraphicsAdapter.Adapters)
             {
                 Debug.Assert(false, "Waiting on MG");
@@ -94,8 +88,6 @@ namespace Boku
                 MainForm.Instance.MaximumSize = new System.Drawing.Size(2048, 2048);
             }
 
-
-
             // Select right profile.
             GraphicsProfile profile = BokuGame.HiDefProfile ? GraphicsProfile.HiDef : GraphicsProfile.Reach;
 
@@ -111,18 +103,13 @@ namespace Boku
             //graphics.SynchronizeWithVerticalRetrace = syncRefresh;
             //graphics.PreferMultiSampling = BokuSettings.Settings.AntiAlias;
 
-
-
-
-
             graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter,
                                                 profile,
                                                 parameters);
 
             Mouse.WindowHandle = windowHandle;
-            
-        }
 
+        }
 
         /// <summary>
         /// Gets a reference to the singleton instance.
@@ -141,7 +128,6 @@ namespace Boku
 
             return singletonInstance;
         }
-
 
         /// <summary>
         /// Releases a reference to the singleton instance.
@@ -165,7 +151,6 @@ namespace Boku
             }
         }
 
-        
         /// <summary>
         /// Resets the graphics device to whichever is bigger out of the specified
         /// resolution or its current size. This behavior means the device will
@@ -185,7 +170,6 @@ namespace Boku
                 DeviceReset(this, EventArgs.Empty);
         }
 
-        
         /// <summary>
         /// Gets the current graphics device.
         /// </summary>
@@ -196,10 +180,8 @@ namespace Boku
 
         GraphicsDevice graphicsDevice;
 
-
         // Store the current device settings.
         PresentationParameters parameters;
-
 
         // IGraphicsDeviceService events.
         public event EventHandler<EventArgs> DeviceCreated;

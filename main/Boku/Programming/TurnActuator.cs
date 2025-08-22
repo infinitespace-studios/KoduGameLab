@@ -22,7 +22,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Marshals desired turns coming from the brain to the actor.
-    /// 
+    ///
     /// (****) Looks like all this really does is queue the movement sets which are created by the TurnSelector.
     /// Not really sure why TurnSelector exists at all.  Feels like it should all be here.
     /// </summary>

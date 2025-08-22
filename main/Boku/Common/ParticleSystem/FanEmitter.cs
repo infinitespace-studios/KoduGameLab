@@ -18,7 +18,7 @@ using Boku.Base;
 
 namespace Boku.Common.ParticleSystem
 {
-    // Emits "Explosion" as a series of expanding, rotating 
+    // Emits "Explosion" as a series of expanding, rotating
     // sprites which fade and grow as they age.  The sprites
     // are rendered using additive blending.
     public class FanEmitter : BaseSpriteEmitter
@@ -59,7 +59,7 @@ namespace Boku.Common.ParticleSystem
         {
             StartRadius = 0.1f;
             EndRadius = 0.1f;
-  
+
             StartAlpha = 1.0f;
             EndAlpha = 1.0f;
 
@@ -104,7 +104,7 @@ namespace Boku.Common.ParticleSystem
         {
             base.Update();
 
-            if (attachTo != null)            
+            if (attachTo != null)
             {
                 // Use modifier to match vfx with actual range
                 InitParticleVelocity = Vector3.Normalize(attachTo.Movement.Facing) * ((attachTo as GameActor).FinalPushRange / MaxLifetime) * 0.9f;

@@ -50,7 +50,6 @@ namespace Xclna.Xna.Animation.Reader
         private NodeContent model;
         private BoneContent modelSkeleton;
 
-
         /// <summary>
         /// The context for the processor.
         /// </summary>
@@ -62,7 +61,6 @@ namespace Xclna.Xna.Animation.Reader
         /// </summary>
         protected BoneContent InputSkeleton
         { get { return inputSkeleton; } }
-
 
         /// <summary>
         /// The model.
@@ -76,7 +74,6 @@ namespace Xclna.Xna.Animation.Reader
         protected BoneContent ModelSkeleton
         { get { return modelSkeleton; } }
 
-
         /// <summary>
         /// Produces ModelAnimationInfo from skeleton and animations.
         /// </summary>
@@ -85,7 +82,7 @@ namespace Xclna.Xna.Animation.Reader
         /// <returns>AnimationContentDictionary</returns>
         public override AnimationContentDictionary Process(BoneContent input, ContentProcessorContext context)
         {
-            
+
             inputSkeleton = input;
             inputSkeleton.Identity.FragmentIdentifier = "";
             this.context = context;
@@ -230,7 +227,7 @@ namespace Xclna.Xna.Animation.Reader
                 while (time <= animationDuration)
                 {
                     AnimationKeyframe keyframe;
-                    // Clamp the time to the duration of the animation and make this 
+                    // Clamp the time to the duration of the animation and make this
                     // keyframe equal to the last animation frame.
                     if (time >= animationDuration)
                     {
@@ -266,7 +263,7 @@ namespace Xclna.Xna.Animation.Reader
                             // The interpolation factor, or amount to interpolate between the current
                             // and next frame
                             double interpAmount = interpNumerator / interpDenom;
-                            
+
                             // If the frames are roughly 60 frames per second apart, use linear interpolation
                             if (channel[currentFrame + 1].Time.Ticks - channel[currentFrame].Time.Ticks
                                 <= ContentUtil.TICKS_PER_60FPS * 1.05)
@@ -312,7 +309,7 @@ namespace Xclna.Xna.Animation.Reader
                         channel[channel.Count - 1].Transform));
                 }
 
-                outChannel.Add(new AnimationKeyframe(input.Duration, 
+                outChannel.Add(new AnimationKeyframe(input.Duration,
                     channel[channel.Count-1].Transform));
                 // Add the interpolated channel to the animation
                 output.Channels.Add(channelName, outChannel);
@@ -323,11 +320,5 @@ namespace Xclna.Xna.Animation.Reader
 
         }
 
-
-
-
-
     }
 }
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -25,7 +24,7 @@ namespace Boku.UI2D
     }
 
     /// <summary>
-    /// UI Grid element used for 2d terrain editing brushes.  Basically it's just a 
+    /// UI Grid element used for 2d terrain editing brushes.  Basically it's just a
     /// wrapper around a drawable item, text blob image etc...
     /// </summary>
     public class ScrollContainer
@@ -36,7 +35,7 @@ namespace Boku.UI2D
             private float scrollOffset = 0.0f;
             private AABB2D hitbox = null;
         #endregion
-        
+
         #region Public
 
             public ScrollContainer(Vector2 size)
@@ -53,7 +52,7 @@ namespace Boku.UI2D
 
             virtual public void ResetWidth()        { ;}
 
-            virtual public void Render(Vector2 pos) 
+            virtual public void Render(Vector2 pos)
             {
             } // needs to be pure virtual
             virtual public void Hover(Vector2 pos)  { ;}
@@ -65,13 +64,13 @@ namespace Boku.UI2D
             /// </summary>
             /// <param name="pos"></param>
             /// <returns></returns>
-            virtual public Object Click(Vector2 pos) 
+            virtual public Object Click(Vector2 pos)
             {
-                return null; 
+                return null;
             }
             virtual public bool Click(Vector2 pos, out Object obj)
-            { 
-                obj = null; return false; 
+            {
+                obj = null; return false;
             }
             virtual public bool Click(Vector2 pos, out Object obj, ClickType clickType)
             {
@@ -156,7 +155,6 @@ namespace Boku.UI2D
             get { return hitbox.Max.Y; }
         }
         #endregion
-
 
     }   // end of class ScrollContainer
 

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// A class with static instances of shared UI bits including renderTargets and fonts.
-    /// You should never hold on to a reference to these since they may change with a 
+    /// You should never hold on to a reference to these since they may change with a
     /// device reset.
     /// </summary>
     public class Shared
@@ -90,7 +89,6 @@ namespace Boku.UI2D
                 {
                     fontName = "Arial";
                 }
-
 
                 return fontName;
             }
@@ -261,7 +259,6 @@ namespace Boku.UI2D
             }
         }
 
-
         /// <summary>
         /// Note:  Do not hold on to this reference for more than the
         /// current frame since a device reset could invalidate it.
@@ -323,8 +320,8 @@ namespace Boku.UI2D
                     renderTargetDepthStencil1024_768 = new RenderTarget2D(
                         BokuGame.bokuGame.GraphicsDevice,
                         width, height, false,
-                        SurfaceFormat.Color, 
-                        DepthFormat.Depth24Stencil8, 0, 
+                        SurfaceFormat.Color,
+                        DepthFormat.Depth24Stencil8, 0,
                         RenderTargetUsage.PlatformContents);
                     InGame.GetRT("UI2D.Shared:renderTargetDepthStencil1024_768", renderTargetDepthStencil1024_768);
                 }
@@ -384,7 +381,7 @@ namespace Boku.UI2D
         /// </summary>
         public static RenderTarget2D RenderTarget1024_768
         {
-            get 
+            get
             {
                 if (renderTarget1024_768 == null || renderTarget1024_768.IsDisposed || renderTarget1024_768.GraphicsDevice.IsDisposed)
                 {
@@ -398,7 +395,7 @@ namespace Boku.UI2D
                         RenderTargetUsage.PlatformContents);
                     InGame.GetRT("UI2D.Shared:renderTarget1024_768", renderTarget1024_768);
                 }
-                return renderTarget1024_768; 
+                return renderTarget1024_768;
             }
         }
         /// <summary>
@@ -430,7 +427,7 @@ namespace Boku.UI2D
         /// </summary>
         public static RenderTarget2D RenderTarget512_302
         {
-            get 
+            get
             {
                 if (renderTarget512_302 == null || renderTarget512_302.IsDisposed || renderTarget512_302.GraphicsDevice.IsDisposed)
                 {
@@ -444,7 +441,7 @@ namespace Boku.UI2D
                         RenderTargetUsage.PlatformContents);
                     InGame.GetRT("UI2D.Shared:renderTarget512_302", renderTarget512_302);
                 }
-                return renderTarget512_302; 
+                return renderTarget512_302;
             }
         }
         /// <summary>
@@ -518,27 +515,27 @@ namespace Boku.UI2D
 
         public static Texture2D BlackButtonTexture
         {
-            get 
+            get
             {
                 if (blackButtonTexture == null || blackButtonTexture.IsDisposed || blackButtonTexture.GraphicsDevice.IsDisposed)
                 {
                     blackButtonTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\GridElements\BlackTextTile");
                 }
 
-                return blackButtonTexture; 
+                return blackButtonTexture;
             }
         }
 
         public static Texture2D UpDownArrowsTexture
         {
-            get 
+            get
             {
                 if (upDownArrowsTexture == null || upDownArrowsTexture.IsDisposed || upDownArrowsTexture.GraphicsDevice.IsDisposed)
                 {
                     upDownArrowsTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\HelpCard\UpDownArrows");
                 }
 
-                return upDownArrowsTexture; 
+                return upDownArrowsTexture;
             }
         }
 
@@ -608,7 +605,6 @@ namespace Boku.UI2D
             get { return quadIndices; }
         }
 
-
         #endregion
 
         #region Public
@@ -619,7 +615,7 @@ namespace Boku.UI2D
         /// <summary>
         /// These delegates are used to provide a level of indirection for objects that
         /// need to hold onto a reference to a font.  Since a device reset may change the
-        /// underlying font we instead give the objects a delegate which returns the 
+        /// underlying font we instead give the objects a delegate which returns the
         /// correct font.
         /// </summary>
         public static GetFont GetGameFont10 = delegate() { return UI2D.Shared.GameFont10; };
@@ -660,7 +656,6 @@ namespace Boku.UI2D
             {
                 upDownArrowsTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\HelpCard\UpDownArrows");
             }
-
 
         } // end of InitDeviceResources()
 

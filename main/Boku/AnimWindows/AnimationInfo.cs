@@ -4,7 +4,7 @@
 /*
  * AnimationInfo.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -195,9 +195,9 @@ namespace Xclna.Xna.Animation
 
         // The bone animation tracks
         private AnimationChannelCollection boneAnimations;
-        
+
         // Internal because it should only be created by the AnimationReader
-        internal AnimationInfo(string animationName, AnimationChannelCollection 
+        internal AnimationInfo(string animationName, AnimationChannelCollection
             anims)
         {
             this.animationName = animationName;
@@ -215,7 +215,6 @@ namespace Xclna.Xna.Animation
         /// </summary>
         public AnimationChannelCollection AnimationChannels
         { get { return boneAnimations; } }
-
 
         /// <summary>
         /// Gets a collection of bones that have tracks in this animation.
@@ -239,7 +238,6 @@ namespace Xclna.Xna.Animation
             get { return animationName; }
         }
 
-
         /// <summary>
         /// Returns true if the animation contains any tracks that affect the given
         /// bone.
@@ -251,7 +249,6 @@ namespace Xclna.Xna.Animation
         { return boneAnimations.AffectsBone(boneName); }
     }
 
-    
     /// <summary>
     /// A collection of AnimationInfo objects.
     /// </summary>
@@ -309,8 +306,5 @@ namespace Xclna.Xna.Animation
         }
 
     }
-
-
-
 
 }

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,9 +16,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Boku.Common.ParticleSystem
 {
-    // Emits "emitter puffs" as a series of expanding, rotating 
+    // Emits "emitter puffs" as a series of expanding, rotating
     // sprites which fade and grow as they age.  These are to
-    // be used when an object is being dragged or when it 
+    // be used when an object is being dragged or when it
     // bounces on the ground.
     public class DustEmitter : BaseEmitter
     {
@@ -150,7 +149,7 @@ namespace Boku.Common.ParticleSystem
             // See if we've died.
             if (Dying)
             {
-                // We don't need to wait for any particles to 
+                // We don't need to wait for any particles to
                 // go away since the shared emitter owns them.
                 Active = false;
                 RemoveFromManager();
@@ -174,7 +173,7 @@ namespace Boku.Common.ParticleSystem
                     partial += dt * EmissionRate;
                 }
 
-                // Emit as many particles as needed this 
+                // Emit as many particles as needed this
                 // frame to keep up with the emission rate.
                 SharedSmokeEmitter.SmokeParticle particle = new SharedSmokeEmitter.SmokeParticle();
                 while (partial >= 1.0f)
@@ -211,7 +210,6 @@ namespace Boku.Common.ParticleSystem
             PreviousPosition = position;
 
         }   // end of Update()
-
 
         #endregion Public
 

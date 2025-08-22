@@ -9,7 +9,6 @@ using System.Threading;
 using BokuShared;
 using BokuShared.Wire;
 
-
 namespace Boku.Web.Trans
 {
     /// <summary>

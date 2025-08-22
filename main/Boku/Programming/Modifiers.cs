@@ -60,16 +60,16 @@ namespace Boku.Programming
         /// <summary>
         /// This should be the accumulated multiplier based on the
         /// effect of any Quickly or Slowly tiles on this reflex.
-        /// 
+        ///
         /// Default value is 1.0.
         /// </summary>
         public float SpeedModifier
         {
             get { return speedModifier; }
-            set 
+            set
             {
                 Debug.Assert(value != 0, "This should never be set to 0.  Default value is 1.0./");
-                speedModifier = value; 
+                speedModifier = value;
             }
         }
 
@@ -88,7 +88,6 @@ namespace Boku.Programming
                 ScoreBucket = (ScoreBucket)value;
             }
         }
-
 
         public bool HasLoft { get { return Loft != 0.0f; } }
         public bool HasStrength { get { return Strength != 0.0f; } }
@@ -112,7 +111,6 @@ namespace Boku.Programming
         public bool HasPoints { get { return true; } }
         public bool HasPlayerIndex { get { return PlayerIndex != GamePadSensor.PlayerId.Dynamic; } }
         public bool HasScoreBucket { get { return ScoreBucket != ScoreBucket.NotApplicable; } }
-
 
         public void Clear()
         {
@@ -180,9 +178,9 @@ namespace Boku.Programming
 
         /// <summary>
         /// If this modifier affects the actor's heading, get the new desired heading.
-        /// 
-        /// In code, this usually returns a bool called "apply" but there's no 
-        /// explanation about what that's supposed to be doing. 
+        ///
+        /// In code, this usually returns a bool called "apply" but there's no
+        /// explanation about what that's supposed to be doing.
         /// </summary>
         /// <param name="reflex"></param>
         /// <param name="gameActor"></param>
@@ -192,7 +190,6 @@ namespace Boku.Programming
         {
             return true;
         }
-
 
         public override bool ReflexCompatible(GameActor actor, ReflexData reflex, ProgrammingElement replacedElement, bool allowArchivedCategories)
         {
@@ -237,7 +234,6 @@ namespace Boku.Programming
             return base.ReflexCompatible(actor, reflex, replacedElement, allowArchivedCategories);
         }
 
-
         /// <summary>
         /// Check if this modifier can provide a parameter
         /// </summary>
@@ -279,7 +275,7 @@ namespace Boku.Programming
                 if (modifier is TeamModifier)
                 {
                     TeamModifier teamMod = modifier as TeamModifier;
-                    
+
                     if (teamMod.team == TeamModifier.Team.B)
                         return (ScoreBucket)Classification.Colors.Green;
                     else

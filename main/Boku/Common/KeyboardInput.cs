@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ using System.ComponentModel;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 
 using Boku.Input;
 using Boku.Web;
@@ -441,7 +439,6 @@ namespace Boku.Common
             //Debug.Assert(false, "Is this needed for Win8?");
         }
 
-
         public static void Update()
         {
             // If this count isn't right, we may have accidentally deleted an entry.
@@ -746,7 +743,6 @@ namespace Boku.Common
             }
         }
 
-
         /// <summary>
         /// Returns the key that was pressed this frame.  If none
         /// pressed returns Keys.None.
@@ -777,7 +773,7 @@ namespace Boku.Common
 
         /// <summary>
         /// Maps the given key to the appropriate char value.  Pays attention
-        /// to the state of shift and capslock (and orange/green on chatpad).  
+        /// to the state of shift and capslock (and orange/green on chatpad).
         /// Returns 0 if no valid mapping.
         /// </summary>
         /// <param name="key"></param>
@@ -804,4 +800,3 @@ namespace Boku.Common
     }   // end of class KeyboardInput
 
 }   // end of namespace Boku.Common
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -68,7 +67,6 @@ namespace Boku.SimWorld.Chassis
 
         #endregion
 
-
         #region Public
 
         public VehicleChassis()
@@ -124,7 +122,6 @@ namespace Boku.SimWorld.Chassis
             dustEmitter.RemoveFromManager();
         }
 
-
         public override void PreCollisionTestUpdate(GameThing thing)
         {
             Movement movement = thing.Movement;
@@ -141,7 +138,7 @@ namespace Boku.SimWorld.Chassis
                     // Only do movement if we are not being held.
                     if (thing.ActorHoldingThis == null)
                     {
-                        // Check if we're up in the air.  If so, then we don't kick up 
+                        // Check if we're up in the air.  If so, then we don't kick up
                         // any dust.  We can still turn while in the air but it doesn't
                         // affect the direction we're moving until we hit the ground.
                         float terrainHeight = Terrain.GetTerrainAndPathHeight(Top(movement.Position));
@@ -234,7 +231,6 @@ namespace Boku.SimWorld.Chassis
 
                 }   // end of if active.
 
-
             }   // end of if not dead
 
         }   // end of PreCollisionTestUpdate()
@@ -281,7 +277,7 @@ namespace Boku.SimWorld.Chassis
                         terrainHeight = Terrain.GetTerrainAndPathHeight(Top(movement.PrevPosition));
                         if (terrainHeight > 0.0f)
                         {
-                            // Bounce if below height of path.  This effectively extends the 
+                            // Bounce if below height of path.  This effectively extends the
                             // width of the path by 1 frame of movement which allows this to work
                             // independent of the thickness of the path.
                             float desiredHeight = terrainHeight;
@@ -318,7 +314,7 @@ namespace Boku.SimWorld.Chassis
         }   // end of PostCollisionTestUpdate()
 
         /// <summary>
-        /// Based on the chassis' internal values, sets the blend values for the 
+        /// Based on the chassis' internal values, sets the blend values for the
         /// four standard looping animations.
         /// </summary>
         /// <param name="anims"></param>
@@ -336,7 +332,7 @@ namespace Boku.SimWorld.Chassis
         /// </summary>
         /// <param name="movement"></param>
         protected virtual void HandleMovement(Movement movement)
-        {        
+        {
         }
 
         /// <summary>

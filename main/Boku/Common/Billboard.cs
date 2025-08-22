@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -183,7 +182,6 @@ namespace Boku.Common
 
         #endregion
 
-
         public struct Vertex : IVertexType
         {
             private Vector3 position;
@@ -226,7 +224,7 @@ namespace Boku.Common
             this.size = size;
 
             InitDeviceResources(BokuGame.bokuGame.GraphicsDevice);
-            
+
         }   // end of Billboard c'tor
 
         public override void Render(Camera camera)
@@ -268,15 +266,14 @@ namespace Boku.Common
 
         }   // end of Billboard Render()
 
-
         override public void Activate()
         {
         }
-        
+
         override public void Deactivate()
         {
         }
-        
+
         public void LoadContent(bool immediate)
         {
         }

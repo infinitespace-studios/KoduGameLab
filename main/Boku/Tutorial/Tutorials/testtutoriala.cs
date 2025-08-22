@@ -49,8 +49,8 @@ namespace Boku.Tutorial.Tutorials
             instruction.text += "You can this by pressing the Back button on the gamepad and select the Exit to Main Menu option.";
             instruction.modality = Instruction.Modality.Modeless;
             instruction.conditions.Add(delegate() { return App.Instance.UiMode == "App.TitleMenu"; });
-            instruction.Starting += delegate() 
-                { 
+            instruction.Starting += delegate()
+                {
                     this.inputConstraint.exceptions.Add( "SaveMenu.NavPrev" );
                     this.inputConstraint.exceptions.Add( "SaveMenu.NavNext" );
                     this.inputConstraint.exceptions.Add( "SaveMenu.Select" );
@@ -104,7 +104,6 @@ namespace Boku.Tutorial.Tutorials
             hint.repeat = true;
             instruction.hints.Add(hint);
             this.instructions.Add(instruction);
-
 
             // last instruction
             // Your done

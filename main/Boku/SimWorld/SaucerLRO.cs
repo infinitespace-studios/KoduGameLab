@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ namespace Boku.SimWorld
         private static SaucerSRO sroInstance = null;
 
         // c'tor
-        private SaucerSRO() 
+        private SaucerSRO()
             : base(@"Models\saucer")
         {
             TechniqueExt = "WithSkinning";
@@ -46,8 +45,6 @@ namespace Boku.SimWorld
             return sroInstance;
         }   // end of SaucerSRO GetInstance()
 
-        
-           
     }   // end of class SaucerSRO
 
 }   // end of namespace Boku.SimWorld

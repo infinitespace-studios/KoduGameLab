@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from SimWorld namespace
 
 using System;
@@ -57,7 +56,7 @@ namespace Boku.Fx
             for (int i = 0; i < tempNames.Count; i++)
                 effectTechNames[tempNames[i].Key] = tempNames[i].Value;
         }
-        
+
         /// <summary>
         /// Load the parameters and techniques (even though no technique
         /// extension is given, we have the EffectTechs enum so we'll go
@@ -110,7 +109,7 @@ namespace Boku.Fx
 
         /// <summary>
         /// Create an EffectCache that will use the given enum types to automatically
-        /// load EffectParameters using the names from the enums. No loading is done, 
+        /// load EffectParameters using the names from the enums. No loading is done,
         /// however, until Load() is called.
         /// </summary>
         public EffectCacheWithParams(params Type[] effectParamEnums)
@@ -166,7 +165,7 @@ namespace Boku.Fx
         /// <summary>
         /// Load up all parameters, plus all special effect techniques.
         /// Reserve space for totalNumTech tech, but don't load them,
-        /// assumes they'll be set explicitly with LoadTechnique(...). 
+        /// assumes they'll be set explicitly with LoadTechnique(...).
         /// </summary>
         /// <param name="effect"></param>
         /// <param name="techniqueExt"></param>
@@ -244,7 +243,7 @@ namespace Boku.Fx
         #region INTERNAL
         ///
         /// Internals follow
-        /// 
+        ///
 
         /// <summary>
         /// Load up all parameters based on overridden param funcs
@@ -319,7 +318,7 @@ namespace Boku.Fx
         }
 
         /// <summary>
-        /// Load up special effects and the two standard (textured or not) with 
+        /// Load up special effects and the two standard (textured or not) with
         /// specified extension.
         /// </summary>
         /// <param name="effect"></param>

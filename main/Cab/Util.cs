@@ -69,7 +69,7 @@ namespace Cab
             else
                 return SeekOrigin.Current;
         }
-        
+
         /// <summary>
         /// Get .NET-compatible file mode value.
         /// </summary>
@@ -102,6 +102,6 @@ namespace Cab
             else
                 return FileAccess.ReadWrite;
         }
-        
+
     }
 }

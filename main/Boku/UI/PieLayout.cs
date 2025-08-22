@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -36,7 +35,7 @@ namespace Boku.UI
             // calc needed circumference
             //
             CalcLayoutInfoFromItems(out neededCircumference, out this.maxItemRadius, items, 1);
-            
+
             // calc radius of the pie
             //
             float radius = neededCircumference / MathHelper.TwoPi;
@@ -44,7 +43,7 @@ namespace Boku.UI
 
             if (radius < this.maxItemRadius * 2.0f)
             {
-                // radius is too small, must increase 
+                // radius is too small, must increase
                 // this is assuming the center composed item is the same size as the other items
                 radius = this.maxItemRadius * 2.0f;
                 // and provide the extra spacing between items on the circumference
@@ -120,7 +119,7 @@ namespace Boku.UI
             // calc needed circumference
             //
             CalcLayoutInfoFromItems(out neededCircumference, out this.maxItemRadius, items, 1);
-            
+
             // calc radius of the pie
             //
             float radius = neededCircumference / MathHelper.TwoPi;
@@ -131,7 +130,7 @@ namespace Boku.UI
             {
                 // so few items they are one row spaced around
 
-                // radius is too small, must increase 
+                // radius is too small, must increase
                 // this is assuming the center composed item is the same size as the other items
                 radius = this.maxItemRadius * 2.0f;
                 // and provide the extra spacing between items on the circumference
@@ -153,8 +152,7 @@ namespace Boku.UI
             }
             // layout items into position on the circumference
             //
-            
-            
+
             float headingArcLength = 0.0f;
             for (int indexItem = 0; indexItem < items.Count; indexItem++)
             {
@@ -292,7 +290,7 @@ namespace Boku.UI
                         transformItem);
                 twitch.Play();
             }
-            
+
 /*
             // layout items into position on a grid starting top left
             //
@@ -311,7 +309,6 @@ namespace Boku.UI
                 OrbitalSelector.ItemData itemData = items[indexItem] as OrbitalSelector.ItemData;
                 IBounding boundingItem = itemData.item as IBounding;
                 ITransform transformItem = itemData.item as ITransform;
-
 
                 Vector3 position = new Vector3((float)col * itemWidth, (float)row * -itemWidth, 0.0f);
                 Debug.Print("[{0}][{1}] ({2,8:F},{3,8:F})", col, row, position.X, position.Y);
@@ -378,7 +375,7 @@ namespace Boku.UI
                 twitch.Play();
             }
             this.maxOrbit = colEnd * itemWidth;
- */ 
+ */
         }
     }
 }

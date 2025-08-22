@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Audio;
 using Boku.Base;
@@ -49,7 +47,7 @@ namespace Boku
         private Texture2D homeTexture = null;
 
         public NewWorldDialog newWorldDialog;
-        
+
         protected class Shared : INeedsDeviceReset
         {
             public Camera camera = new PerspectiveUICamera();
@@ -109,7 +107,6 @@ namespace Boku
                 menu.AddText(Strings.Localize("miniHub.quit"));
             }   // end of BuildMenu()
 
-
             public void LoadContent(bool immediate)
             {
                 BokuGame.Load(menu, immediate);
@@ -160,8 +157,8 @@ namespace Boku
                     return;
                 }
 
-                // We need to do this ever frame instead of just at activation 
-                // time since deactivation of the previous scene and activation 
+                // We need to do this ever frame instead of just at activation
+                // time since deactivation of the previous scene and activation
                 // of this scene don't always happen in that order.
                 AuthUI.ShowStatusDialog();
 
@@ -204,7 +201,6 @@ namespace Boku
                 }
             }
 
-
             private void Callback_PutWorldData(AsyncResult result)
             {
                 if (result.Success)
@@ -225,7 +221,7 @@ namespace Boku
             {
             }
 
-        }   // end of class MiniHub UpdateObj  
+        }   // end of class MiniHub UpdateObj
 
         protected class RenderObj : RenderObject
         {
@@ -338,9 +334,7 @@ namespace Boku
             {
             }
 
-        }   // end of class MiniHub RenderObj     
-
-
+        }   // end of class MiniHub RenderObj
 
         // List objects.
         protected Shared shared = null;
@@ -433,7 +427,7 @@ namespace Boku
                     // Deactivate mini-hub.
                     //Deactivate();
 
-                    // We gave the user the opportunity to save changes and he chose 
+                    // We gave the user the opportunity to save changes and he chose
                     // not to so call OnSelect() once more to get them on their way.
                     if (saveChangesActivated)
                     {
@@ -548,7 +542,7 @@ namespace Boku
             if (dialog.Button == SaveLevelDialog.SaveLevelDialogButtons.Save)
             {
                 // Done.  If this was caused by the SaveChanges dialog popping up then
-                // we need to return to wherever the user was trying to go in the 
+                // we need to return to wherever the user was trying to go in the
                 // first place.  If this was caused by the user explicitely saving
                 // then we should return to running.
 
@@ -572,9 +566,9 @@ namespace Boku
         }   // end of OnSaveLevelDialogButton()
 
         /// <summary>
-        /// OnSelect method used by mini-hub grid.  If the level is dirty and needs to 
-        /// be saved the SaveChagesDialog will be activated.  Upon its deactivation 
-        /// the level should no longer be marked dirty and OnSelect() will get called 
+        /// OnSelect method used by mini-hub grid.  If the level is dirty and needs to
+        /// be saved the SaveChagesDialog will be activated.  Upon its deactivation
+        /// the level should no longer be marked dirty and OnSelect() will get called
         /// again allowing the user's action to be executed.
         /// </summary>
         /// <param name="grid"></param>
@@ -589,7 +583,7 @@ namespace Boku
             // It will be resumed when we go back into sim mode.
             BokuGame.Audio.PauseGameAudio();
 
-            // Flag to let us know if the level needs saving.  If the save changes 
+            // Flag to let us know if the level needs saving.  If the save changes
             // dialog has already been activated then just set this to false.
             bool needToSaveLevel = (InGame.IsLevelDirty || InGame.AutoSaved) && !saveChangesActivated;
 
@@ -606,7 +600,7 @@ namespace Boku
                 }
             }
 
-            // Normally there would be a switch here but if we compare strings 
+            // Normally there would be a switch here but if we compare strings
             // we proof ourselves against changes in the order of the elements.
             if (menu.CurString == Strings.Localize("miniHub.reset"))
             {
@@ -888,5 +882,3 @@ namespace Boku
     }   // end of class MiniHub
 
 }   // end of namespace Boku
-
-

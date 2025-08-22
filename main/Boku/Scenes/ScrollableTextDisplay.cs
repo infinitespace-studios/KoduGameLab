@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -155,7 +153,7 @@ namespace Boku
                 }
 
                 // We need to be able to slip out to the mini-hub here since
-                // continuous, repeated calls to TextDisplay can lock the 
+                // continuous, repeated calls to TextDisplay can lock the
                 // user out of control.
                 if (Actions.MiniHub.WasPressed)
                 {
@@ -166,7 +164,7 @@ namespace Boku
                 }
 
                 // We need to be able to slip out to the tool menu here since
-                // continuous, repeated calls to TextDisplay can lock the 
+                // continuous, repeated calls to TextDisplay can lock the
                 // user out of control.
                 if (Actions.ToolMenu.WasPressed)
                 {
@@ -284,7 +282,7 @@ namespace Boku
             else if (downBox.Touched(touch, hit))
             {
                 ScrollUp();
-            } 
+            }
             else
             {
                 // Touch is active, but none of the buttons were hit so assume user is trying to scroll text.
@@ -696,7 +694,7 @@ namespace Boku
 
         public void OnSelect(UIGrid grid)
         {
-            // We should never actually get here.  The TextDisplay UpdateObj 
+            // We should never actually get here.  The TextDisplay UpdateObj
             // should consume all 'A' presses before the grids get them...
 
             Debug.Assert(false);
@@ -705,7 +703,7 @@ namespace Boku
 
         public void OnCancel(UIGrid grid)
         {
-            // We should never actually get here.  The TextDisplay UpdateObj 
+            // We should never actually get here.  The TextDisplay UpdateObj
             // should consume all 'B' presses before the grids get them...
 
             Debug.Assert(false);

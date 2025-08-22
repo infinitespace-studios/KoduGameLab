@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -82,7 +80,7 @@ namespace Boku
 
         private Vector2 pos;                    // Position on screen (upper left, in pixels)
 
-        // TODO Restore dirty flag handling.  Right now we re-render the whole dialog each 
+        // TODO Restore dirty flag handling.  Right now we re-render the whole dialog each
         // frame since we have to way to tell if a button has become dirty (label changes color on hover)
         private bool dirty = true;              // Does the texture need refreshing.
 
@@ -132,8 +130,8 @@ namespace Boku
         public string LabelA
         {
             get { return labelA; }
-            set 
-            { 
+            set
+            {
                 labelA = value;
                 if (labelA != null)
                 {
@@ -165,7 +163,6 @@ namespace Boku
             }
         }
 
-
         public string LabelX
         {
             get { return labelX; }
@@ -183,7 +180,6 @@ namespace Boku
                 }
             }
         }
-
 
         public string LabelY
         {
@@ -246,7 +242,6 @@ namespace Boku
                 Debug.Assert(labelY != null, "If you have a button handler you must have a label for it.");
             }
 
-
             if (labelA != null)
             {
                 GetTexture getTexture = delegate() { return ButtonTextures.AButton; };
@@ -272,7 +267,7 @@ namespace Boku
         public void SetText(string text)
         {
             int maxWidth = width - 2 * margin;
-            
+
             textBlob = new TextBlob(UI2D.Shared.GetGameFont30Bold, text, maxWidth);
             textBlob.Justification = UIGridElement.Justification.Center;
 
@@ -294,7 +289,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="userRtCoords">Are we rendering on a rendertarget?</param>
         public void Activate(bool useRtCoords = false)
@@ -402,7 +397,7 @@ namespace Boku
                                 hit = MouseInput.AdjustHitPosition(hit, camera, false, false);
                             }
                             hit = hit - pos;
-                           
+
                             HandleTouchInput(hit, touch);
                         }
                     }
@@ -425,7 +420,6 @@ namespace Boku
             }
         }   // end of Update()
 
-
         private void HandleTouchInput(Vector2 hit, TouchContact touch)
         {
             // Hovering?
@@ -445,7 +439,7 @@ namespace Boku
             }
             if (touch.phase == TouchPhase.Ended)
             {
-                // Clicked on? 
+                // Clicked on?
                 if (aButton != null && aButton.Box.Touched(touch,hit,false))
                 {
                     if (handlerA != null)
@@ -480,7 +474,6 @@ namespace Boku
                 }
 
             }
-
 
         }
 
@@ -557,7 +550,7 @@ namespace Boku
 
                 // Center box on screen.
                 Vector2 size = new Vector2(width, height);
-                pos = (screenSize - size)/2.0f; 
+                pos = (screenSize - size)/2.0f;
 
                 ScreenSpaceQuad ssquad = ScreenSpaceQuad.GetInstance();
 
@@ -632,7 +625,7 @@ namespace Boku
 
                 batch.Begin();
 
-                // We need to calc the width of each active button and it's label 
+                // We need to calc the width of each active button and it's label
                 // so we can center the whole set at the bottom of the dialog.
                 // TODO Set this up so we can also right/left justify?
 
@@ -731,4 +724,3 @@ namespace Boku
     }   // end of class ModularMessageDialog
 
 }   // end of namespace Boku
-

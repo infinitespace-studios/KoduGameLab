@@ -12,17 +12,17 @@ using System.Reflection;
     using Windows.Security;
 
 /* Author: Neil Petrick
- * 
+ *
  * License: Public Domain.
- * 
+ *
  * Usage:
  *
- * Inherit from this class, and override the WndProc function in your derived class, 
+ * Inherit from this class, and override the WndProc function in your derived class,
  * in which you handle your windows messages.
- * 
+ *
  * To start recieving the message, create an instance of your derived class, passing in the
  * window handle of the window you want to listen for messages for.
- * 
+ *
  * in XNA: this would be the Game.Window.Handle property
  * in Winforms Form.Handle property
  */
@@ -33,7 +33,7 @@ namespace TouchHook
     {
         /// <summary>
         ///  Defines the windows proc delegate to pass into the windows hook
-        /// </summary>                  
+        /// </summary>
         public delegate int HookDelegate(int nCode, IntPtr wParam, IntPtr lParam);
 
         protected IntPtr hHook = IntPtr.Zero;

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -112,7 +111,7 @@ namespace Boku
         }   // end of ThoughtBalloon c'tor
 
         /// <summary>
-        /// Restart the timer on this thought balloon to extend 
+        /// Restart the timer on this thought balloon to extend
         /// it's duration but still skip the fade in.
         /// </summary>
         public void RestartTime()
@@ -121,7 +120,7 @@ namespace Boku
         }   // end of ThoughtBalloon RestartTime()
 
         /// <summary>
-        /// Tell the thought balloon to shut down now rather than waiting 
+        /// Tell the thought balloon to shut down now rather than waiting
         /// for its full duration.
         /// </summary>
         public void Kill()
@@ -177,7 +176,7 @@ namespace Boku
         public void DeviceReset(GraphicsDevice device)
         {
         }
-        
+
         public void Activate(GameThing thinker, string text, Vector4 color)
         {
             Activate(thinker, text, text, color);
@@ -259,7 +258,7 @@ namespace Boku
         public bool Update(Camera camera)
         {
             double curTime = Time.GameTimeTotalSeconds;
-            
+
             float elapsedTime = (float)(curTime - creationTime);
 
             // First, check if time has expired.
@@ -296,7 +295,6 @@ namespace Boku
 
             return true;
         }   // end of ThoughtBalloon Update()
-            
 
         public void Render(Camera camera)
         {

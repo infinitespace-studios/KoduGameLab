@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +21,6 @@ using Boku.UI;
 using Boku.UI2D;
 using Boku.Input;
 using Boku.SimWorld;
-
 
 namespace Boku
 {
@@ -242,7 +240,6 @@ namespace Boku
 
         }   // end of TexturePicker c'tor
 
-
         private static void InitFileList()
         {
             if (files == null)
@@ -295,7 +292,6 @@ namespace Boku
                 files.Add(new TextureFile(@"simple_clay", .1f, .7f, 0.0f));
             }
         }   // end of TexturePicker InitFileList()
-
 
         public void Update()
         {
@@ -479,12 +475,11 @@ namespace Boku
 
         }   // end of TexturePicker Render()
 
-
         public void OnSelect(UIGrid grid)
         {
             //int index = grid.SelectionIndex.Y;
 
-            // Don't need to do anything with the selection 
+            // Don't need to do anything with the selection
             // since we've been actively updating it.
 
             Deactivate();
@@ -601,7 +596,6 @@ namespace Boku
             }
         }
 
-
         public void LoadContent(bool immediate)
         {
             BokuGame.Load(backPlate);
@@ -634,5 +628,3 @@ namespace Boku
     }   // end of class TexturePicker
 
 }   // end of namespace Boku
-
-

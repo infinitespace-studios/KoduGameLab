@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -216,7 +215,7 @@ namespace Boku.Programming
                 }
 
                 // Cause the filter to detect what is under the touch cursor and set that information on the reflex.
-                // MatchAction will be true if the TouchFilter passes but then we still need to filter on any other 
+                // MatchAction will be true if the TouchFilter passes but then we still need to filter on any other
                 // filters including the ever annoying "not", "me" and "anything" filters.
                 Object param = null;
                 bool matchAction = false;
@@ -241,9 +240,6 @@ namespace Boku.Programming
                 {
                     matchAction = guiButtonFilter.MatchAction(reflex, out param);
                 }
-
-
-
 
                 // Give the anythingFilter a chance to kill the action.
                 if (anythingFilter && reflex.TouchActor == null)
@@ -280,7 +276,7 @@ namespace Boku.Programming
                 {
                     // When moving with touch, going towards oneself doesn't make sense. By discarding
                     // the touch actor and using the terrain position, we have a better definition of this
-                    // movement. This allows for small positional corrections around the target's bounding 
+                    // movement. This allows for small positional corrections around the target's bounding
                     // box as well as letting slide movements that begin on oneself to work.
                     reflex.TouchActor = null;
                     reflex.TouchPosition = TouchEdit.HitInfo.TerrainPosition;
@@ -390,7 +386,7 @@ namespace Boku.Programming
                 }
 
                 reflex.targetSet.Action = reflex.targetSet.Count > 0; // && TestObjectSet(reflex);
-                
+
                 //reflex.targetSet.Action |= matchAction;
 
                 // This forces the movement to keep going toward the clicked position/bot
@@ -411,4 +407,4 @@ namespace Boku.Programming
         }
     }
 
-}   // end of namespace Boku.Programming 
+}   // end of namespace Boku.Programming

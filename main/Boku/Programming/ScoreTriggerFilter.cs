@@ -25,10 +25,10 @@ namespace Boku.Programming
     /// <summary>
     /// Filter that manages the score state and returns a positive action when
     /// a specific score defined by other filters has been passed
-    /// 
+    ///
     /// NOTE: This tile has been archived so it is no longerbeing updated along
     /// with the other scoring tiles.
-    /// 
+    ///
     /// </summary>
     public class ScoreTriggerFilter : Filter
     {

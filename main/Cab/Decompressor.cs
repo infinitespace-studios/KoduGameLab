@@ -16,17 +16,17 @@ namespace Cab
 {
     /// <summary>
     /// Extracts all files from a CAB archive.
-    /// 
+    ///
     /// Usage:
     ///     Decompressor decomp = new Decompressor();
     ///     decomp.Create();
     ///     decomp.Expand(null, @"C:\MyCabFiles\MyArchive.cab");
     ///     decomp.Destroy();
-    ///     
+    ///
     /// Limitations:
     ///     Due to limitations in the system component "cabinet.dll", only one
     ///     Decompress class may exist in the "created" state at at time.
-    ///     
+    ///
     /// </summary>
     public partial class Decompressor
     {
@@ -125,7 +125,7 @@ namespace Cab
 
             if (!success)
             {
-                throw new Exception("Failed to expand cabinet: " + fullPathToCabinet + " with error : " + erf.erfOper.ToString()); 
+                throw new Exception("Failed to expand cabinet: " + fullPathToCabinet + " with error : " + erf.erfOper.ToString());
             }
         }
 
@@ -155,7 +155,6 @@ namespace Cab
         List<string> filenames = new List<string>();
 
         string destinationFolder;
-
 
         byte[] scratchBuffer = new byte[0];
 

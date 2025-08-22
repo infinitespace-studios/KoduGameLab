@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,14 +27,14 @@ using Boku.Fx;
 namespace Boku
 {
     /// <summary>
-    /// Menu of available brushes.  This is a generic element that 
+    /// Menu of available brushes.  This is a generic element that
     /// should be able to be used over the top of any tool.
     /// Tools can pick from various sets of brushes so at construction
     /// time we create a list with all the brushes in it.  The tool
-    /// using the BrushPicker can then choose which brush set to 
+    /// using the BrushPicker can then choose which brush set to
     /// use at which time we pull the appropriate brushes from the
     /// full list and put them into the grid.
-    /// 
+    ///
     /// Tools which want to use the BrushPicker should set Active to true
     /// when they start up and back to false when they exit.  Note that
     /// setting Active to true just has the pikcer listen for being made
@@ -60,7 +59,7 @@ namespace Boku
 
                 // Try and maintain the curent focus index.
                 Point focus = grid.SelectionIndex;
-                
+
                 // Clear the existing brush set.
                 // Don't unload the brushes since brushList is holding them.
                 grid.ClearNoUnload();
@@ -71,7 +70,7 @@ namespace Boku
                     grid.Add(brushList[set[i]], i, 0);
                 }
 
-                // Look at the current edit brush.  If that brush is 
+                // Look at the current edit brush.  If that brush is
                 // in our set then choose that brush to be in focus.
                 int curIndex = InGame.inGame.shared.editBrushIndex;
                 grid.SelectionIndex = new Point(0, 0);  // Default to first element.
@@ -160,7 +159,7 @@ namespace Boku
             grid.UseTriggers = true;
             grid.Wrap = false;
             grid.LocalMatrix = Matrix.CreateTranslation(0.0f, -2.2f, -10.0f);
-            
+
         }   // end of BrushPicker c'tor
 
         /// <summary>
@@ -217,13 +216,13 @@ namespace Boku
             if (e != null)
             {
                 GetElementInfo(e, out invMat, out width, out height);
-                
+
                 Vector2 hitUV = TouchInput.GetHitUV(touch.position, camera, ref invMat, width, height, useRtCoords: false);
 
                 if (hitUV.X > 0 && hitUV.X < 1 && hitUV.Y > 0 && hitUV.Y < 1)
                 {
                     return true;
-                }                
+                }
             }
 
             return false;
@@ -232,7 +231,6 @@ namespace Boku
         public override bool HandleTouchInput(Camera camera)
         {
             float scaleY = Math.Min(BokuGame.ScreenSize.Y / 576.0f, 1.0f);
-
 
             AABB2D box = new AABB2D(new Vector2(0, (BokuGame.ScreenSize.Y - (300.0f) * scaleY)), BokuGame.ScreenSize);
 
@@ -462,7 +460,7 @@ namespace Boku
                     }
                 }
             }
-            
+
             return handled;
         }   // end of HandleMouseInput()
 
@@ -505,7 +503,7 @@ namespace Boku
                     float triggerAlpha = Math.Min((float)(dTime / kFadeTime), 1.0f);
                     Vector2 offset = size * 0.4f;
                     size *= 0.4f;
-                    // Note the 12/64 in the positioning accounts for the fact that the 
+                    // Note the 12/64 in the positioning accounts for the fact that the
                     // button textures only use the upper 40x40 out of the 64x64 space they allocate.
                     // The 12 is actually (64-40)/2.
                     quad.Render(camera, ButtonTextures.RightTrigger, triggerAlpha, position + offset + size * 12.0f / 64.0f, size, @"TexturedRegularAlpha");
@@ -521,5 +519,3 @@ namespace Boku
     }   // end of class BrushPicker
 
 }   // end of namespace Boku
-
-

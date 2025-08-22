@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -82,7 +81,6 @@ namespace Boku.UI2D
 
             NoZ = true;
 
-            
             descLength = (int)(Font().MeasureString(description).X);
 
             textLine = new TextLine(this, description, Font, false);

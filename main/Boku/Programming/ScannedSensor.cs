@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +50,6 @@ namespace Boku.Programming
         public override void ThingUpdate(GameActor gameActor, GameThing gameThing, Vector3 direction, float range)
         {
         }   // end of ThingUpdate()
-
 
         public override void FinishUpdate(GameActor gameActor)
         {

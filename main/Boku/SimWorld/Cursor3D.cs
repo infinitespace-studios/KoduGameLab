@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -109,7 +108,6 @@ namespace Boku
                 }
 
             }   // end of Vertex
-            
 
             public RenderObj(Cursor3D parent, Vector4 diffuse)
             {
@@ -135,7 +133,7 @@ namespace Boku
             private Vector4 targetColor = Color.White.ToVector4();
             public Vector4 DiffuseColor
             {
-                set 
+                set
                 {
                     if (targetColor != value)
                     {
@@ -189,14 +187,14 @@ namespace Boku
                             break;
                     }
                 }
-                /// Debug code to draw the cone cursor where the system thinks the 
+                /// Debug code to draw the cone cursor where the system thinks the
                 /// mouse LOS hits the terrain.
-                #if false 
+                #if false
                 {
                     Matrix l2w = Matrix.Identity;
                     l2w.Translation = MouseEdit.HitInfo.TerrainPosition;
-                    Render(camera, l2w, true, 
-                        MouseEdit.HitInfo.TerrainHit 
+                    Render(camera, l2w, true,
+                        MouseEdit.HitInfo.TerrainHit
                             ? diffuse
                             : Vector4.UnitW);
                 }
@@ -291,7 +289,7 @@ namespace Boku
             {
                 device.BlendState = BlendState.AlphaBlend;
             }
-            
+
             public override void Activate()
             {
 
@@ -331,7 +329,6 @@ namespace Boku
 
                 RunSimCursor.GetInstance().InitDeviceResources(device);
             }   // end of RenderObj Init()
-
 
             public void UnloadContent()
             {
@@ -428,7 +425,6 @@ namespace Boku
 
                 // Copy to vertex buffer.
                 vbuf[0].SetData<Vertex>(localVerts);
-
 
                 // Create index buffer.
                 if (ibuf[0] == null)
@@ -536,7 +532,6 @@ namespace Boku
                 // Copy to vertex buffer.
                 vbuf[1].SetData<Vertex>(localVerts);
 
-
                 // Create index buffer.
                 if (ibuf[1] == null)
                 {
@@ -578,10 +573,7 @@ namespace Boku
                 RenderObj.numVertices[1] = numVertices;
             }
 
-
-
         }   // end of class RenderObj
-
 
         //
         //  Cursor3D
@@ -613,7 +605,7 @@ namespace Boku
 
         public override bool Invulnerable { get { return true; } set { } }
 
-        public Cursor3D(Vector2 position, 
+        public Cursor3D(Vector2 position,
                         Vector4 color)
             : base("cursor", new CursorChassis())
         {
@@ -621,7 +613,6 @@ namespace Boku
 
             renderObj = new RenderObj(this, color);
         }   // end of Cursor3D c'tor
-
 
         public override RenderObject RenderObject
         {
@@ -651,7 +642,7 @@ namespace Boku
         public Vector3 Position
         {
             get { return movement.Position; }
-            set 
+            set
             {
                 Vector3 pos = value;
 
@@ -699,9 +690,9 @@ namespace Boku
         }
         public override BoundingSphere BoundingSphere
         {
-            get 
-            { 
-                return new BoundingSphere(movement.Position, 0.5f); 
+            get
+            {
+                return new BoundingSphere(movement.Position, 0.5f);
             }
         }
         public Vector4 DiffuseColor
@@ -804,7 +795,7 @@ namespace Boku
                 }
 
                 return sroInstance;
-            }   
+            }
 
             public static XmlGameActor XmlCursor
             {
@@ -821,7 +812,7 @@ namespace Boku
             private RunSimCursor()
                 : base(@"Models\RunSimCursor")
             {
-            }   
+            }
 
             #endregion Internal
         }
@@ -829,6 +820,3 @@ namespace Boku
     }   // end of class Cursor3D
 
 }   // end of namespace Boku
-
-
-

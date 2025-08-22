@@ -8,8 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Diagnostics;
 
-
-
 using Boku.Common;
 
 namespace Boku

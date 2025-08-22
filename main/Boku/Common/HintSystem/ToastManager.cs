@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +25,7 @@ using Boku.Common.Xml;
 namespace Boku.Common.HintSystem
 {
     /// <summary>
-    /// Provides a single entry point for creating Toasts.  
+    /// Provides a single entry point for creating Toasts.
     /// </summary>
     public class ToastManager
     {
@@ -166,7 +165,7 @@ namespace Boku.Common.HintSystem
                         Clear();    // Turn off this toast
                         result = true;
                     }
-                }            
+                }
             }
 
             return result;
@@ -208,7 +207,7 @@ namespace Boku.Common.HintSystem
                 return;
             }
 
-            // If the MainMenu is showing a dialog it's probably a 
+            // If the MainMenu is showing a dialog it's probably a
             // storage issue so don't show toast.
             if (MainMenu.Instance.DialogActive)
             {
@@ -311,7 +310,6 @@ namespace Boku.Common.HintSystem
 
                 blob.RenderWithButtons(pos, Color.Yellow, maxLines: maxLines);
             }
-
 
             InGame.RestoreRenderTarget();
 

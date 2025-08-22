@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,7 +43,7 @@ namespace Boku
             public override void Activate()
             {
             }
-            
+
             public override void Deactivate()
             {
             }
@@ -135,7 +134,7 @@ namespace Boku
                     // Apply the background.
                     batch.Draw(backgroundTexture, position, Color.White);
 
-                    // Render dots.                
+                    // Render dots.
                     for (int i = 0; i < 4; i++)
                     {
                         Vector2 size = new Vector2(dots[i].radius);
@@ -143,7 +142,7 @@ namespace Boku
                         size *= 2;
                         Color color = new Color(1, 1, 1, dots[i].alpha);
                         batch.Draw(dotTexture, new Rectangle((int)pos.X, (int)pos.Y, (int)size.X, (int)size.Y), color);
-                        // Reflection 
+                        // Reflection
                         color = new Color(1, 1, 1, dots[i].alpha * 0.15f);
                         batch.Draw(dotTexture, new Rectangle((int)pos.X, (int)pos.Y + 150, (int)size.X, (int)size.Y), color);
                     }
@@ -165,9 +164,9 @@ namespace Boku
                     }
                 }
                 batch.End();
-                
+
             }   // end of Render()
-            
+
             public override void Activate()
             {
             }
@@ -244,7 +243,7 @@ namespace Boku
 
             renderObj = new RenderObj(ref shared);
             updateObj = new UpdateObj(ref shared);
-            
+
         }   // end of TitleScreen c'tor
 
         private void ContentLoadComplete()

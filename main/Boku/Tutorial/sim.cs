@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework;
 namespace Boku.Tutorial
 {
     /// <summary>
-    /// This class wraps the gameThing class for easy tutorial writing 
+    /// This class wraps the gameThing class for easy tutorial writing
     /// and programming restrictions setting
     /// </summary>
     public class Thing
@@ -36,8 +36,8 @@ namespace Boku.Tutorial
     }
 
     /// <summary>
-    /// This singleton class wraps and exposes simulation information and control in a 
-    /// very easy Tutorial interface.  
+    /// This singleton class wraps and exposes simulation information and control in a
+    /// very easy Tutorial interface.
     /// Today it has only a small set of features that are active
     /// </summary>
     public class Sim
@@ -47,16 +47,16 @@ namespace Boku.Tutorial
         }
         public static Sim Instance = new Sim();
         /// <summary>
-        /// This is the set of identifiers for the things the user can see in the Selector 
+        /// This is the set of identifiers for the things the user can see in the Selector
         /// that then can be placed into the world.  Currently not implemented.
         /// </summary>
-        public List<string> thingsAvailable; 
+        public List<string> thingsAvailable;
         /// <summary>
         /// This is a set of identifiers for the things that will be disabled in the Selector
         /// that then can not be placed into the world.  Currently not implemented.
         /// </summary>
-        public List<string> thingsDisabled;  
-        
+        public List<string> thingsDisabled;
+
         public class Cursor
         {
             public Thing Target
@@ -77,7 +77,7 @@ namespace Boku.Tutorial
             }
         }
         /// <summary>
-        /// Although partially implemented, this class currently doesn�t do anything.  
+        /// Although partially implemented, this class currently doesn�t do anything.
         /// It is meant to allow the Tutorial to change the view to better suit the tutorial.
         /// </summary>
         public class Camera
@@ -92,7 +92,7 @@ namespace Boku.Tutorial
             {
             }
         }
-        
+
         public Camera camera;
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Boku.Tutorial
             return null;
         }
         /// <summary>
-        /// This method will find and return a Thing that represents the class thing.  
+        /// This method will find and return a Thing that represents the class thing.
         /// Exact class name is not needed
         /// </summary>
         /// <param name="idClassThing"></param>
@@ -151,8 +151,8 @@ namespace Boku.Tutorial
             return null;
         }
         /// <summary>
-        /// This method is not implemented yet.  
-        /// It will allow the tutorial to add things at specific locations to allow 
+        /// This method is not implemented yet.
+        /// It will allow the tutorial to add things at specific locations to allow
         /// tutorials to expand the set of things to interact with as it progresses.
         /// </summary>
         /// <param name="position"></param>

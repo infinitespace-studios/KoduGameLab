@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,7 +16,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Boku.Common.ParticleSystem
 {
-    // Emits "Explosion" as a series of expanding, rotating 
+    // Emits "Explosion" as a series of expanding, rotating
     // sprites which fade and grow as they age.  The sprites
     // are rendered using additive blending.
     public class InspectExplosionEmitter : BaseSpriteEmitter
@@ -83,7 +82,7 @@ namespace Boku.Common.ParticleSystem
 
     }   // end of class InspectExplosionEmitter
 
-    // Emits "Explosion" as a series of expanding, rotating 
+    // Emits "Explosion" as a series of expanding, rotating
     // sprites which fade and grow as they age.  The sprites
     // are rendered using additive blending.
     public class InspectSmokeEmitter : BaseSpriteEmitter
@@ -138,4 +137,3 @@ namespace Boku.Common.ParticleSystem
     }   // end of class InspectSmokeEmitter
 
 }   // end of namespace Boku.Common
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define TOGGLE_DIRTMAP_HACK
 
 using System;
@@ -28,7 +27,7 @@ namespace Boku.Fx
 
         private string dirtMapName = "";
         private Texture2D dirtMap = null;
-        
+
         /// <summary>
         /// Don't load/save the surfaces, we'll look them up from the global
         /// dictionary.
@@ -41,7 +40,7 @@ namespace Boku.Fx
 #if !SURFACE_EDITOR
         #region Parameter Caching
         /// <summary>
-        /// Notice that these are tightly packed and get pretty ugly. Minimizing the 
+        /// Notice that these are tightly packed and get pretty ugly. Minimizing the
         /// number of constant registers is worth the ugliness though, and no one should
         /// really care, because to the outside world the parameters are expanded to their
         /// components. Packing is restricted to the Setup and within the shaders.
@@ -109,8 +108,8 @@ namespace Boku.Fx
         public string BumpDetailName
         {
             get { return bumpDetailName; }
-            set 
-            { 
+            set
+            {
                 bumpDetailName = value;
                 if (bumpDetail != null)
                 {

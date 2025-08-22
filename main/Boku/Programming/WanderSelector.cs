@@ -24,7 +24,7 @@ using Boku.SimWorld.Terra;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this selector will pick a random location to wander to based upon properties.  
+    /// this selector will pick a random location to wander to based upon properties.
     /// Once it gets near the location or gets stalled it will pick another.
     /// </summary>
     public class WanderSelector : Selector
@@ -37,7 +37,7 @@ namespace Boku.Programming
         private double wanderTimeout;   // Time in GameTime seconds when this wander target should be invalidated.
                                         // This is to prevent an actor from getting stuck trying to reach someplace
                                         // it can't get to.
-        
+
         private bool pickNewTarget = false;
         private float wanderTargetHit;
         private float wanderRangeMin;
@@ -136,16 +136,16 @@ namespace Boku.Programming
             }
 
             actionSet.AddActionTarget(Action.AllocTargetLocationAction(reflex, wanderTarget, autoTurn: true));
-                
+
             /// For debugging, uncomment this line and enable Debug: Display Line of Sight
             /// on the character in question.
-            gameActor.AddLOSLine(gameActor.Movement.Position, 
-                new Vector3(wanderTarget.X, wanderTarget.Y, gameActor.Movement.Position.Z), 
+            gameActor.AddLOSLine(gameActor.Movement.Position,
+                new Vector3(wanderTarget.X, wanderTarget.Y, gameActor.Movement.Position.Z),
                 new Vector4(0.0f, 1.0f, 0.0f, 1.0f));
-            
+
             return actionSet;
         }
-        
+
         public override void Used(bool newUse)
         {
             if (newUse)
@@ -168,7 +168,7 @@ namespace Boku.Programming
             do
             {
                 float newRotation;
-                // If we timed out or if we're taking too many attempts to get a valid target, assume we're bouncing 
+                // If we timed out or if we're taking too many attempts to get a valid target, assume we're bouncing
                 // against a barrier and use a wider angle to pick the next target location.
                 float angleWidthModifier = 1.0f;
                 if (count < 8 || Time.GameTimeTotalSeconds > this.wanderTimeout)

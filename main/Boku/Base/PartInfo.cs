@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -25,7 +24,7 @@ namespace Boku.Base
     public class PartInfo
     {
         #region Members
-        private Vector4 diffuseColor;           
+        private Vector4 diffuseColor;
         private float alpha = 1.0f;
         private Vector4 emissiveColor;
         private Vector4 specularColor;
@@ -41,7 +40,7 @@ namespace Boku.Base
         #endregion Members
 
         #region Accessors
-        public Vector4 DiffuseColor 
+        public Vector4 DiffuseColor
         {
             get { diffuseColor.W = alpha;  return diffuseColor; }
             set { diffuseColor = value; }
@@ -171,9 +170,9 @@ namespace Boku.Base
                     }   // end of switch on parameter name.
                 }   // end of loop over parameters.
 
-                // HACK With changes in content pipeline for 4.0 the Alpha parameter 
-                // is not showing up so we have this hack.  The only place this code is 
-                // used is for the programming UI.  So, this hack looks for the tag 
+                // HACK With changes in content pipeline for 4.0 the Alpha parameter
+                // is not showing up so we have this hack.  The only place this code is
+                // used is for the programming UI.  So, this hack looks for the tag
                 // assocaited with the 'bar' underlying each reflex in the programming
                 // UI and forces the alpha to be 0.5f.  Everything else gets alpha = 1.0.
                 if (part.Tag != null)
@@ -191,7 +190,6 @@ namespace Boku.Base
             }
 
         }   // end of InitFromPart()
-
 
         /// <summary>
         /// Extracts a color from an EffectParameter.
@@ -223,8 +221,8 @@ namespace Boku.Base
 
             SpriteBatch batch = UI2D.Shared.SpriteBatch;
 
-            // Use the 256x256 rendertarget to pre-render our text label.  
-            // This gives us the chance to compress it if we need to if 
+            // Use the 256x256 rendertarget to pre-render our text label.
+            // This gives us the chance to compress it if we need to if
             // the label is too long to naturally fit on the tile.
             RenderTarget2D rt = UI2D.Shared.RenderTarget256_256;
             InGame.SetRenderTarget(rt);
@@ -290,4 +288,3 @@ namespace Boku.Base
     }   // end of class PartInfo
 
 }   // end of namespace Boku.Base
-

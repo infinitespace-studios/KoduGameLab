@@ -4,7 +4,7 @@
 /*
  * AnimationWriter.cs
  * Copyright (c) 2006, 2007 David Astle, Michael Nikonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -45,8 +45,6 @@ namespace Xclna.Xna.Animation.Content
     [ContentTypeWriter]
     internal sealed class AnimationWriter : ContentTypeWriter<AnimationContentDictionary>
     {
-
-
 
         /// <summary>
         /// Writes a ModelInfo object into XNB data
@@ -97,10 +95,9 @@ namespace Xclna.Xna.Animation.Content
                     + "Xclna.Xna.Animationx86, "
                     + "Version="+ContentUtil.VERSION+", Culture=neutral, PublicKeyToken=null";
             }
-            
 
         }
-        
+
         /// <summary>
         /// Returns the string that describes what type of object the stream
         /// will be converted into at runtime (ModelInf)
@@ -123,9 +120,7 @@ namespace Xclna.Xna.Animation.Content
                     + "Version="+ContentUtil.VERSION+", Culture=neutral, PublicKeyToken=null";
             }
 
-
-
         }
     }
- 
+
 }

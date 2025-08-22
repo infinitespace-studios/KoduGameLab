@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filter that returns a positive action a matching string is said by another character.
-    /// 
+    ///
     /// </summary>
     public class SaidFilter : Filter
     {

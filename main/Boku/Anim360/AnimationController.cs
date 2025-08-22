@@ -4,7 +4,7 @@
 /*
  * AnimationController.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -36,7 +36,7 @@ using System.IO;
 
 namespace Xclna.Xna.Animation
 {
-   
+
     /// <summary>
     /// Controls an animation by advancing it's time and affecting
     /// bone transforms
@@ -56,7 +56,6 @@ namespace Xclna.Xna.Animation
         private long elapsedTime = 0;
         // Used as a buffer to store the total elapsed ticks every frame so that
         private long elapsed;
-
 
         /// <summary>
         /// Fired when the controller is not looping and the animation has ended.
@@ -78,7 +77,7 @@ namespace Xclna.Xna.Animation
             AnimationInfo sourceAnimation) : base(game)
         {
             animation = sourceAnimation;
-            // This is set so that the controller updates before the 
+            // This is set so that the controller updates before the
             // ModelAnimator by default
             base.UpdateOrder = 0;
             game.Components.Add(this);
@@ -107,7 +106,6 @@ namespace Xclna.Xna.Animation
             get { return animation.Duration; }
         }
 
-
         /// <summary>
         /// Gets the source animation that this controller is using.
         /// </summary>
@@ -132,8 +130,6 @@ namespace Xclna.Xna.Animation
                 elapsedTime = value;
             }
         }
-
-
 
         /// <summary>
         /// Gets or sets the value that is multiplied by the time when it is
@@ -200,7 +196,6 @@ namespace Xclna.Xna.Animation
             }
         }
 
-
         /// <summary>
         /// Gets the current transform for the given BonePose object in the animation.
         /// This is only called when a bone pose is affected by the current animation.
@@ -216,7 +211,6 @@ namespace Xclna.Xna.Animation
             return channel[boneIndex].Transform;
         }
 
-
         /// <summary>
         /// Returns true if the animation contains a track for the given BonePose.
         /// </summary>
@@ -226,7 +220,6 @@ namespace Xclna.Xna.Animation
         {
             return animation.AnimationChannels.AffectsBone(pose.Name);
         }
-
 
         /// <summary>
         /// Fired when the tracks change so that different bones can be affected by the controller.
@@ -245,7 +238,6 @@ namespace Xclna.Xna.Animation
         #endregion
 
         #region IAnimationController Members
-
 
         #endregion
     }

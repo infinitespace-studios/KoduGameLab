@@ -56,9 +56,9 @@ namespace BokuPreBoot
             this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // CancelBtn
-            // 
+            //
             this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CancelBtn.Location = new System.Drawing.Point(348, 308);
@@ -68,9 +68,9 @@ namespace BokuPreBoot
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.UseVisualStyleBackColor = true;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
-            // 
+            //
             // pictureBox1
-            // 
+            //
             this.pictureBox1.Image = global::BokuPreBoot.Properties.Resources.VectorBoku;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
@@ -78,9 +78,9 @@ namespace BokuPreBoot
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
-            // 
+            //
             // groupBox1
-            // 
+            //
             this.groupBox1.Controls.Add(this.AnimationCk);
             this.groupBox1.Controls.Add(this.AntiAliasCk);
             this.groupBox1.Controls.Add(this.PostFXCk);
@@ -90,9 +90,9 @@ namespace BokuPreBoot
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Visual Effects";
-            // 
+            //
             // AnimationCk
-            // 
+            //
             this.AnimationCk.AutoSize = true;
             this.AnimationCk.Checked = true;
             this.AnimationCk.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -102,9 +102,9 @@ namespace BokuPreBoot
             this.AnimationCk.TabIndex = 2;
             this.AnimationCk.Text = "Animation";
             this.AnimationCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // AntiAliasCk
-            // 
+            //
             this.AntiAliasCk.AutoSize = true;
             this.AntiAliasCk.Checked = true;
             this.AntiAliasCk.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -114,9 +114,9 @@ namespace BokuPreBoot
             this.AntiAliasCk.TabIndex = 1;
             this.AntiAliasCk.Text = "Smoothing (FSAA)";
             this.AntiAliasCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // PostFXCk
-            // 
+            //
             this.PostFXCk.AutoSize = true;
             this.PostFXCk.Checked = true;
             this.PostFXCk.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -126,9 +126,9 @@ namespace BokuPreBoot
             this.PostFXCk.TabIndex = 0;
             this.PostFXCk.Text = "Glow, Distortion, and Focus";
             this.PostFXCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // Apply
-            // 
+            //
             this.Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Apply.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Apply.Location = new System.Drawing.Point(442, 308);
@@ -138,9 +138,9 @@ namespace BokuPreBoot
             this.Apply.Text = "OK";
             this.Apply.UseVisualStyleBackColor = true;
             this.Apply.Click += new System.EventHandler(this.Apply_Click);
-            // 
+            //
             // AudioCk
-            // 
+            //
             this.AudioCk.AutoSize = true;
             this.AudioCk.Checked = true;
             this.AudioCk.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -150,9 +150,9 @@ namespace BokuPreBoot
             this.AudioCk.TabIndex = 0;
             this.AudioCk.Text = "Enable Audio";
             this.AudioCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // StatusTB
-            // 
+            //
             this.StatusTB.Location = new System.Drawing.Point(72, 12);
             this.StatusTB.Multiline = true;
             this.StatusTB.Name = "StatusTB";
@@ -162,9 +162,9 @@ namespace BokuPreBoot
             this.StatusTB.TabStop = false;
             this.StatusTB.Text = "This computer does not support HiDef; only Standard graphics options will be avai" +
     "lable. Advanced features will be disabled.";
-            // 
+            //
             // ShadMod2RB
-            // 
+            //
             this.ShadMod2RB.AutoSize = true;
             this.ShadMod2RB.Location = new System.Drawing.Point(8, 19);
             this.ShadMod2RB.Name = "ShadMod2RB";
@@ -174,9 +174,9 @@ namespace BokuPreBoot
             this.ShadMod2RB.Text = "Standard (Reach)";
             this.ShadMod2RB.UseVisualStyleBackColor = true;
             this.ShadMod2RB.CheckedChanged += new System.EventHandler(this.ShadMod2RB_CheckedChanged);
-            // 
+            //
             // groupBox3
-            // 
+            //
             this.groupBox3.Controls.Add(this.ShadMod3RB);
             this.groupBox3.Controls.Add(this.ShadMod2RB);
             this.groupBox3.Location = new System.Drawing.Point(12, 89);
@@ -185,9 +185,9 @@ namespace BokuPreBoot
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Graphics Quality";
-            // 
+            //
             // ShadMod3RB
-            // 
+            //
             this.ShadMod3RB.AutoSize = true;
             this.ShadMod3RB.Location = new System.Drawing.Point(8, 45);
             this.ShadMod3RB.Name = "ShadMod3RB";
@@ -196,9 +196,9 @@ namespace BokuPreBoot
             this.ShadMod3RB.TabStop = true;
             this.ShadMod3RB.Text = "Advanced (HiDef)";
             this.ShadMod3RB.UseVisualStyleBackColor = true;
-            // 
+            //
             // groupBox4
-            // 
+            //
             this.groupBox4.Controls.Add(this.communityCk);
             this.groupBox4.Controls.Add(this.AudioCk);
             this.groupBox4.Location = new System.Drawing.Point(13, 168);
@@ -207,9 +207,9 @@ namespace BokuPreBoot
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Other Settings";
-            // 
+            //
             // communityCk
-            // 
+            //
             this.communityCk.AutoSize = true;
             this.communityCk.Checked = true;
             this.communityCk.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -219,9 +219,9 @@ namespace BokuPreBoot
             this.communityCk.TabIndex = 1;
             this.communityCk.Text = "Show Community on Main Menu";
             this.communityCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // groupBox6
-            // 
+            //
             this.groupBox6.Controls.Add(this.SavePath);
             this.groupBox6.Controls.Add(this.UserFolder);
             this.groupBox6.Location = new System.Drawing.Point(12, 243);
@@ -230,17 +230,17 @@ namespace BokuPreBoot
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Save Folder";
-            // 
+            //
             // SavePath
-            // 
+            //
             this.SavePath.Location = new System.Drawing.Point(7, 21);
             this.SavePath.Name = "SavePath";
             this.SavePath.Size = new System.Drawing.Size(442, 20);
             this.SavePath.TabIndex = 0;
             this.SavePath.TextChanged += new System.EventHandler(this.SavePath_TextChanged);
-            // 
+            //
             // UserFolder
-            // 
+            //
             this.UserFolder.Location = new System.Drawing.Point(467, 19);
             this.UserFolder.Name = "UserFolder";
             this.UserFolder.Size = new System.Drawing.Size(32, 23);
@@ -248,9 +248,9 @@ namespace BokuPreBoot
             this.UserFolder.Text = "...";
             this.UserFolder.UseVisualStyleBackColor = true;
             this.UserFolder.Click += new System.EventHandler(this.UserFolder_Click);
-            // 
+            //
             // VsyncCk
-            // 
+            //
             this.VsyncCk.AutoSize = true;
             this.VsyncCk.Location = new System.Drawing.Point(281, 189);
             this.VsyncCk.Name = "VsyncCk";
@@ -258,9 +258,9 @@ namespace BokuPreBoot
             this.VsyncCk.TabIndex = 9;
             this.VsyncCk.Text = "VSync";
             this.VsyncCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // SpriteFontCk
-            // 
+            //
             this.SpriteFontCk.AutoSize = true;
             this.SpriteFontCk.Location = new System.Drawing.Point(281, 213);
             this.SpriteFontCk.Name = "SpriteFontCk";
@@ -268,9 +268,9 @@ namespace BokuPreBoot
             this.SpriteFontCk.TabIndex = 10;
             this.SpriteFontCk.Text = "Use SpriteFont Text Rendering";
             this.SpriteFontCk.UseVisualStyleBackColor = true;
-            // 
+            //
             // MainWindow
-            // 
+            //
             this.AcceptButton = this.Apply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -325,4 +325,3 @@ namespace BokuPreBoot
         private System.Windows.Forms.CheckBox SpriteFontCk;
     }
 }
-

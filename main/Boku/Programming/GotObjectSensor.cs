@@ -15,14 +15,13 @@ using Boku.Base;
 using Boku.Common;
 using Boku.SimWorld;
 
-
 namespace Boku.Programming
 {
     /// <summary>
     /// GotObjectSensor fires for things being offered the actor
     /// as well as for the thing the actor is carrying (if any).
     /// Examples:
-    /// 
+    ///
     /// got apple - drop             : Refuse offered apples.
     /// got apple - color me green   : If I'm carrying an apple, paint me green.
     /// got none - color me red      : If I'm not carrying anything, paint me red.
@@ -103,8 +102,7 @@ namespace Boku.Programming
             reflex.targetSet.Action = TestObjectSet(reflex);
 
         } // end void ComposeSensorTargetSet()
-        
+
     } // end class
 
 } // end namespace Boku.Programming
-

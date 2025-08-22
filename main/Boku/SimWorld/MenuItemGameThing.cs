@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -103,7 +102,6 @@ namespace Boku.SimWorld
             this.renderObj = renderObj;
             local = new Transform();
         }   // end of MenuItemGameThing c'tor
-
 
         public override void Render(Camera camera)
         {

@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of gamepad button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class GamePadButtonFilter : Filter
     {
@@ -71,7 +71,7 @@ namespace Boku.Programming
             // Only jump through hoops the first time to get the pad.
             if (ButtonState == null)
             {
-                GamePadInput pad = null;  
+                GamePadInput pad = null;
 
                 // See if there's a filter defining which player we should be.  If not, use pad0.
                 if (playerId == GamePadSensor.PlayerId.Dynamic)

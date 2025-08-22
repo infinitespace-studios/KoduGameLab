@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -62,7 +61,6 @@ namespace Boku
             {
             }   // end of TopLevelPaletteUpdateObj c'tor
 
-
             public void MoveToNextMode()
             {
                 curMode = (UpdateMode)(((int)curMode + 1) % (int)UpdateMode.NumModesInPalette);
@@ -74,7 +72,6 @@ namespace Boku
                 curMode = (UpdateMode)(((int)curMode + (int)UpdateMode.NumModesInPalette - 1) % (int)UpdateMode.NumModesInPalette);
                 shared.topLevelPalette.Select = curMode;
             }
-
 
             /// <summary>
             /// TopLevelPaletteUpdateObj Update()
@@ -121,7 +118,7 @@ namespace Boku
                         HelpOverlay.Pop();
                         return;
                     }
-                    
+
                     // Select current mode.
                     if (pad.ButtonA.WasPressed)
                     {
@@ -200,5 +197,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -20,7 +19,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement specific to the programming help.
-    /// It allows a foreground and background texture to be composited.  
+    /// It allows a foreground and background texture to be composited.
     /// The background texture has selected and unselected versions.
     /// The foreground texture name is expected to be CardSpace upid.
     /// </summary>
@@ -115,7 +114,6 @@ namespace Boku.UI2D
             alpha = 0.0f;
         }
 
-
         public void Update()
         {
             Matrix parentMatrix = Matrix.Identity;
@@ -132,11 +130,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }  // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -213,9 +209,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid2DDualTextureElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

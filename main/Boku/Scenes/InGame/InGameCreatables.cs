@@ -29,7 +29,7 @@ using Boku.Fx;
 namespace Boku
 {
     using CreatableMap = Dictionary<Guid, GameActor>;
-    
+
     /// <summary>
     /// This chunk of the InGame class is responsible for managing the list of creatables.
     /// </summary>
@@ -192,7 +192,7 @@ namespace Boku
             CardSpace.Cards.ModifierDict.Add(modifier.upid, modifier);
             CardSpace.Cards.CacheCardFace(modifier.upid, modifier.icon, modifier.label, modifier.noLabelIcon);
         }
-        
+
         private void UnregisterCardSpace(Guid creatableId)
         {
             Modifier existing = CardSpace.Cards.RemoveModifier("modifier.creatable." + creatableId.ToString());

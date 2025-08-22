@@ -15,12 +15,11 @@ namespace Boku.Web.Trans
         protected override string MethodName { get { return "PostComment"; } }
         private PostCommentPacket packet;
 
-
         #region Public Methods
 
         public PostComment(
             SendOrPostCallback callback,
-            object userState, 
+            object userState,
             PostCommentPacket packet)
             : base(true, callback, userState)
         {
@@ -40,7 +39,6 @@ namespace Boku.Web.Trans
         #endregion
 
         #region Protected Methods
-
 
         protected override bool ISend()
         {

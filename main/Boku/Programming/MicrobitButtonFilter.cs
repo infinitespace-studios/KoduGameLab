@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of Microbit button input.
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class MicrobitButtonFilter : Filter, IMicrobitTile
     {

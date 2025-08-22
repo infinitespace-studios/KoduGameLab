@@ -30,7 +30,7 @@ namespace Boku.SimWorld.Collision
         public override string DebugName
         {
             get { return base.DebugName; }
-            set 
+            set
             {
                 base.DebugName = value;
                 sides[0].DebugName = value + "-X";
@@ -124,7 +124,7 @@ namespace Boku.SimWorld.Collision
         public override bool Collide(Vector3 p0, Vector3 p1, float radius, ref CollInfo collPrim)
         {
             ///Check sphere first.
-            
+
             CollInfo testPrim = new CollInfo();
             testPrim.DistSq = Single.MaxValue;
             bool hit = false;

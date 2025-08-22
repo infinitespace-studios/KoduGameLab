@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -25,7 +24,6 @@ namespace Boku.SimWorld
     {
         private static CruiseMissileSRO sroInstance = null;
 
-
         // c'tor
         private CruiseMissileSRO()
             : base(@"Models\missile-02")
@@ -45,7 +43,6 @@ namespace Boku.SimWorld
 
             return sroInstance;
         }   // end of CruiseMissileSRO GetInstance()
-
 
     }   // end of class CruiseMissileSRO
 

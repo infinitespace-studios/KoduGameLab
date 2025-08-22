@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -313,7 +312,7 @@ namespace Boku.SimWorld.Terra
 
         /// <summary>
         /// Flag to allow a final pass over water tiles to dispose
-        /// when the last water is deleted. 
+        /// when the last water is deleted.
         /// </summary>
         public static bool JustEmptied
         {
@@ -630,7 +629,7 @@ namespace Boku.SimWorld.Terra
         private Water()
         {
         }
-        
+
         private void CopyToXml(XmlWaterData waterData)
         {
             waterData.Color.X = Color.X;
@@ -702,7 +701,7 @@ namespace Boku.SimWorld.Terra
 
             AllWaters.Remove(LabelToWater[label]);
             LabelToWater[label] = null;
-        
+
             JustEmptied = AllWaters.Count == 0;
         }
         #endregion Internal

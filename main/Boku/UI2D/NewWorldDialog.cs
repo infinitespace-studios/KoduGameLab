@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +25,6 @@ using Boku.Input;
 using BokuShared;
 using ExtensionMethods;
 
-
 namespace Boku.UI2D
 {
     /// <summary>
@@ -42,7 +40,7 @@ namespace Boku.UI2D
             public Color FrameColor = Color.Transparent;
             public AABB2D Box;
 
-            public Rectangle Rectangle 
+            public Rectangle Rectangle
             {
                 get { return Box.Rectangle; }
             }
@@ -137,7 +135,7 @@ namespace Boku.UI2D
 
             levels.Add(new NewWorldLevel(@"03a1b038-fd3f-492f-b18c-2a197fe68701"));
             levels.Add(new NewWorldLevel(@"71b3660d-f472-49b2-90c3-2de1758e1f64"));
-            levels.Add(new NewWorldLevel(@"be4ca04b-a3cc-4f76-ba7a-84eb917bcf92")); 
+            levels.Add(new NewWorldLevel(@"be4ca04b-a3cc-4f76-ba7a-84eb917bcf92"));
 
         }   // end of c'tor
 
@@ -194,7 +192,7 @@ namespace Boku.UI2D
                     }
                 }
 
-            }   // end if active.    
+            }   // end if active.
 
         }   // end of Update()
 
@@ -294,7 +292,7 @@ namespace Boku.UI2D
         }   // end of OnCancel()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="screenSize">If rendering to an RT allows us to know how to center.</param>
         public void Render(Vector2 screenSize)

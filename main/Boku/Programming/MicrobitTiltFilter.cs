@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the value of the Microbit tilt input from the accelerometer.
-    /// 
+    ///
     /// </summary>
     public class MicrobitTiltFilter : Filter, IMicrobitTile
     {

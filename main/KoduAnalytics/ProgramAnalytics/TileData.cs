@@ -16,7 +16,7 @@ namespace KoduAnalytics.ProgramAnalytics
         public static string actuator = "actuator";
         public static string filter = "filter";
         public static string selector = "selector";
-        
+
         public TileData()
         {
             tiles = new Dictionary<string, int>();
@@ -40,7 +40,6 @@ namespace KoduAnalytics.ProgramAnalytics
                 TotalTiles = value;
             }
         }
-
 
         public void addTile(String s, int i)
         {
@@ -72,8 +71,6 @@ namespace KoduAnalytics.ProgramAnalytics
                          select t.Value).Sum();
             return found;
         }
-
-
 
         public List<String> getTileType(String type)
         {
@@ -110,7 +107,7 @@ namespace KoduAnalytics.ProgramAnalytics
             if (type == "modifier")
             {
                 var found = (from kp in tiles
-                             where kp.Key.Contains(TileData.modifier) 
+                             where kp.Key.Contains(TileData.modifier)
                             || kp.Key.Contains(TileData.modifer)
                              select kp.Key).Distinct();
                 foreach (var item in found)
@@ -136,10 +133,10 @@ namespace KoduAnalytics.ProgramAnalytics
             List<String> sensors = new List<string>();
 
             var found = (from kp in tiles
-                         where !kp.Key.Contains(TileData.sensor) 
-                         && !kp.Key.Contains(TileData.filter) 
-                         && !kp.Key.Contains(TileData.selector) 
-                         && !kp.Key.Contains(TileData.actuator) 
+                         where !kp.Key.Contains(TileData.sensor)
+                         && !kp.Key.Contains(TileData.filter)
+                         && !kp.Key.Contains(TileData.selector)
+                         && !kp.Key.Contains(TileData.actuator)
                          && !kp.Key.Contains(TileData.modifier)
                          && !kp.Key.Contains(TileData.modifer)
                          select kp.Key).Distinct();

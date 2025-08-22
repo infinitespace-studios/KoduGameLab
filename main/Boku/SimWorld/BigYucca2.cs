@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -42,7 +41,6 @@ namespace Boku
             staticChassis.DefaultEditHeight = 0.0f;
 
         }   // end of BigYucca2 c'tor
-
 
     }   // end of class BigYucca2
 

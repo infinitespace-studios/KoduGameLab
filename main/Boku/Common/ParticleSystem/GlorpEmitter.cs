@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,7 +16,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Boku.Common
 {
-    // Emits "Distortion Glorp" as a series of expanding, rotating 
+    // Emits "Distortion Glorp" as a series of expanding, rotating
     // sprites which fade and grow as they age.  The sprites
     // are rendered using the DistortionManager.
     public class GlorpEmitter : BaseSpriteEmitter
@@ -83,7 +82,7 @@ namespace Boku.Common
                         partial += dt * EmissionRate;
                     }
 
-                    // Emit as many particles as needed this 
+                    // Emit as many particles as needed this
                     // frame to keep up with the emission rate.
                     while (partial >= 1.0f)
                     {
@@ -170,7 +169,6 @@ namespace Boku.Common
             }   // end of if active
         } // end Update
 
-
         public override void Render(Camera camera)
         {
             if (InGame.inGame.renderEffects == InGame.RenderEffect.DistortionPass)
@@ -178,7 +176,6 @@ namespace Boku.Common
                 base.Render(camera);
             }
         }
-
 
         public override void LoadGraphicsContent(GraphicsDeviceManager graphics)
         {
@@ -205,4 +202,3 @@ namespace Boku.Common
     }   // end of class GlorpEmitter
 
 }   // end of namespace Boku.Common
-

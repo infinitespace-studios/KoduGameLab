@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ namespace Boku.SimWorld
         private static Yucca1SRO sroInstance = null;
 
         // c'tor
-        private Yucca1SRO() 
+        private Yucca1SRO()
             : base(@"Models\Tree_A")
         {
             TechniqueExt = "WithWind";
@@ -45,7 +44,7 @@ namespace Boku.SimWorld
 
             return sroInstance;
         }   // end of Yucca1SRO GetInstance()
-           
+
     }   // end of class Yucca1SRO
 
 }   // end of namespace Boku.SimWorld

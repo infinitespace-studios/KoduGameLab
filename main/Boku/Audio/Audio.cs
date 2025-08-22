@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,7 +20,7 @@ namespace Boku.Audio
     {
         #region Members
         readonly private bool enabled;
-        
+
         private AudioEngine engine = null;
 
         private WaveBank inMemoryWavebank = null;
@@ -193,7 +191,6 @@ namespace Boku.Audio
                 cue.Play();
             }
         }
-
 
         /// <summary>
         /// Pass an update to the underlying audio engine, as well as

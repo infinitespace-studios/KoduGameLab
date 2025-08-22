@@ -72,7 +72,7 @@ namespace TouchHook
         public bool IsTouchAvailable()
         {
             int bitMask = Win32.GetSystemMetrics(Win32.SM_DIGITIZER);
-            //the 0x40 mask indicates whether the "multi-touch" bit is set (even if this is set, we need to test max touches to 
+            //the 0x40 mask indicates whether the "multi-touch" bit is set (even if this is set, we need to test max touches to
             //ensure we have over 2 for full gesture support)
             if ((bitMask & 0x40) > 0)
             {
@@ -120,12 +120,12 @@ namespace TouchHook
         public enum DeviceCap
         {
             HORZRES = 8,            // Logical horizontal resolution.
-            VERTRES = 10,           // Logicalvertical resolution. 
+            VERTRES = 10,           // Logicalvertical resolution.
             DESKTOPHORZRES = 118,   // Physical horizontal resolution.
             DESKTOPVERTRES = 117,   // Physical vertical resolution.
         }
 
-        // Scaling factors used to adjust touch locations for 
+        // Scaling factors used to adjust touch locations for
         // system screen scaling.
         float scalingFactorX = 1;
         float scalingFactorY = 1;
@@ -155,7 +155,6 @@ namespace TouchHook
             {
                 UninstallHook();
             }
-
 
             // Get DPI information so we can properly scale touch locations.
             // Commented out since this has magically no longer become necessary.  Yeah Windows.
@@ -317,7 +316,7 @@ namespace TouchHook
         /// <param name="message">window message</param>
         private void DecodeTouch(IntPtr wparam, IntPtr lparam)
         {
-            // More than one touchinput structure may be with each message, so an array is needed 
+            // More than one touchinput structure may be with each message, so an array is needed
             // to get all event information
 
             // Actual number of touch inputs
@@ -393,7 +392,7 @@ namespace TouchHook
                     TouchEventArgs args = new TouchEventArgs();
 
                     // Convert message parameters into a touch event argument structure
-                    // Convert to pixels and convert screen to client coordinates 
+                    // Convert to pixels and convert screen to client coordinates
                     // See [winuser.h] for:
                     //      #define TOUCH_COORD_TO_PIXEL(l)         ((l) / 100)
                     args.contactX = touchInput.cxContact / 100;

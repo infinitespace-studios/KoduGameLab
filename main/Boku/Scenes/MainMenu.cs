@@ -25,7 +25,6 @@ using Microsoft.Xna.Framework.Storage;
     using Windows.Storage.Pickers;
     using Windows.System;
 
-
 using Boku.Audio;
 using Boku.Base;
 using Boku.Common;
@@ -67,7 +66,7 @@ namespace Boku
         /// have been used and overwritten with other stuff.  So in the Deactivate call for the
         /// options menu we set this.
         /// The "real" problem here is that the OptionsMenu isn't a seperate scene.  Instead it
-        /// is just rendered over the top of the MainMenu.  This means that the setting of the 
+        /// is just rendered over the top of the MainMenu.  This means that the setting of the
         /// dirty flag, which happens in the MainMenu Activate call, doesn't otherwise happen
         /// when the OptionsMenu exits.
         /// </summary>
@@ -85,7 +84,7 @@ namespace Boku
 
             public BokuGreeter boku = null;
             public Texture2D backgroundTexture = null;
-            //public Texture2D jplTexture = null;            
+            //public Texture2D jplTexture = null;
             public Texture2D blueArrowTexture = null;
             public Boku.Base.GameTimer timer = null;
 
@@ -161,7 +160,6 @@ namespace Boku
                 menu.OnCancel = parent.OnCancel;
                 menu.UseRtCoords = true;
 
-
                 menu.AddText(Strings.Localize("mainMenu.new"));
                 menu.AddText(Strings.Localize("mainMenu.play"));
                 menu.AddText(Strings.Localize("mainMenu.import"));
@@ -178,7 +176,7 @@ namespace Boku
 
                 string signOutStr = Strings.Localize("textDialog.signOut");
                 signOutButton = new Button( signOutStr, Color.White, null, UI2D.Shared.GetGameFont20);
-                
+
                 //Because this button has no texture and we can't set the width of the texture passed in explicitly. Just use the fixed size based on text size.
                 UI2D.Shared.GetFont Font = UI2D.Shared.GetGameFont20;
                 Vector2 size = (null != Font) ? Font().MeasureString( signOutStr ) : new Vector2( 60.0f, 20.0f );
@@ -216,7 +214,6 @@ namespace Boku
 
                 timer.Reset(4.0 + 4.0 * BokuGame.bokuGame.rnd.NextDouble());
             }   // end of ChangeExpression()
-
 
             public void LoadContent(bool immediate)
             {
@@ -322,7 +319,7 @@ namespace Boku
                 parent.noSharingMessage.Update();
 
                 // Don't do anything else until the user reads and dismisses the dialogs.
-                if (parent.prevSessionCrashedMessage.Active 
+                if (parent.prevSessionCrashedMessage.Active
                     || parent.exitingKodu)
                 {
                     return;
@@ -436,7 +433,7 @@ namespace Boku
                     if (Actions.ComboLeft.WasPressed)
                     {
                         if (!shared.liveFeed.Active && (!shared.optionsMenu.Active))
-                        {                       
+                        {
                             shared.liveFeed.Activate();
                             shared.liveFeed.UpdateFeed();
                         }
@@ -525,13 +522,13 @@ namespace Boku
                 // Start showing the current, signed-in creator.
                 AuthUI.ShowStatusDialog();
             }
-            
+
             public override void Deactivate()
             {
                 AuthUI.HideAllDialogs();
             }
 
-        }   // end of class MainMenu UpdateObj  
+        }   // end of class MainMenu UpdateObj
         protected class RenderObj : RenderObject
         {
             private MainMenu parent;
@@ -687,18 +684,17 @@ namespace Boku
                 MainMenu.Instance.noCommunityMessage.Render();
                 MainMenu.Instance.noSharingMessage.Render();
 
-            }   // end of Render()  
-            
+            }   // end of Render()
+
             public override void Activate()
             {
             }
-            
+
             public override void Deactivate()
             {
             }
 
-        }   // end of class MainMenu RenderObj     
-
+        }   // end of class MainMenu RenderObj
 
         // List objects.
         protected Shared shared = null;
@@ -711,7 +707,6 @@ namespace Boku
             Active,
         }
 
-
         private States state = States.Inactive;
         private States pendingState = States.Inactive;
 
@@ -721,13 +716,12 @@ namespace Boku
         private ModularMessageDialog noSharingMessage = null;
         private ModularMessageDialog prevSessionCrashedMessage = null;
 
-        private bool exitingKodu = false;   // Flag set when the user chooses to exit Kodu 
+        private bool exitingKodu = false;   // Flag set when the user chooses to exit Kodu
                                             // from the above dialogs.  This flags allows us
                                             // to exit more cleanly.  Without it we flash the
                                             // storage selection dialog as we exit.
 
         // Only show this notification once.
-
 
         static public string CrashCookieFilename = "Crash.txt";
 
@@ -773,7 +767,7 @@ namespace Boku
             updateObj = new UpdateObj(this, shared);
             renderObj = new RenderObj(this, shared);
 
-            NewWorldDialog.OnAction OnSelectWorld = delegate(string level) 
+            NewWorldDialog.OnAction OnSelectWorld = delegate(string level)
             {
                 // Deactivate main menu and go into editor with empty level.
                 string levelFilename = Path.Combine(BokuGame.Settings.MediaPath, BokuGame.BuiltInWorldsPath, level + ".Xml");
@@ -788,7 +782,7 @@ namespace Boku
                     shared.menu.Active = true;
                 }
             };
-            NewWorldDialog.OnAction OnCancel = delegate(string level) 
+            NewWorldDialog.OnAction OnCancel = delegate(string level)
             {
                 shared.menu.Active = true;
             };
@@ -1050,7 +1044,7 @@ namespace Boku
 
             // Activate dialog.
             System.Windows.Forms.DialogResult result = dlg.ShowDialog();
-            
+
             if(result == System.Windows.Forms.DialogResult.OK)
             {
                 // See if any files were selected and copy them to the imports folder.
@@ -1104,7 +1098,6 @@ namespace Boku
             }
 
         }   // end of MainMenu OnCancel()
-
 
         public override bool Refresh(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
@@ -1224,9 +1217,6 @@ namespace Boku
             BokuGame.DeviceReset(noSharingMessage, device);
         }
 
-
     }   // end of class MainMenu
 
 }   // end of namespace Boku
-    
-

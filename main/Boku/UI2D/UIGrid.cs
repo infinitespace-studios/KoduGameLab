@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,11 +26,11 @@ namespace Boku.UI2D
 
     /// <summary>
     /// A grid layout UI menu.  This can be set up as a 2d grid or as
-    /// an either vertical or horizontal 1d list.  The c'tor takes a 
-    /// Point type which defines the initial dimensions for the grid.  
+    /// an either vertical or horizontal 1d list.  The c'tor takes a
+    /// Point type which defines the initial dimensions for the grid.
     /// If an element is added outside of this initial size the grid
     /// is grown to match.
-    /// 
+    ///
     /// While the UIGrid doesn't itself need to worry about device reset we
     /// we put the interface here so that the owning object need only make
     /// a single call rather than a call for every element in the grid.
@@ -83,7 +82,7 @@ namespace Boku.UI2D
 
         protected bool ignoreFocusChanged = false;  // Set to true when externally keeping track of focus.
 
-        protected bool ignoreInput = false; // Acts as if the grid never has input focus.  Useful 
+        protected bool ignoreInput = false; // Acts as if the grid never has input focus.  Useful
                                             // for grids that need to be driven from outside.
 
         protected bool alwaysReadInput = false; // Acts as if the grid always has input focus.
@@ -116,7 +115,7 @@ namespace Boku.UI2D
         /// grid to push itself onto the input focus stack and start rendering itself.
         /// If a second Grid is activated while the first is still active then both
         /// will render but only the second will have focus until it is deactivated.
-        /// At that point focus will return to the first grid.  This allows grids to 
+        /// At that point focus will return to the first grid.  This allows grids to
         /// be "layered".
         /// </summary>
         public bool Active
@@ -139,7 +138,7 @@ namespace Boku.UI2D
             }
         }
         /// <summary>
-        /// Forces rendering even when inactive.  
+        /// Forces rendering even when inactive.
         /// Defaults to false.
         /// </summary>
         public bool RenderWhenInactive
@@ -166,7 +165,7 @@ namespace Boku.UI2D
             set { spacing = value; }
         }
         /// <summary>
-        /// Tells the grid to render its elements from either end of the 
+        /// Tells the grid to render its elements from either end of the
         /// array inward toward the selected object, rendering the selected
         /// object last.  Only works correctly for 1d grids.
         /// </summary>
@@ -217,7 +216,7 @@ namespace Boku.UI2D
             get { return grid[focusIndex.X, focusIndex.Y]; }
         }
         /// <summary>
-        /// This is the size of the grid as determined by the elements that have been added.  
+        /// This is the size of the grid as determined by the elements that have been added.
         /// This will be less than or equal to the allocated size of the grid.  Setting this
         /// value should be done carefully if at all.
         /// </summary>
@@ -236,7 +235,7 @@ namespace Boku.UI2D
         }
 
         /// <summary>
-        /// Wrap allows focus to wrap top to bottom or left to 
+        /// Wrap allows focus to wrap top to bottom or left to
         /// right when scrolling off the end of the list.
         /// </summary>
         public bool Wrap
@@ -256,7 +255,7 @@ namespace Boku.UI2D
         }
 
         /// <summary>
-        /// Acts as if the grid never has input focus.  Useful 
+        /// Acts as if the grid never has input focus.  Useful
         /// for grids that need to be driven from outside.
         /// </summary>
         public bool IgnoreInput
@@ -295,7 +294,7 @@ namespace Boku.UI2D
         }
 
         /// <summary>
-        /// Use the left stick for input.  
+        /// Use the left stick for input.
         /// True by default.
         /// </summary>
         public bool UseLeftStick
@@ -305,7 +304,7 @@ namespace Boku.UI2D
         }
 
         /// <summary>
-        /// Use the DPad for input.  
+        /// Use the DPad for input.
         /// True by default.
         /// </summary>
         public bool UseDPad
@@ -426,7 +425,6 @@ namespace Boku.UI2D
         }
 
         #endregion
-
 
         public UIGrid(
             UIGridEvent onSelect,
@@ -770,7 +768,7 @@ namespace Boku.UI2D
         {
             float newScrollYOffset = scrollOffset.Y + yMove;
 
-            //Assure the focusIndex is within bounds 
+            //Assure the focusIndex is within bounds
             focusIndex.X = Math.Max(0, Math.Min(focusIndex.X, (actualDimensions.X - 1)));
             focusIndex.Y = Math.Max(0, Math.Min(focusIndex.Y, (actualDimensions.Y - 1)));
 
@@ -835,7 +833,6 @@ namespace Boku.UI2D
                     }
                 }
             }
-
 
             scrollOffset.Y += yMove;
             return true;
@@ -1032,7 +1029,7 @@ namespace Boku.UI2D
 
         protected Point prevFocus = new Point(-1, -1);
         /// <summary>
-        /// Checks if the infocus element has changed.  If so, changes 
+        /// Checks if the infocus element has changed.  If so, changes
         /// the Selected state on the new and previous infocus object.
         /// </summary>
         public virtual void UpdateSelectionFocus()
@@ -1059,7 +1056,7 @@ namespace Boku.UI2D
         {
             if (active || renderWhenInactive)
             {
-                // Ensure that camera poisiton/orientation is properly 
+                // Ensure that camera poisiton/orientation is properly
                 // set so we get correct lighting on the UI.
                 ShaderGlobals.SetCamera(camera);
 
@@ -1389,7 +1386,7 @@ namespace Boku.UI2D
         /// <summary>
         /// Removes all grid entries and reset size to 0, 0.
         /// Does not call Unload for each element.  This assumes
-        /// that something else is holding on to the elements and 
+        /// that something else is holding on to the elements and
         /// still wants them to be usable.  Currently used with
         /// brush sets.
         /// </summary>
@@ -1413,7 +1410,7 @@ namespace Boku.UI2D
         /// up to fill in the empty place.  Note that this can only work
         /// with 1d grids.  The current implementation only works with
         /// 1d vertical grids.
-        /// 
+        ///
         /// Returns true if the grid is empty and should be deleted.
         /// </summary>
         /// <param name="index"></param>
@@ -1452,7 +1449,7 @@ namespace Boku.UI2D
         /// up to fill in the empty place.  Note that this can only work
         /// with 1d grids.  The current implementation only works with
         /// 1d vertical grids.
-        /// 
+        ///
         /// Returns true if the grid is empty and should be deleted.
         /// </summary>
         /// <param name="index"></param>
@@ -1502,7 +1499,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// Inserts a new element into the grid at the specified index
-        /// and shifts the other elements out to make room.  
+        /// and shifts the other elements out to make room.
         /// Note this only works for 1-d grids.
         /// </summary>
         /// <param name="e">The new element</param>
@@ -1572,7 +1569,6 @@ namespace Boku.UI2D
                 Refresh();
             }
         }   // end of UIGrid Get()
-
 
         public enum ShiftDirection
         {
@@ -1662,9 +1658,9 @@ namespace Boku.UI2D
         }   // end of UIGrid ShiftElements()
 
         /// <summary>
-        /// Sorts the list.  This is only expected to work with 1d vertical grids.  
-        /// The paramter is a GetKey function which takes a UIGridElement and returns 
-        /// a string key on which the array is sorted.  This way the same list can 
+        /// Sorts the list.  This is only expected to work with 1d vertical grids.
+        /// The paramter is a GetKey function which takes a UIGridElement and returns
+        /// a string key on which the array is sorted.  This way the same list can
         /// be sorted various ways.
         /// </summary>
         public delegate string GetKey(UIGridElement e);
@@ -1739,7 +1735,6 @@ namespace Boku.UI2D
             return String.Compare(e0.key, e1.key);
         }   // end of UIGrid StringComp()
 
-
         public virtual void LoadContent(bool immediate)
         {
             for (int j = 0; j < maxDimensions.Y; j++)
@@ -1790,5 +1785,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid
 
 }   // end of namespace Boku.UI2D
-
-

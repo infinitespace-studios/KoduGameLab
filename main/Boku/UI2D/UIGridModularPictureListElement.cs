@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,8 +39,6 @@ namespace Boku.UI2D
             public Vector2 _position;
 
             #region Accessors
-
-
 
             #endregion
 
@@ -385,7 +382,6 @@ namespace Boku.UI2D
             }
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
             // Only respond to clicks in the black region of the element
@@ -426,7 +422,6 @@ namespace Boku.UI2D
 
             }
         }
-
 
         public override void Render(Camera camera)
         {
@@ -515,7 +510,6 @@ namespace Boku.UI2D
                 int h = diffuse.Height;
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
-                
 
                 // Render the white background.
                 Vector2 position = Vector2.Zero;
@@ -544,7 +538,7 @@ namespace Boku.UI2D
                 position = new Vector2(512 / 2 - size.X / 2, 140);
                 quad.Render(indicatorLit, position, size, "TexturedRegularAlpha");
 
-                // The pictures.  Render them from the outside-in so that they 
+                // The pictures.  Render them from the outside-in so that they
                 // ovelap correctly.
                 Vector2 border = new Vector2(3, 3);
                 int index;
@@ -599,7 +593,6 @@ namespace Boku.UI2D
 
                 // Restore default blend state.
                 device.BlendState = BlendState.AlphaBlend;
-
 
                 // Restore backbuffer.
                 InGame.RestoreRenderTarget();
@@ -719,9 +712,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularPictureListElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ using Boku.Common.TutorialSystem;
 namespace Boku.Common
 {
     /// <summary>
-    /// Provides a single entry point for creating ThoughtBalloons anywhere in the scene.  
+    /// Provides a single entry point for creating ThoughtBalloons anywhere in the scene.
     /// </summary>
     public class ThoughtBalloonManager
     {
@@ -37,7 +36,7 @@ namespace Boku.Common
         private static Texture2D tutorialFocusArrow;
 
         #region Accessors
-        
+
         public static Effect Effect
         {
             get { return effect; }
@@ -121,10 +120,10 @@ namespace Boku.Common
 
                 Vector3 pos3 = TutorialManager.FocusActor.Movement.Position + TutorialManager.FocusActor.ThoughtBalloonOffset;
                 pos3 = Vector3.Transform(pos3, camera.ViewProjectionMatrix);
-                
+
                 // Adjust for Z.  This gives us homogeneous coords.
                 Vector2 pos = new Vector2(pos3.X / pos3.Z, pos3.Y / pos3.Z);
-                
+
                 // Map to screen coords.
                 Vector2 screenPos = (0.5f * pos + new Vector2(0.5f, 0.5f)) * BokuGame.ScreenSize;
                 screenPos.Y = BokuGame.ScreenSize.Y - screenPos.Y;
@@ -156,7 +155,7 @@ namespace Boku.Common
 
         /// <summary>
         /// Creates a thought balloon over a bot.  This version is mostly for edit mode
-        /// where you don't want the bot to play its speach sound.  Note that this version 
+        /// where you don't want the bot to play its speach sound.  Note that this version
         /// also kills off any previous thought balloons since we only want one bot at a
         /// time to identify itself.
         /// </summary>
@@ -182,10 +181,10 @@ namespace Boku.Common
             bool substitution = newText != text;
             text = newText;
 
-            // If the current bot is already thinking this same thought then just 
+            // If the current bot is already thinking this same thought then just
             // extend the time for the thought rather than creating a duplicate.
             // If the bot is already thinking another thought then ignore the new
-            // thought.  Always replace the string just in case a substitution 
+            // thought.  Always replace the string just in case a substitution
             // has take place.
             // Also use this opportunity to kill off thoughts from other bots if
             // we're in edit mode.
@@ -194,7 +193,7 @@ namespace Boku.Common
                 ThoughtBalloon balloon = activeBalloons[i];
                 if (balloon.Thinker == thinker)
                 {
-                    // Remove tags.  Need to do this _before_ setting the text 
+                    // Remove tags.  Need to do this _before_ setting the text
                     // on the balloon otherwise the tags can show up on screen.
                     text = TextHelper.RemoveTags(text).Trim();
 
@@ -221,7 +220,6 @@ namespace Boku.Common
                 }
             }
 
-
             int count = spareBalloons.Count;
             if (count > 0)
             {
@@ -245,7 +243,7 @@ namespace Boku.Common
                 string txt = TextHelper.RemoveTags(rawText).Trim();
                 if (txt == null || txt == string.Empty)
                 {
-                    // Must have been just a pure (tag only) message.  In that case, 
+                    // Must have been just a pure (tag only) message.  In that case,
                     // also send it with atBeginning set to false.  This lets the
                     // user be a bit sloppy with the triggering.
                     SaidStringManager.AddEntry(thinker as GameActor, rawText, false);

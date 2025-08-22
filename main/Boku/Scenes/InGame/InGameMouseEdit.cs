@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -38,8 +37,6 @@ using Boku.UI2D;
     Try using the shim and pie menu from InGameEditObjectAddItem.  It should be (or could be) made publically accessible.
 
 #endif
-
-
 
 namespace Boku
 {
@@ -127,8 +124,6 @@ namespace Boku
                 shared.camera.Resolution = new Point((int)BokuGame.ScreenSize.X, (int)BokuGame.ScreenSize.Y);
                 UpdateCamera();
 
-
-
                 // If a modal hint is active, completely bypass any update.  This stops
                 // any input from bleeding through to the editor while the display is up.
                 if (CommandStack.Peek()==null || CommandStack.Peek().name == "ModalHint")
@@ -136,7 +131,7 @@ namespace Boku
                     return;
                 }
 
-                // If we're just setting the camera's position 
+                // If we're just setting the camera's position
                 // rather than actually editing the world.
                 if (EditWorldParameters.CameraSetMode)
                 {
@@ -163,7 +158,6 @@ namespace Boku
                 {
                     // Not in set camera mode, so do normal stuff.
 
-
                     // Are any of the overlay/popup elements active?
                     bool stuffActive = toolBox.PickersActive
                                         || toolBox.SlidersActive
@@ -189,7 +183,6 @@ namespace Boku
                             HelpOverlay.Push("MouseEditBase");
                         }
                     }
-
 
                     bool newToolSelected = false;
 
@@ -320,7 +313,6 @@ namespace Boku
                     // but it still has to update the pickers.
                     toolBox.Update(toolBar.Hovering);
 
-
                     // Ignore mini-hub and run commands if the pie menu is active
                     if (!(toolBar.CurrentMode == ToolMode.EditObject && inGame.editObjectUpdateObj.newItemSelectorShim.State == UIShim.States.Active))
                     {
@@ -352,7 +344,6 @@ namespace Boku
                     }
                 }
 
-
                 // Do the common bits of the Update().
                 UpdateWorld();
 
@@ -362,7 +353,6 @@ namespace Boku
                 // TODO (****) Not sure this is 100% the right place for this.
                 ToolTipManager.Update();
                 ThoughtBalloonManager.Update(inGame.shared.camera);
-
 
             }   // end of Update()
 
@@ -380,7 +370,7 @@ namespace Boku
                     // Prime the pump for toolBar rendering.
                     toolBar.Update();
 
-                    // No need for a tool icon in the upper left since they're always 
+                    // No need for a tool icon in the upper left since they're always
                     // visible at the bottom of the screen.  Use this for something else?
                     HelpOverlay.ToolIcon = null;
 
@@ -435,7 +425,6 @@ namespace Boku
                     inGame.Cursor3D.Rep = Cursor3D.Visual.Edit;
                 }
             }   // end of Deactivate()
-
 
 #endregion
 

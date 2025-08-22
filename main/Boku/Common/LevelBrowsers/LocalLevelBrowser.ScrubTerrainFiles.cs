@@ -13,7 +13,6 @@ using Boku.Common.Xml;
 
 using BokuShared;
 
-
 namespace Boku.Common
 {
     public partial class LocalLevelBrowser
@@ -166,16 +165,16 @@ namespace Boku.Common
                     }
                 }
             }
-            
+
             //System.Diagnostics.Debug.WriteLine(String.Format("Scrubbed {0} terrain files", deleteCount));
         }   // end of ScrubTerrainFiles()
 
         /// <summary>
         /// Deletes the given terrain file but only after verifying that no world is using it.
         /// It any world is found that is using the file then it is not deleted.
-        /// 
+        ///
         /// Note this still isn't perfect since when a level is deleted, the terrain file may still be left
-        /// in the undo stack and hence not deleted.  No biggy.  It's better than deleting too much and it's 
+        /// in the undo stack and hence not deleted.  No biggy.  It's better than deleting too much and it's
         /// much quicker than the above ScrubTerrainFiles().
         /// </summary>
         /// <param name="terrainFile"></param>
@@ -232,7 +231,7 @@ namespace Boku.Common
                     {
                         string filename = starterWorldsFiles[i];
                         XmlWorldData xmlWorldData = XmlWorldData.Load(filename, XnaStorageHelper.Instance);
-                    
+
                         if (xmlWorldData == null || xmlWorldData.xmlTerrainData2 == null)
                             continue;
 

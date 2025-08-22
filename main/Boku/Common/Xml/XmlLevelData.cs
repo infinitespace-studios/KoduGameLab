@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,13 +24,12 @@ using Boku.Common.Xml;
 using Boku.Programming;
 using Boku.Fx;
 
-
 namespace Boku.Common.Xml
 {
     //
     // The classes with the XmlData namespace exist only to be used for Xml IO.
     // They are wrapped in their own namespace to keep them from conflicting
-    // with anything.  This way we can keep the class names simple so that the 
+    // with anything.  This way we can keep the class names simple so that the
     // Xml files themselves have reasonable tag names.
     //
     namespace XmlData
@@ -74,11 +72,11 @@ namespace Boku.Common.Xml
                 actor.CreatableId = creatableId;
                 actor.DisplayNameNumber = creatableName;
                 actor.Version = version;
-                
+
                 // Clone the parameters instead of calling CopyTo so that the creatable flag
                 // is preserved. CopyTo deliberately excludes this this field when copying.
                 actor.LocalParameters = parameters.Clone() as GameActor.TweakableParameters;
-                
+
                 /// Backward compat - heightOffset used to be stored in the shared parameters,
                 /// which only worked because of a bug in SyncParameters. If there is a valid
                 /// heightOffset in parameters, put it in the right place on the actor and
@@ -106,7 +104,7 @@ namespace Boku.Common.Xml
                 creatableId = actor.CreatableId;
                 creatableName = actor.DisplayNameNumber;
                 version = actor.Version;
-                
+
                 // Clone the parameters instead of calling CopyTo so that the creatable flag
                 // is preserved. CopyTo deliberately excludes this this field when copying.
                 parameters = actor.LocalParameters.Clone() as GameActor.TweakableParameters;
@@ -398,7 +396,7 @@ namespace Boku.Common.Xml
                 this.actor = data.actor;
 
                 data = null;
-                
+
                 ToGame(AddThing);
             }
 

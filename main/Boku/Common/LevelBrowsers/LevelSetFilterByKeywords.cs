@@ -24,13 +24,13 @@ namespace Boku.Common
                 {
                     searchString = value;
                     Dirty = true;
-                } 
+                }
             }
         }
 
         override public bool Matches(LevelMetadata item)
         {
-            //check for server side matching 
+            //check for server side matching
             if (ServerSideMatching)
             {
                 return true;
@@ -48,8 +48,8 @@ namespace Boku.Common
             }
 
             //now match keywords
-            return words.All(word => item.Description.ToLower().Contains(word) 
-                || item.Name.ToLower().Contains(word) 
+            return words.All(word => item.Description.ToLower().Contains(word)
+                || item.Name.ToLower().Contains(word)
                 || item.Creator.ToLower().Contains(word));
 
         }

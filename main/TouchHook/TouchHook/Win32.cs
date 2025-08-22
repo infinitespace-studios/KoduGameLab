@@ -56,7 +56,7 @@ namespace TouchHook
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct CallWndStruct 
+    public struct CallWndStruct
     {
         public IntPtr lparam;
         public IntPtr wparam;
@@ -85,17 +85,17 @@ namespace TouchHook
         public int dwFlags;                 // mask which fields in the structure are valid
         public int dwMask;                  // flags
         public int dwTime;                  // touch event time
-        public IntPtr dwExtraInfo;         
+        public IntPtr dwExtraInfo;
         public int cxContact;               // x size of the contact area in pixels
         public int cyContact;               // y size of the contact area in pixels
     }
 
-    /// <summary> 
-    /// The MOUSEHOOKSTRUCT structure contains information about a mouse event passed  
-    /// to a WH_MOUSE hook procedure, MouseProc.  
-    /// </summary> 
+    /// <summary>
+    /// The MOUSEHOOKSTRUCT structure contains information about a mouse event passed
+    /// to a WH_MOUSE hook procedure, MouseProc.
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    struct MOUSEHOOKSTRUCT 
+    struct MOUSEHOOKSTRUCT
     {
         public POINT pt;
         public IntPtr hwnd;
@@ -103,16 +103,16 @@ namespace TouchHook
         public IntPtr dwExtraInfo;
     }
 
-    /// <summary> 
-    /// The MSLLHOOKSTRUCT structure contains information about a low level mouse input event 
-    /// </summary> 
-    [StructLayout(LayoutKind.Sequential)] 
-    internal struct MSLLHOOKSTRUCT 
-    { 
-        public POINT pt;        // The x and y coordinates in screen coordinates.  
-        public int mouseData;   // The mouse wheel and button info. 
-        public int flags; 
-        public int time;        // Specifies the time stamp for this message.  
+    /// <summary>
+    /// The MSLLHOOKSTRUCT structure contains information about a low level mouse input event
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct MSLLHOOKSTRUCT
+    {
+        public POINT pt;        // The x and y coordinates in screen coordinates.
+        public int mouseData;   // The mouse wheel and button info.
+        public int flags;
+        public int time;        // Specifies the time stamp for this message.
         public IntPtr dwExtraInfo;
     }
 
@@ -140,7 +140,7 @@ namespace TouchHook
         public IntPtr wparam;
         public IntPtr lparam;
 
-        public TouchEventArgs(TouchEventArgs tea) 
+        public TouchEventArgs(TouchEventArgs tea)
         {
             x = tea.x;
             y = tea.y;
@@ -248,7 +248,7 @@ namespace TouchHook
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public extern static bool CloseTouchInputHandle(IntPtr lParam);
-        
+
         [DllImport("user32")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetGestureConfig(IntPtr hWnd, int dwReserved, int cIDs, ref GESTURECONFIG[] pGestureConfig, int cbSize);
@@ -266,7 +266,7 @@ namespace TouchHook
 
         [DllImport("user32.dll")]
         public static extern IntPtr DefWindowProc(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam);
-      
+
         [DllImport("Kernel32.dll")]
         public static extern Int32 GetLastError();
 
@@ -276,13 +276,13 @@ namespace TouchHook
         /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs..</param>
         /// <param name="nIndex">The zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer. To set any other value, specify one of the following values: GWL_EXSTYLE, GWL_HINSTANCE, GWL_ID, GWL_STYLE, GWL_USERDATA, GWL_WNDPROC </param>
         /// <param name="dwNewLong">The replacement value.</param>
-        /// <returns>If the function succeeds, the return value is the previous value of the specified 32-bit integer. 
+        /// <returns>If the function succeeds, the return value is the previous value of the specified 32-bit integer.
         /// If the function fails, the return value is zero. To get extended error information, call GetLastError. </returns>
         [DllImport("user32.dll")]
         public static extern Int32 SetWindowLong(IntPtr hWnd, int nIndex, Int32 dwNewLong);
         [DllImport("user32.dll")]
         public static extern Int32 SetWindowLong(IntPtr hWnd, int nIndex, WndProcDelegate newProc);
-        
+
         [DllImport("user32.dll")]
         public static extern Int32 CallWindowProc(Int32 lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
@@ -305,7 +305,7 @@ namespace TouchHook
         public const Int32 GWL_EXSTYLE = (-20);
         public const Int32 GWL_USERDATA = (-21);
         public const Int32 GWL_ID = (-12);
-    
+
         #endregion
 
         #region Touch constants and Structs
@@ -344,7 +344,6 @@ namespace TouchHook
          */
         public const int WM_GESTURENOTIFY = 0x011A;
         public const int WM_GESTURE = 0x0119;
-        
 
         /*
          * System Metric flags
@@ -380,12 +379,12 @@ namespace TouchHook
          */
         public const int GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY = 0x00000004;
         /*
-         * Panning with a gutter boundary around the edges of pannable region. 
-         * The gutter boundary limits perpendicular movement to a primary direction 
+         * Panning with a gutter boundary around the edges of pannable region.
+         * The gutter boundary limits perpendicular movement to a primary direction
          * until a threshold is reached to break out of the gutter.
          */
         public const int GC_PAN_WITH_GUTTER = 0x00000008;
-        /* 
+        /*
          * Panning with inertia to smoothly slow when pan gestures stop.
          */
         public const int GC_PAN_WITH_INERTIA = 0x00000010;
@@ -406,12 +405,12 @@ namespace TouchHook
         public const int GC_PRESSANDTAP = 0x00000001;
         public const int GC_ROLLOVER = GC_PRESSANDTAP;
 
-        /* Maximum number of gestures that can be included                                                        
+        /* Maximum number of gestures that can be included
          * in a single call to SetGestureConfig / GetGestureConfig
          */
-        public const int GESTURECONFIGMAXCOUNT = 256;           
+        public const int GESTURECONFIGMAXCOUNT = 256;
 
-        // Gesture IDs 
+        // Gesture IDs
         public const int GID_BEGIN = 1;
         public const int GID_END = 2;
         public const int GID_ZOOM = 3;
@@ -424,7 +423,7 @@ namespace TouchHook
         public const int GF_BEGIN = 0x00000001;
         public const int GF_INERTIA = 0x00000002;
         public const int GF_END = 0x00000004;
-        
+
         /* Gesture configuration structure
          *   - Used in SetGestureConfig and GetGestureConfig
          *   - Note that any setting not included in either GESTURECONFIG.dwWant
@@ -442,29 +441,29 @@ namespace TouchHook
         }
 
         /*  Gesture information structure
-         *    - Pass the HGESTUREINFO received in the WM_GESTURE message lParam 
+         *    - Pass the HGESTUREINFO received in the WM_GESTURE message lParam
          *      into the GetGestureInfo function to retrieve this information.
-         *    - If cbExtraArgs is non-zero, pass the HGESTUREINFO received in 
-         *      the WM_GESTURE message lParam into the GetGestureExtraArgs 
+         *    - If cbExtraArgs is non-zero, pass the HGESTUREINFO received in
+         *      the WM_GESTURE message lParam into the GetGestureExtraArgs
          *     function to retrieve extended argument information.
          */
         [StructLayout(LayoutKind.Sequential)]
         public struct GESTUREINFO
         {
             public int cbSize;           // size, in bytes, of this structure
-            // (including variable length Args 
+            // (including variable length Args
             // field)
             public int dwFlags;          // see GF_* flags
             public int dwID;             // gesture ID, see GID_* defines
-            public IntPtr hwndTarget;    // handle to window targeted by this 
+            public IntPtr hwndTarget;    // handle to window targeted by this
             // gesture
             [MarshalAs(UnmanagedType.Struct)]
             public POINT ptsLocation;  // current location of this gesture
             public int dwInstanceID;     // internally used
             public int dwSequenceID;     // internally used
-            public Int64 ullArguments;   // arguments for gestures whose 
+            public Int64 ullArguments;   // arguments for gestures whose
             // arguments fit in 8 BYTES
-            public int cbExtraArgs;      // size, in bytes, of extra arguments, 
+            public int cbExtraArgs;      // size, in bytes, of extra arguments,
             // if any, that accompany this gesture
         }
         /// <summary>
@@ -478,14 +477,14 @@ namespace TouchHook
         #endregion
 
         #region Gesture configuration constants [Tpcshrd.h]
-        
+
         public const UInt32 WM_TABLET_DEFBASE = 0x02C0;
         public const UInt32 WM_TABLET_MAXOFFSET = 0x20;
         public const UInt32 WM_TABLET_ADDED = (WM_TABLET_DEFBASE + 8);
         public const UInt32 WM_TABLET_DELETED = (WM_TABLET_DEFBASE + 9);
         public const UInt32 WM_TABLET_FLICK = (WM_TABLET_DEFBASE + 11);
         public const UInt32 WM_TABLET_QUERYSYSTEMGESTURESTATUS = (WM_TABLET_DEFBASE + 12);
-       
+
         public const UInt32 TABLET_DISABLE_PRESSANDHOLD        = 0x00000001; // disables press and hold (right-click) gesture
         public const UInt32 TABLET_DISABLE_PENTAPFEEDBACK      = 0x00000008; // disables UI feedback on pen up (waves)
         public const UInt32 TABLET_DISABLE_PENBARRELFEEDBACK   = 0x00000010; // disables UI feedback on pen button down (circle)
@@ -498,7 +497,7 @@ namespace TouchHook
         public const UInt32 TABLET_DISABLE_SMOOTHSCROLLING     = 0x00080000;
         public const UInt32 TABLET_DISABLE_FLICKFALLBACKKEYS   = 0x00100000;
         public const UInt32 TABLET_ENABLE_MULTITOUCHDATA       = 0x01000000;
-        
+
         #endregion
 
         #region Message type constants from [winuser.h]

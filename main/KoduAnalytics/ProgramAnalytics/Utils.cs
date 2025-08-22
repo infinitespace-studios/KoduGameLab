@@ -11,7 +11,6 @@ namespace KoduAnalytics.ProgramAnalytics
     public static class Utils
     {
 
-
         public static Tile[] upidDeprecated = {
                                                    new Tile( "filter.nothing", TileData.filter, -1),
                                                     new Tile("filter.boku", TileData.filter, -1),
@@ -407,7 +406,6 @@ namespace KoduAnalytics.ProgramAnalytics
                                                 "filter.direction.down",
                                                 "filter.direction.left",
                                                 "filter.not",
-
 
                                              };
 

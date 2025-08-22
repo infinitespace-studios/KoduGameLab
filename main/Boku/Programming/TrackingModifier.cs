@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -24,7 +23,7 @@ using Boku.SimWorld.Chassis;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this modifier acts like a parameter and provides a value to be used 
+    /// this modifier acts like a parameter and provides a value to be used
     /// as a tracking mode to the actuator
     /// </summary>
     public class TrackingModifier : Modifier

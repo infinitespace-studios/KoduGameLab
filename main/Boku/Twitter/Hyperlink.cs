@@ -113,7 +113,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pos">Needs to be relative to rt where link was rendered.</param>
         /// <param name="clickType"></param>
@@ -151,7 +151,7 @@ namespace Boku
 
             IsClickFocus = false;
             WasClicked = false;
-            
+
             return false;
 
         }   // end of HitTest()
@@ -162,5 +162,4 @@ namespace Boku
         #endregion
     }   // end of class Hyperlink
 
-    
 }

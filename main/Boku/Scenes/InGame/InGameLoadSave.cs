@@ -20,7 +20,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-
 using Boku.Base;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
@@ -145,8 +144,6 @@ namespace Boku
 
         #endregion
 
-
-
         /// <summary>
         /// Get called back by the SaveLevelDialog when the user makes a choice.
         /// </summary>
@@ -171,7 +168,7 @@ namespace Boku
             if (dialog.Button == SaveLevelDialog.SaveLevelDialogButtons.Save)
             {
                 // Done.  If this was caused by the SaveChanges dialog popping up then
-                // we need to return to wherever the user was trying to go in the 
+                // we need to return to wherever the user was trying to go in the
                 // first place.  If this was caused by the user explicitely saving
                 // then we should return to running.
 
@@ -383,7 +380,7 @@ namespace Boku
         }   // RestoreFixedCamera()
 
         /// <summary>
-        /// Saves the current edit changes to memory which can either be used as 
+        /// Saves the current edit changes to memory which can either be used as
         /// a source for reseting or be written out to disk as a real save.
         /// </summary>
         public void AutoSaveLevel(string name)
@@ -419,7 +416,6 @@ namespace Boku
                 }
             }
 
-
             // Save score visibility settings
             xmlWorldData.scoreSettings.Clear();
             for (int i = (int)Classification.ColorInfo.First; i <= (int)Classification.ColorInfo.Last; ++i)
@@ -444,13 +440,13 @@ namespace Boku
             //              to be rethought.  If anything is dirty it should be flagged and
             //              the user warned on run, not later when trying to switch levels.
             //              Even more useful would be to treat linked levels as a single
-            //              unit which is autosaved so that you can edit the whole game, 
+            //              unit which is autosaved so that you can edit the whole game,
             //              freely changing levels, without being forced to save.
             //
             // If prevously autosaved we want to reload from disk since the InGame version
             // may have changed during run.  This case only comes up (I think) when running
             // a dirty level which switches levels.  On switch we need to saved the changes
-            // we've made BUT we have to be sure to save the state as it was at the start 
+            // we've made BUT we have to be sure to save the state as it was at the start
             // of the run rather than the state as it exists in memory since characters may
             // have been added or destroyed.
             xmlLevelData = new XmlLevelData();
@@ -478,7 +474,7 @@ namespace Boku
                 xmlLevelData.FromGame(InGame.inGame.gameThingList);
             }
 
-            // And now the terrain.  Note that this call will first check if the 
+            // And now the terrain.  Note that this call will first check if the
             // terrain has been modified.  If so, then it will create/save the
             // new file and then modify the xmlWorldData to reference the newly
             // created filename.
@@ -505,7 +501,7 @@ namespace Boku
                 InGame.XmlWorldData.Save(BokuGame.Settings.MediaPath + worldFilename, XnaStorageHelper.Instance);
             }
 
-            /// Don't flush file changes to storage hardware for just an autosave. 
+            /// Don't flush file changes to storage hardware for just an autosave.
             /// We'll continue flushing on internal build, so resume will still
             /// work after breaking in the debugger etc. ***.
 #endif
@@ -514,8 +510,6 @@ namespace Boku
             AutoSaved = true;
 
         }   // end of AutoSaveLevel()
-
-
 
         /// <summary>
         /// Saves the level to disk.
@@ -594,7 +588,6 @@ namespace Boku
                         }
                     }
 
-
                     //the world being saved was already local - check to make sure the links are still consistent
                     if (xmlWorldData.LinkedToLevel != null)
                     {
@@ -604,7 +597,7 @@ namespace Boku
                             if (XmlDataHelper.CheckWorldExistsByGenre((Guid)xmlWorldData.LinkedToLevel, Genres.Downloads) ||
                                 XmlDataHelper.CheckWorldExistsByGenre((Guid)xmlWorldData.LinkedToLevel, Genres.BuiltInWorlds))
                             {
-                                //not a local level, need perform a deep copy and link to that (only need to copy forward, user can't modify previous level directly)                            
+                                //not a local level, need perform a deep copy and link to that (only need to copy forward, user can't modify previous level directly)
                                 DeepCopyNonLocalLink(xmlWorldData, true);
                             }
                             else
@@ -618,7 +611,7 @@ namespace Boku
                             //load the next world and update it's link from (we can guarantee it's local - otherwise we would have taken the other branch
                             LevelMetadata nextWorld = XmlDataHelper.LoadMetadataByGenre((Guid)xmlWorldData.LinkedToLevel, Genres.MyWorlds);
 
-                            //check if there's an old link that needs dissolving - player was already warned 
+                            //check if there's an old link that needs dissolving - player was already warned
                             //when they set this link, so no dialog needed here
                             if (nextWorld.LinkedFromLevel != null && nextWorld.LinkedFromLevel != xmlWorldData.id)
                             {
@@ -687,7 +680,6 @@ namespace Boku
 
         }   // end of InGame SaveLevel()
 
-
         /// <summary>
         /// Saves the level to disk.
         /// </summary>
@@ -745,7 +737,6 @@ namespace Boku
                 Storage4.TextureSaveAsDDS(thumbnail, thumbFilename);
             }
 
-
             // Save full size image.
             // MG doesn't implement SaveAsJpeg right now, so wrap with try/catch.  We can safely not save this file.
             try
@@ -760,13 +751,12 @@ namespace Boku
             {
             }
 
-
             // Save the world file.
             worldData.Save(BokuGame.Settings.MediaPath + worldFilename, XnaStorageHelper.Instance);
 
         }   // end of InGame SaveLevel()
 
-        //TODO: refactor to follow pattern elsewhere where we find the first link that needs processing and 
+        //TODO: refactor to follow pattern elsewhere where we find the first link that needs processing and
         //always recurse forwards only
         private bool DeepCopyNonLocalLink(XmlWorldData currentWorld, bool forwards)
         {
@@ -816,7 +806,6 @@ namespace Boku
                 //update current level link to information (we're traversing forwards)
                 currentWorld.LinkedToLevel = nextLink;
 
-
                 //we're done, no need to recurse, it's already a local world
                 return true;
             }
@@ -833,9 +822,7 @@ namespace Boku
                 return false;
             }
 
-
             BokuShared.Wire.WorldPacket packet = XmlDataHelper.ReadWorldPacketFromDisk(fullPath, folder);
-
 
             XmlWorldData nextWorldData = XmlWorldData.Load(packet.Data.WorldXmlBytes);
 
@@ -846,7 +833,7 @@ namespace Boku
             //set up links from the next level we're about to process back to the current leve
             if (forwards)
             {
-                //if we were moving forwards, then we're setting up the next level in the chain and it should point back to 
+                //if we were moving forwards, then we're setting up the next level in the chain and it should point back to
                 //this current level
                 nextWorldData.LinkedFromLevel = currentWorld.id;
             }
@@ -871,7 +858,7 @@ namespace Boku
 
             //write out the terrain file - the other terrain properties (cube size, waters) should be copied automatically
 
-            //create a new terrain file for the new level 
+            //create a new terrain file for the new level
             Guid guid = Guid.NewGuid();
             string newTerrainPath = BokuGame.TerrainPath + guid + ".Raw";
 
@@ -935,8 +922,8 @@ namespace Boku
         }
 
         /// <summary>
-        /// This checks if the terrain heightmap has been modified.  If it has then a 
-        /// new file is written using the given fileroot and then the XmlWorldData 
+        /// This checks if the terrain heightmap has been modified.  If it has then a
+        /// new file is written using the given fileroot and then the XmlWorldData
         /// structure is updated to reflect the new filename.
         /// </summary>
         /// <param name="forceSave">Set to true to force the saving of the terrain file even if the modified flag is false.</param>
@@ -993,7 +980,7 @@ namespace Boku
         /// <returns>True on successful loading, false otherwise.</returns>
         public bool LoadLevelAndRun(string levelFullPath, bool keepPersistentScores, bool newWorld, bool andRun = true, bool initUndoStack = true)
         {
-            // These will get reloaded for this level.  This clears 
+            // These will get reloaded for this level.  This clears
             // up any NamedFilters from the previous level.
             NamedFilter.UnregisterAllNamedFiltersInCardSpace();
 
@@ -1040,7 +1027,7 @@ namespace Boku
         }   // end of LoadLevelAndRun()
 
         /// <summary>
-        /// Resets the simulation.  Will reload data if needed.  Requires the 
+        /// Resets the simulation.  Will reload data if needed.  Requires the
         /// current InGame.inGame.xmlWorldData to be up to date.
         /// </summary>
         /// <param name="preserveScores">When true, this causes the score values not to be reset.  This is only used by the DO Reset-World verb since there is a seperate Reset-Scores tile.</param>
@@ -1048,19 +1035,19 @@ namespace Boku
         /// <param name="keepPersistentScores">This is true when the ResetSim call is for loading a linked level during run.</param>
         public void ResetSim(bool preserveScores, bool removeCreatablesFromScene, bool keepPersistentScores)
         {
-            // Since preserveScores happens while executing a Reset action and keepPersistentScores 
+            // Since preserveScores happens while executing a Reset action and keepPersistentScores
             // happens while linking levels we should never see both true at the same time.
             Debug.Assert(!(preserveScores && keepPersistentScores), "Both should never be true.");
 
             InReset = true;
             LimitBudget = false;
 
-            // 
+            //
             // Reset InGame state that shouldn't survive loading or reloading.
             //
 
             // Kill all active twitches.  This is here in particular to ensure that
-            // any color changes that happened while in-game have a change to be 
+            // any color changes that happened while in-game have a change to be
             // finalized before edit mode is reloaded.  This prevents the wrong
             // color from being shown in edit mode.
             TwitchManager.KillAllTwitches();
@@ -1085,7 +1072,7 @@ namespace Boku
             //CameraInfo.Mode = CameraInfo.Modes.Edit;
             //CameraInfo.FirstPerson = false;
 
-            // Remove any active particle emitters.  But, restore the dust 
+            // Remove any active particle emitters.  But, restore the dust
             // emitter used while dragging things around in edit mode.
             shared.dustEmitter.RemoveFromManager();
             ExplosionManager.Suspend();
@@ -1182,7 +1169,7 @@ namespace Boku
             }
             else
             {
-                // The stuff file isn't different so just reload 
+                // The stuff file isn't different so just reload
                 // the objects from memory instead of going back to disk.
                 xmlLevelData.ToGame(AddThing);
             }
@@ -1223,7 +1210,7 @@ namespace Boku
 
                 }   // end for each thing in the gameThingList
 
-                // Force a Refresh so the newly activated objects will get added to the 
+                // Force a Refresh so the newly activated objects will get added to the
                 // render and update lists.  This prevents a 1-frame flicker on reset.
                 Refresh(BokuGame.gameListManager.updateList, BokuGame.gameListManager.renderList);
 
@@ -1246,7 +1233,7 @@ namespace Boku
             CameraInfo.ResetAllLists();
 
             // On reset, the default is to assume we're going into run mode
-            // and we need to set the starting camera.  If either of these 
+            // and we need to set the starting camera.  If either of these
             // aren't true, we can override it later.  Note, this call is
             // probably not needed?
             RestoreStartingCamera();
@@ -1307,7 +1294,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// Based on the PreGame setting in xmlWorldData, 
+        /// Based on the PreGame setting in xmlWorldData,
         /// sets up the correct pregame object.
         /// </summary>
         public void SetUpPreGame()
@@ -1322,7 +1309,7 @@ namespace Boku
             // a new one if needed or reuse the existing one.
             //
             // Note that I'm a bit of an idiot so when I first put this in I used
-            // localized strings for the values.  Which means they don't trigger if 
+            // localized strings for the values.  Which means they don't trigger if
             // a different language is used.  To be fully back compatible we'd need
             // to test for every language hence TranslatePregameToEnglish().
             // Eventually, everyone will be using the hard-coded values and all
@@ -1433,7 +1420,6 @@ namespace Boku
                 }
             }
 
-
             Instrumentation.RecordEvent(Instrumentation.EventId.LevelLoaded, xmlWorldData.id.ToString());
 
             xmlLevelDataFullPath = null;
@@ -1475,7 +1461,6 @@ namespace Boku
                     }
                 }
             }
-
 
             // If requested, start in run sim mode.
             if (andRun)
@@ -1519,7 +1504,7 @@ namespace Boku
         /// <summary>
         /// Takes the string from XmlWorldData and tries to convert
         /// it to English.  This is a bit of a hack to fix up older
-        /// levels where this string was localized when it shouldn't 
+        /// levels where this string was localized when it shouldn't
         /// have been.
         /// </summary>
         /// <param name="preGame"></param>
@@ -1531,9 +1516,9 @@ namespace Boku
             {
                 preGameDict = new Dictionary<string, string>();
 
-                // Note: commented out entries are duplicates from other 
+                // Note: commented out entries are duplicates from other
                 // languages which will cause the Dictionary to throw.
-                
+
                 // English (not needed, but will exercise the path...
                 preGameDict.Add("Nothing", "Nothing");
                 preGameDict.Add("Countdown", "Countdown");
@@ -1701,7 +1686,7 @@ namespace Boku
                 preGameDict.Add("倒數說明", "Description with Countdown");
                 preGameDict.Add("世界標題", "World Title");
                 preGameDict.Add("世界說明", "World Description");
-            
+
             }
 
             preGame = preGame.Trim();
@@ -1721,6 +1706,5 @@ namespace Boku
         #endregion
 
     }   // end of class InGame
-
 
 }   // end of namespace Boku

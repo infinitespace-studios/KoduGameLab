@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -82,7 +81,7 @@ namespace Boku.Programming
         }
 
         /// <summary>
-        /// See if the gameActor 
+        /// See if the gameActor
         /// </summary>
         /// <param name="gameActor"></param>
         /// <param name="reflex"></param>

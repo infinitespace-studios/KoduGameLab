@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +14,6 @@ using Boku.Common;
 using Boku.SimWorld.Path;
 using Boku.Common.ParticleSystem;
 using Boku.Audio;
-
 
 namespace Boku
 {
@@ -357,7 +355,7 @@ namespace Boku
 
                 /// <summary>
                 /// Find the closest edge or node that we are moused-over.
-                /// Loops over all edges and nodes in the scene. 
+                /// Loops over all edges and nodes in the scene.
                 /// </summary>
                 /// <param name="camera"></param>
                 private void FindOver(Camera camera)
@@ -493,9 +491,8 @@ namespace Boku
                     return false;
                 }
 
-
                 /// <summary>
-                /// Look to see if we should be adding nodes, and if so, 
+                /// Look to see if we should be adding nodes, and if so,
                 /// if we should add one now.
                 /// </summary>
                 /// <param name="camera"></param>
@@ -661,7 +658,7 @@ namespace Boku
                 }
 
                 /// <summary>
-                /// See if a path or edge direction change was requested, and 
+                /// See if a path or edge direction change was requested, and
                 /// perform it if it was.
                 /// </summary>
                 private void CheckDirection()
@@ -691,7 +688,7 @@ namespace Boku
                 /// <summary>
                 /// If we're moused over a node and have the right mouse click,
                 /// start adding more nodes.
-                /// If we're over an edge and have the right mouse clicks, 
+                /// If we're over an edge and have the right mouse clicks,
                 /// split the edge and select the new node.
                 /// </summary>
                 /// <returns></returns>

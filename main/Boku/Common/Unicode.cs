@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -277,7 +276,7 @@ namespace Boku.Common
                         mirrorDict.TryGetValue(data.c, out data.mirroredChar);
                     }
 
-                    if (code >= 0 && code <= 0xFFFF)  //UTF-16 BMP code points only 
+                    if (code >= 0 && code <= 0xFFFF)  //UTF-16 BMP code points only
                     {
                         bool inRange = data.name.EndsWith(", First>");
                         if (inRange)   // Add all characters within a specified range.
@@ -356,7 +355,6 @@ namespace Boku.Common
 
         #region Internal
         #endregion
-
 
     }   // end of class Unicode
 

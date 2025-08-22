@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -53,14 +52,13 @@ namespace Boku
                 // Create the backdrop.
                 backdrop = new MessageBoxElement(message);
 
-                // Push the viewpoint in slightly.  This will cause the 
-                // Z depth to be slightly less than other 2D UI elements 
+                // Push the viewpoint in slightly.  This will cause the
+                // Z depth to be slightly less than other 2D UI elements
                 // so we get correct rendering.
                 Vector3 from = camera.From;
                 from.Z -= 0.2f;
                 camera.From = from;
             }   // end of Shared c'tor
-
 
         }   // end of class Shared
 
@@ -98,7 +96,7 @@ namespace Boku
             {
             }
 
-        }   // end of class MessageBox UpdateObj  
+        }   // end of class MessageBox UpdateObj
 
         protected class RenderObj : RenderObject
         {
@@ -128,8 +126,7 @@ namespace Boku
             {
             }
 
-        }   // end of class MessageBox RenderObj     
-
+        }   // end of class MessageBox RenderObj
 
         // List objects.
         public Shared shared = null;
@@ -190,7 +187,7 @@ namespace Boku
                     // If we do this in the Activate/Deactivate calls then we get garbaged
                     // handling if we're polling.  What can happen is that we pop ourselves
                     // because of a 'B' button that we polled but then we no longer have input
-                    // focus and the next object in the update list may also look for and 
+                    // focus and the next object in the update list may also look for and
                     // find the B button being pressed.
                     CommandStack.Push(commandMap);
                 }
@@ -206,7 +203,7 @@ namespace Boku
                     // If we do this in the Activate/Deactivate calls then we get garbaged
                     // handling if we're polling.  What can happen is that we pop ourselves
                     // because of a 'B' button that we polled but then we no longer have input
-                    // focus and the next object in the update list may also look for and 
+                    // focus and the next object in the update list may also look for and
                     // find the B button being pressed.
                     CommandStack.Pop(commandMap);
                 }
@@ -235,7 +232,6 @@ namespace Boku
             }
         }
 
-
         public void LoadContent(bool immediate)
         {
             BokuGame.Load(shared.backdrop, immediate);
@@ -258,4 +254,3 @@ namespace Boku
     }   // end of class MessageBox
 
 }   // end of namespace Boku
-

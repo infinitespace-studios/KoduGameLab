@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -272,7 +271,6 @@ namespace Boku
 
         }   // end of MouseEditToolBox Render()
 
-
         public void RestartCurrentTool()
         {
             if (activeTool != null)
@@ -289,7 +287,7 @@ namespace Boku
                 // clue which order things get pushed and popped and madness ensues.
                 CommandStack.Push(commandMap);
                 active = true;
-                
+
                 if (activeTool != null)
                 {
                     activeTool.Active = true;
@@ -317,7 +315,6 @@ namespace Boku
             materialPicker.Hidden = true;
             waterPicker.Hidden = true;
         }
-
 
         public void LoadContent(bool immediate)
         {
@@ -368,5 +365,3 @@ namespace Boku
     }   // end of class MouseEditToolBox
 
 }   // end of namespace Boku
-
-

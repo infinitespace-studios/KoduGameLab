@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -45,7 +44,7 @@ namespace Boku.Programming
     }
 
     /// <summary>
-    /// this modifier both acts like a parameter providing a fixed direction 
+    /// this modifier both acts like a parameter providing a fixed direction
     /// for the selector or actuator; and modifiers the heading to be the direction.
     /// </summary>
     public class DirectionModifier : Modifier

@@ -39,7 +39,7 @@ namespace BokuSetupActions
             session["XNAFRAMEWORK40"] = xnaFramework ? "1" : null;
 
             session.Log(String.Format("DetectSoftwarePackages: {0} {1}", netFramework, xnaFramework));
-            
+
             session.Log("End DetectSoftwarePackages");
 
             return ActionResult.Success;

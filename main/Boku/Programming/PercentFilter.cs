@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filter used when calculating scores.  No functionality here.
-    /// 
+    ///
     /// </summary>
     public class PercentFilter : Filter
     {

@@ -6,8 +6,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-
-
 using Boku.Common.Sharing;
 using BokuShared;
 using BokuShared.Wire;

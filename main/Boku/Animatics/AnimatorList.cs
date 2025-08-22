@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 ///
 /// This was originally in Common, but migrated here when the new animation
 /// system was written.
-/// 
-
+///
 
 using System;
 using System.Collections.Generic;
@@ -34,7 +32,7 @@ namespace Boku.Animatics
         #region Accessors
         public AnimationInstance Sample
         {
-            get 
+            get
             {
                 AnimationInstance anim = null;
                 if (NotEmpty)

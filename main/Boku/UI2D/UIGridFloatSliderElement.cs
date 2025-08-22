@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -19,7 +18,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
-    /// and creates a texture on the fly into which the slider and the 
+    /// and creates a texture on the fly into which the slider and the
     /// associated text string are rendered.
     /// </summary>
     public class UIGridFloatSliderElement : UIGridBaseSliderElement
@@ -87,7 +86,6 @@ namespace Boku.UI2D
             set { numDecimals = value; }
         }
         #endregion
-
 
         // c'tor
         /// <summary>
@@ -177,9 +175,3 @@ namespace Boku.UI2D
     }   // end of class UIGridFloatSliderElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

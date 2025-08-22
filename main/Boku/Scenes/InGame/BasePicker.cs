@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +49,7 @@ namespace Boku
         private Point previousChoice = Point.Zero;
 
         protected bool active = false;
-        protected bool hidden = true;               // If hidden then don't render and ignore input. 
+        protected bool hidden = true;               // If hidden then don't render and ignore input.
 
         protected float alpha = 0.0f;               // Used for pickers that use transparency to fade.
         protected double startFadeTime = 0.0;       // Time when picker was hidden.
@@ -86,7 +85,7 @@ namespace Boku
                         grid.Active = true;
                         grid.Dirty = true;
 
-                        // Start with the selection index set to the first element.  
+                        // Start with the selection index set to the first element.
                         SetDefaultSelection();
                     }
                     else
@@ -187,7 +186,7 @@ namespace Boku
         }   // end of BasePicker UpdateWithNewAlpha()
 
         /// <summary>
-        /// Set the default selection in the grid when picker starts up.  
+        /// Set the default selection in the grid when picker starts up.
         /// </summary>
         protected virtual void SetDefaultSelection()
         {
@@ -252,7 +251,6 @@ namespace Boku
             {
                 IncrementFocus();
             }
-
 
         }   // end of BasePicker RestorePreviousChoice()
 
@@ -382,7 +380,6 @@ namespace Boku
         {
         }   // end of OnCancel()
 
-
         public virtual void LoadContent(bool immediate)
         {
             if (reticuleTexture == null)
@@ -415,5 +412,3 @@ namespace Boku
     }   // end of class BasePicker
 
 }   // end of namespace Boku
-
-

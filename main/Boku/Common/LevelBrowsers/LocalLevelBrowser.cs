@@ -18,7 +18,6 @@ using Boku.Common.Sharing;
 
 using BokuShared;
 
-
 namespace Boku.Common
 {
     /// <summary>
@@ -100,7 +99,7 @@ namespace Boku.Common
         List<LevelMetadata> thumbnailQueue = new List<LevelMetadata>();
         List<LevelMetadata> thumbnailCompletions = new List<LevelMetadata>();
 
-        bool working = false;   // Mirrors thread's null/non-null condition 
+        bool working = false;   // Mirrors thread's null/non-null condition
 
         public LocalLevelBrowser()
             : this(StorageSource.All)
@@ -249,7 +248,6 @@ namespace Boku.Common
         }
     }
 
-
     public partial class LocalLevelBrowser
     {
         List<ILevelSetQuery> queries = new List<ILevelSetQuery>();
@@ -271,10 +269,10 @@ namespace Boku.Common
             lock (Synch)
             {
                 ILevelSetQuery query = new LevelSetQuery(
-                    sorter, 
-                    filter, 
-                    this, 
-                    notifyFetchingCallback, 
+                    sorter,
+                    filter,
+                    this,
+                    notifyFetchingCallback,
                     notifyFetchCompleteCallback);
 
                 queries.Add(query);
@@ -288,7 +286,7 @@ namespace Boku.Common
                     additionCallback,
                     removalCallback,
                     size);
-                
+
                 query.AddCursor(cursor);
             }
 

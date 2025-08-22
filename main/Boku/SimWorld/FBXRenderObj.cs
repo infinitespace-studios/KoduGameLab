@@ -93,7 +93,6 @@ namespace Boku.SimWorld
         {
         }
 
-
         public virtual void LoadContent(bool immediate)
         {
             this.sro = this.getModelInstance();

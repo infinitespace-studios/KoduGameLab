@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -325,7 +324,7 @@ namespace Boku.UI2D
             if (!newUserMode)
             {
                 bool previouslySeenHash = true;     // TODO (v-chph) Put test here.  Note we should always return true for guest ( Auth.DefaultCreatorHash ) without having to ping the server.
-                
+
                 if (previouslySeenHash)
                 {
                     // We've seen this name before.
@@ -425,7 +424,7 @@ namespace Boku.UI2D
                 pos.Y += verticalBoxSpacing;
                 blob.RawText = pinString;
                 blob.RenderWithButtons(pos, Color.White);
-                
+
                 // Text boxes.
                 // Creator.
                 creatorBlob.Justification = UIGridElement.Justification.Left;

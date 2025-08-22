@@ -26,7 +26,6 @@ namespace Boku.Programming
 {
     public delegate void ReflexUseEvent();
 
-
     /// <summary>
     /// Describes a reflex as a set of upids.
     /// </summary>
@@ -104,7 +103,6 @@ namespace Boku.Programming
         [XmlAttribute]
         public int Indentation = 0;
 
-
         // Can the following object and world parameters be put into just one or two values?
         // Only one at a time is ever used so we really don't need them all but I'm afraid
         // that it would be a back-compat nightmare to switch over.
@@ -141,7 +139,6 @@ namespace Boku.Programming
         [XmlAttribute]
         public int MaxHitpoints = 50;
 
-
         // World parameters
         [XmlAttribute]
         public bool WorldLightChangeEnabled = false;
@@ -166,11 +163,11 @@ namespace Boku.Programming
         {
             get { return _sayString; }
             set { _sayString = value; TextHelper.SplitMessage(value, 10000, UI2D.Shared.GetGameFont20, true, _sayStrings); }
-        }    
+        }
         public int sayMode = 1;                                                     // Display mode.  0==fullscreen, 1==thought balloon sequential, 2==thought balloon random
         public UI2D.UIGridElement.Justification sayJustification = Boku.UI2D.UIGridElement.Justification.Left;
         [XmlIgnore]
-        public int sayLine = 0;                                                     // For sequential display of multi-line thought balloon text.  Also used by random to   
+        public int sayLine = 0;                                                     // For sequential display of multi-line thought balloon text.  Also used by random to
                                                                                     // not show the same line twice in a row.
 
         /// <summary>
@@ -182,17 +179,16 @@ namespace Boku.Programming
             get { return _sayStrings; }
         }
 
-
         private string _saidString;
         private List<string> _saidStrings = new List<string>();                      // Strings for "said" filter.
 
         public string saidString                                                     // Text associated with 'said' filter.
         {
             get { return _saidString; }
-            set 
-            { 
-                _saidString = value; 
-                TextHelper.SplitMessage(value, 10000, UI2D.Shared.GetGameFont20, true, _saidStrings); 
+            set
+            {
+                _saidString = value;
+                TextHelper.SplitMessage(value, 10000, UI2D.Shared.GetGameFont20, true, _saidStrings);
                 for(int i=0; i<_saidStrings.Count; i++)
                 {
                     _saidStrings[i] = _saidStrings[i].Trim();
@@ -201,7 +197,6 @@ namespace Boku.Programming
         }
         public int saidMode = 1;                                                    // Trigger on text said at beginning (0) or end (1) of thought balloon life time.
         public UI2D.UIGridElement.Justification saidJustification = Boku.UI2D.UIGridElement.Justification.Left;
-
 
         /// <summary>
         /// Strings that 'said' filter is listening for.
@@ -370,7 +365,7 @@ namespace Boku.Programming
                 }
                 else
                 {
-                    if (InGame.inGame.CurrentUpdateMode != InGame.UpdateMode.EditObject && 
+                    if (InGame.inGame.CurrentUpdateMode != InGame.UpdateMode.EditObject &&
                         InGame.inGame.CurrentUpdateMode != InGame.UpdateMode.MouseEdit &&
                         InGame.inGame.CurrentUpdateMode != InGame.UpdateMode.TouchEdit)
                     {
@@ -750,7 +745,7 @@ namespace Boku.Programming
         public static ReflexData DeepCopy(ReflexData srcData)
         {
             ReflexData dstData = new ReflexData(0);
-            
+
             dstData.sensorUpid = srcData.sensorUpid;
             dstData.actuatorUpid = srcData.actuatorUpid;
             dstData.selectorUpid = srcData.selectorUpid;
@@ -835,7 +830,6 @@ namespace Boku.Programming
         }
     }
 
-
     /// <summary>
     /// This represents a single part of many that make up a task to accomplish
     /// It is called a reflex as it represents a sub-part of a greater behavior that the task represents
@@ -884,7 +878,6 @@ namespace Boku.Programming
             }
         }
 #endif
-
 
         private ReflexData data = new ReflexData();
 
@@ -939,12 +932,12 @@ namespace Boku.Programming
         public int Indentation
         {
             get { return data.Indentation; }
-            set 
+            set
             {
                 if (value != data.Indentation)
                 {
                     data.Indentation = value;
-                    // If we've changed the indentation level, we need to 
+                    // If we've changed the indentation level, we need to
                     // call TaskFixup() which will be sure the parent reflexes
                     // are set correctly for any indented reflex.
                     TaskFixup();
@@ -1118,7 +1111,6 @@ namespace Boku.Programming
 
         protected Task task;
 
-
         [XmlIgnore]
         public SensorTargetSet targetSet = new SensorTargetSet();
 
@@ -1219,7 +1211,6 @@ namespace Boku.Programming
         [XmlIgnore]
         public Reflex Parent;
 
-
         public ReflexData Copy()
         {
             ReflexData clip = new ReflexData();
@@ -1251,7 +1242,7 @@ namespace Boku.Programming
                 if (modifier != null && modifier != CardSpace.Cards.NullModifier)
                     clip.Modifiers.Add(modifier);
             }
-            
+
             clip.MaterialType = MaterialType;
             clip.WaterType = WaterType;
 
@@ -1413,7 +1404,7 @@ namespace Boku.Programming
             data.WorldSkyChangeEnabled = clip.WorldSkyChangeEnabled;
             data.WorldSkyChangeIndex = clip.WorldSkyChangeIndex;
             data.SetWaterTypeIndex = clip.SetWaterTypeIndex;
-            
+
             // Deep copy needed since we may paste multiple times.
             // Could probably remove the deep copy for the Copy command.
             if (clip.microbitPatterns == null)
@@ -1428,7 +1419,7 @@ namespace Boku.Programming
                     data.microbitPatterns.Add(pattern.Clone() as MicroBitPattern);
                 }
             }
-            
+
             RebuildProcessFilters();
             TaskFixup();
         }
@@ -1569,7 +1560,7 @@ namespace Boku.Programming
             MousePosition = null;
             MouseActor = null;
 
-            // If this reflex has a mouseSensor tell MouseInput to 
+            // If this reflex has a mouseSensor tell MouseInput to
             // ignore inputs until the buttons have been released
             // to prevent clicks from carrying over between tasks.
             if (Sensor is MouseSensor)
@@ -1686,7 +1677,7 @@ namespace Boku.Programming
             // actuators will always update.
             actedOn = this.IsMovement;
 
-            // Clear the mouse targets EXCEPT in the case of movement 
+            // Clear the mouse targets EXCEPT in the case of movement
             // where we want the actor or position to persist.
             if (!IsMovement)
             {
@@ -1766,7 +1757,7 @@ namespace Boku.Programming
         {
             get { return data.modifierParams; }
         }
-        
+
         protected void FillFilters(int FillFilterCount)
         {
             if (rawfilters.Count < FillFilterCount)
@@ -1840,7 +1831,6 @@ namespace Boku.Programming
             }
              */
         }
-
 
         // Used as a local variable in several methods here.
         private static List<ProgrammingElement> _scratchSelectorPieces;
@@ -1943,8 +1933,8 @@ namespace Boku.Programming
         /// <summary>
         /// WARNING This comment is a total guess but it's better than what the author provided.
         /// This function appears to clean up the reflex by replacing any elements which have a
-        /// Null upid value with actual null values and then ensuring that the filter and 
-        /// modifier lists are all nicely aligned.  It then returns a bool telling you if the 
+        /// Null upid value with actual null values and then ensuring that the filter and
+        /// modifier lists are all nicely aligned.  It then returns a bool telling you if the
         /// reflex is empty.  Why this is called "Chill" I have no clue.  Looking through SD logs
         /// it was added back when the row handles were first added.
         /// </summary>
@@ -1973,7 +1963,7 @@ namespace Boku.Programming
             }
             return  (sensor == null &&
                     rawfilters.Count == 0 &&
-                    selector == null && 
+                    selector == null &&
                     modifiers.Count == 0 &&
                     actuator == null);
         }
@@ -2032,7 +2022,7 @@ namespace Boku.Programming
         }   // end of ScorebucketHack()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="atLoadTime">If true this fixup is happening when the level is being loaded.  If false then it's happening during brain editing.</param>
         /// <param name="incomingLanguageVersion">If atLoadTime is true, this is the version of the language for the level being loaded.</param>
@@ -2042,15 +2032,15 @@ namespace Boku.Programming
             // Hack Hack Hack
 
             // HACK  At one point modifier.blue was able to be used as a modifier for score actions, ie resets.
-            // Then it got changed to modifier.scorebucket.color.blue.  This has the advantage of having a 
-            // more relevant tile icon.  The downside is that it totally breaks existing levels.  Since 
+            // Then it got changed to modifier.scorebucket.color.blue.  This has the advantage of having a
+            // more relevant tile icon.  The downside is that it totally breaks existing levels.  Since
             // modifier.blue is still valid in other cases we can't just use the autoreplace functionality.
             // So, what's happening now is that in a reflex like Always Reset Score Blue the Blue modifier
             // is being deleted and the game is broken.  Time for a hack.  A vile hack.
             // Sample world that shows this is Kodu: Portal v10
             if (data.Actuator != null && data.Modifiers.Count >= 1)
             {
-                // Check if this reflex is dealing with scores.  If so, it's 
+                // Check if this reflex is dealing with scores.  If so, it's
                 // a candidate to have its modifiers filtered.
                 bool needToFilter = false;
                 if(data.Actuator.upid == "actuator.score" || data.Actuator.upid == "actuator.unscore" ||
@@ -2098,7 +2088,7 @@ namespace Boku.Programming
                 }
             }
 
-            // HACK Previously we defaulted to the red scorebucket when no scorebucket was 
+            // HACK Previously we defaulted to the red scorebucket when no scorebucket was
             // specified.  This is no longer deemed compatible so insert the red scorebucket
             // where needed.
             // We also allowed strange ordering of the tiles that conflicts with the new setup so rearrange tiles as needed.
@@ -2244,7 +2234,7 @@ namespace Boku.Programming
                                         // Move comparison to first slot.
                                         if (comparisonIndex != 0)
                                         {
-                                            // Since the comparison is currently after the score, moving 
+                                            // Since the comparison is currently after the score, moving
                                             // it to the front will change the index of the score.
                                             if (comparisonIndex > scoreBucketIndex)
                                             {
@@ -2284,7 +2274,7 @@ namespace Boku.Programming
                             break;
                         }
                     }
-    
+
                     // If not found, add the default red bucket. If it was found, move it to the front.
                     if (scoreBucketIndex == -1)
                     {
@@ -2333,7 +2323,7 @@ namespace Boku.Programming
                         }
                     }
 
-                    // If we have both, remove the scoreComp and then 
+                    // If we have both, remove the scoreComp and then
                     // replace the healthComp with the proper scoreComp.
                     if (scoreCompExists && healthCompExists)
                     {
@@ -2451,7 +2441,7 @@ namespace Boku.Programming
 
             // HACK  Do Shoot Level Missile is breaking on Level.  This problem is that since
             // we added blips "Level" is no longer always valid.  It's only available after
-            // "missile" is chosen.  So look for "level" or "cruise" before "missile" and 
+            // "missile" is chosen.  So look for "level" or "cruise" before "missile" and
             // if found, swap places.
             if (data.Actuator != null && data.Actuator.upid == "actuator.shoot2")
             {
@@ -2493,7 +2483,7 @@ namespace Boku.Programming
                     {
                         data.Modifiers.RemoveAt(trackingIndex);
                     }
-                    
+
                     trackingIndex = data.GetModifierIndex("modifier.trackinghoming");
                     if (trackingIndex != -1)
                     {
@@ -2501,7 +2491,7 @@ namespace Boku.Programming
                     }
                 }
             }
-            
+
             // HACK For some reason we used to allow Move Forward North.  So, now if
             // we see a selector (Forward, Wander, etc) combined with a direction (N, S, E, W)
             // we'll just ignore the selector.
@@ -2577,8 +2567,8 @@ namespace Boku.Programming
                 }
             }
 
-            // Originally, the NextLevel tile uses the next level specified in 
-            // XmlWorldData.  Now, we want to use the GUID string stored in 
+            // Originally, the NextLevel tile uses the next level specified in
+            // XmlWorldData.  Now, we want to use the GUID string stored in
             // ReflexData.ParamString.  So, for old levels, copy the level GUID
             // from XmlWorldData to the reflex.
             if (incomingLanguageVersion < 9 && InGame.XmlWorldData.LinkedToLevel != null)
@@ -2607,7 +2597,7 @@ namespace Boku.Programming
 
         protected void ProgrammingElementFixup()
         {
-            // due to XML loading not setting parent task until after 
+            // due to XML loading not setting parent task until after
             // the member ProgrammingElements reference upids we have to
             // reset them asking our brain for the real instances
             if (sensor != null && sensor.upid != ProgrammingElement.upidNull)
@@ -2766,7 +2756,7 @@ namespace Boku.Programming
         /// and modify it based on any modifier tiles (Quckly, Slowly, etc.)
         /// Basically this will just scale the length of heading.
         /// This also appear to be where contraints to the motion should be applied but I
-        /// suspect they are being done elsewhere.  So, the question because, is this serving 
+        /// suspect they are being done elsewhere.  So, the question because, is this serving
         /// any useful purpose?  If so, what is it and please document it.
         /// </summary>
         /// <param name="gameActor"></param>

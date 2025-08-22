@@ -67,7 +67,7 @@ namespace Boku.Common
             string srcName = cmdLine.GetString("Import", null);
 
             // HACK HACK : If srcName is null, check for a Kodu2 file as an arg.
-            // This is because the file association which prepends the /Import flag 
+            // This is because the file association which prepends the /Import flag
             // is only working for .kodu and not .kodu2.
             if (srcName == null)
             {
@@ -80,7 +80,6 @@ namespace Boku.Common
                     }
                 }
             }
-
 
             // No double click to import for WinRT.  Use Import option from main menu.
             return true;
@@ -169,7 +168,7 @@ namespace Boku.Common
                                     {
                                         result = false;
                                     }
-                                    
+
                                 }   // end else for main files.
 
                             }   // end loop over each file in archive.
@@ -199,7 +198,7 @@ namespace Boku.Common
         }   // end of ImportLevels2()
 
         /// <summary>
-        /// Filters a line from the main xml file for import.  An effort to 
+        /// Filters a line from the main xml file for import.  An effort to
         /// remove a bunch of code duplication.
         ///
         ///     Change the stuff file path from MyWorlds to Downloads.
@@ -336,7 +335,7 @@ namespace Boku.Common
                 }   // end loop over files
 
                 // Now that we've extracted all the files out of the cab file,
-                // move them to their proper locations.  Note we also need to 
+                // move them to their proper locations.  Note we also need to
                 // modify the main xml files.
 
                 // Just copy the stuff, terrain and thumbnail files with no modifications to the proper folders.
@@ -416,7 +415,6 @@ namespace Boku.Common
 
         }   // end of CopyMainXmlFile()
 
-
         /// <summary>
         /// Import all .kodu packages in the Imports folder into the Downloads bucket.
         /// </summary>
@@ -460,7 +458,6 @@ namespace Boku.Common
 
                     //System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
                     //    "Importing file : " + fullPathToCab);
-
 
 #if IMPORT_DEBUG
                     DebugPrint("file : " + file);
@@ -598,7 +595,7 @@ namespace Boku.Common
 #endif
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns>True if all ok, false if one or more levels from newer version of Kodu.</returns>
         public static bool ImportAllLevels(List<Guid> importedLevelList)
@@ -703,7 +700,7 @@ namespace Boku.Common
                 filename = Path.Combine(folder, filename);
                 ZipArchiveEntry entry = archive.CreateEntry(filename);
                 Stream entryStream = entry.Open();
-                Stream fileStream = Storage4.OpenRead(path, StorageSource.All);                
+                Stream fileStream = Storage4.OpenRead(path, StorageSource.All);
                 fileStream.CopyTo(entryStream);
                 entryStream.Close();
                 fileStream.Close();

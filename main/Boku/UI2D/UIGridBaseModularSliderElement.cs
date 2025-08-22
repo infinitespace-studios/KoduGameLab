@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -19,7 +18,7 @@ using Boku.Fx;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// Common functionality used for sliders.  The actual instances will 
+    /// Common functionality used for sliders.  The actual instances will
     /// differ in whether they are integer or float valued.
     /// </summary>
     public abstract class UIGridBaseModularSliderElement : UIGridElement
@@ -46,7 +45,7 @@ namespace Boku.UI2D
         private Base9Grid geometry = null;
 
         protected bool selected = false;
-        protected bool useRightStick = false;   
+        protected bool useRightStick = false;
 
         protected Vector4 specularColor = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
         protected float specularPower = 8.0f;
@@ -58,14 +57,12 @@ namespace Boku.UI2D
         protected bool invertDropShadow = false;    // Puts the drop shadow above the regular letter instead of below.
         protected Justification justify = Justification.Left;
 
-
         #region fast-scrolling support
         private bool fastScrolling;
         private float fastScrollTime = 1.5f;
         private int fastScrollScalar = 5;
         private double lastNonPressTime;
         #endregion
-
 
         #region Accessors
         /// <summary>
@@ -186,7 +183,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// By default the sliders look for input on the left stick.
-        /// When UseRightStick is set to true, they look for the right 
+        /// When UseRightStick is set to true, they look for the right
         /// stick input and ignore the left stick.
         /// </summary>
         public bool UseRightStick
@@ -211,7 +208,7 @@ namespace Boku.UI2D
             this.width = blob.width;
             this.height = blob.height;
             this.edgeSize = blob.edgeSize;
-            
+
             this.Font = blob.Font;
             this.textColor = blob.textColor;
             this.useDropShadow = blob.useDropShadow;
@@ -545,7 +542,7 @@ namespace Boku.UI2D
         public abstract float GetNumStops();
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="value">Percentage value to set.  Should be in [0, 1] range.</param>
         /// <returns>True if this action caused the value to change.</returns>
@@ -665,9 +662,3 @@ namespace Boku.UI2D
     }   // end of class UIGridBaseModularSliderElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

@@ -18,7 +18,6 @@ using Microsoft.Xna.Framework.Storage;
 using Boku.Base;
 using Boku.Common;
 
-
 namespace Boku.Programming
 {
     /// <summary>
@@ -35,7 +34,6 @@ namespace Boku.Programming
 
         [XmlAttribute]
         public ProjectileType projectile;
-
 
         public override ProgrammingElement Clone()
         {

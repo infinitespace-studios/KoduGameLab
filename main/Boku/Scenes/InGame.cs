@@ -24,7 +24,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-
 using Boku.Base;
 using Boku.Fx;
 using Boku.SimWorld;
@@ -83,7 +82,7 @@ namespace Boku
 
             public ToolBar.TouchControls.BrushActionIDs currentTouchAction = ToolBar.TouchControls.BrushActionIDs.NUMBER_OF_Buttons;
             public ToolBar.TouchControls.BrushActionIDs previousGoodTouchAction = ToolBar.TouchControls.BrushActionIDs.NUMBER_OF_Buttons;
-            
+
             public Vector2 dragTerrainStartPosition;
 
             public int curObjectColor = ColorPalette.GetIndexFromColor(Classification.Colors.White);    // The current color as displayed on our color palette.
@@ -118,10 +117,10 @@ namespace Boku
             public ModularMessageDialog tooManyLightsMessage = null;
 
             public bool renderWorldAsThumbnail = false; // When this is set to true instead of rendering the world as normal
-                                                        // we instead just render the blurred, thumbnail image.  This is 
+                                                        // we instead just render the blurred, thumbnail image.  This is
                                                         // useful for edit modes where we don't especially need to see the world
                                                         // but stil want to have some impression of it.  This is also generally
-                                                        // much faster than rendering the world live which means that the UI 
+                                                        // much faster than rendering the world live which means that the UI
                                                         // interaction with the edit mode is better.
             public bool refreshThumbnail = false;
 
@@ -168,7 +167,6 @@ namespace Boku
                     cursorPosition = value;
                 }
             }
-
 
             public ToolBox ToolBox
             {
@@ -240,7 +238,6 @@ namespace Boku
                                                                 );
             }
 
-
             /// <summary>
             /// Tries to keep the camera from penetrating the ground.
             /// </summary>
@@ -265,7 +262,7 @@ namespace Boku
                 altitude = Math.Max(altitude, Terrain.GetTerrainAndPathHeight(center + new Vector3(radius, -radius, 0.0f)));
                 altitude = Math.Max(altitude, Terrain.GetTerrainAndPathHeight(center + new Vector3(-radius, -radius, 0.0f)));
                 altitude = Math.Max(altitude, Terrain.GetTerrainAndPathHeight(center + new Vector3(-radius, radius, 0.0f)));
-                
+
                 // Use samples to calc height above the ground.
                 float height = center.Z - camera.BoundingSphere.Radius - altitude;
 
@@ -428,7 +425,7 @@ namespace Boku
 
             public Texture2D ThumbNail
             {
-                get 
+                get
                 {
                     if (thumbNail == null)
                         try
@@ -599,7 +596,7 @@ namespace Boku
 
                 InGame.inGame.renderEffects = RenderEffect.ShadowPass;
 
-                // Render the waypoints and roads.  Note that we don't 
+                // Render the waypoints and roads.  Note that we don't
                 // render these shadows while terrain heights are being
                 // changed.
                 if (InGame.inGame.terrain.LastEdit != Time.FrameCounter)
@@ -683,7 +680,7 @@ namespace Boku
                 HelpOverlay.RefreshTexture();
 
                 // If one of the edit modes is active, instead of rendering the full scene just
-                // fill the screen with the thumbnail ala what we do for the mini-hub.  This has 
+                // fill the screen with the thumbnail ala what we do for the mini-hub.  This has
                 // a couple of advantages:  First, it decreases the visual clutter.  The
                 // programming UI is already quite busy and this helps tone down what's behind it.
                 // Second, if the current scene has quite a few objects the frame rate can be bad
@@ -738,7 +735,7 @@ namespace Boku
                         Texture2D smallThumb = SmallThumbNail;
                         if (InGame.inGame.RenderWorldAsThumbnail && !InGame.RefreshThumbnail)
                         {
-                            // Always need to clear just to be sure z-buffer is reset.  Note this doesn't 
+                            // Always need to clear just to be sure z-buffer is reset.  Note this doesn't
                             // seem to be needed on desktop build but is required on WinRT.
                             InGame.Clear(new Color(20, 20, 20));
 
@@ -770,7 +767,6 @@ namespace Boku
                                 batch.End();
                             }
                         }   // If we need the thumbnail as background.
-
 
                         //
                         // Render directly to backbuffer rather than to RT.
@@ -853,7 +849,7 @@ namespace Boku
 
                     try
                     {
-                        // If we think we want to skip this frame 
+                        // If we think we want to skip this frame
                         // see if there's a valid texture to grab.
                         if (skipFrame)
                         {
@@ -997,7 +993,7 @@ namespace Boku
                         InGame.inGame.PopBatching(batching);
 
                         DistortionManager.RenderBloomSM2(shared.camera);
-                        
+
                         // Render the water.
                         InGame.inGame.terrain.RenderWater(shared.camera, false);
                         Ripple.Render(shared.camera);
@@ -1025,7 +1021,7 @@ namespace Boku
                         shared.particleSystemManager.Render(shared.camera);
 
                         shared.editWayPoint.RenderWayPointSelection(shared.camera);
-                        
+
                         Fx.Luz.DebugDrawLuz(shared.camera);
                         FirstPersonEffectMgr.Render(shared.camera);
                         Shield.Render(shared.camera);
@@ -1138,9 +1134,6 @@ namespace Boku
                         //Terrain.RenderTestRays(shared.camera);
                         */
 
-
-
-
 //#if DEBUG
 //                        //draw the last positions (debug build only)
 
@@ -1153,7 +1146,7 @@ namespace Boku
 //                                if (touch != null)
 //                                {
 //                                    Vector2 crossHairOffset = new Vector2(0.0f, -20.0f);
-                                    
+
 //                                    Utils.Draw2DCrossHairs(touch.startPosition + crossHairOffset, new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 //                                    Utils.Draw2DCrossHairs(touch.previousPosition + crossHairOffset, new Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 //                                    Utils.Draw2DCrossHairs(touch.position + crossHairOffset, new Vector4(1.0f, 0.0f, 0.0f, 1.0f));
@@ -1182,7 +1175,7 @@ namespace Boku
                             // Clear to get the same results as rendering the skybox w/ DepthPass true.
                             // TODO (****) The comment above mentions that we don't need to clear the depth buffer
                             // but this version of clear does clear the depth buffer.  Is that a problem???
-                            
+
                             // TODO (****) Why clear to transparent red???
                             InGame.Clear(new Color(1, 0, 0, 0));
 
@@ -1240,7 +1233,6 @@ namespace Boku
 
                             // Resolve the rendertarget(s).
 
-
                             // Restore the original backbuffer (original rendertarget).
                             InGame.RestoreRenderTarget();
 
@@ -1263,18 +1255,14 @@ namespace Boku
                                 InGame.SetRenderTarget(smallRenderTarget0);
                                 boxFilter.Render(fullRenderTarget1);
 
-
                                 InGame.SetRenderTarget(bloomRenderTarget);
                                 boxFilter.Render(smallRenderTarget0);
-
 
                                 InGame.SetRenderTarget(tinyRenderTarget0);
                                 gaussianFilter.RenderHorizontal(bloomRenderTarget);
 
-
                                 InGame.SetRenderTarget(bloomRenderTarget);
                                 gaussianFilter.RenderVertical(tinyRenderTarget0);
-
 
                                 InGame.RestoreRenderTarget();
 
@@ -1287,14 +1275,11 @@ namespace Boku
                                 InGame.SetRenderTarget(glowRenderTarget);
                                 boxFilter.Render(smallRenderTarget0);
 
-
                                 InGame.SetRenderTarget(tinyRenderTarget0);
                                 gaussianFilter.RenderHorizontal(glowRenderTarget);
 
-
                                 InGame.SetRenderTarget(glowRenderTarget);
                                 gaussianFilter.RenderVertical(tinyRenderTarget0);
-
 
                                 InGame.RestoreRenderTarget();
                             }
@@ -1325,9 +1310,6 @@ namespace Boku
                                 distortRenderTarget1
                                 );
 
-
-
-                            
                             /*
                             // Debug...
                             //InGame.Clear(Color.Coral);
@@ -1344,8 +1326,7 @@ namespace Boku
                                 batch.Draw(glowRenderTarget, rect, new Color(1, 1, 1, 1.0f));
                             }
                             batch.End();
-                            */                            
-
+                            */
 
                             if (InGame.RefreshThumbnail)
                             {
@@ -1380,7 +1361,7 @@ namespace Boku
                             SpriteBatch batch = UI2D.Shared.SpriteBatch;
                             batch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
                             {
-                                // Note, fullRenderTarget0 may be larger than the current screen so only take the part we care about. 
+                                // Note, fullRenderTarget0 may be larger than the current screen so only take the part we care about.
                                 Microsoft.Xna.Framework.Rectangle dstRect = new Microsoft.Xna.Framework.Rectangle((int)BokuGame.ScreenPosition.X, (int)BokuGame.ScreenPosition.Y, (int)BokuGame.ScreenSize.X, (int)BokuGame.ScreenSize.Y);
                                 Microsoft.Xna.Framework.Rectangle srcRect = dstRect;
                                 batch.Draw(fullRenderTarget0, dstRect, srcRect, Color.White);
@@ -1400,7 +1381,7 @@ namespace Boku
 
                     // Set viewport to take into account tutorial mode changing the screen.
                     SetViewportToScreen();
-                    
+
                     // Render touch cursor (if any touches).  Note this MUST be after viewport is set.
                     RenderTouchCursor();
 
@@ -1430,7 +1411,7 @@ namespace Boku
                         shared.compass.Render(shared.camera);
                     }
 
-                    // NOTE This got removed when touch was added.  No clue what thought was there.  
+                    // NOTE This got removed when touch was added.  No clue what thought was there.
                     // Adding it back in like this may cause other flakiness.
                     // If in object edit mode, render the color palette.
                     if (InGame.inGame.CurrentUpdateMode == UpdateMode.EditObject || InGame.inGame.CurrentUpdateMode == UpdateMode.TweakObject)
@@ -1583,8 +1564,8 @@ namespace Boku
                 InGame.inGame.touchEditUpdateObj.ToolBox.Render();
 
                 // ToolBar and any active menus if in mouse edit mode.
-                if (InGame.inGame.CurrentUpdateMode == UpdateMode.MouseEdit && 
-                    !InGame.inGame.mouseEditUpdateObj.ToolBox.PickersActive && 
+                if (InGame.inGame.CurrentUpdateMode == UpdateMode.MouseEdit &&
+                    !InGame.inGame.mouseEditUpdateObj.ToolBox.PickersActive &&
                     !InGame.inGame.mouseEditUpdateObj.ToolBox.SlidersActive)
                 {
                     // Don't show any of the mouse edit menus if the AddItem help, programming editor, text editor or pattern editor is active.
@@ -1604,7 +1585,7 @@ namespace Boku
                         InGame.inGame.mouseEditUpdateObj.ToolBox.EditPathsToolInstance.EdgeMenu.Render();
                     }
                 }
-                else if (InGame.inGame.CurrentUpdateMode == UpdateMode.TouchEdit && 
+                else if (InGame.inGame.CurrentUpdateMode == UpdateMode.TouchEdit &&
                     !InGame.inGame.touchEditUpdateObj.ToolBox.PickersActive &&
                     !InGame.inGame.touchEditUpdateObj.ToolBox.SlidersActive)
                 {
@@ -1673,12 +1654,11 @@ namespace Boku
             {
 
             }   // end of RenderObj Activate()
-            
+
             public override void Deactivate()
             {
 
             }   // end of RenderObj Deactivate()
-
 
             public void LoadContent(bool immediate)
             {
@@ -1828,7 +1808,6 @@ namespace Boku
                 InitDeviceResources(device);
             }
 
-
             public void RenderMessageStack()
             {
                 for (int i = 0; i < messages.Count; i++)
@@ -1903,7 +1882,7 @@ namespace Boku
                     {
                         touchCursorRenderPos = targetCursorPos;
                     }
-                
+
                     SpriteBatch batch = UI2D.Shared.SpriteBatch;
                     batch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
                     {
@@ -1923,17 +1902,16 @@ namespace Boku
 
         }   // end of class RenderObj
 
-
         public abstract class InGameUpdateObject : UpdateObject, INeedsDeviceReset
         {
             public override void Update()
             {
                 InGame.inGame.saveLevelDialog.Update();
 
-                // If we're not in run mode or WorldTweak or..., we must be editing.  
+                // If we're not in run mode or WorldTweak or..., we must be editing.
                 // So, look at the input mode and switch update modes if needed.
                 // TODO (mouse) Do we need to set up / fix up cursor stuff here???
-                if (InGame.inGame.CurrentUpdateMode != UpdateMode.RunSim 
+                if (InGame.inGame.CurrentUpdateMode != UpdateMode.RunSim
                     && InGame.inGame.CurrentUpdateMode != UpdateMode.EditWorldParameters
                     && InGame.inGame.CurrentUpdateMode != UpdateMode.SelectNextLevel
                     && InGame.inGame.CurrentUpdateMode != UpdateMode.EditObjectParameters)
@@ -1954,7 +1932,7 @@ namespace Boku
                     {
                         InGame.inGame.CurrentUpdateMode = UpdateMode.MouseEdit;
                     }
-                    
+
                 }
             }   // end of Update()
 
@@ -2022,12 +2000,11 @@ namespace Boku
         {
             get { return Time.GameTimeTotalSeconds - startTime - totalPauseTime; }
         }
-        
+
         public double LevelLoadedSeconds
         {
             get { return Time.GameTimeTotalSeconds - loadTime - totalLoadedPauseTime; }
         }
-        
 
         /// <summary>
         /// Does any koding in the current level use the mouse sensor?
@@ -2055,7 +2032,7 @@ namespace Boku
             get { return shared.programUsesRightMouse; }
             set { shared.programUsesRightMouse = value; }
         }
-        
+
         /// <summary>
         /// Does any koding in the current level use the mouse hover filter?
         /// </summary>
@@ -2078,14 +2055,14 @@ namespace Boku
         //PV: public accessor for the touchEdit variable
         public TouchEdit TouchEdit
         {
-            get { return touchEdit; } 
-        }       
+            get { return touchEdit; }
+        }
 
         public bool SnapToGrid
         {
             get { return shared.SnapToGrid; }
-            set 
-            { 
+            set
+            {
                 shared.SnapToGrid = value;
 
                 if (value)
@@ -2126,7 +2103,7 @@ namespace Boku
             get { return saveLevelDialog.Active || ModularMessageDialogManager.Instance.IsDialogActive(); }
         }
 
-        //helper function that will, if appropriate, update the touch and mouse edit return modes to 
+        //helper function that will, if appropriate, update the touch and mouse edit return modes to
         //ensure consistenty when switching between input types
         public static void SetReturnEditMode(BaseEditUpdateObj.ToolMode currentMode)
         {
@@ -2189,12 +2166,11 @@ namespace Boku
         };
         public RenderEffect renderEffects = RenderEffect.Normal;          // This is basically a global that lets the gameThings know that they should be
                                                     // rendering to the effects buffer instead of rendering color.  It would be nice
-                                                    // if this was just an arg to the render call but than would mean changing 
+                                                    // if this was just an arg to the render call but than would mean changing
                                                     // RenderObject which means that just about everything needs to change.  Of course
                                                     // all these non-gameThings would then have a paramter to their render call that
                                                     // they ignore resulting in more code churn for less efficient code.  Sweet.
                                                     // This should all get re-thought when we get a chance.
-
 
         // List objects.
         protected RenderObj renderObj = null;
@@ -2353,10 +2329,10 @@ namespace Boku
         /// </summary>
         public Texture2D SmallThumbNail
         {
-            get 
+            get
             {
                 InGame.RefreshThumbnail = true;
-                return renderObj.SmallThumbNail; 
+                return renderObj.SmallThumbNail;
             }
         }
 
@@ -2385,7 +2361,7 @@ namespace Boku
         public void RegisterBrain(GameActor ga)
         {
             // We don't want to register the brains of creatables since we
-            // don't want them to be run.  
+            // don't want them to be run.
             if (!ga.Creatable)
             {
                 ga.BrainRegistered = Register(ga, brainUpdates, ga.BrainRegistered);
@@ -2393,7 +2369,7 @@ namespace Boku
         }
         public void RegisterChassis(GameThing gt)
         {
-            // Note that we specifically do want to register the chassis 
+            // Note that we specifically do want to register the chassis
             // of creatables since the chassis update keeps animations and
             // partical systems (smoke) in place and working.
             gt.ChassisRegistered = Register(gt, chassisUpdates, gt.ChassisRegistered);
@@ -2402,14 +2378,14 @@ namespace Boku
         {
             if (!ga.Creatable)
             {
-                // HACK Clam uses a fixed position chassis BUT uses the 
+                // HACK Clam uses a fixed position chassis BUT uses the
                 // normal collision sphere so we need to special case it.
                 //
                 // The real problem is that "movers" are expected to use a simple
                 // collision sphere while "static props" (castle, trees, etc) use
                 // a collection of collision primitives.  The clam even though it's
                 // a static prop doesn't have a collection of primitives and so needs
-                // to use its collision sphere.  So, this hack tells the system to 
+                // to use its collision sphere.  So, this hack tells the system to
                 // treat the clam as a mover.
                 // Seagrass is even a worse hack.  We do the same thing so that collisions
                 // are detected but we only care about them being reported as bumps.  We
@@ -2424,7 +2400,7 @@ namespace Boku
                     CollSys.RegisterBlocker(ga);
                 }
             }
-            
+
         }
         protected bool Register(GameActor ga, List<GameActor> list, bool done)
         {
@@ -2452,7 +2428,6 @@ namespace Boku
 
             brainUpdates.Clear();
         }
-
 
         public void UnRegisterBrain(GameActor ga)
         {
@@ -2518,10 +2493,10 @@ namespace Boku
             {
                 return;
             }
-            
+
             // This call has been MOVED to the TOP of the BokuGame::Update() call.
             // Go there for a comment on why this change was done.
-            // TouchEdit.Update(shared.camera); 
+            // TouchEdit.Update(shared.camera);
 
             // Don't update if we're paused.
             if (Time.Paused == false)
@@ -2538,7 +2513,7 @@ namespace Boku
                     chassisUpdates[i].DesiredMovement.Reset();
                 }
 
-                // Clear the lists used by the camera when following multiple objects 
+                // Clear the lists used by the camera when following multiple objects
                 // or in first person mode.
                 CameraInfo.ResetIgnoreList();
 
@@ -2575,7 +2550,7 @@ namespace Boku
                 }
 
                 // Delay the end of path process by 1 frame before clearing out all the flags
-                // Allows for all sensors to detect the EOP 
+                // Allows for all sensors to detect the EOP
                 for (int i = 0; i < brainUpdates.Count; ++i)
                 {
                     // If already set, this indicates that EOP happened last frame so clear state.
@@ -2609,7 +2584,7 @@ namespace Boku
                 CameraInfo.ResolveFollowLists();
 
                 //
-                // Do pre-collision update.  This does most of the dynamics for the object.  
+                // Do pre-collision update.  This does most of the dynamics for the object.
                 // Also build up current camera focus list at the same time.
                 //
                 for (int i = 0; i < chassisUpdates.Count; i++)
@@ -2626,7 +2601,7 @@ namespace Boku
 
                     chassisUpdates[i].Chassis.PreCollisionTestUpdate(chassisUpdates[i]);
 
-                    // If this object is being held then update its velocity to match the 
+                    // If this object is being held then update its velocity to match the
                     // holding object's so that the collision testing works correctly.
                     if (ga != null && ga.ActorHoldingThis != null)
                     {
@@ -2657,7 +2632,7 @@ namespace Boku
                 // Do collision testing with glass walls and terrain.
                 //
                 // Note that this is going over the whole gameThingList instead
-                // of just the chassisUpdates list.  This is because anything 
+                // of just the chassisUpdates list.  This is because anything
                 // added during the brain update may get pushed into an invalid
                 // location before it has a chance to get added to the list.
                 for (int i = 0; i < chassisUpdates.Count; i++)
@@ -2682,7 +2657,7 @@ namespace Boku
                             ga.Movement.Position = ga.Movement.PrevPosition;
                         }
 
-                        // Apply positional constraints imposed by the brain again.  We also apply 
+                        // Apply positional constraints imposed by the brain again.  We also apply
                         // them in CollideWithTerrainWalls but the position may have been moved again
                         // in PostCollisionTestUpdate().
                         if (ga.Chassis.Constraints != ConstraintModifier.Constraints.None)
@@ -2767,8 +2742,6 @@ namespace Boku
             None,   // Use to "clear" pendingUpdateMode.
         }
 
-
-
         private UpdateMode currentUpdateMode = UpdateMode.None;     // Start in None, this forces a reset the first time we set any mode.
         private UpdateMode pendingUpdateMode = UpdateMode.None;     // The mode we're switching to.
         private UpdateMode previousUpdateMode = UpdateMode.RunSim;  // Where we were before we got to where we are.
@@ -2779,10 +2752,10 @@ namespace Boku
             Active,
             Paused,
         }
-        
+
         private States state = States.Inactive;
         private States pendingState = States.Inactive;
-        
+
         public void AddBatch(FBXModel.RenderPack pack)
         {
             renderObj.AddBatch(pack);
@@ -2837,7 +2810,7 @@ namespace Boku
             {
                 if (currentUpdateMode != value)
                 {
-                    // Transitioning between edit and run modes save away the appropriate camera. 
+                    // Transitioning between edit and run modes save away the appropriate camera.
                     if (currentUpdateMode == UpdateMode.RunSim)
                     {
                         SavePlayModeCamera();
@@ -2938,7 +2911,7 @@ namespace Boku
 
         /// <summary>
         /// The name of the current light rig.  Note that
-        /// this is the internal, English name, not the 
+        /// this is the internal, English name, not the
         /// localized one.
         /// </summary>
         public static string LightRig
@@ -3001,9 +2974,9 @@ namespace Boku
                 }
             }
         }
-        
+
         /// <summary>
-        /// Whether we show a line from EVERYTHING that sees or hears to 
+        /// Whether we show a line from EVERYTHING that sees or hears to
         /// EVERYTHING it sees or hears. See GameActor version for property
         /// specific to each actor.
         /// </summary>
@@ -3019,7 +2992,7 @@ namespace Boku
                 }
             }
         }
-        
+
         /// <summary>
         /// Displays the currently executing programming page above each actor
         /// only if they have any code at all.
@@ -3126,10 +3099,10 @@ namespace Boku
         public static bool ShowVirtualController
         {
             get{ return (null != xmlWorldData) && xmlWorldData.showVirtualController; }
-            set 
+            set
             {
                 if (null != xmlWorldData)
-                { 
+                {
                     xmlWorldData.showVirtualController = value;
                     IsLevelDirty = true;
                 }
@@ -3261,8 +3234,8 @@ namespace Boku
         }
         public bool GameOver
         {
-            set 
-            { 
+            set
+            {
                 VictoryOverlay.ActiveGameOver = value;
                 if (value)
                 {
@@ -3296,13 +3269,13 @@ namespace Boku
         public bool RenderWorldAsThumbnail
         {
             get { return shared.renderWorldAsThumbnail; }
-            set 
+            set
             {
                 if (value)
                 {
                     InGame.RefreshThumbnail = true;
                 }
-                shared.renderWorldAsThumbnail = value; 
+                shared.renderWorldAsThumbnail = value;
             }
         }
 
@@ -3360,7 +3333,7 @@ namespace Boku
             editWorldParametersUpdateObj = new EditWorldParametersUpdateObj(this, ref shared);
             editObjectParametersUpdateObj = new EditObjectParametersUpdateObj(this, ref shared);
             selectNextLevelUpdateObj = new SelectNextLevelUpdateObj(this, ref shared);
-            
+
             // Steal the RunSimUpdateObject's update list for the other update objects.
             toolMenuUpdateObj.updateList = runSimUpdateObj.updateList;
             toolBoxUpdateObj.updateList = runSimUpdateObj.updateList;
@@ -3376,20 +3349,19 @@ namespace Boku
             // Set the currently active update list.
             updateObj = runSimUpdateObj;
             currentUpdateMode = UpdateMode.None;
-            
+
             renderObj = new RenderObj(ref shared);
 
             mouseEdit = new MouseEdit(this);
 
             touchEdit = new TouchEdit(this);
-            
+
             Init();
-            ExplosionManager.Init();    // This and the particle system manager should probably 
+            ExplosionManager.Init();    // This and the particle system manager should probably
                                         // be pulled out of InGame and made available everywhere.
 
             saveLevelDialog = new SaveLevelDialog();
             saveLevelDialog.OnButtonPressed += OnSaveLevelDialogButton;
-
 
         }   // end of InGame c'tor
 
@@ -3473,7 +3445,7 @@ namespace Boku
             actor.Movement.RotationZ = rot;
 
             // Now that the position is set, we can query for the poper height
-            // at this position and set that to match.  Note that you can't 
+            // at this position and set that to match.  Note that you can't
             // call GetPreferredAltitude() without setting the position first
             // or you'll get an altitude from some other place.
 
@@ -3493,7 +3465,7 @@ namespace Boku
                 float terrainHeight = Terrain.GetTerrainAndPathHeight(a.Movement.Position);
                 a.Chassis.InsideGlassWalls = terrainHeight != 0;
             }
-            
+
             return a;
         }
 
@@ -3583,7 +3555,7 @@ namespace Boku
         #region Public
 
         /// <summary>
-        /// This is the dialog that is shown when changing to a linked 
+        /// This is the dialog that is shown when changing to a linked
         /// level but the current level has yet to be saved.
         /// </summary>
         /// <param name="onCancel"></param>
@@ -3655,10 +3627,9 @@ namespace Boku
         public delegate GameThing AddThingDelegate(GameThing thing, bool ignoreResourceBudget = false);
         #endregion Public
 
-
         #region Internal
         /// <summary>
-        /// Zero out the actor cost on unloading a scene. It should already 
+        /// Zero out the actor cost on unloading a scene. It should already
         /// be about zero because we've just removed everything, but this prevents
         /// accumulation of slight errors.
         /// </summary>
@@ -3688,7 +3659,7 @@ namespace Boku
 
         /// <summary>
         /// Compute the object bounds. Note that we don't want these kept up to date,
-        /// as that would cause the sky dome to react every time a bot exploded. So 
+        /// as that would cause the sky dome to react every time a bot exploded. So
         /// these are only computed at load.
         /// </summary>
         private void MakeObjectBounds()
@@ -3799,9 +3770,6 @@ namespace Boku
             }
         }   // end of ApplyInlining()
 
-
-
-
         public override bool Refresh(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
             bool result = false;
@@ -3863,7 +3831,6 @@ namespace Boku
                     preGame.Active = false;
                 }
 
-
                 // Swap out the current updateObj for the pending one.
                 updateList.Remove(updateObj);
                 updateObj.Deactivate();
@@ -3889,9 +3856,9 @@ namespace Boku
                 pendingUpdateMode = UpdateMode.None;
 
                 // Do a bunch of transition dependent stuff.
-                // Currently, and this may change at any minute, the only non-editing mode we 
+                // Currently, and this may change at any minute, the only non-editing mode we
                 // have is RunSim.  So, we only need to save and/or reload when going in and
-                // out of RunSim mode.  Well, actually, not quite.  
+                // out of RunSim mode.  Well, actually, not quite.
 
                 // Are we transitioning out of an edit mode.  If so, trigger an autosave.
                 if(currentUpdateMode == UpdateMode.RunSim)
@@ -3918,7 +3885,7 @@ namespace Boku
                     BokuGame.bokuGame.shaderGlobals.SetLightRig("Day");
 
                     // Restore the edit camera position unless we're already
-                    // in free/edit mode in which case just leave the camera alone.  
+                    // in free/edit mode in which case just leave the camera alone.
                     if (CameraInfo.Mode != CameraInfo.Modes.Edit)
                     {
                         RestoreEditCamera(true);
@@ -3952,7 +3919,7 @@ namespace Boku
                         }
                     }
 
-                    // TODO We need to rethink whether or not things have 
+                    // TODO We need to rethink whether or not things have
                     // a paused state as well as pausing via stopping time.
                     PauseAllGameThings();
 
@@ -3973,7 +3940,7 @@ namespace Boku
                 // If we're going into run mode.
                 if (currentUpdateMode == UpdateMode.RunSim)
                 {
-                    // We generally use the Day time rig for edit mode so transition 
+                    // We generally use the Day time rig for edit mode so transition
                     // into the game's light rig.
                     BokuGame.bokuGame.shaderGlobals.SetLightRig(xmlWorldData.lightRig);
 
@@ -3994,7 +3961,7 @@ namespace Boku
 
                     // After flushing deactivated objects, deactivate the creatables.
                     RemoveCreatablesFromScene();
-                    
+
                     cursor3D.Deactivate();
 
                     // We want to do the inlining as late as possible
@@ -4068,7 +4035,7 @@ namespace Boku
                 BokuGame.objectListDirty = true;
             }
 
-            ActorFactory.Enabled = CurrentUpdateMode != UpdateMode.EditObject && 
+            ActorFactory.Enabled = CurrentUpdateMode != UpdateMode.EditObject &&
                 CurrentUpdateMode != UpdateMode.MouseEdit &&
                 CurrentUpdateMode != UpdateMode.TouchEdit;
 
@@ -4127,7 +4094,7 @@ namespace Boku
                 // stop timer
                 Instrumentation.StopTimer(timerInstrument);
 
-                // Whether we were in sim mode or edit mode we 
+                // Whether we were in sim mode or edit mode we
                 // need to pop everything off the stack.
                 HelpOverlay.Clear();
             }
@@ -4135,7 +4102,7 @@ namespace Boku
 
         public bool ShowEditor(GameActor gameActor)
         {
-            
+
             if (state != States.Paused)
             {
                 pendingState = States.Paused;
@@ -4219,7 +4186,6 @@ namespace Boku
             MainMenu.Instance.Activate();
         }
 
-       
         /// <summary>
         /// Runs through the current gameThingList and pauses all the objects.
         /// </summary>
@@ -4254,7 +4220,7 @@ namespace Boku
 
                 // We need to wipe each acotr's brain at this point so that scores
                 // work correctly.  In particular, scores must be Active in order to
-                // be displayed on the screen.  Part of Wipe goes through all the 
+                // be displayed on the screen.  Part of Wipe goes through all the
                 // reflexes looking for scores that need to be activated.  If this
                 // is not done then the first time a score is expected to display it
                 // will not.  Since Wipe is called when unloading a level, the next
@@ -4611,7 +4577,7 @@ namespace Boku
         {
             Debug.Assert(dst.GetType() == src.GetType(), "Copying between different types");
 
-            // If the thing we're cloning is already in the world, set the 
+            // If the thing we're cloning is already in the world, set the
             // lastCloneThing ref so that we can prevent it from colliding
             // with the selected object.
             if (gameThingList.Contains(src))
@@ -4665,7 +4631,7 @@ namespace Boku
             // Copy the chassis data.
             dst.Chassis = (BaseChassis)src.Chassis.Clone();
 
-            // If the thing we're cloning is already in the world, set the 
+            // If the thing we're cloning is already in the world, set the
             // lastCloneThing ref so that we can prevent it from colliding
             // with the selected object.
             if (gameThingList.Contains(src))
@@ -4687,7 +4653,6 @@ namespace Boku
 
             // Copy over the initial height offset.
             dst.HeightOffset = src.HeightOffset;
-
 
             // Copy brain.
             dst.Brain = Brain.DeepCopy(src.Brain);
@@ -4728,7 +4693,6 @@ namespace Boku
             editObjectUpdateObj.CloneAction(editObject);
         }
 
-
         /// <summary>
         /// When passed in a size less than the total available video memory,
         /// this function locks up that much video memory and won't let it go.
@@ -4738,8 +4702,8 @@ namespace Boku
         /// lock, and then releases all of it.
         /// This function works by allocating 256x256x4 rendertargets (which must reside in video
         /// memory) until reaching the goal or failure. On success, it holds onto
-        /// the memory, simulating not having it to begin with. On failure, it 
-        /// then releases all that allocated memory to not cripple your machine. 
+        /// the memory, simulating not having it to begin with. On failure, it
+        /// then releases all that allocated memory to not cripple your machine.
         /// This is a debug/dev function, not a production runtime utility.
         /// </summary>
         public static void DebugCheckVideoMem(UInt64 sizeToSuck)
@@ -4780,23 +4744,23 @@ namespace Boku
 
         public bool IsOverUIButton(TouchContact touch, bool ignoreOnDrag)
         {
-            if (InGame.inGame.CurrentUpdateMode == UpdateMode.MouseEdit && 
-                InGame.inGame.mouseEditUpdateObj.ToolBar.IsOverUIButton(touch, ignoreOnDrag))                
+            if (InGame.inGame.CurrentUpdateMode == UpdateMode.MouseEdit &&
+                InGame.inGame.mouseEditUpdateObj.ToolBar.IsOverUIButton(touch, ignoreOnDrag))
             {
                 //mouse mode over mouse UI?
                 return true;
             }
-            
-            if (InGame.inGame.CurrentUpdateMode == UpdateMode.TouchEdit && 
+
+            if (InGame.inGame.CurrentUpdateMode == UpdateMode.TouchEdit &&
                 (InGame.inGame.touchEditUpdateObj.ToolBar.IsOverUIButton(touch, ignoreOnDrag) ||
                  InGame.inGame.touchEditUpdateObj.ToolBox.IsTouchOverMenuButton(touch)))
             {
                 //touch mode over touch UI
                 return true;
             }
-            
+
             return false;
-            
+
         }
 
 #if INSTRUMENT_RTS

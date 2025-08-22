@@ -4,7 +4,7 @@
 /*
  * AmcImporter.cs
  * Copyright (c) 2006, 2007 Michael Nikonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -40,7 +40,7 @@ namespace Xclna.Xna.Animation.Reader
     /// <summary>
     /// Imports Acclaim AMC (motion capture data).
     /// For a foo_bar.amc, expects skeleton in a file named foo.asf.
-    /// Returns a skeleton with Animations in root bone. 
+    /// Returns a skeleton with Animations in root bone.
     /// </summary>
     [ContentImporter(".AMC", CacheImportedData = true, DefaultProcessor = "AnimationProcessor",
         DisplayName="Acclaim AMC - Animation Library")]
@@ -63,13 +63,12 @@ namespace Xclna.Xna.Animation.Reader
                 return contentId;
             }
         }
-        #endregion            
-
+        #endregion
 
         /// <summary>
         /// Imports Acclaim AMC (motion capture data).
         /// For a foo_bar.amc, expects skeleton in a file named foo.asf.
-        /// Returns a skeleton with Animations in root bone. 
+        /// Returns a skeleton with Animations in root bone.
         /// </summary>
         public override BoneContent Import(string filename, ContentImporterContext context)
         {
@@ -119,13 +118,13 @@ namespace Xclna.Xna.Animation.Reader
                         }
                         AnimationChannel channel = animation.Channels[bone];
                         AnimationKeyframe keyframe = importKeyframe(s, frameNumber);
-                        if (keyframe!=null) 
+                        if (keyframe!=null)
                             channel.Add(keyframe);
                     }
                 }
             }
             animation.Duration = TimeSpan.FromTicks(maxFrameNumber * ticksPerFrame);
-            context.Logger.LogImportantMessage("imported {0} animation frames for {1} bones", 
+            context.Logger.LogImportantMessage("imported {0} animation frames for {1} bones",
                 maxFrameNumber, animation.Channels.Count);
             root.Animations.Add(animation.Name, animation);
             return root;
@@ -152,8 +151,8 @@ namespace Xclna.Xna.Animation.Reader
                 Quaternion r=Quaternion.Identity;
                 for (int i = 0; i < dataLength; i++)
                 {
-                    float data = float.Parse(s[i + 1], 
-                        NumberStyles.Float, 
+                    float data = float.Parse(s[i + 1],
+                        NumberStyles.Float,
                         CultureInfo.InvariantCulture.NumberFormat);
                     if (dof[i] == "tx")
                         t.X = data;

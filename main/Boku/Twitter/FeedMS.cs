@@ -68,13 +68,13 @@ namespace Boku
             {
                 try
                 {
-                    postDateDT = DateTime.ParseExact(value, "M/d/yyyy", null);                                  
+                    postDateDT = DateTime.ParseExact(value, "M/d/yyyy", null);
                 }
                 catch
                 {
                 }
                 postDate = value;
-                dateBlob = new TextBlob(dateFont, postDate, 160);                
+                dateBlob = new TextBlob(dateFont, postDate, 160);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Boku
                     titleWidth = (int)(base.Width * 0.8f);
                 title = value;
                 titleBlob = new TextBlob(titleFont, title, titleWidth);
-                
+
             }
         }
 
@@ -120,9 +120,6 @@ namespace Boku
                 }
             }
         }
-
-
-
 
         public FeedMs(Vector2 size, TextBlob tBlob, Shared.GetFont titleFont, Shared.GetFont dateFont, Shared.GetFont bodyFont)
           : base(size)
@@ -164,7 +161,7 @@ namespace Boku
 
             size.Y = (textBlob.NumLines - 1) * textBlob.TotalSpacing;
             size.Y += bodyFont().LineSpacing;
-            size.Y += GetTitleHeightOffset(); 
+            size.Y += GetTitleHeightOffset();
             size.Y += GetDateHeightOffset();
             base.Height = size.Y;
         }
@@ -215,14 +212,14 @@ namespace Boku
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pos">Appears to be position on RT to render this news item.  Different for each item.</param>
         override public void Render(Vector2 pos)
         {
             base.Render(pos);
             drawPos = pos;
-            // drawOffset seems just to be an offset accumulated as each section of 
+            // drawOffset seems just to be an offset accumulated as each section of
             // the news item is rendered.
             Vector2 drawOffset = Vector2.Zero;
 
@@ -366,7 +363,7 @@ namespace Boku
             }
         }
 
-        override public bool SetPrevFocus() 
+        override public bool SetPrevFocus()
         {
             if (!useFocus)
             {
@@ -384,7 +381,7 @@ namespace Boku
             }
         }
 
-        override public bool SetNextFocus() 
+        override public bool SetNextFocus()
         {
             if (!useFocus)
             {
@@ -424,7 +421,6 @@ namespace Boku
             }
         }
         */
- 
 
     }
 }

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -19,7 +18,7 @@ namespace Boku
 {
     /// <summary>
     /// This represents the abstract sub-object to a GameObject
-    /// It should contain only those bits that are specific to rendering and 
+    /// It should contain only those bits that are specific to rendering and
     /// should reference other bits shared with other sub-object or the gameobject
     /// in a custom shared sub-object.
     /// </summary>
@@ -46,7 +45,4 @@ namespace Boku
 
     }   // end of abstract class RenderObject
 
-
-
 }   // end of namespace Boku
-

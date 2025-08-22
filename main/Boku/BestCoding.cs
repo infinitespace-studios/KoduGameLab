@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #region Defines
 /// #defines in UPPER_CASE
 #if DEBUG
@@ -18,16 +17,15 @@ using System.Diagnostics;
 
 using Boku.Common;
 
-
 /// <summary>
 /// Sample code to demonstrate "best practices" layout for Boku C# files. Start
-/// with a highlevel summary. 
-/// 
+/// with a highlevel summary.
+///
 /// Formatting:
 /// -----------
 /// Based on the idea that any consistent formatting is more readable than a jumble of different
 /// styles, formatting is generally to be left at the dev studio defaults.
-/// 
+///
 /// Comments:
 /// ---------
 /// Broad comments that pertain to the entire class go here, in the class description.
@@ -37,27 +35,27 @@ using Boku.Common;
 /// with the code within the class. Use this section for describing the intent of the
 /// code.
 /// This is also a good place to concisely describe how other classes should interface
-/// with this class. 
-/// Make all comments in as proper English as you can manage, including spelling and 
+/// with this class.
+/// Make all comments in as proper English as you can manage, including spelling and
 /// punctuation. This helps in reading as well as search.
 /// Keep humor to a minimum in comments, you never know who will read them.
-/// 
+///
 /// Naming:
 /// ------
 /// Keep one class per file, and create a subfolder for every namespace. The exceptions
 /// are that child classes, where small and trivial may remain in the same file. If it gets
 /// much beyond a struct, moving to another file using "partial".
-/// 
+///
 /// Prefix interface names with "I", e.g. public interface IDislikeYou {.
-/// 
+///
 /// See more naming notes in situ, like at a sample member variable name.
-/// 
+///
 /// Spelling:
 /// ---------
 /// Also watch your spelling with variable names. If someone that searched for 20 minutes
 /// on Finalize() comes to your door with a bat wondering why you spelled it Finialize(),
 /// yell all you want but don't expect support.
-/// 
+///
 /// </summary>
 namespace Boku.SimWorld
 {
@@ -65,9 +63,9 @@ namespace Boku.SimWorld
     {
         /// A typical class will have all the following regions in the same order.
         /// Exact names are flexible, but should include at least variants on the following
-        /// four regions. Additional subregions within these may be added. 
+        /// four regions. Additional subregions within these may be added.
         /// The overarching idea is to block off the public APIs and internals in separate
-        /// sections, 
+        /// sections,
         #region Members
         /// <summary>
         /// All members should be private, and accessed through Properties. There are
@@ -154,7 +152,7 @@ namespace Boku.SimWorld
             const int kNumTimes = 5;
 
             /// Short iterator names are fine, unless there's a special need to distinguish them.
-            /// 
+            ///
             /// On trivial single statement clauses, curly brace use should be
             /// based on whatever makes for most readable.
             for (int i = 0; i < kNumTimes; ++i)
@@ -209,7 +207,7 @@ namespace Boku.SimWorld
                 Debug.Assert(b != null); // Assertion not good enough here.
                 b.KillTime(1);
             }
-            /// This is okay. 
+            /// This is okay.
             foreach (BestCoding b in arrayList)
             {
                 if (b != null)
@@ -223,7 +221,7 @@ namespace Boku.SimWorld
                 /// Okay
                 Debug.Assert(b != null); // Null element in list?
                 /// Better, this way the user can report the comment.
-                Debug.Assert(b != null, "Null element in list?"); 
+                Debug.Assert(b != null, "Null element in list?");
                 b.KillTime(1);
             }
         }
@@ -231,10 +229,10 @@ namespace Boku.SimWorld
 
         #region Internal Methods
         /// Prefer C# predefined types rather than their aliases in the System namepspace.
-        /// 
+        ///
         /// For very long function declarations or calls, break it into multiple lines as
         /// shown here. Very long is loosely defined as more than about 100 characters.
-        /// 
+        ///
         /// Similarly, break up very long functions into multiple subfunctions. Again, no
         /// hard limit, but when a function gets longer than 100 lines, start considering
         /// breaking it up.

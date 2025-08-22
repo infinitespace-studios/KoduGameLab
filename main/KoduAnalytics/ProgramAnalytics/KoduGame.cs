@@ -54,7 +54,7 @@ namespace KoduAnalytics.ProgramAnalytics
         {
             get
             {
-                //parse 
+                //parse
                 DateTime dt = DateTime.Now;
                 if (date == "")
                 {
@@ -63,7 +63,7 @@ namespace KoduAnalytics.ProgramAnalytics
                 String[] dateTime = date.Split(' ');
                 String d = dateTime[0].Trim();
                 String[] dateTokens = d.Split('/');
-                dt = new DateTime(Convert.ToInt32(dateTokens[2]), 
+                dt = new DateTime(Convert.ToInt32(dateTokens[2]),
                     Convert.ToInt32(dateTokens[0]),
                     Convert.ToInt32(dateTokens[1]));
                 return dt;
@@ -96,12 +96,12 @@ namespace KoduAnalytics.ProgramAnalytics
         public Dictionary<String, int> bucketreads = new Dictionary<string, int>();
         public Dictionary<String, int> bucketwrites = new Dictionary<string, int>();
         public int bucketreadorwriterulecount = 0;
-        
+
         //object name, page not jumped to
         public List<KeyValuePair<string, int>> unreachablePages = new List<KeyValuePair<string, int>>();
         //object name, destination
         public List<KeyValuePair<string, int>> blankJumps = new List<KeyValuePair<string, int>>();
-        
+
         public KoduGame(String uid)
         {
             upid = uid;

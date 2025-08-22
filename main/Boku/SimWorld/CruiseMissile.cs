@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -31,7 +29,7 @@ namespace Boku
         private static XmlGameActor xmlActor;
         public static XmlGameActor XmlActor
         {
-            get 
+            get
             {
                 if (xmlActor == null)
                     xmlActor = ActorManager.GetActor("CruiseMissile").XmlGameActor;
@@ -143,7 +141,7 @@ namespace Boku
                                 Vector3 position,                   // Starting position.
                                 Vector3 targetPosition,             // Location we're trying to hit.
                                 GameActor launcher,                 // Actor that launched this missile.
-                                float initialRotation,              // 
+                                float initialRotation,              //
                                 GameThing.Verbs verbPayload,
                                 int damage,
                                 MissileChassis.BehaviorFlags behavior,
@@ -211,7 +209,7 @@ namespace Boku
                                 Vector3 position,                    // Starting position.
                                 GameThing targetThing,              // Object we're trying to hit.
                                 GameActor launcher,                 // Actor that launched this missile.
-                                float initialRotation,              // 
+                                float initialRotation,              //
                                 GameThing.Verbs verbPayload,
                                 int damage,
                                 MissileChassis.BehaviorFlags behavior,
@@ -353,5 +351,3 @@ namespace Boku
     }   // end of class CruiseMissile
 
 }   // end of namespace Boku
-
-

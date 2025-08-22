@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +50,7 @@ namespace Boku
         private CommandMap commandMap = new CommandMap("LiveFeedDisplay");
 
         private bool useBackgroundThumbnail = true;
-       
+
         private Texture2D Header_bg  = null;
        // private Texture2D Feed_bg    = null;
         private Texture2D cornerTR = null;
@@ -72,7 +71,6 @@ namespace Boku
         // Color constants.
         private Color lightTextColor = new Color(191, 191, 191);
         private Color hoverTextColor = new Color(50, 255, 50);
-
 
         // Bounds
         AABB2D aBox = new AABB2D();
@@ -139,7 +137,7 @@ namespace Boku
                 if (InGame.inGame.State == InGame.States.Active && InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.RunSim)
                 {
                     // We need to be able to slip out to the mini-hub here since
-                    // continuous, repeated calls to LiveFeedDisplay can lock the 
+                    // continuous, repeated calls to LiveFeedDisplay can lock the
                     // user out of control.
                     if (Actions.MiniHub.WasPressed)
                     {
@@ -150,7 +148,7 @@ namespace Boku
                     }
 /*
                     // We need to be able to slip out to the tool menu here since
-                    // continuous, repeated calls to LiveFeedDisplay can lock the 
+                    // continuous, repeated calls to LiveFeedDisplay can lock the
                     // user out of control.
                     if (Actions.ToolMenu.WasPressed)
                     {
@@ -231,9 +229,6 @@ namespace Boku
 
         }
 
-
-
-
         private void HandleTouchInput(TouchContact touch, Vector2 hit)
         {
             if (hitBox.Touched(touch, hit))
@@ -295,7 +290,7 @@ namespace Boku
             if (Active)
             {
                 RenderFeedBasePlate();
-                
+
             }
         }   // end of LiveFeedDisplay Render()
 
@@ -374,17 +369,17 @@ namespace Boku
         {
             if (Header_bg == null)
             {
-                Header_bg = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\twitter_Icon");                
+                Header_bg = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\twitter_Icon");
             }
-            
+
             if (cornerTR == null)
             {
-                cornerTR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\cornerTR");                
+                cornerTR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\cornerTR");
             }
-            
+
             if (cornerBR == null)
             {
-                cornerBR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\cornerBR");                
+                cornerBR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\cornerBR");
             }
         }   // end of LiveFeedDisplay InitDeviceResources()
 
@@ -393,7 +388,7 @@ namespace Boku
             BokuGame.Release(ref Header_bg);
             BokuGame.Release(ref cornerTR);
             BokuGame.Release(ref cornerBR);
-            
+
         }   // end of LiveFeedDisplay UnloadContent()
 
         /// <summary>
@@ -406,7 +401,7 @@ namespace Boku
 
         public void Activate()
         {
-           
+
             if (state != States.Active)
             {
                 this.useBackgroundThumbnail = true;// useBackgroundThumbnail;

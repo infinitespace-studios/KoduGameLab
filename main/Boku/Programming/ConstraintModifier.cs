@@ -40,7 +40,6 @@ namespace Boku.Programming
 
         private Vector3 initialPosition;
 
-
         public override ProgrammingElement Clone()
         {
             ConstraintModifier clone = new ConstraintModifier();

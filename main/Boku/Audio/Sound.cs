@@ -107,8 +107,8 @@ namespace Boku.Audio
                 AudioCue cue = cues[i];
 
                 if (
-                    (cue.Emitter == emitter) 
-                    || 
+                    (cue.Emitter == emitter)
+                    ||
                     (!Spatial && (emitter == null))
                     )
                 {

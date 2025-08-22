@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -128,9 +127,9 @@ namespace Boku.UI2D
             /// </summary>
             public Vector2 Position
             {
-                set 
-                { 
-                    position = value; 
+                set
+                {
+                    position = value;
                     absolutePosition = parent.Position + position;
                     // Force to pixel align to render cleaner.
                     absolutePosition.X = (float)Math.Round(absolutePosition.X);
@@ -144,8 +143,8 @@ namespace Boku.UI2D
             public Vector2 Size
             {
                 get { return size; }
-                set 
-                { 
+                set
+                {
                     size = value;
                     size.Y += 10.0f;
                     hitBox.Set(absolutePosition, absolutePosition + size);
@@ -215,7 +214,7 @@ namespace Boku.UI2D
         #region Accessors
 
         /// <summary>
-        ///  Returns the last chosen index within the menu. 
+        ///  Returns the last chosen index within the menu.
         ///  -1 if the menu was closed without choosing anything.
         /// </summary>
         public int ChosenIndex
@@ -331,7 +330,7 @@ namespace Boku.UI2D
         public Vector2 Position
         {
             get { return position; }
-            set 
+            set
             {
                 value.X = (float)Math.Round(value.X);
                 value.Y = (float)Math.Round(value.Y);
@@ -358,7 +357,6 @@ namespace Boku.UI2D
         {
             get { return commandMap; }
         }
-        
 
         #endregion
 
@@ -448,7 +446,6 @@ namespace Boku.UI2D
                     dirty = false;
                 }
 
-
                 // Check for input.
                 if (Active && itemList.Count > 0 && CommandStack.Peek() == commandMap)
                 {
@@ -467,10 +464,10 @@ namespace Boku.UI2D
                     }
                     else if (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
                     {
-                        UpdateMouseInput();                   
+                        UpdateMouseInput();
                     }
                 }
-            
+
             }   // end if active
 
         }   // end of MouseMenu Update()
@@ -645,8 +642,6 @@ namespace Boku.UI2D
             }
             */
 
-
-
             // Calc extent of full menu.
             AABB2D menuBox = new AABB2D(itemList[0].HitBox);
             for (int i = 1; i < itemList.Count; i++)
@@ -676,9 +671,8 @@ namespace Boku.UI2D
             }
             // Update position.
             Position = curPos;
-            
-        }   // end of LayoutMenu()
 
+        }   // end of LayoutMenu()
 
         public void Render()
         {
@@ -717,7 +711,7 @@ namespace Boku.UI2D
         }   // end of MouseMenu SetValue()
 
         /// <summary>
-        /// Returns the index associated with the text. 
+        /// Returns the index associated with the text.
         /// Returns -1 if not found.
         /// </summary>
         /// <param name="text"></param>
@@ -804,9 +798,3 @@ namespace Boku.UI2D
     }   // end of class MouseMenu
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

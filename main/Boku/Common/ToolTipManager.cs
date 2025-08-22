@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ using Boku.Common.Xml;
 namespace Boku.Common
 {
     /// <summary>
-    /// Provides a single entry point for creating ToolTips.  
+    /// Provides a single entry point for creating ToolTips.
     /// </summary>
     public class ToolTipManager
     {
@@ -51,7 +50,7 @@ namespace Boku.Common
         private static float alpha = 0.0f;
         private static Vector2 curPosition;         // The position we're currently displaying at.
         private static Vector2 pendingPosition;     // The position of the pending tool tip.
-        private static Vector2 originalPosition;    // Unmodified version of the above used to tell when the position 
+        private static Vector2 originalPosition;    // Unmodified version of the above used to tell when the position
                                                     // of the tooltip hs been changed even though the content hasn't.
         private static bool useAdd = false;         // Use the "Add" string to label the <A> button rather than "Change"
 
@@ -147,7 +146,7 @@ namespace Boku.Common
         /// gracefully faded out.
         /// </summary>
         /// <param name="name">The name to be displayed at the top of the tool tip</param>
-        /// <param name="desc">The description string to be displayed.  This may contain 
+        /// <param name="desc">The description string to be displayed.  This may contain
         /// button icons.  If the description is too long to fit onto the tool tip it will
         /// be truncated and the final line changed to end in elipses.</param>
         /// <param name="position">Position in pixels for the upper left hand corner of the tool tip.</param>
@@ -164,7 +163,7 @@ namespace Boku.Common
         /// gracefully faded out.
         /// </summary>
         /// <param name="name">The name to be displayed at the top of the tool tip</param>
-        /// <param name="desc">The description string to be displayed.  This may contain 
+        /// <param name="desc">The description string to be displayed.  This may contain
         /// button icons.  If the description is too long to fit onto the tool tip it will
         /// be truncated and the final line changed to end in elipses.</param>
         /// <param name="position">Position in pixels for the upper left hand corner of the tool tip.</param>
@@ -297,7 +296,7 @@ namespace Boku.Common
             blob.RenderWithButtons(pos, Color.Yellow);
             blob.RawText = desc;        // Restore
 
-            // We need to special case groups since they don't have any data.  For groups 
+            // We need to special case groups since they don't have any data.  For groups
             // we just display a string that says "press <a> for more..."
             if (curTip == Strings.Localize("toolTips.group"))
             {
@@ -340,7 +339,7 @@ namespace Boku.Common
                 // Buttons @ bottom
                 if (showButtons)
                 {
-                    string aText = useAdd ? Strings.Localize("toolTips.add") : Strings.Localize("toolTips.change"); 
+                    string aText = useAdd ? Strings.Localize("toolTips.add") : Strings.Localize("toolTips.change");
 
                     int buttonWidth = 40;                       // For spacing.
                     Vector2 buttonSize = new Vector2(64, 64);   // For rendering.
@@ -351,7 +350,7 @@ namespace Boku.Common
                     pos.X = (512 - width) / 2;
 
                     batch.Begin();
-                    
+
                     ssquad.Render(ButtonTextures.AButton, pos, buttonSize, "TexturedRegularAlpha");
                     pos.X += buttonWidth;
                     TextHelper.DrawString(Font, aText, pos, Color.White);
@@ -360,7 +359,7 @@ namespace Boku.Common
                     ssquad.Render(ButtonTextures.YButton, pos, buttonSize, "TexturedRegularAlpha");
                     pos.X += buttonWidth;
                     TextHelper.DrawString(Font, Strings.Localize("toolTips.examples"), pos, Color.White);
-                    
+
                     batch.End();
                 }
             }

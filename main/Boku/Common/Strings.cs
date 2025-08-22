@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ using Boku.Common.Localization;
 namespace Boku.Common
 {
     /// <summary>
-    /// A class to contain the string constants used in Boku 
+    /// A class to contain the string constants used in Boku
     /// in the hope that this will ease localization issues.
     /// </summary>
     public static class Strings

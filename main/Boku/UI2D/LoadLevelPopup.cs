@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -121,7 +120,6 @@ namespace Boku.UI2D
 
             #endregion
 
-
             #region Public
 
             public PopupItem(string text, OnSelectEvent onSelect, LoadLevelPopup parent)
@@ -168,7 +166,7 @@ namespace Boku.UI2D
                 {
                     if (value)
                     {
-                        //clear out any previous mouse input - this prevents false positive double clicks caused by the second click coming shortly after 
+                        //clear out any previous mouse input - this prevents false positive double clicks caused by the second click coming shortly after
                         //entering the level browser
                         MouseInput.Left.ClearAllWasPressedState();
 
@@ -384,7 +382,6 @@ namespace Boku.UI2D
                     }
                 }   // end of Touch input.
 
-
                 if (Actions.Select.WasPressed || mouseSelect || touchSelect)
                 {
                     Actions.Select.ClearAllWasPressedState();
@@ -499,7 +496,7 @@ namespace Boku.UI2D
                     }
                     int down = (int)((spacing - blob.TotalSpacing) / 2.0f);
                     blob.RenderWithButtons(textPos + new Vector2(0, down), textColor);
-                    
+
                     // Restore larger font.
                     blob.Font = UI2D.Shared.GetGameFont24;
 
@@ -529,7 +526,7 @@ namespace Boku.UI2D
         }   // end of LoadLevelPopup SetValue()
 
         /// <summary>
-        /// Returns the index associated with the text. 
+        /// Returns the index associated with the text.
         /// Returns -1 if not found.
         /// </summary>
         /// <param name="text"></param>
@@ -583,9 +580,3 @@ namespace Boku.UI2D
     }   // end of class LoadLevelPopup
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

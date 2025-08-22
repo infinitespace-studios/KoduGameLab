@@ -4,7 +4,7 @@
 /*
  * BasicPaletteEffect.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -39,7 +39,7 @@ namespace Xclna.Xna.Animation
 {
 
     /// <summary>
-    /// Provides functionality similar to that of BasicEffect, but uses a 
+    /// Provides functionality similar to that of BasicEffect, but uses a
     /// Matrix Palette.
     /// </summary>
     public sealed class BasicPaletteEffect : Effect
@@ -56,12 +56,10 @@ namespace Xclna.Xna.Animation
         // Used to help determine the eye position
         private static Vector3 zero = Vector3.Zero;
 
-
         /// <summary>
         /// The max number of bones in the effect's matrix palette.
         /// </summary>
         public readonly int PALETTE_SIZE;
-
 
         internal BasicPaletteEffect(GraphicsDevice device, byte[] byteCode,
             int paletteSize)
@@ -129,8 +127,6 @@ namespace Xclna.Xna.Animation
             FogEnabled = false;
         }
 
-
-
         /// <summary>
         /// Clones the current BasicPaletteEffect class.
         /// </summary>
@@ -140,7 +136,6 @@ namespace Xclna.Xna.Animation
         {
             return new BasicPaletteEffect(device, this);
         }
-
 
         /// <summary>
         /// Sets the parameters of this effect from a BasicEffect instance.
@@ -226,9 +221,6 @@ namespace Xclna.Xna.Animation
                 }
             }
 
-
-
-
             /// <summary>
             /// Gets or sets the specular color of this light.
             /// </summary>
@@ -302,13 +294,13 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-            
+
                 fogEndParam.SetValue(value);
             }
         }
 
         /// <summary>
-        /// Gets or sets a value enabling the fog. 
+        /// Gets or sets a value enabling the fog.
         /// </summary>
         public bool FogEnabled
         {
@@ -318,7 +310,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                fogEnabledParam.SetValue(value); 
+                fogEnabledParam.SetValue(value);
             }
         }
 
@@ -382,7 +374,6 @@ namespace Xclna.Xna.Animation
             }
 
         }
-
 
         /// <summary>
         /// Gets directional light zero.
@@ -522,7 +513,6 @@ namespace Xclna.Xna.Animation
                 worldParam.SetValue(value);
             }
         }
-
 
         /// <summary>
         /// Gets or sets the view matrix of this effect.

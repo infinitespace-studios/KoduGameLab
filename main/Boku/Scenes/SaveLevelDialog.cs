@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -74,11 +72,11 @@ namespace Boku
             public TextBlob descBlob = null;    // The formatted description.
             public int curVersion = 0;          // Current level version.  Version numbers should all be positive.
                                                 // 0 indicates no version number.
-            public int maxVersion = 999;        
+            public int maxVersion = 999;
 
             public string curString = null;     // The current string we are editing.
             public int cursorPosition = 0;      // Current cursor position.
-                                                // 0 is before the 1st character, 1 is between 
+                                                // 0 is before the 1st character, 1 is between
                                                 // the 1st and 2nd characters, etc.
             public string originalString = null;    // Original version of whichever string is currently being edited.
 
@@ -118,7 +116,7 @@ namespace Boku
 
             public Vector2 rtDisplayPosition;       // Where the rt is displayed on the screen.  Used to adjust mouse hit.
             public float rtScale = 1.0f;            // The scale the rt is displayed at.
-        
+
             // Colors for button labels
             public Color labelColor = Color.White;
             public Color tagsColor = new Color(32, 140, 178);
@@ -166,7 +164,7 @@ namespace Boku
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
                 // We're rendering the camera specific parts into a 1024x768 rendertarget and
-                // then copying (with masking) into the 1280x720 rt and finally cropping it 
+                // then copying (with masking) into the 1280x720 rt and finally cropping it
                 // as needed for 4:3 display.
                 camera = new PerspectiveUICamera();
                 camera.Resolution = new Point(1280, 720);
@@ -324,7 +322,7 @@ namespace Boku
                                 shared.focus = Shared.InputFocus.Name;
                             }
 
-                            // Name 
+                            // Name
                             if (shared.nameBox.Touched(touch, hit))
                             {
                                 // If we were editing something else.
@@ -362,7 +360,6 @@ namespace Boku
                                 shared.focus = Shared.InputFocus.Description;
                                 KeyboardInput.ShowOnScreenKeyboard();
                                 ActivateEditing();
-                                
 
                                 // TODO Think about refactoring this functionality into the TextBlob.
 
@@ -560,7 +557,6 @@ namespace Boku
                                 }
                             }
 
-
                             // The scroll wheel only affects the cursor if editing the description.
                             if (shared.editingText && shared.focus == Shared.InputFocus.Description)
                             {
@@ -582,7 +578,6 @@ namespace Boku
                                 }
                             }
 
-
                             // Change button label colors based on mouse hover.
                             shared.tagsButton.SetHoverState(hit);
                             shared.changeButton.SetHoverState(hit);
@@ -590,7 +585,7 @@ namespace Boku
                             shared.saveButton.SetHoverState(hit);
                         }
 
-                    } 
+                    }
 
                     // END of TouchInput
 
@@ -625,7 +620,7 @@ namespace Boku
                             shared.focus = Shared.InputFocus.Name;
                         }
 
-                        // Name 
+                        // Name
                         if (shared.nameBox.LeftPressed(hit))
                         {
                             // If we were editing something else.
@@ -860,7 +855,6 @@ namespace Boku
                             }
                         }
 
-
                         // The scroll wheel only affects the cursor if editing the description.
                         if (shared.editingText && shared.focus == Shared.InputFocus.Description)
                         {
@@ -874,7 +868,6 @@ namespace Boku
                                 ScrollUp();
                             }
                         }
-
 
                         // Change button label colors based on mouse hover.
                         shared.tagsButton.SetHoverState(hit);
@@ -1110,7 +1103,6 @@ namespace Boku
                 return newName;
             }   // end of NewName()
 
-
             /// <summary>
             /// Determines if the user needs to be asked if level links should be preserved during the save
             /// </summary>
@@ -1122,15 +1114,13 @@ namespace Boku
                 //check if the level has been saved before (or has been saved but not as a local world)
                 if (!XmlDataHelper.CheckWorldExistsByGenre(InGame.XmlWorldData.id, Genres.MyWorlds))
                 {
-                    //hasn't been saved or is non-local - either way, we'll be making a new copy and links will be preserved 
+                    //hasn't been saved or is non-local - either way, we'll be making a new copy and links will be preserved
                     //automatically - don't have to ask the user
                     needsCheck = false;
                 }
 
                 return needsCheck;
             }   // end of CheckPreserveLinks()
-
-
 
             /// <summary>
             /// Saves the level and exits the SaveLevel dialog.  Assumes that
@@ -1243,8 +1233,8 @@ namespace Boku
                         }
                         else if (shared.focus == Shared.InputFocus.Description)
                         {
-                            // With the description it's a bit different since this gets 
-                            // broken up into multiple lines.  What we do here is break 
+                            // With the description it's a bit different since this gets
+                            // broken up into multiple lines.  What we do here is break
                             // the lines up and then scroll if we need to in order to
                             // keep the current line within the window.
                             shared.descBlob.InsertString(str);
@@ -1267,7 +1257,7 @@ namespace Boku
             // TODO (****) Clean this up.  We're mixing text as input with text as control here.
             // Probably the right thing to do would be to push/pop the text input callbacks
             // dynamically to mirror the state we're in.
-            
+
             public void KeyInput(Keys key)
             {
                 // If tagPicker is active, ignore input.
@@ -1456,8 +1446,8 @@ namespace Boku
             }
 
             /// <summary>
-            /// User has accepted the currently edited string.  We don't need to 
-            /// copy to the current position since it should already be there.  
+            /// User has accepted the currently edited string.  We don't need to
+            /// copy to the current position since it should already be there.
             /// So, just turn off editing.
             /// </summary>
             public void Accept()
@@ -1470,7 +1460,7 @@ namespace Boku
                     // Scrub user text for URLs or email addresses.
                     shared.CurName = TextHelper.FilterURLs(shared.CurNameScrubbed);
                     shared.CurName = TextHelper.FilterEmail(shared.CurNameScrubbed);
-                    
+
                     shared.curVersion = 0;
                 }
 
@@ -1484,8 +1474,6 @@ namespace Boku
                     shared.curDesc = TextHelper.FilterEmail(shared.curDesc);
                     shared.descBlob.RawText = shared.curDesc;
                 }
-
-
 
             }   // end of Accept()
 
@@ -1539,7 +1527,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class SaveLevelDialog UpdateObj  
+        }   // end of class SaveLevelDialog UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -1559,7 +1547,6 @@ namespace Boku
             public float dropShadowAlpha = 0.0f;            // Shadow opacity.
 
             public UI2D.Shared.GetFont Font = UI2D.Shared.GetGameFont20;
-
 
             #endregion
 
@@ -1639,8 +1626,6 @@ namespace Boku
 
                 // Impossible to calc so these numbers were derived experimentally.
                 shared.descBox.Set(new Vector2(360, 140), new Vector2(1060, 450));
-
-
 
                 batch.Begin();
 
@@ -1733,9 +1718,9 @@ namespace Boku
                 for (int shift = 1; shift < 32; shift++)
                 {
                     int i = 1 << shift;
-                    // Since we're saving, ignore the BuiltInWorlds genre since 
-                    // this will get stripped out on save.  Don't strip it out 
-                    // here since we still might back out plus we need it 
+                    // Since we're saving, ignore the BuiltInWorlds genre since
+                    // this will get stripped out on save.  Don't strip it out
+                    // here since we still might back out plus we need it
                     // when the actual save happens for force a new GUID to
                     // be generated.
                     if ((i & bits) != 0 && i != (int)Genres.BuiltInWorlds && i != (int)Genres.StarterWorlds)
@@ -1975,7 +1960,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class SaveLevelDialog RenderObj     
+        }   // end of class SaveLevelDialog RenderObj
 
         #region Members
 
@@ -2147,7 +2132,7 @@ namespace Boku
 
                 // Increment version number and save.
                 shared.curVersion = Math.Min(shared.curVersion + 1, shared.maxVersion);
-                
+
                 ShowPreserveLinksDialog();
 
             };

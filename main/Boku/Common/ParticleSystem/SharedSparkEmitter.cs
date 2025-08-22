@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -26,7 +25,7 @@ namespace Boku.Common.ParticleSystem
             get { return @"TexturedColorPassOneOneBlend"; }
         }
         /// <summary>
-        /// Avoid the lighting effecting spark color. 
+        /// Avoid the lighting effecting spark color.
         /// </summary>
         public override bool IsEmissive
         {

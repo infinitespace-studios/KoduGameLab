@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -255,7 +254,6 @@ namespace Boku.Base
 
         private Dictionary<String, StateRenderObj> collection = new Dictionary<String, StateRenderObj>();
         private Dictionary<String, Matrix> positions = new Dictionary<String, Matrix>();
-
 
         public ClassRenderObj(string classname, Model model, ModelBone bone)
         {
@@ -791,5 +789,5 @@ namespace Boku.Base
             //device.RenderState.FillMode = tempFillMode;
         }
 
-    }   // end of class MeshRenderObj 
+    }   // end of class MeshRenderObj
 }

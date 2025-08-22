@@ -77,7 +77,7 @@ namespace Boku.Programming
                         actionEffector = testEffector;
                         actionObject = pair.Key;
                     }
-                }                
+                }
             }
 #endif
             if (actionEffector != null)

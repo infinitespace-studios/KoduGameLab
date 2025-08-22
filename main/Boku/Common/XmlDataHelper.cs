@@ -164,7 +164,6 @@ namespace Boku.Common
                 }
                 catch { }
 
-
                 // Try To load Snapshot image.
                 try
                 {
@@ -179,7 +178,6 @@ namespace Boku.Common
                     }
                 }
                 catch { }
-
 
                 // We've successfully read all required files. We may now upload them to the server.
                 file = Storage4.OpenRead(localLevelPath + worldFilename, StorageSource.All);
@@ -353,7 +351,6 @@ namespace Boku.Common
                 Debug.WriteLine(e.Message);
             }
         }
-
 
     }
 }

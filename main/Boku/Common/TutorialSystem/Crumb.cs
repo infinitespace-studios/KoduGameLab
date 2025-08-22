@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace Boku.Common.TutorialSystem
     /// <summary>
     /// Crumbs are the edges of our navigation graph.  They are specified by two modes, curMode which
     /// is the starting mode and targetMode which is the mode we are transitioning to.  TargetMode may
-    /// be left Unknown.  In that case, the crumb is just expected to give the user context relevant 
+    /// be left Unknown.  In that case, the crumb is just expected to give the user context relevant
     /// information about the current mode they are in.
     /// curModes is implemented as an array to help cut down on the explosion of potential edges when
     /// working with the edit mode tools.
@@ -98,7 +97,6 @@ namespace Boku.Common.TutorialSystem
             get { return mouseText; }
         }
 
-        
         /// <summary>
         /// Text to be displayed to the user if touch is current input device.
         /// </summary>
@@ -107,14 +105,13 @@ namespace Boku.Common.TutorialSystem
         {
             get { return touchText==null ? "" : touchText; }
         }
-        
 
         #endregion
 
         #region Public
 
         /// <summary>
-        /// c'tor for Crumbs.  Probably never used in code 
+        /// c'tor for Crumbs.  Probably never used in code
         /// but needs to be public for deserialization.
         /// </summary>
         public Crumb()
@@ -312,11 +309,11 @@ namespace Boku.Common.TutorialSystem
                 Storage4.Close(stream);
             }
 
-            // If we don't have data.  Delete the server version of 
+            // If we don't have data.  Delete the server version of
             // the file and try loading the TitleSpace version.
             if (data == null)
             {
-                // Don't delete the server version since this might actually be someone 
+                // Don't delete the server version since this might actually be someone
                 // trying to do a localization.
                 //Storage4.Delete(filename);
 
@@ -336,7 +333,7 @@ namespace Boku.Common.TutorialSystem
                     Storage4.Close(stream);
                 }
             }
-        
+
             return data;
         }   // end of Load()
 

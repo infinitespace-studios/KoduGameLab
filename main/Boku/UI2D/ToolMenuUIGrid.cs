@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// Specialization of the standard UIGrid for the tool menu.  We need to have a custom
-    /// Refresh() method to handle the rotation and scaling of the tiles and we also need a 
+    /// Refresh() method to handle the rotation and scaling of the tiles and we also need a
     /// custom Render() method to render the tiles from the outside-in so that the drop
     /// shadows and transparency layer correctly.
     /// </summary>
@@ -50,7 +49,6 @@ namespace Boku.UI2D
         #endregion
 
         #region Public
-
 
         public ToolMenuUIGrid(
             UIGridEvent onSelect,
@@ -84,7 +82,7 @@ namespace Boku.UI2D
             bool wasDirty = dirty;
 
             // Normally the B button will allow a user to back out of any grid.
-            // For the tool menu though we don't want this to happen so we 
+            // For the tool menu though we don't want this to happen so we
             // clear any input on that button before calling the base Update().
             GamePadInput pad = GamePadInput.GetGamePad0();
             pad.ButtonB.ClearAllWasPressedState();
@@ -169,7 +167,6 @@ namespace Boku.UI2D
 
         }   // end of Update();
 
-
         public override void Render(Camera camera)
         {
             if (active || renderWhenInactive)
@@ -191,7 +188,6 @@ namespace Boku.UI2D
                 }
 
                 prevFocus = focusIndex;
-
 
                 // Render reticule around selection.
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
@@ -235,7 +231,7 @@ namespace Boku.UI2D
 
             base.LoadContent(immediate);
 
-            // If we've had device reset we need to refresh the tool icon we've given to the help overlay.  
+            // If we've had device reset we need to refresh the tool icon we've given to the help overlay.
             // We let the base.LoadContent call go first to ensure that the new texture is good to go.
             if (HelpOverlay.ToolIcon != null && HelpOverlay.ToolIcon.GraphicsDevice.IsDisposed)
             {
@@ -256,7 +252,6 @@ namespace Boku.UI2D
         }   // end of LoadContent()
 
         #endregion
-
 
     }   // end of class ToolMenuUIGrid
 

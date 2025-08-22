@@ -172,9 +172,9 @@ namespace Boku.Input
                 command.Reset();
             }
         }
-        
+
         /// It appears that on the 360, unknown types are added in as objects, whereas
-        /// on the PC, they are filtered out. This function is to 
+        /// on the PC, they are filtered out. This function is to
         protected void RemoveUnknowns()
         {
         }
@@ -339,7 +339,7 @@ namespace Boku.Input
 
                 return result;
             }
-        }  
+        }
 */
         const string BindToken = "Bind";
         protected void LateBindEvents()
@@ -359,7 +359,7 @@ namespace Boku.Input
         }
 
         /// <summary>
-        /// This method is used to create and load a command map xml file and 
+        /// This method is used to create and load a command map xml file and
         /// map any events to the given eventTarget object
         /// </summary>
         /// <param name="eventTarget"></param>

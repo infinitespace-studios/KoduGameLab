@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -242,11 +241,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }   // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -389,9 +386,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid2DTextElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

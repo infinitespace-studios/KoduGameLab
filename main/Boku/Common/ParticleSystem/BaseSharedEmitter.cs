@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,13 +31,12 @@ namespace Boku.Common.ParticleSystem
         protected static short[] localIndices = null;       // Shared among all.
         protected static IndexBuffer ibuf = null;
 
-
         protected ParticleSystemManager manager = null;     // The manager that holds this emitter.
         private bool inManager = false;
 
-        protected float[] particleDeathTimeList = null;     // An array containing the death times for all the particles.  The index for 
+        protected float[] particleDeathTimeList = null;     // An array containing the death times for all the particles.  The index for
                                                             // each particle corresponds to its position in the vertex buffer.  This way
-                                                            // we can determine which particles to render without having to touch the 
+                                                            // we can determine which particles to render without having to touch the
                                                             // data in the VB.
         protected int maxParticles = 0;                     // Maximum particles in this emitter.
         protected int firstParticle = 0;                    // Index of first active particle.
@@ -60,7 +58,7 @@ namespace Boku.Common.ParticleSystem
             get { return usage; }
             set { usage = value; }
         }
-        
+
         /// <summary>
         /// True if the input usage matches any of this emitter's usages.
         /// </summary>
@@ -70,7 +68,7 @@ namespace Boku.Common.ParticleSystem
         {
             return (this.usage & usage) != 0;
         }
-        
+
         /// <summary>
         /// Only the manager should be accessing this as the system
         /// comes and goes from it's ownership.
@@ -92,7 +90,7 @@ namespace Boku.Common.ParticleSystem
             if (localIndices == null)
             {
                 localIndices = new short[kMaxParticles * 6];    // 1 particle == 2 triangles == 6 indices.
-                
+
                 int v = 0;
                 int i = 0;
                 for (int p = 0; p < kMaxParticles; p++)
@@ -118,8 +116,8 @@ namespace Boku.Common.ParticleSystem
         {
             // Never trust a particle over 40.
             // We need to kill off any particles that have exceeded their lifetime.  But, we
-            // want to keep the active particles grouped contiguously.  So, starting at the 
-            // beginning of the list, keep moving the firstParticle index forward until we 
+            // want to keep the active particles grouped contiguously.  So, starting at the
+            // beginning of the list, keep moving the firstParticle index forward until we
             // find a live particle.
             float time = (float)Time.GameTimeTotalSeconds;
 
@@ -145,7 +143,7 @@ namespace Boku.Common.ParticleSystem
         }   // end of BaseSharedEmitter Update()
 
         /// <summary>
-        /// Sets up all the common stuff needed for rendering a batch of these emitters.  
+        /// Sets up all the common stuff needed for rendering a batch of these emitters.
         /// This includes setting the technique and any parameters that don't change from
         /// one batch to the next.
         /// </summary>

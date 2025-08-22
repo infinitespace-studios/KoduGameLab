@@ -16,11 +16,11 @@ namespace Boku.Tutorial
         /// How long to wait after the conditions have been met before the hint is shown,
         /// also, how often to repeat if the conditions remain met
         /// </summary>
-        public float hintRepeatSeconds; 
+        public float hintRepeatSeconds;
         /// <summary>
         /// Should this hint repeat after it has been shown
         /// </summary>
-        public bool repeat; 
+        public bool repeat;
 
         public Hint()
         {

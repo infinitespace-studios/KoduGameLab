@@ -4,7 +4,7 @@
 /*
  * IAnimationController.cs
  * Copyright (c) 2007 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -36,8 +36,6 @@ using System.IO;
 
 namespace Xclna.Xna.Animation
 {
-
-
 
     /// <summary>
     /// An interface used by BonePose that allows an animation to affect the bone
@@ -84,6 +82,5 @@ namespace Xclna.Xna.Animation
             get;
         }
     }
-
 
 }

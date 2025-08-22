@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,18 +53,17 @@ namespace Boku.Common
 
             public VertexDeclaration VertexDeclaration
             {
-                get 
+                get
                 {
                     if (decl == null || decl.IsDisposed)
                     {
                         decl = new VertexDeclaration(elements);
                     }
-                    return decl; 
+                    return decl;
                 }
             }
         }   // end of UtilsVertex
 
-        
         public static void Init(GraphicsDevice device)
         {
             // Init the effect.
@@ -408,7 +406,6 @@ namespace Boku.Common
                 runwayScratch[vertBase + 1] = runwayScratch[vertBase + 0];
                 runwayScratch[vertBase + 1].other.W = -runwayScratch[vertBase + 1].other.W;
 
-
                 runwayScratch[vertBase + 2].position = pts[i * 2 + 1];
                 runwayScratch[vertBase + 2].other = new Vector4(pts[i * 2], 1.0f);
 
@@ -446,7 +443,6 @@ namespace Boku.Common
                 runwayScratch[vertBase + 1] = runwayScratch[vertBase + 0];
                 runwayScratch[vertBase + 1].other.W = -runwayScratch[vertBase + 1].other.W;
 
-
                 runwayScratch[vertBase + 2].position = pts[i * 2 + 1];
                 runwayScratch[vertBase + 2].other = new Vector4(pts[i * 2], 1.0f);
 
@@ -470,7 +466,7 @@ namespace Boku.Common
 
             static VertexDeclaration decl = null;
             static VertexElement[] elements = new VertexElement[]
-            { 
+            {
                 new VertexElement(0, VertexElementFormat.Vector3, VertexElementUsage.Position, 0),
                 new VertexElement(12, VertexElementFormat.Vector4, VertexElementUsage.TextureCoordinate, 0),
                 new VertexElement(28, VertexElementFormat.Color, VertexElementUsage.Color, 0),
@@ -614,7 +610,6 @@ namespace Boku.Common
         //  2D Stuff
         //
         //
-
 
         /// <summary>
         /// Draw a line in screenspace using pixel coords.
@@ -772,17 +767,15 @@ namespace Boku.Common
 
         #endregion
 
-
         #region Constants
 
         private const string ITEM = "item";
 
         private const string KEY = "key";
-        
+
         private const string VALUE = "value";
 
         #endregion
- 
 
         #region IXmlSerializable Members
 
@@ -790,7 +783,6 @@ namespace Boku.Common
         {
             return null;
         }
- 
 
         public void ReadXml(System.Xml.XmlReader reader)
         {
@@ -831,7 +823,6 @@ namespace Boku.Common
             reader.ReadEndElement();
         }
 
- 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
             XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
@@ -862,7 +853,5 @@ namespace Boku.Common
 
         #endregion
     }
-
-
 
 }   // end of namespace Boku.Common

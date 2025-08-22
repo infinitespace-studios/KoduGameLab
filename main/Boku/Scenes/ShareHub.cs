@@ -51,7 +51,7 @@ namespace Boku
             public AABB2D openBox = new AABB2D();       // Hit box for "open sharing session" tile at bottom.
 
             public bool forceSessionRestart = false;    // This is set to true when we are hosting a shring session
-                                                        // and the session must be aborted for any reason.  When 
+                                                        // and the session must be aborted for any reason.  When
                                                         // this is true we start hosting a new session just as if
                                                         // the user had done so.
 
@@ -144,7 +144,6 @@ namespace Boku
             {
                 RefreshGrid();
             }
-
 
             List<UIGridShareHubElement> refreshGrid_scratch = new List<UIGridShareHubElement>();
 
@@ -440,7 +439,7 @@ namespace Boku
                         }
                     }
 
-                    // If we've changed the list, call update on the grid again so 
+                    // If we've changed the list, call update on the grid again so
                     // that it's in a good state for rendering.
                     if (refreshGrid)
                     {
@@ -620,7 +619,6 @@ namespace Boku
                 // TODO Add code to adjust for a change in the number of lines of text to make localization easier.
                 position += new Vector2(120, 48);
                 tile2Blob.RenderWithButtons(position, darkText);
-
 
                 InGame.RestoreRenderTarget();
 
@@ -894,7 +892,6 @@ namespace Boku
             {
                 // Failed to create the session for some reason.
                 // TODO: Show a message here?
-
 
                 // Restart the periodic update of profiles and joinable states.
                 LiveManager.FriendUpdatesEnabled = true;

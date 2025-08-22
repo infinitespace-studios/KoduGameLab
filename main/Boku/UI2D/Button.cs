@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,13 +76,13 @@ namespace Boku.UI2D
                 size.X = (box.Max.X - box.Min.X);
                 size.Y = (box.Max.Y - box.Min.Y);
                 return size;
-            }            
+            }
 
-            set 
-            { 
+            set
+            {
                 fixedSize = value;
                 box.Set( new Vector2(box.Min.X,box.Min.Y), new Vector2(box.Min.X + value.X, box.Min.Y + value.Y));
-            }            
+            }
         }
 
         public bool IsPressed
@@ -147,7 +146,7 @@ namespace Boku.UI2D
             set
             {
                 label = value;
-            }       
+            }
         }
 
         public Vector2 GetSize()
@@ -167,7 +166,7 @@ namespace Boku.UI2D
                 result.X += Font().MeasureString(label).X;
                 result.Y = Math.Max(result.Y, Font().LineSpacing);
             }
-    
+
             return result;
         }   // end of GetSize()
 

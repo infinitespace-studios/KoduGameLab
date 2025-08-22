@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -18,7 +17,6 @@ using Boku.Common;
 using Boku.SimWorld;
 using Boku.SimWorld.Chassis;
 using Boku.Common.Xml;
-
 
 namespace Boku
 {

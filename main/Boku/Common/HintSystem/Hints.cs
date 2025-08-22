@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,8 +26,8 @@ namespace Boku.Common
     /// Provides support for the hints which are presented to users as a toast.  When active
     /// the user can either mouse click on the toast or press <Y> to bring up a modal dialog
     /// with more detailed help.  This modal dialog will also allow them to dismiss the hint
-    /// with a "don't show me this again" option.  This value will be persisted in the 
-    /// OptionsData.Xml file since that's where we store global settings.  
+    /// with a "don't show me this again" option.  This value will be persisted in the
+    /// OptionsData.Xml file since that's where we store global settings.
     /// </summary>
     public class Hints
     {
@@ -72,7 +71,7 @@ namespace Boku.Common
             hints.Add(new SwitchNoTargetHint());
             hints.Add(new NoTerrainToRaiseHint());
             // Disable hints that the user has previously dismissed.
-            // Yes this is n^2 but the lists should be short enough 
+            // Yes this is n^2 but the lists should be short enough
             // so you'll never notice.
             List<string> disList = XmlOptionsData.DisabledHintIDs;
             if (disList != null)
@@ -212,4 +211,3 @@ namespace Boku.Common
     }   // end of class Hints
 
 }   // end of namespace Boku.Common
-

@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-// Uncomment the following line to cause fake presence 
+// Uncomment the following line to cause fake presence
 // events to be fed to the sharing presence display.
 //#define PRESENCE_DEBUG
 
@@ -60,7 +59,7 @@ namespace Boku
 
             public bool isDeleteActive = false;         // Is the user allowed to delete this world?
 
-            public string userName = null;              // The name of the current user.  Used to decided whether or 
+            public string userName = null;              // The name of the current user.  Used to decided whether or
                                                         // not she may delete a file from the community.
 
             public bool isAttaching = false;            // Are we in attach-level mode?
@@ -101,7 +100,7 @@ namespace Boku
             public AABB2D downloadsBox = new AABB2D();          // Hitbox for num downloads.
 
             public ILevelBrowser mainBrowser = null;
-            public ILevelBrowser altBrowser = null;         // On the Sharing page we also need to be able to toggle between 
+            public ILevelBrowser altBrowser = null;         // On the Sharing page we also need to be able to toggle between
             // using the SharingBrowser and the LocalBrowser.  We use this
             // as a place to hang the currently unused one.
 
@@ -187,7 +186,6 @@ namespace Boku
                 levelSorter.SortDirection = SortDirection.Descending;
 
                 textLineEditor = new TextLineEditor(searchBox, levelFilter.SearchString, @"Textures\UI2D\SearchIcon");
-
 
                 // Create level grid.
                 levelGrid = new LoadLevelMenuUIGrid(
@@ -383,7 +381,6 @@ namespace Boku
                     }
                 }
 
-
             }   // end of SetAuxMenuDefaultSelections()
 
             #endregion
@@ -391,7 +388,7 @@ namespace Boku
             #region Internal
 
             /// <summary>
-            /// Sets up the SortBy 
+            /// Sets up the SortBy
             /// </summary>
             public void SetUpAuxMenus()
             {
@@ -570,7 +567,6 @@ namespace Boku
                 }
             }   // end of SetUpPopup()
 
-
             private void AttachSelectedLevel()
             {
                 LevelMetadata targetNextLevel = parent.shared.CurWorld;
@@ -642,7 +638,7 @@ namespace Boku
                 }
                 else
                 {
-                    // SelectionElement is null which implies that the grid has not yet been populated so 
+                    // SelectionElement is null which implies that the grid has not yet been populated so
                     // don't let the user make a choice.  Note that they can still exit if they choose.
 
                     // Reactivate the grid and return.
@@ -743,14 +739,14 @@ namespace Boku
             //pre: assumes level is at the start of the chain
             //pre: assumes valid filename is passed in
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="level"></param>
             /// <param name="fileName"></param>
             /// <param name="outStream">May be null.  If not null this is used.  If this is null then fileName is used.</param>
             private void ExportLevel(LevelMetadata level, string fileName, Stream outStream)
             {
-                //only the first level in a chain should ever make it this far 
+                //only the first level in a chain should ever make it this far
                 //(higher up, we determine it's a package and pass in the first level)
                 Debug.Assert(level.LinkedFromLevel == null);
 
@@ -795,7 +791,6 @@ namespace Boku
                     string fullPathToScreenshotFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Jpg");
                     screenshotFiles.Add(fullPathToScreenshotFile);
 
-
                     // Only provide terrain file if it is not a builtin terrain.
                     // TODO Rethink this.  Maybe put terrain in every file.
                     string fullPathToTerrainFile = null;
@@ -821,7 +816,6 @@ namespace Boku
                     fileName,
                     outStream);
             }   // end of ExportLevel()
-
 
             private string GenerateDefaultFileName(LevelMetadata level, bool withExtension)
             {
@@ -1024,7 +1018,6 @@ namespace Boku
 
             }
 
-
             /// <summary>
             /// Video output hack.
             /// </summary>
@@ -1148,7 +1141,6 @@ namespace Boku
                 PopupOnPlayOrEdit(true);
             }
 
-
             private void PopupOnPlayOrEdit(bool bEditMode)
             {
                 popup.Active = false;
@@ -1159,7 +1151,7 @@ namespace Boku
                 }
                 else
                 {
-                    // SelectionElement is null which implies that the grid has not yet been populated so 
+                    // SelectionElement is null which implies that the grid has not yet been populated so
                     // don't let the user make a choice.  Note that they can still exit if they choose.
 
                     // Reactivate the grid and return.
@@ -1239,7 +1231,6 @@ namespace Boku
                     parent.shared.CurWorld.FlaggedByMe = true;
                 }
             }
-
 
             public void PopupOnDelete()
             {
@@ -1440,7 +1431,6 @@ namespace Boku
                 SetAuxMenuDefaultSelections();
             }   // end of AuxOnCancel()
 
-
             public void StartFetchingThumbnails(ILevelSetCursor cursor)
             {
                 // Most recent thumbnail requests are serviced first, so walk from left
@@ -1605,8 +1595,8 @@ namespace Boku
                     parent.FeedFakeSharingEvents();
                 }
 #endif
-                // We need to do this ever frame instead of just at activation 
-                // time since deactivation of the previous scene and activation 
+                // We need to do this ever frame instead of just at activation
+                // time since deactivation of the previous scene and activation
                 // of this scene don't always happen in that order.
                 AuthUI.ShowStatusDialog();
 
@@ -1655,7 +1645,7 @@ namespace Boku
                 HandleTouchInput();
 
                 // Note that no input goes to the levelGrid while the popup (or the sort list) is active.
-                // TODO (****) Should this be rethought to send input to those items first instead of 
+                // TODO (****) Should this be rethought to send input to those items first instead of
                 // updating the main list first?
                 if (shared.levelGrid != null && shared.popup.Active == false && shared.sortList.Active == false && parent.pendingState != States.Inactive)
                 {
@@ -1675,7 +1665,7 @@ namespace Boku
                         shared.mainBrowser.Reset();
                     }
 
-                    // The level info comes in asynchronously.  So check 
+                    // The level info comes in asynchronously.  So check
                     // it and split the description text when it arrives.
                     SplitText();
 
@@ -1687,7 +1677,7 @@ namespace Boku
                 {
                     Matrix world = Matrix.Identity;
 
-                    // Need to update the lists before the grids otherwise 
+                    // Need to update the lists before the grids otherwise
                     // the grid will steal input.
                     if (shared.sortList != null)
                     {
@@ -1776,7 +1766,7 @@ namespace Boku
                     //                        shared.levelGrid.Update(ref world);
                     //                    }
 
-                    // Look at the world that is currently in focus and set 
+                    // Look at the world that is currently in focus and set
                     // the appropriate shared bools so we know where we are.
                     // Start by turning off everything so we've got a known state.
                     shared.isDownload = false;
@@ -1794,7 +1784,7 @@ namespace Boku
                         shared.isBuiltInWorld = (info.Genres & Genres.BuiltInWorlds) != 0;
                         shared.isDownload = (info.Genres & Genres.Downloads) != 0;
 
-                        // Users may delete their own worlds or worlds they've downloaded.  
+                        // Users may delete their own worlds or worlds they've downloaded.
                         shared.isDeleteActive =
                             //(info.Creator == shared.userName && shared.isMyWorld) ||
                             shared.isMyWorld ||
@@ -1815,7 +1805,7 @@ namespace Boku
                         shared.isDeleteActive &= (parent.CurrentBrowserType != LevelBrowserType.Sharing);
                     }
 
-                    // The level info comes in asynchronously.  So check 
+                    // The level info comes in asynchronously.  So check
                     // it and split the description text when it arrives.
                     SplitText();
 
@@ -2036,7 +2026,6 @@ namespace Boku
                             shared.levelGrid.MoveRight();
                         }
 
-
                     }
 
                     // Mouse input for activating show or sort menus.
@@ -2099,12 +2088,8 @@ namespace Boku
                     }
                 }
 
-
-
                 // Check for hover and adjust text color to match.
                 Color newColor;
-
-
 
                 newColor = shared.sortBox.Contains(hit) ? shared.hoverTextColor : shared.lightTextColor;
                 if (newColor != shared.sortTargetColor)
@@ -2516,7 +2501,7 @@ namespace Boku
                     {
                         string description = null;
                         description += info.Description;
-                        // We need to limit the width on the sharing browser more so that 
+                        // We need to limit the width on the sharing browser more so that
                         // we have room for the presence information to fit.
                         int maxWidth = parent.OriginalBrowserType == LevelBrowserType.Sharing ? 460 : 900;
                         info.UIDescBlob = new TextBlob(parent.renderObj.FontSmall, description, maxWidth);
@@ -2535,8 +2520,8 @@ namespace Boku
             #region Internal
 
             /// <summary>
-            /// Deletes the current world.  If local then from the local 
-            /// machine.  If in the community site then sends a message 
+            /// Deletes the current world.  If local then from the local
+            /// machine.  If in the community site then sends a message
             /// to the server to delete the world.
             /// </summary>
             public bool DeleteCurrentWorld()
@@ -2547,7 +2532,6 @@ namespace Boku
                     DeleteCallback,
                     shared.CurWorld.Browser);
             }
-
 
             //
             // Callbacks for Async server calls.
@@ -2599,7 +2583,6 @@ namespace Boku
                 }
             }   // end of GetWorldDataCallback()
 
-
             public override void Activate()
             {
                 shared.levelGrid.LoadContent(true);
@@ -2617,7 +2600,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class LoadLevelMenu UpdateObj  
+        }   // end of class LoadLevelMenu UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -2689,7 +2672,7 @@ namespace Boku
                 // Render the scene to our rendertarget.
                 InGame.SetRenderTarget(rt);
 
-                // Needed to clear the depth buffer so we don't see a silhouette 
+                // Needed to clear the depth buffer so we don't see a silhouette
                 // of the main menu and greeter Kodu.
                 device.Clear(Color.Transparent);
 
@@ -2719,13 +2702,11 @@ namespace Boku
 
                 quad.Render(bkg, Vector2.Zero, rtSize, "TexturedNoAlpha");
 
-
                 Color darkTextColor = new Color(40, 40, 40);
                 Color greyTextColor = new Color(127, 127, 127);
                 Color lightTextColor = new Color(255, 255, 255);
                 Color greenTextColor = new Color(12, 255, 0);
                 Color blueText = new Color(12, 150, 209);
-
 
                 SpriteBatch batch = UI2D.Shared.SpriteBatch;
 
@@ -3003,7 +2984,6 @@ namespace Boku
                 {
                     string str = String.Empty;
 
-
                     if (counter > 0)
                         --counter;
 
@@ -3242,7 +3222,6 @@ namespace Boku
                 }
             }   // end of RenderAuxMenuShadow()
 
-
             public override void Activate()
             {
             }
@@ -3342,7 +3321,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class LoadLevelMenu RenderObj     
+        }   // end of class LoadLevelMenu RenderObj
 
         #region Members
 
@@ -3490,7 +3469,6 @@ namespace Boku
                 return savedUIStates[(int)LocalLevelMode];
             }
         }
-
 
         // c'tor
         public LoadLevelMenu(LevelBrowserType browserType)
@@ -3684,7 +3662,6 @@ namespace Boku
             ModularMessageDialogManager.Instance.AddDialog(text, ReturnToLevelGrid, labelA);
         }
 
-
         public void ShowTargetAlreadyLinkedDialog(Guid targetLink)
         {
             //handler for "continue" - user wants to play anyway
@@ -3741,8 +3718,6 @@ namespace Boku
             //reactive the grid
             shared.levelGrid.Active = true;
         }
-
-
 
         public void OnSelect(UIGrid grid)
         {
@@ -4103,8 +4078,6 @@ namespace Boku
             }
         }
 
-
-
         private void WorldDownloadComplete(WorldDataPacket packet, byte[] thumbnailBytes, LevelMetadata level)
         {
             if (!XmlDataHelper.WriteWorldDataPacketToDisk(packet, thumbnailBytes, level.LastWriteTime))
@@ -4147,7 +4120,6 @@ namespace Boku
                     shared.popup.Active = false;
                 }
 
-
                 // Do stack handling here.  If we do it in the update object we have no
                 // clue which order things get pushed and popped and madness ensues.
                 CommandStack.Pop(commandMap);
@@ -4172,7 +4144,6 @@ namespace Boku
                 {
                     shared.bucketsGrid.Active = false;
                 }
-
 
                 //
                 // Shut down all the browser instances.
@@ -4340,7 +4311,7 @@ namespace Boku
 
         /// <summary>
         /// Converts byte array to Base64 while also doing character
-        /// substitutions to ensure that the resutling string is 
+        /// substitutions to ensure that the resutling string is
         /// valid to use in a URL.
         /// </summary>
         /// <param name="bytes"></param>

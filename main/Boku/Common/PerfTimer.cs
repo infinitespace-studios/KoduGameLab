@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if DEBUG
 #define DO_PERF_TIMING
 #endif
@@ -11,11 +10,10 @@ using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-
 namespace Boku.Common
 {
     /// <summary>
-    /// Primarily for internal use this is a class that will hopefully make it 
+    /// Primarily for internal use this is a class that will hopefully make it
     /// easier to measue perf and understand where the hot spots are in the code.
     /// </summary>
     public class PerfTimer
@@ -139,5 +137,3 @@ namespace Boku.Common
     }   // end of class PerfTimer
 
 }   // end of namespace Boku.Common
-
-

@@ -19,7 +19,7 @@ namespace Boku.Common.Gesture
         }
 
         /// <summary>
-        /// Rotation DOT product threshold. This controls how tolerant the twist gesture detector is to the two fingers 
+        /// Rotation DOT product threshold. This controls how tolerant the twist gesture detector is to the two fingers
         /// moving in opposite directions.
         /// Setting this to -1 means the fingers have to move in exactly opposite directions relative to each other.
         /// This value has to be kept between -1 and 0
@@ -48,7 +48,7 @@ namespace Boku.Common.Gesture
         public Vector2 AveragePosition
         {
             get { return m_averagePosition; }
-            protected set 
+            protected set
             {
                 m_PrevAveragePosition = m_averagePosition;
                 m_averagePosition = value;
@@ -73,16 +73,14 @@ namespace Boku.Common.Gesture
             get { return m_isVertical; }
         }
 
-
         private bool m_dragStarted = false;
 
-        private int[] m_FingerIdx = new int[kNumTouchesRequired]; 
-        
-        
-        //This variable is used to keep track of the movement of the fingers since detection.  
+        private int[] m_FingerIdx = new int[kNumTouchesRequired];
+
+        //This variable is used to keep track of the movement of the fingers since detection.
         //We use this because we can detect the finger after the fact that it was pressed and so using startPosition on the touch contact would be wrong some times.
-        private Vector2[] m_AccumulatedDeltaDir = new Vector2[kNumTouchesRequired]; 
-        
+        private Vector2[] m_AccumulatedDeltaDir = new Vector2[kNumTouchesRequired];
+
         protected override void OnReset()
         {
             for( int i=0; i<m_FingerIdx.Length; ++i )
@@ -130,7 +128,6 @@ namespace Boku.Common.Gesture
 
             bool bFailed = touches.Length != GetRequiredTouchCount();
 
-            
             if( !bFailed  )
             {
                 //If we don't have 2 fingers then assign them
@@ -190,7 +187,6 @@ namespace Boku.Common.Gesture
                         m_AccumulatedDeltaDir[0] = Vector2.Zero;
                         m_AccumulatedDeltaDir[1] = Vector2.Zero;
 
-
                         //One Finger has dragged far enough to start dragging.
                         if( TouchesMovedInSameDirection(ref finger1, ref finger2, k_MaxDOT) )
                         {
@@ -246,7 +242,7 @@ namespace Boku.Common.Gesture
                 newDrag.Normalize();
 
                 //assign the new drag direction
-                m_dragDirection = newDrag; 
+                m_dragDirection = newDrag;
 
                 Vector2 yAxis = new Vector2(0.0f, 1.0f);
 

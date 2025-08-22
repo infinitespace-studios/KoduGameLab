@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ using Boku.Programming;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// Element used for examples in programming help.  They display a single reflex and 
+    /// Element used for examples in programming help.  They display a single reflex and
     /// some text describing the reflex.
     /// </summary>
     public class UIGrid2DExampleElement : UIGridElement
@@ -70,12 +69,12 @@ namespace Boku.UI2D
                 }
             }
         }
-        
+
         public float Width
         {
             get { return width; }
         }
-        
+
         public float Height
         {
             get { return height; }
@@ -132,7 +131,6 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }   // end of HandleTouchInput()
@@ -185,7 +183,6 @@ namespace Boku.UI2D
             descBlob.RenderWithButtons(pos, textColor);
 
             //device.BlendState = BlendState.AlphaBlend;
-
 
         }   // end of UIGrid2DExampleElement Render()
 
@@ -284,9 +281,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid2DExampleElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

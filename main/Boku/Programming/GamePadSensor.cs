@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,10 +24,10 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses when the physical GamePad is used
-    /// 
+    ///
     /// This sensor acts more like a manager than the true source of the sensor event.
-    /// It will request the GamePadStick and GamePadButton filters to provide 
-    /// the actual input.  This sensor demonstrates a break in the normal use of 
+    /// It will request the GamePadStick and GamePadButton filters to provide
+    /// the actual input.  This sensor demonstrates a break in the normal use of
     /// the model but demonstrates how other elements can be used to solve problems.
     /// </summary>
     public class GamePadSensor : Sensor
@@ -40,12 +39,11 @@ namespace Boku.Programming
             Two,
             Three,
             Four,
-            All, 
+            All,
         }
-              
+
         [XmlAttribute]
         public PlayerId playerIndex = PlayerId.Dynamic;
-
 
         public GamePadSensor()
         {

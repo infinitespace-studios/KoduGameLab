@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // If you uncomment this then the randomness will be taken out of
 // the initial position and velocity of created/droppped items.
 #define NO_RANDOM
@@ -45,7 +44,7 @@ namespace Boku.Base
         /// <summary>
         /// These used to be Rover specific but are being renamed
         /// so they can be used by any character.  No, the renaming
-        /// doesn't change any functionality but it seems like 
+        /// doesn't change any functionality but it seems like
         /// having "rover" in the name no longer makes sense.
         /// </summary>
         public enum ScienceAction
@@ -69,7 +68,6 @@ namespace Boku.Base
         /// </summary>
         [XmlIgnore]
         public bool FactoryCreated;
-
 
         protected Brain brain;
         protected AnimationSet animationSet = null;
@@ -102,7 +100,7 @@ namespace Boku.Base
         private SensorTargetSet missileHitSet = new SensorTargetSet();  // Targets my shots have hit this frame.
         private SensorTargetSet shooterHitSet = new SensorTargetSet();  // Shooters that have hit me this frame.
 
-        // The following modifiers are set based on the execution of the 
+        // The following modifiers are set based on the execution of the
         // Settings->MoveSpeed and Settings->TurnSpeed tiles during runtime.
         // They must be reset at the start of each run and should not be persisted.
         private float moveSpeedTileModifier = 1.0f;
@@ -128,7 +126,6 @@ namespace Boku.Base
         private Vector3 _beamTargetPosition;
         private Classification.Colors _beamColor;
         private bool _inspected;
-
 
         // SGI_MOD - if the object has reached end of path
         private Classification.Colors _reachedEOP;
@@ -273,7 +270,6 @@ namespace Boku.Base
             get { return scannedSetIter; }
         }
 
-
         [XmlIgnore]
         public BleepManager.BleepData ActiveBleeps
         {
@@ -305,7 +301,7 @@ namespace Boku.Base
                 //mark as revealed - this will have RenderObject and SRO returning the new model
                 _revealed = value;
 
-                // If we have an actor that doesn't have a "revealed" state, then we 
+                // If we have an actor that doesn't have a "revealed" state, then we
                 // can just stop here.  Currently, this is only for "rock".
                 if (StaticActor.XmlGameActorRevealed == null)
                 {
@@ -381,8 +377,8 @@ namespace Boku.Base
         public bool ScienceActionPerformed
         {
             get { return scienceActionPerformed; }
-            set 
-            { 
+            set
+            {
                 scienceActionPerformed = value;
                 TweakImmobileNoRot = value;
             }
@@ -429,7 +425,7 @@ namespace Boku.Base
             get { return scienceActorDirection; }
             set { scienceActorDirection = value; }
         }
-        
+
         public override Classification.Colors ReachedEOP
         {
             get { return _reachedEOP; }
@@ -620,7 +616,6 @@ namespace Boku.Base
                 maxCreated = 1000;
                 rescale = 1.0f;
                 holdDistance = _holdDistance = 1.0f;
-                
 
                 mass = 1.0f;
 
@@ -712,7 +707,6 @@ namespace Boku.Base
                 return MemberwiseClone();
             }
 
-
         }   // end of struct TweakableParameters
 
         /// <summary>
@@ -749,7 +743,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// This is the minimum height of the object.  An object at 
+        /// This is the minimum height of the object.  An object at
         /// this height should appear to be sitting on the ground.
         /// </summary>
         public override float MinHeight
@@ -792,7 +786,6 @@ namespace Boku.Base
             get { return CollisionRadius + CollisionCenter.Z; }
         }
 
-
         /// <summary>
         /// Gets the offset in model space where the healthbar should render.
         /// This is a reasonable default for most models, but should be overridden
@@ -815,13 +808,13 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Offset position for thought balloon.  Note that for 
+        /// Offset position for thought balloon.  Note that for
         /// tumbling objects we want to ignore the tumble otherwise
         /// the balloon gets spun into the ground.
         /// </summary>
         public override Vector3 WorldThoughtBalloonOffset
         {
-            get 
+            get
             {
                 Vector3 result = Vector3.Zero;
                 DynamicPropChassis chassis = Chassis as DynamicPropChassis;
@@ -834,7 +827,7 @@ namespace Boku.Base
                     result = WorldHealthBarOffset - Vector3.UnitZ;
                 }
 
-                return result; 
+                return result;
             }
         }
 
@@ -843,7 +836,6 @@ namespace Boku.Base
 
         // Runtime copy of local parameters (for clones)
         private TweakableParameters runtimeLocalParameters = null;
-
 
         /// <summary>
         /// If this bot is an individual or a creatable master, return its local parameters.
@@ -1064,10 +1056,10 @@ namespace Boku.Base
                 prevHitPoints = 1;
                 currHitPoints = 0;
 
-                // The overall goal of this code is to allow 1 final pass through the kode when a bot dies.  
+                // The overall goal of this code is to allow 1 final pass through the kode when a bot dies.
                 // This allows things like WHEN Health 0 DO Score Points.  (score when I die)
-                // The filter is applied to the root level reflexes (indent==0) and so only allowed things like 
-                // the above example to work when at indent==0.  If nested, even if the parent executes, the filter 
+                // The filter is applied to the root level reflexes (indent==0) and so only allowed things like
+                // the above example to work when at indent==0.  If nested, even if the parent executes, the filter
                 // prevents this running.
                 // Removing the filter altogether causes bugs.  For instance:
                 //          WHEN OnLand Type DO +Score Green 1Point
@@ -1129,9 +1121,9 @@ namespace Boku.Base
             {
                 /// Masters don't affect the counts.
                 GameActor master = InGame.inGame.GetCreatable(creatableId);
-                
+
                 // This only occurs in levels with PreGrame and creatables. GamePad must be used.
-                // To get the error to happen need to run the game, during pregame hit Start to 
+                // To get the error to happen need to run the game, during pregame hit Start to
                 // go to HomeMenu, Save game, it should return to run mode, now hit Back to go
                 // into Edit mode.  During the unload we end up here because the creatableId is Guid.Empty.
                 // Duel temp fixes: check for null here and disable Start button during RunSim.
@@ -1261,7 +1253,7 @@ namespace Boku.Base
                                 int hitPoints = HitPoints;
                                 ShutdownSubsystems(revivingTheDead: true);
                                 HitPoints = hitPoints;
-                                
+
                                 UnRegister();
 
                                 // Move to active state.
@@ -1382,7 +1374,7 @@ namespace Boku.Base
 
         /// <summary>
         /// Is this actor's brain registered for updates?
-        /// 
+        ///
         /// TODO (****) remove this.  Do we really need this or
         /// is it just redundant information that could get out
         /// of sync?
@@ -1432,10 +1424,10 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// The DisplayNameNumber is a combination of a string name and number.  The 
-        /// number cannot be set by the user and is used to ensure uniqueness even 
+        /// The DisplayNameNumber is a combination of a string name and number.  The
+        /// number cannot be set by the user and is used to ensure uniqueness even
         /// if the same string name is used.
-        /// 
+        ///
         /// The only time this should ever be set is when reading in from a level.
         /// </summary>
         public override string DisplayNameNumber
@@ -1444,7 +1436,7 @@ namespace Boku.Base
             {
                 Debug.Assert(!String.IsNullOrWhiteSpace(displayName), "We should alwasy have a valid name.");
                 Debug.Assert(displayNumber > 0, "Number should also be at least 1");
-                
+
                 return displayName + " " + displayNumber.ToString();
             }
             set
@@ -1539,7 +1531,7 @@ namespace Boku.Base
         /// <summary>
         /// Has the user renamed this character?
         /// Note that this will not work correctly on levels that were created
-        /// using one language and then edited in another.  All names will 
+        /// using one language and then edited in another.  All names will
         /// appear to be user defined.
         /// </summary>
         [XmlIgnore]
@@ -1559,7 +1551,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Doesn't do anything except act as a placholder for 
+        /// Doesn't do anything except act as a placholder for
         /// bot specific functions that need to happen before
         /// the brain is updated.
         /// </summary>
@@ -1568,7 +1560,7 @@ namespace Boku.Base
         }   // end of PreBrainUpdate()
 
         /// <summary>
-        /// Doesn't do anything except act as a placholder for 
+        /// Doesn't do anything except act as a placholder for
         /// bot specific functions that need to happen after
         /// the brain is updated.
         /// </summary>
@@ -1579,7 +1571,7 @@ namespace Boku.Base
         /// <summary>
         /// Update the brain (AI)
         /// </summary>
-        /// 
+        ///
         public void UpdateSensors(BrainCategories category)
         {
             // If we're entering edit mode, don't execute.
@@ -1597,7 +1589,7 @@ namespace Boku.Base
                 ClearBeamedSet();
                 ClearInspectedSet();
                 ClearScannedSet();
-                
+
                 prevHitPoints = currHitPoints;
             }
         }
@@ -1632,9 +1624,7 @@ namespace Boku.Base
                 ProcessMovementSets();
             }
 
-
             bool quiet = Mute;
-
 
             // GameActor doesn't have a general update call, so tasks we'd normally perform
             // in a general update have started accumulating in this function. The code
@@ -1785,8 +1775,8 @@ namespace Boku.Base
         }   // end of UpdateActuators()
 
         /// <summary>
-        /// Updates the first person state of the current bot.  Note, that in order for this 
-        /// to work the CameraInfo state must be valid which means that ALL the bots need 
+        /// Updates the first person state of the current bot.  Note, that in order for this
+        /// to work the CameraInfo state must be valid which means that ALL the bots need
         /// to have had UpdateActuators() already called on them.
         /// </summary>
         public void UpdateFirstPersonState()
@@ -1842,7 +1832,6 @@ namespace Boku.Base
         /// <summary>
         /// The UNSCALED scan range.
         /// </summary>
-         
 
         /// TODO (****) From here down this looks like it's all Rover
         /// specific.  If so, why is it here?  Would it be better in
@@ -1853,11 +1842,11 @@ namespace Boku.Base
         /// </summary>
         protected float beamRange;
         /// <summary>
-        /// The UNSCALED inspect range. 
+        /// The UNSCALED inspect range.
         /// </summary>
         protected float inspectRange;
         /// <summary>
-        /// The UNSCALED cluster range. 
+        /// The UNSCALED cluster range.
         /// </summary>
         protected float clusterRange;
         /// <summary>
@@ -1865,23 +1854,23 @@ namespace Boku.Base
         /// </summary>
         protected float beamDelay;
         /// <summary>
-        /// The UNSCALED inspect delay. 
+        /// The UNSCALED inspect delay.
         /// </summary>
         protected float inspectDelay;
         /// <summary>
-        /// The UNSCALED scan delay. 
+        /// The UNSCALED scan delay.
         /// </summary>
         protected float scanDelay;
         /// <summary>
-        /// The UNSCALED scan rings. 
+        /// The UNSCALED scan rings.
         /// </summary>
         protected int scanRings;
         /// <summary>
-        /// The UNSCALED rover rotation acc when beaming/inspecting 
+        /// The UNSCALED rover rotation acc when beaming/inspecting
         /// </summary>
         protected float roverRotationAcc;
         /// <summary>
-        /// The UNSCALED rover rotation rate when beaming/inspecting 
+        /// The UNSCALED rover rotation rate when beaming/inspecting
         /// </summary>
         protected float roverRotationRate;
         /// <summary>
@@ -2424,7 +2413,7 @@ namespace Boku.Base
         /// </summary>
         public float ReScaleFromScale
         {
-            get; 
+            get;
             set;
         }
 
@@ -2436,7 +2425,6 @@ namespace Boku.Base
             get;
             set;
         }
-
 
         //these are only changed at runtime, always local
         public bool ReScaling
@@ -2640,7 +2628,7 @@ namespace Boku.Base
         /// <summary>
         /// Value used to modify vertical speed for bots whose chassis allows them
         /// to move up and down.  Acts as a multiplier to the chassis limits
-        /// so that 1.0 is the default, 0.5 will create a character that moves 
+        /// so that 1.0 is the default, 0.5 will create a character that moves
         /// at half speed and 2.0 will move at double the normal rate.
         /// </summary>
         public float VerticalSpeedModifier
@@ -2652,7 +2640,7 @@ namespace Boku.Base
         /// <summary>
         /// Value used to modify vertical acceleration for bots whose chassis allows them
         /// to move up and down.  Acts as a multiplier to the chassis limits
-        /// so that 1.0 is the default, 0.5 will create a character that accelerates 
+        /// so that 1.0 is the default, 0.5 will create a character that accelerates
         /// at half speed and 2.0 will accelerate at double the normal rate.
         /// </summary>
         public float VerticalAccelerationModifier
@@ -2784,7 +2772,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// The base strength of an actor's push.  
+        /// The base strength of an actor's push.
         /// Actors will be push by this amount of force
         /// Default is 5.0.
         /// </summary>
@@ -2795,7 +2783,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// The base range of an actor's push.  
+        /// The base range of an actor's push.
         /// Actors within this range will be affected by the push
         /// Default is 30.0.
         /// </summary>
@@ -2822,7 +2810,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// The strength of an actor's kick.  Used as the 
+        /// The strength of an actor's kick.  Used as the
         /// base velocity imparted to the kicked object.
         /// Default is 10.0.
         /// </summary>
@@ -3031,8 +3019,8 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Returns the altitude (absolute Z position) for this object 
-        /// when in edit mode.  For some bots (boats) this should be 
+        /// Returns the altitude (absolute Z position) for this object
+        /// when in edit mode.  For some bots (boats) this should be
         /// overridden to also take into account the water level.
         /// </summary>
         public virtual float EditAltitude
@@ -3169,7 +3157,7 @@ namespace Boku.Base
             CreateDevices();
 
             SetupBaseXmlParams();
-            
+
             XmlConstruct();
             InitDefaults(false);
 
@@ -3431,7 +3419,7 @@ namespace Boku.Base
                     AddSmoke(xmlSource);
                 }
             }
-            #endregion      
+            #endregion
         }
 
         protected virtual void ResetXmlParams(bool revivingDeadActor)
@@ -3454,7 +3442,7 @@ namespace Boku.Base
                     // But, with missiles, this can be a problem.  For instance:
                     // WHEN Bump Missile Green DO ...
                     // The missile ends up being recycled (and its color reset to white) before
-                    // the Bump can test the color and trigger.  
+                    // the Bump can test the color and trigger.
                     // So, the hack is to just not reset the color.  This only works for
                     // missiles because whenever they are created, a new color is set.  This
                     // isn't true for most other things.
@@ -3489,7 +3477,7 @@ namespace Boku.Base
                 {
                     TweakInvulnerable = XmlActorParams.SpecialActions.OpenCloseData.Invulnerable;
                 }
-            }    
+            }
         }
 
         protected virtual void XmlConstruct()
@@ -3599,7 +3587,7 @@ namespace Boku.Base
             GameActor targetActor = thing as GameActor;
             if (targetActor != null && !targetActor.CanBeSensed())
                 return;
-            
+
             SensorTarget target = SensorTargetSpares.Alloc();
             target.Init(thing, direction, range);
 
@@ -3698,7 +3686,7 @@ namespace Boku.Base
             {
                 // The following code can throw under rare circumstances.  If you program
                 // a Kodu with WHEN See Cycle DO Shoot and cycle with WHEN Health 0 DO Reset World
-                // you get a situation where the missileHitSet gets reset in the middle of the 
+                // you get a situation where the missileHitSet gets reset in the middle of the
                 // foreach loop causing an exception.  The try/catch lets it work as expected.
                 // A "proper" fix might be a bit more involved...
                 try
@@ -3945,7 +3933,7 @@ namespace Boku.Base
                     Chassis.Gravity = BaseChassis.kGravity;
                 }
 
-                // TODO (****) Encapsulate this in some "collision effect" manager so we 
+                // TODO (****) Encapsulate this in some "collision effect" manager so we
                 // can have different sounds/visuals for different types of collisions.
                 // For now, just don't do effects for prop/prop collisions.
                 if (Chassis as DynamicPropChassis == null && actor.Chassis as DynamicPropChassis == null)
@@ -4004,7 +3992,7 @@ namespace Boku.Base
         /// <summary>
         /// Compute the right amount to dampen a tangent velocity for the input time interval
         /// and friction parameter.
-        /// 
+        ///
         /// TODO (****) This is totally useless if it doesn't even document the range
         /// of values and which end of the range aligns with slick vs sticky.
         /// </summary>
@@ -4038,7 +4026,7 @@ namespace Boku.Base
         private const float kNoFriction = 1.0f; // frictionless, T=infinity
 
         /// <summary>
-        /// We've detected that the two actors have collided so now 
+        /// We've detected that the two actors have collided so now
         /// calc the bounce and apply this to the actor's velocities.
         /// </summary>
         /// <param name="actor0"></param>
@@ -4193,7 +4181,6 @@ namespace Boku.Base
             {
                 terrainBlocked = true;
             }
-
 
             bool objectBlocked = false;
             if (CollSys.TestAll(from, toward, CollisionRadius, _scratchPreHits))
@@ -4685,16 +4672,15 @@ namespace Boku.Base
             return true;
         }
 
-
         // TODO (****) Try and move more of this into the AnimationSet class.
 
         /// <summary>
-        /// The animation system was designed to self-update, but we update 
-        /// the animations manually so that we have more control over 
-        /// suspending them, etc.  If you want animations to run "on their 
-        /// own," then pass a valid "Game" object into the constructor (we 
+        /// The animation system was designed to self-update, but we update
+        /// the animations manually so that we have more control over
+        /// suspending them, etc.  If you want animations to run "on their
+        /// own," then pass a valid "Game" object into the constructor (we
         /// pass null from our constructor, above.)
-        /// 
+        ///
         /// Note: This function may be overridden to start new bot-specific
         /// animations.
         /// </summary>
@@ -4712,7 +4698,7 @@ namespace Boku.Base
                     once = true;
                 }
 
-                // If animation is turned off we only need to do the following 
+                // If animation is turned off we only need to do the following
                 // whenever "once" is reset which currently only happens when
                 // the open/close state changes.
                 if (BokuSettings.Settings.Animation || once)
@@ -4749,7 +4735,7 @@ namespace Boku.Base
         /// <summary>
         /// Face interface
         /// </summary>
-        /// 
+        ///
 
         public bool DirectGaze(Vector3 target)
         {
@@ -5081,7 +5067,7 @@ namespace Boku.Base
             // Why is this a hack?
 
             // If we don't have the optional subject, lets find a nearby one.
-            // Ignore anything that we're already holding. 
+            // Ignore anything that we're already holding.
             if (grabThing == null)
             {
                 grabThing = ClosestActor(TotalGrabRange, true);
@@ -5340,7 +5326,7 @@ namespace Boku.Base
                         target.Chassis.Moving = true;
                     }
                 }
-                else 
+                else
                 {
                     if (target.ReScaling)
                     {
@@ -5681,7 +5667,7 @@ namespace Boku.Base
         }
         /// <summary>
         /// Figure out what to launch, either something to create or something we're holding.
-        /// 
+        ///
         /// This may return null if the resource limit is reached and we're not
         /// holding anything.
         /// </summary>
@@ -5719,11 +5705,11 @@ namespace Boku.Base
 
         /// <summary>
         /// Returns the closest GameActor in the scene within the specified range.
-        /// 
+        ///
         /// If I'm being held, this should never return the actor holding me.
         /// </summary>
         /// <param name="RangeCheck">Delegate to get max range to check.</param>
-        /// <param name="ignoreHeldObjects">Should we ignore things we are holding?  
+        /// <param name="ignoreHeldObjects">Should we ignore things we are holding?
         /// Depends of usage.  For instance is makes sense to ignore the apple I'm
         /// holding if I'm trying to find someone to give it to.  On the other hand
         /// it does make sense to count it if I'm looking for something nearby to eat.</param>
@@ -5777,7 +5763,7 @@ namespace Boku.Base
                 if ((actor != null)
                     && (actor != this)
                     && ((actor.ActorHoldingThis == null) || (actor.ActorHoldingThis == this))
-                    && (actor.XmlActorParams.CanReveal) 
+                    && (actor.XmlActorParams.CanReveal)
                     && (!actor.Revealed))
                 {
                     //TODO: verify it's an object that can be revealed and an object that hasn't yet been revealed
@@ -5886,7 +5872,7 @@ namespace Boku.Base
                         else if (actor.Classification.name == rockNameHP && distSq < closestHPDistSq)
                         {
                             closestHPActor = actor;
-                            closestHPDistSq = distSq;                                 
+                            closestHPDistSq = distSq;
                         }
                         // check for rock name 2
                         else if (actor.Classification.name == rockNameLP && distSq < closestLPDistSq)
@@ -5913,7 +5899,7 @@ namespace Boku.Base
             // return the low priority actor in view
             else if (closestFOVActor != null && closestFOVActor.Classification.name == rockNameLP)
                 return closestFOVActor;
-            // return the closest low priority actor 
+            // return the closest low priority actor
             else if (closestLPActor != null)
                 return closestLPActor;
             // return the rock that's in view
@@ -6052,10 +6038,10 @@ namespace Boku.Base
                 // Actor we want to push.
                 GameActor pushActor = pushThing as GameActor;
 
-                // Assuming that PushStrength is the wind speed, we want to 
+                // Assuming that PushStrength is the wind speed, we want to
                 // calculate a force relative to the ideal.  In other words, if the
                 // target is already moving with the wind then the wind should have
-                // no additional effect.  Moving against the wind should have a 
+                // no additional effect.  Moving against the wind should have a
                 // stronger effect.
                 float relativeSpeed = Vector3.Dot(movement.Facing, pushActor.Movement.Velocity);
 
@@ -6361,7 +6347,7 @@ namespace Boku.Base
                 eatThing = ClosestActor(TotalGrabRange, false);
             }
 
-            if (eatThing != null 
+            if (eatThing != null
                 && !(eatThing is NullActor)
                 && (eatThing.ActorHoldingThis == null || eatThing.ActorHoldingThis == this))
             {
@@ -6414,7 +6400,7 @@ namespace Boku.Base
 
         /// <summary>
         /// temporary effect
-        /// If override, call this base first then modify state as Reset may do that also 
+        /// If override, call this base first then modify state as Reset may do that also
         /// </summary>
         /// <returns></returns>
         protected override bool DoStun(BaseAction effector, bool quiet, GameThing executor)
@@ -6450,7 +6436,7 @@ namespace Boku.Base
         /// <summary>
         /// Permanent effect, leave a carcas
         /// If override, call this base first then modify state as Reset may do that also.
-        /// 
+        ///
         /// UPDATE : Death can now be reversed by healing.
         /// </summary>
         /// <returns></returns>
@@ -6458,7 +6444,7 @@ namespace Boku.Base
         {
             if (this is NullActor && executor !=null && executor is GameActor)
             {
-                return (executor as GameActor).DoKill(effector, quiet, executor);                
+                return (executor as GameActor).DoKill(effector, quiet, executor);
             }
 
             quiet |= this.Mute;
@@ -6700,7 +6686,6 @@ namespace Boku.Base
             return total;
         }
 
-
         /// <summary>
         /// Find the sum of my grab range and the grab range of the thing I want to grab.
         /// Handles rescaling.
@@ -6752,8 +6737,7 @@ namespace Boku.Base
                 }
             }
 
-             
-            return true;                            
+            return true;
         }
 
         public bool DoKick(BaseAction effector, GameThing directObject, bool quiet)
@@ -6835,7 +6819,6 @@ namespace Boku.Base
 
                     // Give it some loft
                     kickDir = GetLoft(effector, kickDir);
-
 
                     if ((kickThing.Classification.physicality & Classification.Physicalities.Static) != 0)
                     {
@@ -7261,7 +7244,6 @@ namespace Boku.Base
             Vector3 initialDirection = GetShootDirection(gun, targetObject, MissileSpeed, effector);
             float initialRotation = MyMath.ZRotationFromDirection(initialDirection);
 
-
             CruiseMissile missile = null;
 
             float lifetime = MissileRange / MissileSpeed;
@@ -7441,7 +7423,7 @@ namespace Boku.Base
         private void FireBeamInternal(bool quiet)
         {
             if (Time.GameTimeTotalSeconds < nextBeamFire)
-                return; 
+                return;
 
             bool result = SharedEmitterManager.Beams.Fire(this, ScienceActorTarget, BeamTargetPosition, BeamColor);
             if (result)
@@ -7456,7 +7438,6 @@ namespace Boku.Base
             }
         }
 
-
         // SGI_MOD - adding inspect action
         public bool DoInspect(BaseAction effector, GameThing targetObject, bool quiet)
         {
@@ -7468,7 +7449,7 @@ namespace Boku.Base
 
             //don't allow if not on ground
             if (Chassis is VehicleChassis && ((VehicleChassis)Chassis).OnGround == false)
-                return false; 
+                return false;
             if (ScienceActionPerformed)
                 return false;
 
@@ -7515,7 +7496,7 @@ namespace Boku.Base
             ScienceActionTimer = 0.0f;
             ScienceActorTarget = targetActor;
             ScienceActorDirection = direction;
-            
+
             return true;
 
         }   // end of GameActor DoInspect()
@@ -7778,7 +7759,6 @@ namespace Boku.Base
             }
         }
 
-
         public override bool SetFirstPerson(bool on)
         {
             if (base.SetFirstPerson(on))
@@ -7821,7 +7801,7 @@ namespace Boku.Base
         }
         /// <summary>
         /// Pulled out of derived classes down to base.
-        /// 
+        ///
         /// </summary>
         public void InitBrainEmpty()
         {
@@ -7885,7 +7865,7 @@ namespace Boku.Base
 
         /// <summary>
         /// Called to have the actor state to be reset, but not movement.
-        /// 
+        ///
         /// Recentely added the ignoreState flag.  Not sure if there's really
         /// any case where this shouldn't be true.
         /// </summary>
@@ -7902,7 +7882,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Called to have the actor reset 
+        /// Called to have the actor reset
         /// </summary>
         public virtual void Reset()
         {
@@ -7934,7 +7914,6 @@ namespace Boku.Base
                 param.hitStrength = defaultDamage;
                 param.hitPosition = hitPos;
 
-
                 SensorTarget target = SensorTargetSpares.Alloc();
                 // We don't need a direction and range so just set the target.
                 // TODO (****) This kind of imples that this should be refactored.
@@ -7943,7 +7922,7 @@ namespace Boku.Base
 
                 // This actor (the launcher) may have died since launching the missile.
                 // So, adding to this missileHitSet is at best useless and may be very
-                // wrong if the actor has already been recycled.  We can test for the 
+                // wrong if the actor has already been recycled.  We can test for the
                 // inactive case but there's still the odd case of being recycled.
                 // TODO (****) Maybe missile hit stuff should be in the missile rather
                 // than the launcher?  Will this fix the problem?
@@ -8537,7 +8516,6 @@ namespace Boku.Base
         /// </summary>
         private static List<DirectLine> _soundLines = new List<DirectLine>();
 
-
         /// <summary>
         /// Display user visible debug collision information.
         /// </summary>
@@ -8548,7 +8526,7 @@ namespace Boku.Base
             if (SRO.DisplayCollisions)
             {
                 // Normally fixed position bots use a collection of geometirc prims to represent
-                // their collision volume.  Clams however just use a bounding sphere like the 
+                // their collision volume.  Clams however just use a bounding sphere like the
                 // rest of the mobile bots so we need to check to see if this is a Clam.
                 if (!Chassis.FixedPosition || Classification.name.Equals("clam"))
                 {
@@ -8655,10 +8633,10 @@ namespace Boku.Base
                     break;
                 case 4:
                     {
-                        /// Search from src to dst for the first blocking wall. 
+                        /// Search from src to dst for the first blocking wall.
                         /// A wall is considered blocking if it is higher than src.Z.
                         /// The edge of the world is treated as an infinitely high wall.
-                        /// If src is off the edge of the world, src is returned as the 
+                        /// If src is off the edge of the world, src is returned as the
                         /// blocking position.
                         found = Terrain.FindWallOrEdge(
                             src,
@@ -8817,7 +8795,6 @@ namespace Boku.Base
         {
             currHitPoints = prevHitPoints = hp;
         }
-
 
         protected override bool IExecuteVerb(GameThing.Verbs verb, GameActor directObject, BaseAction effector, bool quiet)
         {
@@ -9104,13 +9081,13 @@ namespace Boku.Base
                     }
                     break;
 
-                // do modify movement speed 
+                // do modify movement speed
                 case Verbs.MovementSpeedModify:
                     // Copy modifier from reflex to actor.
                     moveSpeedTileModifier = effector.Reflex.MoveSpeedTileModifier;
                     break;
 
-                // do modify turn speed 
+                // do modify turn speed
                 case Verbs.TurningSpeedModify:
                     // Copy modifier from reflex to actor.
                     turnSpeedTileModifier = effector.Reflex.TurnSpeedTileModifier;
@@ -9173,7 +9150,6 @@ namespace Boku.Base
             return supports;
         }
 
-
         private List<ActionSet> movementSets = new List<ActionSet>();
 
         public void QueueMovementSet(ActionSet actionSet)
@@ -9204,7 +9180,7 @@ namespace Boku.Base
             */
             movementSets.Clear();
             externalMovementSets.Clear();
-            
+
         }   // end of ProcessMovementSets()
 
         /// <summary>
@@ -9365,9 +9341,7 @@ namespace Boku.Base
             return maxVerticalAcceleration;
         }   // end of CalcMaxVerticalAcceleration()
 
-
     }   // end of class GameActor
-
 
     /// <summary>
     /// NullActor is used by the brain to poison empty sensor sets, so that a reflex's classification
@@ -9395,4 +9369,3 @@ namespace Boku.Base
     }   // end of class NullActor
 
 }   // end of namespace Boku.Base
-    

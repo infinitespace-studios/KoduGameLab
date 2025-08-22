@@ -4,7 +4,7 @@
 /*
  * CubeComponent.cs
  * Copyright (c) 2007 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -95,7 +95,6 @@ namespace Xclna.Xna.Animation.Visualization
             }
         }
 
-
         /// <summary>
         /// Creats a new CubeComponent.
         /// </summary>
@@ -105,14 +104,13 @@ namespace Xclna.Xna.Animation.Visualization
         public CubeComponent(
                             Game game,
                             Color color,
-                            float sideLength) 
+                            float sideLength)
             : base(game)
         {
             this.sideLength = sideLength;
             this.graphics = (IGraphicsDeviceService)game.Services.GetService(
                 typeof(IGraphicsDeviceService));
             effect = new BasicEffect(graphics.GraphicsDevice);
-
 
             indices = new int[]
             {
@@ -130,11 +128,10 @@ namespace Xclna.Xna.Animation.Visualization
 
                 5,6,2, // back face
                 2,1,5,
-                
+
                 7,4,0, // front face
                 0,3,7
             };
-
 
             Vector3[] originalVerts = new Vector3[]
             {

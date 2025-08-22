@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -57,7 +56,7 @@ namespace Boku.Common
             // Find vectors for two edges sharing v0.
             Vector3 edge1 = v1 - v0;
             Vector3 edge2 = v2 - v0;
- 
+
             // Begin calculating determinant - also used to calculate U parameter.
             Vector3 pvec = Vector3.Cross(ray.Direction, edge2);
 
@@ -67,9 +66,9 @@ namespace Boku.Common
             // Calculate distance from v0 to ray origin.
             Vector3 tvec = ray.Position - v0;
             float inv_det = 1.0f / det;
-           
+
             Vector3 qvec = Vector3.Cross(tvec, edge1);
-              
+
             if (det > float.Epsilon)
             {
                 u = Vector3.Dot(tvec, pvec);
@@ -102,7 +101,7 @@ namespace Boku.Common
                     return false;
                 }
             }
-            else 
+            else
             {
                 // Ray is parallel to the plane of the triangle.
                 return false;
@@ -115,7 +114,6 @@ namespace Boku.Common
             return true;
 
         }   // end of Triangle Intersect()
-
 
 }   // end of class Triangle
 

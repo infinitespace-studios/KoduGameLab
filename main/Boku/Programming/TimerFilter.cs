@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of a timer input
-    /// 
+    ///
     /// It contains the definition of the amount of time
     /// </summary>
     public class TimerFilter : Filter

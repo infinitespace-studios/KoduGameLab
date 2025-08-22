@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,9 +27,9 @@ using Boku.Fx;
 namespace Boku
 {
     /// <summary>
-    /// Menu of available materials.  This is a generic element that 
+    /// Menu of available materials.  This is a generic element that
     /// should be able to be used over the top of any tool.
-    /// 
+    ///
     /// Tools which want to use the MaterialPicker should set Active to true
     /// when they start up and back to false when they exit.  Note that
     /// setting Active to true just has the pikcer listen for being made
@@ -49,7 +48,6 @@ namespace Boku
         private Vector2 m_DragDelta = Vector2.Zero;
 
         private const float kHitSphereTestSize = 1.5f;
-
 
         #region Accessors
         #endregion
@@ -426,7 +424,7 @@ namespace Boku
                     float alpha = Math.Min((float)(dTime / kFadeTime), 1.0f);
                     Vector2 offset = size * 0.4f;
                     size *= 0.4f;
-                    // Note the 12/64 in the positioning accounts for the fact that the 
+                    // Note the 12/64 in the positioning accounts for the fact that the
                     // button textures only use the upper 40x40 out of the 64x64 space they allocate.
                     // The 12 is actually (64-40)/2.
                     quad.Render(camera, ButtonTextures.RightTrigger, alpha, position + offset + size * 12.0f / 64.0f, size, @"TexturedRegularAlpha");
@@ -464,4 +462,3 @@ namespace Boku
     }   // end of class WaterPicker
 
 }   // end of namespace Boku
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,20 +44,17 @@ namespace Boku
 
         }   // end of GameListManager c'tor
 
-
         public void AddObject(GameObject obj)
         {
             objectList.Add(obj);
             BokuGame.objectListDirty = true;
         }   // end of GameListManager AddObject()
 
-
         public void RemoveObject(GameObject obj)
         {
             objectList.Remove(obj);
             BokuGame.objectListDirty = true;
         }   // end of GameListManager RemoveObject()
-
 
         public void Refresh()
         {
@@ -71,7 +67,6 @@ namespace Boku
                 }
             }
         }   // end of GameListManager Refresh()
-
 
         public void Update()
         {
@@ -96,7 +91,6 @@ namespace Boku
                 // Game paused since in strange snapped mode
             }
         }   // end of GameListManager Update()
-
 
         public void Render()
         {
@@ -129,7 +123,6 @@ namespace Boku
 
             }
         }   // end of GameListManager Render()
-
 
     }   // end of class GameListManager
 

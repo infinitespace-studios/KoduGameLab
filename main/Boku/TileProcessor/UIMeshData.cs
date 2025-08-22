@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -11,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
     This file should contain the definitions for all the custom data
     types used by the custom pipeline processor and must also contain
     the ContentTypeReaders for each of these types.
-  
+
     This file should be part of the custom pipeline project but should
     also be included via link to both the Boku projects.  The Boku360
     project's properties must also be modified so that the assembly it

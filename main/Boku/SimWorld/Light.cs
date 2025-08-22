@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -73,7 +72,7 @@ namespace Boku
                 get { return scale; }
             }
             /// <summary>
-            /// Don't use this for anything but init, it doesn't have the twitch to 
+            /// Don't use this for anything but init, it doesn't have the twitch to
             /// smoothly transition. Final color is Color * Strength.
             /// </summary>
             public Vector3 Color
@@ -172,7 +171,7 @@ namespace Boku
                 Color = new Vector3(dstCol4.X, dstCol4.Y, dstCol4.Z);
                 if (luz != null)
                 {
-                    TwitchManager.Set<Vector3> set = delegate(Vector3 val, Object param) 
+                    TwitchManager.Set<Vector3> set = delegate(Vector3 val, Object param)
                     {
                         if (luz != null)
                         {
@@ -223,8 +222,8 @@ namespace Boku
         public override Classification.Colors ClassColor
         {
             get { return base.ClassColor; }
-            set 
-            { 
+            set
+            {
                 base.ClassColor = value;
                 if (tail != null)
                 {
@@ -291,7 +290,6 @@ namespace Boku
         {
             tail = new PlasmaEmitter(InGame.inGame.ParticleSystemManager);   // Starts in inactive state.
             AddEmitter(tail, new Vector3(0f, 0f, 0f));
-
 
             AddAttachment(luzAtt);
 
@@ -423,7 +421,6 @@ namespace Boku
         }
 
        #endregion Internal
-
 
     }   // end of class Light
 

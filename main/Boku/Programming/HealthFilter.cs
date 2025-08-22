@@ -23,9 +23,9 @@ using Boku.Input;
 namespace Boku.Programming
 {
     /// <summary>
-    /// Filter that just exists as a placeholder.  Actual value is 
+    /// Filter that just exists as a placeholder.  Actual value is
     /// extracted when scores are accumulated.
-    /// 
+    ///
     /// </summary>
     public class HealthFilter : Filter
     {

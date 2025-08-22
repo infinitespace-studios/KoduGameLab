@@ -161,7 +161,6 @@ namespace Boku.Programming
             else
                 selectedUpid = String.Empty;
 
-
             example.rank = 0;
 
             for (int iReflex = 0; iReflex < example.reflexes.Length; ++iReflex)
@@ -173,7 +172,7 @@ namespace Boku.Programming
                 {
                     example.rank += RankElements(exampleReflex.Sensor, selected, settings.sensorRank);
                 }
-                
+
                 if (exampleReflex.Sensor != null && reflex.Sensor != null)
                 {
                     example.rank += RankElements(exampleReflex.Sensor, reflex.Sensor, settings.sensorRank);
@@ -385,11 +384,11 @@ namespace Boku.Programming
                 Storage4.Close(stream);
             }
 
-            // If we don't have data.  Delete the server version of 
+            // If we don't have data.  Delete the server version of
             // the file and try loading the TitleSpace version.
             if (data == null)
             {
-                // Don't delete the server version since this might actually be someone 
+                // Don't delete the server version since this might actually be someone
                 // trying to do a localization.
                 //Storage4.Delete(filename);
 
@@ -440,7 +439,6 @@ namespace Boku.Programming
         {
         }
 
-
 #if DEBUG
         private void LoadWithSampleData()
         {
@@ -461,7 +459,6 @@ namespace Boku.Programming
                             "actuator.eat",
                         }),
                 });
-
 
             ActorHelp example = new ActorHelp();
             example.description = "This is the actor description.";
@@ -491,7 +488,7 @@ namespace Boku.Programming
         #region Public
 
         [XmlElement]
-        public string description;  // Description of what the page does.  This is not used 
+        public string description;  // Description of what the page does.  This is not used
                                     // in ActorHelp but is used in ProgrammingHelp.
 
         [XmlArray("reflexes")]
@@ -515,7 +512,6 @@ namespace Boku.Programming
 
         [XmlIgnore]
         public float rank;
-
 
         public ExamplePage()
         {
@@ -557,7 +553,6 @@ namespace Boku.Programming
 
             return page;
         }
-
 
         #endregion
     }
@@ -643,6 +638,5 @@ namespace Boku.Programming
     }
 
     #endregion
-
 
 }   // end of namespace Boku.Programming

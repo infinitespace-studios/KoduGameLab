@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -19,8 +18,8 @@ using Boku.Fx;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// Base on the UIGridCHeckboxElement this version uses spritefonts 
-    /// and scales the checkbox itself better.  Eventually this should 
+    /// Base on the UIGridCHeckboxElement this version uses spritefonts
+    /// and scales the checkbox itself better.  Eventually this should
     /// replace the old version everywhere.
     /// </summary>
     public class UIGrid2DCheckboxElement : UIGridElement
@@ -184,10 +183,10 @@ namespace Boku.UI2D
             get { return new Vector2(width, height); }
             set { /* do nothing, should be removed from base class */ }
         }
-        
+
         #endregion
 
-        #region Public 
+        #region Public
 
         // c'tor
         /// <summary>
@@ -217,7 +216,6 @@ namespace Boku.UI2D
             this.normalMapName = blob.normalMapName;
 
         }
-
 
         public override void Update(ref Matrix parentMatrix)
         {
@@ -253,11 +251,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }  // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -443,9 +439,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid2DCheckboxElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

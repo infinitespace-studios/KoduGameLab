@@ -145,8 +145,8 @@ namespace Boku.SimWorld.Path
         }
 
         /// <summary>
-        /// Look for any road UNDER input position, get height 
-        /// and return true and update height only if higher than passed in height, 
+        /// Look for any road UNDER input position, get height
+        /// and return true and update height only if higher than passed in height,
         /// else return false w/ height untouched.
         /// </summary>
         /// <param name="pos"></param>
@@ -289,7 +289,7 @@ namespace Boku.SimWorld.Path
             /// Care about two cases:
             /// a. src on path, dst off (dst possibly off end of world)
             ///     need point where leave path, and normal back in there.
-            /// b. ray src to dst passes through path 
+            /// b. ray src to dst passes through path
             ///     need first point hitting path, and normal out from there
             const float kCloseTogether = Single.Epsilon;
             if (Vector3.DistanceSquared(src, dst) <= kCloseTogether)
@@ -734,7 +734,6 @@ namespace Boku.SimWorld.Path
             void Finish(Intersection isect);
         }
         #endregion RenderObj
-
 
     }
 

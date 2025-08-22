@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // Uncomment this to see debug spew about the help helpText stack.
 //#define DEBUG_SPEW
 
@@ -187,7 +186,6 @@ namespace Boku.Common
             return success;
         }   // end of XmlHelpTextData ReadFromXml()
 
-
         private static XmlHelpTextData Load(string filename)
         {
             XmlHelpTextData data = null;
@@ -214,11 +212,11 @@ namespace Boku.Common
                 Storage4.Close(stream);
             }
 
-            // If we don't have data.  Delete the server version of 
+            // If we don't have data.  Delete the server version of
             // the file and try loading the TitleSpace version.
             if(data == null)
             {
-                // Don't delete the server version since this might actually be someone 
+                // Don't delete the server version since this might actually be someone
                 // trying to do a localization.
                 //Storage4.Delete(filename);
 
@@ -242,8 +240,6 @@ namespace Boku.Common
             return data;
         }   // end of XmlHelpTextData Load()
 
-
     }   // end of class XmlHelpTextData
-
 
 }   // end of namespace Boku.Common

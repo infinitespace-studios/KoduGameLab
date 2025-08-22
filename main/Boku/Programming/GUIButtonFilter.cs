@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of on-screen touch button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class GUIButtonFilter : Filter
     {
@@ -63,7 +63,6 @@ namespace Boku.Programming
             GUIButton button = GUIButtonManager.GetButton(color);
 
             bool clicked = (null != button) && button.Clicked;
-            
 
             if (reflex.Sensor is MouseSensor)
             {

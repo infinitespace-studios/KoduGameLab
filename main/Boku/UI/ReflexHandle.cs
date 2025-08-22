@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,7 +37,7 @@ namespace Boku.UI
             private ReflexHandle parent;
 
             private CommandMap commandMap;
-            
+
             public UpdateObjMoveReflex(ReflexHandle parent)
             {
                 this.parent = parent;
@@ -240,7 +239,7 @@ namespace Boku.UI
         protected static List<Texture2D> rtLineNumber = new List<Texture2D>();
 
         /// <summary>
-        /// Dispose of any textures allocated 
+        /// Dispose of any textures allocated
         /// </summary>
         public static void Dispose()
         {
@@ -289,8 +288,8 @@ namespace Boku.UI
         public States PendingState
         {
             get { return pendingState; }
-            set 
-            { 
+            set
+            {
                 pendingState = value;
                 if (pendingState == States.Hot && InGame.inGame.Editor.IndexActivePanel != -1)
                 {
@@ -401,7 +400,7 @@ namespace Boku.UI
             AffixLineNumberToCurrentState();
             BokuGame.objectListDirty = true;
         }   // end of PlaceReflex()
-        
+
         public void MoveUp(Object sender, EventArgs args)
         {
             reflexBlock.MoveUp();
@@ -442,10 +441,10 @@ namespace Boku.UI
                 // move the camera down
                 MoveCamera(-heightPanel);
 
-                // swap the the reflexes 
+                // swap the the reflexes
                 SwapReflexPanels(reflexPanelPrev, reflexPanel);
             */
-            
+
             /*
             ReflexPanel parentPanel = this.parent as ReflexPanel;
             parentPanel.MoveReflexDown();
@@ -488,7 +487,6 @@ namespace Boku.UI
             ReflexPanel parentPanel = this.parent as ReflexPanel;
             parentPanel.RemoveReflex();
         }
-
 
         protected bool SwitchToNormal(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
@@ -574,7 +572,7 @@ namespace Boku.UI
             {
                 ApplyUpdateObjChange(updateList, renderList);
             }
-            
+
             if (State != PendingState)
             {
                 if (PendingState == States.Active)
@@ -730,7 +728,7 @@ namespace Boku.UI
                 if (renderObj.listActivePartInfos != null)
                 {
                     // walk it and update it
-                    
+
                     int indexMeshInfo = 1;
                     if (indexMeshInfo >= renderObj.listActivePartInfos.Count)
                     {

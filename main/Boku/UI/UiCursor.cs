@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,7 +46,7 @@ namespace Boku.UI
             set
             {
                 // Since the cursor is parented we always want the translation to be zero.
-                // So, in order to smoothly move the cursor we need to calc the difference 
+                // So, in order to smoothly move the cursor we need to calc the difference
                 // between the old and the new parent's positions and add this to the cursor's
                 // current translation.  We then twitch this toward 0.
 
@@ -123,7 +122,7 @@ namespace Boku.UI
                 renderObj.State = value;
             }
         }
-        
+
         public override void Render(Camera camera)
         {
             if (visable)

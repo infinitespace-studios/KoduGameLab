@@ -10,7 +10,6 @@ using Boku.Common;
 using BokuShared;
 using BokuShared.Wire;
 
-
 namespace Boku.Web
 {
     /// <summary>
@@ -139,9 +138,9 @@ namespace Boku.Web
             Genres genreFilter,
             SortBy sortBy,
             SortDirection sortDir,
-            int first, 
+            int first,
             int count,
-            BokuAsyncCallback callback, 
+            BokuAsyncCallback callback,
             object param)
         {
             try
@@ -230,9 +229,9 @@ namespace Boku.Web
         /// <param name="param"></param>
         /// <returns></returns>
         public static int Async_VoteOnLevel(
-            Guid id, 
+            Guid id,
             Vote vote,
-            BokuAsyncCallback callback, 
+            BokuAsyncCallback callback,
             object param)
         {
             try
@@ -535,7 +534,6 @@ namespace Boku.Web
             }
         }
 
-
         public static int Async_GetKoduWebUser(
             string userSecret,
             BokuAsyncCallback callback,
@@ -565,10 +563,6 @@ namespace Boku.Web
         }
         #endregion
     }
-
-
-
-
 
     /// <summary>
     /// The internal machinations of the Community class.
@@ -608,7 +602,6 @@ namespace Boku.Web
                 return registered;
             }
         }
-
 
         private class AsyncState
         {

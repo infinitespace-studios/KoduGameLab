@@ -42,9 +42,9 @@ namespace Boku
             this.NewVersion = new System.Windows.Forms.Label();
             this.CurrentVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //
             // CurrentVersionLabel
-            // 
+            //
             this.CurrentVersionLabel.AutoSize = true;
             this.CurrentVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentVersionLabel.Location = new System.Drawing.Point(22, 79);
@@ -52,9 +52,9 @@ namespace Boku
             this.CurrentVersionLabel.Size = new System.Drawing.Size(102, 16);
             this.CurrentVersionLabel.TabIndex = 5;
             this.CurrentVersionLabel.Text = "Current Version:";
-            // 
+            //
             // NewVersionLabel
-            // 
+            //
             this.NewVersionLabel.AutoSize = true;
             this.NewVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewVersionLabel.Location = new System.Drawing.Point(22, 95);
@@ -62,9 +62,9 @@ namespace Boku
             this.NewVersionLabel.Size = new System.Drawing.Size(87, 16);
             this.NewVersionLabel.TabIndex = 7;
             this.NewVersionLabel.Text = "New Version:";
-            // 
+            //
             // UpdateButton
-            // 
+            //
             this.UpdateButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.UpdateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateButton.Location = new System.Drawing.Point(25, 134);
@@ -73,9 +73,9 @@ namespace Boku
             this.UpdateButton.TabIndex = 3;
             this.UpdateButton.Text = "Update Now";
             this.UpdateButton.UseVisualStyleBackColor = true;
-            // 
+            //
             // IgnoreButton
-            // 
+            //
             this.IgnoreButton.DialogResult = System.Windows.Forms.DialogResult.Ignore;
             this.IgnoreButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IgnoreButton.Location = new System.Drawing.Point(189, 134);
@@ -84,9 +84,9 @@ namespace Boku
             this.IgnoreButton.TabIndex = 4;
             this.IgnoreButton.Text = "Ignore This Update";
             this.IgnoreButton.UseVisualStyleBackColor = true;
-            // 
+            //
             // RemindButton
-            // 
+            //
             this.RemindButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.RemindButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RemindButton.Location = new System.Drawing.Point(353, 134);
@@ -95,9 +95,9 @@ namespace Boku
             this.RemindButton.TabIndex = 0;
             this.RemindButton.Text = "Remind Me Later";
             this.RemindButton.UseVisualStyleBackColor = true;
-            // 
+            //
             // MessageLabel
-            // 
+            //
             this.MessageLabel.AutoSize = true;
             this.MessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MessageLabel.LinkArea = new System.Windows.Forms.LinkArea(17, 13);
@@ -108,9 +108,9 @@ namespace Boku
             this.MessageLabel.TabStop = true;
             this.MessageLabel.Text = "A new version of Kodu Game Lab is avalable!";
             this.MessageLabel.UseCompatibleTextRendering = true;
-            // 
+            //
             // RelaseNotesLabel
-            // 
+            //
             this.RelaseNotesLabel.AutoSize = true;
             this.RelaseNotesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RelaseNotesLabel.LinkArea = new System.Windows.Forms.LinkArea(32, 13);
@@ -121,9 +121,9 @@ namespace Boku
             this.RelaseNotesLabel.TabStop = true;
             this.RelaseNotesLabel.Text = "For more details please see the release notes";
             this.RelaseNotesLabel.UseCompatibleTextRendering = true;
-            // 
+            //
             // NewVersion
-            // 
+            //
             this.NewVersion.AutoSize = true;
             this.NewVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NewVersion.Location = new System.Drawing.Point(130, 95);
@@ -131,9 +131,9 @@ namespace Boku
             this.NewVersion.Size = new System.Drawing.Size(59, 16);
             this.NewVersion.TabIndex = 8;
             this.NewVersion.Text = "1.4.111.0";
-            // 
+            //
             // CurrentVersion
-            // 
+            //
             this.CurrentVersion.AutoSize = true;
             this.CurrentVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CurrentVersion.Location = new System.Drawing.Point(130, 79);
@@ -141,9 +141,9 @@ namespace Boku
             this.CurrentVersion.Size = new System.Drawing.Size(52, 16);
             this.CurrentVersion.TabIndex = 6;
             this.CurrentVersion.Text = "1.4.92.0";
-            // 
+            //
             // UpdateForm
-            // 
+            //
             this.AcceptButton = this.RemindButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

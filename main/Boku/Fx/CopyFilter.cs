@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -68,7 +67,6 @@ namespace Boku.Fx
             Render("Add", source, 1.0f);
         }   // end of CopyFilter Render()
 
-
         public override void LoadContent(bool immediate)
         {
             // Init the effect.
@@ -83,6 +81,3 @@ namespace Boku.Fx
     }   // end of class CopyFilter
 
 }   // end of Boku.Common
-
-
-

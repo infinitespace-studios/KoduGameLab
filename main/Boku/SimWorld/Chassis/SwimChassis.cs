@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,11 +21,11 @@ namespace Boku.SimWorld.Chassis
     /// </summary>
     public class SwimChassis : BaseChassis
     {
-        #region Members 
-        public const float DefaultMaxRotationRate = 2.0f;           
+        #region Members
+        public const float DefaultMaxRotationRate = 2.0f;
         public const float DefaultMaxRotationalAcceleration = 3.0f;
-        public const float DefaultMaxSpeed = 2.0f;                  
-        public const float DefaultMaxLinearAcceleration = 2.0f;     
+        public const float DefaultMaxSpeed = 2.0f;
+        public const float DefaultMaxLinearAcceleration = 2.0f;
         public const float DefaultMaxLinearDeceleration = 2.0f;
         public const float DefaultHullDraft = 1.3f;
         public const float DefaultMinDepth = -0.6f;
@@ -50,7 +49,7 @@ namespace Boku.SimWorld.Chassis
                                                                         // ofthe update for rendering and then removed at the beginning for update.
 
         private Vector2 m_JumpDir = Vector2.Zero;                  // The 2D direction the bot is going when a jump happens
-  
+
         private float bodyFlex = DefaultBodyFlex;                       // Value used to flex body.
         private float flexAmplitude = DefaultFlexAmplitude;             // Attenuation applied to constant sine wave.  Used to damp sine wave when fish is turning.
         private float flexOffset = 10.0f * MathHelper.Pi * (float)BokuGame.bokuGame.rnd.NextDouble();   // Just so all the fish aren't in sync.
@@ -141,10 +140,10 @@ namespace Boku.SimWorld.Chassis
             // Only do movement if we are not being held and active.
             if (state == GameActor.State.Active && thing.ActorHoldingThis == null)
             {
-                // Test for grounding.  
+                // Test for grounding.
                 float terrainAltitude = Terrain.GetHeight(movement.Position);
                 float waterBaseAltitude = Terrain.GetWaterBase(movement.Position);
-                    
+
                 Vector3 waterNormal = Vector3.UnitZ;
                 float waterAltitude = (waterBaseAltitude > 0) ? Terrain.GetWaterHeightAndNormal(movement.Position, ref waterNormal) : 0.0f;
 
@@ -171,13 +170,12 @@ namespace Boku.SimWorld.Chassis
 
                 }   // end if not grounded.
 
-
                 // Now see if we're stuck or hitting shore.
                 if (grounded && !(jumping || landing))
                 {
                     Vector3 terrainNormal = groundedNormal;
 
-                    // Grounded tells us there's too little water to float, now check if we're 
+                    // Grounded tells us there's too little water to float, now check if we're
                     // actually touching the ground.
                     float closeToGround = 0.1f;
                     if (movement.Position.Z - hullDraft - terrainAltitude < closeToGround)
@@ -292,7 +290,7 @@ namespace Boku.SimWorld.Chassis
                 }
                 else
                 {
-                    // Blend between vertical and wave normal.  This allows the waves to 
+                    // Blend between vertical and wave normal.  This allows the waves to
                     // affect the bot more when it's close to the surface.
                     waterNormal = MyMath.Lerp(Vector3.UnitZ, waterNormal, waveEffect);
                     botNormal = MyMath.Lerp(botNormal, waterNormal, secs);
@@ -344,8 +342,8 @@ namespace Boku.SimWorld.Chassis
             float rightWeight = 0.0f;
             float leftWeight = 0.0f;
 
-            // For the sub and fish the forward and backward animations 
-            // are used for dive and surface so look at the pitch value 
+            // For the sub and fish the forward and backward animations
+            // are used for dive and surface so look at the pitch value
             // and assign weights from that.
 
             if (pitch > 0)
@@ -439,7 +437,7 @@ namespace Boku.SimWorld.Chassis
 
             // Apply vertical movement.
             ApplyDesiredVerticalMovement(movement, desiredMovement);
-            
+
             /*
             // Clamp velocity to prevent side to side motion.
             if (movement.Velocity.LengthSquared() > 5.0f)
@@ -450,7 +448,7 @@ namespace Boku.SimWorld.Chassis
                 // The 0.8 factor just prevents this from clamping down absolutely.
                 // It give the motion a bit more fluid feel.
                 movement.Velocity -= 0.8f * dot * right;
-            }            
+            }
             */
             // Clamp velocity to forward/backward.  Don't mess with vertical movement.
             // Calc facing dir without any Z component.

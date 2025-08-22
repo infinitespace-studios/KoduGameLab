@@ -119,7 +119,7 @@ namespace Boku.Programming
                 PrintActorProgramming(tw, actor);
                 tw.Flush();
                 tw.Dispose();
-            
+
                 SendToPrinter(fullPath);
             }
 
@@ -133,7 +133,7 @@ namespace Boku.Programming
         {
             string filename = NewFileName(fixup);
             string fullPath = Path.Combine(Storage4.UserLocation, filename);
-            
+
             return fullPath;
         }   // end of GetFullPath()
 
@@ -146,7 +146,7 @@ namespace Boku.Programming
         }   // end of OpenFile
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fixup">Tells system to not use version with .. in it.  Pure hack uglisness to maintain back compatibility.</param>
         /// <returns></returns>
@@ -509,6 +509,5 @@ namespace Boku.Programming
         #endregion
 
     }   // end of class Print
-
 
 }   // end of namespace Boku.Programming

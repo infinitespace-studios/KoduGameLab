@@ -36,7 +36,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Returns true if the application is running as a UWP app, 
+        /// Returns true if the application is running as a UWP app,
         /// ie running under Centennial as a Windows Store app.
         /// </summary>
         /// <returns></returns>
@@ -55,7 +55,7 @@ namespace Boku.Common
                 sb = new StringBuilder(length);
                 result = GetCurrentPackageFullName(ref length, sb);
 
-                // If result is not ERROR then this is UWP version. 
+                // If result is not ERROR then this is UWP version.
                 bool runningAsUWP = result != APPMODEL_ERROR_NO_PACKAGE;
                 return runningAsUWP;
             }

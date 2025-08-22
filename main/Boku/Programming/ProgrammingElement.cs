@@ -46,9 +46,9 @@ namespace Boku.Programming
                                 // See sets ExplicitSubject and Not excludes it.  But since it
                                 // is excluded Closeby, which requires ExplicitiSubject, is no
                                 // longer valid.
-                                // So the solution is to have ExplicitSubjectFilter which is 
+                                // So the solution is to have ExplicitSubjectFilter which is
                                 // set by the sensors, matches the filters, but is not excluded
-                                // by the NotFilter.  Note that this should only be used to 
+                                // by the NotFilter.  Note that this should only be used to
                                 // match filters, not actuators or modifiers.
         MoversOnly,             // Used with EndOfPath to prevent Me filter when character doesn't move.
         WhenGamePad,
@@ -63,7 +63,7 @@ namespace Boku.Programming
         WhenTimer,
         WhenGot,
         WhenScore,
-        WhenScoreBucketNeeded,  // This category is added when a scorebucket is needed.  
+        WhenScoreBucketNeeded,  // This category is added when a scorebucket is needed.
                                 // Once the scorebucket is added, this is removed.
         WhenHealth,
         WhenShotHit,
@@ -130,7 +130,7 @@ namespace Boku.Programming
         WaterFilter,
         TimerFilter,
         ScoreFilter,
-        ScorePresent,           // There's at least one score (or health) in the reflex so now we can allow comparison operators. 
+        ScorePresent,           // There's at least one score (or health) in the reflex so now we can allow comparison operators.
         ScoreCompareFilter,
         SoundFilter,
         SaidFilter,
@@ -487,7 +487,6 @@ namespace Boku.Programming
         /// <returns></returns>
         public abstract ProgrammingElement Clone();
 
-
         protected void CopyTo(ProgrammingElement clone)
         {
             base.CopyTo(clone);
@@ -839,7 +838,7 @@ namespace Boku.Programming
         }
 
         /// <summary>
-        /// Called on this element when it should be reset, usually due to task switch 
+        /// Called on this element when it should be reset, usually due to task switch
         /// </summary>
         public virtual void Reset(Reflex reflex)
         {
@@ -904,7 +903,7 @@ namespace Boku.Programming
             GreaterThanOrEqual,
             GreaterThan,
         }
-        public static bool OperandCompare<T>(T lhs, Operand operand, T rhs) where T : IComparable<T> 
+        public static bool OperandCompare<T>(T lhs, Operand operand, T rhs) where T : IComparable<T>
         {
             bool match = false;
             int comp = lhs.CompareTo(rhs);

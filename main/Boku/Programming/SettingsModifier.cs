@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -22,9 +21,9 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// modifier that just exists as a placeholder.  Actual value is 
+    /// modifier that just exists as a placeholder.  Actual value is
     /// extracted when scores are accumulated.
-    /// 
+    ///
     /// Used for MaxHealth, BlipDamage, MissileDamage... (so far)
     /// </summary>
     public class SettingsModifier : Modifier

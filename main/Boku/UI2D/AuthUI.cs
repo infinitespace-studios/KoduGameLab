@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,7 +95,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// Hides the status dialog, for instance when we go into
-        /// RunSim mode.  Note that this is set up to be called 
+        /// RunSim mode.  Note that this is set up to be called
         /// every frame without problem.
         /// </summary>
         public static void HideStatusDialog()
@@ -181,7 +180,7 @@ namespace Boku.UI2D
         {
             SpriteBatch batch = UI2D.Shared.SpriteBatch;
 
-            // If either dimension of the rect is smaller than the texture 
+            // If either dimension of the rect is smaller than the texture
             // we need to scale everything down to prevent distortion.
             // But we want to clamp scaling at 1.
             Vector2 scale = new Vector2(Math.Min(rect.Width / (float)texture.Width, 1.0f), Math.Min(rect.Height / (float)texture.Height, 1.0f));
@@ -192,7 +191,7 @@ namespace Boku.UI2D
             batch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
             {
                 Point cornerSize = new Point((int)(minScale * texture.Width / 2.0f), (int)(minScale * texture.Height / 2.0f));
-                
+
                 // Upper left hand corner.
                 srcRect = new Rectangle(0, 0, texture.Width / 2, texture.Height / 2);
                 dstRect = new Rectangle(rect.X, rect.Y, cornerSize.X, cornerSize.Y);

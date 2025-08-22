@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -31,8 +30,8 @@ namespace Boku
         public override Classification.Colors ClassColor
         {
             get { return base.ClassColor; }
-            set 
-            { 
+            set
+            {
                 base.ClassColor = value;
                 if (tail != null)
                 {

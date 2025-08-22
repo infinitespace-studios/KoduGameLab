@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +25,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Detects when we are at the end of a path
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class EndofPathSensor : Sensor
     {
@@ -38,7 +37,6 @@ namespace Boku.Programming
         private Random rnd = new Random();
 
         #endregion Members
-
 
         #region Public
         public EndofPathSensor()
@@ -80,7 +78,6 @@ namespace Boku.Programming
         public override void FinishUpdate(GameActor gameActor)
         {
         }
-
 
         public override void ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,14 +20,14 @@ using Boku.Base;
 namespace Boku.Common.ParticleSystem
 {
     /// <summary>
-    /// Provides a single entry point for creating explosions anywhere in the scene.  
-    /// Explosions consist of a combination of an Explosion emitter which does the 
-    /// central fireball and a smoke emitter which does the lingering cloud after 
+    /// Provides a single entry point for creating explosions anywhere in the scene.
+    /// Explosions consist of a combination of an Explosion emitter which does the
+    /// central fireball and a smoke emitter which does the lingering cloud after
     /// the explosion.
-    /// 
+    ///
     /// One of the key features is that the emitters are given a fixed life span
     /// after which the manager kills them off.
-    /// 
+    ///
     /// Also used to manage the creation of emitter puffs, steam puffs, sparks etc.  For
     /// these we create a single, static instance of the emitter and just reuse it
     /// when needed.
@@ -301,7 +300,7 @@ namespace Boku.Common.ParticleSystem
                     dustPuffs.Add(this);
                 }
             }   // end of DustPuff Update()
-        
+
         }   // end of class DustPuff
 
         public class SteamPuff : EmitterPuff
@@ -635,7 +634,7 @@ namespace Boku.Common.ParticleSystem
             e.beamSmoke.StartRadius = radius * 0.2f;
             e.beamSmoke.EndRadius = radius * 1.4f;
             e.beamSmoke.EmissionRate = 15.0f;
-            e.beamSmoke.Color = new Vector4(0.4f, 0.8f, 1.0f, 0.5f);    
+            e.beamSmoke.Color = new Vector4(0.4f, 0.8f, 1.0f, 0.5f);
             e.beamSmoke.Active = true;
 
             e.beamFireballDuration = 0.6f;
@@ -697,7 +696,7 @@ namespace Boku.Common.ParticleSystem
             e.scanExplode.MinLifetime = 0.5f;
             e.scanExplode.MaxLifetime = 1.0f;
             e.scanExplode.MaxRotationRate = 0.0f;
-            e.scanExplode.Color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);   
+            e.scanExplode.Color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             e.scanExplode.Active = true;
 
             e.startTime = Time.GameTimeTotalSeconds;
@@ -781,7 +780,7 @@ namespace Boku.Common.ParticleSystem
             e.inspectSmoke.EndRadius = radius * 1.3f;
             e.inspectSmoke.EmissionRate = 20.0f;
             e.inspectSmoke.MaxRotationRate = 0.1f;
-            e.inspectSmoke.Color = new Vector4(1.0f, 0.8f, 0.6f, 0.4f);   
+            e.inspectSmoke.Color = new Vector4(1.0f, 0.8f, 0.6f, 0.4f);
             e.inspectSmoke.Active = true;
 
             e.inspectExplosionDuration = 0.4f;
@@ -795,7 +794,7 @@ namespace Boku.Common.ParticleSystem
             e.inspectExplode.EmissionRate = 30.0f;
             e.inspectExplode.MinLifetime = 0.1f;
             e.inspectExplode.MaxLifetime = 0.3f;
-            e.inspectExplode.Color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);   
+            e.inspectExplode.Color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             e.inspectExplode.Active = true;
 
             e.startTime = Time.GameTimeTotalSeconds;
@@ -859,8 +858,8 @@ namespace Boku.Common.ParticleSystem
         }   // end of ExplosionManager CreateSteamPuff()
 
         /// <summary>
-        /// Sparks are simple particle systems which emit all their 
-        /// particle at the same time upon creation.  This causes the 
+        /// Sparks are simple particle systems which emit all their
+        /// particle at the same time upon creation.  This causes the
         /// emitter to immediately be put into the "dying" state so it
         /// doesn't need to be put into the fooList.
         /// </summary>

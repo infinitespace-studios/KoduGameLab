@@ -60,11 +60,11 @@ namespace KoduAnalytics.ProgramAnalytics
         }
 
         public List<Actor> getActorsByType(string type)
-        {           
+        {
             List<Actor> acts = (from a in actors.Values
                       where a.type == type
                       select a).ToList();
-            
+
             return acts;
         }
 
@@ -96,7 +96,6 @@ namespace KoduAnalytics.ProgramAnalytics
             {
                 Console.WriteLine(game.upid + " " + a.id);
             }
-
 
         }
 

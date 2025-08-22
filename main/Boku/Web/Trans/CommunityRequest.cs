@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using BokuShared;
 using BokuShared.Wire;
 
-
 namespace Boku.Web.Trans
 {
     /// <summary>

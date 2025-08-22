@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -69,8 +68,8 @@ namespace Boku.SimWorld.Path
             public bool Edit
             {
                 get { return edit; }
-                set 
-                { 
+                set
+                {
                     edit = value;
                     Node0.Edit = value;
                     Node1.Edit = value;
@@ -79,8 +78,8 @@ namespace Boku.SimWorld.Path
             public bool Select
             {
                 get { return select; }
-                set 
-                { 
+                set
+                {
                     select = value;
                     Node0.Select = value;
                     Node1.Select = value;
@@ -95,7 +94,7 @@ namespace Boku.SimWorld.Path
 
             #region Public
             /// <summary>
-            /// Edge c'tor.  In addition to creating the edge this also checks to 
+            /// Edge c'tor.  In addition to creating the edge this also checks to
             /// make sure it's not a duplicate and adds it to the right path.
             /// </summary>
             /// <param name="node0"></param>
@@ -107,8 +106,8 @@ namespace Boku.SimWorld.Path
 
                 Path path = node0.Path;
 
-                // If the nodes are equal then this is a fake edge used to make 
-                // things work better for paths with only 1 node so don't add it 
+                // If the nodes are equal then this is a fake edge used to make
+                // things work better for paths with only 1 node so don't add it
                 // to the path.
                 if (node0 == node1)
                 {
@@ -130,7 +129,7 @@ namespace Boku.SimWorld.Path
 
                 path.AddEdge(this);
 
-                // Then if the second node belongs to a different path we need to 
+                // Then if the second node belongs to a different path we need to
                 // merge the second node's path into the first.
                 if (node0.Path != node1.Path)
                 {
@@ -147,7 +146,7 @@ namespace Boku.SimWorld.Path
                 Path p = Node0.Path;
                 p.RemoveEdge(this);
 
-                // Removing this edge may split the path into two so 
+                // Removing this edge may split the path into two so
                 // try and keep things sane.
                 p.EnsureCoherence();
             }   // end of Edge Delete()
@@ -354,7 +353,7 @@ namespace Boku.SimWorld.Path
                 float result = 0.0f;
                 if (Math.Abs(lenD) > float.Epsilon)
                 {
-                    // The Abs function is here because round off error can result in 
+                    // The Abs function is here because round off error can result in
                     // a slightly negative number which then becomes a NAN when some
                     // function upstream of here tries to take the square root of it.
                     result = Math.Abs(p.LengthSquared() - t * t / lenD);
@@ -407,7 +406,7 @@ namespace Boku.SimWorld.Path
                 float result = 0.0f;
                 if (Math.Abs(lenD) > float.Epsilon)
                 {
-                    // The Abs function is here because round off error can result in 
+                    // The Abs function is here because round off error can result in
                     // a slightly negative number which then becomes a NAN when some
                     // function upstream of here tries to take the square root of it.
                     result = Math.Abs(p.LengthSquared() - t * t / lenD);
@@ -427,7 +426,7 @@ namespace Boku.SimWorld.Path
                 return Vector3.DistanceSquared(HandlePosition, p);
             }
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="p"></param>
             /// <returns></returns>

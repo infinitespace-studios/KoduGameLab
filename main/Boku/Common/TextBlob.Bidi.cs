@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -43,7 +42,7 @@ namespace Boku.Common
 
             static Stack<Level> stack = new Stack<Level>(61);     // Paragraph's current embedding level and override status.
 
-            // Used when processing runs.  Pulled to this level of visibilty so the 
+            // Used when processing runs.  Pulled to this level of visibilty so the
             // Sub() methods don't have to have everything passed to them.
             static int start = 0;
             static int end = 0;
@@ -54,12 +53,10 @@ namespace Boku.Common
 
             #endregion
 
-
-
             /// <summary>
-            /// Takes the input string which is expected to be in logical 
+            /// Takes the input string which is expected to be in logical
             /// ordering and returns a string in visual ordering.
-            /// 
+            ///
             /// Logical ordering is the ordering the string should be stored
             /// and edited in.  Visual ordering is the order the characters
             /// are displayed.  Since this is a many-to-one conversion there
@@ -75,7 +72,7 @@ namespace Boku.Common
                 //
                 stack.Clear();
                 OverrideStatus status = OverrideStatus.Neutral;
-                
+
                 foreach (FatChar fc in fatChars)
                 {
                     if (fc.type == "L")
@@ -95,8 +92,8 @@ namespace Boku.Common
                 {
                     return;
                 }
-                
-                // Just assume "L".  Not sure why but this seems to give behaviour 
+
+                // Just assume "L".  Not sure why but this seems to give behaviour
                 // matching what I see in Word, etc.  On the other hand it breaks
                 // things when just typing R.  In particular, any white space or
                 // punctuation gets displayed at the wrong place until it is surrounded
@@ -288,7 +285,6 @@ namespace Boku.Common
 
                     //Debug.Print("run {0},{1} sor={2} eor={3}", start, end, sor, eor);
 
-
                     //
                     // 3.3.3 Resolving Weak Types.
                     //
@@ -316,7 +312,7 @@ namespace Boku.Common
                     {
                         if (GetType(i) == "EN")
                         {
-                            // Look backwards to try and find AL.  
+                            // Look backwards to try and find AL.
                             for (int j = i - 1; j >= start; j--)
                             {
                                 if (GetType(j) == "AL")
@@ -366,7 +362,7 @@ namespace Boku.Common
                     // W5 Convert European terminators to European numbers if adjacent (either direction) to a European number.
                     // Note that these transformations need to go both directions so we do two passes.
                     // ET ET EN -> EN EN EN
-                    // EN ET ET -> EN EN EN 
+                    // EN ET ET -> EN EN EN
                     // AN ET EN -> AN EN EN
                     // left to right pass
                     for (int i = start + 1; i <= end; i++)
@@ -453,7 +449,7 @@ namespace Boku.Common
                     // L  N L  -> L  L L
                     // R  N R  -> R  R R
                     // R  N AN -> R  R AN
-                    // R  N EN -> R  R EN 
+                    // R  N EN -> R  R EN
                     // AN N R  -> AN R R
                     // AN N AN -> AN R AN
                     // AN N EN -> AN R EN
@@ -481,7 +477,7 @@ namespace Boku.Common
                         {
                             fatChars[i].type = "R";
                         }
-                        // R  N EN -> R  R EN 
+                        // R  N EN -> R  R EN
                         if (GetType(i - 1) == "R" && IsNeutralRun(i, out len) && GetType(i + len) == "EN")
                         {
                             fatChars[i].type = "R";
@@ -671,9 +667,9 @@ namespace Boku.Common
                         fatChars[i].displayOrderIndex = dispIndex;
                         ++dispIndex;
                     }
-                }        
-                
-                // L2  From highest level to lowest odd level, reverse 
+                }
+
+                // L2  From highest level to lowest odd level, reverse
                 // any contiguous set of characters at that level or higher.
                 {
                     // Find highest level.
@@ -745,9 +741,6 @@ namespace Boku.Common
                     }   // end of loop over levels.
 
                 }   // end of L2
-
-
-                
 
                 // L3 Combining marks?
 

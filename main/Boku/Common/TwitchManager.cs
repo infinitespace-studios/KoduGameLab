@@ -34,7 +34,7 @@ namespace Boku.Common
         // Set delegate.
         public delegate void Set<T>(T value, Object param);
 
-        // 
+        //
         // CreateTwitch methods.  These should be the only public interface...
         //
 
@@ -194,7 +194,7 @@ namespace Boku.Common
 
             public static int CreateTwitch(T startValue, T targetValue, Set<T> set, double duration, TwitchCurve.Shape shape, Object param, TwitchCompleteEvent onComplete, TwitchCompleteEvent onTerminate, bool useGameTime)
             {
-                // Get the next free twitch.  
+                // Get the next free twitch.
                 // If none exists, create it.
                 Twitch<T> twitch = null;
                 if (freeList.Count > 0)
@@ -328,7 +328,7 @@ namespace Boku.Common
 
                     //Note: implemented this way to preserve old behaviour
                     // if note termination delegate, then the completed will fire as before, setting the final value first
-                    // this does allow new callers to specify a termination delegate for cases where they don't want a quick 
+                    // this does allow new callers to specify a termination delegate for cases where they don't want a quick
                     // snap to the final value.
                     if (terminate && Terminated != null)
                     {
@@ -382,7 +382,7 @@ namespace Boku.Common
         //
         // Warning, bizarre code ahead.  This is to get around C#'s reluctance
         // to allow you use regular operators on generic types even if you
-        // know that they are supported.  The alternative is boxing and 
+        // know that they are supported.  The alternative is boxing and
         // unboxing so this is actually kind of efficient.
         //
         abstract class AbstractGeneric<T>
@@ -478,5 +478,3 @@ namespace Boku.Common
     }   // end of class TwitchManager
 
 }   // end of namespace Boku.Common
-
-

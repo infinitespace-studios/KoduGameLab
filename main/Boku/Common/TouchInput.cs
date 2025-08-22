@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Boku.Common.Xml;
 using Boku.Common.Gesture;
 using System.Diagnostics;
-namespace Boku.Common 
+namespace Boku.Common
 {
     /// <summary>
     /// Singleton wrapper for touch input.
@@ -45,7 +45,7 @@ namespace Boku.Common
             set { touchAvailable = value; }
         }
         /// <summary>
-        /// Were any touches captured this frame that moved 
+        /// Were any touches captured this frame that moved
         /// </summary>
         private static bool wasMoved = false;
 
@@ -71,7 +71,7 @@ namespace Boku.Common
 
         /// <summary>
         /// This field is filled in if the touch sequence BEGAN on an actor.
-        /// This is useful information for gestures such as Drag, which 
+        /// This is useful information for gestures such as Drag, which
         /// need to know what character the user began the movement on, not where they are now.
         /// </summary>
         private static Base.GameActor initialActorHit = null;
@@ -154,7 +154,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Return true if any touch captured this frame were moved 
+        /// Return true if any touch captured this frame were moved
         /// </summary>
         public static bool WasMoved
         {
@@ -163,7 +163,7 @@ namespace Boku.Common
 
         /// <summary>
         /// This field is filled in if the touch sequence BEGAN on an actor.
-        /// This is useful information for gestures such as Drag, which need to know what 
+        /// This is useful information for gestures such as Drag, which need to know what
         /// character the user began the movement on, not where they are now.
         /// </summary>
         public static Base.GameActor InitialActorHit
@@ -221,7 +221,6 @@ namespace Boku.Common
                     wasMultiTouch = true;
                 }
 
-
                 // Assume we just released until proven false below
                 wasReleased = true;
 
@@ -265,7 +264,7 @@ namespace Boku.Common
                                 {
                                     return p.fingerId == contact.fingerId;
                                 });
-                                
+
                                 if(existT==null )
                                     temp.Add(contact);
                             }
@@ -315,7 +314,7 @@ namespace Boku.Common
                         case TouchPhase.Stationary:
                             // JW - NOTE: Even when the Unity layer reports a touch as stationary once the
                             // delta position is unchanged for one frame, that is not a very accurate measure.
-                            // We won't set TouchContact objects to be stationary until we've detected no 
+                            // We won't set TouchContact objects to be stationary until we've detected no
                             // delta position change for STATIONARY_TIME seconds.
                             if (touch.deltaPosition == Vector2.Zero)
                             {
@@ -703,7 +702,6 @@ namespace Boku.Common
             return null;
         }
 
-
         public static TouchContact GetNewestTouch()
         {
             TouchContact[] touches = TouchInput.Touches;
@@ -814,7 +812,7 @@ namespace Boku.Common
             set { velocity = value; }
         }
         // This is the object that was touched. Should only be activated if the user
-        // ends the touch still over this object. Note that the frame after the touch 
+        // ends the touch still over this object. Note that the frame after the touch
         // is ended, this is cleared.
         private object mTouchedObject;
         public object TouchedObject

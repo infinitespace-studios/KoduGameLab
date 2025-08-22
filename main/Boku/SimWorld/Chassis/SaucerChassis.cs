@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -41,7 +40,7 @@ namespace Boku.SimWorld.Chassis
         public override bool SupportsStrafing { get { return true; } }
 
         /// <summary>
-        /// This rotation is purely cosmetic.  It shoudl have no effect on the 
+        /// This rotation is purely cosmetic.  It shoudl have no effect on the
         /// heading or facing directions of the actor.
         /// </summary>
         public float RotationRate
@@ -139,9 +138,9 @@ namespace Boku.SimWorld.Chassis
 
             float secs = Time.GameTimeFrameSeconds;
 
-            // Init the target Altitude.  This should only happen the very first time 
-            // after a reset.  We want to use the bot's initial height as the original 
-            // target height but at the time the c'tor is called we don't yet know 
+            // Init the target Altitude.  This should only happen the very first time
+            // after a reset.  We want to use the bot's initial height as the original
+            // target height but at the time the c'tor is called we don't yet know
             // where the bot will be positioned.
             if (startingAltitude == DefaultStartingAltitude)
             {
@@ -199,7 +198,7 @@ namespace Boku.SimWorld.Chassis
             float angle = movement.RotationZ + (float)Time.GameTimeTotalSeconds * RotationRate;
             Matrix mat = Matrix.CreateRotationZ(angle);
             mat.Translation = movement.Position;
-            // Note that we're just setting the rotation angle back to the 
+            // Note that we're just setting the rotation angle back to the
             // original value.  The extra rotation only goes into LocalMatrix.
             movement.SetLocalMatrixAndRotation(mat, movement.RotationZ);
 

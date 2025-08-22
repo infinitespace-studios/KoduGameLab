@@ -114,7 +114,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// otherColors is set behind the scenes by the owning class. 
+        /// otherColors is set behind the scenes by the owning class.
         /// We don't want to save it, if the class changes its mind, we want otherColors
         /// to take the new value.
         /// </summary>
@@ -163,7 +163,6 @@ namespace Boku.Base
 
         [XmlAttribute]
         public string sound;
-
 
         public Classification()
         {

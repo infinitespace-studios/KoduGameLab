@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +41,7 @@ namespace Boku
         {
             private VideoOutput parent = null;
 
-            // This will be the 100xblockH block of data we transfer each frame. 
+            // This will be the 100xblockH block of data we transfer each frame.
             // Each byte in this block translates into 2 colored blocks of data.
             // We allowcate and free this each time we are activated/deactivated
             // so we don't end up wasting 30k of space.
@@ -161,7 +160,7 @@ namespace Boku
 
             /// <summary>
             /// Shows the current file.  Should be called each frame with
-            /// the same name until this returns true indicating that the 
+            /// the same name until this returns true indicating that the
             /// frame has been displayed for enough time.
             /// </summary>
             /// <param name="filename"></param>
@@ -188,7 +187,7 @@ namespace Boku
                     {
                         return true;
                     }
-                    
+
                     fileSize = (int)stream.Length;
 
                     numPages = fileSize / bytesPerPage;
@@ -204,7 +203,7 @@ namespace Boku
                     setStartTime = false;
                 }
 
-                // If we timed out, then either load/show next 
+                // If we timed out, then either load/show next
                 // page or return done if on last page.
                 Double curTime = Time.WallClockTotalSeconds;
                 if (startTime + kPageTime < curTime)
@@ -214,7 +213,7 @@ namespace Boku
                     {
                         // Done with this file.
                         Storage4.Close(stream);
-                        
+
                         // Allow the same file to be sent twice in a row.
                         curFilename = null;
 
@@ -308,7 +307,7 @@ namespace Boku
             {
             }
 
-        }   // end of class VideoOutput UpdateObj  
+        }   // end of class VideoOutput UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -424,7 +423,7 @@ namespace Boku
 
                 quad.Render(rt, Vector2.Zero, rtSize, @"TexturedNoAlpha");
 
-            }   // end of Render()  
+            }   // end of Render()
 
             /// <summary>
             /// Renders a colored 3x3 block at the given position.
@@ -486,7 +485,6 @@ namespace Boku
             {
             }
 
-
             #region INeedsDeviceReset Members
 
             public void LoadContent(bool immediate)
@@ -506,8 +504,7 @@ namespace Boku
             }
 
             #endregion
-        }   // end of class VideoOutput RenderObj     
-
+        }   // end of class VideoOutput RenderObj
 
         // List objects.
         protected Shared shared = null;
@@ -655,6 +652,3 @@ namespace Boku
     }   // end of class VideoOutput
 
 }   // end of namespace Boku
-    
-
-

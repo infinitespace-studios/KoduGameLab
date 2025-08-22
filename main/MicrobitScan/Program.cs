@@ -165,7 +165,6 @@ namespace MicrobitScan
                         //  REV_0.1#9900000037024E45004820050000000E0000000097969901
                         //  0#{53F56307-B6BF-11D0-94F2-00A0C91EFB8B}
 
-
                         bool gotVendorName = false;
                         bool gotProductName = false;
                         string microcontrollerId = String.Empty;
@@ -214,7 +213,6 @@ namespace MicrobitScan
         {
             string Microbit_COM = null;
             string Microbit_Drive = null;
-
 
             string qstr = String.Empty;
             WqlObjectQuery query = new SelectQuery();

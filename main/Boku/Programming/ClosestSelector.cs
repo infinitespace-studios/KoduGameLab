@@ -22,16 +22,16 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// This will just select the closest Action Thing from the set and add 
+    /// This will just select the closest Action Thing from the set and add
     /// that to the actuators arbitrator.
-    /// 
-    /// this selector is known as �nearest� and is hidden unless there is another valid selector.  
-    /// 
-    /// It was known as �Use� for a bit.  
+    ///
+    /// this selector is known as �nearest� and is hidden unless there is another valid selector.
+    ///
+    /// It was known as �Use� for a bit.
     ///
     /// This is not used for WHEN See Apple DO Move Toward
     /// This IS used for WHEN See Apple DO Shoot
-    /// 
+    ///
     /// </summary>
     public class ClosestSelector : Selector
     {
@@ -70,7 +70,7 @@ namespace Boku.Programming
 
             // TODO (****) This was causing a null ref in the "Green Ghost V Looper" level
             // when the user pressed the mouse button to launch a wisp.  In that case the
-            // targetSet has 1 element in it but it's not "valid" so it never goes into 
+            // targetSet has 1 element in it but it's not "valid" so it never goes into
             // the nearestTargets list, hence targetSet.Nearest is null.
             // Note I also pulled the Finalize call out of the if statement since Finialize(sic)
             // is what creates the nearestTargets list.
@@ -91,7 +91,7 @@ namespace Boku.Programming
             }
             else
             {
-                // No explicit target.  
+                // No explicit target.
                 // This handles the case of WHEN GamePad AButton DO Shoot
                 // where instead of having a target we just have a direction.
                 if (reflex.targetSet.Param != null && reflex.targetSet.Param is Vector2)
@@ -121,5 +121,5 @@ namespace Boku.Programming
         {
         }
     }
-    
+
 }

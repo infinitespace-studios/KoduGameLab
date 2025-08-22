@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace Boku.UI
         /// <summary>
         /// The most recent card selected via pie menu.  We need
         /// this here because endingCard sometimes gets overwritten
-        /// before we can check it in Update().  Yes, this is a bit 
+        /// before we can check it in Update().  Yes, this is a bit
         /// of a hack.
         /// Actually this is worse than I thought.  This works ok
         /// for editing existing patterns cards but fails when new
@@ -43,7 +42,7 @@ namespace Boku.UI
 
         public const string idSensor = "sensor";
         public const string idFilter = "filter";
-        
+
         public const string idSelector = "selector";
         public const string idModifier = "modifier";
         public const string idActuator = "actuator";
@@ -107,7 +106,7 @@ namespace Boku.UI
                         Modifier modifier = ReflexCard.LastPickedCard as Modifier;
                         Filter filter = parent.pendingCard as Filter;
 
-                        // If the tile we just chose was the say verb or the microbit say verb then 
+                        // If the tile we just chose was the say verb or the microbit say verb then
                         // automatically activate the text editor.
                         if (verbActuator != null && (verbActuator.upid == "actuator.say" && prevUpid == "actuator.say"))
                         {
@@ -238,7 +237,7 @@ namespace Boku.UI
                             InGame.inGame.shared.editObjectParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditObjectParameters.Control.Hearing);
                         }
 
-                        // If the tile we just chose was the say verb then 
+                        // If the tile we just chose was the say verb then
                         // automatically activate the text editor.
                         if (filter != null && filter.upid == "filter.said" && prevUpid == "filter.said")
                         {
@@ -298,11 +297,11 @@ namespace Boku.UI
             }   // end of Update()
 
             /// <summary>
-            /// Brings up the pie menu for a programming card.  
+            /// Brings up the pie menu for a programming card.
             /// Normally when you select an existing tile
             /// in the programming UI and press A the pie menu comes up and you
             /// can then replace the existing tile.  However, for the 'say'
-            /// verb and 'said filter tiles we want it to bring up the text editor 
+            /// verb and 'said filter tiles we want it to bring up the text editor
             /// so that the text associated with the verb can be edited by the user.
             /// Also, for the Micro Bit Pattern tiles we want to bring up the pattern editor.
             /// </summary>
@@ -388,7 +387,7 @@ namespace Boku.UI
                             case GameThing.Verbs.MovementSpeedModify:
                                 InGame.inGame.shared.editObjectParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditObjectParameters.Control.MovementSpeedModifier);
                                 break;
-                            
+
                             case GameThing.Verbs.TurningSpeedModify:
                                 InGame.inGame.shared.editObjectParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditObjectParameters.Control.TurningSpeedModifier);
                                 break;
@@ -397,7 +396,7 @@ namespace Boku.UI
                             case GameThing.Verbs.WorldLightingChangeInstant:
                                 InGame.inGame.shared.editWorldParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditWorldParameters.Control.LightRig);
                                 break;
-                            
+
                             case GameThing.Verbs.WorldSkyChange:
                             case GameThing.Verbs.WorldSkyChangeInstant:
                                 InGame.inGame.shared.editWorldParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditWorldParameters.Control.Sky);
@@ -426,7 +425,7 @@ namespace Boku.UI
                             case GameThing.Verbs.CloseByRangeChange:
                                 InGame.inGame.shared.editObjectParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditObjectParameters.Control.NearByDistance);
                                 break;
-                            
+
                             case GameThing.Verbs.FarAwayRangeChange:
                                 InGame.inGame.shared.editObjectParameters.Activate(parent.reflex.Data, parent.reflex.Task.GameActor, EditObjectParameters.Control.FarAwayDistance);
                                 break;
@@ -478,7 +477,6 @@ namespace Boku.UI
             }
         }
 
-
         public CardSpace.CardType cardType;
         public bool morphable = false;
         public ControlRenderObj renderClause;
@@ -529,8 +527,8 @@ namespace Boku.UI
         private States PendingState
         {
             get { return pendingState; }
-            set 
-            { 
+            set
+            {
                 pendingState = value;
                 if (pendingState == States.Hot && InGame.inGame.Editor.IndexActivePanel != -1)
                 {
@@ -540,10 +538,9 @@ namespace Boku.UI
         }
         #endregion
 
-
         private Reflex reflex;
         private ProgrammingElement card;
-        
+
         private ControlCollection controls;
         private UiSelector cardSelector;
         private ProgrammingElement pendingCard;
@@ -744,7 +741,7 @@ namespace Boku.UI
                     {
                         if (progElement != null && !progElement.ActorCompatible(reflex.Task.GameActor))
                         {
-                            // skip it 
+                            // skip it
                         }
                         else
                         {
@@ -752,7 +749,7 @@ namespace Boku.UI
                             {
                                 hiddenDefaultsPresent++;
                             }
-                            
+
                             supportedCards++;
                         }
                     }
@@ -946,9 +943,9 @@ namespace Boku.UI
             for (int i = 0; i < task.reflexes.Count; i++)
             {
                 Reflex reflex = task.reflexes[i] as Reflex;
-                if (reflex != null 
-                    && reflex.actuatorUpid == "actuator.inlinetask" 
-                    && reflex.modifierUpids.Length > 0 
+                if (reflex != null
+                    && reflex.actuatorUpid == "actuator.inlinetask"
+                    && reflex.modifierUpids.Length > 0
                     && reflex.modifierUpids[0].StartsWith("modifier.task"))
                 {
                     int newTarget = reflex.modifierUpids[0].Substring("modifier.task".Length)[0] - 'a';
@@ -1222,7 +1219,7 @@ namespace Boku.UI
 
                 List<PieNode> childList = new List<PieNode>(groupNode.children.Values);
                 childList.Sort(ComparePieNodeGroupIndiciesAsc);
-                
+
                 for (int i = 0; i < childList.Count; ++i)
                 {
                     PieNode node = childList[i];
@@ -1484,8 +1481,8 @@ namespace Boku.UI
             renderObj.Activate();
 
             // Set our magic refresh card which will let the cursor
-            // automagically move to the next spot.  But don't do 
-            // this for the say verb or said filter since we want 
+            // automagically move to the next spot.  But don't do
+            // this for the say verb or said filter since we want
             // to leave the cursor there so we can open the text editor.
             if (pendingCard != null)
             {
@@ -1498,21 +1495,21 @@ namespace Boku.UI
 
             //if this flag isn't set, a "NavNext" call will be made, moving to the next tile and preventing the card from remaining active upon
             //return from the screen that pops up (say dialog, world/object settings, etc.).  If you have a tile that brings up a new screen after placement,
-            //it will likely need to be added to this list.              
+            //it will likely need to be added to this list.
             if (pendingCard != null &&
                 !(pendingCard.upid == "actuator.say" ||
-                  pendingCard.upid == "actuator.microbit.say" || 
-                  pendingCard.upid == "filter.said" || 
-                  pendingCard.upid == "actuator.movementspeedmodify" || 
+                  pendingCard.upid == "actuator.microbit.say" ||
+                  pendingCard.upid == "filter.said" ||
+                  pendingCard.upid == "actuator.movementspeedmodify" ||
                   pendingCard.upid == "actuator.turningspeedmodify" ||
-                  pendingCard.upid == "actuator.rescale" || 
+                  pendingCard.upid == "actuator.rescale" ||
                   pendingCard.upid == "actuator.rescaleinstant" ||
                   pendingCard.upid == "actuator.holddistance" ||
                   pendingCard.upid == "actuator.holddistanceinstant" ||
-                  pendingCard.upid == "actuator.worldlightingchange" || 
+                  pendingCard.upid == "actuator.worldlightingchange" ||
                   pendingCard.upid == "actuator.worldlightingchangeinstant" ||
-                  pendingCard.upid == "actuator.worldskychange" || 
-                  pendingCard.upid == "actuator.worldskychangeinstant" || 
+                  pendingCard.upid == "actuator.worldskychange" ||
+                  pendingCard.upid == "actuator.worldskychangeinstant" ||
                   pendingCard.upid == "actuator.nextlevel"))
             {
                 magicFlagOfRefreshAvoiding = true;
@@ -1521,9 +1518,9 @@ namespace Boku.UI
 
         /// <summary>
         /// Magic flag that lets us know if a new tile has been placed so
-        /// that we can move the cursor to match.  The reason we need this 
+        /// that we can move the cursor to match.  The reason we need this
         /// is that because of the delayed refresh architecture it takes
-        /// forever before the new tile is valid.  Until it's valid we 
+        /// forever before the new tile is valid.  Until it's valid we
         /// can't navigate to it.
         /// </summary>
         static bool magicFlagOfRefreshAvoiding = false;
@@ -1532,7 +1529,7 @@ namespace Boku.UI
         /// switch to the next spot and that spot already has the "say" verb tile
         /// that we don't automatically open the text editor.
         /// </summary>
-        static string prevUpid = null;  
+        static string prevUpid = null;
 
         protected void ApplyUpdateObjChange(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
@@ -1553,7 +1550,7 @@ namespace Boku.UI
                 InGame.inGame.Editor.NavCardNext(null, null);
             }
         }
-        
+
         public override bool Refresh(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
             bool result = false;
@@ -1670,7 +1667,7 @@ namespace Boku.UI
                 }
             }
 
-            // rely on the change event to cause things to be removed 
+            // rely on the change event to cause things to be removed
             this.pendingCard = null;
             if (this.Change != null)
             {

@@ -4,7 +4,7 @@
 /*
  * MultiBlendController.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -45,7 +45,7 @@ namespace Xclna.Xna.Animation
         /// Creates a new MultiBlendController
         /// </summary>
         /// <param name="game">The game.</param>
-        public MultiBlendController(Game game) : base(game) 
+        public MultiBlendController(Game game) : base(game)
         {
             game.Components.Add(this);
             controllerDict = new Dictionary<IAnimationController, float>();
@@ -53,7 +53,6 @@ namespace Xclna.Xna.Animation
         }
 
         private Dictionary<IAnimationController, float> controllerDict;
-  
 
         #region IAnimationController Members
 
@@ -103,7 +102,6 @@ namespace Xclna.Xna.Animation
             return true;
         }
 
-
         private void OnAnimationTracksChanged(EventArgs e)
         {
             if (AnimationTracksChanged != null)
@@ -118,9 +116,6 @@ namespace Xclna.Xna.Animation
         #endregion
 
         #region IAnimationController Members
-
-
-
 
         #endregion
     }

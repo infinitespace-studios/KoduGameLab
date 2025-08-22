@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define KEYBOARD_LOD_HACK
 
 using System;
@@ -182,7 +181,7 @@ namespace Boku.SimWorld
         }
         /// <summary>
         /// The Animator is a temp cache, where the owning object (which also owns
-        /// the real animator) can stash the animator to use when rendering it's 
+        /// the real animator) can stash the animator to use when rendering it's
         /// instance of the FBXModel. Remember this FBXModel is a shared resource.
         /// </summary>
         public AnimatorList Animators
@@ -220,7 +219,6 @@ namespace Boku.SimWorld
 
         public Setup PreRender;
 
-
         public FBXModel(string resourceName)
         {
             this.resourceName = resourceName;
@@ -228,7 +226,7 @@ namespace Boku.SimWorld
 
         public virtual Vector4 PartColor(PartInfo partInfo, Vector4 tint)
         {
-            if ((partInfo.DiffuseColor.X == 1.0f) 
+            if ((partInfo.DiffuseColor.X == 1.0f)
                 &&(partInfo.DiffuseColor.Y == 1.0f)
                 &&(partInfo.DiffuseColor.Z == 1.0f))
             {
@@ -380,8 +378,8 @@ namespace Boku.SimWorld
                     ModelMeshPart part = mesh.MeshParts[j];
 
                     device.Indices = part.IndexBuffer;
-                    // Argh.  Note we don't set the Vertex Offset here but we do use it 
-                    // in the DrawPrims call.  If you set it in both places then the 
+                    // Argh.  Note we don't set the Vertex Offset here but we do use it
+                    // in the DrawPrims call.  If you set it in both places then the
                     // values get summed and the part fails to render.
                     device.SetVertexBuffer(part.VertexBuffer /* , part.VertexOffset */);
 
@@ -444,7 +442,7 @@ namespace Boku.SimWorld
                             Parameter(EffectParams.SpecularPower).SetValue(partInfo.SpecularPower);
 
                             // HACKHACK  XNA 4 is much pickier than XNA 3.1 about having valid data for
-                            // all vertex shader inputs.  So, if we find a case where we don't have the 
+                            // all vertex shader inputs.  So, if we find a case where we don't have the
                             // correct inputs, fall back to something simpler.
                             if (Effect.CurrentTechnique.Name.Contains("WithWind"))
                             {
@@ -498,8 +496,8 @@ namespace Boku.SimWorld
 
                                 }   // end loop over each pass.
                             }
-                            catch 
-                            { 
+                            catch
+                            {
                                 // TODO (****) Figure out why we get here.
                             }
                         }
@@ -540,7 +538,6 @@ namespace Boku.SimWorld
 
         }   // end of FBXModel Render()
 
-
         #endregion Public
 
         #region Internal
@@ -559,9 +556,9 @@ namespace Boku.SimWorld
         private void BindSurfaces(int which)
         {
             Model model = models[which];
-            if ((model != null) && 
-                (xmlActor != null) 
-                && (xmlActor.SurfaceSets != null) 
+            if ((model != null) &&
+                (xmlActor != null)
+                && (xmlActor.SurfaceSets != null)
                 && (xmlActor.SurfaceSets.Count > 0))
             {
                 for (int i = 0; i < model.Meshes.Count; ++i)
@@ -633,7 +630,7 @@ namespace Boku.SimWorld
             public int partIdx;
 
             /// <summary>
-            /// These three are sorted simply by bool. We want all the 
+            /// These three are sorted simply by bool. We want all the
             /// things that don't have these adjacent, the things that do
             /// have any of these set don't really matter in order
             /// </summary>
@@ -662,14 +659,14 @@ namespace Boku.SimWorld
             }
             public EffectTechnique Technique
             {
-                get 
+                get
                 {
                     SurfaceSet set = SurfaceSet;
                     if (set != null)
                     {
                         return set.Technique(technique);
                     }
-                    return model.Technique(technique, diffuseTexture != null); 
+                    return model.Technique(technique, diffuseTexture != null);
                 }
             }
         }
@@ -688,7 +685,6 @@ namespace Boku.SimWorld
         static PerfTimer rendTime = new PerfTimer("rend", 5.0f);
         static PerfTimer parmTime = new PerfTimer("parm", 5.0f);
         static PerfTimer loopTime = new PerfTimer("loop", 5.0f);
-
 
         private static System.Comparison<RenderPack> ComparePacksThing = new Comparison<RenderPack>(ComparePacks);
         public static int ComparePacks(RenderPack lhs, RenderPack rhs)
@@ -760,7 +756,7 @@ namespace Boku.SimWorld
                 device.RasterizerState = UI2D.Shared.RasterStateWireframe;
             //StartTimer(sortTime);
             /// sort the list
-            /// 
+            ///
             renderBatch.Sort(ComparePacksThing);
 
             //StopTimer(sortTime);
@@ -770,7 +766,7 @@ namespace Boku.SimWorld
             int batchBegin = 0;
             while (batchBegin < renderBatch.Count)
             {
-                // If we change effect or technique, 
+                // If we change effect or technique,
                 //      finish up any old effect/technique
                 //      start up the new effect/technique
                 RenderPack basePack = renderBatch[batchBegin];
@@ -814,16 +810,15 @@ namespace Boku.SimWorld
                             lastPreRender = pack.PreRender;
                         }
 
-
                         // If the model changed
-                        //      reset mesh 
+                        //      reset mesh
                         //      reset part
                         // if the mesh changed
                         //      set index buffer
                         //      reset part
                         bool setVtx = false;
-                        if ((iBatch == batchBegin) 
-                            || (lastModel != pack.model) 
+                        if ((iBatch == batchBegin)
+                            || (lastModel != pack.model)
                             || (lastLod != pack.lod)
                             || (lastMeshIdx != pack.meshIdx))
                         {
@@ -841,12 +836,11 @@ namespace Boku.SimWorld
                             lastPartIdx = pack.partIdx;
 
                             device.Indices = part.IndexBuffer;
-                            // Argh.  Note we don't set the Vertex Offset here but we do use it 
-                            // in the DrawPrims call.  If you set it in both places then the 
+                            // Argh.  Note we don't set the Vertex Offset here but we do use it
+                            // in the DrawPrims call.  If you set it in both places then the
                             // values get summed and the part fails to render.
                             device.SetVertexBuffer(part.VertexBuffer /* , part.VertexOffset */);
                         }
-
 
                         if (pack.animator != null && pack.animator.Palette != null)
                         {
@@ -864,7 +858,6 @@ namespace Boku.SimWorld
                                 lastAnim = pack.animator;
                             }
                         }
-
 
                         // Render
                         pack.model.RenderBatch(pack);
@@ -984,7 +977,6 @@ namespace Boku.SimWorld
             Matrix rootToProjMatrix = pack.rootToWorld * camera.ViewProjectionMatrix;
             Parameter(EffectParams.WorldViewProjMatrix).SetValue(rootToProjMatrix);
 
-
             ModelMeshPart part = mesh.MeshParts[pack.partIdx];
 
             Texture2D diffuseTexture = PartTexture(partInfo);
@@ -992,7 +984,7 @@ namespace Boku.SimWorld
             Parameter(EffectParams.GlowEmissiveColor).SetValue(pack.glowEmissiveColor);
 
             // HACKHACK  XNA 4 is much pickier than XNA 3.1 about having valid data for
-            // all vertex shader inputs.  So, if we find a case where we don't have the 
+            // all vertex shader inputs.  So, if we find a case where we don't have the
             // correct inputs, fall back to something simpler.
             if (Effect.CurrentTechnique.Name.Contains("WithWind"))
             {
@@ -1079,7 +1071,6 @@ namespace Boku.SimWorld
             Matrix rootToProjMatrix = pack.rootToWorld * camera.ViewProjectionMatrix;
             Parameter(EffectParams.WorldViewProjMatrix).SetValue(rootToProjMatrix);
 
-
             ModelMeshPart part = mesh.MeshParts[pack.partIdx];
 
             Texture2D diffuseTexture = PartTexture(partInfo);
@@ -1096,7 +1087,7 @@ namespace Boku.SimWorld
             Parameter(EffectParams.SpecularPower).SetValue(partInfo.SpecularPower);
 
             // HACKHACK  XNA 4 is much pickier than XNA 3.1 about having valid data for
-            // all vertex shader inputs.  So, if we find a case where we don't have the 
+            // all vertex shader inputs.  So, if we find a case where we don't have the
             // correct inputs, fall back to something simpler.
             if (Effect.CurrentTechnique.Name.Contains("WithWind"))
             {
@@ -1134,7 +1125,6 @@ namespace Boku.SimWorld
                     }
                 }
             }
-
 
             //StopTimer(parmTime);
 
@@ -1224,7 +1214,7 @@ namespace Boku.SimWorld
 
             return box;
         }   // end of FBXModel CalcMeshBoundingBox()
-            
+
         private Matrix CalcMeshTransform(ModelMesh mesh)
         {
             Matrix transform = mesh.ParentBone.Transform;
@@ -1295,13 +1285,13 @@ namespace Boku.SimWorld
                 CalcBoundingBox();
                 CalcBoundingSphere();
 
-                BindSurfaces();                
+                BindSurfaces();
             }
         }
         private List<List<PartInfo>> BuildInfoList(Model model, int lod)
         {
             /// This AnimationInstance is created just to get the initial
-            /// bone poses out to the collision primitives, then discarded. 
+            /// bone poses out to the collision primitives, then discarded.
             /// Each collision primitive instance will
             /// eventually get its own copy (if it's animated).
             AnimationInstance tempAnim = AnimationInstance.TryMake(model);
@@ -1478,13 +1468,13 @@ namespace Boku.SimWorld
             {
                 // HACKHACK TODO (****) Try to figure out why WinRT build can't get Tag info.
                 // Seem to be a problem with the MG loader.
-                // In the meantime, uncomment the code above, run in debug mode, and copy/paste 
+                // In the meantime, uncomment the code above, run in debug mode, and copy/paste
                 // the debug output into the switch statement below.
                 Vector3 min = Vector3.Zero;
                 Vector3 max = Vector3.Zero;
                 string name = resourceName + mesh.Name;
                 name = name.Replace('\\', '-');
-                
+
                 switch (name)
                 {
                     case "Models-Tree_DSCP_CYL_TRUNK":
@@ -1639,16 +1629,15 @@ namespace Boku.SimWorld
                         min = new Vector3(-1.848369f, -1.502947f, -1.382351f);
                         max = new Vector3(1.848369f, 1.502947f, 1.382351f);
                         break;
-                        
+
                     default:
                         Debug.Assert(false, "Did we add a new model?  If so, we need to add entry to this switch statement.");
                         return false;
                 }
-                
 
                 prim.DebugName = mesh.Name;
                 prim.Make(min, max);
-               
+
                 return true;
             }
         }
@@ -1657,6 +1646,3 @@ namespace Boku.SimWorld
     }   // end of FBXModel
 
 }   // end of namespace Boku.SimWorld
-
-
-

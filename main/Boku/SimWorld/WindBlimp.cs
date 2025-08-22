@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +50,7 @@ namespace Boku
         /// Anyway, the reason is that for other models, they load up their various
         /// animations and blend them together based on things like whether the bot
         /// is moving or shooting or whatever. The blimp only has one animation. That
-        /// in itself isn't a problem, because the anim system just puts the idle 
+        /// in itself isn't a problem, because the anim system just puts the idle
         /// animation in for whatever is missing, and the idle animation is the one
         /// animation the blimp has. But the blimp's idle animation has the propellor
         /// rotating 1080 degrees (3 revs) around a pivot point. Now, if you take two idle

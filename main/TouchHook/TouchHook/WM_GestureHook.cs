@@ -171,7 +171,7 @@ namespace TouchHook
             // Nothing is being done here with the ULLArguments or the gestureInfo.ptsLocation, since Microsoft's
             // Documentation seems to be innacurate. The docs suggest that the ptsLocation contains the
             // position of the first finger, and the delta between it and the second( tapped ) finger is stored in
-            // the ULLArgument... however it specifically says that it is stored as a POINT structure in the 
+            // the ULLArgument... however it specifically says that it is stored as a POINT structure in the
             // lower 32 bits... but a points structure is 2 ints. So either their documents are wrong or they packed
             // it as two shorts knowing that delta screen space coords wouldn't blow that limit. We can find this out
             // with some testing
@@ -212,7 +212,7 @@ namespace TouchHook
                 args.initialRotation = Win32.ArgToRadians(gestureInfo.ullArguments & Win32.ULL_ARGUMENTS_BIT_MASK);
                 args.rotation = 0;
             }
-            else 
+            else
             {
                 if (gestureInfo.dwFlags == Win32.GF_END)
                 {
@@ -422,7 +422,7 @@ namespace TouchHook
         }
 
         /// <summary>
-        /// Explicitly set a gesture to be allowed or blocked. The gesture is not configured until a 
+        /// Explicitly set a gesture to be allowed or blocked. The gesture is not configured until a
         /// GESTURENOTIFY message is hooked
         /// NOTE! Passing GestureId.All clears ALL the flags from ALL other gestures
         /// </summary>

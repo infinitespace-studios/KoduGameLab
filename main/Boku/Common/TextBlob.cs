@@ -25,7 +25,7 @@ using Boku.Programming;
 namespace Boku.Common
 {
     /// <summary>
-    /// The TextBlob class wraps up a user entered text string along 
+    /// The TextBlob class wraps up a user entered text string along
     /// with methods for navigating, editing and rendering it.
     /// </summary>
     public partial class TextBlob
@@ -70,12 +70,11 @@ namespace Boku.Common
         }
 
         char koduIcon = '\uF8FF';           // Character used to indicate that this char
-                                            // is a Kodu icon.  Defaults to neutral so 
+                                            // is a Kodu icon.  Defaults to neutral so
                                             // should work well with bidi processing.
         #region Members
 
         UI2D.Shared.GetFont GetFont = null;
-
 
         int maxWidth = 0;                   // Max width (in pixels) of each line.  Used for flow/wrapping.
 
@@ -84,10 +83,10 @@ namespace Boku.Common
         string scrubbedText = null;         // This is the text post bad word filtering.  This is the version we display.
         string displayString = null;        // Display ordered string post bidi processing.
 
-        int cursorPosition = 0;             // Position in string in logical ordering post-icon substitution. 
+        int cursorPosition = 0;             // Position in string in logical ordering post-icon substitution.
                                             // 0==before first character, 1==between 1st and 2nd character, etc.
-                                            // Note that in mixed R and L text, at each transition the cursor position on the screen is 
-                                            // ambiguous.  To determine the correct placement we need to keep track of the previous 
+                                            // Note that in mixed R and L text, at each transition the cursor position on the screen is
+                                            // ambiguous.  To determine the correct placement we need to keep track of the previous
                                             // character the cursor went over.
         FatChar cursorChar = null;          // See above.
 
@@ -206,7 +205,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Total line spacing used.  The sum of the font's 
+        /// Total line spacing used.  The sum of the font's
         /// line spacing plus the LineSpacingAdjustment value.
         /// </summary>
         public int TotalSpacing
@@ -221,10 +220,10 @@ namespace Boku.Common
         public int Width
         {
             get { return maxWidth; }
-            set 
-            { 
-                maxWidth = (int)MathHelper.Min(value, 2048); 
-                dirty = true; 
+            set
+            {
+                maxWidth = (int)MathHelper.Min(value, 2048);
+                dirty = true;
             }
         }
 
@@ -298,7 +297,7 @@ namespace Boku.Common
             }
 
             return result;
-        }   // end of GetLineWidth() 
+        }   // end of GetLineWidth()
 
         //
         // Cursor functions.
@@ -624,7 +623,6 @@ namespace Boku.Common
             }
         }   // end of AddEllipsisToLine()
 
-
         //
         // Render functions.
         //
@@ -748,7 +746,7 @@ namespace Boku.Common
                     if (word.icon == TextHelper.ControlInputs.programmingTile)
                     {
                         Texture2D texture = CardSpace.Cards.CardFaceTexture(word.str + "_button");
-                        // The 40/64 scale is to shrink the images to better match the 
+                        // The 40/64 scale is to shrink the images to better match the
                         // buttons which are 40*40 images in the upper left hand corner of a 64x64 texture.
                         // The 'foo' amount enlarges the tile to be larger than a button to make them a bit more readable.
                         Vector2 foo = new Vector2(3.0f, 3.0f);
@@ -859,9 +857,9 @@ namespace Boku.Common
                 if (BokuSettings.Settings.UseSystemFontRendering)
                 {
                     // HACK This hack is due to the way system font rendering works.
-                    // When DrawString is called it pads some space on either end of 
-                    // the string.  The result is that things don't line up in the 
-                    // same way they did for SpriteFont.  So we look where the cursor 
+                    // When DrawString is called it pads some space on either end of
+                    // the string.  The result is that things don't line up in the
+                    // same way they did for SpriteFont.  So we look where the cursor
                     // is and move it a bit to the left.
                     if (cursorPosition > 0 && scrubbedText[cursorPosition - 1] == ' ')
                     {
@@ -885,7 +883,6 @@ namespace Boku.Common
                 Utils.Draw2DLine(cursorTop, cursorBottom, color.ToVector4());
             }
 
-            
             /*
             // Debug code.
             if (renderCursor)
@@ -962,13 +959,13 @@ namespace Boku.Common
         }   // end of AliasStartingAtCursor()
 
         /// <summary>
-        /// Checks if the cursor is at the end of a valid alias, ie if the 
-        /// cursor is at position N then '>' for the alias would have to 
+        /// Checks if the cursor is at the end of a valid alias, ie if the
+        /// cursor is at position N then '>' for the alias would have to
         /// be the (N+1)th character in the raw text.
         /// </summary>
         /// <param name="text">The text string to check.</param>
         /// <param name="cursorPos">The cursor position with the string.</param>
-        /// <param name="start">If function returns true, this is the 
+        /// <param name="start">If function returns true, this is the
         /// starting character of the alias.</param>
         /// <returns>ControlInputs.none if there's no alias, or the input enum if there is.</returns>
         TextHelper.ControlInputs AliasEndingAtCursor(string text, int cursorPos, out int start)
@@ -1014,11 +1011,11 @@ namespace Boku.Common
         {
             if (dirty)
             {
-                // Fill in FatChar "string".  While doing 
+                // Fill in FatChar "string".  While doing
                 // this check for any RtoL chars.
                 CreateFatString();
 
-                // Process icon substitution.  This will replace icon 
+                // Process icon substitution.  This will replace icon
                 // text ala <apple> with a single, neutral character.
                 IconSubstitution();
 
@@ -1288,7 +1285,7 @@ namespace Boku.Common
 
                         if (fatChars[end].c == '>')
                         {
-                            // Found it!  
+                            // Found it!
                             // Before anything else we need to check if it's a valid
                             // icon.  If not, just leave it as text.
                             string str = "";
@@ -1304,7 +1301,7 @@ namespace Boku.Common
                             {
                                 if (InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.RunSim)
                                 {
-                                    // If in run mode, we need to replace the <score ***> text with 
+                                    // If in run mode, we need to replace the <score ***> text with
                                     // the actual score value.
                                     string score = TextHelper.GetStringSubstitution(icon, null);
 
@@ -1326,7 +1323,6 @@ namespace Boku.Common
                                 // In either case break since we don't want to create an icon.
                                 break;
                             }
-
 
                             // If we've found a valid icon.
                             if (icon != TextHelper.ControlInputs.none)
@@ -1583,7 +1579,7 @@ namespace Boku.Common
                 // have to give it a hard-break.
                 if (totalWidth + words[i].width > maxWidth)
                 {
-                    // If we've only got a single word and it's still 
+                    // If we've only got a single word and it's still
                     // too big then we need to add a hard-break.
                     if (line.words.Count == 0)
                     {
@@ -1622,11 +1618,11 @@ namespace Boku.Common
                 {
                     // The word fits.
                     /*
-                    
+
                     // MErging words here seems to cause all kinds of problems, so let's not do that.
-                     
+
                     // If the new word and the previous word are both text, merge the new one
-                    // into the previous one.  This gives us proper spacing for SystemFont 
+                    // into the previous one.  This gives us proper spacing for SystemFont
                     // rendering plus reduces draw calls.
                     if (line.words.Count > 0 &&
                         line.words[line.words.Count - 1].icon == TextHelper.ControlInputs.none && line.words[line.words.Count - 1].keyIcon == TextHelper.ControlInputs.none &&
@@ -1719,7 +1715,7 @@ namespace Boku.Common
             for (int i = 0; i < text.Count - 1; i++)
             {
                 Unicode.LigatureData ld = Unicode.GetLigatureData(text[i].c);
-                
+
                 // If not null, we have a possible winner.
                 if (ld != null)
                 {
@@ -1794,7 +1790,7 @@ namespace Boku.Common
                     {
                         text[i].c = dmd.medial;
                     }
-                    
+
                     // final
                     if (ahead == true && behind == false && dmd.final != 0)
                     {
@@ -1803,7 +1799,6 @@ namespace Boku.Common
                 }
             }
         }   // end of ApplyContextualForms()
-
 
         Texture2D ButtonTexture(TextHelper.ControlInputs input)
         {
@@ -2279,7 +2274,7 @@ namespace Boku.Common
             Line line = lines[curLine];
 
             // First figure out the whole words.  We need to find the word
-            // which has the largest cursor position less than or equal to 
+            // which has the largest cursor position less than or equal to
             // the cursorPosition.
             // Note that this all has to be working on the text in display order.
             Word word = null;
@@ -2359,7 +2354,7 @@ namespace Boku.Common
                 ++curLine;
                 xPos = 0;
             }
-            
+
             // Now take into account justification.
             if (justification == UIGridElement.Justification.Left)
             {
@@ -2381,7 +2376,7 @@ namespace Boku.Common
         }   // end of FindCursorLineAndPosition()
 
         /// <summary>
-        /// Given a line and a position in pixels, calculate the 
+        /// Given a line and a position in pixels, calculate the
         /// matching cursor position as a character index.
         /// Note that this has to work from the display ordered words
         /// and return the position in logical ordering.

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -22,7 +21,7 @@ namespace Boku.UI2D
     /// An instance of UIElement that uses a 9-grid element for its geometry.
     /// This is the new, modular version call so because of the way the
     /// parts fit together.
-    /// 
+    ///
     /// The "button" element is designed to display several buttons with
     /// labels, kind of like a dialog box.  Version 1.0 will probably be
     /// kind of limited in that it's aimed at controlling the display of
@@ -221,7 +220,7 @@ namespace Boku.UI2D
         }   // end of UIGridModularButtonElement Update()
 
         /// <summary>
-        /// Test mouse input against buttons.  hitUV is in 
+        /// Test mouse input against buttons.  hitUV is in
         /// local UV coords for button.  Full range is 0..1
         /// in either coordinate.
         /// </summary>
@@ -248,8 +247,6 @@ namespace Boku.UI2D
 
         }   // end of HandleMouseInput()
 
-
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
             if (onXButton != null)
@@ -271,11 +268,10 @@ namespace Boku.UI2D
             }
         }   // end of HandleTouchInput()
 
-
         public override void Render(Camera camera)
         {
             effect.CurrentTechnique = effect.Techniques["NormalMappedWithEnv"];
-            
+
             effect.Parameters["DiffuseTexture"].SetValue(diffuse);
 
             effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
@@ -308,7 +304,6 @@ namespace Boku.UI2D
                 int h = diffuse.Height;
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
-                
 
                 // Render the white region with highlight.
                 Vector2 position = new Vector2(h - 2, 0);
@@ -334,7 +329,7 @@ namespace Boku.UI2D
                     text += "    <A> " + aButtonText + "\n";
                 if (xButtonText != null)
                     text += "    <X> " + xButtonText;
- 
+
                 TextBlob blob = new TextBlob(Font, text, w - (int)position.X - margin);
 
                 position.Y = (int)((h - blob.TotalSpacing) / 2.0f) - 2;
@@ -484,9 +479,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularButtonElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

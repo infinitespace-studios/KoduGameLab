@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -22,7 +21,7 @@ namespace Boku.SimWorld
 
     /// <summary>
     /// A grid layout UI menu.  This can be set up as a 2d grid or as
-    /// an either vertical or horizontal 1d list.  The c'tor takes a 
+    /// an either vertical or horizontal 1d list.  The c'tor takes a
     /// Point type which defines the maximum allowable dimensions for
     /// the grid.  The grid may actually be any size up to this limit.
     /// This allows minor resizing of the grid without having to always
@@ -64,7 +63,7 @@ namespace Boku.SimWorld
         /// grid to push itself onto the input focus stack and start rendering itself.
         /// If a second Grid is activated while the first is still active then both
         /// will render but only the second will have focus until it is deactivated.
-        /// At that point focus will return to the first grid.  This allows grids to 
+        /// At that point focus will return to the first grid.  This allows grids to
         /// be "layered".
         /// </summary>
         public bool Active
@@ -139,7 +138,7 @@ namespace Boku.SimWorld
                                                 // Why bother about supporting something that's stupid, just limit it.
 
             this.commandMap = CommandMap.Deserialize(this, "UiGridControl.xml");
-      
+
         }   // end of UIGrid c'tor
 
         //
@@ -172,7 +171,7 @@ namespace Boku.SimWorld
 
             Scroll();
         }
-        
+
         public void MoveRight()
         {
             if (focusIndex.X < actualDimensions.X - 1)
@@ -285,7 +284,7 @@ namespace Boku.SimWorld
                         }
                     }
                 }
-            
+
             }   // end of if active.
 
         }   // end of UIGrid Render()
@@ -337,5 +336,3 @@ namespace Boku.SimWorld
     }   // end of class UIGrid
 
 }   // end of namespace Boku.SimWorld
-
-

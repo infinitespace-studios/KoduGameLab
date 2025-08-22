@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,9 +16,8 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Boku.Common.ParticleSystem
 {
-    // Emits "smoke" as a series of expanding, rotating 
+    // Emits "smoke" as a series of expanding, rotating
     // sprites which fade and grow as they age.
-
 
     public class SmokeEmitter : BaseSpriteEmitter
     {
@@ -31,8 +29,6 @@ namespace Boku.Common.ParticleSystem
             get { return texture; }
         }
         #endregion
-
-      
 
         // c'tor
         public SmokeEmitter(ParticleSystemManager manager)
@@ -77,4 +73,3 @@ namespace Boku.Common.ParticleSystem
     }   // end of class SmokeEmitter
 
 }   // end of namespace Boku.Common
-

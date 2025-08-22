@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,10 +42,10 @@ namespace Boku.Programming
     }
     /// <summary>
     /// Senses other GameThings by sound
-    /// 
-    /// Currently this sensor is archived and thus not used.  
-    /// 
-    /// It was originally planned to be the hearing for any gameactor; 
+    ///
+    /// Currently this sensor is archived and thus not used.
+    ///
+    /// It was originally planned to be the hearing for any gameactor;
     /// but without sound in the game its a little abstract
     /// </summary>
     public class AudioSensor : Sensor
@@ -122,7 +121,6 @@ namespace Boku.Programming
         {
             heardSet.Finialize();
         }
-
 
         public override SensorTargetSet ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {

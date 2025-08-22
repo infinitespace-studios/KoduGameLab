@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +25,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses thing by hearing
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class SoundSensor : Sensor
     {
@@ -38,7 +37,6 @@ namespace Boku.Programming
         private Random rnd = new Random();
 
         #endregion Members
-
 
         #region Public
         public SoundSensor()
@@ -92,7 +90,6 @@ namespace Boku.Programming
         public override void FinishUpdate(GameActor gameActor)
         {
         }
-
 
         public override void ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {

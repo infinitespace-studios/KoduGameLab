@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -20,10 +19,10 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// Your classic 9-grid based UI entity.  Combined with the
-    /// appropriate textures and normal maps this will allow us 
+    /// appropriate textures and normal maps this will allow us
     /// to have a nicely scalable tile-shaped 2D object.  This is
     /// just the geometry and a holder for the size params.
-    /// 
+    ///
     /// The geometry is created in the XY plane at Z==0 centered
     /// at the origin.  The extents are +- width/2 in the X direction
     /// and +- height/2 in the Y direction.
@@ -40,7 +39,7 @@ namespace Boku.UI2D
         private float height = 0.0f;
         private float edgeSize = 0.0f;
 
-        private float maxU = 1.0f;      // In the case that we have a card that is restricted to power of two 
+        private float maxU = 1.0f;      // In the case that we have a card that is restricted to power of two
         private float maxV = 1.0f;      // textures we want to be able to limit the UV coords for the 9-grid.
 
         #region Accessors
@@ -82,7 +81,7 @@ namespace Boku.UI2D
             private Vector2 scaledTex;
             private Vector2 overallTex;
 
-            static VertexDeclaration decl = null;   // We only need one shared among all the 9-grid objects.   
+            static VertexDeclaration decl = null;   // We only need one shared among all the 9-grid objects.
             static VertexElement[] elements = new VertexElement[]
             {
                 new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),              // Expanded to vector3 in the shader...
@@ -112,7 +111,6 @@ namespace Boku.UI2D
             }
 
         }   // end of Vertex
-
 
         // c'tors
         public Base9Grid(float width, float height, float edgeSize)
@@ -147,9 +145,8 @@ namespace Boku.UI2D
 
         }   // end of Base9Grid c'tor
 
-
         /// <summary>
-        /// This is just a thin render shell.  It expects that the effect 
+        /// This is just a thin render shell.  It expects that the effect
         /// and all the variables have been set up before calling this.
         /// </summary>
         public void Render(Effect effect)
@@ -169,7 +166,6 @@ namespace Boku.UI2D
             device.Indices = null;
             device.SetVertexBuffer(null);
         }   // end of Base9Grid Render()
-
 
         public void LoadContent(bool immediate)
         {

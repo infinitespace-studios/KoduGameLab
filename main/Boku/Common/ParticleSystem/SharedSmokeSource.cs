@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,7 +46,7 @@ namespace Boku.Common.ParticleSystem
         #endregion
 
         #region Accessors
-        
+
         /// <summary>
         /// If true, emission is per meter.  If false it's per second.
         /// </summary>
@@ -56,7 +55,7 @@ namespace Boku.Common.ParticleSystem
             get { return linearEmission; }
             set { linearEmission = value; }
         }
-        
+
         /// <summary>
         /// Magnitude of random offset given to new particles.
         /// </summary>
@@ -74,7 +73,7 @@ namespace Boku.Common.ParticleSystem
             get { return velocity; }
             set { velocity = value; }
         }
-        
+
         /// <summary>
         /// Color used to attenuate particles when they're rendered.
         /// </summary>
@@ -83,7 +82,7 @@ namespace Boku.Common.ParticleSystem
             get { return color; }
             set { color = value; }
         }
-        
+
         /// <summary>
         /// Radius for particles at the beginning of their lifetime.
         /// </summary>
@@ -92,7 +91,7 @@ namespace Boku.Common.ParticleSystem
             get { return startRadius; }
             set { startRadius = value; }
         }
-        
+
         /// <summary>
         /// Radius for particles at the end of their lifetime.
         /// </summary>
@@ -120,7 +119,7 @@ namespace Boku.Common.ParticleSystem
             get { return minLifetime; }
             set { minLifetime = value; }
         }
-        
+
         /// <summary>
         /// Maximum  time the particles live.
         /// </summary>
@@ -160,7 +159,7 @@ namespace Boku.Common.ParticleSystem
         #endregion
 
         #region Public
-        
+
         public SharedSmokeSource(ParticleSystemManager manager)
             : base(manager)
         {
@@ -185,7 +184,7 @@ namespace Boku.Common.ParticleSystem
             // See if we've died.
             if (Dying)
             {
-                // We don't need to wait for any particles to 
+                // We don't need to wait for any particles to
                 // go away since the shared emitter owns them.
                 Active = false;
                 RemoveFromManager();
@@ -209,7 +208,7 @@ namespace Boku.Common.ParticleSystem
                     partial += dt * EmissionRate;
                 }
 
-                // Emit as many particles as needed this 
+                // Emit as many particles as needed this
                 // frame to keep up with the emission rate.
                 SharedSmokeEmitter.SmokeParticle particle = new SharedSmokeEmitter.SmokeParticle();
                 while (partial >= 1.0f)
@@ -263,6 +262,5 @@ namespace Boku.Common.ParticleSystem
         #endregion
 
     }   // end of class SharedSmokeSource
-
 
 }   // end of namespace Boku.Common.ParticleSystem

@@ -35,7 +35,6 @@ namespace Boku.Common
         AllSkipPersistent = All | SkipPersistent,
     }
 
-
     public enum ScoreBucket
     {
         NotApplicable, // assumed to occupy the zero slot.
@@ -149,7 +148,7 @@ namespace Boku.Common
                     try
                     {
                         batch.Begin();
-                        
+
                         TextHelper.DrawString(
                             ScoreBoardFont,
                             str,
@@ -190,7 +189,7 @@ namespace Boku.Common
             private bool active;    // True if score should be displayed on screen.
             private bool persist;
             private ScoreVisibility visibility;
-            
+
             private bool labeled = false;
             private string label = "";
 
@@ -268,7 +267,7 @@ namespace Boku.Common
                 {
                     return;
                 }
-                
+
                 //check if score should be reset
                 if (0 != (flags & ScoreResetFlags.Score))
                 {
@@ -297,7 +296,7 @@ namespace Boku.Common
         #endregion
 
         #region Private Constants
-        
+
         private const float kLoudEffectSeconds = 1f;
         private const float kQuietEffectSeconds = 0f;
         private const float kFlyingEffectSeconds = 2f;
@@ -964,7 +963,6 @@ namespace Boku.Common
 
             string str = score.Labeled ? score.Label +": " : ""; // <----  Should include label
             str += score.Curr.ToString();
-            
 
             int width = 8 + (int)ScoreBoardFont().MeasureString(str).X;
             int x = (int)((float)BokuGame.bokuGame.GraphicsDevice.Viewport.Width - width);

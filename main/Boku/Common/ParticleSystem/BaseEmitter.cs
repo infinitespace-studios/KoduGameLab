@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace Boku.Common.ParticleSystem
         protected bool active = false;
         protected bool emitting = true;         // Are we still emitting particles?
         protected bool dying = false;           // Should we remove ourself from the manager when all our paritcles are dead?
-        protected bool persistent = false;      // If true, this emitter should not be removed by the manager's "ClearAllEmitters" function.    
+        protected bool persistent = false;      // If true, this emitter should not be removed by the manager's "ClearAllEmitters" function.
         protected float scale = 1.0f;
 
         public enum Use
@@ -41,7 +40,6 @@ namespace Boku.Common.ParticleSystem
             Distort = 0x2
         };
         protected Use usage = Use.Regular;           // When this emitter gets rendered. Can be or'd
-
 
         #region Accessors
         /// <summary>
@@ -57,11 +55,11 @@ namespace Boku.Common.ParticleSystem
         /// </summary>
         public Vector3 PreviousPosition
         {
-            get 
+            get
             {
                 if (prevPosition.X == float.MaxValue)
                     ResetPreviousPosition();
-                return prevPosition; 
+                return prevPosition;
             }
             set { prevPosition = value; }
         }
@@ -86,7 +84,7 @@ namespace Boku.Common.ParticleSystem
         /// <summary>
         /// Should this emitter remove itself from the manager when all its particles have faded away?
         /// This is generally used in conjunction with Emitting for emitters that are no longer needed.
-        /// Setting Emitting to false will stop the creation of new particles.  Setting Dying to true will 
+        /// Setting Emitting to false will stop the creation of new particles.  Setting Dying to true will
         /// let the existing particles live out their lifespan before the emitter kills itself off.
         /// </summary>
         public bool Dying
@@ -95,7 +93,7 @@ namespace Boku.Common.ParticleSystem
             set { dying = value; }
         }
         /// <summary>
-        /// True if this particle emitter has been added to the 
+        /// True if this particle emitter has been added to the
         /// DistortionManager hence needing removal upon death.
         /// </summary>
         public Use Usage
@@ -123,7 +121,7 @@ namespace Boku.Common.ParticleSystem
         }
 
         /// <summary>
-        /// If true, this emitter should not be removed by the manager's "ClearAllEmitters" function.    
+        /// If true, this emitter should not be removed by the manager's "ClearAllEmitters" function.
         /// </summary>
         public bool Persistent
         {

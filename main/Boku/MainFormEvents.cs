@@ -21,7 +21,7 @@ namespace Boku
         {
         }   // endof ConnectEventHandlers()
 
-        // 
+        //
         // System Events
         //
 
@@ -50,9 +50,9 @@ namespace Boku
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SuspendLayout();
-            // 
+            //
             // MainForm
-            // 
+            //
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";

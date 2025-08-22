@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Diagnostics;
 
@@ -11,7 +10,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Common.Sharing;
 
@@ -51,7 +49,7 @@ namespace Boku
         private void InitializeComponent()
         {
             //
-            // Graphics 
+            // Graphics
             //
 
             graphics = new Microsoft.Xna.Framework.GraphicsDeviceManager(this);
@@ -81,7 +79,7 @@ namespace Boku
             }
 
             Debug.Assert(false, "Should we even be here?");
-            
+
             // Select right profile.
             graphics.GraphicsProfile = BokuGame.HiDefProfile ? GraphicsProfile.HiDef : GraphicsProfile.Reach;
 
@@ -94,7 +92,7 @@ namespace Boku
             BokuSettings.Settings.ResolutionY = graphics.PreferredBackBufferHeight;
 
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FULL SCREEN WINDOWED MODE FIX
-            
+
             // FULL SCREEN WINDOWED MODE FIX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             graphics.SynchronizeWithVerticalRetrace = syncRefresh;

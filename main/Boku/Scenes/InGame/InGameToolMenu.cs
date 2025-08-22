@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -27,7 +26,7 @@ namespace Boku
 {
     /// <summary>
     /// UpdateObject for InGame -> ToolMenu
-    /// This is the update object for the main tool menu that 
+    /// This is the update object for the main tool menu that
     /// lets the user transition into the various editing tools.
     /// </summary>
     public partial class InGame : GameObject, INeedsDeviceReset
@@ -50,7 +49,6 @@ namespace Boku
                 : base(parent, ref shared)
             {
             }   // end of ToolMenuUpdateObj c'tor
-
 
             /// <summary>
             /// ToolMenuUpdateObj Update()
@@ -131,5 +129,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

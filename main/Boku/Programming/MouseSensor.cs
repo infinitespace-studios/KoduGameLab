@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -155,7 +154,7 @@ namespace Boku.Programming
                 }
 
                 // Cause the filter to detect what is under the mouse cursor and set that information on the reflex.
-                // MatchAction will be true if the MouseFilter passes but then we still need to filter on any other 
+                // MatchAction will be true if the MouseFilter passes but then we still need to filter on any other
                 // filters including the ever annoying "not", "me" and "anything" filters.
                 Object param = null;
                 bool matchAction = mouseFilter.MatchAction(reflex, out param);
@@ -234,8 +233,8 @@ namespace Boku.Programming
                     {
                         // No MouseActor case (the mouse click was not on an actor)
 
-                        // If we have any classification filters, then we must have been 
-                        // looking for an actor. Since we don't have an actor, the 
+                        // If we have any classification filters, then we must have been
+                        // looking for an actor. Since we don't have an actor, the
                         // result is false.
                         if (reflex.hasClassificationFitler)
                         {
@@ -248,8 +247,8 @@ namespace Boku.Programming
                             matchAction = false;
                         }
 
-                        // MouseActor is null so we didn't click on anything which means that if we have an anything 
-                        // filter, matchAction should stay false.  Unless, of course we also have a notFilter. 
+                        // MouseActor is null so we didn't click on anything which means that if we have an anything
+                        // filter, matchAction should stay false.  Unless, of course we also have a notFilter.
                         if (!anythingFilter || notFilter)
                         {
                             // No mouse actor but if we have a "not" or this is a movement toward reflex then the result should be true.
@@ -341,4 +340,4 @@ namespace Boku.Programming
         }
     }
 
-}   // end of namespace Boku.Programming 
+}   // end of namespace Boku.Programming

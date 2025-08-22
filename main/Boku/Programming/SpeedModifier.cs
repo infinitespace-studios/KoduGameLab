@@ -22,7 +22,7 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this modifier will modify the selector output vectors length 
+    /// this modifier will modify the selector output vectors length
     /// </summary>
     public class SpeedModifier : Modifier
     {

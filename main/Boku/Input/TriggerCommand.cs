@@ -27,8 +27,8 @@ namespace Boku.Input
     /// <summary>
     /// This represents the abstraction for the game pad trigger input command
     /// It exposes a float value for the position of the trigger
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     abstract public class TriggerCommand : InputCommand
     {
@@ -133,7 +133,7 @@ namespace Boku.Input
             if ( GamePadInput.GetGamePad(this.playerIndex).IsConnected )
             {
                 Position = TriggerValue();
-                
+
                 if (timerAutoRepeat.Running)
                 {
                     timerAutoRepeat.Update();
@@ -192,10 +192,9 @@ namespace Boku.Input
             {
                 digpos = true;
             }
-            
+
             return digpos;
         }
-        
+
     }
 }
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -181,8 +180,8 @@ namespace Boku.SimWorld.Chassis
                 // If we're actively moving up/down, we need to adjust height offset.
                 thing.HeightOffset += velocity.Z * secs;
             }
-            
-            // Adjust height for terrain.  We do this outside of the check for Active 
+
+            // Adjust height for terrain.  We do this outside of the check for Active
             // so that we stay at the right height if we're being dragged around.
             // Note that for the position we use the max Z of the current and previous
             // positions.  This way we can always detect the ground without getting
@@ -288,7 +287,7 @@ namespace Boku.SimWorld.Chassis
                 float angle = movement.RotationZ + (float)Time.GameTimeTotalSeconds * RotationRate;
                 Matrix mat = Matrix.CreateRotationZ(angle);
                 mat.Translation = movement.Position;
-                // Note that we're just setting the rotation angle back to the 
+                // Note that we're just setting the rotation angle back to the
                 // original value.  The extra rotation only goes into LocalMatrix.
                 movement.SetLocalMatrixAndRotation(mat, movement.RotationZ);
             }
@@ -306,7 +305,7 @@ namespace Boku.SimWorld.Chassis
             movement.Velocity = velocity;
 
             // The puck has no real "heading" which is used for Move Forward.
-            // To make movement work correctly, force heading to match the 
+            // To make movement work correctly, force heading to match the
             // current moving direction.
             // We can't set heading directly so set z rotation.
             // Note that this causes the visual rotation to glitch on bouncing

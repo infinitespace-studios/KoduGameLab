@@ -36,10 +36,10 @@ namespace MicrobitNeedDriverDlg
             this.installBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
+            //
             // message
-            // 
-            this.message.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.message.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.message.Location = new System.Drawing.Point(45, 20);
             this.message.Name = "message";
@@ -47,10 +47,10 @@ namespace MicrobitNeedDriverDlg
             this.message.TabIndex = 0;
             this.message.Text = "We need to install a driver so that Kodu can talk to your BBC micro:bit. Click th" +
     "e Install button to begin. Click the link below for more information.";
-            // 
+            //
             // linkLabel
-            // 
-            this.linkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.linkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel.Location = new System.Drawing.Point(49, 94);
             this.linkLabel.Name = "linkLabel";
@@ -60,9 +60,9 @@ namespace MicrobitNeedDriverDlg
             this.linkLabel.Text = "Kodu && BBC micro:bit - Getting Started Guide";
             this.linkLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
+            //
             // installBtn
-            // 
+            //
             this.installBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.installBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.installBtn.Location = new System.Drawing.Point(417, 149);
@@ -71,9 +71,9 @@ namespace MicrobitNeedDriverDlg
             this.installBtn.TabIndex = 2;
             this.installBtn.Text = "Install";
             this.installBtn.UseVisualStyleBackColor = true;
-            // 
+            //
             // cancelBtn
-            // 
+            //
             this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelBtn.Location = new System.Drawing.Point(307, 149);
@@ -82,9 +82,9 @@ namespace MicrobitNeedDriverDlg
             this.cancelBtn.TabIndex = 3;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
-            // 
+            //
             // MicrobitNeedDriverDlgForm
-            // 
+            //
             this.AcceptButton = this.installBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -175,7 +174,6 @@ namespace Boku.UI2D
             }
 
             #endregion
-
 
             #region Public
 
@@ -456,7 +454,7 @@ namespace Boku.UI2D
 
             // If the mouse is over the menu, move the selection index to the item under the mouse.
             // On mouse down, make the item (if any) under the mouse the ClickedOnItem.
-            // On mouse up, if the mouse is still over the ClickedOnItem, activate it.  If not, just clear ClickedOnItem. 
+            // On mouse up, if the mouse is still over the ClickedOnItem, activate it.  If not, just clear ClickedOnItem.
             Vector2 hitUV = MouseInput.GetHitUV(camera, ref invWorldMatrix, width, height, useRtCoords: useRtCoords);
 
             // See if we're over anything.  If so, set that item to being selected but only if we've moved the mouse.
@@ -545,7 +543,7 @@ namespace Boku.UI2D
             // Touch input
             // If the touch is over the menu, move the selection index to the item under the mouse.
             // On touch down, make the item (if any) under the touch the ClickedOnItem.
-            // On tap, if the touch is still over the ClickedOnItem, activate it.  If not, just clear ClickedOnItem. 
+            // On tap, if the touch is still over the ClickedOnItem, activate it.  If not, just clear ClickedOnItem.
             TouchContact touch = TouchInput.GetOldestTouch();
             if (touch != null)
             {
@@ -795,7 +793,6 @@ namespace Boku.UI2D
             }
         }   // end of ApplyExclusiveFiltering()
 
-
         public void Render(Camera camera)
         {
             if (Active && geometry != null)
@@ -814,7 +811,6 @@ namespace Boku.UI2D
                 effect.Parameters["NormalMap"].SetValue(normalMap);
 
                 geometry.Render(effect);
-
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
 
@@ -865,7 +861,7 @@ namespace Boku.UI2D
                 for (int i = 0; i < itemList.Count; i++)
                 {
                     float a = itemList[i].LitValue;
-                    
+
                     // If not fully lit.
                     if (a < 1.0f)
                     {
@@ -917,7 +913,7 @@ namespace Boku.UI2D
         }   // end of ModularCheckboxList SetValue()
 
         /// <summary>
-        /// Returns the index associated with the text. 
+        /// Returns the index associated with the text.
         /// Returns -1 if not found.
         /// </summary>
         /// <param name="text"></param>
@@ -938,7 +934,7 @@ namespace Boku.UI2D
         }   // end of GetIndex()
 
         /// <summary>
-        /// Returns the index associated with the object. 
+        /// Returns the index associated with the object.
         /// Returns -1 if not found.
         /// </summary>
         /// <param name="text"></param>
@@ -1041,9 +1037,3 @@ namespace Boku.UI2D
     }   // end of class ModularCheckboxList
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

@@ -22,10 +22,10 @@ using Boku.Programming;
 namespace Boku.Common
 {
     /// <summary>
-    /// The TextBlob class wraps up a user entered text string along 
+    /// The TextBlob class wraps up a user entered text string along
     /// with methods for navigating, editing and rendering it.
-    /// 
-    /// This file contains the FatChar class.  
+    ///
+    /// This file contains the FatChar class.
     /// </summary>
     public partial class TextBlob
     {

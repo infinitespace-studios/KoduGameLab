@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -53,7 +52,7 @@ namespace Boku.UI2D
 
             int materialIndex = uiSlot;
 
-            // We need to push the near plane out more than is normal for UI 
+            // We need to push the near plane out more than is normal for UI
             // so that the material cubes don't render behind the terrain.
             Camera cam = camera;
             cam.NearClip = 3.0f;
@@ -97,7 +96,6 @@ namespace Boku.UI2D
                         world,
                         camera);
 
-
                     device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, numVerts, 0, numTris);
 
                     terrain.PostRenderWaterCube();
@@ -119,7 +117,6 @@ namespace Boku.UI2D
                         world,
                         camera);
 
-
                     device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, numVerts, 0, numTris);
 
                     terrain.PostRenderWaterCube();
@@ -134,7 +131,6 @@ namespace Boku.UI2D
                 (int)Tile.Face.Top,
                 world,
                 camera);
-
 
             device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, numVerts, 0, numTris);
 
@@ -320,7 +316,6 @@ namespace Boku.UI2D
             batch.End();
 
         }
-
 
         #endregion Internal
 

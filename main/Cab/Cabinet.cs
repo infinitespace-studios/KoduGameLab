@@ -76,7 +76,6 @@ namespace Cab
             fdidtDECRYPT,
         }
 
-
         public enum FDINOTIFICATIONTYPE : int
         {
             fdintCABINET_INFO,
@@ -298,7 +297,7 @@ namespace Cab
             FdiSeekFn pfnseek,
             int cputype,
             ref ERF perf);
-        
+
         [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool FDIIsCabinet(

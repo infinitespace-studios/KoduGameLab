@@ -17,7 +17,7 @@ namespace Boku.Common
 
     /// <summary>
     /// Browser Callbacks.
-    /// </summary>    
+    /// </summary>
     public delegate void LevelDownloadCompleteEvent(WorldDataPacket packet, byte[] thumbnailBytes, LevelMetadata level);
     public delegate void LevelDownloadOffPageCompleteEvent(WorldDataPacket packet, byte[] thumbnailBytes, Guid guid);
     public delegate void ThumbnailDownloadCompleteEvent(LevelMetadata level);

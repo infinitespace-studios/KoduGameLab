@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -23,7 +22,7 @@ namespace Boku.Common
         public class Events
         {
             /// <summary>
-            /// Prototype used for GamePadInput.Events events. 
+            /// Prototype used for GamePadInput.Events events.
             /// </summary>
             /// <param name="creator">The object which registered for this event set.</param>
             public delegate void InputEvent(Object obj);
@@ -81,8 +80,6 @@ namespace Boku.Common
             public event InputEvent RightStickRightOnRepeatPressed;
             public event InputEvent RightStickUpOnRepeatPressed;
             public event InputEvent RightStickDownOnRepeatPressed;
-
-
 
             public event InputEvent AButtonOnReleased;
             public event InputEvent BButtonOnReleased;
@@ -158,7 +155,7 @@ namespace Boku.Common
             }   // end of Events UpdateCurrent()
 
             /// <summary>
-            /// Looks through the list seeing if any match the stack top.  If so, then 
+            /// Looks through the list seeing if any match the stack top.  If so, then
             /// those should be made current.
             /// </summary>
             /// <param name="stackTop"></param>
@@ -483,7 +480,4 @@ namespace Boku.Common
 
     }   // end of class GamePadInput
 
-
 }   // end of namespace Boku.Common
-
-

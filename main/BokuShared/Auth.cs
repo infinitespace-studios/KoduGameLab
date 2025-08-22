@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -88,7 +87,7 @@ namespace BokuShared
             IBuffer buffer = CryptographicBuffer.CreateFromByteArray(data);
             hash.Append(buffer);
             IBuffer hashBuff = hash.GetValueAndReset();
-            result = hashBuff.ToArray();       
+            result = hashBuff.ToArray();
 
             return result;
         }   // end of MD5()
@@ -101,7 +100,7 @@ namespace BokuShared
         }
 
         /// <summary>
-        /// Given a pin, determines if it is valid.  "Valid" in 
+        /// Given a pin, determines if it is valid.  "Valid" in
         /// this case means that it's not trivially simple.
         /// </summary>
         /// <param name="pin"></param>
@@ -222,9 +221,8 @@ namespace BokuShared
             return result;
         }   // end of CreateChecksumHash()
 
-
         /// <summary>
-        /// Creates checksum hash based on dateTime using the 
+        /// Creates checksum hash based on dateTime using the
         /// current creator and pin.
         /// </summary>
         /// <param name="dateTime"></param>
@@ -261,7 +259,7 @@ namespace BokuShared
         }   // end of ExtractPin()
 
         /// <summary>
-        /// Extracts pin from given 
+        /// Extracts pin from given
         /// </summary>
         /// <param name="fileChecksum"></param>
         /// <param name="creatorName"></param>

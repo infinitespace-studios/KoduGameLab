@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filter that returns a positive action when the score value is met or exceeded
-    /// 
+    ///
     /// </summary>
     public class ScoreFilter : Filter
     {

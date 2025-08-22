@@ -18,7 +18,7 @@
 # define UPDATE_CHECK    // check for new version at startup.
 #endif
 
-//#define DISABLE_STUDIOK 
+//#define DISABLE_STUDIOK
 
 using System;
 using System.Net;
@@ -49,7 +49,7 @@ using Boku.Common.Localization;
 
 namespace Boku
 {
-    //Class that holds version information from service. 
+    //Class that holds version information from service.
     public class UpdateInfo
     {
         public string releaseNotesUrl = "";
@@ -78,7 +78,7 @@ namespace Boku
                                                         // 6 -> 7 : Add Settings slider tiles as well as some settings as scores.
                                                         // 7 -> 8 : Add naming of characters and the ability to sense named characters.
                                                         // 8 -> 9 : Move linked level target from XmlWorldData to ReflexData.
-        
+
         public static string UpdateCode;
 
         public static UpdateInfo updateInfo=null;
@@ -163,7 +163,7 @@ namespace Boku
                     // Path starts with %LocalAppData% == c:\users\scoy.REDMOND\AppData\Local
                     // Then add Packages\Microsoft.Kodu*\LocalState\Content\Xml\Levels
                     // The * will have to be figured out just by looking at the first bit.  I think it's tied to the user???
-                    
+
                     // Levels\MyWorlds                  *.dds, *.jpg, *.Xml
                     // Levels\MyWorlds\Stuff            *.Xml
                     // Levels\Stuff\TerrainHeightMaps   *.Raw
@@ -201,7 +201,7 @@ namespace Boku
                             CopyFiles(worldsPath, destWorldsPath, "*.Xml");
                             CopyFiles(stuffPath, destStuffPath, "*.Xml");
                             CopyFiles(terrainPath, destTerrainPath, "*.Raw");
-                            
+
                         }   // end of loop over directories.
                     }
                     catch(Exception e)
@@ -300,7 +300,7 @@ namespace Boku
                     string lang = XmlOptionsData.Language;
                     string commandLineLang = CmdLine.GetString("LOCALIZATION", "");
 
-                    // If we haven't previously set a language preference, select one 
+                    // If we haven't previously set a language preference, select one
                     // from the current locale.
                     if (string.IsNullOrEmpty(lang))
                     {
@@ -516,13 +516,12 @@ namespace Boku
                     stream.Close();
                 }
 
-                
 #if !XBOX
                 // Be sure mouse cursor is on regardless of current input mode.
                 BokuGame.bokuGame.IsMouseVisible = true;
 
                 StartupForm.Shutdown();
-                
+
                 // Show the crash report dialog box unless we're running the debugger.
                 if (!Debugger.IsAttached)
                 {
@@ -552,7 +551,7 @@ namespace Boku
                             ex.GetType().Name + "\r\n" +
                             "Kodu: " + ThisVersion.ToString() + "\r\n" +
                             gfxString + "\r\n" +
-                            "WLID: " + errorForm.textBoxLiveId.Text + "\r\n\r\n" + 
+                            "WLID: " + errorForm.textBoxLiveId.Text + "\r\n\r\n" +
                             errorForm.textBoxAddInfo.Text;
                         SendErrorReport(ex.Message, ex.StackTrace, addInfo);
                     }
@@ -569,7 +568,7 @@ namespace Boku
                     if(ex is System.IO.IOException)
                     {
                         msg = Strings.Localize("error.outOfDiskSpace");
-                    }   
+                    }
                     else
                     {
                         if (ex.StackTrace.Length > 255)
@@ -685,8 +684,6 @@ namespace Boku
             getCurrentVersionComplete = true;
         }
     }
-
-
 
     /// This chunk of the Program class manages the task of sending crash reports and instrumentation.
     static partial class Program2

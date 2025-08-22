@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -23,8 +22,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filters based upon the distance of the GameThing from the GameActor
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class DistanceFilter : Filter
     {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -39,7 +38,6 @@ namespace Boku
                 : base(parent, ref shared)
             {
             }   // end of EditTextureUpdateObj c'tor
-
 
             /// <summary>
             /// EditTextureUpdateObj Update()
@@ -93,7 +91,6 @@ namespace Boku
                         InGame.inGame.IsLevelDirty = true;
                     }
 
-
                 }   // end if we have input focus.
 
                 // Do the common bits of the Update().
@@ -116,5 +113,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

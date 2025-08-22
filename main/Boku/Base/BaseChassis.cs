@@ -1,9 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define MF_VALIDATE
-
 
 using System;
 using System.Collections.Generic;
@@ -57,7 +55,7 @@ namespace Boku.Base
         public static float kMinAltitude = -100.0f;
 
         /// <summary>
-        /// A class which contains a single "probe" used so that the chassis 
+        /// A class which contains a single "probe" used so that the chassis
         /// can sample the terrain at more than a single point.
         /// </summary>
         public class CurbFeeler
@@ -237,7 +235,7 @@ namespace Boku.Base
                         botPosition.Z + orientedOffset.Z * rescale + topHeight);
                 }
 
-                // For bots that don't have a facing direction 
+                // For bots that don't have a facing direction
                 // we use the cardinal directions.
                 return new Vector3(
                     botPosition.X + Offset.X * rescale,
@@ -247,7 +245,6 @@ namespace Boku.Base
             #endregion
 
         }   // end of class CurbFeeler
-
 
         #region Members
 
@@ -260,8 +257,8 @@ namespace Boku.Base
         protected float targetAltitude = 0.0f;      // A target altitude in absolute terms
 
         protected bool fixedPosition = false;       // Is this stuck in one place and should never be moved?
-        protected bool moving = false;              // Is this thing currently moving or  
-                                                    // has it settled to a static state?  
+        protected bool moving = false;              // Is this thing currently moving or
+                                                    // has it settled to a static state?
 
         protected bool terrainOnContact = false;    // Do we ignore terrain/water except when actually contacting (not just over)?
 
@@ -280,8 +277,8 @@ namespace Boku.Base
         protected float linearAccelerationModifier = 1.0f;
         protected float turningAccelerationModifier = 1.0f;
 
-        protected bool hasFacingDirection = true;   // This bot has a "front" which determines which way it is 
-                                                    // moving as opposed to something like the saucer which just 
+        protected bool hasFacingDirection = true;   // This bot has a "front" which determines which way it is
+                                                    // moving as opposed to something like the saucer which just
                                                     // moves any direction regardless of its rotation.
 
         protected bool ignoreGlassWalls = false;    // If true, this bot ignores the glass walls around the world.
@@ -319,7 +316,7 @@ namespace Boku.Base
         protected Vector2 lastRipple = new Vector2(float.MaxValue, float.MaxValue);
 
         protected ConstraintModifier.Constraints constraints = ConstraintModifier.Constraints.None;
-        
+
         // Variables to indicate whether touch controls are attempting to rotate the chassis this frame
         // and the rotation rate/acceleration to use when this occurs.
         protected bool wasTouchRotated = false;
@@ -341,7 +338,7 @@ namespace Boku.Base
         /// Flag to indicate whether a touch control has caused the chassis to rotate. We use alternate
         /// values for rotation/rotationacceleration in these cases.
         /// </summary>
-        public bool WasTouchRotated 
+        public bool WasTouchRotated
         {
             get { return wasTouchRotated; }
             set { wasTouchRotated = value; }
@@ -450,12 +447,12 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// This is the minimum height of the object.  An object at 
+        /// This is the minimum height of the object.  An object at
         /// this height should appear to be sitting on the ground.
         /// </summary>
         public float MinHeight
         {
-            get 
+            get
             {
                 float height = parent.MinHeight;
                 GameActor actor = parent as GameActor;
@@ -463,7 +460,7 @@ namespace Boku.Base
                 {
                     height = parent.MinHeight * actor.SquashScale.Z;
                 }
-                return height; 
+                return height;
             }
         }
 
@@ -507,15 +504,13 @@ namespace Boku.Base
             set { fixedPosition = value; }
         }
 
-
         // TODO (****) Are the following variables even needed or are they duplicates
         // of values stored elsewhere.  If they are duplicates we should remove these
         // and ensure that everything is normalized to only look in a single place.
 
-
         /// <summary>
-        /// Used to tweak an individual's speed capabilities so that we can 
-        /// have slightly varying performance characteristics even among 
+        /// Used to tweak an individual's speed capabilities so that we can
+        /// have slightly varying performance characteristics even among
         /// otherwise identical actors.
         /// Defaults to 1.0f.
         /// </summary>
@@ -526,8 +521,8 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Used to tweak an individual's turning capabilities so that we can 
-        /// have slightly varying performance characteristics even among 
+        /// Used to tweak an individual's turning capabilities so that we can
+        /// have slightly varying performance characteristics even among
         /// otherwise identical actors.
         /// Defaults to 1.0f.
         /// </summary>
@@ -579,8 +574,8 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Used to tweak an individual's speed capabilities so that we can 
-        /// have slightly varying performance characteristics even among 
+        /// Used to tweak an individual's speed capabilities so that we can
+        /// have slightly varying performance characteristics even among
         /// otherwise identical actors.
         /// Defaults to 1.0f.
         /// </summary>
@@ -591,8 +586,8 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Used to tweak an individual's turning capabilities so that we can 
-        /// have slightly varying performance characteristics even among 
+        /// Used to tweak an individual's turning capabilities so that we can
+        /// have slightly varying performance characteristics even among
         /// otherwise identical actors.
         /// Defaults to 1.0f.
         /// </summary>
@@ -601,10 +596,10 @@ namespace Boku.Base
             get { return turningAccelerationModifier; }
             set { turningAccelerationModifier = value; }
         }
-        
+
         /// <summary>
-        /// This bot has a "front" which determines which way it is 
-        /// moving as opposed to something like the saucer which just 
+        /// This bot has a "front" which determines which way it is
+        /// moving as opposed to something like the saucer which just
         /// moves any direction regardless of its rotation.
         /// </summary>
         public bool HasFacingDirection
@@ -677,8 +672,8 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// The amount of time that the jump animation should be running before 
-        /// the physical jump takes place.  Or, in animaotr terms, the 
+        /// The amount of time that the jump animation should be running before
+        /// the physical jump takes place.  Or, in animaotr terms, the
         /// anticipation time before the jump.
         /// </summary>
         public float PreJumpDelay
@@ -688,7 +683,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// The amount of time before the bot touches down that the landing 
+        /// The amount of time before the bot touches down that the landing
         /// animation should be started.
         /// </summary>
         public float PreLandDelay
@@ -705,7 +700,6 @@ namespace Boku.Base
             get { return jumpRate; }
             set { jumpRate = value; }
         }
-
 
         /// <summary>
         /// The list of CurbFeelers associated with this chassis.
@@ -770,7 +764,7 @@ namespace Boku.Base
         /// <summary>
         /// Constraints the brain is imposing on this chassis. We clear this every frame after applying.
         /// </summary>
-        public ConstraintModifier.Constraints Constraints 
+        public ConstraintModifier.Constraints Constraints
         {
             get { return constraints; }
             set { constraints = value; }
@@ -798,7 +792,7 @@ namespace Boku.Base
         {
             get { return parent; }
         }
-        
+
         #endregion
 
         #region Public
@@ -885,8 +879,8 @@ namespace Boku.Base
         /// This function should only handle parts of the chassis updates that need to occur
         /// after the collision (other actors, terrain walls and edge of the world) testing.
         /// This update should NEVER change the position of the chassis except in Z.  Right
-        /// now this is only used for chassis that need to bounce off the ground, ie the 
-        /// DynamicPropChassis and the CycleChassis.  We need to do this since we want to 
+        /// now this is only used for chassis that need to bounce off the ground, ie the
+        /// DynamicPropChassis and the CycleChassis.  We need to do this since we want to
         /// test the terrain as a wall before testing for a bounce.
         /// </summary>
         /// <param name="thing"></param>
@@ -924,7 +918,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Does collision testing for falling off the edge  
+        /// Does collision testing for falling off the edge
         /// of the world and running into terrain walls.
         /// </summary>
         /// <param name="actor"></param>
@@ -973,7 +967,7 @@ namespace Boku.Base
                 /// Record whether we need to call a bounce correction at the end.
                 float bounceHeight = 0.0f;
 
-                // 
+                //
                 // Test feelers against terrain and glass walls.
                 //
                 for (int i = 0; i < Feelers.Count; ++i)
@@ -1036,7 +1030,7 @@ namespace Boku.Base
                         // TODO (****) This code which looks like it's checking for feelers getting embedded
                         // in the terrain is actually where we do all (?) of the bouncing off the terrain.
                         // Is this really what we want?
-                        // Part of the problem is that the feelers are better poisitioned for side to side 
+                        // Part of the problem is that the feelers are better poisitioned for side to side
                         // collisions rather than vertical.  So, for chassis that can bounce off the terrain
                         // we should always put in an explicit test.
 
@@ -1073,7 +1067,7 @@ namespace Boku.Base
                             // Not entering.
                             if (data.altitude == BaseChassis.kMinAltitude)
                                 continue;
-                           
+
                         }
                         else
                         {
@@ -1119,7 +1113,7 @@ namespace Boku.Base
                                 else
                                 {
 
-                                    // Coefficient of Restitution should only apply to fraction of velocity that is aligned with 
+                                    // Coefficient of Restitution should only apply to fraction of velocity that is aligned with
                                     // the wall normal.  Velocity tangent to the wall normal should be left alone.
                                     Vector3 normalVelocity = Vector3.Dot(hitBlock.Normal, vel) * hitBlock.Normal;
                                     Vector3 tangentVelocity = vel - normalVelocity;
@@ -1161,7 +1155,6 @@ namespace Boku.Base
                                 feelersValid = false;
 
                         }
-
 
                     }   // end if valid feeler.
 
@@ -1251,7 +1244,6 @@ namespace Boku.Base
 
         }   // end of BaseChassis CollideWithTerrainWalls()
 
-
         public virtual void CollisionResponse(Movement movement)
         {
         }   // end of BaseChassis CollisionResponse()
@@ -1267,9 +1259,9 @@ namespace Boku.Base
             Vector3 prevPosition = movement.PrevPosition;
 
             // On the first frame or if dead, the feeler data is invalid so ignore.
-            if (Feelers[0].prevAltitude == BaseChassis.kMinAltitude 
-                || Feelers[0].prevPosition == Vector3.Zero 
-                || parent.CurrentState == GameThing.State.Dead 
+            if (Feelers[0].prevAltitude == BaseChassis.kMinAltitude
+                || Feelers[0].prevPosition == Vector3.Zero
+                || parent.CurrentState == GameThing.State.Dead
                 || parent.CurrentState == GameThing.State.Squashed)
             {
                 terrainAltitude = Terrain.GetHeight(Top(prevPosition));
@@ -1317,7 +1309,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Based on the chassis' internal values, sets the blend values for the 
+        /// Based on the chassis' internal values, sets the blend values for the
         /// four standard looping animations.  Should be overridden for each chassis
         /// type.  The default implementation just idles.  Note, the sum of the
         /// weights must be 1.0f.
@@ -1335,7 +1327,7 @@ namespace Boku.Base
 
         /// <summary>
         /// A standard implementation of SetLoopedAnimationWeights() that works for most moving bots.
-        /// It's not right for everything but at least 4 different chassis were using it so it 
+        /// It's not right for everything but at least 4 different chassis were using it so it
         /// seemed right to make the code common.
         /// </summary>
         /// <param name="anims"></param>
@@ -1348,7 +1340,7 @@ namespace Boku.Base
             float leftWeight = 0.0f;
             float rightWeight = 0.0f;
 
-            // Blend animations based only on relationship between 
+            // Blend animations based only on relationship between
             // actual facing direction and desired heading.  This
             // ignores current speed or rotation rate.
             if (desiredMovement.DesiredVelocity.HasValue || desiredMovement.DesiredTargetLocation.HasValue)
@@ -1367,7 +1359,7 @@ namespace Boku.Base
                     // Trying to move toward target.
                     desiredVelocity = desiredMovement.DesiredTargetLocation.Value - movement.Position;
                 }
-                
+
                 desiredVelocity.Normalize();
                 if (!float.IsNaN(desiredVelocity.X))
                 {
@@ -1641,7 +1633,7 @@ namespace Boku.Base
 
                 // maxDist is the outer limit of what we consider.  This
                 // is an arbitrary multiplier on the minDist but also
-                // limited iff we're moving toward a target location. If the 
+                // limited iff we're moving toward a target location. If the
                 // avoid target is further away than this, we'll ignore it.
                 float maxDist = minDist * 5.0f;
                 maxDist = Math.Min(maxDist, targetLocationDist);
@@ -1690,7 +1682,7 @@ namespace Boku.Base
         /// <summary>
         /// Assumes the heading is the exisitng desired heading.  Adjust this
         /// to avoid and avoid targets and returns a new heading.
-        /// Assumes that all non relevant avoid targets have already been 
+        /// Assumes that all non relevant avoid targets have already been
         /// filtered out.  Maybe even using the function above this one. :-)
         /// </summary>
         /// <param name="desiredMovement"></param>
@@ -1716,7 +1708,7 @@ namespace Boku.Base
 
                 // Calc point on heading vector that's at same distance as avoid target.
                 Vector3 pointAlongHeading = actor.Movement.Position + dist * newHeading;
-                
+
                 // delta is difference between avoid target position and nearest point in heading direction.
                 Vector3 delta = pointAlongHeading - target.Movement.Position;
                 delta.Z = 0;
@@ -1744,15 +1736,14 @@ namespace Boku.Base
         /// </summary>
         /// <param name="movement"></param>
         /// <param name="desiredMovement"></param>
-        public virtual void ApplyDesiredMovement(Movement movement, DesiredMovement desiredMovement) 
+        public virtual void ApplyDesiredMovement(Movement movement, DesiredMovement desiredMovement)
         {
             Debug.Assert(false, "NotImpl");
         }
 
-
         /// <summary>
         /// Return the angle normalized to the range -pi..pi
-        /// 
+        ///
         /// TODO (****) Should probably be in MathHelper.
         /// </summary>
         /// <param name="angle"></param>
@@ -1787,7 +1778,6 @@ namespace Boku.Base
 
             return angle;
         }
-
 
         /// <summary>
         /// Apply any position constraints put on the chassis by the brain.
@@ -1909,7 +1899,7 @@ namespace Boku.Base
 
                     // Ignore the Z component.  This makes the distance 2D which works better since
                     // hover chassis stuff is mostly fixed for height.  Without this, the distance also
-                    // takes the vertical into account and when we decide whether or not we're close enough 
+                    // takes the vertical into account and when we decide whether or not we're close enough
                     // to slow down we underestimate and end up overshooting.
                     // Calc dist as a 2D distance.
                     float distToObject = (float)Math.Sqrt(toObject.X * toObject.X + toObject.Y * toObject.Y);
@@ -1997,7 +1987,7 @@ namespace Boku.Base
                         {
                             desiredFacingDir = movement.Facing;
                         }
-                        // Allow moving backwards but only if user controlled.  
+                        // Allow moving backwards but only if user controlled.
                         if (movement.UserControlled)
                         {
                             // If dot product between facing direction
@@ -2034,7 +2024,7 @@ namespace Boku.Base
                     float speed = velocity2D.Length();
                     if (speed > desiredMovement.MaxSpeed)
                     {
-                        // Instead of hard clamping, we just decelerate 
+                        // Instead of hard clamping, we just decelerate
                         // very fast.  This ends up looking smoother.
                         // Lerp toward target velocity.
                         Vector2 targetVelocity = velocity2D * (desiredMovement.MaxSpeed / speed);
@@ -2044,7 +2034,7 @@ namespace Boku.Base
                         // we need to change the equation for t since it should always be in the 0..1 range.
                         Debug.Assert(tics <= 0.2f);
                         float t = tics * 4.0f;
-                        
+
                         velocity2D = MyMath.Lerp(velocity2D, targetVelocity, t);
                     }
                 }
@@ -2055,7 +2045,7 @@ namespace Boku.Base
         }   // end of ApplyDesiredVelocityForHover()
 
         /// <summary>
-        /// Apply the brain's desired rotation changes. 
+        /// Apply the brain's desired rotation changes.
         /// This is standard turning for Hover chassis and may be applied to others.
         /// </summary>
         /// <param name="movement"></param>
@@ -2078,8 +2068,8 @@ namespace Boku.Base
                     float desiredHeading = desiredMovement.DesiredRotationAngle.Value;
                     float rotationalAcceleration = desiredMovement.MaxRotationalAcceleration;
 
-                    // Ok, need to figure out which way to try and turn. If we're not already turning 
-                    // it's totally simple BUT if we're already rotating, the short way may 
+                    // Ok, need to figure out which way to try and turn. If we're not already turning
+                    // it's totally simple BUT if we're already rotating, the short way may
                     // not be the quickest.  Do we really care about that case? No. Just do
                     // what's simple.
 
@@ -2087,7 +2077,7 @@ namespace Boku.Base
                     // Map into range (-pi, pi).
                     delta = NormalizeAngle(delta);
 
-                    // From the current rotation rate calc how many radians will pass if 
+                    // From the current rotation rate calc how many radians will pass if
                     // we try and stop at full deceleration.
                     float radiansToStop = movement.RotationZRate * movement.RotationZRate / rotationalAcceleration;
 
@@ -2161,7 +2151,7 @@ namespace Boku.Base
 
         /// <summary>
         /// Apply the brain's desired vertical movement changes.
-        /// 
+        ///
         /// This is just simple float up/down.
         /// Note that this also affects the pitch of actor if appropriate.
         /// </summary>
@@ -2226,16 +2216,16 @@ namespace Boku.Base
                 movement.Velocity = velocity;
             }   // end if changing velocity.
 
-        }   // end of ApplyDesiredVerticalMovement() 
+        }   // end of ApplyDesiredVerticalMovement()
 
         /// <summary>
-        /// Apply drag to velocity.  We're actually modeling friction here.  This works 
-        /// better than trying to model actual drag since drag is relative to v^2 which 
+        /// Apply drag to velocity.  We're actually modeling friction here.  This works
+        /// better than trying to model actual drag since drag is relative to v^2 which
         /// causes it to be near 0 when the velocity is near 0 which means that nothing ever stops.
-        /// We ignore friction while actively driving chassis.  Only using friction when 
-        /// all Desired* members of DesiredMovement have no values.  ie only apply friction 
+        /// We ignore friction while actively driving chassis.  Only using friction when
+        /// all Desired* members of DesiredMovement have no values.  ie only apply friction
         /// when we're not actively trying to move.
-        /// 
+        ///
         /// By default, applyVertical is true so we apply friction to all 3 axes. If false
         /// the friction is only applied to the horizontal axes (X and Y).
         /// </summary>
@@ -2258,7 +2248,7 @@ namespace Boku.Base
 
                     // Since we use the facing direction to control the friction
                     // we need to be able to handle bots with no facing direction.
-                    // In this case, just pretent that the bot is facing the 
+                    // In this case, just pretent that the bot is facing the
                     // direction it is currently moving.  This will cause it to
                     // slow in a stright line instead of curving.
                     Vector3 facing = movement.Facing;
@@ -2336,7 +2326,7 @@ namespace Boku.Base
 
             height = bottom - terrain;
 
-            // Only bounce if there is ground and if we're below the surface, but not if we're fully under. 
+            // Only bounce if there is ground and if we're below the surface, but not if we're fully under.
             if (terrain > 0 && height <= 0 && height > -2)
             {
                 // Move back to surface.

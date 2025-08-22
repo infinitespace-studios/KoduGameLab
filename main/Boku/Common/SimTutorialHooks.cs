@@ -61,7 +61,6 @@ namespace Boku.Common
         }
         #endregion
 
-
         // c'tor, private since we don't want anyone to create one.
         private SimTutorialHook()
         {
@@ -109,7 +108,7 @@ namespace Boku.Common
                 InGame.inGame.CurrentUpdateMode = InGame.UpdateMode.RunSim;
                 result = true;
             }
-            
+
             return result;
         }   // end of Tutorial.NavigateToRunSimMode()
 

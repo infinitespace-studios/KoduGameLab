@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -21,7 +20,6 @@ using TileProcessor;
 
 namespace Xclna.Xna.Animation.Content
 {
-
 
     class BBoxer
     {

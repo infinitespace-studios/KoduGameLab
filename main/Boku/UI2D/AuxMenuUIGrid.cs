@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,9 +22,9 @@ using Boku.Input;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// A specialized version of the a UIGrid designed to be used with the 
-    /// aux menus on the load level menu.  The aux menus are those labelled 
-    /// "Sort By" and "Show Only".  The main differrentiating factor for 
+    /// A specialized version of the a UIGrid designed to be used with the
+    /// aux menus on the load level menu.  The aux menus are those labelled
+    /// "Sort By" and "Show Only".  The main differrentiating factor for
     /// this menu is the fact that the menu renders its own background while
     /// the elements are just rendered as text over the top of the menu.
     /// </summary>

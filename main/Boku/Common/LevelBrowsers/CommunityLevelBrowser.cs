@@ -15,8 +15,8 @@ using BokuShared;
 
 namespace Boku.Common
 {
-    //helper class for containing info regarding a download for an item that may not be loaded in the current 
-    //browser - used when linked level dependencies are donwloaded and we can't guarantee the item is on the 
+    //helper class for containing info regarding a download for an item that may not be loaded in the current
+    //browser - used when linked level dependencies are donwloaded and we can't guarantee the item is on the
     //current page
     class OffPageLevelInfo
     {
@@ -54,7 +54,6 @@ namespace Boku.Common
         {
             get { return pagingOpCount > 0; }
         }
-
 
         /// <summary>
         /// Start deleting a level from the community server.  You must have adequate permissions or the server will deny your request.
@@ -147,9 +146,9 @@ namespace Boku.Common
             {
                 ILevelSetQuery query = new LevelSetQuery(
                     sorter,
-                    filter, 
-                    this, 
-                    notifyFetchingCallback, 
+                    filter,
+                    this,
+                    notifyFetchingCallback,
                     notifyFetchCompleteCallback);
 
                 queries.Add(query);
@@ -163,7 +162,7 @@ namespace Boku.Common
                     additionCallback,
                     removalCallback,
                     size);
-                
+
                 query.AddCursor(cursor);
             }
 
@@ -295,7 +294,7 @@ namespace Boku.Common
         //similiar to StartDownloadingWorld, but operates assuming we can't rely on the current browser page to contain the level
         //all world references will be through Guids instead of LevelMetadata until the download completes
         public bool StartDownloadingOffPageWorld(Guid worldId, LevelDownloadOffPageCompleteEvent callback)
-        {            
+        {
             OffPageLevelInfo downloadInfo = new OffPageLevelInfo();
             downloadInfo.WorldId = worldId;
             downloadInfo.downloadCallback = callback;
@@ -356,7 +355,6 @@ namespace Boku.Common
                 state.downloadCallback(null, null, level);
             }
         }
-
 
         private int IndexOf(Guid worldId)
         {
@@ -459,7 +457,7 @@ namespace Boku.Common
         private bool IsAlreadyDownloaded(LevelMetadata level)
         {
             string filename = BokuGame.Settings.MediaPath + BokuGame.DownloadsPath + level.WorldId.ToString() + @".Xml";
-            
+
             if (Storage4.FileExists(filename, StorageSource.UserSpace))
             {
                 XmlWorldData xml = XmlWorldData.Load(filename, XnaStorageHelper.Instance);

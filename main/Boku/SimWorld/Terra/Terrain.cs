@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if DEBUG
 #define Debug_ToggleRenderWireWithF9
 #define Debug_ToggleSideFacesWithF7
@@ -68,7 +67,7 @@ namespace Boku.SimWorld.Terra
             public UInt32 faceAndCorner;
 
             static VertexDeclaration decl;
-            static VertexElement[] elements = 
+            static VertexElement[] elements =
             {
                 new VertexElement(0, VertexElementFormat.Vector4, VertexElementUsage.Position, 0),
                 new VertexElement(16, VertexElementFormat.Byte4, VertexElementUsage.TextureCoordinate, 1),
@@ -134,7 +133,6 @@ namespace Boku.SimWorld.Terra
         }
         #endregion
 
-        
         #region Fabric render method state
 
         //Vertex decleration
@@ -148,7 +146,7 @@ namespace Boku.SimWorld.Terra
 
             public const int Stride = 24;
             public static VertexDeclaration decl = null;
-            private readonly static VertexElement[] elements = 
+            private readonly static VertexElement[] elements =
             {
                 new VertexElement(0, VertexElementFormat.Vector4, VertexElementUsage.Position, 0),
                 new VertexElement(16, VertexElementFormat.Vector2, VertexElementUsage.Normal, 0),
@@ -177,10 +175,10 @@ namespace Boku.SimWorld.Terra
         public enum EffectParams_FA
         {
             // The "10" is to account for FD or LM specific params.
-            // This will need to be increased if more params are 
-            // added to the FD or LM methods. 
-            // ToDo (DZ): We may need to rethink this effect cache 
-            // thing... It seems very fragile to have this "10" 
+            // This will need to be increased if more params are
+            // added to the FD or LM methods.
+            // ToDo (DZ): We may need to rethink this effect cache
+            // thing... It seems very fragile to have this "10"
             // constant.
             Inversion_FA = EffectParamsLength + 10,
             BumpToWorld_FA,
@@ -301,17 +299,17 @@ namespace Boku.SimWorld.Terra
             switch (RenderMethod)
             {
                 case RenderMethods.FewerDraws:
-                    effectCacheColor = new EffectCacheWithTechs(new Type[] 
-                                                            { 
-                                                                typeof(EffectParams), 
-                                                                typeof(EffectParams_FD), 
+                    effectCacheColor = new EffectCacheWithTechs(new Type[]
+                                                            {
+                                                                typeof(EffectParams),
+                                                                typeof(EffectParams_FD),
                                                                 typeof(EffectParams_FA)
                                                             },
                                                            new Type[] { typeof(EffectTechs) });
-                    effectCacheEdit = new EffectCacheWithTechs(new Type[] 
-                                                            { 
-                                                                typeof(EffectParams), 
-                                                                typeof(EffectParams_FD), 
+                    effectCacheEdit = new EffectCacheWithTechs(new Type[]
+                                                            {
+                                                                typeof(EffectParams),
+                                                                typeof(EffectParams_FD),
                                                                 typeof(EffectParams_FA)
                                                             },
                                                            new Type[] { typeof(EffectTechs) });
@@ -518,7 +516,7 @@ namespace Boku.SimWorld.Terra
         }
 
         /// <summary>
-        /// An estimate of the cost per vertex normalized to the cost of a 
+        /// An estimate of the cost per vertex normalized to the cost of a
         /// standard bot being 1.0f.
         /// </summary>
         static public float CostPerVertex
@@ -528,7 +526,6 @@ namespace Boku.SimWorld.Terra
             // method and/or a per-shader model version basis.
             get { return 1.0f / (32 * 32) / 7.0f; }
         }
-
 
         //
         // XmlWorldData accessors
@@ -716,7 +713,7 @@ namespace Boku.SimWorld.Terra
         public static int SkyIndex
         {
             get { return Current.xmlWorldData.SkyIndex; }
-            set { Current.xmlWorldData.SkyIndex = value; 
+            set { Current.xmlWorldData.SkyIndex = value;
                   Current.runTimeSkyIndex = value;
                 }
         }
@@ -841,7 +838,7 @@ namespace Boku.SimWorld.Terra
                 }
             };
 
-            skyTwitchId = TwitchManager.CreateTwitch<float>(0.0f, 1.0f, skyLerp, transitionTime, TwitchCurve.Shape.EaseIn, newSkyIndex, skyLerpComplete, skyLerpTerminated, true);        
+            skyTwitchId = TwitchManager.CreateTwitch<float>(0.0f, 1.0f, skyLerp, transitionTime, TwitchCurve.Shape.EaseIn, newSkyIndex, skyLerpComplete, skyLerpTerminated, true);
         }
 
         /// <summary>
@@ -1219,7 +1216,7 @@ namespace Boku.SimWorld.Terra
 
         /// <summary>
         /// Return the (short) material index at given position. If no terrain
-        /// there, return the empty material index. 
+        /// there, return the empty material index.
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
@@ -1232,7 +1229,7 @@ namespace Boku.SimWorld.Terra
 
             VirtualMap vMap = Current.VirtualMap;
             Point virtIndex = vMap.WorldToVirtualIndex(pos);
-            
+
             var matIdx = vMap.GetColor(virtIndex.X, virtIndex.Y, TerrainMaterial.EmptyMatIdx);
 
             matIdx = TerrainMaterial.RemoveFlags(matIdx, TerrainMaterial.Flags.Selection);
@@ -1403,7 +1400,6 @@ namespace Boku.SimWorld.Terra
             {
                 overPath = false;
             }
-
 
             // TODO (****) No clue why we limit the height here.  In what case is this the right
             // thing to do?
@@ -1724,7 +1720,7 @@ namespace Boku.SimWorld.Terra
             }
         }
         /// <summary>
-        /// Do ray test from p0 TO p1, looking for crossings into cells with 
+        /// Do ray test from p0 TO p1, looking for crossings into cells with
         /// height LEqual minMaxH.X or height GEqual minMaxH.Y.
         /// Returns true if such a crossing is found, and sets
         /// norm to be the normal of said crossing (norm.Z will be zero),
@@ -1862,10 +1858,10 @@ namespace Boku.SimWorld.Terra
         }
 
         /// <summary>
-        /// Search from src to dst for the first blocking wall. 
+        /// Search from src to dst for the first blocking wall.
         /// A wall is considered blocking if it is higher than src.Z.
         /// The edge of the world is treated as an infinitely high wall.
-        /// If src is off the edge of the world, src is returned as the 
+        /// If src is off the edge of the world, src is returned as the
         /// blocking position.
         /// </summary>
         /// <param name="src"></param>
@@ -2222,7 +2218,7 @@ namespace Boku.SimWorld.Terra
 
                 // Note: Indexing into shaders doesn't work with MG.  Apparently it
                 // was some hack done in XNA related to the Effect code they used.
-                // Anyway, instead of using this indexing we need to pick and set 
+                // Anyway, instead of using this indexing we need to pick and set
                 // the right technique which we do further down from here.
 
 #if Debug_CountTerrainVerts
@@ -2248,8 +2244,8 @@ namespace Boku.SimWorld.Terra
                 {
                     var selectedIdx = VirtualMap.SelectedMatIdx;
                     renderIdx = TerrainMaterial.SetFlags(selectedIdx, TerrainMaterial.Flags.Selection);
-                    if (TerrainMaterial.IsValid(selectedIdx, false, false) 
-                        && !TerrainMaterial.IsFabric(selectedIdx) 
+                    if (TerrainMaterial.IsValid(selectedIdx, false, false)
+                        && !TerrainMaterial.IsFabric(selectedIdx)
                         && TerrainMaterial.IsUsed(renderIdx))
                     {
                         // This is the selection material. It will always be the last material rendered.
@@ -2388,7 +2384,7 @@ namespace Boku.SimWorld.Terra
                     var selectedIdx = VirtualMap.SelectedMatIdx;
                     renderIdx = TerrainMaterial.SetFlags(selectedIdx, TerrainMaterial.Flags.Selection);
                     if (TerrainMaterial.IsValid(selectedIdx, false, false)
-                        && TerrainMaterial.IsFabric(selectedIdx) 
+                        && TerrainMaterial.IsFabric(selectedIdx)
                         && TerrainMaterial.IsUsed(renderIdx))
                     {
                         // This is the selection material. It will always be the last material rendered.
@@ -2406,7 +2402,6 @@ namespace Boku.SimWorld.Terra
                     if (!TerrainMaterial.IsUsed(matIdx))
                         continue;
                 }
-
 
                 TerrainMaterial mat = TerrainMaterial.Get(matIdx);
 
@@ -2866,7 +2861,7 @@ namespace Boku.SimWorld.Terra
                             water.BaseHeight = waterHeight;
 
                             //move the seed position to the cursor
-                            water.SeedPosition2D = editBrushPosition; 
+                            water.SeedPosition2D = editBrushPosition;
                             VirtualMap.AddForRefresh(water, editBrushPosition, terrainHeight);
                         }
                         else
@@ -2896,9 +2891,9 @@ namespace Boku.SimWorld.Terra
                             if (waterHeight > terrainHeight)
                             {
                                 water.BaseHeight = waterHeight;
-                                
+
                                 //move the seed position to the cursor
-                                water.SeedPosition2D = editBrushPosition; 
+                                water.SeedPosition2D = editBrushPosition;
                                 VirtualMap.AddForRefresh(water, editBrushPosition, terrainHeight);
                             }
                             else
@@ -2942,8 +2937,6 @@ namespace Boku.SimWorld.Terra
                 default:
                     break;
             }
-
-
 
             // Get brush info.
             Brush2DManager.Brush2D brush = Brush2DManager.GetBrush(editBrushIndex);
@@ -3036,7 +3029,7 @@ namespace Boku.SimWorld.Terra
                     float brushPointSample;
                     float brushBilinearSample;
 
-                    // Only look at the brush if we're in bounds of the brush.  We still need 
+                    // Only look at the brush if we're in bounds of the brush.  We still need
                     // to check that the result samples are non-zero before use.
                     if (brush.Sample(brushPoint, out brushPointSample, out brushBilinearSample))
                     {
@@ -3238,7 +3231,6 @@ namespace Boku.SimWorld.Terra
                             + Vector3.Cross(south - center, east - center)
                             + Vector3.Cross(east - center, north - center);
             norm.Normalize();
-
 
             float dist = Vector3.Dot(center, norm);
 
@@ -3720,8 +3712,8 @@ namespace Boku.SimWorld.Terra
             }
 
             bool snap = InGame.inGame.SnapToGrid;
-            bool click = MouseInput.Left.WasPressed 
-                || MouseInput.Right.WasPressed 
+            bool click = MouseInput.Left.WasPressed
+                || MouseInput.Right.WasPressed
                 || GamePadInput.GetGamePad0().LeftTriggerButton.WasPressed
                 || GamePadInput.GetGamePad0().RightTriggerButton.WasPressed;
 
@@ -3810,7 +3802,7 @@ namespace Boku.SimWorld.Terra
                     case EditMode.PaintMaterial:
                         break;
 
-                    /// If we've just nuked what we have selected, 
+                    /// If we've just nuked what we have selected,
                     /// we better go ahead and clear it.
                     case EditMode.Delete:
                         EndSelection();
@@ -4067,7 +4059,7 @@ namespace Boku.SimWorld.Terra
         /// <summary>
         /// Updating the water is relatively slow so if we try and do it
         /// every single time we edit the heightmap things just get too slow.
-        /// So, we have this function which we can call after the fact to 
+        /// So, we have this function which we can call after the fact to
         /// update the water.
         /// </summary>
         public void RebuildWater()
@@ -4092,8 +4084,8 @@ namespace Boku.SimWorld.Terra
         }
 
         /// <summary>
-        /// A holder for the edit palette information that we want to 
-        /// persist from frame to frame.  Simplifies things by assuming 
+        /// A holder for the edit palette information that we want to
+        /// persist from frame to frame.  Simplifies things by assuming
         /// that all the objects are square.
         /// </summary>
         public class EditPalette : INeedsDeviceReset
@@ -4246,7 +4238,6 @@ namespace Boku.SimWorld.Terra
 
             }   // end of EditPalette Render()
 
-
             public void LoadContent(bool immediate)
             {
                 if (shadowMask == null)
@@ -4332,8 +4323,6 @@ namespace Boku.SimWorld.Terra
             }
 
         }   // end of CursorVertex
-
-
 
         //
         // Visualize visibility testing.

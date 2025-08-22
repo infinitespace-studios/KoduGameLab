@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ namespace Boku
 {
     public class EditObjectParameters : INeedsDeviceReset
     {
-        #region Members 
+        #region Members
 
         public const float k_ObjectMinScale = 0.2f;
         public const float k_ObjectMaxScale = 4.0f;
@@ -77,13 +76,13 @@ namespace Boku
             HoldDistance,
             Bounciness,
             Friction,
-            
+
             BlipDamage,
             BlipReloadTime,
             BlipRange,
             BlipSpeed,
             BlipsInAir,
-            
+
             MissileDamage,
             MissileReloadTime,
             MissileRange,
@@ -112,10 +111,10 @@ namespace Boku
 
             SIZEOF
         };
-        
+
         private enum ControlSetup
         {
-            Initialize,             
+            Initialize,
             AddToGridReflexData,    // Single parameter edit in programming tiles, eg size or hold distance.
             AddToGridEditObject,    // Regular object parameter editing.
         };
@@ -178,7 +177,6 @@ namespace Boku
 
         UIGridModularFloatSliderElement nearByDistance;
         UIGridModularFloatSliderElement farAwayDistance;
-
 
         private CommandMap commandMap = new CommandMap("EditObjectParameters");     // Placeholder for stack.
 
@@ -253,7 +251,7 @@ namespace Boku
                     if (!textDisplaying)
                     {
 
-                        // Check for help tile.                        
+                        // Check for help tile.
                         Vector2 hitUV = Vector2.Zero;
 
                         TouchContact touch = TouchInput.GetOldestTouch();
@@ -388,7 +386,7 @@ namespace Boku
                         if (hitUV.X >= 0 && hitUV.X < 1 && hitUV.Y >= 0 && hitUV.Y < 1)
                         {
                             e.HandleMouseInput(hitUV);
-                            focusElementHit = true;                            
+                            focusElementHit = true;
                         }
 
                         // If we didn't hit the focus object, see if we hit any of the others.
@@ -432,7 +430,6 @@ namespace Boku
 //                         }
                     }
                 }
-
 
                 GamePadInput pad = GamePadInput.GetGamePad0();
 
@@ -542,7 +539,7 @@ namespace Boku
         public void OnSelect(UIGrid grid)
         {
             // Normally the grid wil deactivate itself when a selection is made.
-            // In the options/settings case there are some elements that ignore 
+            // In the options/settings case there are some elements that ignore
             // the Select action letting it get to the grid which then deactivates
             // itself.  We don't want that to happen so set the grid active here.
             grid.Active = true;
@@ -612,10 +609,10 @@ namespace Boku
             }
             else if (setupType == ControlSetup.AddToGridEditObject && controlType == Control.PushRange )
             {
-                pushrange.OnChange = delegate(float range) { actor.PushRange = range; InGame.IsLevelDirty = true; };                
+                pushrange.OnChange = delegate(float range) { actor.PushRange = range; InGame.IsLevelDirty = true; };
                 grid.Add(pushrange, 0, (int)Control.PushRange);
             }
-            
+
             #endregion pushrange
 
             #region pushstrength
@@ -626,7 +623,7 @@ namespace Boku
                 pushstrength.MinValue = 1.0f;
                 pushstrength.MaxValue = 150.0f;
                 pushstrength.IncrementByAmount = 1.0f;
-                pushstrength.NumberOfDecimalPlaces = 0;                
+                pushstrength.NumberOfDecimalPlaces = 0;
                 pushstrength.HelpID = "PushStrength";
                 gridElements.Add(pushstrength);
             }
@@ -691,10 +688,10 @@ namespace Boku
                 lightrange.MinValue = 0.0f;
                 lightrange.MaxValue = 100.0f;
                 lightrange.IncrementByAmount = 5.0f;
-                lightrange.NumberOfDecimalPlaces = 0;                
+                lightrange.NumberOfDecimalPlaces = 0;
                 lightrange.HelpID = "LightRange";
                 gridElements.Add(lightrange);
-                
+
             }
             else if (setupType == ControlSetup.AddToGridEditObject && controlType == Control.LightRange)
             {
@@ -772,7 +769,7 @@ namespace Boku
                 glowLights.MinValue = 0.0f;
                 glowLights.MaxValue = 10.0f;
                 glowLights.IncrementByAmount = 0.1f;
-                glowLights.NumberOfDecimalPlaces = 1;                
+                glowLights.NumberOfDecimalPlaces = 1;
                 glowLights.HelpID = "GlowStrength";
                 gridElements.Add(glowLights);
             }
@@ -790,9 +787,9 @@ namespace Boku
                 rescale.MinValue = k_ObjectMinScale;
                 rescale.MaxValue = k_ObjectMaxScale;
                 rescale.IncrementByAmount = 0.1f;
-                rescale.NumberOfDecimalPlaces = 1;               
+                rescale.NumberOfDecimalPlaces = 1;
                 rescale.HelpID = "ReScale";
-                gridElements.Add(rescale);                                
+                gridElements.Add(rescale);
             }
             else if (setupType == ControlSetup.AddToGridEditObject && controlType == Control.ReScale)
             {
@@ -836,7 +833,7 @@ namespace Boku
                 bounciness.MinValue = 0.0f;
                 bounciness.MaxValue = 1.0f;
                 bounciness.IncrementByAmount = 0.05f;
-                bounciness.NumberOfDecimalPlaces = 2;                
+                bounciness.NumberOfDecimalPlaces = 2;
                 bounciness.HelpID = "Bounciness";
                 gridElements.Add(bounciness);
             }
@@ -845,8 +842,8 @@ namespace Boku
                 bounciness.OnChange = delegate(float value) { actor.CoefficientOfRestitution = value; InGame.IsLevelDirty = true; };
                 grid.Add(bounciness, 0, (int)Control.Bounciness);
             }
-            #endregion bounciness    
-        
+            #endregion bounciness
+
             #region friction
             if (setupType == ControlSetup.Initialize)
             {
@@ -854,7 +851,7 @@ namespace Boku
                 friction.MinValue = 0.0f;
                 friction.MaxValue = 1.0f;
                 friction.IncrementByAmount = 0.05f;
-                friction.NumberOfDecimalPlaces = 2;                
+                friction.NumberOfDecimalPlaces = 2;
                 friction.HelpID = "Friction";
                 gridElements.Add(friction);
             }
@@ -902,7 +899,7 @@ namespace Boku
                 hearing.MinValue = 0.0f;
                 hearing.MaxValue = 100.0f;
                 hearing.IncrementByAmount = 0.5f;
-                hearing.NumberOfDecimalPlaces = 1;              
+                hearing.NumberOfDecimalPlaces = 1;
                 hearing.HelpID = "Hearing";
                 gridElements.Add(hearing);
             }
@@ -1053,7 +1050,7 @@ namespace Boku
                 blipsInAir = new UIGridModularIntegerSliderElement(blob, Strings.Localize("editObjectParams.blipsInAir"));
                 blipsInAir.MinValue = 1;
                 blipsInAir.MaxValue = 200;
-                blipsInAir.IncrementByAmount = 1;                
+                blipsInAir.IncrementByAmount = 1;
                 blipsInAir.HelpID = "BlipsInAir";
                 gridElements.Add(blipsInAir);
             }
@@ -1576,7 +1573,7 @@ namespace Boku
         // Should be called after all UI elements are setup on the grid
         private void SetupGridHelp()
         {
-            // Loop over all the elements in the grid.  For any that have 
+            // Loop over all the elements in the grid.  For any that have
             // help, set the flag so they display Y button for help.
             for (int i = 0; i < grid.ActualDimensions.Y; i++)
             {
@@ -1589,7 +1586,7 @@ namespace Boku
                     {
                         e.ShowHelpButton = true;
                     }
-                }                
+                }
             }
         }
 
@@ -1676,7 +1673,7 @@ namespace Boku
         }
         /// <summary>
         /// Look for the next non-disabled element, and make that the current selection.
-        /// 
+        ///
         /// </summary>
         /// <param name="hiding"></param>
         private void CheckSelection()
@@ -2000,7 +1997,7 @@ namespace Boku
                 //renderSensors.Check = actor.ShowSensors;
                 showHitPoints.Check = actor.ShowHitPoints;
                 maxHitPoints.CurrentValue = actor.MaxHitPoints;
-                
+
                 blipDamage.CurrentValue = actor.BlipDamage;
                 blipReloadTime.CurrentValue = actor.BlipReloadTime;
                 blipSpeed.CurrentValue = actor.BlipSpeed;
@@ -2064,7 +2061,7 @@ namespace Boku
                 grid.Dirty = true;
 
                 CheckSelection();
-                
+
                 InGame.inGame.RenderWorldAsThumbnail = true;
                 InGame.IsLevelDirty = wasDirty;
 
@@ -2150,5 +2147,3 @@ namespace Boku
     }   // end of class EditObjectParameters
 
 }
-
-

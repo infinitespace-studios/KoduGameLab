@@ -27,16 +27,16 @@ namespace Boku.Base
     /// Call Start to start the timer and run it automatically
     /// Attach an event to the TimerElapsed, it will get called when time has elapsed
     /// Elapsed will return true if the time has elapsed
-    /// 
+    ///
     /// example:
     ///     GameTimer timer = new GameTimer( GameTimer.ClockType.WallClock. 3.0f );
     ///     timer.TimerElapsed += MyEventHandler;
     ///     timer.Start();
-    /// 
+    ///
     /// Advanced:  This supports a owner update called method; which is used when the owner
     /// wants to control the life of timer and call its update routine.  This is not a normal use
     /// and is supported for a few special cases in the inputcommand work.
-    /// 
+    ///
     /// </summary>
     public class GameTimer
     {
@@ -87,7 +87,7 @@ namespace Boku.Base
             }
         }
         /// <summary>
-        /// Constructor for a GameTimer 
+        /// Constructor for a GameTimer
         /// </summary>
         /// <param name="clock">Real Time or Game Time</param>
         public GameTimer(ClockType clock)
@@ -98,7 +98,7 @@ namespace Boku.Base
         /// <summary>
         /// Update the GameTimer and process events
         /// Called by the TimerManager by defualt
-        /// 
+        ///
         /// Advanced: With the owner called update model, the owner must call this explicitly in its update
         /// </summary>
         public bool Update()
@@ -131,7 +131,7 @@ namespace Boku.Base
         }
         /// <summary>
         /// Resets the game timer to the time given
-        /// 
+        ///
         /// Advanced: If using owner called update it also sets the state to allow it to run
         /// </summary>
         /// <param name="seconds"></param>
@@ -155,7 +155,7 @@ namespace Boku.Base
         }
         /// <summary>
         /// Starts the timer
-        /// 
+        ///
         /// Advanced: should not be called for owner called update model
         /// </summary>
         public void Start()
@@ -163,8 +163,8 @@ namespace Boku.Base
             this.state = State.Running;
 
             // If starting for the first time, just grab the current time.
-            startTime = clock == ClockType.WallClock ? Time.WallClockTotalSeconds : Time.GameTimeTotalSeconds;            
-            
+            startTime = clock == ClockType.WallClock ? Time.WallClockTotalSeconds : Time.GameTimeTotalSeconds;
+
             GameTimerManager.AttachTimer(this);
         }
 
@@ -199,7 +199,7 @@ namespace Boku.Base
 
         /// <summary>
         /// Stops the timer
-        /// 
+        ///
         /// Advanced: should not be called for owner called update model
         /// </summary>
         public void Stop()
@@ -233,7 +233,7 @@ namespace Boku.Base
     /// <summary>
     /// Manages all GameTimers
     /// Used by the GameTimer and Games main update loop
-    /// 
+    ///
     /// Advanced: except not using the owner called udpate model
     /// </summary>
     public class GameTimerManager

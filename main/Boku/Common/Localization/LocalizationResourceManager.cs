@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define LOCALES_DEBUG
 
 using System;
@@ -20,8 +19,8 @@ using System.Globalization;
 namespace Boku.Common.Localization
 {
     /// <summary>
-    /// This class manages localization resource files (ex: Strings.xml) and 
-    /// ensures that all most recent versions of all supported langauges are 
+    /// This class manages localization resource files (ex: Strings.xml) and
+    /// ensures that all most recent versions of all supported langauges are
     /// available on the client machine
     /// NOTE: This class is NOT thread-safe
     /// </summary>
@@ -38,7 +37,7 @@ namespace Boku.Common.Localization
         #endregion
 
         /// <summary>
-        /// List of Supported Locales, could be null. For guaranteed non-nullness, use the 
+        /// List of Supported Locales, could be null. For guaranteed non-nullness, use the
         /// Property "Locales" instead.
         /// </summary>
         private static IList<Locale> _locales;
@@ -100,7 +99,7 @@ namespace Boku.Common.Localization
                         locs.Add(new Locale("VN", "Vietnamese", "Tiếng Việt", new DateTime(2017, 2, 22)));
                         locs.Add(new Locale("ZH-TW", "Chinese (trad)", "繁體中文", new DateTime(2017, 2, 22)));
                         locs.Add(new Locale("ZH-CN", "Chinese (simp)", "简体中文", new DateTime(2017, 2, 22)));
-                            
+
                         _locales = locs;
                         LocalesSet.Set();
                     }
@@ -127,7 +126,7 @@ namespace Boku.Common.Localization
         {
             get
             {
-                // DebugLog.WriteLine("SuportedLanguages.Get"); 
+                // DebugLog.WriteLine("SuportedLanguages.Get");
                 return Locales.Select(locale => new SupportedLanguage { Language = locale.Directory, NameInEnglish = locale.Language, NameInNative = locale.Native });
             }
         }
@@ -153,7 +152,6 @@ namespace Boku.Common.Localization
         }
 #endif
 
-
         #region Retreive Locales From Server
         /// <summary>
         /// Attempts to read Locales.xml from the remote server
@@ -167,7 +165,7 @@ namespace Boku.Common.Localization
                 var request = (HttpWebRequest)WebRequest.Create(new Uri(LocalesUrl));
                 // DebugLog.WriteLine("    get response");
                 var result = request.BeginGetResponse(GetLocalesCallback, request);
-                
+
             }
             catch (Exception e)
             {
@@ -196,7 +194,7 @@ namespace Boku.Common.Localization
 
                 bool persist = true;
                 // If disk version is newer than online version, don't persist.  This
-                // should only happen when a user is adding a new language.  In this 
+                // should only happen when a user is adding a new language.  In this
                 // case we want ehm to be able to modify their local copy.
                 DateTime lastModTime = Storage4.GetLastWriteTimeUtc(LocalesFilePath, StorageSource.UserSpace);
                 // For WindowsStore build .LastModified is not supported so just always persist file.
@@ -267,7 +265,6 @@ namespace Boku.Common.Localization
             }   // end of lock.
         }
 
-
         /// <summary>
         /// Attempts to get the locale for a specific resource from the remote server
         /// </summary>
@@ -279,7 +276,7 @@ namespace Boku.Common.Localization
                 var request = (HttpWebRequest)WebRequest.Create(new Uri(string.Format("{0}?file={1}&dir={2}", LocalesUrl, resource.Name, languageLocale.Directory)));
                 var state = new LocaleAsyncState { Request = request, Resource = resource, LanguageLocale = languageLocale};
                 var result = request.BeginGetResponse(GetLocaleCallBack, state);
-                
+
             }
             catch (Exception e)
             {
@@ -299,7 +296,7 @@ namespace Boku.Common.Localization
             // DebugLog.WriteLine("GetLocaleCallBack()");
             var state = (LocaleAsyncState)asyncResult.AsyncState;
             try
-            {                
+            {
                 var response = (HttpWebResponse) state.Request.EndGetResponse(asyncResult);
                 using (var responseStream = response.GetResponseStream())
                 {
@@ -340,7 +337,7 @@ namespace Boku.Common.Localization
             public Locale LanguageLocale { get; set; }
         }
 
-        // Abort the request if the timer fires. 
+        // Abort the request if the timer fires.
         private static void TimeoutCallback(object state, bool timedOut)
         {
             if (timedOut)
@@ -467,9 +464,7 @@ namespace Boku.Common.Localization
             }
         }
 
-
         #endregion
-
 
         #region Update Local Resources
 
@@ -531,7 +526,7 @@ namespace Boku.Common.Localization
             {
                 // DebugLog.WriteLine("    localelanguage.Directory : " + languageLocale.Directory);
             }
-            
+
             // No point in trying to update a Language if we don't have a Locale for it
             if (languageLocale == null)
             {
@@ -561,7 +556,7 @@ namespace Boku.Common.Localization
         private static void UpdateResource(Resource resource, Locale languageLocale)
         {
             // DebugLog.WriteLine("UpdateResources()");
-            
+
             var serverLastUpdated = languageLocale.LastUpdated;
             var localResourceLastUpdated = resource.LastUpdated(languageLocale.Directory);
 
@@ -651,8 +646,6 @@ namespace Boku.Common.Localization
 
         }
 
-       
-
         public static readonly Resource CardsResource = new Resource("Cards.xml");
         public static readonly Resource HelpResource = new Resource("Help.xml");
         public static readonly Resource HelpOverlaysResource = new Resource("HelpOverlays.xml");
@@ -667,20 +660,17 @@ namespace Boku.Common.Localization
             HelpResource,
             HelpOverlaysResource,
             StringsResource,
-            TutorialCrumbsResource, 
-            TutorialStringsResource, 
+            TutorialCrumbsResource,
+            TutorialStringsResource,
             TweakScreenHelpResource
         };
 
-
-
     }
-
 
 #region Data Deserialization
     /// <summary>
     /// Efficient Parser for Locales.xml. Expected format for Locales.xml is:
-    /// 
+    ///
     /// Begin Locales.xml
     /// =================
     ///  <Locales>

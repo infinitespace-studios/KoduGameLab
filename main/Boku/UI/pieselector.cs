@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +21,6 @@ using Boku.Programming;
 using Boku.Input;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
-
 
 namespace Boku.UI
 {
@@ -100,7 +98,7 @@ namespace Boku.UI
                                 {
                                     objectHelpName = "PathGeneric";
                                     objectName = Strings.Localize("actorNames.pathGeneric");
-                                    helpAvailable = true;                                 
+                                    helpAvailable = true;
                                 }
                                 else if (item.Name == "flora")
                                 {
@@ -139,7 +137,6 @@ namespace Boku.UI
                         }
                     }
                     HelpOverlay.SuppressYButton = !helpAvailable;
-
 
                     // ToolTip?  But not for the AddItemMenu.
                     if (parent.SelectedItem != null)
@@ -191,14 +188,12 @@ namespace Boku.UI
                         ToolTipManager.ShowTip(null, null, Vector2.Zero, false);
                     }
 
-
-
                     if (Actions.Help.WasPressed)
                     {
                         Actions.Help.ClearAllWasPressedState();
 
                         // Activate help overlay for current selection.
-                        
+
                         if (editor.Active)
                         {
                             ProgrammingElement focusElement = parent.ParamSelectedItem as ProgrammingElement;
@@ -252,9 +247,9 @@ namespace Boku.UI
                 this.transform = transform;
                 this.transformParent = transformParent;
             }
-            
+
             public bool ViewTested = false;
-            
+
             protected void ReCenter(Camera camera)
             {
                 PieSelector.Camera = camera as UiCamera;
@@ -426,7 +421,7 @@ namespace Boku.UI
                 // and they don't come short on one edge
                 if ((segmentCount % 2) == 1)
                 {
-                    segmentCount++; 
+                    segmentCount++;
                 }
 
                 float arcHalfLength = this.arcLength * 0.5f; // center the slice
@@ -458,7 +453,7 @@ namespace Boku.UI
                 Vector3 normalInner = Vector3.Zero;
 
                 Vector3 normal;
-                
+
                 for (int indexSegment = 0; indexSegment < radialCount; indexSegment++)
                 {
                     float arc = indexSegment * this.arcLength / segmentCount - arcHalfLength + MathHelper.PiOver2;
@@ -485,7 +480,7 @@ namespace Boku.UI
 
                 // Lower surface.
                 normal = new Vector3(0.0f, 0.0f, -1.0f);
-                
+
                 for (int indexSegment = 0; indexSegment < radialCount; indexSegment++)
                 {
                     float arc = indexSegment * this.arcLength / segmentCount - arcHalfLength + MathHelper.PiOver2;
@@ -572,7 +567,6 @@ namespace Boku.UI
                 // Copy to vertex buffer.
                 vertexBuffer.SetData<Vertex>(localVerticies);
 
-
                 // Create index buffer.
                 if (indexBuffer == null)
                 {
@@ -634,7 +628,7 @@ namespace Boku.UI
                 // clockwise normal side edge cap
                 {
                     int baseVertex = radialCount * 8;
-    
+
                     localIndexBuffer[index++] = (ushort)((baseVertex + 3));
                     localIndexBuffer[index++] = (ushort)((baseVertex + 1));
                     localIndexBuffer[index++] = (ushort)((baseVertex + 2));
@@ -713,9 +707,7 @@ namespace Boku.UI
             static public Vector4 ColorSelectedDim = new Vector4(0.49f, 0.49f, 0.0f, 1.0f);
             static public Vector4 ColorSelectedBright = new Vector4(0.78f, 0.78f, 0.0f, 1.0f);
 
-
             private Vector4 diffuse = ColorNormal; // Local override for diffuse color.
-
 
             public RenderObjSlice(Object parent, Object item, List<RenderObject> adornments, IndexPrimitiveSlice slice)
             {
@@ -728,13 +720,13 @@ namespace Boku.UI
 
             public Vector4 DiffuseColor
             {
-                set 
-                { 
-                    this.diffuse = value; 
+                set
+                {
+                    this.diffuse = value;
                 }
-                get 
-                { 
-                    return this.diffuse; 
+                get
+                {
+                    return this.diffuse;
                 }
             }
 
@@ -948,7 +940,7 @@ namespace Boku.UI
             }
         }
 
-        // Ugly hack to be able to get the camera from the shim 
+        // Ugly hack to be able to get the camera from the shim
         // object back out so we can do mouse hit testing with it.
         static protected UiCamera Camera = null;
 
@@ -985,7 +977,7 @@ namespace Boku.UI
             // adjust spacing if radius is smaller than the inner radius (one item)
             if (this.radiusAtItems < maxItemRadius * 2.0f)
             {
-                // radius is too small, must increase 
+                // radius is too small, must increase
                 this.radiusAtItems = maxItemRadius * 2.0f + radiusAtItemSpacing;
                 // and provide the extra spacing between items on the circumference
                 float newCircumference = MathHelper.TwoPi * this.radiusAtItems;
@@ -1015,7 +1007,7 @@ namespace Boku.UI
                 {
                     slice = new RenderObjSlice(this, itemData.item, itemData.Adornments, this.sliceSingle);
                 }
-                float rot = MathHelper.PiOver2 - indexItem * arcLength; // rotate clockwise around 
+                float rot = MathHelper.PiOver2 - indexItem * arcLength; // rotate clockwise around
 
                 ITransform transformItem = itemData.item as ITransform;
                 ITransform transformSlice = slice as ITransform;
@@ -1051,11 +1043,10 @@ namespace Boku.UI
             // force an update of the selected item
             IndexSelectedItem = indexCenteredItem;
 
-
         }
         protected void DestroyLayout()
         {
-           
+
             this.sliceGroup = null;
             this.sliceSingle = null;
             float arcLength = MathHelper.TwoPi / this.items.Count;
@@ -1063,7 +1054,7 @@ namespace Boku.UI
             for (int indexItem = 0; indexItem < this.items.Count; indexItem++)
             {
                 UiSelector.ItemData itemData = this.items[indexItem];
-                float rot = MathHelper.PiOver2 - indexItem * arcLength; // rotate clockwise around 
+                float rot = MathHelper.PiOver2 - indexItem * arcLength; // rotate clockwise around
 
                 // reverse changes to items (see BuildLayout)
                 ITransform transformItem = itemData.item as ITransform;
@@ -1071,7 +1062,7 @@ namespace Boku.UI
                 transformItem.Local.RotationZ += rot;
                 transformItem.Compose();
 
-                // reverse changes to adornments 
+                // reverse changes to adornments
                 if (itemData.Adornments != null)
                 {
                     foreach (ITransform transformAdornment in itemData.Adornments)
@@ -1137,7 +1128,7 @@ namespace Boku.UI
                     IndexSelectedItem = (IndexSelectedItem + 1) % items.Count;
                 }
                 KeyboardInput.ClearAllWasPressedState(Keys.Right);
-            } 
+            }
             else if (KeyboardInput.WasPressedOrRepeat(Keys.Down))
             {
                 if (IndexSelectedItem == -1)
@@ -1163,7 +1154,6 @@ namespace Boku.UI
                 KeyboardInput.ClearAllWasPressedState(Keys.Up);
             }
 
-
             // Mouse Input
             bool mouseMoving = false;
             {
@@ -1185,7 +1175,7 @@ namespace Boku.UI
                         // Touch input
                         // If the user touched the menu, move the selection index to the item under the touch.
                         // On touch down, make the item (if any) under the contact the touchedItem.
-                        // On touch up, if the touch is still over the touchedItem, activate it.  If not, just clear touchedItem. 
+                        // On touch up, if the touch is still over the touchedItem, activate it.  If not, just clear touchedItem.
 
                         hitUV = TouchInput.GetHitOrtho(touch.position, camera, ref invWorld, useRtCoords:false);
                     }
@@ -1261,7 +1251,7 @@ namespace Boku.UI
                 Vector2 dir = args.position;
                 dir.Normalize();
 
-                // Calc the angle of the stick.  Set this up so that directly up results 
+                // Calc the angle of the stick.  Set this up so that directly up results
                 // in an angle of 0 and to the right results in pi/2 (clockwise).
                 double angle = Math.Acos(dir.Y);
                 if (dir.X < 0.0f)
@@ -1311,8 +1301,8 @@ namespace Boku.UI
                         relative = relative + MathHelper.TwoPi;
                     }
 
-                    // Calc max relative angle we need before switching to the 
-                    // next item.  Use half the width of the pie segment plus 
+                    // Calc max relative angle we need before switching to the
+                    // next item.  Use half the width of the pie segment plus
                     // a little extra to provide some hysteresis.
                     double maxAngle = arcItem / 2.0f;
                     // Only apply hysteresis when we have more that 4 items in the
@@ -1331,7 +1321,7 @@ namespace Boku.UI
                     {
                         IndexSelectedItem = (IndexSelectedItem - 1 + items.Count) % items.Count;
                     }
-                    else if (GamePadInput.ActiveMode == GamePadInput.InputMode.Touch) 
+                    else if (GamePadInput.ActiveMode == GamePadInput.InputMode.Touch)
                     {
                         // no change in selection
                         if (TouchInput.WasReleased)
@@ -1498,12 +1488,12 @@ namespace Boku.UI
 
                 state = pendingState;
             }
-            
+
             return result;
         }
 
         private Texture2D prevToolIcon = null;
-        
+
         public override void Activate()
         {
             if (state != States.Active)

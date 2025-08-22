@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,10 +29,10 @@ namespace Boku
 {
     /// <summary>
     /// UpdateObject for InGame -> EditObject
-    /// 
+    ///
     /// This just takes all the methods needed for the add item menu and
     /// puts them out into a seperate file for organizational purposes.
-    /// 
+    ///
     /// </summary>
     public partial class InGame : GameObject, INeedsDeviceReset
     {
@@ -50,7 +49,7 @@ namespace Boku
             private void CenterMenuItem(Object obj, float offset)
             {
                 ITransform trans = obj as ITransform;
-                
+
                 if (trans != null)
                 {
                     trans.Local.Translation += new Vector3(0.0f, 0.0f, offset);
@@ -121,7 +120,7 @@ namespace Boku
                     for (int i = 0; i < actors.Count; i++)
                     {
                         selectorGroup.AddItem(new ActorMenuItem(selectorGroup, actors[i].LocalizedName, actors[i].MenuTextureFile, actors[i], size, groupRadialOffset));
-                    }                    
+                    }
                 }
                 #endregion
 
@@ -143,12 +142,12 @@ namespace Boku
 
                     uiSelector.AddGroup(group, selectorGroup);
 
-                    // bot group items                
+                    // bot group items
                     var actors = ActorManager.GetActorsInGroup("BotGroup2");
                     for (int i = 0; i < actors.Count; i++)
                     {
                         selectorGroup.AddItem(new ActorMenuItem(selectorGroup, actors[i].LocalizedName, actors[i].MenuTextureFile, actors[i], size, groupRadialOffset));
-                    }  
+                    }
                 }
                 #endregion
 
@@ -169,12 +168,11 @@ namespace Boku
 
                     uiSelector.AddGroup(group, selectorGroup);
 
-
                     var actors = ActorManager.GetActorsInGroup("ObjectGroup");
                     for (int i = 0; i < actors.Count; i++)
                     {
                         selectorGroup.AddItem(new ActorMenuItem(selectorGroup, actors[i].LocalizedName, actors[i].MenuTextureFile, actors[i], size, groupRadialOffset));
-                    }  
+                    }
                 }
 
                 #endregion
@@ -368,7 +366,7 @@ namespace Boku
                 // This may seem a bit strange but it's here for a reason.  On MouseInput.Left.WasReleased
                 // the pie selector checks if the ClickedOnObject matches the current, in focus object.  If
                 // they match it is selected.  If they're both null, the selector thinks the user has
-                // clicked away and closes.  By setting this to a valid object ref we ensure that the 
+                // clicked away and closes.  By setting this to a valid object ref we ensure that the
                 // first left release is ignored.  Which is what we want since the press was what brought
                 // up the pie selector in the first place.
                 MouseInput.ClickedOnObject = this;
@@ -427,7 +425,7 @@ namespace Boku
                                 thingToColor = parent.AddActorAtCursor(ActorFactory.Create(item.StaticActor));
                             }
 
-                            // Give a ref to the actor to the HelpCard.  If it's active it 
+                            // Give a ref to the actor to the HelpCard.  If it's active it
                             // can then program the actor's brain.
                             InGame.inGame.shared.addItemHelpCard.Actor = thingToColor as GameActor;
                         }
@@ -464,7 +462,6 @@ namespace Boku
                     {
                         Debug.Assert(false, "How did this happen?");
                     }
-
 
                     if (thingToColor != null)
                     {
@@ -526,4 +523,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-

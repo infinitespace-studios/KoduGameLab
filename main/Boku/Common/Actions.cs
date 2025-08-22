@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Diagnostics;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 
 namespace Boku.Common
 {
@@ -88,7 +86,7 @@ namespace Boku.Common
         public static MetaButton AddNodes = new MetaButton(Buttons.Y, Keys.Insert);
         public static MetaButton PutNodeGo = new MetaButton(Buttons.A, Keys.Insert);
         public static MetaButton PutNodeDone = new MetaButton(Buttons.Y, Keys.Enter);
-        
+
         // Brush/Material pickers.
         public static MetaButton PickerX = new MetaButton(Buttons.X, Keys.X);
         public static MetaButton PickerY = new MetaButton(Buttons.Y, Keys.Y);

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -21,7 +20,7 @@ using Boku.Common;
 namespace Boku.Fx
 {
     /// <summary>
-    /// Simple 2d quad which can be instanced as needed.  The size 
+    /// Simple 2d quad which can be instanced as needed.  The size
     /// is initialized to 1x1 which can be scaled as needed.  The quad
     /// is centered on 0,0,0 and lives in the X/Y plane aka Z==0.
     /// This is set up as a singleton so only one is ever created and

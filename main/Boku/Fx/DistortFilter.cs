@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -34,7 +33,6 @@ namespace Boku.Fx
         protected static Vector4 filterRate = new Vector4(0.025f, -0.025f, 0.027f, 0.03f);
         protected static float filterBlur = 1.0f;
         protected static Vector3 filterColor = new Vector3(0.2f, 0.5f, 0.6f);
-
 
         // c'tor
         public DistortFilter(string effName)
@@ -93,7 +91,7 @@ namespace Boku.Fx
                 effect.Parameters["BaseHeight"].SetValue(baseHeight);
                 effect.Parameters["CubeSize"].SetValue(
                     new Vector3(
-                        Terrain.Current.CubeSize, 
+                        Terrain.Current.CubeSize,
                         1.0f / Terrain.Current.CubeSize,
                         Terrain.Current.CubeSize * 0.5f)
                 );
@@ -113,7 +111,6 @@ namespace Boku.Fx
 
             SetUvToPos();
 
-
             effect.CurrentTechnique = effect.Techniques[technique];
 
             device.SetVertexBuffer(vbuf);
@@ -127,7 +124,6 @@ namespace Boku.Fx
             }
 
         }   // end of DistortFilter Render()
-
 
         public override void LoadContent(bool immediate)
         {
@@ -154,6 +150,3 @@ namespace Boku.Fx
     }   // end of class DistortFilter
 
 }   // end of Boku.Common
-
-
-

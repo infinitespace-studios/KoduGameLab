@@ -78,7 +78,7 @@ namespace Boku.Common
         {
             CensorContentFile file = new CensorContentFile();
             file.Filename = Path.GetFullPath(filename);
-            
+
             int lineno = 0;
 
             char[] delimChars = new char[] { ',', ';' };
@@ -231,4 +231,3 @@ namespace Boku.Common
         }
     }
 }
-

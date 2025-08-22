@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +9,11 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-
 namespace Boku.Common
 {
     /// <summary>
-    /// A layer of indirection which allows a collection of inputs to be 
-    /// treated as a single button.  The collection may consist of a 0, 1 or 2 
+    /// A layer of indirection which allows a collection of inputs to be
+    /// treated as a single button.  The collection may consist of a 0, 1 or 2
     /// gamepad buttons and any number of keyboard keys.
     /// </summary>
     public class MetaButton

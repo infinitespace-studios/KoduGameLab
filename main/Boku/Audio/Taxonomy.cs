@@ -56,8 +56,8 @@ namespace Boku.Audio
         }
 
         /// <summary>
-        /// Play sound identified by id (or randomly selected descendent) with 
-        /// (possibly null) emitter for 3d effects, and place sound in list cues. 
+        /// Play sound identified by id (or randomly selected descendent) with
+        /// (possibly null) emitter for 3d effects, and place sound in list cues.
         /// If I'm already playing a sound in the list,
         /// do nothing and return null.
         /// </summary>

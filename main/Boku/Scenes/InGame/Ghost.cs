@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #define MF_GHOST_IGNORED
 
 using System;
@@ -265,7 +264,7 @@ namespace Boku
         #region Accessors
         #endregion Accessors
 
-        /// The external API. These are private functions, but 
+        /// The external API. These are private functions, but
         /// are the only API called from elsewhere for ghosting operations.
         #region Public
 
@@ -331,7 +330,7 @@ namespace Boku
 
                 /// Do LOS check and find everything intersecting sphere around
                 /// the camera's current position.
-                /// 
+                ///
                 CheckCameraSphere(camera);
                 MergeNewGhosts(_scratchActors, ghostList, true, currentTime);
 
@@ -471,7 +470,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// Determine whether we're just checking for the cursor, or 
+        /// Determine whether we're just checking for the cursor, or
         /// checking LOS to actors in the scene.
         /// </summary>
         private bool CursorOnlyCheck
@@ -603,9 +602,9 @@ namespace Boku
         ///     add to ghostList
         /// else (only in ghostList) if it has timed out
         ///     remove from ghostList
-        
+
         /// <summary>
-        /// Merge the new list into the ghost list, eliminating duplicates and 
+        /// Merge the new list into the ghost list, eliminating duplicates and
         /// refreshing existing ghosts.
         /// </summary>
         /// <param name="newList"></param>
@@ -692,7 +691,7 @@ namespace Boku
                     UnGhost(i);
                 }
                 else if ((ghostList[i].Actor.CurrentState == GameThing.State.Inactive)
-                    || (!ghostList[i].Actor.Invisible 
+                    || (!ghostList[i].Actor.Invisible
 #if MF_GHOST_IGNORED
                         && !ghostList[i].Actor.Ignored
                         && !ghostList[i].Actor.Camouflaged
@@ -732,7 +731,7 @@ namespace Boku
         /// <param name="currentTime"></param>
         private void AddGhost(GameActor actor, bool urgent, double currentTime)
         {
-            if (actor.Invisible 
+            if (actor.Invisible
 #if MF_GHOST_IGNORED
                 || actor.Ignored
                 || actor.Camouflaged

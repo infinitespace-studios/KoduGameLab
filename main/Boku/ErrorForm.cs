@@ -3,8 +3,6 @@
 
 using System;
 
-
-
 namespace Boku
 {
     // (TODO (****) BROKEN

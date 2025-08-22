@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -48,8 +47,8 @@ namespace Boku.Common
         }
         static public Matrix Lerp(ref Matrix a, ref Matrix b, float t)
         {
-            // Yes, this is wrong mathematically but it works for what we currently 
-            // need and is a lot quicker than trying to decompose the matrices into 
+            // Yes, this is wrong mathematically but it works for what we currently
+            // need and is a lot quicker than trying to decompose the matrices into
             // their individual rotations, translations and scalings.
 
             Matrix result = Matrix.Identity;
@@ -196,7 +195,6 @@ namespace Boku.Common
             return false;
         }
 
-
         /// <summary>
         /// Returns true if the input value is a power of two.
         /// </summary>
@@ -342,7 +340,7 @@ namespace Boku.Common
 
         /// <summary>
         /// Returns 1 if v >= 0, -1 otherwise.
-        /// 
+        ///
         /// TODO (****) remove/rename this.
         /// </summary>
         /// <param name="v"></param>
@@ -421,9 +419,9 @@ namespace Boku.Common
         /// Not sure what, exactly to call this but I end up doing it all the time.
         ///     RemapRange(value, 0, 100, 32, 212)  -- map from degrees Celcius to Fahrenheit
         ///     RemapRange(value, 0, 2pi, 0, 360)   -- map from radians to degrees
-        ///     RemapRange(value, 1, 0.8, 0, 1)     -- map which inverts direction of magnitude (bigger input -> smaller output) 
-        /// 
-        /// Note that the value doesn't have to be inside the range.  
+        ///     RemapRange(value, 1, 0.8, 0, 1)     -- map which inverts direction of magnitude (bigger input -> smaller output)
+        ///
+        /// Note that the value doesn't have to be inside the range.
         /// The mapping is done linearly.
         /// </summary>
         /// <param name="value"></param>
@@ -459,7 +457,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Given a point and a line defined by 2 points, return 
+        /// Given a point and a line defined by 2 points, return
         /// the point on the line nearest the input point.
         /// </summary>
         /// <param name="p">The input point</param>
@@ -567,5 +565,3 @@ namespace Boku.Common
     }   // end of class MyMath
 
 }   // end of namespace Boku.Common
-
-

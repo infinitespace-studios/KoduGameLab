@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -42,7 +40,7 @@ namespace Boku
         #region Members
 
         private ModularCheckboxList tagList = null;
-        
+
         #endregion
 
         #region Accessors
@@ -53,7 +51,7 @@ namespace Boku
         public bool Active
         {
             get { return tagList.Active; }
-            set 
+            set
             {
                 if (value)
                 {
@@ -161,7 +159,7 @@ namespace Boku
                 if (Actions.Select.WasPressed)
                 {
                     Actions.Select.ClearAllWasPressedState();
-                    
+
                     tagList.CurChecked = !tagList.CurChecked;
                 }
                 if (Actions.Cancel.WasPressed)

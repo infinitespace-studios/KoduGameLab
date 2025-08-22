@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -30,11 +29,10 @@ namespace Boku.Common
         protected Point resolution;         // Current screen resolution
         protected float fov;                // Vertical field of view in radians.
 
-        protected float heightOffset;       // This is a offset added to the camera's 'at' position 
-                                            // in the 'up' direction.  This is here to make controlling 
+        protected float heightOffset;       // This is a offset added to the camera's 'at' position
+                                            // in the 'up' direction.  This is here to make controlling
                                             // the camera in edit mode easier.
         protected float targetHeight;       // Used internally to support the twitch.
-
 
         protected BoundingSphere bound;     // Bounding sphere enclosing eye and near clip face of frustum.
 
@@ -89,7 +87,7 @@ namespace Boku.Common
         {
             get { return new Vector3(at.X, at.Y, at.Z + heightOffset); }
         }
-        
+
         public float AspectRatio
         {
             get { return aspectRatio; }
@@ -119,13 +117,13 @@ namespace Boku.Common
         }
         public BoundingSphere BoundingSphere
         {
-            get 
+            get
             {
                 if (dirty)
                 {
                     Recalc();
                 }
-                return bound; 
+                return bound;
             }
         }
         public Matrix ProjectionMatrix
@@ -181,7 +179,7 @@ namespace Boku.Common
         /// </summary>
         public Vector3 ViewUp
         {
-            get 
+            get
             {
                 if (dirty)
                 {
@@ -196,7 +194,7 @@ namespace Boku.Common
         /// </summary>
         public Vector3 ViewRight
         {
-            get 
+            get
             {
                 if (dirty)
                 {
@@ -205,7 +203,6 @@ namespace Boku.Common
                 return new Vector3(viewMatrix.M11, viewMatrix.M21, viewMatrix.M31);
             }
         }
-
 
         public Frustum Frustum
         {
@@ -219,8 +216,8 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// This is a offset added to the camera's 'at' position 
-        /// in the 'up' direction.  This is here to make controlling 
+        /// This is a offset added to the camera's 'at' position
+        /// in the 'up' direction.  This is here to make controlling
         /// the camera in edit mode easier.
         /// </summary>
         public float HeightOffset
@@ -240,7 +237,7 @@ namespace Boku.Common
 
         #endregion
 
-        #region Public 
+        #region Public
 
         public Camera()
         {
@@ -290,7 +287,7 @@ namespace Boku.Common
         }   // end of Camera WorldToScreenCoords()
 
         /// <summary>
-        /// Converts the given pixel position into a world vector 
+        /// Converts the given pixel position into a world vector
         /// from the eye, through the pixel, into the world.
         /// </summary>
         /// <param name="position">Position in pixels</param>
@@ -406,7 +403,7 @@ namespace Boku.Common
             {
                 // No water, return to default height.
                 float height = InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.RunSim ? 0.0f : 1.0f;
-                
+
                 ClearHeightOffset(height, twitchTime);
             }
 
@@ -420,7 +417,7 @@ namespace Boku.Common
 
         #endregion
 
-    }   // end of class Camera  
+    }   // end of class Camera
 
     /// <summary>
     /// Camera with orthographic projection used for programming UI.
@@ -471,7 +468,6 @@ namespace Boku.Common
                     defaultDpi /= 1.0f - 0.5f * (600.0f - smallestAxis) / 600.0f;
                 }
 
-
                 return defaultDpi;
             }
         }
@@ -482,7 +478,7 @@ namespace Boku.Common
         public Vector3 Offset
         {
             get { return desiredOffset; }
-            set 
+            set
             {
                 value.Z = 0.0f;     // Don't move in depth
                 desiredOffset = value;
@@ -567,7 +563,7 @@ namespace Boku.Common
                 TwitchManager.CreateTwitch<Vector3>(offset, targetOffset, set, 0.4f, TwitchCurve.Shape.OvershootOut);
             }
         }
-        
+
         /// <summary>
         /// Takes the current camera params and Recalcs the internal matrices.
         /// </summary>
@@ -597,7 +593,6 @@ namespace Boku.Common
 
         #endregion
     }   // end of class UiCamera
-
 
     /// <summary>
     /// Orthographic camera set up for looking straight down to render shadow textures.
@@ -757,7 +752,6 @@ namespace Boku.Common
 
     }   // end of class ShadowCamera
 
-
     public class PerspectiveUICamera : SimCamera
     {
         #region Public
@@ -789,7 +783,7 @@ namespace Boku.Common
             Recalc();
         }
 
-        #endregion 
+        #endregion
     }   // end of class PerspectiveUICamera
 
     public class SimCamera : Camera
@@ -856,6 +850,4 @@ namespace Boku.Common
 
     }   // end of class SimCamera
 
-}   // end of namespace Boku.Common  
-
-
+}   // end of namespace Boku.Common

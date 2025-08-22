@@ -243,13 +243,13 @@ namespace Boku.SimWorld
             PositionLids(
                 leftCenter,
                 rightCenter,
-                new Vector2(-leftAboveCenter.Current * blink * Asymmetry.X, 
+                new Vector2(-leftAboveCenter.Current * blink * Asymmetry.X,
                             -leftAboveEdge.Current * blink * Asymmetry.X),
-                new Vector2(-rightAboveCenter.Current * blink * Asymmetry.Y, 
+                new Vector2(-rightAboveCenter.Current * blink * Asymmetry.Y,
                             -rightAboveEdge.Current * blink * Asymmetry.Y),
-                new Vector2(-leftBelowCenter.Current * blink * Asymmetry.X, 
+                new Vector2(-leftBelowCenter.Current * blink * Asymmetry.X,
                             -leftBelowEdge.Current * blink * Asymmetry.X),
-                new Vector2(-rightBelowCenter.Current * blink * Asymmetry.Y, 
+                new Vector2(-rightBelowCenter.Current * blink * Asymmetry.Y,
                             -rightBelowEdge.Current * blink * Asymmetry.Y));
         }
 

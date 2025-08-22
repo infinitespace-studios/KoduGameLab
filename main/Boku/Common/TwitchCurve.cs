@@ -106,7 +106,7 @@ namespace Boku.Common
                     }
                     break;
             }
-            
+
             return result;
         }   // TwitchCurve Apply()
 

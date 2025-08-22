@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,7 +72,7 @@ namespace Boku.Common.HintSystem
         }
 
         /// <summary>
-        /// The detailed version of the text for this hint to 
+        /// The detailed version of the text for this hint to
         /// be displayed when modal.
         /// </summary>
         public string ModalText
@@ -96,7 +95,7 @@ namespace Boku.Common.HintSystem
         #region Internal
 
         /// <summary>
-        /// Helper function which checks the actors in the current world for 
+        /// Helper function which checks the actors in the current world for
         /// input sensors.
         /// </summary>
         /// <param name="usesGamepad"></param>
@@ -148,12 +147,12 @@ namespace Boku.Common.HintSystem
         }   // end of CheckInputUsage()
 
         /// <summary>
-        /// Helper function which checks the actors in the current world for 
+        /// Helper function which checks the actors in the current world for
         /// mouse sensor usage.
         /// </summary>
-        /// <param name="leftButton">true if left button filter found (actually this is a 
-        /// bit more complicated.  We actually check for usage that would conflict with 
-        /// normal camera movement.  If no conflict occurs then we leave this false even 
+        /// <param name="leftButton">true if left button filter found (actually this is a
+        /// bit more complicated.  We actually check for usage that would conflict with
+        /// normal camera movement.  If no conflict occurs then we leave this false even
         /// though there is mouse left button usage.)</param>
         /// <param name="rightButton">true if right button filter found</param>
         /// <param name="hover">true if hover filter found</param>
@@ -165,7 +164,7 @@ namespace Boku.Common.HintSystem
             hover = false;
 
             bool sensorFound = false;
-            
+
             for (int i = 0; i < InGame.inGame.gameThingList.Count; i++)
             {
                 GameActor actor = InGame.inGame.gameThingList[i] as GameActor;
@@ -196,7 +195,7 @@ namespace Boku.Common.HintSystem
                                                 // Having filters implies that we're testing for clicking on an object, not the ground.
                                                 // Also, look at the RHS of the reflex.
                                                 // If "moving toward" then restrict the button.
-                                                // If "shooting" then restrict if using the click location as a target.  If using a 
+                                                // If "shooting" then restrict if using the click location as a target.  If using a
                                                 // direction this implies we don't care about the click location and we can let
                                                 // the camera drag still work.
                                                 if (reflex.filterUpids.Length == 1)
@@ -230,7 +229,7 @@ namespace Boku.Common.HintSystem
                                                 // Having filters implies that we're testing for clicking on an object, not the ground.
                                                 // Also, look at the RHS of the reflex.
                                                 // If "moving toward" then restrict the button.
-                                                // If "shooting" then restrict if using the click location as a target.  If using a 
+                                                // If "shooting" then restrict if using the click location as a target.  If using a
                                                 // direction this implies we don't care about the click location and we can let
                                                 // the camera drag still work.
                                                 if (reflex.filterUpids.Length == 1)

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -44,7 +43,6 @@ namespace Boku
         // frame. Currently this is done in UpdateActuators().
         // At this same time, wasPushing should be set to pushing.
 
-
         public bool Pushing
         {
             get { return pushing; }
@@ -62,7 +60,6 @@ namespace Boku
             get { return wasPushing; }
             set { wasPushing = value; }
         }
-
 
         #endregion
 
@@ -82,7 +79,7 @@ namespace Boku
             wasPushing = pushing;
             pushing = false;
             pushingReverse = false;
-            
+
             base.PreBrainUpdate();
         }   // end of PreBrainUpdate()
 

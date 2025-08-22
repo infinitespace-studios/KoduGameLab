@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,11 +22,11 @@ namespace Boku.Common
 {
     /// <summary>
     /// Static class which keeps track of strings "said" by the actors this frame.
-    /// 
+    ///
     /// When an actor "says" a line of text displayed in a thought balloon it will
     /// actually get put into the list twice:  once at the beginning of the thought
     /// balloon's life and once at the end.  The "said" filter can then look for either.
-    /// 
+    ///
     /// When this is used for messaging via the <tag > construct, it is assumed to always
     /// be at the beginning.
     /// </summary>

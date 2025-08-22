@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,15 +35,12 @@ namespace Boku.Programming
         [XmlIgnore]
         public BitArray Outputs { get { return outputs; } }
 
-
         [XmlIgnore]
         public int OutputCount { get { return outputCount; } }
-
 
         [XmlArray]
         [XmlArrayItem("Output")]
         public List<SensorOutputType> XmlOutputs = new List<SensorOutputType>();
-
 
         protected void CopyTo(Filter clone)
         {
@@ -57,7 +53,6 @@ namespace Boku.Programming
         public override void OnLoad()
         {
             base.OnLoad();
-
 
             outputs.SetAll(false);
 
@@ -91,7 +86,7 @@ namespace Boku.Programming
         /// have culled the list down to only contain blue kodus, then the 'Many'
         /// filter's MatchAction method is called to determine if the resulting
         /// list as a whole still passes the filter stage.
-        /// 
+        ///
         /// Note that for input filters we've implemented them with MatchAction().
         /// I'm not clear why this is or if it even makes a difference.  (****)
         /// </summary>
@@ -146,28 +141,28 @@ namespace Boku.Programming
         /// This used to return the ScoreBucket but by calculating the scores here
         /// we can allow richer comparisons.
         /// The Health Filter can also be used as a value as can SettingsFilters.
-        /// 
+        ///
         /// The result values depend on how the sensor is used.
-        /// 
+        ///
         /// --Testing for Health
         /// WHEN Health Comparison Points
-        /// 
+        ///
         /// --Testing for change.
         /// WHEN Red DO
         ///     Bucket will contain the bucket to test for changed value from the previous frame.
-        ///   
+        ///
         /// --Testing against a value.
         /// WHEN Red 5Points 2Points Green
         ///     Left will contain the value for red.
         ///     Right will contain value to compare against.
         ///     CompareOp will contain the op to apply, in this case equals.
-        /// 
+        ///
         /// --Comparisons
         /// WHEN Red White 2Points > Blue Blue Random Green 5Points
         ///     Left will contain the sum of the values to the left of the comparison.
         ///     Right will contain the sum of the values to the right of the comparison.
         ///     CompareOp will contain the op to apply.
-        ///     
+        ///
         /// </summary>
         /// <param name="actor"></param>
         /// <param name="reflex"></param>
@@ -563,7 +558,7 @@ namespace Boku.Programming
 
         /// <summary>
         /// Look at this filter set and determine if it's testing to see if a score has changed.
-        /// 
+        ///
         /// Filter set should contain a single Scorebucket and an optional Not.  Nothing else is valid.
         /// </summary>
         /// <param name="filters"></param>
@@ -604,16 +599,16 @@ namespace Boku.Programming
         /// <summary>
         /// Look at this filter set and determine if it's testing a score against a value
         /// without using a comparison operator.  Equals is implied.
-        /// 
-        /// There can be any number of scorebucket and point filters.  We compare whatever 
-        /// the first scorebucket is (no matter position) to the sum of all the other values 
-        /// even if the first tiles is a point tile.  This preserves the legacy behaviour of 
+        ///
+        /// There can be any number of scorebucket and point filters.  We compare whatever
+        /// the first scorebucket is (no matter position) to the sum of all the other values
+        /// even if the first tiles is a point tile.  This preserves the legacy behaviour of
         /// being able to program
         ///     WHEN Scored 10Points Red
         ///     WHEN Scored 10Points 10Points Blue
-        /// 
+        ///
         /// If no scorebucket is found then we compare the sum of the points to the Red Scorebucket (default).
-        /// 
+        ///
         /// Filter set should have no comparison filters.  Although there will be a hidden one.
         /// </summary>
         /// <param name="filters"></param>
@@ -639,7 +634,7 @@ namespace Boku.Programming
         /// <summary>
         /// Look at this filter set and determine if it's testing 2 sets of values
         /// using a comparison filter.
-        /// 
+        ///
         /// Just look for a comparison filter.
         /// </summary>
         /// <param name="filters"></param>
@@ -661,10 +656,8 @@ namespace Boku.Programming
             return result;
         }   // end of TestScoreChange()
 
-
     }   // end of abstract class Filter
 
-    
     public class NullFilter : Filter
     {
         public NullFilter()
