@@ -5,7 +5,7 @@
     <RootNamespace>Boku</RootNamespace>
     <AssemblyName>Boku</AssemblyName>
     <ApplicationIcon>256x.ico</ApplicationIcon>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
