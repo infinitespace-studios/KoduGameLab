@@ -764,17 +764,6 @@ namespace Boku
 
                     string fullPathToLevelFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, level.WorldId.ToString() + ".Xml");
 
-#if EXPORT_DEBUG_HACK
-                    {
-                        string message = "Main File\n" +
-                                        "UserLocation : " + Storage4.UserLocation + "\n" +
-                                        "MediaPath : " + BokuGame.Settings.MediaPath + "\n" +
-                                        "folderName : " + folderName + "\n" +
-                                        "fileName : " + level.WorldId.ToString() + ".Xml\n\n" +
-                                        "fullPath : " + fullPathToLevelFile;
-                        var result = System.Windows.Forms.MessageBox.Show(message);
-                    }
-
                     levelFiles.Add(fullPathToLevelFile);
 
                     //load the xml so we can find the stuff, thumbnail and terrain file paths
