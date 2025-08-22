@@ -57,7 +57,6 @@ namespace Boku
             graphics = new Microsoft.Xna.Framework.GraphicsDeviceManager(this);
 
             graphics.PreparingDeviceSettings += PreparingDeviceSettingsHandler;
-#endif
 
             // Determine if HiDef is supported.
             // Find the default adapter and check if it supports Reach and Hidef.
