@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -113,7 +112,7 @@ namespace Boku
                             }
                         }
 
-                    } 
+                    }
                     else
                     {
                         int oldPhase = phase;
@@ -246,5 +245,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

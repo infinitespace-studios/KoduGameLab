@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -296,7 +295,7 @@ namespace Boku.SimWorld
             gradient = new Vector4[6];
             gradient[0] = new Vector4(0.5f, 0.5f, 0.8f, 0.0f);      // purple
             gradient[1] = new Vector4(0.6f, 0.0f, 0.9f, 0.47f);     // other purple
-            gradient[2] = new Vector4(1.0f, 1.0f, 1.0f, 0.5f);      // white 
+            gradient[2] = new Vector4(1.0f, 1.0f, 1.0f, 0.5f);      // white
             gradient[3] = new Vector4(0.96f, 0.80f, 0.95f, 0.6f);   // pink
             gradient[4] = new Vector4(0.96f, 0.60f, 0.80f, 0.9f);   // pink, slightly darker
             gradient[5] = new Vector4(1.0f, 0.9f, 0.9f, 1.0f); // psys
@@ -317,7 +316,7 @@ namespace Boku.SimWorld
             gradient[0] = new Vector4(0.0f, 0.0f, 0.0f, 0.49f); // black
             gradient[1] = new Vector4(1.0f, 0.8f, 0.0f, 0.50f); // yellow
             gradient[2] = new Vector4(0.6f, 0.0f, 0.0f, 0.52f); // dark red
-            gradient[3] = new Vector4(0.0f, 0.0f, 0.0f, 0.6f);  // black 
+            gradient[3] = new Vector4(0.0f, 0.0f, 0.0f, 0.6f);  // black
             gradient[4] = new Vector4(0.0f, 0.0f, 0.0f, 0.6f);  // ignored
             gradient[5] = new Vector4(1.0f, 0.95f, 0.8f, 1.0f); // psys
             AddGradient(gradient);
@@ -478,7 +477,6 @@ namespace Boku.SimWorld
             #endregion Brian's
         }
 
-
         private static float Compare(Vector4[] oldGradient, Vector4[] gradient)
         {
             Debug.Assert(oldGradient.Length <= gradient.Length);
@@ -584,11 +582,8 @@ namespace Boku.SimWorld
             return new Vector4(rF / 255.0f, gF / 255.0f, bF / 255.0f, aF / 100.0f);
         }
 
-
         #endregion Internal
 
     }   // end of class SkyBox
 
 }   // end of Boku.SimWorld
-
-

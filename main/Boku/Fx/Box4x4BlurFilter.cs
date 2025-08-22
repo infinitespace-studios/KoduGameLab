@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -68,7 +67,6 @@ namespace Boku.Fx
             Render(source, 1.0f);
         }   // end of Box4x4BlurFilter Render()
 
-
         public override void LoadContent(bool immediate)
         {
             // Init the effect.
@@ -103,6 +101,3 @@ namespace Boku.Fx
     }   // end of class Box4x4BlurFilter
 
 }   // end of Boku.Common
-
-
-

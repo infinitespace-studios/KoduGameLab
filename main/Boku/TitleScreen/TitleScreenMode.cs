@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define DISPLAY_IMAGE_HACK
 
 using System;
@@ -37,10 +36,6 @@ namespace Boku
         {
             public Camera camera = null;
 
-#if !NETFX_CORE
-            public Video video = null;
-            public VideoPlayer player = null;
-#endif
         }
 
         protected class UpdateObj : UpdateObject
@@ -75,36 +70,8 @@ namespace Boku
                     {
                         try
                         {
-#if NETFX_CORE
                             // Switch to MainMenu.
                             parent.DismissAndShowMain(null, null);
-#else
-                            if (shared.video == null)
-                            {
-                                // Start video.
-                                shared.video = BokuGame.Load<Video>(BokuGame.Settings.MediaPath + @"Video\Intro");
-                                shared.player = new VideoPlayer();
-                                shared.player.IsLooped = false;
-                                shared.player.Play(shared.video);
-                            }
-
-                            // Check if we're done with the video or the user hit escape to skip.
-                            if (shared.player.State != MediaState.Playing || 
-                                Actions.Cancel.WasPressed ||
-                                TouchInput.WasLastReleased)
-                            {
-                                Actions.Cancel.ClearAllWasPressedState();
-                                shared.player.Stop();
-
-                                shared.player.Dispose();
-                                shared.video = null;
-
-                                XmlOptionsData.ShowIntroVideo = false;
-
-                                // Switch to MainMenu.
-                                parent.DismissAndShowMain(null, null);
-                            }
-#endif
                         }
                         catch (Exception e)
                         {
@@ -145,7 +112,7 @@ namespace Boku
                 CommandStack.Pop(commandMap);
             }
         }   // end of class UpdateObj
-        
+
         protected class RenderObj : RenderObject
         {
             private TitleScreenMode parent = null;
@@ -163,35 +130,12 @@ namespace Boku
             public override void Render(Camera camera)
             {
                 // Render the parent's list of objects using our local camera.
-#if !NETFX_CORE
-                if (shared.player == null)
-#endif
                 {
                 foreach (RenderObject obj in renderList)
                     {
                         obj.Render(shared.camera);
                     }
                 }
-
-#if !NETFX_CORE
-                if (shared.player != null && !shared.player.IsDisposed && shared.player.State == MediaState.Playing)
-                {
-                    GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
-
-                    device.Clear(Color.Black);
-                    ScreenSpaceQuad ssquad = ScreenSpaceQuad.GetInstance();
-
-                    Texture2D vid = shared.player.GetTexture();
-                    int w = device.Viewport.Width;
-                    int h = device.Viewport.Height;
-                    float scale = (float)w / vid.Width;
-
-                    Vector2 size = new Vector2(w, vid.Height * scale);
-                    Vector2 pos = new Vector2(0, (h - size.Y) / 2.0f);
-
-                    ssquad.Render(vid, pos, size, "TexturedNoAlpha");
-                }
-#endif
 
             }   // end of RenderObj Render()
             public override void Activate()
@@ -203,8 +147,6 @@ namespace Boku
 
             }
         }   // end of class RenderObj
-
-
 
         // Children.
         private TitleScreen titleScreen = null;
@@ -279,7 +221,6 @@ namespace Boku
 
         }   // end of DoneLoadingContent()
 
-
         public override bool Refresh(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
             bool result = false;
@@ -303,7 +244,7 @@ namespace Boku
 
                     titleScreen.Deactivate();
                     logonDialog.Deactivate();
-                    
+
                     result = true;
                 }
 
@@ -362,21 +303,14 @@ namespace Boku
         public void DismissAndShowMain(Object sender, EventArgs args)
         {
             //before we enter the main menu for the first time, do a check to see if:
-            // 1) touch input is available, and 
+            // 1) touch input is available, and
             // 2) we have less than 5 max touch points
-            //if these conditions are both true, then we know the touch hardware isn't windows 8 compliant. this means 
-            //we may see hardware like the infrared monitors that can't handle rotate gestures reliably.  Display a 
+            //if these conditions are both true, then we know the touch hardware isn't windows 8 compliant. this means
+            //we may see hardware like the infrared monitors that can't handle rotate gestures reliably.  Display a
             //warning to the user that touch gestures may not perform in an ideal manner.
 #if false
             if (TouchInput.TouchAvailable && TouchInput.MaxTouchCount < 5)
             {
-#if !NETFX_CORE
-                System.Windows.Forms.MessageBox.Show(
-                    Strings.Localize("warning.noncomplianttouch"),
-                    Strings.Localize("warning.noncomplianttouch_title"),
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Warning);
-#endif
             }
 #endif
 
@@ -415,11 +349,7 @@ namespace Boku
         private void OnTextDialogButton(TextDialog dialog)
         {
             Debug.Assert(false, "Need to remove this login path.  Not sure if anyone ever used it anyway.");
-#if NETFX_CORE
             Storage4.Username = dialog.UserText;
-#else
-            //GamerServices.CreatorName = dialog.UserText;
-#endif
             XmlOptionsData.Username = dialog.UserText;
         }
 

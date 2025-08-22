@@ -25,7 +25,7 @@ namespace Boku.Programming
     /// <summary>
     /// Filter that manages the timer state and returns a positive action when
     /// time defined by other filters has been passed
-    /// 
+    ///
     /// </summary>
     public class TimerTriggerFilter : Filter
     {

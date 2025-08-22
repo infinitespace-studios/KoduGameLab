@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,9 +21,9 @@ namespace Boku
     /// <summary>
     /// Example XNA control for use w/ WinForms
     /// Inherits from GraphicsDeviceControl, which allows it to
-    /// render using a GraphicsDevice. 
-    /// This control shows how to draw animating 3D graphics inside a WinForms application. 
-    /// It hooks the Application.Idle event, using this to invalidate the control, which will 
+    /// render using a GraphicsDevice.
+    /// This control shows how to draw animating 3D graphics inside a WinForms application.
+    /// It hooks the Application.Idle event, using this to invalidate the control, which will
     /// cause the animation to constantly redraw.
     /// It loads a SpriteFont object through the ContentManager, then uses a SpriteBatch to draw text.
     /// </summary>
@@ -75,7 +74,7 @@ namespace Boku
 
             // Set up KoiLibrary
             // CLICK_ONCE allows the framework to change from having the
-            // content in a seperate content project vs having it tied 
+            // content in a seperate content project vs having it tied
             // into the project as Content (which is what is needed in
             // order to get ClickOnce deployment to work).
             // For development, this should be off.  Turn it one when
@@ -125,7 +124,7 @@ namespace Boku
 
         public void XNAControl_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;    
+            e.Effect = DragDropEffects.Copy;
         }
 
         public void XNAControl_DragDrop(object sender, DragEventArgs e)

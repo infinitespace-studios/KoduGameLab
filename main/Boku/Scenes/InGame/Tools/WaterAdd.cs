@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -78,7 +77,6 @@ namespace Boku.Scenes.InGame.Tools
                         Terrain.EditMode.WaterChange,
                         Terrain.EditMode.WaterLower);
 
-
                     SelectOverlay();
                 }
             }
@@ -114,7 +112,7 @@ namespace Boku.Scenes.InGame.Tools
         public override void OnActivate()
         {
             timerInstrument = Instrumentation.StartTimer(Instrumentation.TimerId.InGameWaterTool);
-            
+
             base.OnActivate();
 
             PickerY = waterPicker;
@@ -135,5 +133,3 @@ namespace Boku.Scenes.InGame.Tools
     }   // class WaterAdd
 
 }   // end of namespace Boku.Scenes.InGame.Tools
-
-

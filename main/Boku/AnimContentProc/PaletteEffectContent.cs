@@ -4,7 +4,7 @@
 /*
  * PaletteEffectContent.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -39,8 +39,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Xclna.Xna.Animation.Reader
 {
-
-
 
     [ContentTypeWriter]
     internal class PaletteMaterialWriter : ContentTypeWriter<PaletteMaterialContent>
@@ -86,7 +84,7 @@ namespace Xclna.Xna.Animation.Reader
                     + "Xclna.Xna.Animationx86, "
                     + "Version="+ContentUtil.VERSION+", Culture=neutral, PublicKeyToken=null";
             }
-            
+
         }
 
         public override string GetRuntimeType(TargetPlatform targetPlatform)
@@ -104,7 +102,6 @@ namespace Xclna.Xna.Animation.Reader
             }
         }
     }
-
 
     /// <summary>
     /// Processes a PaletteInfo object into a PaletteMaterialContent object.
@@ -208,9 +205,9 @@ namespace Xclna.Xna.Animation.Reader
         public int PaletteSize
         {
             get { return paletteSize; }
-            set 
-            { 
-                paletteSize = value; 
+            set
+            {
+                paletteSize = value;
             }
         }
 
@@ -222,8 +219,6 @@ namespace Xclna.Xna.Animation.Reader
             get { return (byte[])byteCode.Clone(); }
             set { byteCode = value; }
         }
-
-
 
     }
 

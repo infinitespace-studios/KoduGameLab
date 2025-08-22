@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,8 +64,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
         /// activated the tool.
         /// </summary>
         private bool ignoreInput= false;
-
-
 
         #endregion Members
 
@@ -221,7 +218,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
                     dragPos = new Vector2(MouseInput.Position.X, MouseInput.Position.Y);
                 }
 
-
                 // Convert mouse hit into UV coords. (GetHitUV for MouseInput and TouchInput have same implementation...)
                 Matrix worldMat = Matrix.Invert(slider.WorldMatrix);
                 Vector2 hitUV = TouchInput.GetHitUV(dragPos, uicamera, ref worldMat, slider.Size.X, slider.Size.Y, useRtCoords: false); ;
@@ -345,7 +341,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 if (Boku.InGame.ColorPalette.HandlingTouch)
                 {
                     return;
-                }            
+                }
             }
 
             bool hasNonUITouch = touchEdit.HasNonUITouch();
@@ -354,7 +350,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
             touchEdit.DoObject(camera);
 
             //check for tap to adjust hit actor
-            if (hasValidTap || 
+            if (hasValidTap ||
                 TouchGestureManager.Get().DoubleTapGesture.WasRecognized ||
                 TouchGestureManager.Get().TouchHoldGesture.WasRecognized ||
                 TouchGestureManager.Get().TouchHoldGesture.SlightHoldMade ||
@@ -380,7 +376,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
             }
 
             //check for double tap on terrain to bring up add actor
-            if (hasNonUITouch && 
+            if (hasNonUITouch &&
                 TouchGestureManager.Get().DoubleTapGesture.WasRecognized &&
                 FocusActor == null &&
                 !MenusActive && !SliderActive && inGame.editObjectUpdateObj.newItemSelectorShim.State != UIShim.States.Active)
@@ -400,7 +396,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 //select the focus actor when we start dragging
                 if (selectedActor == null)
                 {
-
 
                     // Start draggin if over actor.
                     selectedActor = FocusActor;
@@ -425,7 +420,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 }
 
                 // If the actor is supposed to stay above water, try to enforce that.
-                // This can have some strange visual effects since it forces the actor to 
+                // This can have some strange visual effects since it forces the actor to
                 // float above where the mouse cursor is but the alternative is to have
                 // actor get dragged under water.
                 if (selectedActor.StayAboveWater)
@@ -444,15 +439,14 @@ namespace Boku.Scenes.InGame.MouseEditTools
             {
                 selectedActor = null;
 
-
                 //rules for context menus:
-                // tap + hold -> always bring up menu (terrain or actor accordingly) 
+                // tap + hold -> always bring up menu (terrain or actor accordingly)
                 // double tap -> bring up menu if over an actor (actor only)
                 // single tap -> bring up menu if over an actor that was already selected (actor only)
-                if (hasNonUITouch && 
+                if (hasNonUITouch &&
                     (TouchGestureManager.Get().TouchHoldGesture.WasRecognized ||
                     (FocusActor != null && TouchGestureManager.Get().DoubleTapGesture.WasRecognized) ||
-                    (FocusActor != null && hasValidTap && FocusActor == previousFocusActor))) 
+                    (FocusActor != null && hasValidTap && FocusActor == previousFocusActor)))
                 {
                     menuActor = FocusActor;
                     menuCursorPosition = hitInfo.TerrainPosition;
@@ -479,7 +473,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 if (hasNonUITouch && TouchInput.TouchCount == 2 && selectedActor == null)
                 {
 
-
                     PinchGestureRecognizer pinchGesture = TouchGestureManager.Get().GetActiveGesture( TouchGestureType.Pinch, TouchGestureType.Rotate ) as PinchGestureRecognizer;
                     if ( pinchGesture != null && pinchGesture.IsPinching )
                     {
@@ -495,8 +488,8 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 }
             }
 
-            if (TouchGestureManager.Get().RotateGesture.IsValidated || 
-                TouchGestureManager.Get().PinchGesture.IsValidated || 
+            if (TouchGestureManager.Get().RotateGesture.IsValidated ||
+                TouchGestureManager.Get().PinchGesture.IsValidated ||
                 TouchGestureManager.Get().DoubleDragGesture.IsValidated)
             {
                 //turn off menu if rotating, pinching or double dragging (i.e. terrain manipulation)
@@ -532,7 +525,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 {
                     HelpOverlay.ReplaceTop("MouseEditEditObjectFocus");
                 }
-            }            
+            }
         }
 
         private void DoScaleActor( float deltaScale, GameActor actorToScale )
@@ -627,7 +620,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 }
 
                 // If the actor is supposed to stay above water, try to enforce that.
-                // This can have some strange visual effects since it forces the actor to 
+                // This can have some strange visual effects since it forces the actor to
                 // float above where the mouse cursor is but the alternative is to have
                 // actor get dragged under water.
                 if (selectedActor.StayAboveWater)
@@ -770,7 +763,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
 
                 HandleSliderInput(uicamera);
 
-                // If the slider is still active, we're done.  
+                // If the slider is still active, we're done.
                 // We don't want any other input acted upon.
                 if (sliderActive)
                 {
@@ -791,7 +784,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 ignoreInput = false;
             }   // end if active.
 
-            // This tool is odd enough compared to the standard 
+            // This tool is odd enough compared to the standard
             // tools that we don't want to call the base update.
             //base.Update();
 
@@ -1108,5 +1101,3 @@ namespace Boku.Scenes.InGame.MouseEditTools
     }   // class EditObjectsTool
 
 }   // end of namespace Boku.Scenes.InGame.MouseEditTools
-
-

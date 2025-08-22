@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +25,7 @@ namespace Boku.SimWorld.Terra
         public enum BrushType
         {
             None = 0x0000,
-            Soft = 0x0001,    
+            Soft = 0x0001,
             Binary = 0x0002,
             All = Soft | Binary,
 
@@ -67,8 +66,8 @@ namespace Boku.SimWorld.Terra
             public Texture2D Texture
             {
                 get { return texture; }
-                set 
-                { 
+                set
+                {
                     texture = value;
 
                     if (texture != null)
@@ -135,7 +134,7 @@ namespace Boku.SimWorld.Terra
             /// Samples the brush texture based on the given in uv coordinates.
             /// Normally these are in 0..1 range.  Outside of that range is outside
             /// of the texture and false is returned.
-            /// 
+            ///
             /// Assumes brushes are the same across all channels.
             /// </summary>
             /// <param name="uv"></param>
@@ -155,10 +154,10 @@ namespace Boku.SimWorld.Terra
                 {
                     pointSample = data[p.X, p.Y];
 
-                    // Convert 0..1 range into texel indices. 
+                    // Convert 0..1 range into texel indices.
                     Vector2 texels = uv * new Vector2(texture.Width, texture.Height);
                     texels.X = MathHelper.Clamp(texels.X, 0.0f, texture.Width - 1.001f);
-                    texels.Y = MathHelper.Clamp(texels.Y, 0.0f, texture.Height - 1.001f); 
+                    texels.Y = MathHelper.Clamp(texels.Y, 0.0f, texture.Height - 1.001f);
 
                     // Use bilinear interpolation to get smoothed sample.
                     int i = (int)texels.X;

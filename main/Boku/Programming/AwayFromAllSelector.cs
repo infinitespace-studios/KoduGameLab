@@ -22,7 +22,7 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// This selector will calculate a vector that is away from all 
+    /// This selector will calculate a vector that is away from all
     /// of the Action Things and add it as a replusor to the actuators arbitrator.
     /// </summary>
     public class AwayFromAllSelector : Selector
@@ -44,7 +44,7 @@ namespace Boku.Programming
         {
             base.Reset(reflex);
         }
-        
+
         public override ActionSet ComposeActionSet(Reflex reflex, GameActor gameActor)
         {
             ClearActionSet(actionSet);
@@ -85,7 +85,7 @@ namespace Boku.Programming
                             Vector3 fromTarget = actorPos - targetActor.Movement.Position;
                             float dist = fromTarget.Length();
                             // Normalize fromTarget then divide again by dist.  This gives us a linear
-                            // falloff of strength based on distance so that a target that is twice as 
+                            // falloff of strength based on distance so that a target that is twice as
                             // close will have twice the weight on the flee direction.
                             dir += fromTarget / dist / dist;
                         }

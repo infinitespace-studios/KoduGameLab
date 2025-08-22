@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Define MF_PITCH_OR_YAW for a mode that lets the user be affecting
 /// pitch OR yaw, but not both at a time. The mode is determined when
-/// the right button is down and the mouse moves. 
-// #define MF_PITCH_OR_YAW 
+/// the right button is down and the mouse moves.
+// #define MF_PITCH_OR_YAW
 
 using System;
 using System.Collections.Generic;
@@ -95,12 +94,12 @@ namespace Boku
 
             /// <summary>
             /// Where the mouse LOS ray hits the ActorHit's collision hull. For
-            /// mobile bots, that's a sphere, for other bots (e.g. factory) it's 
+            /// mobile bots, that's a sphere, for other bots (e.g. factory) it's
             /// a set of collision primitives. Undefined if !HaveActor.
             /// </summary>
             public Vector3 ActorPosition
             {
-                get 
+                get
                 {
                     Vector3 pos = actorPosition;
 
@@ -128,7 +127,7 @@ namespace Boku
             }
 
             /// <summary>
-            /// True if current mouse LOS hits no terrain, but does cross the 
+            /// True if current mouse LOS hits no terrain, but does cross the
             /// zero height plane.
             /// </summary>
             public bool ZeroPlaneHit
@@ -142,7 +141,7 @@ namespace Boku
             /// </summary>
             public Vector3 TerrainPosition
             {
-                get 
+                get
                 {
                     Vector3 pos = terrainPosition;
 
@@ -152,7 +151,7 @@ namespace Boku
                         pos = InGame.SnapPosition(pos);
                     }
 
-                    return pos; 
+                    return pos;
                 }
                 internal set { terrainPosition = value; }
             }
@@ -277,7 +276,7 @@ namespace Boku
             {
                 return MouseInput.Left.IsPressed && KeyboardInput.IsPressed(Keys.Space)
                     ? (KeyboardInput.ShiftIsPressed ? 1.0f : 0.25f)
-                    : 0.0f; 
+                    : 0.0f;
             }
         }
 
@@ -488,7 +487,7 @@ namespace Boku
         public void DoZoom(SmoothCamera camera)
         {
             // Don't zoom if the AddItem pie menu or pickers are active.
-            if (InGame.inGame.editObjectUpdateObj.newItemSelectorShim.State == Boku.UI.UIShim.States.Active 
+            if (InGame.inGame.editObjectUpdateObj.newItemSelectorShim.State == Boku.UI.UIShim.States.Active
                 || InGame.inGame.mouseEditUpdateObj.PickersActive)
             {
                 return;
@@ -543,7 +542,7 @@ namespace Boku
             {
                 if (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
                 {
-                    // Calc where the mouse is aiming and move the cursor towards there.  
+                    // Calc where the mouse is aiming and move the cursor towards there.
                     // The camera will follow.
                     Vector3 mouseAimPosition = FindHit(camera, MouseInput.Position);
                     InGame.inGame.shared.CursorPosition = MyMath.Lerp(camera.ActualAt, mouseAimPosition, 1.5f * scrollRate);
@@ -1057,7 +1056,7 @@ namespace Boku
         /// Terminate the visual drag effect.
         /// </summary>
         private void EndDrag()
-        {            
+        {
             if (dragObject != null)
             {
                 dragObject = null;
@@ -1163,7 +1162,7 @@ namespace Boku
         private void Orbit(SmoothCamera camera)
         {
             /// Either pitch or yaw according to current mode.
-            /// 
+            ///
             if (orbitMode == OrbitMode.Pitch)
             {
                 Pitch(camera);
@@ -1293,7 +1292,6 @@ namespace Boku
                 Vector3 prevPos = FindAtHeight(camera, MouseInput.PrevPosition, cursorPos.Z);
 
                 Vector3 pos = FindAtHeight(camera, MouseInput.Position, prevPos.Z);
-
 
                 Vector2 toPrev = new Vector2(prevPos.X - cursorPos.X, prevPos.Y - cursorPos.Y);
                 Vector2 toPos = new Vector2(pos.X - cursorPos.X, pos.Y - cursorPos.Y);
@@ -1490,7 +1488,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// Find where a ray through input mouse position (pixel coords) 
+        /// Find where a ray through input mouse position (pixel coords)
         /// passes through the horizontal plane at height h.
         /// </summary>
         /// <param name="camera"></param>
@@ -1547,7 +1545,7 @@ namespace Boku
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightAlt)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.LeftShift)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightShift)
-                    
+
                     && !disableRightOrbit;
             }
         }
@@ -1561,7 +1559,7 @@ namespace Boku
             get
             {
                 return
-                    MouseInput.Left.IsPressed 
+                    MouseInput.Left.IsPressed
 
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.Space)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.LeftControl)
@@ -1570,7 +1568,7 @@ namespace Boku
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightAlt)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.LeftShift)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightShift)
-                    
+
                     && !disableLeftDrag;
             }
         }

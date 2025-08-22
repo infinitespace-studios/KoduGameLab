@@ -154,7 +154,7 @@ namespace Boku.SimWorld.Path
                 diffTex1 = null;
                 normTex0 = null;
                 normTex1 = null;
-                
+
                 BokuGame.Load(this);
             }
             /// <summary>
@@ -175,8 +175,8 @@ namespace Boku.SimWorld.Path
             /// <param name="second"></param>
             /// <returns></returns>
             public override bool NewFan(
-                Road.Intersection isect, 
-                Road.Section first, 
+                Road.Intersection isect,
+                Road.Section first,
                 Road.Section second,
                 List<Road.RenderObj> fans)
             {
@@ -355,8 +355,8 @@ namespace Boku.SimWorld.Path
         /// <param name="second"></param>
         /// <returns></returns>
         public override bool NewFan(
-            Road.Intersection isect, 
-            Road.Section first, 
+            Road.Intersection isect,
+            Road.Section first,
             Road.Section second,
             List<Road.RenderObj> fans)
         {

@@ -9,24 +9,20 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Reflection;
 
-#if NETFX_CORE
     using Windows.Security;
-#else
-    using System.Security.Permissions;
-#endif
 
 /* Author: Neil Petrick
- * 
+ *
  * License: Public Domain.
- * 
+ *
  * Usage:
  *
- * Inherit from this class, and override the WndProc function in your derived class, 
+ * Inherit from this class, and override the WndProc function in your derived class,
  * in which you handle your windows messages.
- * 
+ *
  * To start recieving the message, create an instance of your derived class, passing in the
  * window handle of the window you want to listen for messages for.
- * 
+ *
  * in XNA: this would be the Game.Window.Handle property
  * in Winforms Form.Handle property
  */
@@ -37,7 +33,7 @@ namespace TouchHook
     {
         /// <summary>
         ///  Defines the windows proc delegate to pass into the windows hook
-        /// </summary>                  
+        /// </summary>
         public delegate int HookDelegate(int nCode, IntPtr wParam, IntPtr lParam);
 
         protected IntPtr hHook = IntPtr.Zero;
@@ -116,9 +112,6 @@ namespace TouchHook
             }
         }
 
-#if !NETFX_CORE
-        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-#endif
         protected int CoreHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             //Message msg = (Message)Marshal.PtrToStructure(lParam, typeof(Message));

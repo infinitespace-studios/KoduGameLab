@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,20 +44,17 @@ namespace Boku
 
         }   // end of GameListManager c'tor
 
-
         public void AddObject(GameObject obj)
         {
             objectList.Add(obj);
             BokuGame.objectListDirty = true;
         }   // end of GameListManager AddObject()
 
-
         public void RemoveObject(GameObject obj)
         {
             objectList.Remove(obj);
             BokuGame.objectListDirty = true;
         }   // end of GameListManager RemoveObject()
-
 
         public void Refresh()
         {
@@ -72,7 +68,6 @@ namespace Boku
             }
         }   // end of GameListManager Refresh()
 
-
         public void Update()
         {
             // Lazy allocation
@@ -83,45 +78,29 @@ namespace Boku
                 deadKoduTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\SleepyKodu");
             }
 
-#if !NETFX_CORE
-            // Check if microbit:driver needs installing.
-            if (MicrobitManager.DriverInstalled == false)
-            {
-                MicrobitManager.ShowDriverDialog();
-            }
-#endif
-
-#if NETFX_CORE
             if (BokuGame.ScreenSize.X > BokuGame.ScreenSize.Y)
             {
-#endif
                 for (int i = 0; i < updateList.Count; ++i)
                 {
                     UpdateObject obj = updateList[i] as UpdateObject;
                     obj.Update();
                 }
-#if NETFX_CORE
             }
             else
             {
                 // Game paused since in strange snapped mode
             }
-#endif
         }   // end of GameListManager Update()
-
 
         public void Render()
         {
-#if NETFX_CORE
             if (BokuGame.ScreenSize.X > BokuGame.ScreenSize.Y)
             {
-#endif
                 for (int i = 0; i < renderList.Count; ++i)
                 {
                     RenderObject obj = renderList[i] as RenderObject;
                     obj.Render(null);
                 }
-#if NETFX_CORE
             }
             else
             {
@@ -143,9 +122,7 @@ namespace Boku
                 blob.RenderWithButtons(pos, new Color(0.8f, 0.8f, 0.8f));
 
             }
-#endif
         }   // end of GameListManager Render()
-
 
     }   // end of class GameListManager
 

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -17,9 +16,9 @@ using Boku.Common;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// This is a text element which has no background and is rendered 
-    /// directly over whatever is under it.  For the selected selected 
-    /// state the text is rendered in BOLD with a blurred drop shadow 
+    /// This is a text element which has no background and is rendered
+    /// directly over whatever is under it.  For the selected selected
+    /// state the text is rendered in BOLD with a blurred drop shadow
     /// under it.
     /// </summary>
     public class UIGrid2DFloatingTextElement : UIGridElement
@@ -35,7 +34,6 @@ namespace Boku.UI2D
         private float width;
         private float height;
 
-
         #endregion
 
         #region Accessors
@@ -43,7 +41,7 @@ namespace Boku.UI2D
         public override bool Selected
         {
             get { return selected; }
-            set 
+            set
             {
                 if (selected != value)
                 {
@@ -86,7 +84,6 @@ namespace Boku.UI2D
             this.unselectedTextColor = blob.unselectedColor;
             this.dropShadowColor = blob.dropShadowColor;
 
-            
             width = 1.0f;
             height = Font().LineSpacing / 96.0f;
 
@@ -95,7 +92,6 @@ namespace Boku.UI2D
         public override void HandleMouseInput(Vector2 hitUV)
         {
         }   // end of HandleMouseInput()
-
 
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {

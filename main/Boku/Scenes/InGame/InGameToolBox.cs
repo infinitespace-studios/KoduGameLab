@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -50,7 +49,7 @@ namespace Boku
                 get { return shared.ToolBox.CurrentMode; }
                 set { shared.ToolBox.CurrentMode = value; }
             }
-            
+
             #endregion
 
             // c'tor
@@ -58,7 +57,6 @@ namespace Boku
                 : base(parent, ref shared)
             {
             }   // end of ToolBoxUpdateObj c'tor
-
 
             /// <summary>
             /// ToolBoxUpdateObj Update()
@@ -123,5 +121,3 @@ namespace Boku
     }   // end of class InGameToolBox
 
 }   // end of namespace Boku
-
-

@@ -28,8 +28,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// The primary responsibility of this class is to render and maintain the internal state of
-    /// any buttons required by Kode containing TouchButtonFilter tiles. When any such filter exists, we 
-    /// need to draw the button on the screen and respond to touches by the user. The TouchButtonFilters 
+    /// any buttons required by Kode containing TouchButtonFilter tiles. When any such filter exists, we
+    /// need to draw the button on the screen and respond to touches by the user. The TouchButtonFilters
     /// will be querying this class to find out if their button conditions have been met.
     /// </summary>
     public class TouchVirtualController
@@ -37,7 +37,7 @@ namespace Boku.Programming
         //List of all the button types to be handled
         public enum TouchButtonType
         {
-            //Virtual Controller 
+            //Virtual Controller
             Button_A,
             Button_B,
             Button_X,
@@ -61,29 +61,27 @@ namespace Boku.Programming
 
         private static AABB2D[] buttonHitBoxes = new AABB2D[kNumButtons];
         private static Texture2D[] buttonTextures = new Texture2D[kNumButtons];
-        
+
         private static ButtonState[] buttonState = new ButtonState[kNumButtons];
 
         private static bool isInitialized = false;
         private static Vector2 defaultButtonSize = new Vector2(128, 128);
 
         /*
-         * This scale gets initialized at startup and compares 
+         * This scale gets initialized at startup and compares
         *the width/height of the view-port to an expected resolution.
         *If the target resolution is bigger we scale down.
          */
-        private static float ControllerScale = 1.0f; 
-
+        private static float ControllerScale = 1.0f;
 
         private const float kButtonHorizOffsetToScreenEdge = 15; //In Px the offset from the side of the screen the button cross will render.
         private const float kButtonVertOffsetToScreenEdge = 50;
 
         private const float kThumbStickOuterDiameterPx = 256.0f; //Size in Px of the outter circle (Size of the texture)
         private const float kThumbStickInnerDiameterPx = 128.0f; //Size in Px of the inner circle (Size of the texture and hit area)
-        
+
         private const float kThumbStickTouchDiameterPx = 115.0f; //Diameter in pixels of the area the touch takes effect.  If we want to make this smaller/Bigger than art.
         //If the value is 100. then it would take 100 px to go from -1 input to 1 input on one axis.
-
 
         private static Texture2D ThumbStickTop_Texture = null;
         private static Texture2D ThumbStickBottom_Texture = null;
@@ -127,7 +125,6 @@ namespace Boku.Programming
             ThumbStickTop_Texture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\VirtualController\ThumbStick_Light");
             ThumbStickBottom_Texture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\VirtualController\ThumbStick_Dark");
 
-
             for (int i = 0; i < kNumButtons; i++)
             {
                 buttonHitBoxes[i] = new AABB2D();
@@ -146,17 +143,16 @@ namespace Boku.Programming
             buttonTextures[(int)TouchButtonType.Button_Y] = BokuGame.Load<Texture2D>(
                 BokuGame.Settings.MediaPath + @"Textures\VirtualController\Button_Y");
 
-
 //             //DPad
 //             buttonTextures[(int)TouchButtonType.DPad_L] = BokuGame.Load<Texture2D>(
 //                 BokuGame.Settings.MediaPath + @"Textures\Programming\TouchButton_ControllerDPad_L");
-// 
+//
 //             buttonTextures[(int)TouchButtonType.DPad_R] = BokuGame.Load<Texture2D>(
 //                 BokuGame.Settings.MediaPath + @"Textures\Programming\TouchButton_ControllerDPad_R");
-// 
+//
 //             buttonTextures[(int)TouchButtonType.DPad_U] = BokuGame.Load<Texture2D>(
 //                 BokuGame.Settings.MediaPath + @"Textures\Programming\TouchButton_ControllerDPad_U");
-// 
+//
 //             buttonTextures[(int)TouchButtonType.DPad_D] = BokuGame.Load<Texture2D>(
 //                 BokuGame.Settings.MediaPath + @"Textures\Programming\TouchButton_ControllerDPad_D");
         }
@@ -193,14 +189,12 @@ namespace Boku.Programming
         {
         }
 
-
         public static void Update()
         {
             // Handles touch input and keeping button state
             bool bCanUpdate = InGame.ShowVirtualController && InGame.UpdateMode.RunSim == InGame.inGame.CurrentUpdateMode;
             bCanUpdate = bCanUpdate && GamePadInput.InputMode.Touch == GamePadInput.ActiveMode;
 
-            
             TouchContact[] touches = TouchInput.Touches;
             Debug.Assert(null != touches);
 
@@ -214,7 +208,7 @@ namespace Boku.Programming
             {
                 //Not in touch mode or no input or not visible
                 ResetLeftThumbstick();
-                
+
                 ResetButtonState();
             }
 
@@ -228,7 +222,7 @@ namespace Boku.Programming
             {
                 bTouchOnController = buttonState[i] == ButtonState.Pressed;
             }
-            
+
             return bTouchOnController;
         }
 
@@ -254,7 +248,7 @@ namespace Boku.Programming
             if (null == touch)
             {
                 Vector2 innerCircleCenterPos = GetInnerStickCenterPos();
-                
+
                 for (int i = 0; i < touches.Length; ++i)
                 {
                     if (TouchPhase.Began == touches[i].phase &&
@@ -279,7 +273,6 @@ namespace Boku.Programming
                 radius = radius != 0 ? radius : 1.0f;
 
                 LeftStickValue = stickToFinger / radius;
-
 
                 Vector2 normalized = LeftStickValue;
                 normalized.Normalize();
@@ -351,9 +344,7 @@ namespace Boku.Programming
             LeftStickCenterPos.Y -= (kButtonVertOffsetToScreenEdge + (kThumbStickOuterDiameterPx * ControllerScale * 0.5f));
             LeftStickCenterPos.X = kButtonHorizOffsetToScreenEdge + (kThumbStickOuterDiameterPx * ControllerScale * 0.5f);
 
-
             DrawThumbStick();
-
 
             Vector2 crossCenterOffset = new Vector2();
             Vector2 buttonSize = defaultButtonSize * ControllerScale;
@@ -366,13 +357,13 @@ namespace Boku.Programming
             //DRAW DPAD
 
 //             float xPosButtonCross = 15 + crossCenterOffset.X + (buttonSize.X * 1.5f);
-// 
-//             List<TouchButtonType> controllerDPadIdList = new List<TouchButtonType>(){ 
+//
+//             List<TouchButtonType> controllerDPadIdList = new List<TouchButtonType>(){
 //                 TouchButtonType.DPad_U,
 //                 TouchButtonType.DPad_D,
 //                 TouchButtonType.DPad_L,
 //                 TouchButtonType.DPad_R };
-// 
+//
 //             DrawButtonInCross(controllerDPadIdList, new Vector2(xPosButtonCross, yPosButtonCross) - (buttonSize * 0.5f), buttonSize, crossCenterOffset);
 
             //---------------------
@@ -380,7 +371,7 @@ namespace Boku.Programming
             float xPosButtonCross = BokuGame.bokuGame.GraphicsDevice.Viewport.Width;
             xPosButtonCross -= (kButtonHorizOffsetToScreenEdge + crossCenterOffset.Y + (buttonSize.Y * 1.5f));
 
-            List<TouchButtonType> controllerButtonIdList = new List<TouchButtonType>(){ 
+            List<TouchButtonType> controllerButtonIdList = new List<TouchButtonType>(){
                 TouchButtonType.Button_Y,
                 TouchButtonType.Button_A,
                 TouchButtonType.Button_X,
@@ -404,7 +395,6 @@ namespace Boku.Programming
                         Debug.Assert(false);
                         continue;
                     }
-                   
 
                     deltaPos.X = 0.0f;
                     deltaPos.Y = 0.0f;
@@ -451,7 +441,7 @@ namespace Boku.Programming
             ScreenSpaceQuad.GetInstance().Render(
                 buttonTextures[buttonIdx],
                 GetDrawColor((uint)buttonIdx),
-                pos, 
+                pos,
                 size,
                 "TexturedRegularAlpha");
         }
@@ -497,8 +487,6 @@ namespace Boku.Programming
             }
             return new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
         }
-
-
 
         private static bool InCircle(Vector2 testPoint, Vector2 circleCenter, float radius)
         {

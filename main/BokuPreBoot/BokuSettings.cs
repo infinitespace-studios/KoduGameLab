@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -14,26 +13,26 @@ namespace Boku
 {
 
     /* HOW TO USE
-     * 
+     *
      * // Load the settings by referencing the static Settings property.
      * // This will only hit the disk once and will cache a singleton
      * // of the BokuSettings class.
      * BokuSettings mySettings = BokuSettings.Settings;
-     * 
+     *
      * // Look at properties on the settings object:
      * if(mySettings.Fullscreen) { ...
-     * 
+     *
      * // Set settings directly on the settings object
      * mySettings.Bloom = true;
-     * 
+     *
      * // Save using static functions - don't need to have a reference to the instance
      * // This writes the singleton to disk
      * BokuSettings.Save()
-     * 
+     *
      * // Don't allocate your own BokuSettings object (you can't)
      * BokuSettings IWantMyOwnInstance = new BokuSettings() // ERROR - constructor is protected
      */
-     
+
     public class BokuSettings
     {
         // These are the application settings. Keep them together here at the top of the file
@@ -100,9 +99,9 @@ namespace Boku
         /// The terrain rending code as it is set up now assumes
         /// that the graphics mode preference will be set before
         /// Terrain.LoadShared() is called. Also, the terrain
-        /// classes require that the graphics mode preference 
+        /// classes require that the graphics mode preference
         /// never be changed once set.
-        /// 
+        ///
         /// PreferReach should ONLY refer to the user's preference.
         /// This may be false even if the user has hw that only
         /// supports reach.  So, do not use this for in game stuff.
@@ -160,13 +159,8 @@ namespace Boku
         /// </summary>
         public bool UseSystemFontRendering
         {
-#if NETFX_CORE
             get { return false; }
             set { }
-#else
-            get { return useSystemFontRendering; }
-            set { useSystemFontRendering = value; }
-#endif
         }
 
         #endregion
@@ -176,7 +170,7 @@ namespace Boku
         static private BokuSettings theInstance = null;
 
         // constructor is private so people don't inadvertently allocate one directly.
-        // Use the BokuSettings.Load() 
+        // Use the BokuSettings.Load()
         private BokuSettings()
         {
         }

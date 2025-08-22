@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -45,7 +43,7 @@ namespace Boku
 
             public string curString = "blah bah blah";         // Current input string.
             public int cursorPosition = 0;          // Current cursor position.
-                                                    // 0 is before the 1st character, 1 is between 
+                                                    // 0 is before the 1st character, 1 is between
                                                     // the 1st and 2nd characters, etc.
             public string originalString = null;    // Used to allow Cancel to work.
 
@@ -159,7 +157,7 @@ namespace Boku
 
                 shared.descBlob.InsertString(new string(c, 1));
                 shared.curString = shared.descBlob.RawText;
-            } 
+            }
             // TODO (****) Clean this up.  We're mixing text as input with text as control here.
             // Probably the right thing to do would be to push/pop the text input callbacks
             // dynamically to mirror the state we're in.
@@ -232,7 +230,6 @@ namespace Boku
                         UpdateEditedString();
                     }
                 }
-
 
             }   // end of UpdateObj KeyInput()
 
@@ -344,12 +341,8 @@ namespace Boku
                 shared.descBlob = new TextBlob(UI2D.Shared.GetGameFont24, shared.curString, 650);
                 //shared.Justification = blob.justify;
                 //KeyboardInput.OnChar = TextInput;
-#if NETFX_CORE
                 Debug.Assert(false, "Does this work?  Why did we prefer winKeyboard?");
                 KeyboardInput.OnChar = TextInput;
-#else
-                BokuGame.bokuGame.winKeyboard.CharacterEntered = TextInput;
-#endif
                 KeyboardInput.OnKey = KeyInput;
             }
 
@@ -359,12 +352,9 @@ namespace Boku
 
                 KeyboardInput.OnChar = null;
                 KeyboardInput.OnKey = null;
-#if !NETFX_CORE
-                BokuGame.bokuGame.winKeyboard.CharacterEntered = null;
-#endif
             }
 
-        }   // end of class TextDialog UpdateObj  
+        }   // end of class TextDialog UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -446,7 +436,6 @@ namespace Boku
 
                         //TextHelper.DrawStringWithShadow(Font20, batch, x, y, shared.Prompt, shared.textColor, shared.shadowColor, false);
                     }
-
 
                     batch.Begin();
 
@@ -547,7 +536,6 @@ namespace Boku
             {
             }
 
-
             public void LoadContent(bool immediate)
             {
                 // Init the effect.
@@ -622,8 +610,7 @@ namespace Boku
                 BokuGame.Release(ref diffuse);
             }
 
-        }   // end of class TextDialog RenderObj     
-
+        }   // end of class TextDialog RenderObj
 
         // delegates
         public delegate void TextDialogButtonHandler(TextDialog dialog);
@@ -698,8 +685,8 @@ namespace Boku
         public string UserText
         {
             get { return shared.curString; }
-            set 
-            { 
+            set
+            {
                 shared.curString = value;
                 shared.originalString = value;
                 // Position the cursor at the end of the current string.
@@ -723,7 +710,7 @@ namespace Boku
             get { return shared.textColor; }
             set { shared.textColor = value; }
         }
-        
+
         /// <summary>
         /// The shadow color for the text.
         /// </summary>
@@ -732,16 +719,15 @@ namespace Boku
             get { return shared.shadowColor; }
             set { shared.shadowColor = value; }
         }
-        
+
         public TextDialogButtons Buttons
         {
             get { return buttons; }
         }
-        
-        #endregion 
+
+        #endregion
 
         #region Public
-
 
         // c'tor
         public TextDialog(Color color, TextDialogButtons buttons)
@@ -810,7 +796,7 @@ namespace Boku
                 pendingState = States.Active;
                 BokuGame.objectListDirty = true;
 
-                // There should be no entry for "TextDialog" so this effectively 
+                // There should be no entry for "TextDialog" so this effectively
                 // disables the help overlay while the dialog is active.
                 HelpOverlay.Push("TextDialog");
 
@@ -829,7 +815,6 @@ namespace Boku
                 BokuGame.objectListDirty = true;
             }
         }
-
 
         public void LoadContent(bool immediate)
         {
@@ -860,4 +845,3 @@ namespace Boku
     }   // end of class TextDialog
 
 }   // end of namespace Boku
-

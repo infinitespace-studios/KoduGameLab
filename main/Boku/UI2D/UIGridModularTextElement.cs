@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -119,7 +118,7 @@ namespace Boku.UI2D
             {
                 RefreshRT();
             }
-            
+
             base.Update(ref parentMatrix);
         }
 
@@ -173,7 +172,6 @@ namespace Boku.UI2D
             Vector2 buttonSize = new Vector2(rt.Width, rt.Height);
             ScreenSpaceQuad ssquad = ScreenSpaceQuad.GetInstance();
             ssquad.Render(tile, Vector2.Zero, buttonSize, "TexturedRegularAlpha");
-
 
             if (compressionFactor < 1.0f)
             {
@@ -241,9 +239,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularTextElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

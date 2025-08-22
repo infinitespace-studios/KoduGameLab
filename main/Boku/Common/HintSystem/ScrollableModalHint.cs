@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -158,7 +156,7 @@ namespace Boku
                 }
 
                 // We need to be able to slip out to the mini-hub here since
-                // continuous, repeated calls to ScrollableModalHint can lock the 
+                // continuous, repeated calls to ScrollableModalHint can lock the
                 // user out of control.
                 if (Actions.MiniHub.WasPressed)
                 {
@@ -169,7 +167,7 @@ namespace Boku
                 }
 
                 // We need to be able to slip out to the tool menu here since
-                // continuous, repeated calls to ScrollableModalHint can lock the 
+                // continuous, repeated calls to ScrollableModalHint can lock the
                 // user out of control.
                 if (Actions.ToolMenu.WasPressed)
                 {
@@ -229,7 +227,7 @@ namespace Boku
                         TouchContact touch = TouchInput.GetTouchContactByIndex(i);
 
                         Vector2 touchHit = touch.position;
-                        
+
                         // Adjust for position and scaling of final rendering.
                         touchHit -= renderPosition;
                         touchHit /= renderScale;
@@ -504,7 +502,6 @@ namespace Boku
                 // Clear to transparent.
                 InGame.Clear(Color.Transparent);
 
-
                 // Set up params for rendering UI with this camera.
                 Fx.ShaderGlobals.SetCamera(camera);
 
@@ -539,7 +536,7 @@ namespace Boku
                 Vector2 max;
 
                 batch.Begin();
-                {   
+                {
                     // Calc center position.
                     pos = new Vector2(rtSize.X / 2.0f, rtSize.Y / 2.0f + backgroundSize.Y * 0.28f);
 

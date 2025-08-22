@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -39,7 +38,6 @@ namespace Boku
                 : base(parent, ref shared)
             {
             }   // end of EditWorldParametersUpdateObj c'tor
-
 
             /// <summary>
             /// EditWorldParametersUpdateObj Update()
@@ -79,5 +77,3 @@ namespace Boku
     }   // end of class InGame
 
 }
-
-

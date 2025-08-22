@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -57,7 +56,7 @@ namespace Boku
         private static AABB2D homeHitBox = new AABB2D();        // Hit regions for mouse clicking on buttons.
         private static AABB2D editHitBox = new AABB2D();
         private static AABB2D restartHitBox = new AABB2D();
-        private static PerspectiveUICamera camera = null;       // Used for re-mapping to account for rendering to a rendertarget 
+        private static PerspectiveUICamera camera = null;       // Used for re-mapping to account for rendering to a rendertarget
                                                                 // which may differ in size from the current window.
 
         private static bool dirty = false;                      // Force a refresh of the rendertarget texture.
@@ -112,7 +111,7 @@ namespace Boku
         public static Classification.Colors ActiveTeam
         {
             get { return activeTeam; }
-            set 
+            set
             {
                 if (activeTeam != value)
                 {
@@ -166,7 +165,7 @@ namespace Boku
         public static float AlphaTeam
         {
             get { return alphaTeam; }
-            set 
+            set
             {
                 TwitchManager.Set<float> set = delegate(float val, Object param) { alphaTeam = val; };
                 TwitchManager.CreateTwitch<float>(alphaTeam, value, set, 0.2f, TwitchCurve.Shape.EaseInOut);
@@ -255,7 +254,7 @@ namespace Boku
         {
             get
             {
-                return ActiveGameOver 
+                return ActiveGameOver
                         || ActivePlayer != GamePadSensor.PlayerId.Dynamic
                         || ActiveTeam != Classification.Colors.NotApplicable
                         || ActiveWinner;
@@ -404,7 +403,7 @@ namespace Boku
                     pos += new Vector2(7, 10);
                     quad.Render(glyph, pos, size, "TexturedPreMultAlpha");
                 }
-                
+
                 // Options.
                 if (GamePadInput.ActiveMode == GamePadInput.InputMode.GamePad)
                 {
@@ -451,7 +450,7 @@ namespace Boku
                 // This prevents transparent fringing around the text.
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
                 device.BlendState = UI2D.Shared.BlendStateColorWriteRGB;
-                
+
                 if (label != null)
                 {
                     // Center the team name.
@@ -465,7 +464,7 @@ namespace Boku
                 pos = new Vector2(572, 482);
                 TextHelper.DrawStringNoBatch(Font, Strings.Localize("gameOver.browse"), pos + shadowOffset, shadowColor);
                 TextHelper.DrawStringNoBatch(Font, Strings.Localize("gameOver.browse"), pos, fontColor);
-                
+
                 pos.Y += 51;
                 TextHelper.DrawStringNoBatch(Font, Strings.Localize("gameOver.edit"), pos + shadowOffset, shadowColor);
                 TextHelper.DrawStringNoBatch(Font, Strings.Localize("gameOver.edit"), pos, fontColor);
@@ -473,10 +472,10 @@ namespace Boku
                 pos.Y += 51;
                 TextHelper.DrawStringNoBatch(Font, Strings.Localize("gameOver.restart"), pos + shadowOffset, shadowColor);
                 TextHelper.DrawStringNoBatch(Font, Strings.Localize("gameOver.restart"), pos, fontColor);
-                
+
                 // Restore default blend state.
                 device.BlendState = BlendState.AlphaBlend;
-                
+
             }
 
             if (ActiveWinner)
@@ -625,7 +624,7 @@ namespace Boku
             {
                 camera.Resolution = new Point(1280, 720);   // Match the render target we're using.
                 Vector2 mouseHit = MouseInput.GetAspectRatioAdjustedPosition(camera, false);
-                
+
                 if (homeHitBox.LeftPressed(mouseHit))
                 {
                     InGame.inGame.SwitchToMiniHub();
@@ -674,7 +673,6 @@ namespace Boku
                     }
                 }
 
-               
             }
 
         }   // end of Update()
@@ -744,14 +742,13 @@ namespace Boku
             catch
             {
                 // During device reset this can fail.  What's happening is that if the victory overlay is
-                // active when the window in minimixzed/restored, the system can still think that the 
+                // active when the window in minimixzed/restored, the system can still think that the
                 // rendertarget is 'set' on the device causing the Texture2D call to throw.
                 // So, catch the exception and force the rendertarget to be redrawn.
                 dirty = true;
             }
 
         }   // end of VictoryOverlay Render()
-
 
         public static void LoadContent(bool immediate)
         {

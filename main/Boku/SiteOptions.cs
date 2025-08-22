@@ -44,7 +44,7 @@ namespace Boku
         public string Product = "General";
 
         public string Community = "Default";
-        
+
         public string KGLUrl = @"http://www.kodugamelab.com";
 
         public string SKAuthUrl = "";
@@ -119,11 +119,11 @@ namespace Boku
         public void Save()
         {
             XmlSerializer xml = new XmlSerializer(typeof(SiteOptions));
-            
+
             Stream stream = Storage4.OpenWrite(MyFilename);
-            
+
             xml.Serialize(stream, this);
-            
+
             stream.Close();
         }
 

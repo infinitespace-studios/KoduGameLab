@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
-
 using Boku.Common.Xml;
 
 using BokuShared;
@@ -114,7 +112,7 @@ namespace Boku.Common
             }
         }
 
-        public DateTime LastSaveTime = DateTime.MinValue;//Used to determin if level is owned by user. 
+        public DateTime LastSaveTime = DateTime.MinValue;//Used to determin if level is owned by user.
                                                         //Note it should usually be the same as lastWriteTime but not the same as Modified.
         internal LevelMetadata Duplicate()
         {
@@ -167,7 +165,7 @@ namespace Boku.Common
             PartitionKey = packet.PartitionKey;
             Checksum = packet.checksum;
             LastSaveTime = packet.LastSaveTime;
-            
+
         }
 
         public void ToPacket(WorldInfoPacket packet)
@@ -337,7 +335,7 @@ namespace Boku.Common
                 currentLink = previousLink;
             }
 
-            //first link now points to the beginning, walk forward to the end, ensuring we 
+            //first link now points to the beginning, walk forward to the end, ensuring we
             while (currentLink.LinkedToLevel != null)
             {
                 //check to make sure the xml exists

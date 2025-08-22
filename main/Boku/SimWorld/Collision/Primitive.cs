@@ -32,7 +32,7 @@ namespace Boku.SimWorld.Collision
 
         private BoundingSphere localSphere;
         private BoundingSphere worldSphere; /// cached localSphere transformed
-                                            /// 
+                                            ///
         private string debugName = "Unknown";
 
         #endregion Members
@@ -129,7 +129,6 @@ namespace Boku.SimWorld.Collision
 
         #endregion Abstract
 
-
         /// <summary>
         /// Set the owner actor.
         /// </summary>
@@ -161,8 +160,8 @@ namespace Boku.SimWorld.Collision
         /// </summary>
         public virtual void UpdateTransforms()
         {
-            Matrix rootToWorld = Owner != null 
-                ? Owner.Movement.LocalMatrix 
+            Matrix rootToWorld = Owner != null
+                ? Owner.Movement.LocalMatrix
                 : Matrix.Identity;
             Matrix worldToRoot = Matrix.Invert(rootToWorld);
 
@@ -226,7 +225,7 @@ namespace Boku.SimWorld.Collision
             double a = dir.LengthSquared();
             if (a <= 0.000001)
             {
-                // There is no movement along a ray, either p0 is in the sphere or 
+                // There is no movement along a ray, either p0 is in the sphere or
                 // there is no hit.
                 if (Vector3.DistanceSquared(center, p0) <= radius * radius)
                 {
@@ -255,7 +254,7 @@ namespace Boku.SimWorld.Collision
 
         /// <summary>
         /// Test a ray segment against an axis-aligned ellipsoid.
-        /// 
+        ///
         /// A ray inside the ellipsoid will return an immediate hit.
         /// </summary>
         /// <param name="center"></param>
@@ -367,9 +366,9 @@ namespace Boku.SimWorld.Collision
         /// <param name="collPrim"></param>
         /// <returns></returns>
         public bool SetCollPrim(
-            Vector3 from, 
-            Vector3 center, 
-            Vector3 contact, 
+            Vector3 from,
+            Vector3 center,
+            Vector3 contact,
             Vector3 normal,
             Vector3 struck,
             ref CollInfo collPrim)

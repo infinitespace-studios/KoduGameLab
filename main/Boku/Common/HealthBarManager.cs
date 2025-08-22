@@ -64,7 +64,7 @@ namespace Boku.Common
         #endregion
 
         #region Public Accessors
-        
+
         public static Texture2D BackTexture
         {
             get { return backTexture; }
@@ -81,7 +81,7 @@ namespace Boku.Common
         #endregion
 
         #region Public Methods
-        
+
         static HealthBarManager()
         {
             actors = new List<GameActor>();
@@ -290,7 +290,7 @@ namespace Boku.Common
 
                 // Position at center bottom of screen.
                 Vector2 position = new Vector2((camera.Resolution.X - size.X) / 2, (camera.Resolution.Y - size.Y));
-                
+
                 // Adjust for vertical overscan.
                 position.Y -= 40;
 

@@ -22,7 +22,7 @@ namespace Boku.Common.Gesture
         }
 
         /// <summary>
-        /// Rotation DOT product threshold. This controls how tolerant the twist gesture detector is to the two fingers 
+        /// Rotation DOT product threshold. This controls how tolerant the twist gesture detector is to the two fingers
         /// moving in opposite directions.
         /// Setting this to -1 means the fingers have to move in exactly opposite directions relative to each other.
         /// This value has to be kept between -1 and 0
@@ -39,18 +39,17 @@ namespace Boku.Common.Gesture
 
         //how much to multiply the output rotation by
         const float k_RotationMultiplier = 1.75f;
-        
+
         //
         private int[] m_FingerId = new int[kNumTouchesRequired];
         private float m_RotationDelta = 0.0f;
-        
+
         private float m_AccumulatedRotation = 0.0f;
 
         private double m_MinRotationLastTime = 0;
         private float m_MinRotationDelta = 0.0f;
 
         private Vector2 m_averagePosition = new Vector2(0.0f, 0.0f);
-
 
         public bool AreFingerIDValid()
         {
@@ -74,7 +73,6 @@ namespace Boku.Common.Gesture
             get { return (TotalRotation * (180.0f / (float)Math.PI)); }
         }
 
-
         /// <summary>
         /// Get rotation change since last move( in radians )
         /// </summary>
@@ -92,8 +90,8 @@ namespace Boku.Common.Gesture
         }
 
         /// <summary>
-        /// A rotation is considered "rotating" if the gesture is active and both fingers are down. 
-        /// It is not rotating when the user lifts off one of the fingers, even if the gesture as a whole 
+        /// A rotation is considered "rotating" if the gesture is active and both fingers are down.
+        /// It is not rotating when the user lifts off one of the fingers, even if the gesture as a whole
         /// is still considered active.
         /// </summary>
         public bool IsRotating
@@ -225,7 +223,7 @@ namespace Boku.Common.Gesture
 
                     //Calculate rotation delta and apply to total rotation
                     m_RotationDelta = SignedAngularGap( (tc[0].position - tc[1].position), (tc[0].previousPosition - tc[1].previousPosition) );
-                    
+
                     m_AccumulatedRotation += m_RotationDelta;
                     m_MinRotationDelta += m_RotationDelta;
 

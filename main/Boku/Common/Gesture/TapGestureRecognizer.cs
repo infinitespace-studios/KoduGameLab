@@ -24,7 +24,6 @@ namespace Boku.Common.Gesture
         /// </summary>
         const float k_MaxTouchRadius = 20.0f;
 
-
         const float k_ValidTimeForEditTap = 0.25f;
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace Boku.Common.Gesture
                 SetState(GestureState.Failed);
                 return;
             }
- 
+
             m_fingerId = touches[0].fingerId;
             m_position = touches[0].startPosition;
         }

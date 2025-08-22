@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Xml;
 using System.Xml.Serialization;
@@ -56,7 +55,7 @@ namespace Boku.Input
         static Vector2 position;            // Position as if fully scaled.  Will be different in snapped modes.
         static Vector2 renderPosition;      // Actual position we render in due to snap.
         static Vector2 renderSize;          // Actual size we render in.
-        static float renderScale = 1.0f;    // Ratio of renderSize / rt size 
+        static float renderScale = 1.0f;    // Ratio of renderSize / rt size
 
         static int backspaceWidth = largeBackspaceWidth;
         static int enterWidth = largeEnterWidth;
@@ -88,7 +87,6 @@ namespace Boku.Input
         static Texture2D rightTexture = null;
         static Texture2D leftCircleTexture = null;
         static Texture2D rightCircleTexture = null;
-
 
         #endregion
 
@@ -1390,8 +1388,6 @@ namespace Boku.Input
 
         #endregion
 
-
-
         #region Internal
 
         static void SwitchToKeySet(string name)
@@ -1411,7 +1407,7 @@ namespace Boku.Input
             dirty = true;
 
         }   // end of SwitchToKeySet()
-            
+
         static void RefreshTexture()
         {
             // Render the keyboard into our rendertarget.
@@ -1424,7 +1420,6 @@ namespace Boku.Input
 
             dirty = false;
         }   // end of RefreshTexture()
-
 
         public static void LoadContent(bool immediate)
         {

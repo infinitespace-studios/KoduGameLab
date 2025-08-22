@@ -4,7 +4,7 @@
 /*
  * ModelAnimator.cs
  * Copyright (c) 2007 David Astle, Michael Nikonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -43,7 +43,6 @@ namespace Xclna.Xna.Animation
     public  class ModelAnimator : DrawableGameComponent
     {
 
-
         #region Member Variables
         // Stores the world transform for the animation controller.
         private Matrix world = Matrix.Identity;
@@ -61,7 +60,7 @@ namespace Xclna.Xna.Animation
 
         // Store the number of meshes in the model
         private readonly int numMeshes;
-        
+
         // Used to avoid reallocation
         private static Matrix skinTransform;
         // Buffer for storing absolute bone transforms
@@ -81,7 +80,6 @@ namespace Xclna.Xna.Animation
         #endregion
 
         #region General Properties
-
 
         /// <summary>
         /// Gets or sets the world matrix for the animation scene.
@@ -151,9 +149,9 @@ namespace Xclna.Xna.Animation
             }
             // Update after AnimationController by default
             base.UpdateOrder = 1;
-            if(game != null) 
+            if(game != null)
                 game.Components.Add(this);
-   
+
         }
         #endregion
         /// <summary>
@@ -174,7 +172,7 @@ namespace Xclna.Xna.Animation
         public void Update()
         {
             bonePoses.CopyAbsoluteTransformsTo(pose);
-            for (int i = 0; i < skinInfo.Length; i ++) 
+            for (int i = 0; i < skinInfo.Length; i ++)
             {
                 if (palette[i] == null)
                     continue;
@@ -200,7 +198,6 @@ namespace Xclna.Xna.Animation
 
         }
 
-
         /// <summary>
         /// Copies the current absolute transforms to the specified array.
         /// </summary>
@@ -219,7 +216,6 @@ namespace Xclna.Xna.Animation
         {
             return pose[boneIndex];
         }
-
 
         /// <summary>
         /// Gets a list of objects that are attached to a bone in the model.

@@ -4,7 +4,7 @@
 /*
  * PaletteSourceCode.cs
  * Copyright (c) 2007 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -64,12 +64,11 @@ namespace Xclna.Xna.Animation.Reader
             {
                 return @"
 
-
-	// For phong shading, the final color of a pixel is equal to 
+	// For phong shading, the final color of a pixel is equal to
 	// (sum of influence of lights + ambient constant) * texture color at given tex coord
 	// First we find the diffuse light, which is simply the dot product of -1*light direction
 	// and the normal.  This gives us the component of the reverse light direction in the
-	// direction of the normal.  We then multiply the sum of each lights influence by a 
+	// direction of the normal.  We then multiply the sum of each lights influence by a
 	// diffuse constant.
 	// Then we do a similar strategy for specular light; sum the lights then multiply by
 	// a specular constant.  In this formula, for each light, we find the dot product between
@@ -93,11 +92,9 @@ namespace Xclna.Xna.Animation.Reader
 		 (DirLight1Enable ? dot(-DirLight1Direction,normal) * DirLight1DiffuseColor : 0) +
 		 (DirLight2Enable ?  dot(-DirLight2Direction,normal) * DirLight2DiffuseColor : 0));
 
-
     // This is the vector between the camera and the object in world space, which is used
     // for phong lighting calculation
 	float3 viewDirection = normalize(EyePosition - mul(output.position,World));
-
 
     // These will store the specular components for each light.
     float3 spec0,spec1,spec2;
@@ -160,7 +157,7 @@ namespace Xclna.Xna.Animation.Reader
     }
     else
         spec2=float3(0,0,0);
-    
+
     // Now we find the total specular by multiplying the specular material by the sum
     // of the lights' specular colors.
 	float3 totalSpecular = SpecularColor * (spec0+spec1+spec2);
@@ -246,16 +243,13 @@ void TransformPixel (in PS_INPUT input, out PS_OUTPUT output)
     }
 	else
 	{
-		
-
 
 		output.color.xyz = TextureEnabled ? tex2D(TextureSampler, input.texcoord).xyz  * input.color.xyz
             : input.color.xyz;
 
 	}
-    output.color.w   = 
+    output.color.w   =
          TextureEnabled ? tex2D(TextureSampler, input.texcoord).w * Alpha : Alpha;
-    
 
     if (FogEnable)
     {
@@ -267,7 +261,7 @@ void TransformPixel (in PS_INPUT input, out PS_OUTPUT output)
         // the fog color.
         // If it lies in between, we interpolate from the shaded vertex color to
         // the fog color as a function of how close it is to the FogEnd.
-                
+
         float dist = (input.distance - FogStart) / (FogEnd - FogStart);
         dist = saturate(dist);
         float3 distv = float3(dist,dist,dist);
@@ -278,7 +272,6 @@ void TransformPixel (in PS_INPUT input, out PS_OUTPUT output)
 ";
             }
         }
-
 
         /// <summary>
         /// Returns the source code for BasicPaletteEffect for a max of
@@ -368,14 +361,10 @@ void TransformVertex (in VS_INPUT input, out VS_OUTPUT output)
     output.position=skin.position;
     float3 normal = skin.normal;
 
-
-
     " + LightingCode + @"
 }
 
 " + PixelShaderCode + @"
-
-
 
 technique TransformTechnique
 {

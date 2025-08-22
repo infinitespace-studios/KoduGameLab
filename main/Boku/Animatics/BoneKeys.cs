@@ -112,7 +112,6 @@ namespace Boku.Animatics
                     ? keys.Length - 1
                     : idx);
 
-
             return idx;
         }
         /// <summary>

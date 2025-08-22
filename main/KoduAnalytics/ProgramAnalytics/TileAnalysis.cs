@@ -67,7 +67,7 @@ namespace KoduAnalytics.ProgramAnalytics
         public void getActorInformation()
         {
             String fullpath = @"C:\BokuProject\Boku\KoduAnalytics\ProgramAnalytics\Strings.xml";
-            
+
             //read the XML file to get actor names
             XmlTextReader reader = new XmlTextReader(fullpath);
             Boolean inActorNames = false;
@@ -117,7 +117,6 @@ namespace KoduAnalytics.ProgramAnalytics
     allActorTypes.Add("wall");
     allActorTypes.Add("flora");
 
-
             //while (reader.Read())
             //{
             //    switch (reader.NodeType)
@@ -132,7 +131,6 @@ namespace KoduAnalytics.ProgramAnalytics
             //                            // the value is the object type we want to record;
             //                            allActorTypes.Add(reader.Value);
             //                            Console.Write(reader.Value + "'");
-                                    
 
             //                    }
             //                    break;
@@ -214,7 +212,6 @@ namespace KoduAnalytics.ProgramAnalytics
                  sr.Close();
             }
 
-
             //summarize the frequency and object percentages
             int unreachable = (from g in games
                                where g.unreachablePages.Count() > 0
@@ -256,7 +253,6 @@ namespace KoduAnalytics.ProgramAnalytics
             g.totalTiles = (from a in g.actordata.actors.Values
                            where a.allrules.Count() > 0
                            select a.tileCount).Sum();
-
 
         }
 
@@ -362,7 +358,7 @@ namespace KoduAnalytics.ProgramAnalytics
 
             foreach (KoduGame g in games)
             {
-                
+
                 for (int i = 0; i < tiles.Length; i++)
                 {
                     var found = (from s in g.tiledata.tiles
@@ -458,7 +454,7 @@ namespace KoduAnalytics.ProgramAnalytics
          * Looks at the rule interactions with each scorebucket, as a proxy for
          * global variables. We care here about the number of rules that read
          * versus the number of rules that write. Some rules may do both.
-         */ 
+         */
         private void getScoreBucketInformation(KoduGame g)
         {
             List<KeyValuePair<string, int>> sb = (from t in g.tiledata.tiles
@@ -475,7 +471,7 @@ namespace KoduAnalytics.ProgramAnalytics
                     g.bucketwrites.Add(bucket, 0);
                     buckets.Add(bucket);
                 }
-                
+
             }
             String color;
             foreach (Actor a in g.actordata.actors.Values)
@@ -498,13 +494,12 @@ namespace KoduAnalytics.ProgramAnalytics
                 }
             }
 
-
             g.distinctbuckets = buckets.Count();
 
             Boolean contains = false;
             foreach (Actor a in g.actordata.actors.Values)
             {
-                
+
                 foreach (Rule r in a.allrules)
                 {
                     contains = false;
@@ -530,7 +525,7 @@ namespace KoduAnalytics.ProgramAnalytics
                                 {
                                     g.bucketreads[b]++;
                                     contains = true;
-                               } 
+                               }
                             }
                         }
                     }
@@ -668,7 +663,7 @@ namespace KoduAnalytics.ProgramAnalytics
                             }
                         }
                     }
-                    
+
                 }
                 //check for the rules that are duplicates
                 int allDuplicates = (from rules in a.allrules
@@ -677,7 +672,7 @@ namespace KoduAnalytics.ProgramAnalytics
                 g.logicalAndConditionProxies += allDuplicates;
 
                 int allDuplicatesNotAlways = (from rules in a.allrules
-                                             where rules.conditionDuplicatedInPage == true 
+                                             where rules.conditionDuplicatedInPage == true
                                              & rules.conditionIsAlways == false
                                              select rules).Count();
                 g.logicalAndConditionProxiesNoAlways += allDuplicatesNotAlways;
@@ -770,7 +765,7 @@ namespace KoduAnalytics.ProgramAnalytics
             {
                 a.createStateMachine();
                 int states = a.pagesUsed();
-                //if (states == 4 && a.stateMachine.hasCycle() && 
+                //if (states == 4 && a.stateMachine.hasCycle() &&
                 //    (a.stateMachine.get("win").incoming.Count() > 0
                 //    || a.stateMachine.get("lose").incoming.Count() > 0))
                 int used = (from s in a.stateMachine.states
@@ -795,7 +790,7 @@ namespace KoduAnalytics.ProgramAnalytics
             + @"\analytics\Machines\";
 
             Directory.CreateDirectory(directory);
-            
+
             directory += g.upid + "_" + a.id + ".dot";
 
             using (StreamWriter sw = File.CreateText(directory))
@@ -813,7 +808,6 @@ namespace KoduAnalytics.ProgramAnalytics
                 sw.Close();
             }
         }
-
 
         private Boolean isSameSetOfStrings(List<string> a, List<string> b)
         {
@@ -883,7 +877,7 @@ namespace KoduAnalytics.ProgramAnalytics
                 foreach (Rule r in a.allrules)
                 {
                     if (r.Condition.Contains("sensor.gamepad")
-                        || r.Condition.Contains("sensor.keyboard") 
+                        || r.Condition.Contains("sensor.keyboard")
                         || r.Condition.Contains("sensor.mouse"))
                     {
                         g.HCItile++;
@@ -1012,7 +1006,6 @@ namespace KoduAnalytics.ProgramAnalytics
                     g.avgpageobj = g.totalpages / g.distinctActors.Count();
                 }
 
-
                 int wa = (from w in g.actordata.actors.Values
                                   from r in w.allrules
                           where r.Condition.Contains("sensor.always") && r.Action != "Do"
@@ -1035,11 +1028,11 @@ namespace KoduAnalytics.ProgramAnalytics
             TextWriter tw = new StreamWriter(RunAnalysis.directory + @"/" + "games.csv");
             string delim = ", ";
             tw.WriteLine(
-                "id" 
-                + delim + "title" 
+                "id"
+                + delim + "title"
                 + delim + "total scorebucket" + delim + "distinct scorebuckets"
-                + delim + "total tiles" + delim + "distinct tiles" 
-                + delim + "avgreads bucket" + delim + "avgwrites bucket" 
+                + delim + "total tiles" + delim + "distinct tiles"
+                + delim + "avgreads bucket" + delim + "avgwrites bucket"
                 + delim + "total actors" + delim + "distinct actors"
                 + delim + "blank actors" //+ delim + "% blank actors"
                 + delim + "total rules"  + delim + "rules per actor"
@@ -1153,7 +1146,6 @@ namespace KoduAnalytics.ProgramAnalytics
             Console.WriteLine("Last: " + last.ToLongDateString() + " " + lastgame);
         }
 
-
         public void readTileFile()
         {
             String path = RunAnalysis.tileusage;
@@ -1205,8 +1197,6 @@ namespace KoduAnalytics.ProgramAnalytics
                 pact = (double)act / (double)total;
                 pfilt = (double)filt / (double)total;
 
-                
-
                 if (total > 0)
                 {
                     tw.WriteLine(total + delim +
@@ -1251,9 +1241,9 @@ namespace KoduAnalytics.ProgramAnalytics
             Console.WriteLine("Zero Tiles: " + blanks);
         }
 
-        public void processLine(String line) 
+        public void processLine(String line)
         {
-            
+
             String[] tokens = line.Split(',');
             KoduGame kg = new KoduGame(tokens[0]);
             TileData td = new TileData();

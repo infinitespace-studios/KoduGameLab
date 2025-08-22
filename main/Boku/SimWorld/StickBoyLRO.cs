@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ namespace Boku.SimWorld
         private static StickBoySRO sroInstance = null;
 
         // c'tor
-        private StickBoySRO() 
+        private StickBoySRO()
             : base(@"Models\stick_boy")
         {
             TechniqueExt = "WithSkinning";

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -126,7 +124,7 @@ namespace Boku
                 if (InGame.inGame.State == InGame.States.Active && InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.RunSim)
                 {
                     // We need to be able to slip out to the mini-hub here since
-                    // continuous, repeated calls to ModalHint can lock the 
+                    // continuous, repeated calls to ModalHint can lock the
                     // user out of control.
                     if (Actions.MiniHub.WasPressed)
                     {
@@ -137,7 +135,7 @@ namespace Boku
                     }
 
                     // We need to be able to slip out to the tool menu here since
-                    // continuous, repeated calls to ModalHint can lock the 
+                    // continuous, repeated calls to ModalHint can lock the
                     // user out of control.
                     if (Actions.ToolMenu.WasPressed)
                     {
@@ -294,7 +292,7 @@ namespace Boku
                 {
                     curHint.Disabled = true;
                 }
-                
+
                 Deactivate();
             }
 
@@ -374,7 +372,7 @@ namespace Boku
                 //
                 Vector2 size = new Vector2(backgroundTexture.Width, backgroundTexture.Height);
                 renderPosition = (BokuGame.ScreenSize - size) / 2.0f;
-                
+
                 ssquad.Render(backgroundTexture, renderPosition, size, "TexturedRegularAlpha");
 
                 //

@@ -28,8 +28,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// The primary responsibility of this class is to render and maintain the internal state of
-    /// any buttons required by Kode containing TouchButtonFilter tiles. When any such filter exists, we 
-    /// need to draw the button on the screen and respond to touches by the user. The TouchButtonFilters 
+    /// any buttons required by Kode containing TouchButtonFilter tiles. When any such filter exists, we
+    /// need to draw the button on the screen and respond to touches by the user. The TouchButtonFilters
     /// will be querying this class to find out if their button conditions have been met.
     /// </summary>
     public class TouchButtons
@@ -171,7 +171,7 @@ namespace Boku.Programming
 
             float scale = Math.Min((float)BokuGame.bokuGame.GraphicsDevice.Viewport.Height / 1024.0f, 1.0f);
             int center = BokuGame.bokuGame.GraphicsDevice.Viewport.Width / 2;
-            float overscan = BokuGame.bokuGame.GraphicsDevice.Viewport.Height * 
+            float overscan = BokuGame.bokuGame.GraphicsDevice.Viewport.Height *
                 XmlOptionsData.OverscanPercent / 200.0f;
             ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
 
@@ -204,7 +204,7 @@ namespace Boku.Programming
                 buttonsPos[i].Y += overscan;
                 touchButtonBoxes[i].Set(buttonsPos[i], buttonsPos[i] + buttonSize);
 
-                quad.Render(touchButtonTextures[i], drawColor, buttonsPos[i], buttonSize, 
+                quad.Render(touchButtonTextures[i], drawColor, buttonsPos[i], buttonSize,
                     "TexturedRegularAlpha");
             }
         }

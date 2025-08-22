@@ -17,7 +17,7 @@ namespace Boku.SimWorld
     /// <summary>
     /// The visual representation for a path
     /// </summary>
-    public class Road 
+    public class Road
     {
         private float width = 3.0f;
         private float height = 1.0f;
@@ -30,8 +30,8 @@ namespace Boku.SimWorld
         private List<Section> sections = new List<Section>();
         private List<Intersection> intersections = new List<Intersection>();
 
-        static private RoadGenerator[] generators = 
-            { 
+        static private RoadGenerator[] generators =
+            {
                 null,
                 new HiWallGen(),
                 new HiWayGen(),
@@ -460,7 +460,7 @@ namespace Boku.SimWorld
             HeightMap heightMap = InGame.inGame.Terrain.HeightMap;
 
             return new Vector2(i * heightMap.Scale.X / (heightMap.Size.X - 1),
-                    j * heightMap.Scale.Y / (heightMap.Size.Y - 1));            
+                    j * heightMap.Scale.Y / (heightMap.Size.Y - 1));
         }
 
         protected void Flatten(Vector2 start, Vector2 end)
@@ -470,7 +470,7 @@ namespace Boku.SimWorld
             float invAxLenSq = 1.0f / axis.LengthSquared();
 
             Vector2 smoothWidth = Generator.SmoothWidth();
-            float smoothNorm = smoothWidth.Y > smoothWidth.X 
+            float smoothNorm = smoothWidth.Y > smoothWidth.X
                                 ? 1.0f / (smoothWidth.Y - smoothWidth.X)
                                 : 1.0f;
 
@@ -529,7 +529,7 @@ namespace Boku.SimWorld
             }
 
             terrain.RefreshFromHeightMap(min, max);
-    
+
         }
     }
 

@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of Microbit button input.
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class MicrobitButtonFilter : Filter, IMicrobitTile
     {
@@ -75,23 +75,6 @@ namespace Boku.Programming
                     }
                 }
             }
-
-#if !NETFX_CORE
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                // Get the correct button.
-                switch (button)
-                {
-                    case MicrobitButton.Left:
-                        result = bit.State.ButtonA.IsPressed();
-                        break;
-                    case MicrobitButton.Right:
-                        result = bit.State.ButtonB.IsPressed();
-                        break;
-                }
-            }
-#endif
 
             // Return as a parameter a vector that can be used for input to the movement system, so
             // that players can drive and turn bots using gamepad buttons.

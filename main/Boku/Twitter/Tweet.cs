@@ -56,7 +56,7 @@ namespace Boku
         {
             tweetBlob = new TextBlob(UI2D.Shared.GetGameFont13_5, text, 150);
             tweetBlob.Width = (int)size.X;
-            
+
             size.Y = (tweetBlob.NumLines - 1) * tweetBlob.TotalSpacing;
             size.Y += UI2D.Shared.GetGameFont13_5().LineSpacing;
             base.Height = size.Y;
@@ -246,7 +246,7 @@ namespace Boku
             }
         }
 
-        override public bool SetPrevFocus() 
+        override public bool SetPrevFocus()
         {
             if (!useFocus)
             {
@@ -264,7 +264,7 @@ namespace Boku
             }
         }
 
-        override public bool SetNextFocus() 
+        override public bool SetNextFocus()
         {
             if (!useFocus)
             {

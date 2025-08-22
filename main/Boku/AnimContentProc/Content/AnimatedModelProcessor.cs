@@ -4,7 +4,7 @@
 /*
  * AnimatedModelProcessor.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -42,7 +42,6 @@ using System.Globalization;
 using System.Xml;
 using System.Collections.ObjectModel;
 
-
 namespace Xclna.Xna.Animation.Content
 {
     /// <summary>
@@ -54,7 +53,7 @@ namespace Xclna.Xna.Animation.Content
     {
 
         private ContentProcessorContext context;
-        
+
         // stores all animations for the model
         private AnimationContentDictionary animations = new AnimationContentDictionary();
         private NodeContent input;
@@ -65,7 +64,6 @@ namespace Xclna.Xna.Animation.Content
         List<MeshContent> meshes = new List<MeshContent>();
 
         private int numMeshes = 0;
-
 
         /// <summary>Processes a SkinnedModelImporter NodeContent root</summary>
         /// <param name="input">The root of the X file tree</param>
@@ -125,8 +123,6 @@ namespace Xclna.Xna.Animation.Content
 
             Dictionary<string, object> dict = new Dictionary<string, object>();
 
-
-
             // Attach the animation and skinning data to the models tag
             FindAnimations(input);
             // Test to see if any animations have zero duration
@@ -175,7 +171,6 @@ namespace Xclna.Xna.Animation.Content
             return c;
         }
 
-
         private void FindMeshes (NodeContent root)
         {
             if (root is MeshContent)
@@ -213,9 +208,7 @@ namespace Xclna.Xna.Animation.Content
             }
         }
 
-
-
-        // returns true if the model contains meshes that have a parent bone as a child of 
+        // returns true if the model contains meshes that have a parent bone as a child of
         // a bone in the skeleton attached to the mesh.
         private bool ValidateMeshSkeleton (MeshContent meshContent)
         {
@@ -232,7 +225,6 @@ namespace Xclna.Xna.Animation.Content
 
         }
 
-
         private void CalculateAbsoluteTransforms(ModelBoneContent bone, Matrix[] transforms)
         {
             if (bone.Parent == null)
@@ -244,8 +236,6 @@ namespace Xclna.Xna.Animation.Content
             foreach (ModelBoneContent child in bone.Children)
                 CalculateAbsoluteTransforms(child, transforms);
         }
-
-
 
         private SkinInfoContentCollection[] ProcessSkinInfo(ModelContent model)
         {
@@ -298,8 +288,6 @@ namespace Xclna.Xna.Animation.Content
         protected ReadOnlyCollection<SkinInfoContentCollection> SkinnedBones
         { get { return new ReadOnlyCollection<SkinInfoContentCollection>(skinInfo); } }
 
-
-
         /// <summary>
         /// Gets the processor context.
         /// </summary>
@@ -315,12 +303,12 @@ namespace Xclna.Xna.Animation.Content
             ProcessAnimation(AnimationContent animation)
         {
             // M * M = F
-            // 
+            //
             AnimationProcessor ap = new AnimationProcessor();
             AnimationContent newAnim = ap.Interpolate(animation);
             newAnim.Name = animation.Name;
             return newAnim;
-; 
+;
         }
 
         /// <summary>
@@ -515,7 +503,6 @@ namespace Xclna.Xna.Animation.Content
                             }
                         }
 
-
                         // Now we have our start and end index for the channel
                         for (int i = startIndex; i <= endIndex; i++)
                         {
@@ -536,16 +523,15 @@ namespace Xclna.Xna.Animation.Content
                             AnimationKeyframe keyframe = new AnimationKeyframe(
                                 TimeSpan.FromTicks(time),
                                 frame.Transform);
-                            
+
                             newChan.Add(keyframe);
                         }
-                        
+
                         // Add the channel and update the animation duration based on the
                         // length of the animation track.
                         newAnim.Channels.Add(k.Key, newChan);
                         if (newChan[newChan.Count - 1].Time > newAnim.Duration)
                             newAnim.Duration = newChan[newChan.Count - 1].Time;
-
 
                     }
                     try
@@ -559,7 +545,7 @@ namespace Xclna.Xna.Animation.Content
                             "Name: " + newAnim.Name);
                     }
                 }
-                
+
             }
         }
 
@@ -582,8 +568,6 @@ namespace Xclna.Xna.Animation.Content
             }
             return doc;
         }
-
-
 
         /// <summary>
         /// Called when a basic effect is encountered and potentially replaced by
@@ -631,7 +615,6 @@ namespace Xclna.Xna.Animation.Content
             }
         }
 
-
         /// <summary>
         /// Searches through the NodeContent tree for all animations and puts them in
         /// one AnimationContentDictionary
@@ -639,7 +622,7 @@ namespace Xclna.Xna.Animation.Content
         /// <param name="node">The root of the tree</param>
         private void FindAnimations(NodeContent node)
         {
-            
+
             foreach (KeyValuePair<string, AnimationContent> k in node.Animations)
             {
                 if (animations.ContainsKey(k.Key))
@@ -654,13 +637,13 @@ namespace Xclna.Xna.Animation.Content
                     animations.Add(k.Key, k.Value);
                 }
             }
-            
+
             foreach (NodeContent child in node.Children)
                 FindAnimations(child);
         }
-        
+
         /// <summary>
-        /// Go through the vertex channels in the geometry and replace the 
+        /// Go through the vertex channels in the geometry and replace the
         /// BoneWeightCollection objects with weight and index channels.
         /// </summary>
         /// <param name="geometry">The geometry to process.</param>
@@ -674,7 +657,7 @@ namespace Xclna.Xna.Animation.Content
                 int meshIndex = (int)geometry.Parent.OpaqueData["MeshIndex"];
                 BoneIndexer indexer = indexers[meshIndex];
                 // Skin channels are passed in from importers as BoneWeightCollection objects
-                VertexChannel<BoneWeightCollection> vc = 
+                VertexChannel<BoneWeightCollection> vc =
                     (VertexChannel<BoneWeightCollection>)
                     geometry.Vertices.Channels[vertexChannelIndex];
                 int maxBonesPerVertex = 0;
@@ -694,7 +677,7 @@ namespace Xclna.Xna.Animation.Content
                 // weightsToAdd and indicesToAdd array for each BoneWeightCollection.
                 for (int i = 0; i < vc.Count; i++)
                 {
-                    
+
                     BoneWeightCollection bwc = vc[i];
 
                     if (bwc.Count == 0)
@@ -715,7 +698,6 @@ namespace Xclna.Xna.Animation.Content
                     bi.Y = count > 1 ? indexer.GetBoneIndex(bwc[1].BoneName) : (byte)0;
                     bi.Z = count > 2 ? indexer.GetBoneIndex(bwc[2].BoneName) : (byte)0;
                     bi.W = count > 3 ? indexer.GetBoneIndex(bwc[3].BoneName) : (byte)0;
-
 
                     indicesToAdd[i] = new Byte4(bi);
                     Vector4 bw = new Vector4();
@@ -742,8 +724,5 @@ namespace Xclna.Xna.Animation.Content
                     "BonesWeightCollections with zero weights found in geometry.");
         }
 
-
     }
 }
-
-

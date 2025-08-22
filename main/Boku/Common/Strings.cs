@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ using Boku.Common.Localization;
 namespace Boku.Common
 {
     /// <summary>
-    /// A class to contain the string constants used in Boku 
+    /// A class to contain the string constants used in Boku
     /// in the hope that this will ease localization issues.
     /// </summary>
     public static class Strings
@@ -294,25 +293,6 @@ namespace Boku.Common
         {
             return Localize("colorNames." + color.ToString());
         }   // end of GetColorName()
-
-#if !NETFX_CORE
-        public static string GetNetworkSessionEndReason(Microsoft.Xna.Framework.Net.NetworkSessionEndReason reason)
-        {
-            switch (reason)
-            {
-                case Microsoft.Xna.Framework.Net.NetworkSessionEndReason.ClientSignedOut:
-                    return Localize("networkSessionEndReason.clientSignedOut");
-                case Microsoft.Xna.Framework.Net.NetworkSessionEndReason.Disconnected:
-                    return Localize("networkSessionEndReason.disconnected");
-                case Microsoft.Xna.Framework.Net.NetworkSessionEndReason.HostEndedSession:
-                    return Localize("networkSessionEndReason.hostEndedSession");
-                case Microsoft.Xna.Framework.Net.NetworkSessionEndReason.RemovedByHost:
-                    return Localize("networkSessionEndReason.removedByHost");
-                default:
-                    throw new Exception("invalid reason");
-            }
-        }
-#endif
 
         public static string GetGenreName(int flag)
         {

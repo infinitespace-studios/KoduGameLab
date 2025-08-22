@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -420,8 +419,8 @@ namespace Boku.Fx
         }   // end of ScreenSpaceQuad RenderStencil()
 
         /// <summary>
-        /// A specialized render call for rendering things like ratings where 
-        /// you want part of the quad rendered with one texture and the rest 
+        /// A specialized render call for rendering things like ratings where
+        /// you want part of the quad rendered with one texture and the rest
         /// of the quad rendered with another.
         /// </summary>
         /// <param name="leftTexture"></param>
@@ -454,7 +453,6 @@ namespace Boku.Fx
                 }
             }
         }   // end of RenderSplitTexture()
-
 
         public void LoadContent(bool immediate)
         {

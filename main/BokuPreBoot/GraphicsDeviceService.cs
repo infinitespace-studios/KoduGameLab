@@ -41,17 +41,13 @@ namespace BokuPreBoot
     {
         #region Fields
 
-
         // Singleton device service instance.
         static GraphicsDeviceService singletonInstance;
-
 
         // Keep track of how many controls are sharing the singletonInstance.
         static int referenceCount;
 
-
         #endregion
-
 
         /// <summary>
         /// Constructor is private, because this is a singleton class:
@@ -71,7 +67,6 @@ namespace BokuPreBoot
             //graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, parameters);
         }
 
-
         /// <summary>
         /// Gets a reference to the singleton instance.
         /// </summary>
@@ -89,7 +84,6 @@ namespace BokuPreBoot
 
             return singletonInstance;
         }
-
 
         /// <summary>
         /// Releases a reference to the singleton instance.
@@ -113,7 +107,6 @@ namespace BokuPreBoot
             }
         }
 
-        
         /// <summary>
         /// Resets the graphics device to whichever is bigger out of the specified
         /// resolution or its current size. This behavior means the device will
@@ -133,7 +126,6 @@ namespace BokuPreBoot
                 DeviceReset(this, EventArgs.Empty);
         }
 
-        
         /// <summary>
         /// Gets the current graphics device.
         /// </summary>
@@ -144,10 +136,8 @@ namespace BokuPreBoot
 
         GraphicsDevice graphicsDevice;
 
-
         // Store the current device settings.
         PresentationParameters parameters;
-
 
         // IGraphicsDeviceService events.
         public event EventHandler DeviceCreated;

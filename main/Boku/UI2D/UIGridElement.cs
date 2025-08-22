@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +19,7 @@ using Boku.Fx;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// The basic, renderable element that is used by the UIGrid.  This 
+    /// The basic, renderable element that is used by the UIGrid.  This
     /// object is assumed to be centered at 0,0,0.
     /// </summary>
     public abstract class UIGridElement : ArbitraryComparable, INeedsDeviceReset
@@ -81,11 +80,11 @@ namespace Boku.UI2D
         public Point gridCoords = Point.Zero; // Location in the container grid.
 
         protected float alpha = 1.0f;       // Overall alpha applied to complete element.
-        private float targetAlpha = 1.0f;   // If the above alpha is changing due to a twitch, 
+        private float targetAlpha = 1.0f;   // If the above alpha is changing due to a twitch,
                                             // this is the value is is going toward.
 
         protected float grey = 1.0f;        // Overall grey applied to complete element.
-        private float targetGrey = 1.0f;    // If the above grey is changing due to a twitch, 
+        private float targetGrey = 1.0f;    // If the above grey is changing due to a twitch,
                                             // this is the value is is going toward.
 
         protected const float kDim = 0.6f;  // How much to dim the element when not selected.  Used by Modular* elements.
@@ -136,9 +135,9 @@ namespace Boku.UI2D
         public Vector3 Position
         {
             get { return position; }
-            set 
+            set
             {
-                position = value; 
+                position = value;
             }
         }
         public float Scale
@@ -168,7 +167,7 @@ namespace Boku.UI2D
             set { grey = value; targetGrey = value; }
         }
         /// <summary>
-        /// Does this element need to be refreshed? 
+        /// Does this element need to be refreshed?
         /// </summary>
         public bool Dirty
         {
@@ -240,7 +239,7 @@ namespace Boku.UI2D
         }
 
         /// <summary>
-        /// If set to false, elements will not set help overlay.  
+        /// If set to false, elements will not set help overlay.
         /// The default is true since we're adding this kind of late
         /// and don't want to break existing behaviour.
         /// </summary>
@@ -399,9 +398,6 @@ namespace Boku.UI2D
         /// <param name="graphics"></param>
         public abstract void DeviceReset(GraphicsDevice device);
 
-
     }   // end of class UIElement
 
 }   // end of namespace Boku.UI2D
-
-

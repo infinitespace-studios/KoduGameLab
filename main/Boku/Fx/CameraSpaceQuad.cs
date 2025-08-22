@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -68,7 +67,6 @@ namespace Boku.Fx
                 new Vertex(new Vector2(1.0f, 1.0f))
             };
 
-
         public static CameraSpaceQuad GetInstance()
         {
             if (instance == null)
@@ -83,7 +81,6 @@ namespace Boku.Fx
         private CameraSpaceQuad()
         {
         }   // end of CameraSpaceQuad c'tor
-
 
         private void SetUvToPos(Vector2 position, Vector2 size)
         {

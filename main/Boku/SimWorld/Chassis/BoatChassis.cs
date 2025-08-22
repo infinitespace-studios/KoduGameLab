@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +27,7 @@ namespace Boku.SimWorld.Chassis
         private float hullDraft = DefaultHullDraft;
 
         private float speed = 0.0f;
-        private bool grounded = false;                      // Are we high and dry?  This should be set when the level 
+        private bool grounded = false;                      // Are we high and dry?  This should be set when the level
                                                             // is reset and stay constant throughout the run unless the
                                                             // bot is picked up and carried.
         private float velocityZ = 0.0f;                     // Temp storage for velocity.Z while terrain and glass wall hits
@@ -74,7 +73,6 @@ namespace Boku.SimWorld.Chassis
                 return;
             }
 
-
             float secs = Time.GameTimeFrameSeconds;
             Vector3 position = movement.Position;
 
@@ -86,7 +84,6 @@ namespace Boku.SimWorld.Chassis
                 float terrainAltitude = Terrain.GetTerrainAndPathHeight(Top(position));
                 grounded = (terrainAltitude > 0) && (terrainAltitude > waterAltitude - HullDraft);
             }
-
 
             if (state == GameActor.State.Active)
             {
@@ -306,7 +303,7 @@ namespace Boku.SimWorld.Chassis
         }
 
         /// <summary>
-        /// Based on the chassis' internal values, sets the blend values for the 
+        /// Based on the chassis' internal values, sets the blend values for the
         /// four standard looping animations.
         /// </summary>
         /// <param name="anims"></param>

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System.Windows.Forms;
 
 namespace Boku
@@ -56,18 +55,18 @@ namespace Boku
             // 800x600 is our minimum allowable size.
             System.Drawing.Size size = new System.Drawing.Size(800, 600);
 
-            // 
+            //
             // xnaControl
-            // 
+            //
             this.xnaControl.Location = new System.Drawing.Point(0, 0);
             this.xnaControl.Name = "xnaControl";
             this.xnaControl.Size = size;
             this.xnaControl.TabIndex = 2;
             this.xnaControl.Text = "XNAControl";
             this.xnaControl.Click += new System.EventHandler(this.xnaControl1_Click);
-            // 
+            //
             // MainForm
-            // 
+            //
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ClientSize = size;
             this.WindowState = FormWindowState.Maximized;
@@ -78,7 +77,7 @@ namespace Boku
             this.ResumeLayout(false);
 
             // To handle Alt-Enter for full screen toggle.
-            this.KeyPreview = true; 
+            this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(MainForm_KeyDown);
 
             //this.ResizeRedraw = false;

@@ -12,7 +12,6 @@ using Boku.Common.Sharing;
 using BokuShared;
 using BokuShared.Wire;
 
-
 namespace Boku.Web.Trans
 {
     /// <summary>

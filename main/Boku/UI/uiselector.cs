@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace Boku.UI
 {
     public delegate void UiSelectorActionEvent(UiSelector selector);
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="selector"></param>
     /// <param name="item"></param>
@@ -339,7 +338,7 @@ namespace Boku.UI
                 {
                     this.Cancel(this);
                 }
-                
+
             }
             else
             {
@@ -360,9 +359,9 @@ namespace Boku.UI
                         this.parentSelector.ShowCursor();
                         this.parentSelector = null;
                     }
-                    
+
                 }
-                
+
                 // item was activated
                 if (this.Select != null)
                 {
@@ -388,7 +387,7 @@ namespace Boku.UI
                 this.parentSelector.ShowCursor();
                 this.parentSelector = null;
             }
-            
+
             if (this.Cancel != null)
             {
                 this.Cancel(this);
@@ -440,13 +439,13 @@ namespace Boku.UI
                         {
                             controlItem.Hot = false;
                         }
-/* Removed to fix issue 
+/* Removed to fix issue
                         // move it back (aka hot)
                         transformItem = itemData.item as ITransform;
                         // remove it if it has a value
                         transformItem.Local.Translation = transformItem.Local.Translation - new Vector3(0.0f, 0.0f, transformItem.Local.Translation.Z);
                         transformItem.Compose();
- */ 
+ */
                     }
 
                     RenderObject selectedItem = null;
@@ -491,11 +490,11 @@ namespace Boku.UI
                         transformItem = selectedItem as ITransform;
 
                         MoveCursor(transformItem.Local.Translation, indexNew );
-/* Removed to fix issue 
+/* Removed to fix issue
                         // move it out (aka hot)
                         transformItem.Local.Translation += new Vector3(0.0f, 0.0f, hotZTranslate);
                         transformItem.Compose();
- */ 
+ */
                     }
                     else
                     {

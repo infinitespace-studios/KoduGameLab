@@ -38,15 +38,15 @@ namespace Boku.SimWorld.Terra
 
             public ushort this[int i, int j]
             {
-                get 
+                get
                 {
                     ushort val = map[i, j];
-                    return val; 
+                    return val;
                 }
-                set 
+                set
                 {
                     Debug.Assert(TerrainMaterial.IsValid(value, allowEmpty: true, allowSelectionFlag: true));
-                    map[i, j] = value; 
+                    map[i, j] = value;
                 }
             }
 
@@ -76,11 +76,11 @@ namespace Boku.SimWorld.Terra
                             val = br.ReadByte();
 
                         // If user was editing terrain with a huge brush and saved before
-                        // all tiles were updated, some of them may be saved with the 
+                        // all tiles were updated, some of them may be saved with the
                         // selection flag in place.  Obviously this doesn't make sense to
                         // have on loading, so clear it out just to be sure.
                         val &= (ushort)~TerrainMaterial.Flags.Selection;
-                        
+
                         // Is the material we read valid? If not, replace it with empty.
                         if (!TerrainMaterial.IsValid(val, true, false))
                         {

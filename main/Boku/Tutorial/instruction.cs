@@ -11,10 +11,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Boku.Tutorial
 {
     /// <summary>
-    /// This represents the base class for a single instruction.  
-    /// Only one instruction will be active at a time within the tutorial.  
+    /// This represents the base class for a single instruction.
+    /// Only one instruction will be active at a time within the tutorial.
     /// As of today, all instructions are text only (no icons or graphics).
-    /// 
+    ///
     /// </summary>
     public class Instruction : DisplayItem
     {
@@ -28,7 +28,7 @@ namespace Boku.Tutorial
         /// This is the body of text for the instruction.
         /// </summary>
         public string text;
-        
+
         /// <summary>
         /// How the input should be handled when this instruction is active
         /// </summary>
@@ -66,7 +66,7 @@ namespace Boku.Tutorial
             Boku.Common.BitmapFont font = BokuGame.fontBerlinSansFBDemiBold24;
             CalcTextPosition(out x, out y, font, this.title, 0, 1);
             DrawText(x, y, font, this.title, Color.White);
-            
+
             // draw the text
             font = BokuGame.fontBerlinSansFBDemiBold20;
             ArrayList lines = Boku.Common.TextHelper.SplitMessage(this.text, BokuGame.width - font.LineHeight, font);

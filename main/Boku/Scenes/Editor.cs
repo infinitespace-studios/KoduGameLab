@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // On exit from the kode editor, the kode's Xml will be output to the clipboard.
 // This helps support grabbing kode snippets for some of the help options.
 // This is disabled by default because it seems to throw fairly regularly, causing
@@ -39,14 +38,14 @@ namespace Boku
 {
     /// <summary>
     /// This represents the Editor scene
-    /// 
+    ///
     /// GamePad Back or Key Esc - return to Sim
     /// </summary>
     public class Editor : GameObject, ITransform, INeedsDeviceReset
     {
         protected string pageLabel = Strings.Localize("programming.page");
         protected const string upidTaskFormat = CardSpace.IconPrefix + ".task{0}";
-        
+
         public class Shared
         {
             public UiCamera camera = new UiCamera();
@@ -62,7 +61,7 @@ namespace Boku
             // The touch selector is used to change between pages
             public AABB2D[] touchPageSelectorPageBoxes = new AABB2D[Brain.kCountDefaultTasks];
             public AABB2D touchPageSelectorBackBox = new AABB2D();
-            
+
             // Used when requesting a change to a specific page, rather than simply going to next or prev.
             public int changeTaskId = 0;
             public int activeTaskId = 0;
@@ -101,11 +100,11 @@ namespace Boku
                     {
                         tile.ClearCard(null, null);
                     }
-                } 
+                }
                 else if (menu.CurString == Strings.Localize("programming.copyTile"))
                 {
                     // intentionally left blank
-                } 
+                }
                 else if (menu.CurString == Strings.Localize("programming.pasteTile"))
                 {
                     // intentionally left blank
@@ -121,7 +120,7 @@ namespace Boku
                         // Then cut.
                         ReflexHandle.reflexBlock.Cut();
                     }
-                } 
+                }
                 else if (menu.CurString == Strings.Localize("programming.copyRow"))
                 {
                     ReflexHandle rh = menu.Object as ReflexHandle;
@@ -168,7 +167,7 @@ namespace Boku
 
                     // Cause camera offset to be reset.
                     parent.firstTime = true;
-                
+
                 }
                 else if (menu.CurString == Strings.Localize("programming.copyPage"))
                 {
@@ -358,8 +357,6 @@ namespace Boku
                     bDraggingUpDown = false;
                     currentDragY = 0.0f;
                 }
-
-
 
                 // Test for hits on the page buttons in order to change tasks
                 TapGestureRecognizer tapGesture = TouchGestureManager.Get().TapGesture;
@@ -674,8 +671,8 @@ namespace Boku
                                                     // Indent/Unindent
                                                     // Wait until we're allowed to move again.
                                                     // The reason we have the wait here is that without it, because of the
-                                                    // twitched motion we would get oscillations in the indentation of the 
-                                                    // row.  This is because the hit box is based on the current position 
+                                                    // twitched motion we would get oscillations in the indentation of the
+                                                    // row.  This is because the hit box is based on the current position
                                                     // of the element rather than it's intended position.
                                                     if (nextMoveTime < Time.WallClockTotalSeconds)
                                                     {
@@ -697,7 +694,7 @@ namespace Boku
 
                                     }   // end loop over panel's listcontrols
 
-                                }   // end if reflex is in-focus    
+                                }   // end if reflex is in-focus
 
                             }   // end if touch hits reflex.
 
@@ -1066,8 +1063,8 @@ namespace Boku
                                                     // Indent/Unindent
                                                     // Wait until we're allowed to move again.
                                                     // The reason we have the wait here is that without it, because of the
-                                                    // twitched motion we would get oscillations in the indentation of the 
-                                                    // row.  This is because the hit box is based on the current position 
+                                                    // twitched motion we would get oscillations in the indentation of the
+                                                    // row.  This is because the hit box is based on the current position
                                                     // of the element rather than it's intended position.
                                                     if (nextMoveTime < Time.WallClockTotalSeconds)
                                                     {
@@ -1089,7 +1086,7 @@ namespace Boku
 
                                     }   // end loop over panel's listcontrols
 
-                                }   // end if reflex is in-focus    
+                                }   // end if reflex is in-focus
 
                             }   // end if mouse hits reflex.
 
@@ -1124,7 +1121,7 @@ namespace Boku
                 // the kode doesn't feel too small on big screens???
                 shared.camera.Resolution = new Point((int)BokuGame.ScreenSize.X, (int)BokuGame.ScreenSize.Y);
                 // FULL SCREEN WINDOWED MODE FIX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                
+
                 shared.camera.Update();
 
                 // Ugly, ugly, ugly.  When a paste happens the renderlist objects get totally out
@@ -1133,8 +1130,8 @@ namespace Boku
                 ReflexBlock.ReflexComparer comp = new ReflexBlock.ReflexComparer();
                 InGame.inGame.Editor.renderObj.renderList.Sort(comp);
 
-                bool editorActive = InGame.inGame.shared.textEditor.Active 
-                                    || InGame.inGame.shared.microbitPatternEditor.Active 
+                bool editorActive = InGame.inGame.shared.textEditor.Active
+                                    || InGame.inGame.shared.microbitPatternEditor.Active
                                     || InGame.inGame.shared.editObjectParameters.Active
                                     || InGame.inGame.shared.editWorldParameters.Active;
 
@@ -1299,13 +1296,13 @@ namespace Boku
 
                 // Since we're here we know that the editor is active.  We also
                 // know that the children have already been updated meaning that
-                // any input they're interested in they've already taken and 
+                // any input they're interested in they've already taken and
                 // cleared.  So, at this point we can just assume that any
                 // remaining input is ours to do with as we please with no
                 // further need to check input focus EXCEPT if the helpCard,
                 // pic selector or text editor is up.
 
-                if (!CommandStack.Peek().name.StartsWith(@"ProgrammingHelpCard") 
+                if (!CommandStack.Peek().name.StartsWith(@"ProgrammingHelpCard")
                     && !CommandStack.Peek().name.StartsWith(@"AddItemHelpCard")
                     && !CommandStack.Peek().name.StartsWith(@"PieSelector")
                     && !CommandStack.Peek().name.StartsWith(@"NotPieSelector")
@@ -1566,7 +1563,7 @@ namespace Boku
                     // In touch mode this can get out of sync.
                     // Force it to a good state.  (HACK)
                     // The problem appears to be that the right click menu is updated way earlier than
-                    // the code that normally looks at input.  We can't move the right click menu Update 
+                    // the code that normally looks at input.  We can't move the right click menu Update
                     // to that location because it needs to bail early to prevent input leaking from the
                     // touch input.  Problem is a combo of touch input leaking along with all this code
                     // being too brittle.  Need to decide whether to make touch act like other input
@@ -1575,7 +1572,7 @@ namespace Boku
                     {
                         parent.IndexActivePanel = -1;
                     }
-                    
+
                     if (parent.IndexActivePanel == -1)
                     {
                         // On page icon at top of display.
@@ -1591,7 +1588,7 @@ namespace Boku
                         {
                             ToolTipManager.Clear();
                         }
-                    } 
+                    }
                     else
                     {
                         ReflexCard card = parent.ActivePanel.listControls[parent.ActivePanel.ActiveCard] as ReflexCard;
@@ -1614,7 +1611,7 @@ namespace Boku
                                     {
                                         ToolTipManager.ShowTip(label, desc, new Vector2(loc.X, loc.Y), true);
                                     }
-                                    
+
                                     HelpOverlay.SuppressYButton = false;
 
                                     if (Actions.Help.WasPressed || shared.showHelp)
@@ -1665,9 +1662,8 @@ namespace Boku
                     shared.showHelp = false;
                 }
 
-
                 // Also if we're in touch mode, we want to clear the tip.
-                
+
                 // If the text editor is active (adding text for 'say' verb) then
                 // we want to disable the tooltip since it will be rendered on top
                 // of the editor.
@@ -1691,7 +1687,7 @@ namespace Boku
                 {
                     parent.InsertReflex(null);
                 }
-#else
+
                 bool blank = false;
                 for (int i = 0; i < parent.ActivePanels.Count; i++)
                 {
@@ -1723,23 +1719,10 @@ namespace Boku
 #if !EXTERNAL
                 if (BokuGame.Running)
                 {
-#if !NETFX_CORE
-
-#if OUTPUT_KODE_TO_CLIPBOARD
-                    // Copy program to the clipboard (to aid help database generation)
-                    ExampleProgram program = ExampleProgram.FromBrain(parent.gameActor.Brain);
-                    System.IO.MemoryStream stream = new System.IO.MemoryStream();
-                    System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(ExampleProgram));
-                    serializer.Serialize(stream, program);
-                    stream.Position = 0;
-                    System.IO.StreamReader reader = new System.IO.StreamReader(stream);
-                    try { System.Windows.Forms.Clipboard.SetText(reader.ReadToEnd()); }
-                    catch { }
-#endif  // OUTPUT_KODE_TO_CLIPBOARD
+  // OUTPUT_KODE_TO_CLIPBOARD
 
 #endif  // !NETFX_CORE
                 }   // end if Running
-#endif
             }
         }   // end of class UpdateObj
 
@@ -1786,10 +1769,8 @@ namespace Boku
                 ShaderGlobals.SetValues(Editor.effect);
                 ShaderGlobals.SetCamera(Editor.effect, shared.camera);
 
-#if NETFX_CORE
                 // TODO (****) Not sure why this is needed for MG but not for XNA.
                 BokuGame.bokuGame.GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Pink, 1.0f, 0);
-#endif
 
                 // Don't render editor UI when HelpCard is active.  It
                 // still works if you do but it looks more cluttered.
@@ -1830,11 +1811,10 @@ namespace Boku
                     // Update fugly to know where to put the cursor, if needed.
                     InGame.inGame.Editor.fugly.Local.Translation = c.At + tut;
 
-
-                    // Now, through the wonders of ITransform, we need to tell the cursor to incorporate 
-                    // the position from its parent.  Note that we can't just set the parent to null and 
-                    // set the values directly.  Oh no, that would be too easy, too sane, too understandable.  
-                    // Instead we have to create a convoluted placeholder object which actually ends up being 
+                    // Now, through the wonders of ITransform, we need to tell the cursor to incorporate
+                    // the position from its parent.  Note that we can't just set the parent to null and
+                    // set the values directly.  Oh no, that would be too easy, too sane, too understandable.
+                    // Instead we have to create a convoluted placeholder object which actually ends up being
                     // ignored for the most part.  How cool is that?
                     if (cursorTransform.Parent == InGame.inGame.Editor.fugly)
                     {
@@ -1842,7 +1822,7 @@ namespace Boku
                         cursorTransform.Recalc(ref world);
                     }
 
-                    // Cull objects vertically since program lists may extend 
+                    // Cull objects vertically since program lists may extend
                     // way above or below the current camera view.  For objects
                     // that we can't figure out the extents for, just render
                     // them anyway.
@@ -1873,7 +1853,6 @@ namespace Boku
                             }
                         }
                         */
-
 
                         Debug.Assert(cro != null);
 
@@ -1925,8 +1904,8 @@ namespace Boku
                     shared.camera.At += cameraOffset;
 
                     // HACK -- Since we now want the page icon to be on top of the programming but also
-                    // have any active pie menu on top of the page icon we render all the things in the 
-                    // renderObj list first (except the pie menu which we turn off via a hack to Editor).  
+                    // have any active pie menu on top of the page icon we render all the things in the
+                    // renderObj list first (except the pie menu which we turn off via a hack to Editor).
                     // But we still need the cursor to be on top of the page icon.  So, render it now.
                     if (!debugRender)
                     {
@@ -2150,7 +2129,7 @@ namespace Boku
                 pos.Y += -32.0f * scale;
                 size = scale * new Vector2(128, 128);
                 quad.Render(taskTexture, pos, size, @"TexturedRegularAlpha");
-            }               
+            }
 
             public override void Activate()
             {
@@ -2178,7 +2157,7 @@ namespace Boku
             {
             }
 
-        }   
+        }
 
         protected static Effect effect = null;
         protected ControlCollection controls = null;
@@ -2249,7 +2228,7 @@ namespace Boku
         {
             get { return (state != States.Inactive); }
         }
-        
+
         public GameActor GameActor
         {
             set
@@ -2265,7 +2244,7 @@ namespace Boku
                 return this.gameActor;
             }
         }
-        
+
         public static Effect Effect
         {
             get { return effect; }
@@ -2277,7 +2256,7 @@ namespace Boku
         /// </summary>
         public ReflexPanel ActivePanel
         {
-            get 
+            get
             {
                 if (IndexActivePanel > -1 && IndexActivePanel < activePanels.Count)
                 {
@@ -2355,7 +2334,7 @@ namespace Boku
         }
 
         #endregion
-        
+
         public Editor()
         {
             shared = new Shared();
@@ -2386,7 +2365,7 @@ namespace Boku
                     CreateUI();
 
                     this.shared.RecenterCamera();
-                    
+
                     CreateUiForTask(gameActor.Brain.ActiveTask, gameActor.Brain.ActiveTaskId);
 
                     updateList.Add(updateObj);
@@ -2403,7 +2382,7 @@ namespace Boku
                     updateObj.Deactivate();
                     updateList.Remove(updateObj);
                     CleanupTasks();
-                    
+
                     ReleaseUiPanels( this.activePanels);
                     ReleaseUi();
                 }
@@ -2443,9 +2422,8 @@ namespace Boku
 
             RefreshChildren();
 
-            
             return result;
-        }   // end of Refresh() 
+        }   // end of Refresh()
 
         private void StartTaskChange( int direction )
         {
@@ -2453,7 +2431,7 @@ namespace Boku
 
             int countTasks = gameActor.Brain.TaskCount;
             int indexTask = gameActor.Brain.ActiveTaskId;
-                
+
             indexTask = (indexTask + direction + countTasks) % countTasks;
 
             SetupUiForTaskChange( -direction );
@@ -2493,7 +2471,7 @@ namespace Boku
                 }
             }
         }
-        
+
         private object timerInstrument = null;
         private Texture2D prevToolIcon = null;  // Keep track of the HelpOverlay's toolIcon so we can restore it when done.
 
@@ -2520,13 +2498,13 @@ namespace Boku
                 InGame.inGame.RenderWorldAsThumbnail = true;
                 timerInstrument = Instrumentation.StartTimer(Instrumentation.TimerId.ProgrammingTime);
             }
-        }  
+        }
 
         override public void Deactivate()
         {
             if (state != States.Inactive)
             {
-                // Make sure these have closed.  Shouldn't be a problem except 
+                // Make sure these have closed.  Shouldn't be a problem except
                 // when shutting down the editor to handle device reset.
                 ProgrammingHelpCard.Instance.Deactivate();
                 InGame.inGame.Editor.RightClickMenu.Deactivate();
@@ -2566,7 +2544,7 @@ namespace Boku
                 StringWriter tw = new StringWriter();
                 Print.SerializeActorProgramming(tw, gameActor);
                 tw.Close();
-                
+
             }
         }
 
@@ -2581,7 +2559,7 @@ namespace Boku
                 panelControl.Hot = false;
             }
         }
-        
+
         Transform ITransform.Local
         {
             get
@@ -2617,14 +2595,14 @@ namespace Boku
             {
                 transformReflex.Recalc(ref parentMatrix);
             }
-            
+
         }
         ITransform ITransform.Parent
         {
             // we have no parent
             get
             {
-                return null; 
+                return null;
             }
             set
             {
@@ -2639,7 +2617,6 @@ namespace Boku
             transformThis.Recalc(ref parentMatrix);
         }
 
-        
         private const int MaxFilters = 3;
         private const int MaxModifiers = 1;
 
@@ -2692,7 +2669,7 @@ namespace Boku
             shared.camera.At += shift;
             shared.camera.From += shift;
             SlideCamera(-xShift, CameraSlideComplete);
-            
+
         }
 
         protected void CameraSlideComplete(Object param)
@@ -2737,7 +2714,7 @@ namespace Boku
                 panel.Activate();
                 this.activePanels.Add(panel);
                 // add as a child to track for lifetime beyound being in the list
-                this.childPanels.Add(panel); 
+                this.childPanels.Add(panel);
             }
             // have our update object add its commands to the child controls.
             IControl panelControl;
@@ -2764,7 +2741,7 @@ namespace Boku
         /// <param name="task"></param>
         /// <param name="removeEmpty"></param>
         private void CleanupTask( Task task, bool removeEmpty)
-        {       
+        {
             for (int iReflex = 0; iReflex < task.reflexes.Count; iReflex++)
             {
                 Reflex gameReflex = task.reflexes[iReflex] as Reflex;
@@ -2907,7 +2884,7 @@ namespace Boku
 
                 NavPanel(IndexActivePanel + 1);
             }
-  
+
         }
 
         public void NavTaskPrev(Object sender, EventArgs args)
@@ -2926,7 +2903,7 @@ namespace Boku
 
                 this.pendingState = States.PrevTask;
                 BokuGame.objectListDirty = true;
-            }            
+            }
         }
 
         public void NavTaskNext(Object sender, EventArgs args)
@@ -3045,9 +3022,9 @@ namespace Boku
 
             // remove the one requested
             gameActor.Brain.ActiveTask.RemoveReflex(reflexPanel.Reflex);
-            
+
             BokuGame.objectListDirty = true;
-            
+
         }
         protected void OnRemoveAnimationComplete(Object param)
         {
@@ -3064,7 +3041,7 @@ namespace Boku
         {
             Foley.PlayPaste();
 
-            // If no panel specified, addToEnd is true and we're just 
+            // If no panel specified, addToEnd is true and we're just
             // adding the new panel without giving it focus.
             bool addToEnd = reflexPanel == null;
             if (addToEnd)
@@ -3127,8 +3104,8 @@ namespace Boku
                 translation.Y -= heightPanel;
 
                 // If the panel we're setting our position relative to happens
-                // to be currently picked up we need to take that into account.  
-                // Oh how I love having everything be positioned relative to 
+                // to be currently picked up we need to take that into account.
+                // Oh how I love having everything be positioned relative to
                 // everything else.
                 if (reflexPanel.Moving)
                 {
@@ -3201,12 +3178,12 @@ namespace Boku
 
                 // move the camera up
                 MoveCamera(heightPanel);
-                
-                // swap the the reflexes 
+
+                // swap the the reflexes
                 SwapReflexPanels(reflexPanelPrev, reflexPanel);
             }
         }
-        
+
         public void MoveReflexDown(ReflexPanel reflexPanel)
         {
             if (this.IndexActivePanel < this.activePanels.Count - 1)
@@ -3229,7 +3206,7 @@ namespace Boku
                 // move the camera down
                 MoveCamera(-heightPanel);
 
-                // swap the the reflexes 
+                // swap the the reflexes
                 SwapReflexPanels(reflexPanelPrev, reflexPanel);
             }
         }
@@ -3237,7 +3214,6 @@ namespace Boku
         //
         // A colleciton of camera movement functions.
         //
-
 
         // The postition to where the camera is going although it may not be there yet.
         private float fromY = 0.0f;
@@ -3263,7 +3239,7 @@ namespace Boku
                     atY = camera.At.Y;
                     firstTime = false;
                 }
-                
+
                 // "from" position
                 {
                     TwitchManager.Set<float> set = delegate(float value, Object param) { Vector3 from = camera.From; from.Y = value; camera.From = from; };
@@ -3275,7 +3251,7 @@ namespace Boku
                     TwitchManager.Set<float> set = delegate(float value, Object param) { Vector3 at = camera.At; at.Y = value; camera.At = at; };
                     TwitchManager.CreateTwitch<float>(camera.At.Y, atY + deltaY, set, twitchTime, curveShape);
                 }
-                
+
                 fromY += deltaY;
                 atY += deltaY;
             }
@@ -3310,7 +3286,6 @@ namespace Boku
                 }
             }
         }   // end of SlideCamera()
-
 
         public void LoadContent(bool immediate)
         {
@@ -3352,6 +3327,4 @@ namespace Boku
 
     }
 
-}   
-
-
+}

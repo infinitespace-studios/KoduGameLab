@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// The cluster filter looks for a group of objects (>3) that are near each other.  In 
+    /// The cluster filter looks for a group of objects (>3) that are near each other.  In
     /// this case "near" is determined by 2 * the sum of the bounding radii of the objects.
     /// By using the bounding radius we get this to work correctly as objects are scaled.
     /// </summary>
@@ -48,7 +47,7 @@ namespace Boku.Programming
         public override ProgrammingElement Clone()
         {
             ClusterFilter clone = new ClusterFilter();
-            CopyTo(clone);            
+            CopyTo(clone);
             return clone;
         }
 
@@ -68,7 +67,6 @@ namespace Boku.Programming
             param = null;
 
             bool match = false;
-
 
             // Do we have enough targets to even bother?
             if (reflex.targetSet.NearestTargets.Count > count)

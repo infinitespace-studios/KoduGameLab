@@ -16,7 +16,7 @@ namespace Boku.Common
     #region Public
 
     /// <summary>
-    /// Provides a mechanism for marking out words specified as forbidden as well as automatically detecting common variants thereof. 
+    /// Provides a mechanism for marking out words specified as forbidden as well as automatically detecting common variants thereof.
     /// </summary>
     public static class Censor
     {
@@ -49,13 +49,13 @@ namespace Boku.Common
         static CensorContent _CensorContent = null;
         static CensorContent CensorContent
         {
-            get 
+            get
             {
                 if (_CensorContent == null)
                 {
                     _CensorContent = ContentLoader.ContentManager.Load<CensorContent>(BokuGame.Settings.MediaPath + @"Text\Censor\Profanity");
                 }
-                return _CensorContent; 
+                return _CensorContent;
             }
         }
 
@@ -79,7 +79,6 @@ namespace Boku.Common
     #endregion Internal
 
 #endif
-
 
     #region Internal
 

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -71,7 +70,7 @@ namespace Boku.Programming
         #endregion
 
         #region Public
-        
+
         public static void Init()
         {
             for (int i = 0; i < kNumButtons; i++)
@@ -200,7 +199,6 @@ namespace Boku.Programming
                                 bReleasedButton = !MouseInput.Left.IsPressed;
                             }
 
-
                             if (bIntersect)
                             {
                                 button.ChangeState(bReleasedButton ? ButtonState.Released : ButtonState.Pressed);
@@ -235,8 +233,6 @@ namespace Boku.Programming
         #endregion
 
         #region Internal
-
-
 
         public static void LoadContent(bool immediate)
         {
@@ -277,11 +273,6 @@ namespace Boku.Programming
 
         #endregion
 
-
-
-
-
-
         public static bool IsOverUIButton(Vector2 pos)
         {
             if (null != buttons && InGame.UpdateMode.RunSim == InGame.inGame.CurrentUpdateMode)
@@ -301,7 +292,6 @@ namespace Boku.Programming
 
             return false;
         }
-
 
         public static GUIButton[] GetButtons()
         {
@@ -491,7 +481,7 @@ namespace Boku.Programming
 
         /// <summary>
         /// Renders the buttons label onto the button textures.
-        /// 
+        ///
         /// </summary>
         /// <param name="buttonIndex"></param>
         /// <returns>True if label fits, false if it's too big.</returns>

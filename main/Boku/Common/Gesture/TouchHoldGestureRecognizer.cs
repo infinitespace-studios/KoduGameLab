@@ -29,12 +29,10 @@ namespace Boku.Common.Gesture
         /// </summary>
         const float k_DriftRadiusLimit = 20.0f;
 
-
         /// <summary>
         /// When a touch sequence starts, we store the finger id in order to know which finger is tapping
         /// </summary>
         int m_FingerId = -1;
-
 
         //This variable is necessary to hold the recognized value for the rest of the frame.
         bool m_bRecognized;
@@ -56,7 +54,6 @@ namespace Boku.Common.Gesture
             return m_bRecognized;
         }
 
-
         protected override void OnTouchReleased(TouchContact[] touches)
         {
             //When we release any finger we fail.
@@ -74,7 +71,7 @@ namespace Boku.Common.Gesture
 
                 //Check if finger has drifted.
                 bFailed |= (tc.position - tc.startPosition).LengthSquared() > (k_DriftRadiusLimit*k_DriftRadiusLimit);
-            
+
                 //Recognize gesture if we have exceeded the time.
                 m_bRecognized = !bFailed && (Time.WallClockTotalSeconds - tc.startTime) >= k_TriggerHoldTime;
 
@@ -96,7 +93,7 @@ namespace Boku.Common.Gesture
             }
             else if (m_bRecognized)
             {
-                
+
                 SetState(GestureState.Recognized);
             }
             else

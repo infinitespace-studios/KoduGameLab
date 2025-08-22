@@ -10,21 +10,14 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-#if !NETFX_CORE
-using System.Management;
-using System.IO.Ports;
-using Microsoft.Win32.SafeHandles;
-#endif
-
 using Boku.Common;
 using Boku.Common.Xml;
 using Boku.Programming;
-
-#if !NETFX_CORE
+using System.Management;
+using System.IO.Ports;
+using Microsoft.Win32.SafeHandles;
 using MicrobitNeedDriverDlg;
-#endif
 
-#if !NETFX_CORE
 namespace Boku.Input
 {
     /// <summary>
@@ -66,7 +59,6 @@ namespace Boku.Input
             // Clear the array of Microbit objects.
             Microbits.Clear();
         }
-
 
         /// <summary>
         /// Returns a list of brief structures representing an attached microbit. 
@@ -230,24 +222,6 @@ namespace Boku.Input
 
             ReleaseDevices();
 
-#if false
-            // Print the Caption and DeviceID of all connected PNP devices. This
-            // is helpful when you need to discover what the exact device id is
-            // for a particular device you want to be able to detect.
-            {
-                using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_PnPEntity"))
-                using (var collection = searcher.Get())
-                {
-                    foreach (var device in collection)
-                    {
-                        string Caption = (string)device.GetPropertyValue("Caption");
-                        string DeviceID = (string)device.GetPropertyValue("DeviceID");
-                        System.Diagnostics.Debug.WriteLine(Caption + " ---- " + DeviceID);
-                    }
-                }
-            }
-#endif
-
             List<MicrobitDesc> microbitDescs = new List<MicrobitDesc>();
 
             // Detect microbits.
@@ -368,6 +342,3 @@ namespace Boku.Input
         }
     }
 }
-#endif
-
-

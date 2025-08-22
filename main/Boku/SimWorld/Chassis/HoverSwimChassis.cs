@@ -18,7 +18,7 @@ namespace Boku.SimWorld.Chassis
 {
     /// <summary>
     /// Chassis used for things that hover above land but should swim under water, e.g. Octopus, etc.
-    /// 
+    ///
     /// Most of the movement logic taken from the HoverChassis, with the vertical velocity/pitch adjustment from SwimChassis
     /// </summary>
     public class HoverSwimChassis : BaseChassis
@@ -30,11 +30,10 @@ namespace Boku.SimWorld.Chassis
 
         public override bool SupportsStrafing { get { return true; } }
 
-
         #endregion
 
         #region Public
-        
+
         public HoverSwimChassis()
             : base()
         {
@@ -104,7 +103,7 @@ namespace Boku.SimWorld.Chassis
                     }
 
                     bounce = CollideWithGround(movement, ref height);
-                    
+
                     // Create a dust puff when bouncing off dry ground.
                     // TODO (****) This doesn't seem to actually do anything.  As far as I can
                     // tell the CreateDustPuff() call is never called by anything else so it may
@@ -202,9 +201,8 @@ namespace Boku.SimWorld.Chassis
 
         }   // end of PreCollisionTestUpdate()
 
-
         /// <summary>
-        /// Based on the chassis' internal values, sets the blend values for the 
+        /// Based on the chassis' internal values, sets the blend values for the
         /// four standard looping animations.
         /// </summary>
         /// <param name="anims"></param>

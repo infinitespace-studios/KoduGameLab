@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if DEBUG
 #define DO_PERF_TIMING
 #endif
@@ -11,11 +10,10 @@ using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-
 namespace Boku.Common
 {
     /// <summary>
-    /// Primarily for internal use this is a class that will hopefully make it 
+    /// Primarily for internal use this is a class that will hopefully make it
     /// easier to measue perf and understand where the hot spots are in the code.
     /// </summary>
     public class PerfTimer
@@ -104,22 +102,9 @@ namespace Boku.Common
                     double max = 1000 * 1000 * (double)maxSample / (double)freq;
                     minSample = freq;
                     maxSample = 0;
-#if NETFX_CORE
                     Debug.WriteLine(label + " : " + ns.ToString("f2") + "ns");
                     //Debug.WriteLine("    min : " + minSample.ToString());
                     //Debug.WriteLine("    max : " + maxSample.ToString());
-#else
-                    if (ns > 1000 * 1000 || true)
-                    {
-                        Debug.Print(label + " : " + sampleLabel + " : " + (ns/1000.0/1000.0).ToString("f2") + "sec");
-                    }
-                    else
-                    {
-                        Debug.Print(label + " : " + sampleLabel + " : " + ns.ToString("f2") + "ns");
-                    }
-                    //Debug.Print("    min : " + minSample.ToString());
-                    //Debug.Print("    max : " + maxSample.ToString());
-#endif
                     //Console.WriteLine(label + " : " + ns.ToString("f2") + "ns" + "    min : " + min.ToString("f2") + "    max : " + max.ToString("f2"));
 
                     Reset();
@@ -152,5 +137,3 @@ namespace Boku.Common
     }   // end of class PerfTimer
 
 }   // end of namespace Boku.Common
-
-

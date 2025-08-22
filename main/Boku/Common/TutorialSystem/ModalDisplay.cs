@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -132,7 +131,6 @@ namespace Boku.Common.TutorialSystem
                 GetTexture getTexture = delegate() { return ButtonTextures.XButton; };
                 exitTutorialButton = new Button(Strings.Localize("tutorial.exitTutorial"), Color.White, getTexture, UI2D.Shared.GetGameFont20);
             }
-
 
         }   // end of c'tor
 

@@ -193,7 +193,7 @@ namespace Boku.SimWorld.Chassis
                 else
                 {
 
-                    // If the target has been killed, then have the missile go straight off the world's edge and explode. 
+                    // If the target has been killed, then have the missile go straight off the world's edge and explode.
                     if (targetObject != null && targetObject.CurrentState == GameThing.State.Inactive)
                     {
                         targetObject = null;
@@ -275,10 +275,10 @@ namespace Boku.SimWorld.Chassis
                     -1.0f); // water depth at which transition water to land occurs (-1 to ignore)
 
                 SimWorld.Terra.Terrain.Blocked(
-                    collisionCenter, 
-                    lookAheadPoint, 
-                    minMaxZ, 
-                    maxStep, 
+                    collisionCenter,
+                    lookAheadPoint,
+                    minMaxZ,
+                    maxStep,
                     ref hitBlock,
                     missile.Movement.Altitude);
 
@@ -293,7 +293,7 @@ namespace Boku.SimWorld.Chassis
                 }
                 else
                 {
-                    /// Check if any more terrain is coming up. If not, we'll 
+                    /// Check if any more terrain is coming up. If not, we'll
                     /// early terminate.
                     CheckForMoreLand(collisionCenter, referenceVectorUnit2D);
                 }
@@ -324,7 +324,7 @@ namespace Boku.SimWorld.Chassis
                 bool adjustPitch = !Homing
                     || targetPastLookAhead
                     || (referencePosition.Z < maxHeightAhead);
-                if (adjustPitch) 
+                if (adjustPitch)
                 {
                     // Use the look-ahead vector as our desired flight direction.
                     referenceVector = lookAheadVectorUnit * 50f;
@@ -342,7 +342,7 @@ namespace Boku.SimWorld.Chassis
                 deltaTurn = MathHelper.Clamp(deltaTurn, -MaxRotationRate * secs, MaxRotationRate * secs);
                 turnAngle += deltaTurn;
             }
-            
+
             // Update roll
             rollAngle = MyMath.Lerp(rollAngle, -deltaTurn / MaxRotationRate / secs, secs * 10f);
 
@@ -367,7 +367,7 @@ namespace Boku.SimWorld.Chassis
                 Quaternion.CreateFromAxisAngle(Vector3.Backward, turnAngle) *
                 Quaternion.CreateFromAxisAngle(Vector3.Down, pitchAngle) *
                 Quaternion.CreateFromAxisAngle(Vector3.Right, rollAngle));
-            
+
             // Find our new position along our rotated forward axis.
             Vector3 velocity = rotation.Right * Speed;
             Vector3 position = movement.Position + velocity * secs;
@@ -422,7 +422,6 @@ namespace Boku.SimWorld.Chassis
                 Vector3 end = new Vector3(from.X + dir2D.X * distance,
                                           from.Y + dir2D.Y * distance,
                                           from.Z);
-
 
                 Terrain.HitBlock hitBlock = new Boku.SimWorld.Terra.Terrain.HitBlock();
 
@@ -486,7 +485,7 @@ namespace Boku.SimWorld.Chassis
                 // We only need to do this if the launcher is dead.  Otherwise the above
                 // notification will get processed and the damage will be taken into
                 // account there.  Yes, this is kind of confusing and should be rethought
-                // and cleaned up.  
+                // and cleaned up.
                 // TODO (****)
                 if (Launcher.CurrentState == GameThing.State.Inactive)
                 {

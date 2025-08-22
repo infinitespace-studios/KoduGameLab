@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
-    /// and creates a texture on the fly into which the PictureList and the 
+    /// and creates a texture on the fly into which the PictureList and the
     /// associated text string are rendered.
     /// </summary>
     public class UIGridPictureListElement : UIGridElement
@@ -80,9 +79,9 @@ namespace Boku.UI2D
             // Specific to gradient tiles.
             public Vector4[] gradient = null;
             private RenderTarget2D rt = null;
-            
+
             public Vector2 position = Vector2.Zero;
-            public float scale = 1.0f;      // Used to change the size while rendering.  The currently selected 
+            public float scale = 1.0f;      // Used to change the size while rendering.  The currently selected
                                             // Picture will be rendered larger than the others.
             public float alpha = 1.0f;      // Alpha value used to render picture.  When set to 0 this indicates
                                             // that this picture should not be rendered.
@@ -146,7 +145,6 @@ namespace Boku.UI2D
                 set { texture = value; }
             }
             #endregion
-
 
             #region Internal
             public void LoadContent(bool immediate)
@@ -213,10 +211,10 @@ namespace Boku.UI2D
             #endregion
         }   // end of class picture
 
-        private int curIndex = -1;      // Which picture is currently highlighted.  Init to invalid 
+        private int curIndex = -1;      // Which picture is currently highlighted.  Init to invalid
                                         // value to force an recalc right at the start.
-        private int leftIndex = 0;      // The index of the _visible_ picture that is leftmost.  This 
-                                        // is needed since we may have more pictures than can be shown 
+        private int leftIndex = 0;      // The index of the _visible_ picture that is leftmost.  This
+                                        // is needed since we may have more pictures than can be shown
                                         // at any given time.
         private List<Picture> pictures = new List<Picture>();
         // TODO (****) Add a twitch to these to fade in/out as needed?
@@ -230,7 +228,7 @@ namespace Boku.UI2D
         #region Accessors
 
         /// <summary>
-        /// Returns the index of the currently selected item.  
+        /// Returns the index of the currently selected item.
         /// May be -1 if none.
         /// </summary>
         public int CurrentIndex
@@ -454,7 +452,7 @@ namespace Boku.UI2D
                 pictures[0].scale = pic.selectedScale;
             }
         }
-        
+
         /// <summary>
         /// Add a picture to the list.  Pictures should be added in order and are indexed starting with 0.
         /// </summary>
@@ -484,7 +482,7 @@ namespace Boku.UI2D
             Picture pic = new Picture();
             pic.gradient = gradient;
             pic.label = TextHelper.FilterInvalidCharacters(label);
-            
+
             pic.scale = pic.unselectedScale;
 
             pictures.Add(pic);
@@ -507,7 +505,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// Searches through the gradients in the list for one that matches
-        /// the passed in gradient.  When found this is then set as the 
+        /// the passed in gradient.  When found this is then set as the
         /// current selection.
         /// </summary>
         /// <param name="gradient"></param>
@@ -530,7 +528,7 @@ namespace Boku.UI2D
         }   // end of SetValue()
 
         /// <summary>
-        /// Sets the currently selected index and refreshes 
+        /// Sets the currently selected index and refreshes
         /// everything to take the change into account.
         /// </summary>
         /// <param name="index"></param>
@@ -633,11 +631,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }   // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -730,7 +726,7 @@ namespace Boku.UI2D
                 if (i == curIndex || i + 1 == curIndex)
                 {
                     scale += (pictures[0].selectedScale - 1.0f) * 0.5f;
-                    // Ensure that the left edge of the first pic always 
+                    // Ensure that the left edge of the first pic always
                     // stays at the same place.
                     if (i == 0 && i == curIndex)
                     {
@@ -751,8 +747,8 @@ namespace Boku.UI2D
                     {
                         pictures[i].Alpha = 0.0f;
                     }
-                    else 
-                    { 
+                    else
+                    {
                         pictures[i].Alpha = 1.0f;
                     }
                 }
@@ -793,8 +789,6 @@ namespace Boku.UI2D
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
 
-                
-
                 // Render the label text into the texture in the upper left-hand corner.
                 int margin = 32;
                 int x = 0;
@@ -813,7 +807,6 @@ namespace Boku.UI2D
                 batch.Begin();
                 TextHelper.DrawStringWithShadow(Font, batch, x, y, fancyLabel, textColor, dropShadowColor, invertDropShadow);
                 batch.End();
-
 
                 // Render the arrows.
                 if (showLeftArrow)
@@ -994,9 +987,3 @@ namespace Boku.UI2D
     }   // end of class UIGridPictureListElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

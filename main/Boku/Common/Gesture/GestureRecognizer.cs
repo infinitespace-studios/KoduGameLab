@@ -27,7 +27,6 @@ namespace Boku.Common.Gesture
             Changed,
             Ended,
 
-
             /// <summary>
             /// This state is for discrete gestures like a tap.  There is no begin - end. It just happened.
             /// </summary>
@@ -43,10 +42,8 @@ namespace Boku.Common.Gesture
         GestureState m_state = GestureState.Possible;
         GestureState m_prevState = GestureState.Possible;
 
-
         public GestureState GetState() { return m_state; }
         public GestureState GetPrevState() { return m_prevState; }
-
 
         /// <summary>
         /// A gesture is considered 'validated' from the time it has become active till the time it is reset.
@@ -104,7 +101,6 @@ namespace Boku.Common.Gesture
             get { return timeSinceRecognized; }
         }
 
-
         //SubClasses need to override these to handle gesture recognition
         protected abstract int GetRequiredTouchCount(); //From old implementation.
         protected abstract void OnTouchPressed( TouchContact[] touches );
@@ -146,12 +142,12 @@ namespace Boku.Common.Gesture
             {
                 //FOR
                 //Continuous Gestures
-                case GestureState.Began: 
+                case GestureState.Began:
                     wasActivated = true;
                     OnRecognized();
                     break;
 
-                case GestureState.Changed: 
+                case GestureState.Changed:
                     OnRecognized();
                     break;
 
@@ -163,7 +159,7 @@ namespace Boku.Common.Gesture
 
                 //FOR
                 //Discrete Gestures
-                case GestureState.Recognized: 
+                case GestureState.Recognized:
                     wasActivated = true;
                     wasRecognized = true;
                     wasRecentlyRecognized = false;
@@ -171,7 +167,6 @@ namespace Boku.Common.Gesture
                     OnRecognized();
                     Reset();
                     break;
-
 
                 //FOR
                 //ALL
@@ -188,7 +183,6 @@ namespace Boku.Common.Gesture
 			       state == GestureState.Changed;
 	    }
 
-
         public virtual void Update(TouchContact[] touches)
         {
 
@@ -199,7 +193,7 @@ namespace Boku.Common.Gesture
             bool bDidBegin = false;
             bool bDidEnd = false;
             bool bDidMove = false;
-            
+
             for (int i = 0; i < touches.Length; ++i)
             {
                 bDidBegin |= TouchPhase.Began == touches[i].phase;
@@ -241,7 +235,6 @@ namespace Boku.Common.Gesture
         }
 
         #region Utils
-        
 
         /// <summary>
         /// Check if the input touches are moving in opposite direction
@@ -274,7 +267,6 @@ namespace Boku.Common.Gesture
             return false;
         }
 
-
         /// <summary>
         /// returns signed angle in radians between "from" -> "to"
         /// </summary>
@@ -292,7 +284,7 @@ namespace Boku.Common.Gesture
         public static Vector2 GetAverageTouchPosition(ref TouchContact[] touches)
         {
             Vector2 averagePosition = Vector2.Zero;
-            
+
             int count = 0;
             for (int i = 0; i < touches.Length; ++i)
             {
@@ -302,7 +294,7 @@ namespace Boku.Common.Gesture
                     count++;
                 }
             }
-            
+
             averagePosition /= (float)(count > 0 ? count : 1);
             return averagePosition;
         }

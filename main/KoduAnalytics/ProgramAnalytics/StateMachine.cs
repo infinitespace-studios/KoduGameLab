@@ -25,10 +25,10 @@ namespace KoduAnalytics.ProgramAnalytics
             get
             {
                 //int count = (from s in states
-                //            where (s.incoming.Count() > 0 
+                //            where (s.incoming.Count() > 0
                 //            || s.outgoing.Count() > 0)
                 //            select s).Count();
-                int count = (from s in states where 
+                int count = (from s in states where
                                  s.used == true
                                  select s).Count();
                 return count;
@@ -82,8 +82,6 @@ namespace KoduAnalytics.ProgramAnalytics
                 return fanin;
             }
         }
-
-
 
         public StateMachine()
         {

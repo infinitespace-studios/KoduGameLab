@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -21,7 +20,7 @@ namespace Boku.Fx
 {
     /// <summary>
     /// This performs a 7 pixel wide Gaussian filter either horizontally or vertically.  Since
-    /// Gaussian filters are separable doing one then the other yields the same results as doing 
+    /// Gaussian filters are separable doing one then the other yields the same results as doing
     /// a 7x7 filter but runs a lot faster.
     /// </summary>
     class GaussianFilter : BaseFilter
@@ -87,7 +86,6 @@ namespace Boku.Fx
             Render(source, false);
         }   // end of GaussianFilter RenderVertical()
 
-
         public override void LoadContent(bool immediate)
         {
             // Init the effect.
@@ -102,6 +100,3 @@ namespace Boku.Fx
     }
 
 }   // end of namespace Boku.Common
-
-
-

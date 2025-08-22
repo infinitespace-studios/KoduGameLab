@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,17 +26,13 @@ namespace Boku
     {
         #region Fields
 
-
         // Singleton device service instance.
         static GraphicsDeviceService singletonInstance;
-
 
         // Keep track of how many controls are sharing the singletonInstance.
         static int referenceCount;
 
-
         #endregion
-
 
         /// <summary>
         /// Constructor is private, because this is a singleton class:
@@ -71,29 +66,12 @@ namespace Boku
                 parameters.MultiSampleCount = 1;
             }
 
-
             foreach (GraphicsAdapter ga in GraphicsAdapter.Adapters)
             {
-#if NETFX_CORE
                 Debug.Assert(false, "Waiting on MG");
                 // Assume Reach for now.
                 hwSupportsReach = true;
                 break;
-#else
-                if (ga.IsDefaultAdapter)
-                {
-                    if (ga.IsProfileSupported(GraphicsProfile.Reach))
-                    {
-                        BokuGame.hwSupportsReach = true;
-                    }
-                    if (ga.IsProfileSupported(GraphicsProfile.HiDef))
-                    {
-                        BokuGame.hwSupportsHiDef = true;
-                    }
-
-                    break;
-                }
-#endif
             }
 
             // Set HiDef iff HW supports AND user doesn't prefer Reach.
@@ -110,46 +88,28 @@ namespace Boku
                 MainForm.Instance.MaximumSize = new System.Drawing.Size(2048, 2048);
             }
 
-
-
             // Select right profile.
             GraphicsProfile profile = BokuGame.HiDefProfile ? GraphicsProfile.HiDef : GraphicsProfile.Reach;
 
-#if NETFX_CORE
             // For Win8 always force fullscreen and use full device resolution.
             graphics.IsFullScreen = BokuSettings.Settings.FullScreen = true;
             BokuSettings.Settings.ResolutionX = graphics.PreferredBackBufferWidth;
             BokuSettings.Settings.ResolutionY = graphics.PreferredBackBufferHeight;
-#else
-            //graphics.IsFullScreen = BokuSettings.Settings.FullScreen;
-            //graphics.PreferredBackBufferWidth = BokuSettings.Settings.ResolutionX;
-            //graphics.PreferredBackBufferHeight = BokuSettings.Settings.ResolutionY;
-#endif
 
             // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FULL SCREEN WINDOWED MODE FIX
-
-#if !NETFX_CORE
-            // Always start windowed.
-            //graphics.IsFullScreen = false;
-#endif
 
             // FULL SCREEN WINDOWED MODE FIX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
             //graphics.SynchronizeWithVerticalRetrace = syncRefresh;
             //graphics.PreferMultiSampling = BokuSettings.Settings.AntiAlias;
 
-
-
-
-
             graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter,
                                                 profile,
                                                 parameters);
 
             Mouse.WindowHandle = windowHandle;
-            
-        }
 
+        }
 
         /// <summary>
         /// Gets a reference to the singleton instance.
@@ -168,7 +128,6 @@ namespace Boku
 
             return singletonInstance;
         }
-
 
         /// <summary>
         /// Releases a reference to the singleton instance.
@@ -192,7 +151,6 @@ namespace Boku
             }
         }
 
-        
         /// <summary>
         /// Resets the graphics device to whichever is bigger out of the specified
         /// resolution or its current size. This behavior means the device will
@@ -212,7 +170,6 @@ namespace Boku
                 DeviceReset(this, EventArgs.Empty);
         }
 
-        
         /// <summary>
         /// Gets the current graphics device.
         /// </summary>
@@ -223,10 +180,8 @@ namespace Boku
 
         GraphicsDevice graphicsDevice;
 
-
         // Store the current device settings.
         PresentationParameters parameters;
-
 
         // IGraphicsDeviceService events.
         public event EventHandler<EventArgs> DeviceCreated;

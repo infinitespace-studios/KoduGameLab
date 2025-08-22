@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -70,7 +68,6 @@ namespace Boku
         private Color lightTextColor = new Color(191, 191, 191);
         private Color hoverTextColor = new Color(50, 255, 50);
 
-
         // Bounds
         AABB2D aBox = new AABB2D();
 
@@ -84,14 +81,13 @@ namespace Boku
 
         private bool prevRenderWorldAsThumbnail = false;
 
-        // The following are used to delay looking at input when the 
+        // The following are used to delay looking at input when the
         // dialog is first launched.  The idea here is that in the heat of
         // a game, the player may still be hitting keys when the dialog
         // comes up.  This can lead to them accidently dismissing the dialog
         // before they read the message.
         private double activationTime = 0;      // When was this dialog activated?
         private double deadInputTime = 0.5;     // How long we wait (in seconds) before accepting input.
-
 
         #endregion
 
@@ -141,24 +137,8 @@ namespace Boku
 
                 if (InGame.inGame.State == InGame.States.Active && InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.RunSim)
                 {
-#if !NETFX_CORE
-                    // For games using micro:bit, allow buttons to dismiss ingame dialogs.
-                    if (InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.RunSim)
-                    {
-                        Microbit bit = MicrobitExtras.GetMicrobitOrNull(GamePadSensor.PlayerId.All);
-                        if (bit != null)
-                        {
-                            // Allow either button to dismiss display.
-                            if (bit.State.ButtonA.IsPressed() || bit.State.ButtonB.IsPressed())
-                            {
-                                Deactivate();
-                            }
-                        }
-                    }
-#endif
-
                     // We need to be able to slip out to the mini-hub here since
-                    // continuous, repeated calls to TextDisplay can lock the 
+                    // continuous, repeated calls to TextDisplay can lock the
                     // user out of control.
                     if (Actions.MiniHub.WasPressed)
                     {
@@ -169,7 +149,7 @@ namespace Boku
                     }
 
                     // We need to be able to slip out to the tool menu here since
-                    // continuous, repeated calls to TextDisplay can lock the 
+                    // continuous, repeated calls to TextDisplay can lock the
                     // user out of control.
                     if (Actions.ToolMenu.WasPressed)
                     {

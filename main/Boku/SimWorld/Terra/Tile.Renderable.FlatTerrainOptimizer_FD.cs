@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if DEBUG
 #define Debug_CountTerrainVerts
 #define Debug_DrawNormalsWithF8
@@ -51,13 +50,13 @@ namespace Boku.SimWorld.Terra
 
                 /// <summary>
                 /// How large the top faces are allowed to be. (Note, if
-                /// this is too large then it will interfere with 
+                /// this is too large then it will interfere with
                 /// per-vertex lighting.)
                 /// </summary>
                 public const int MaxXLength = 4;
                 /// <summary>
                 /// How large the top faces are allowed to be. (Note, if
-                /// this is too large then it will interfere with 
+                /// this is too large then it will interfere with
                 /// per-vertex lighting.)
                 /// </summary>
                 public const int MaxYLength = 4;
@@ -371,7 +370,7 @@ namespace Boku.SimWorld.Terra
             }   // end of class FlatTerrainOptimizer_FD
 
         }   // end of class Renderable
-    
+
     }   // end of class Tile
 
 }   // end of namespace Boku.SimWorld.Terra

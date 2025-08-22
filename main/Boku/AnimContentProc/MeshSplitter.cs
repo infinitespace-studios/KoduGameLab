@@ -19,7 +19,6 @@ namespace Xclna.Xna.Animation.Reader
         private int maxBones;
         private int currentIndex = 0;
 
-
         private class MeshSplitPart
         {
             private MeshSplitter splitter;
@@ -208,7 +207,6 @@ namespace Xclna.Xna.Animation.Reader
             {
                 part = new MeshSplitPart(this, geom, vertexStart);
 
-
                 currentIndex++;
                 MeshContent newMesh = part.Process();
                 vertexStart = part.VertexEndIndex;
@@ -218,8 +216,6 @@ namespace Xclna.Xna.Animation.Reader
 
             }
         }
-
-
 
     }
 
@@ -243,7 +239,6 @@ namespace Xclna.Xna.Animation.Reader
             this.maxBones = maxBonesPerMesh;
             this.root = modelRoot;
         }
-
 
         /// <summary>
         /// Splits the model meshes up based on the max number of bones.
@@ -314,7 +309,7 @@ namespace Xclna.Xna.Animation.Reader
             {
                 ProcessNode(child);
             }
-            
+
         }
 
         private VertexChannel<BoneWeightCollection> GetWeightChannel(GeometryContent geom)
@@ -328,12 +323,6 @@ namespace Xclna.Xna.Animation.Reader
             }
             return null;
         }
-
-
-
-
-
-
 
     }
 }

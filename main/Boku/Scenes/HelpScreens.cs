@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // Uncomment this to build the UI as it will look for release.
 //#define FINAL_UI
 
@@ -21,11 +20,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-#if !NETFX_CORE
-    using Microsoft.Xna.Framework.Net;
-#endif
-
-
 using Boku.Audio;
 using Boku.Base;
 using Boku.Fx;
@@ -47,7 +41,7 @@ namespace Boku
     {
         public static HelpScreens Instance = null;
 
-        // Individual entry.  Making this a class just in case 
+        // Individual entry.  Making this a class just in case
         // we later want to add meta-data.
         public class Screen
         {
@@ -234,7 +228,7 @@ namespace Boku
                     else if(GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
                     {
                         Vector2 mouseHit = new Vector2(MouseInput.Position.X, MouseInput.Position.Y);
-                        
+
                         if(shared.leftArrowBox.LeftPressed(mouseHit))
                         {
                             moveLeft = true;
@@ -306,7 +300,7 @@ namespace Boku
             {
             }
 
-        }   // end of class HelpScreens UpdateObj  
+        }   // end of class HelpScreens UpdateObj
 
         protected class RenderObj : RenderObject
         {
@@ -408,8 +402,7 @@ namespace Boku
             {
             }
 
-        }   // end of class HelpScreens RenderObj     
-
+        }   // end of class HelpScreens RenderObj
 
         // List objects.
         protected Shared shared = null;
@@ -540,7 +533,6 @@ namespace Boku
 
     }   // end of class HelpScreens
 
-
     //
     //
     // Xml file reading.
@@ -578,7 +570,6 @@ namespace Boku
             return success;
         }   // end of XmlHelpScreensData ReadFromXml()
 
-
         private static XmlHelpScreensData Load(string filename)
         {
             // Fix up the filename with the full path.
@@ -601,9 +592,6 @@ namespace Boku
             return data;
         }   // end of XmlHelpScreensData Load()
 
-
     }   // end of class XmlOverlayData
 
 }   // end of namespace Boku
-
-

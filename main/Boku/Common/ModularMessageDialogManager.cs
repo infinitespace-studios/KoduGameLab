@@ -19,7 +19,6 @@ namespace Boku.Common
 
         //list of active dialogs
         private List<ModularMessageDialog> m_dialogs;
-        
 
         //accessors
         public static ModularMessageDialogManager Instance
@@ -61,7 +60,7 @@ namespace Boku.Common
                 if (!m_dialogs[0].Active)
                 {
                     m_dialogs.RemoveAt(0);
-                    
+
                     //are there more dialogs?  if so, activate the next
                     if (m_dialogs.Count > 0)
                     {
@@ -99,7 +98,6 @@ namespace Boku.Common
                             null, null,
                             null, null);
         }
-
 
         public void AddDialog(string text,
             ModularMessageDialog.ButtonHandler handlerA, string labelA,

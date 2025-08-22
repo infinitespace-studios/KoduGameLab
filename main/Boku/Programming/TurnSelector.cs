@@ -28,7 +28,7 @@ namespace Boku.Programming
     /// New Desc:
     /// This creates the actions needed to turn.  No clue why Turn is a Selector rather than an Actuator.
     /// Sometimes it just doesn't pay to be too inquisitive.  You end up being expected to fix what you find.
-    /// 
+    ///
     /// </summary>
     public class TurnSelector : Selector
     {
@@ -71,9 +71,9 @@ namespace Boku.Programming
             // Will be modified depending on stick or trigger position.
             float speedModifier = 1.0f;
 
-            // 
+            //
             // Start by looking at the input filters to attenuate speed.
-            // 
+            //
 
             if (stickFilt != null)
             {
@@ -264,7 +264,7 @@ namespace Boku.Programming
                             desiredHeading = reflex.targetSet.Nearest.Direction;
                             targetHeading = MyMath.ZRotationFromDirection(desiredHeading);
 
-                            // If mouseOver, calc damping to slow down turning when already looking 
+                            // If mouseOver, calc damping to slow down turning when already looking
                             // in the direction we want.  This helps make it less twitchy.
                             float dampingFactor = 1.0f;
                             if (mouseOver)
@@ -273,12 +273,12 @@ namespace Boku.Programming
 
                                 float deadzoneAngle = 0.96f;
                                 float dampzoneAngle = 0.9f;
-                                
+
                                 // If very close to center, just treat as zero.
                                 if (dot > deadzoneAngle)
                                 {
                                     dampingFactor = 0;
-                                } 
+                                }
                                 else if (dot > dampzoneAngle)
                                 {
                                     // Not in center, but close so damp turning.

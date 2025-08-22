@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +21,7 @@ using Boku.SimWorld;
 namespace Boku.UI
 {
     /// <summary>
-    /// Wrapper class to provide a home and camera for UI elements 
+    /// Wrapper class to provide a home and camera for UI elements
     /// that don't have an obvious parent.
     /// </summary>
     public class UIShim : GameObject, INeedsDeviceReset
@@ -46,7 +45,6 @@ namespace Boku.UI
                 */
             }
         }   // end of class Shared
-
 
         protected class UpdateObj : UpdateObject
         {
@@ -81,7 +79,6 @@ namespace Boku.UI
 
         }   // end of class UpdateObj
 
-
         public class RenderObj : RenderObject, INeedsDeviceReset
         {
             private Shared shared = null;
@@ -103,9 +100,9 @@ namespace Boku.UI
 
             public override void Render(Camera camera)
             {
-                // We don't want UI objects being thrown into the regular shadow pass but 
-                // since they're in the same renderlist we just have to deal with it.  It 
-                // seems to make more sense here to test and bail than to test every single 
+                // We don't want UI objects being thrown into the regular shadow pass but
+                // since they're in the same renderlist we just have to deal with it.  It
+                // seems to make more sense here to test and bail than to test every single
                 // shadow casting object.
 
                 if (active && (InGame.inGame.renderEffects == InGame.RenderEffect.Normal))
@@ -138,7 +135,7 @@ namespace Boku.UI
                     FBXModel.LockLowLOD = FBXModel.LockLOD.kAny;
                     InGame.inGame.PopBatching(batch);
 
-                    // Restore the real DOF_MaxBlur. 
+                    // Restore the real DOF_MaxBlur.
                     effect.Parameters["DOF_MaxBlur"].SetValue(dof_maxBlur);
 
                     BokuGame.bokuGame.shaderGlobals.PopLightRig(oldRig);
@@ -155,7 +152,6 @@ namespace Boku.UI
                 active = false;
             }
 
-
             public void LoadContent(bool immediate)
             {
                 // Init the effect.  Doesn't really matter which one, just
@@ -170,7 +166,7 @@ namespace Boku.UI
 
             public void InitDeviceResources(GraphicsDevice device)
             {
-                
+
             }
 
             public void UnloadContent()
@@ -230,13 +226,12 @@ namespace Boku.UI
             InGame.inGame.SetUIShim(renderObj);
 
             updateObj = new UpdateObj(ref shared);
-            
+
             childList = new List<GameObject>();
 
             this.ignorePaths = ignorePaths;
             addChildren(childList, out uiSelector, ignorePaths);
         }   // end of UIShim c'tor
-
 
         public override bool Refresh(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
@@ -249,7 +244,7 @@ namespace Boku.UI
                 {
                     updateList.Add(updateObj);
                     updateObj.Activate();
-                    /// Don't add it to the renderlist, it's handed directly to the 
+                    /// Don't add it to the renderlist, it's handed directly to the
                     /// InGame so that it can be rendered at the right time. ***
                     renderObj.Activate();
                 }
@@ -293,7 +288,6 @@ namespace Boku.UI
             pendingState = States.Inactive;
             BokuGame.objectListDirty = true;
         }
-
 
         public void LoadContent(bool immediate)
         {

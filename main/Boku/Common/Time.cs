@@ -16,18 +16,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 
-
 namespace Boku.Common
 {
     /// <summary>
-    /// Using the GameTime class it's not as easy to support slow motion, 
-    /// fast forward, pausing etc as it should be.  This class just wraps 
+    /// Using the GameTime class it's not as easy to support slow motion,
+    /// fast forward, pausing etc as it should be.  This class just wraps
     /// GameTime and gives us a clear differentiation between wall clock time
     /// and the in game simulation time.
-    /// 
+    ///
     /// WallClock values are real world times.
     /// GameTime values may reflect sped up, slowed down or paused game time.
-    /// 
+    ///
     /// All the class accessors are static since there's only one time.
     /// </summary>
     public class Time
@@ -38,9 +37,9 @@ namespace Boku.Common
         private static float wallClockFrameSeconds = 0.0f;      // Real world time since last call to Update().
         private static float gameTimeFrameSeconds = 0.0f;       // Game time seconds since last call to Update().
 
-        private static float clockRatio = 1.0f;                 // Ratio of game time / real world.  
+        private static float clockRatio = 1.0f;                 // Ratio of game time / real world.
         // Set to 0 to pause although calling Pause is better since you can then
-        // call Resume() without having to remember what speed you were running at.  
+        // call Resume() without having to remember what speed you were running at.
         // 0.5 to have game run at half speed.
         // 2.0 to have game run at double speed.
         // Negative values may cause your brain to implode.
@@ -159,7 +158,7 @@ namespace Boku.Common
 
 #if DEBUG
         static public string DebugString = "";
-#endif 
+#endif
 
         /// <summary>
         /// Returns a string with the current frame rate and other timing info.
@@ -172,10 +171,10 @@ namespace Boku.Common
 #if DEBUG
 #if Debug_CountTerrainVerts
                 fps = String.Format("{0:F1} fps ave:{1:####.00}ms verts:{2:####} tris:{3:####}", Time.FrameRate, 1000.0f / Time.FrameRate, Boku.SimWorld.Terra.Terrain.VertCounter_Debug, Boku.SimWorld.Terra.Terrain.TriCounter_Debug);
-#else
+
                 fps = String.Format("{0:F1} fps ave:{3:####.00}ms ", Time.FrameRate, minMS, maxMS, 1000.0f / Time.FrameRate) + " " + DebugString;
 #endif
-#else
+
                 fps = String.Format("{0:F1} fps", Time.FrameRate);
 #endif
                 return fps;
@@ -183,9 +182,9 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Ratio of game time / real world.  
+        /// Ratio of game time / real world.
         /// Set to 0 to pause although setting Paused to true is better since you can then
-        /// set it back to false without having to remember what speed you were running at.  
+        /// set it back to false without having to remember what speed you were running at.
         /// 0.5 to have game run at half speed.
         /// 2.0 to have game run at double speed.
         /// Negative values may cause your brain to implode.
@@ -330,8 +329,8 @@ namespace Boku.Common
                 int index = FrameCounter % PrevFrames.Length;
                 PrevFrames[index] = delta;
 
-                // Find the max delta in PrevFrames and use that to control 
-                // going in and out of frame skip mode. 
+                // Find the max delta in PrevFrames and use that to control
+                // going in and out of frame skip mode.
                 // If this is the frame after the one where we always render the full world,
                 // check the frame time and decide whether or not to turn skipping on or off.
                 double maxDelta = PrevFrames[0];
@@ -372,7 +371,7 @@ namespace Boku.Common
                 }
             }
 
-            // Debugging aid, if we're in the debugger then things jump 
+            // Debugging aid, if we're in the debugger then things jump
             // around too much so use a minimum of 1/5 of a second.
             delta = Math.Min(1.0 / 5.0, delta);
 
@@ -449,7 +448,3 @@ namespace Boku.Common
     }   // end of class Time
 
 }   // end of namespace BokuCommon
-
-
-
-

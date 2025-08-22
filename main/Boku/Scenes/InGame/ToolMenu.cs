@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define MF_HOSE_TESTS
 
 using System;
@@ -36,8 +35,8 @@ using Boku.Scenes.InGame.Tools;
 namespace Boku
 {
     /// <summary>
-    /// Selector for game editing tools.  Internally this just presents 
-    /// a grid with the tool icons on it and then switches InGame modes 
+    /// Selector for game editing tools.  Internally this just presents
+    /// a grid with the tool icons on it and then switches InGame modes
     /// depending on the user's choice.
     /// </summary>
     public class ToolMenu : INeedsDeviceReset
@@ -70,7 +69,7 @@ namespace Boku
         {
             get { return active; }
         }
-        
+
         #endregion
 
         #region Public
@@ -425,7 +424,7 @@ namespace Boku
                         float triggerAlpha = Math.Min((float)(dTime / kFadeTime), 1.0f);
                         Vector2 offset = size * 0.4f;
                         size *= 0.4f;
-                        // Note the 12/64 in the positioning accounts for the fact that the 
+                        // Note the 12/64 in the positioning accounts for the fact that the
                         // button textures only use the upper 40x40 out of the 64x64 space they allocate.
                         // The 12 is actually (64-40)/2.
                         csquad.Render(camera, ButtonTextures.RightTrigger, triggerAlpha, position + offset + size * 12.0f / 64.0f, size, @"TexturedRegularAlpha");
@@ -522,7 +521,6 @@ namespace Boku
             }
         }
 
-
         public void LoadContent(bool immediate)
         {
             BokuGame.Load(grid, immediate);
@@ -586,5 +584,3 @@ namespace Boku
     }   // end of class ToolMenu
 
 }   // end of namespace Boku
-
-

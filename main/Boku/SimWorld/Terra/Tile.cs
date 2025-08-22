@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if DEBUG
 #define Debug_CountTerrainVerts
 #define Debug_DrawNormalsWithF8
@@ -45,15 +44,15 @@ namespace Boku.SimWorld.Terra
         /// <summary>
         /// Array of Normal directions for each face direction.
         /// </summary>
-        public static Vector3[] FaceNormals = new Vector3[] { 
+        public static Vector3[] FaceNormals = new Vector3[] {
             Vector3.UnitZ,
             -Vector3.UnitY,
             Vector3.UnitY,
             -Vector3.UnitX,
-            Vector3.UnitX 
+            Vector3.UnitX
         };
         private const int maxNumRenderables = TerrainMaterial.MaxNum * 2; //Double the max number of terrain materials because they can come with or without the TerrainMaterial.Flags.Selection flag
-       
+
         #endregion
 
         #region FewerDraws render method state
@@ -173,7 +172,7 @@ namespace Boku.SimWorld.Terra
             get { return culled; }
             set { culled = value; }
         }
-        
+
         #endregion Accessors
 
         #region Public
@@ -203,7 +202,6 @@ namespace Boku.SimWorld.Terra
                 TerrainMaterial.Users[matIdx]++;
             }
         }
-
 
         /// <summary>
         /// Render the geometry for this tile which uses the input material
@@ -404,7 +402,6 @@ namespace Boku.SimWorld.Terra
             // Reset number of local vertices in each Renderable
             // since we're about to remake the list.
             ResetAllVertexCounts();
-            
 
             Vector2 cubeSize = new Vector2(
                 heightMap.Scale.X / (float)heightMap.Size.X,
@@ -551,7 +548,7 @@ namespace Boku.SimWorld.Terra
             int lastPix = heightMap.Size.X - 1;
             int lastLut = lastPix + 1;
 
-            /// Prime the sides from the neighbors. 
+            /// Prime the sides from the neighbors.
             HeightMap north = neighbors[VirtualMap.HeightMapNeighbors.Dir.North];
             if (north != null)
             {
@@ -781,6 +778,3 @@ namespace Boku.SimWorld.Terra
     }   // end of class Tile
 
 }   // end of namespace Boku.SimWorld
-
-
-

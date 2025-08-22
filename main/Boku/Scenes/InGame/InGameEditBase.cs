@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -128,9 +127,9 @@ namespace Boku
             /// <summary>
             /// Common camera controls for edit modes.
             /// </summary>
-            /// <param name="preventZoom">Lock the zoom.  This is kind of a hack used 
-            /// by the tool palette since that palette uses the shoulder buttons to 
-            /// cycle through it.  Without locking the zoom we'd zoom in and out 
+            /// <param name="preventZoom">Lock the zoom.  This is kind of a hack used
+            /// by the tool palette since that palette uses the shoulder buttons to
+            /// cycle through it.  Without locking the zoom we'd zoom in and out
             /// as we're moving though the tool options.</param>
             public void UpdateCamera(bool preventZoom)
             {
@@ -245,7 +244,7 @@ namespace Boku
                         parent.MouseEdit.DoCamera(parent.Camera);
                     }
 
-                    // Left stick to control cursor position.  
+                    // Left stick to control cursor position.
                     // Cursor movement is relative to view heading.
                     // Cursor speed grows with view distance.
                     Vector2 position = new Vector2(shared.CursorPosition.X, shared.CursorPosition.Y);
@@ -544,9 +543,6 @@ namespace Boku
 
             }   // end of BaseEditUpdateObj UpdateEditBrush()
 
-
-
-
             public override void Activate()
             {
                 if (!active)
@@ -585,5 +581,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

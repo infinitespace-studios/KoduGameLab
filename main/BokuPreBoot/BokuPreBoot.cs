@@ -64,7 +64,7 @@ namespace BokuPreBoot
                             return;
                         }
                     }
-                    catch 
+                    catch
                     {
                         // Nothing to see here.  Move along.
                         // We get here if there is no patched version (ie all the time).

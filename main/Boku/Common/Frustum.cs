@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,7 +16,7 @@ namespace Boku.Common
 {
     /// <summary>
     /// Based on the camera that owns it, this class creates the six planes
-    /// which define the current view frustum.  This class also contains 
+    /// which define the current view frustum.  This class also contains
     /// functions which test the frustum against bounding objects.
     /// </summary>
     public class Frustum
@@ -30,7 +29,7 @@ namespace Boku.Common
         };
 
         private Vector4[] planes = null;
-        
+
         // c'tor
         public Frustum()
         {
@@ -43,7 +42,7 @@ namespace Boku.Common
             Frustum clone = new Frustum();
 
             clone.planes = new Vector4[6];
-            
+
             for (int i = 0; i < 6; ++i)
             {
                 clone.planes[i] = this.planes[i];
@@ -223,7 +222,6 @@ namespace Boku.Common
                 NormalizePlane(ref planes[5]);
             }
         }   // end of Frustum ExtractPlanes()
-
 
     }   // end of class Frustum
 

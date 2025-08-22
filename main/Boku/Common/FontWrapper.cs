@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,9 +33,6 @@ namespace Boku.Common
 
                 if (BokuSettings.Settings.UseSystemFontRendering)
                 {
-#if !NETFX_CORE
-                    result = systemFont.LineSpacing;
-#endif
                 }
                 else
                 {
@@ -58,9 +54,6 @@ namespace Boku.Common
 
             if (BokuSettings.Settings.UseSystemFontRendering)
             {
-#if !NETFX_CORE
-                result = systemFont.MeasureString(text);
-#endif
             }
             else
             {
@@ -72,7 +65,7 @@ namespace Boku.Common
 
             return result;
         }   // end of MeasureString()
-    
+
     }   // end of class FontWrapper
 
 }   // end of namespace Boku.Common

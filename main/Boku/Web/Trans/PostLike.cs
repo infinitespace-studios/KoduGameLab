@@ -14,7 +14,6 @@ namespace Boku.Web.Trans
     {
          protected override string MethodName { get { return "PostLike"; } }
 
-
         #region Public Methods
 
          public PostLike(
@@ -41,7 +40,6 @@ namespace Boku.Web.Trans
         #endregion
 
         #region Protected Methods
-
 
         protected override bool ISend()
         {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #define ALLOW_BLOOM
 
 using System;
@@ -42,7 +41,7 @@ namespace Boku.Fx
         {
             [FieldOffset(0)]public Vector2 cubeCenter;    // cubecenter
             [FieldOffset(4)]public Vector2 offset;    // offset from cubecenter to position
-            [FieldOffset(8)]public Vector4 uv;          // center.xy, radius.z, birth.w 
+            [FieldOffset(8)]public Vector4 uv;          // center.xy, radius.z, birth.w
             [FieldOffset(24)]public Vector2 water;       // height.x, type.y
         };
         private static VertexElement[] elements = new VertexElement[]
@@ -59,7 +58,7 @@ namespace Boku.Fx
         {
             public Vector2 cubeCenter;  // cubecenter
             public Vector2 offset;      // offset from cubecenter to position
-            public Vector4 uv;          // center.xy, radius.z, birth.w 
+            public Vector4 uv;          // center.xy, radius.z, birth.w
             public Vector2 water;       // height.x, type.y
 
             static VertexDeclaration decl = null;
@@ -84,9 +83,9 @@ namespace Boku.Fx
                 }
             }
 
-            public static int Stride 
-            { 
-                get { return 40; } 
+            public static int Stride
+            {
+                get { return 40; }
             }
         };
 
@@ -314,7 +313,6 @@ namespace Boku.Fx
 #if !LLLLLL
                 //device.RasterizerState = UI2D.Shared.RasterStateWireframe;
 
-
                 device.Indices = indices;
                 device.SetVertexBuffer(verts);
 
@@ -465,7 +463,7 @@ namespace Boku.Fx
 
             //float uvScale = 0.5f / radius;
             //Vector2 uvOffset = new Vector2(0.5f - center.X * uvScale.X, 0.5f - center.Y * uvScale.Y);
-            
+
             SetVert(
                 water.BaseHeight,
                 water.Type,
@@ -515,11 +513,11 @@ namespace Boku.Fx
         private static void SetVert(
             float baseHeight,
             int waterType,
-            int vtxIdx, 
-            Vector3 cubeCenter, 
+            int vtxIdx,
+            Vector3 cubeCenter,
             Vector2 offset,
-            Vector2 center, 
-            float radius, 
+            Vector2 center,
+            float radius,
             float birthTime)
         {
             localVerts[vtxIdx].cubeCenter = new Vector2(cubeCenter.X, cubeCenter.Y);

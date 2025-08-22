@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -108,7 +107,7 @@ namespace Boku.Common.ParticleSystem
         #endregion
 
         // c'tor
-        public GlowEmitter(ParticleSystemManager manager) 
+        public GlowEmitter(ParticleSystemManager manager)
             : base(manager)
         {
             const int numInitParticles = 5;
@@ -268,7 +267,6 @@ namespace Boku.Common.ParticleSystem
             unused.Add((GlowParticle)particleList[which]);
             particleList.RemoveAt(which);
         }
-
 
     }   // end of class GlowEmitter
 

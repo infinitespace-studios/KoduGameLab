@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -25,7 +24,7 @@ namespace Boku.SimWorld
     /// rather than 16 bit.
     /// Actually, 129x129 will also fit, but then small world (only 65x65 heightmap)
     /// will die with a truncation problem coming up with 0x0 tiles - maf
-    /// 
+    ///
     /// With the change to allowing for hidden tiles skirts and water have been integrated
     /// into the Tile class.
     /// </summary>
@@ -165,7 +164,7 @@ namespace Boku.SimWorld
                     tiles[i, j].stride = System.Runtime.InteropServices.Marshal.SizeOf(new Terrain.TerrainVertex());
                     tiles[i, j].indexX = i;
                     tiles[i, j].indexY = j;
-                    tiles[i, j].position = new Vector3(i * heightMap.Scale.X / width, j * heightMap.Scale.Y / height, 0.0f); 
+                    tiles[i, j].position = new Vector3(i * heightMap.Scale.X / width, j * heightMap.Scale.Y / height, 0.0f);
 
                     Point offset = new Point(i * (BuffSize - 1), j * (BuffSize - 1));
 
@@ -218,7 +217,7 @@ namespace Boku.SimWorld
         //static public void RelaxTileData(HeightMap heightMap)
         //{
         //    int numToDo = 1000;
-            
+
         //    int numDone = 0;
         //    while (numDone < numToDo)
         //    {
@@ -235,7 +234,7 @@ namespace Boku.SimWorld
         //        int i = currRelax.X;
         //        if (i > 0)
         //        {
-        //            Vector2 
+        //            Vector2
         //        }
         //        int j = currRelax.Y;
 
@@ -317,12 +316,11 @@ namespace Boku.SimWorld
                 + h0.Z * (1.0f / (s1 * s1 * s1) + 1.0f / (s1 * s1 * sb) + 1.0f / (s1 * sb * sb))
                 - hb.Z / (s1 * sb * sb);
 
-
             float kEnergy = 0.1f;
 
             float kLowK = 0.25f;
-            return (kurv > kLowK 
-                ? s1 
+            return (kurv > kLowK
+                ? s1
                 : kurv < -kLowK
                     ? -sb
                     : 0.0f) * kEnergy;
@@ -348,15 +346,15 @@ namespace Boku.SimWorld
             Terrain.TerrainVertex vfore = vertices[i + di, j + dj];
             float kBack = K2(vback, vhere);
             float kFore = K2(vhere, vfore);
-            
+
             if (kBack * kFore <= 0.0f)
                 return 0.0f;
 
             float step = 0.0f;
             if (kBack > kFore)
             {
-                step = di > 0 
-                    ? vback.position.X - vhere.position.X 
+                step = di > 0
+                    ? vback.position.X - vhere.position.X
                     : vback.position.Y - vhere.position.Y;
                 step *= (kBack - kFore) / kBack;
             }
@@ -552,8 +550,8 @@ namespace Boku.SimWorld
             bool inX = false;
             if ((i > 0) && (i < heightMapSize.X - 1))
             {
-                ReCenter(ref vertices[i - 1, j].position, 
-                    ref vertices[i, j].position, 
+                ReCenter(ref vertices[i - 1, j].position,
+                    ref vertices[i, j].position,
                     ref vertices[i + 1, j].position);
 
                 inX = true;
@@ -614,8 +612,8 @@ namespace Boku.SimWorld
             Vector2 result = TempLerp(
                 TempLerp(kurvatures[i, j],
                             kurvatures[i + 1, j], dx),
-                TempLerp(kurvatures[i, j + 1], 
-                            kurvatures[i + 1, j + 1], dx), 
+                TempLerp(kurvatures[i, j + 1],
+                            kurvatures[i + 1, j + 1], dx),
                        dy);
 
             return result;
@@ -688,9 +686,9 @@ namespace Boku.SimWorld
             if ((j > 0) && (j < heightMapSize.Y - 1))
             {
                 AccumForce((vertices[i, j - 1].position - vertices[i, j].position), ref force);
-                
+
                 AccumForce((vertices[i, j + 1].position - vertices[i, j].position), ref force);
-                
+
                 inY = true;
             }
             if (inX && inY)
@@ -1023,6 +1021,3 @@ namespace Boku.SimWorld
     }   // end of class Tile
 
 }   // end of namespace Boku.SimWorld
-
-
-

@@ -4,7 +4,7 @@
 /*
  * XMeshImporter.cs
  * Copyright (c) 2006, 2007 David Astle, Michael Nikonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -60,7 +60,7 @@ namespace Xclna.Xna.Animation.Content
                 // this face
                 public int MaterialIndex;
 
-                // Converts a face with 4 verts into 
+                // Converts a face with 4 verts into
                 public Face[] ConvertQuadToTriangles()
                 {
                     Face[] triangles = new Face[2];
@@ -128,29 +128,28 @@ namespace Xclna.Xna.Animation.Content
 
             #region Vertex Importation Methods
 
-            // "This template is instantiated on a per-mesh basis. Within a mesh, a sequence of n 
-            // instances of this template will appear, where n is the number of bones (X file frames) 
+            // "This template is instantiated on a per-mesh basis. Within a mesh, a sequence of n
+            // instances of this template will appear, where n is the number of bones (X file frames)
             // that influence the vertices in the mesh. Each instance of the template basically defines
-            // the influence of a particular bone on the mesh. There is a list of vertex indices, and a 
+            // the influence of a particular bone on the mesh. There is a list of vertex indices, and a
             // corresponding list of weights.
-            // template SkinWeights 
-            // { 
-            //     STRING transformNodeName; 
-            //     DWORD nWeights; 
-            //     array DWORD vertexIndices[nWeights]; 
-            //     array float weights[nWeights]; 
-            //     Matrix4x4 matrixOffset; 
+            // template SkinWeights
+            // {
+            //     STRING transformNodeName;
+            //     DWORD nWeights;
+            //     array DWORD vertexIndices[nWeights];
+            //     array float weights[nWeights];
+            //     Matrix4x4 matrixOffset;
             // }
-            // - The name of the bone whose influence is being defined is transformNodeName, 
+            // - The name of the bone whose influence is being defined is transformNodeName,
             // and nWeights is the number of vertices affected by this bone.
-            // - The vertices influenced by this bone are contained in vertexIndices, and the weights for 
+            // - The vertices influenced by this bone are contained in vertexIndices, and the weights for
             // each of the vertices influenced by this bone are contained in weights.
-            // - The matrix matrixOffset transforms the mesh vertices to the space of the bone. When concatenated 
+            // - The matrix matrixOffset transforms the mesh vertices to the space of the bone. When concatenated
             // to the bone's transform, this provides the world space coordinates of the mesh as affected by the bone."
             // (http://msdn.microsoft.com/library/default.asp?url=/library/en-us/
             //  directx9_c/dx9_graphics_reference_x_file_format_templates.asp)
-            // 
-
+            //
 
             // Reads in a bone that contains skin weights.  It then adds one bone weight
             //  to every vertex that is influenced by ths bone, which contains the name of the bone and the
@@ -235,7 +234,7 @@ namespace Xclna.Xna.Animation.Content
             // {
             //      DWORD nTextureCoords;
             //      array Coords2d textureCoords[nTextureCoords] ;
-            // } 
+            // }
             /// <summary>
             /// Imports the texture coordinates associated with the current mesh.
             /// </summary>
@@ -256,7 +255,7 @@ namespace Xclna.Xna.Animation.Content
             //     array Vector normals[nNormals];
             //     DWORD nFaceNormals;
             //     array MeshFace faceNormals[nFaceNormals];
-            // } 
+            // }
             /// <summary>
             /// Imports the normals associated with the current mesh.
             /// </summary>
@@ -290,8 +289,6 @@ namespace Xclna.Xna.Animation.Content
                 // end of mesh normals
                 tokens.SkipToken();
             }
-
-
 
             // template Mesh
             // {
@@ -347,7 +344,7 @@ namespace Xclna.Xna.Animation.Content
             //      DWORD nFaceIndexes;
             //      array DWORD faceIndexes[nFaceIndexes];
             //      [Material]
-            // } 
+            // }
             /// <summary>
             /// Imports a material list that contains the materials used by the current mesh.
             /// </summary>
@@ -383,7 +380,6 @@ namespace Xclna.Xna.Animation.Content
                 tokens.SkipToken();
             }
 
-
             #endregion
 
             #region Other Methods
@@ -394,13 +390,11 @@ namespace Xclna.Xna.Animation.Content
             private void AddAllChannels()
             {
 
-
                 bool recalcNormal = false;
                if (model.AnimationOptions.Contains("RecalcNormals") || (normals == null && !hasNormals))
                    recalcNormal=true;
                else
                     AddChannel<Vector3>(VertexElementUsage.Normal.ToString() + "0", normals);
-
 
                 if (texCoords != null)
                     AddChannel<Vector2>("TextureCoordinate0", texCoords);
@@ -435,9 +429,6 @@ namespace Xclna.Xna.Animation.Content
                     MeshHelper.CalculateNormals(mesh, true);
                 MeshHelper.OptimizeForCache(mesh);
 
-
-
-                
             }
 
             /// <summary>
@@ -520,14 +511,13 @@ namespace Xclna.Xna.Animation.Content
                     for (int i = 0; i < faceList.Count * 3; i++)
                         geom.Indices.Add(i);
                     foreach (Face face in faceList)
-                        geom.Vertices.AddRange(face.VertexIndices);              
+                        geom.Vertices.AddRange(face.VertexIndices);
                     if (materials.Length > 0)
                         geom.Material = materials[index++];
                 }
 
                 // Add the channels to the geometries
                 AddAllChannels();
-                
 
             }
 
@@ -542,8 +532,6 @@ namespace Xclna.Xna.Animation.Content
             }
         }
 
-
     }
-
 
 }

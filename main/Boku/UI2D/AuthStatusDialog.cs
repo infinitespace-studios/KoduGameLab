@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -111,7 +110,7 @@ namespace Boku.UI2D
                 }
                 else if (GamePadInput.ActiveMode == GamePadInput.InputMode.GamePad)
                 {
-                    // Do nothing.  Since signing in requires keyboard/mouse it 
+                    // Do nothing.  Since signing in requires keyboard/mouse it
                     // really doesn't make sense to partially support gamepad.
                 }
             }
@@ -147,7 +146,7 @@ namespace Boku.UI2D
                     offset.Y += 1;
                 }
                 blob.RenderWithButtons(hitBox.Min + offset, Color.White);
-            
+
             }   // end of active
 
         }   // end of Render()

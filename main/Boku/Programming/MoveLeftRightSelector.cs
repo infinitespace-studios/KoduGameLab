@@ -25,13 +25,13 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Moves a bot up or down in response to gamestick direction.
-    /// 
-    /// 
-    /// 
+    ///
+    ///
+    ///
     /// ARCHIVED!!!
-    /// 
-    /// 
-    /// 
+    ///
+    ///
+    ///
     /// </summary>
     public class MoveLeftRightSelector : Selector
     {

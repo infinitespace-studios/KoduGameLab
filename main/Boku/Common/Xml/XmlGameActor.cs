@@ -136,7 +136,7 @@ namespace Boku.Common.Xml
         // Does this make the saved files cleaner?  If so, ok.
         // If not, this just seems like too much crap is dumped here
         // and it makes these values difficult to work with.
-        // Are these ever even written or are they read only?  If 
+        // Are these ever even written or are they read only?  If
         // read only then they definitely don't need to be nullable.
 
         //Base
@@ -159,7 +159,7 @@ namespace Boku.Common.Xml
         public bool? Tumbles;                   // DynamicProp
         public float? SlopeThreshold;           // Puck
         public float? Radius;                   // Puck
-        public float? RotationRate;             // Saucer, Puck        
+        public float? RotationRate;             // Saucer, Puck
         public float? MaxVerticalAcceleration;  // FloatInAir
         public float? MaxVerticalSpeed;         // FloatInAir
         public float? MaxAltitude;              // FloatInAir
@@ -172,7 +172,6 @@ namespace Boku.Common.Xml
         public float? Overshoot;                // Swim
         public PipeChassis.PipeTypeEnum? PipeType;// Pipe
 
-        
         /// <summary>
         /// Assigns each applicable member of the given chassis
         /// the value of the respective member in this instance
@@ -180,7 +179,7 @@ namespace Boku.Common.Xml
         /// </summary>
         /// <param name="chassis">
         /// Should be the same type as this instances' Type
-        /// member. Otherwise, chassis specific settings (such as 
+        /// member. Otherwise, chassis specific settings (such as
         /// the PuckChassis' Radius member) will not be set.
         /// </param>
         public void CopyTo(BaseChassis chassis)
@@ -577,10 +576,10 @@ namespace Boku.Common.Xml
         /// <summary>
         /// World space radius of the collision sphere.
         /// </summary>
-        public float CollisionRadius 
-        { 
-            get; 
-            set; 
+        public float CollisionRadius
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -621,7 +620,7 @@ namespace Boku.Common.Xml
         }
 
         /// <summary>
-        /// This is the minimum height of the object.  An object at 
+        /// This is the minimum height of the object.  An object at
         /// this height should appear to be sitting on the ground.
         /// </summary>
         public float MinHeight
@@ -880,7 +879,6 @@ namespace Boku.Common.Xml
             set { roverHillEndPitch = value; }
         }
 
-
         /// <summary>
         /// The unscaled, default scan range
         /// </summary>
@@ -1088,7 +1086,6 @@ namespace Boku.Common.Xml
             set { sensorsData = value; }
         }
 
-
         [XmlElement("SharedIdle")]
         public XmlSharedIdle SharedIdleData
         {
@@ -1177,92 +1174,14 @@ namespace Boku.Common.Xml
 
         #region refresh logic for design tools
 
-#if NETFX_CORE
         public void RefreshFromXML()
         {
             Debug.Assert(false, "Is this needed during runtime?");
         }
-#else
-
-        public void RefreshFromXML()
-        {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(System.IO.Directory.GetCurrentDirectory() + XmlFileName);
-
-            // note on persistence: the surface sets are in subnodes of the root xml document
-            // each surface set record will hold pointers to these subnodes
-            // when we save, we copy date back to the subnodes and then write the whole doc
-            // back to the file.
-            foreach (XmlNode node in xmlDoc.ChildNodes)
-            {
-                // look for the actor - should be one per file
-                if (node.Name == "XmlGameActor")
-                {
-                    foreach (XmlNode actorNode in node.ChildNodes)
-                    {
-                        // we currently rely on the surface sets being in the same order, as there is no
-                        // way for the user to reorder them and they should always be in load order
-                        if (actorNode.Name == "SurfaceSets")
-                        {
-                            int curSurfSet = 0;
-                            foreach (XmlNode surfSetNode in actorNode.ChildNodes)
-                            {
-                                if (surfSetNode.Name == "SurfaceSet")
-                                {
-                                    SurfaceSet curSet = this.SurfaceSets[curSurfSet];
-                                    RefreshSurfaceSet(surfSetNode, curSet);
-                                    curSurfSet++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Given an xml node and a surface set, parse the xml node and 
-        // update approprate fields of the surface set.
-        public void RefreshSurfaceSet(XmlNode surfSetXML, SurfaceSet surfSet)
-        {
-            // first get the properties of the surface set
-            foreach (XmlNode node in surfSetXML.ChildNodes)
-            {
-                if (node.Name == "Name")
-                {
-                    string name = node.InnerText;
-                    // keeping this around for validation; not doing anything with it at the moment.
-                }
-                if (node.Name == "SurfaceNames")
-                {
-                    string[] names = new string[8];
-                    int curName = 0;
-                    // now we're going to accumulate the names
-                    // of all the surfaces applied to the slots in this
-                    // model - note that order is paramount - different slots
-                    // correspond to different body parts of the bot
-                    foreach (XmlNode surfNameNode in node.ChildNodes)
-                    {
-                        System.Diagnostics.Debug.Assert(surfNameNode.Name == "string",
-                                                        "Expected string parsing SurfaceNames in XmlActor");
-                        names[curName++] = surfNameNode.InnerText;
-                    }
-                    surfSet.SurfaceNames = names;
-                }
-                else if (node.Name == "BumpDetailName")
-                {
-                    surfSet.BumpDetailName = node.InnerText;
-                }
-                else if (node.Name == "DirtMapName")
-                {
-                    surfSet.DirtMapName = node.InnerText;
-                }
-            }
-        }
-#endif
         #endregion
 
         /// <summary>
-        /// Save a named resource, using file naming convention. 
+        /// Save a named resource, using file naming convention.
         /// Currently unused, actor xml's are hand made.
         /// </summary>
         /// <param name="name"></param>

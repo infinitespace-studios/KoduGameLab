@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -116,7 +115,7 @@ namespace Boku.UI2D
                 position.X += (int)size.X;
             }
 
-            // Render the text.         
+            // Render the text.
             SpriteBatch batch = UI2D.Shared.SpriteBatch;
 
             batch.Begin();

@@ -11,14 +11,11 @@ using Boku.Base;
 using Boku.Common.Xml;
 using Boku.Common.Sharing;
 
-#if NETFX_CORE
     using System.Threading.Tasks;
     using Windows.Foundation;
     using Windows.System.Threading;
-#endif
 
 using BokuShared;
-
 
 namespace Boku.Common
 {
@@ -47,11 +44,7 @@ namespace Boku.Common
 
         public bool Working
         {
-#if NETFX_CORE
             get { return working; }
-#else
-            get { return thread != null; }
-#endif
         }
 
         public StorageSource Sources = StorageSource.All;
@@ -104,11 +97,7 @@ namespace Boku.Common
         List<LevelMetadata> thumbnailQueue = new List<LevelMetadata>();
         List<LevelMetadata> thumbnailCompletions = new List<LevelMetadata>();
 
-#if NETFX_CORE
-        bool working = false;   // Mirrors thread's null/non-null condition 
-#else
-        Thread thread;
-#endif
+        bool working = false;   // Mirrors thread's null/non-null condition
 
         public LocalLevelBrowser()
             : this(StorageSource.All)
@@ -127,14 +116,9 @@ namespace Boku.Common
         private void StartInitialize()
         {
             running = true;
-#if NETFX_CORE
             // Run ReadLevelsProc using the ThreadPool
             Task.Factory.StartNew(ReadLevelsProc);
             working = true;
-#else
-            thread = new Thread(new ThreadStart(ReadLevelsProc));
-            thread.Start();
-#endif
         }
 
         void ReadLevelsProc2()
@@ -150,11 +134,7 @@ namespace Boku.Common
             ReadDataSource("MyWorlds", Genres.MyWorlds, StorageSource.UserSpace);
             ReadDataSource("Downloads", Genres.Downloads, StorageSource.UserSpace);
 
-#if NETFX_CORE
             working = false;
-#else
-            thread = null;
-#endif
 
             for (; ; )
             {
@@ -162,13 +142,8 @@ namespace Boku.Common
                     break;
 
                 // Wait for a wake-up signal
-#if NETFX_CORE
                 if (!signal.WaitOne(10))
                     continue;
-#else
-                if (!signal.WaitOne(10, false))
-                    continue;
-#endif
 
                 // Process all queued thumbnail load requests.
                 for (; ; )
@@ -197,15 +172,11 @@ namespace Boku.Common
                     }
 
                     // Let the main thread have the cpu so it can deliver the thumbnail to the level.
-#if NETFX_CORE
                     {
                         System.Threading.Tasks.Task delayTask = System.Threading.Tasks.Task.Delay(1);
                         delayTask.ConfigureAwait(false);
                         delayTask.Wait();
                     }
-#else
-                    Thread.Sleep(1);
-#endif
                 }
             }
         }
@@ -222,11 +193,7 @@ namespace Boku.Common
 
             try
             {
-#if NETFX_CORE
                 files = Storage4.GetFiles(path, @"*.Xml", sources);
-#else
-                files = Storage4.GetFiles(path, @"*.Xml", sources, SearchOption.TopDirectoryOnly);
-#endif
             }
             catch { }
 
@@ -279,7 +246,6 @@ namespace Boku.Common
         }
     }
 
-
     public partial class LocalLevelBrowser
     {
         List<ILevelSetQuery> queries = new List<ILevelSetQuery>();
@@ -301,10 +267,10 @@ namespace Boku.Common
             lock (Synch)
             {
                 ILevelSetQuery query = new LevelSetQuery(
-                    sorter, 
-                    filter, 
-                    this, 
-                    notifyFetchingCallback, 
+                    sorter,
+                    filter,
+                    this,
+                    notifyFetchingCallback,
                     notifyFetchCompleteCallback);
 
                 queries.Add(query);
@@ -318,7 +284,7 @@ namespace Boku.Common
                     additionCallback,
                     removalCallback,
                     size);
-                
+
                 query.AddCursor(cursor);
             }
 

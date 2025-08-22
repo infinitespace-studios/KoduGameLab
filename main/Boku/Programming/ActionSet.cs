@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +31,7 @@ namespace Boku.Programming
 
         /// <summary>
         /// TODO (****)
-        /// Generic add method for actions.  Once all new actions go 
+        /// Generic add method for actions.  Once all new actions go
         /// through this, all the other Add* methods should be removed.
         /// </summary>
         /// <param name="action"></param>
@@ -49,8 +48,8 @@ namespace Boku.Programming
         }
         /// <summary>
         /// Add attractors in order from closest to furthest
-        /// include distance from bot, 
-        /// vector effect, 
+        /// include distance from bot,
+        /// vector effect,
         /// and radius that the effect starts to fade
         /// </summary>
         /// <param name="distance"></param>
@@ -75,6 +74,5 @@ namespace Boku.Programming
             return null;
         }
     }   // end of class ActionSet
-
 
 }   // end of namespace Boku.Programming

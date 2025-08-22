@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -86,7 +85,7 @@ namespace Boku
                 descBlob.LineSpacingAdjustment = -5;
 
                 // We're rendering the camera specific parts into a 1024x768 rendertarget and
-                // then copying (with masking) into the 1280x720 rt and finally cropping it 
+                // then copying (with masking) into the 1280x720 rt and finally cropping it
                 // as needed for 4:3 display.
                 camera = new PerspectiveUICamera();
                 camera.Resolution = new Point(1280, 720);
@@ -158,8 +157,8 @@ namespace Boku
                 {
                     int focusIndex = editor.ActivePanel.ActiveCard;
 
-                    // Since there is no single list of elements we need to 
-                    // just work our way through the reflex trying to figure 
+                    // Since there is no single list of elements we need to
+                    // just work our way through the reflex trying to figure
                     // out where the new tile should go.
 
                     for (; ; ) // Fake a loop just to give us something to break out of.
@@ -206,7 +205,7 @@ namespace Boku
                             reflexData.Selector = (Selector)focusElement;
                             break;
                         }
-                        // This can happen if we're replacing a Selector with a Modifier.  
+                        // This can happen if we're replacing a Selector with a Modifier.
                         // It's kind of questionable whether or not that is a valid thing
                         // to do but since the system currently supports doing so we have
                         // to be able to handle the case.
@@ -317,7 +316,6 @@ namespace Boku
 
                 // Allow the geometry for the tiles to load.
                 tilesGrid.LoadContent(true);
-
 
                 //
                 // Set up samplesGrid
@@ -474,7 +472,6 @@ namespace Boku
                         }
                     }
 
-
                     Vector2 touchHit = TouchInput.GetAspectRatioAdjustedPosition(touch.position, shared.camera, true);
 
                     // InsertExample
@@ -506,7 +503,6 @@ namespace Boku
                             shared.examplesGrid.MoveDown();
                         }
                     }
-
 
                     // Scroll description
                     if (shared.descBlob != null && shared.rightStickBox.Touched(touch, touchHit))
@@ -574,7 +570,6 @@ namespace Boku
                             }
                         }
                     }
-
 
                     Vector2 mouseHit = MouseInput.GetAspectRatioAdjustedPosition(shared.camera, true);
 
@@ -790,7 +785,7 @@ namespace Boku
                     parent.parent.Deactivate();
 
                     // But, the pie selectors may be nested.  So crawl around and see if we can find them all.
-                    // Nested pie selectors are hosted on billboards which in turn are hosted on slices of 
+                    // Nested pie selectors are hosted on billboards which in turn are hosted on slices of
                     // other pie selectors.  Yes, it's turtles all the way down.
                     Billboard bb = parent.parent.Parent as Billboard;
                     while (bb != null)
@@ -825,7 +820,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class ProgrammingHelpCard UpdateObj  
+        }   // end of class ProgrammingHelpCard UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -888,8 +883,6 @@ namespace Boku
 
                 // Set up params for rendering UI with this camera.
                 Fx.ShaderGlobals.SetCamera(shared.camera1k);
-
-
 
                 //
                 // Render the samples grid.
@@ -975,7 +968,6 @@ namespace Boku
                     device.DepthStencilState = DepthStencilState.None;
                 }
                 */
-
 
                 // Render the scene to our rendertarget.
                 InGame.SetRenderTarget(rtFull);
@@ -1107,7 +1099,6 @@ namespace Boku
 
                 ssquad.Render(rtFull, position + BokuGame.ScreenPosition, newSize, @"TexturedRegularAlpha");
 
-
             }   // end of ProgrammingHelpCard RenderObj Render()
 
             #endregion
@@ -1175,7 +1166,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class ProgrammingHelpCard RenderObj     
+        }   // end of class ProgrammingHelpCard RenderObj
 
         #region Members
 
@@ -1232,7 +1223,7 @@ namespace Boku
 
         public void OnSelect(UIGrid grid)
         {
-            // We should never actually get here.  The ProgrammingHelpCard UpdateObj 
+            // We should never actually get here.  The ProgrammingHelpCard UpdateObj
             // should consume all 'A' presses before the grids get them...
 
             Debug.Assert(false);
@@ -1241,7 +1232,7 @@ namespace Boku
 
         public void OnCancel(UIGrid grid)
         {
-            // We should never actually get here.  The ProgrammingHelpCard UpdateObj 
+            // We should never actually get here.  The ProgrammingHelpCard UpdateObj
             // should consume all 'B' presses before the grids get them...
 
             Debug.Assert(false);

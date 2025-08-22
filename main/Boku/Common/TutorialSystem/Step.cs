@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,7 +55,7 @@ namespace Boku.Common.TutorialSystem
 
         /// <summary>
         /// Since XML comments don't persist over serialization/deserialization we have
-        /// this comment string.  It's not used for anything internally.  It's just 
+        /// this comment string.  It's not used for anything internally.  It's just
         /// there to help out people creating tutorials.
         /// </summary>
         private string comment = null;
@@ -172,7 +171,6 @@ namespace Boku.Common.TutorialSystem
             set { touchText = value; }
         }
 
-        
         /// <summary>
         /// Test used for non-modal steps to determine when they've completed.
         /// </summary>
@@ -181,7 +179,7 @@ namespace Boku.Common.TutorialSystem
             get { return completionTest; }
             set { completionTest = value; }
         }
-        
+
         #endregion
 
         #region Public

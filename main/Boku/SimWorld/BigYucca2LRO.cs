@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ namespace Boku.SimWorld
         private static BigYucca2SRO sroInstance = null;
 
         // c'tor
-        private BigYucca2SRO() 
+        private BigYucca2SRO()
             : base(@"Models\big_yucca_2")
         {
             TechniqueExt = "Foliage";

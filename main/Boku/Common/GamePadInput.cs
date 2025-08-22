@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -13,17 +12,15 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-
 using Boku.Common.Sharing;
 using Boku.Programming;
-
 
 namespace Boku.Common
 {
     /// <summary>
-    /// A thin wrapper around the GamePad stuff to hide catching of edge transitions, 
+    /// A thin wrapper around the GamePad stuff to hide catching of edge transitions,
     /// support of auto-repeat, treating analog inputs as buttons, etc.
-    /// 
+    ///
     /// *IsPressed functions return true if the button is currently pressed.
     /// *WasPressed functions return true if the button was pressed this frame.
     /// *WasRepeatPressed returns true if a button press was triggered by autorepeat.
@@ -31,23 +28,23 @@ namespace Boku.Common
     ///
     /// To use this class call GamePadInput.Init() once to set things up and then
     /// call GamePadInput.Update() once per frame to update the state.
-    /// 
+    ///
     /// When you need input you can grab the gamepad and query it for state:
     ///     GamePadInput pad = GamePadInput.GetGamePad0();
-    ///     if ( pad.AWasPressed ) 
-    ///     { 
-    ///         /* handle press of A button */ 
+    ///     if ( pad.AWasPressed )
+    ///     {
+    ///         /* handle press of A button */
     ///     }
-    /// 
+    ///
     ///     If you also want autorepeat to work.
-    ///     if ( pad.AWasPressed || pad.AWasRepeatPressed ) 
-    ///     { 
-    ///         /* handle press of A button */ 
+    ///     if ( pad.AWasPressed || pad.AWasRepeatPressed )
+    ///     {
+    ///         /* handle press of A button */
     ///     }
-    /// 
-    /// GamePad0 is a composite of all four controllers.  This allows multiple 
+    ///
+    /// GamePad0 is a composite of all four controllers.  This allows multiple
     /// controllers to provide input at the same time.
-    /// 
+    ///
     /// </summary>
     public partial class GamePadInput
     {
@@ -134,7 +131,7 @@ namespace Boku.Common
             private bool wasDoubleClicked = false;
             private double lastPressedTime = 0.0;
 
-            // Makes the button pretend that it's not pressed until the user actually 
+            // Makes the button pretend that it's not pressed until the user actually
             // releases the button.  This helps prevent UI commands from "leaking"
             // over into the game.  Note this only prevents the WasPressed and WasRepeatPressed
             // values from going true.  IsPressed will still be valid and WasReleased will
@@ -152,13 +149,13 @@ namespace Boku.Common
             }
             public bool IsPressed
             {
-                get 
+                get
                 {
                     if (ignoreUntilReleased)
                     {
                         return false;
                     }
-                    return isPressed; 
+                    return isPressed;
                 }
                 set { isPressed = value; }
             }
@@ -193,7 +190,7 @@ namespace Boku.Common
             public bool IgnoreUntilReleased
             {
                 get { return ignoreUntilReleased; }
-                set 
+                set
                 {
                     if(value)
                     {
@@ -230,8 +227,8 @@ namespace Boku.Common
             }   // end of Button ClearAllWasPressed()
 
             /// <summary>
-            /// Version of Update used for analog inputs acting as buttons.  
-            /// For analog sticks this assumes that the input value is flipped 
+            /// Version of Update used for analog inputs acting as buttons.
+            /// For analog sticks this assumes that the input value is flipped
             /// around so that "pressed" is in the positive direction.
             /// </summary>
             /// <param name="value"></param>
@@ -366,8 +363,6 @@ namespace Boku.Common
         // Analog controls.
         private float leftTrigger = 0.0f;
         private float rightTrigger = 0.0f;
-
-        
 
         private bool leftTriggerChanged = false;
         private bool rightTriggerChanged = false;
@@ -519,7 +514,7 @@ namespace Boku.Common
         }
 
         //
-        // Analog controls 
+        // Analog controls
         //
 
         public Vector2 LeftStick
@@ -556,7 +551,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// True if there are no controllers plugged in. 
+        /// True if there are no controllers plugged in.
         /// </summary>
         public static bool NoControllers
         {
@@ -845,7 +840,6 @@ namespace Boku.Common
             return "Player" + mapIdx.ToString();
         }
 
-
         /// <summary>
         /// Set the invert y property for the input logical player index,
         /// passing along the value for saving in the options file.
@@ -923,9 +917,8 @@ namespace Boku.Common
             return GetGamePad(RealToGamePad(LastTouched)).invertCamX;
         }
 
-
         /// <summary>
-        /// Given a button, will ignore all input on that button until the button 
+        /// Given a button, will ignore all input on that button until the button
         /// is released.  After the release everything goes back to normal.
         /// Currently only A, B, X, and Y supported.
         /// - Added a few more. *** -
@@ -1129,7 +1122,6 @@ namespace Boku.Common
             mapping[3] = 4;
         }
 
-
         private void CheckStick(ref Vector2 curValue, Vector2 oldValue, ref bool changed)
         {
             changed = curValue != oldValue;
@@ -1175,11 +1167,8 @@ namespace Boku.Common
             gamePad3.UpdatePad();
             gamePad4.UpdatePad();
 
-
-
             // Pad0 is a special case.
             gamePad0.ComposeUpdate();
-
 
             if (clearFrameCount > 0)
             {
@@ -1344,7 +1333,7 @@ namespace Boku.Common
         private bool IsControllerStateNeutral()
         {
             bool neutral = true;
-            
+
             GamePadState state = GamePad.GetState(player);
             if (state.IsConnected)
             {
@@ -1461,18 +1450,16 @@ namespace Boku.Common
                 CheckStick(ref leftStick, leftStickValue, ref leftStickChanged);
                 CheckStick(ref rightStick, rightStickValue, ref rightStickChanged);
 
-
 				//Do not set wasTouched.  This will force change the mode to gamepad.  Instead we set the isConnected boolean up above tue ensure input is processed properly.
 
             }   // end if controller is connected.
             else
             {
-                // Not connected so clear to neutral.  Users should be checking for 
+                // Not connected so clear to neutral.  Users should be checking for
                 // connected but this makes sure nothing bad happens if they don't.
                 ResetToZero();
             }
         }
-
 
         private void UpdatePad()
         {
@@ -1500,7 +1487,7 @@ namespace Boku.Common
             if (isConnected)
             {
                 NoControllers = false;
-                
+
                 // Regular buttons.
 
                 A.Update(state.Buttons.A);
@@ -1598,7 +1585,7 @@ namespace Boku.Common
             }   // end if controller is connected.
             else
             {
-                // Not connected so clear to neutral.  Users should be checking for 
+                // Not connected so clear to neutral.  Users should be checking for
                 // connected but this makes sure nothing bad happens if they don't.
                 ResetToZero();
             }
@@ -1721,7 +1708,7 @@ namespace Boku.Common
                 }
             }
 
-        }   // end of ComposeUpdate() 
+        }   // end of ComposeUpdate()
 
         /// <summary>
         /// Blends the values from one pad into another to create a virtual composite pad.
@@ -1858,9 +1845,9 @@ namespace Boku.Common
         }   // end of GamePadInput ResetToZero()
 
         /// <summary>
-        /// Force the stick to return 0,0 until it actually is 0,0 at which 
-        /// point return to normal functionality.  This is primarily useful 
-        /// in pie menus so that after a selection the cursor doesn't run 
+        /// Force the stick to return 0,0 until it actually is 0,0 at which
+        /// point return to normal functionality.  This is primarily useful
+        /// in pie menus so that after a selection the cursor doesn't run
         /// off in whatever direction the user is pressing.
         /// </summary>
         public void IgnoreLeftStickUntilZero()
@@ -1869,9 +1856,9 @@ namespace Boku.Common
         }   // end of IgnoreLeftStickUntilZero()
 
         /// <summary>
-        /// Force the stick to return 0,0 until it actually is 0,0 at which 
-        /// point return to normal functionality.  This is primarily useful 
-        /// in pie menus so that after a selection the cursor doesn't run 
+        /// Force the stick to return 0,0 until it actually is 0,0 at which
+        /// point return to normal functionality.  This is primarily useful
+        /// in pie menus so that after a selection the cursor doesn't run
         /// off in whatever direction the user is pressing.
         /// </summary>
         public void IgnoreRightStickUntilZero()
@@ -1892,7 +1879,6 @@ namespace Boku.Common
             gamePad4.ClearAllWasPressedStateForSinglePad();
         }   // end of GamePadInput ClearAllWasPressedState()
 
-
         /// <summary>
         /// Ignores all gamepad input's pressed state until released, for all gamepads.
         /// </summary>
@@ -1905,7 +1891,6 @@ namespace Boku.Common
             gamePad4.IgnoreUntilReleasedForSinglePad();
         }   // end of GamePadInput IgnoreUntilReleasedForSinglePad()
 
-        
         /// <summary>
         /// Clears all the WasPressed and WasRepeatPressed values to false.  Useful
         /// to ensure no false triggers when transitioning between modes.
@@ -2026,7 +2011,6 @@ namespace Boku.Common
             }
         }   // end of GamePadInput ClearAllWasPressedState()
 
-
         private static object timerInstrumentGamepad = null;
         private static object timerInstrumentKeyboard = null;
         private static object activeTimer = new object();
@@ -2095,8 +2079,6 @@ namespace Boku.Common
             }
         }
 
-
-
         public static void stopActiveInputTimer()
         {
             //check if a timer is active, and then stop it
@@ -2113,7 +2095,7 @@ namespace Boku.Common
                 return false;
 
             GamePadCapabilities caps = GamePad.GetCapabilities(player);
-            bool guitar = caps.GamePadType == GamePadType.AlternateGuitar 
+            bool guitar = caps.GamePadType == GamePadType.AlternateGuitar
                         || caps.GamePadType == GamePadType.Guitar;
 
             return A.WasPressed
@@ -2153,11 +2135,7 @@ namespace Boku.Common
 
                 if (KeyboardInput.WasPressed(Keys.Escape))
                 {
-#if NETFX_CORE
                     Windows.UI.Xaml.Application.Current.Exit();
-#else
-                    BokuGame.bokuGame.Exit();
-#endif
                 }
                     if (KeyboardInput.WasPressed(Keys.Enter))
                 {
@@ -2225,9 +2203,9 @@ namespace Boku.Common
         private static bool _wasPaused = false;
 
         /// <summary>
-        /// Create and activate a dialog warning the user that one or more of 
+        /// Create and activate a dialog warning the user that one or more of
         /// the levels they just imported were built with a newer version of Kodu.
-        /// 
+        ///
         /// NOTE: This is really a bad place to have these.  We need to refactor
         /// to create a centralized manager for dialogs...
         /// </summary>
@@ -2261,7 +2239,3 @@ namespace Boku.Common
     }   // end of class GamePad
 
 }   // end of namespace Boku.Common
-
-
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -102,7 +101,7 @@ namespace Boku.Programming
         {
             List<Filter> filters = reflex.Filters;
 
-            // If we have a "me" filter we need to look at the ShooterHitSet to 
+            // If we have a "me" filter we need to look at the ShooterHitSet to
             // see if anything hit us.
             if (reflex.Data.HasTile("filter.me"))
             {

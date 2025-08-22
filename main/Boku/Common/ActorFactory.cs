@@ -94,8 +94,8 @@ namespace Boku.Common
                 actor.InRecycleBin = false;
                 actor.FactoryCreated = true;
 
-                // For this call we ignore the current state so we know that the 
-                // subsystems will get reset.  Without this the smoke emitters 
+                // For this call we ignore the current state so we know that the
+                // subsystems will get reset.  Without this the smoke emitters
                 // don't turn on until the level has been run and reset.
                 actor.ResetState(ignoreCurrentState: true);
             }
@@ -145,8 +145,8 @@ namespace Boku.Common
                 dst = Create(src.StaticActor);
                 /// If we are Enabled, then this is during runtime, and
                 /// the only non-creatable things getting created have
-                /// no brains programmed. But if we are enabled, we may 
-                /// be cloning a programmed bot, in which case we need 
+                /// no brains programmed. But if we are enabled, we may
+                /// be cloning a programmed bot, in which case we need
                 /// to clone it's brain.
                 /// The perfect test would be something like:
                 ///    if(src.Brain.NotEmpty)

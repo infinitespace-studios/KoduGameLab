@@ -23,7 +23,7 @@ namespace Boku.SimWorld.Collision
         /// <summary>
         /// Distance squared travelled before impact
         /// </summary>
-        public float DistSq; 
+        public float DistSq;
         /// <summary>
         /// sphere center at contact time
         /// </summary>
@@ -31,7 +31,7 @@ namespace Boku.SimWorld.Collision
         /// <summary>
         /// Point of contact
         /// </summary>
-        public Vector3 Contact; 
+        public Vector3 Contact;
         /// <summary>
         /// Normal at point of contact, pointing toward sphere
         /// </summary>
@@ -102,14 +102,14 @@ namespace Boku.SimWorld.Collision
         public bool Touching;
 
         /// <summary>
-        /// True if this is the recipricating second call having 
+        /// True if this is the recipricating second call having
         /// already been processed by the first of the colliding pair.
         /// </summary>
         public bool Handled;
 
         /// <summary>
         /// Distance from start to impact point. Used for sorting only, probably
-        /// doesn't mean what you think. 
+        /// doesn't mean what you think.
         /// It's actually Vector3.DistanceSquared(StartingPosition, Contact);
         /// Note that that's from the starting center of the sphere to the contact
         /// point on the surface of the ending position sphere.
@@ -250,7 +250,7 @@ namespace Boku.SimWorld.Collision
         }
         private Vector3 MakeOffset(HitInfo hitInfo, float radius)
         {
-            if (Vector3.DistanceSquared(hitInfo.Center, hitInfo.Contact) 
+            if (Vector3.DistanceSquared(hitInfo.Center, hitInfo.Contact)
                 < radius * radius)
             {
                 Vector3 newCenter = hitInfo.Contact + hitInfo.Normal * radius;
@@ -349,7 +349,7 @@ namespace Boku.SimWorld.Collision
 
             GameActor other = hitInfo.Other;
 
-            // The ordering of tests can change so we need to check if either of 
+            // The ordering of tests can change so we need to check if either of
             // the acotrs involved are missiles.
             if (mover.Owner is CruiseMissile || other is CruiseMissile)
             {
@@ -397,12 +397,12 @@ namespace Boku.SimWorld.Collision
                                             // selected obj collides w/ recent clone.
 
             /// These are structs, no real allocation done here.
-            
+
             // Loop over all the movers comparing each one against all
             // the remaining ones in the list AND any non-moving props.
             // NOTE It may seem strange that this loop ends at movers.Count
             // rather than movers.Count-1.  After all, for the last mover
-            // in the list there is no one to collide with.  BUT further 
+            // in the list there is no one to collide with.  BUT further
             // down we do another round of collision testing for actors
             // with TouchCushions which are used to force bump events
             // between hovering bots and low things like apples.  For
@@ -433,7 +433,6 @@ namespace Boku.SimWorld.Collision
                         ApplyCollision(mover, hitInfo_ScratchList[i]);
                     }
                 }
-
 
                 // Do another round of collision testing but this time only for movers with
                 // a non-zero TouchCushion.  Note that we have to test against all other
@@ -466,7 +465,7 @@ namespace Boku.SimWorld.Collision
                 hitInfo_ScratchList.Clear();
             }
 
-            // If this is still set to true that means that the selected obj and 
+            // If this is still set to true that means that the selected obj and
             // the most recent clone did not collide so it's safe to clear the ref.
             if(clearLastClonedThing)
             {
@@ -480,7 +479,7 @@ namespace Boku.SimWorld.Collision
         /// this mover's swept ellipsoid against all the non-moving things as
         /// well as all the other movers which appear after it in the list.
         /// The "first" param is the index of the next item in the list.
-        /// 
+        ///
         /// The listAll param seems to determine whether we just keep the nearest hit
         /// or keep them all.  It appears that listAll=false is used for physics collision
         /// testing while listAll=true is used for WHEN Bumped testing.  But, of course,

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,9 +19,9 @@ using Boku.Programming;
 namespace Boku.UI2D
 {
     /// <summary>
-    /// Grid element for hold a preprogrammed bot.  The element displays a single, representative 
+    /// Grid element for hold a preprogrammed bot.  The element displays a single, representative
     /// programming tile and a text description of what the programming does.
-    /// 
+    ///
     /// Note this has mutated into a very different beast form most of the uigrid elements.  This
     /// no longer renders into a texture, rather it renders everything on the fly.  This helps
     /// with the clarity of the text.
@@ -34,7 +33,7 @@ namespace Boku.UI2D
         private Texture2D tile = null;
         private TextBlob textBlob = null;
 
-        private ActorHelp actorHelp = null; 
+        private ActorHelp actorHelp = null;
         private int exampleIndex = -1;              // Which program from the above ActorHelp this element represents.
 
         // Properties for the underlying 9-grid geometry.
@@ -155,7 +154,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// Uses an alternate shader for rendering.  This shader treats the texture
-        /// contents as fully lit and doesn't attenuate the textured pixels by the 
+        /// contents as fully lit and doesn't attenuate the textured pixels by the
         /// alpha of the object color.
         /// </summary>
         public bool AltShader
@@ -296,9 +295,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid2DProgrammedBotElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

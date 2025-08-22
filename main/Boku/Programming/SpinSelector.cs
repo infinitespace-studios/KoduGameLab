@@ -23,13 +23,13 @@ namespace Boku.Programming
 {
     /// <summary>
     /// this selector will spin the GameActor clockwise
-    /// 
-    /// 
-    /// 
+    ///
+    ///
+    ///
     /// ARCHIVED!!!
-    /// 
-    /// 
-    /// 
+    ///
+    ///
+    ///
     /// </summary>
     public class SpinSelector : Selector
     {
@@ -77,7 +77,6 @@ namespace Boku.Programming
             value.Y = (float)Math.Sin(angle);
             value.Z = 0.0f;
             value *= 0.001f; // remove any forward velocity
-
 
             bool apply = reflex.ModifyHeading(gameActor, Modifier.ReferenceFrames.World, ref value);
 

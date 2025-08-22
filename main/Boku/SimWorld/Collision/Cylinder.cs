@@ -12,10 +12,10 @@ using Boku.Base;
 namespace Boku.SimWorld.Collision
 {
     /// <summary>
-    /// Cylinder is defined by a central axis along Z, 
+    /// Cylinder is defined by a central axis along Z,
     /// extending from local origin up a distance Length in Z,
     /// with an X/Y cross section that's a circle of radius Radius.
-    /// 
+    ///
     /// In local space the xyz bounds are [-Radius, Radius][-Radius, Radius][0, Length]
     /// </summary>
     internal class Cylinder : CollisionPrimitive
@@ -78,7 +78,7 @@ namespace Boku.SimWorld.Collision
             /// One is that the sphere hit our top or bottom cap
             /// Second is the sphere hits the side.
             /// Third is sphere hits edge between side and cap.
-            /// 
+            ///
             if (disabled)
                 return false;
 
@@ -93,7 +93,7 @@ namespace Boku.SimWorld.Collision
             float localRadius = WorldToLocalRadius(radius);
 
             /// Check the end caps first.
-            /// Note that the cap checks look only for the sphere's tangent 
+            /// Note that the cap checks look only for the sphere's tangent
             /// hitting on the cap, not for further misses.
             float t = CheckCapTop(p0loc, p1loc, localRadius);
             if (IsHit(t))
@@ -123,7 +123,7 @@ namespace Boku.SimWorld.Collision
                     norm,
                     ref collPrim);
             }
-            
+
             /// Now check the sides.
             t = CheckSides(p0loc, p1loc, localRadius);
             if (IsHit(t))
@@ -143,7 +143,7 @@ namespace Boku.SimWorld.Collision
                         ref collPrim);
                 }
             }
-            
+
             return false;
         }
 
@@ -221,7 +221,7 @@ namespace Boku.SimWorld.Collision
                 }
                 else
                 {
-                    // This case happens when we're within the infinite cylinder 
+                    // This case happens when we're within the infinite cylinder
                     // but outside of either end cap.
                     return false;
                 }
@@ -237,7 +237,7 @@ namespace Boku.SimWorld.Collision
         }
 
         /// <summary>
-        /// Check for sphere hitting side of cylinder. 
+        /// Check for sphere hitting side of cylinder.
         /// </summary>
         /// <param name="p0loc"></param>
         /// <param name="p1loc"></param>

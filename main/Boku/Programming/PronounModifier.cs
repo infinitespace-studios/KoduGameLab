@@ -20,7 +20,6 @@ using Boku.Base;
 using Boku.Common;
 #endregion
 
-
 namespace Boku.Programming
 {
     public class PronounModifier : Modifier

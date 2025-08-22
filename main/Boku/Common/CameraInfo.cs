@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define DEBUG_SPEW
 
 using System;
@@ -70,7 +69,7 @@ namespace Boku.Common
         public static Modes Mode
         {
             get { return mode; }
-            set 
+            set
             {
                 if (mode != value)
                 {
@@ -93,8 +92,8 @@ namespace Boku.Common
                             Debug.Print("mode : Multi Target");
                             break;
                     }
-#endif                    
-                    
+#endif
+
                     // If we were in follow actor mode and we are transitioning into edit (free) mode
                     // then we need to keep the camera from jumping.  This transition can happen either
                     // because of a bots programming or more likely because a user controlled bot just
@@ -193,7 +192,7 @@ namespace Boku.Common
         /// </summary>
         public static GameActor FirstPersonActor
         {
-            get 
+            get
             {
                 GameActor actor = brainFirstPersonStack.Count == 0 ? null : brainFirstPersonStack[brainFirstPersonStack.Count - 1];
                 return actor;
@@ -209,7 +208,7 @@ namespace Boku.Common
         public static void AddFollowMe(GameActor actor)
         {
             // If this first person actor got that way via zooming in rather
-            // than via it's programming then we don't want to let the 
+            // than via it's programming then we don't want to let the
             // brain overwrite that state.
             if (FirstPersonViaZoom && actor == FirstPersonActor)
                 return;
@@ -323,12 +322,12 @@ namespace Boku.Common
         /// Resolves conflicts in the follow lists used by the camera.
         /// An entry in the NeverFollowList overrides one in the FollowList.
         /// Also removes any dead bots.
-        /// This should be called after the brain updates but before the 
+        /// This should be called after the brain updates but before the
         /// camera is used.
         /// </summary>
         public static void ResolveFollowLists()
         {
-            // An explicit ignore in the bot's programming trumps 
+            // An explicit ignore in the bot's programming trumps
             // an explicit follow or a user controlled follow.
             for (int i = 0; i < brainIgnoreMeList.Count; i++)
             {
@@ -362,7 +361,7 @@ namespace Boku.Common
                 /// We want to clear out anyone that has requested first person
                 /// but lost out. They can continue to request, but if they requested
                 /// at some point in the past but stopped requesting, and the current
-                /// first person stops being first person, we want their request to 
+                /// first person stops being first person, we want their request to
                 /// have expired. So achieving firstperson-ness is sticky, but requesting
                 /// firstperson-ness is not.
                 GameActor winner = null;

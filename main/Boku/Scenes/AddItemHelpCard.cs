@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,7 +39,7 @@ namespace Boku
         {
 
             #region Members
-    
+
             public AddItemHelpCard parent = null;
 
             public ActorHelp actorHelp = null;
@@ -85,7 +84,7 @@ namespace Boku
                 descBlob = new TextBlob(UI2D.Shared.GetGameFont24, "replace me", descWidth);
 
                 // We're rendering the camera specific parts into a 1024x768 rendertarget and
-                // then copying (with masking) into the 1280x720 rt and finally cropping it 
+                // then copying (with masking) into the 1280x720 rt and finally cropping it
                 // as needed for 4:3 display.
                 camera = new PerspectiveUICamera();
                 camera.Resolution = new Point(1280, 720);
@@ -148,8 +147,6 @@ namespace Boku
                 }
 
             }   // end of SetUpGrid()
-
-
 
             public void LoadContent(bool immediate)
             {
@@ -329,7 +326,7 @@ namespace Boku
             {
                 if (parent.parent != null)
                 {
-                    // Call the OnSelect() method on the pie menu.  This will cause it to go through 
+                    // Call the OnSelect() method on the pie menu.  This will cause it to go through
                     // its normal process of creating and adding the new actor to the scene.
                     parent.parent.OnSelect(null, null);
 
@@ -379,14 +376,14 @@ namespace Boku
 
             #endregion
 
-        }   // end of class AddItemHelpCard UpdateObj  
+        }   // end of class AddItemHelpCard UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
             #region Members
 
             private Shared shared;
-            
+
             private Effect effect = null;
 
             public Texture2D rightStickTexture = null;
@@ -576,15 +573,14 @@ namespace Boku
                 // Actor name
                 TextHelper.DrawString(UI2D.Shared.GetGameFont30Bold, shared.curActorName, new Vector2(450, 30) + shadowOffset, shadowTextColor);
                 TextHelper.DrawString(UI2D.Shared.GetGameFont30Bold, shared.curActorName, new Vector2(450, 30), greyTextColor);
-                
+
                 // Create
                 TextHelper.DrawString(UI2D.Shared.GetGameFont24Bold, Strings.Localize("helpCard.create"), new Vector2(268, 250), whiteTextColor);
-                
+
                 // Choose
                 TextHelper.DrawString(UI2D.Shared.GetGameFont24, Strings.Localize("helpCard.choose"), new Vector2(990 - UI2D.Shared.GetGameFont24().MeasureString(Strings.Localize("helpCard.choose")).X, 250), greyTextColor);
 
                 batch.End();
-
 
                 // Now render the contents of the rt1k texture but with the edges blended using the mask.
                 Vector4 limits = new Vector4(0.4f, 0.41f, 0.857f, 0.93f);
@@ -717,7 +713,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class AddItemHelpCard RenderObj     
+        }   // end of class AddItemHelpCard RenderObj
 
         #region Members
 
@@ -753,7 +749,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// The GameActor to be programmed.  Should be set after 
+        /// The GameActor to be programmed.  Should be set after
         /// the actor has been created and added to the scene.
         /// </summary>
         public GameActor Actor
@@ -780,7 +776,7 @@ namespace Boku
 
         public void OnSelect(UIGrid grid)
         {
-            // We should never actually get here.  The AddItemHelpCard UpdateObj 
+            // We should never actually get here.  The AddItemHelpCard UpdateObj
             // should consume all 'A' presses before the grids get them...
 
             Debug.Assert(false);
@@ -789,7 +785,7 @@ namespace Boku
 
         public void OnCancel(UIGrid grid)
         {
-            // We should never actually get here.  The AddItemHelpCard UpdateObj 
+            // We should never actually get here.  The AddItemHelpCard UpdateObj
             // should consume all 'B' presses before the grids get them...
 
             Debug.Assert(false);
@@ -950,7 +946,6 @@ namespace Boku
             BokuGame.Unload(shared);
             BokuGame.Unload(renderObj);
         }   // end of AddItemHelpCard UnloadContent()
-
 
         public void DeviceReset(GraphicsDevice device)
         {

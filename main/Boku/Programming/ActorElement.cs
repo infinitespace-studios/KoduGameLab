@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -19,7 +18,6 @@ using Microsoft.Xna.Framework.Storage;
 using Boku.Base;
 using Boku.Common;
 
-
 namespace Boku.Programming
 {
     /// <summary>
@@ -32,7 +30,6 @@ namespace Boku.Programming
 
         [XmlAttribute]
         public string[] mountlock; // list of bots this element will not work
-
 
         protected void CopyTo(ActorElement clone)
         {

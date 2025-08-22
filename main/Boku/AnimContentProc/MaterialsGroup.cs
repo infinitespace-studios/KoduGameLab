@@ -57,7 +57,7 @@ namespace BokuPipeline
         }
 
         /// <summary>
-        /// Just set the names for reference at runtime. 
+        /// Just set the names for reference at runtime.
         /// Also, if requested, null out the material
         /// so it doesn't get dragged into the runtime.
         /// </summary>
@@ -79,7 +79,7 @@ namespace BokuPipeline
                     /// things like the diffuse color from the Material. With the new
                     /// model material, it's not an issue, but until they are converted
                     /// we have to take the bad with the good.
-                    /// TODO - *** 
+                    /// TODO - ***
                     if (nullMats)
                     {
                         part.Material = null;
@@ -142,7 +142,7 @@ namespace BokuPipeline
         /// pos = MeshContent.Positions[GeoCont.Verts.PosIndices[GeoCont.Indices[i]]]
         /// but
         /// pos = GeoCont.Verts.Positions[GeoCont.Indices[i]]
-        /// 
+        ///
         /// When we add some position indices to the GeoCont.Vertices, the positions
         /// are automatically set, because we are giving PositionIndices which map
         /// into the parent MeshContent. This assumes the positions in question are

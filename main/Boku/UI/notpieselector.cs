@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -106,7 +105,7 @@ namespace Boku.UI
             private NotPieSelector owner;
 
             private PerspectiveUICamera camera = new PerspectiveUICamera();
-         
+
             public bool Active
             {
                 get;
@@ -119,7 +118,7 @@ namespace Boku.UI
             }
             Matrix ITransform.World
             {
-                get 
+                get
                 {
                     return parent != null
                         ? localToWorld.Matrix * parent.World

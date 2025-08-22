@@ -12,7 +12,6 @@ using System.Xml.Serialization;
 
 using Microsoft.Xna.Framework;
 
-
 using Boku.Base;
 using Boku.Common;
 
@@ -33,7 +32,6 @@ namespace Boku.Programming
 
         [XmlAttribute]
         public PronounModifier.Pronouns defaultPronoun = PronounModifier.Pronouns.Me;
-        
 
         /// <summary>
         /// The maximum frequency (per second) at which this actuator can fire.
@@ -47,11 +45,9 @@ namespace Boku.Programming
         [XmlIgnore]
         public bool IsTurning { get { return Categories.Get((int)BrainCategories.DoNewTurning); } }
 
-
         private double lastTriggerTime;     // in total game seconds.
         private float timerDelaySeconds;    // 1.0/maxTriggerRate
         private int actuatorUpdateDepth;    // to avoid recursion
-
 
         /// Returns true if the actuator was acted on.
         protected abstract bool ActuatorUpdate(Reflex reflex);
@@ -111,8 +107,8 @@ namespace Boku.Programming
                 }
                 else
                 {
-                    // For some reason we weren't able to do the action.  So, 
-                    // if this reflex has a once modifier, decrement it so 
+                    // For some reason we weren't able to do the action.  So,
+                    // if this reflex has a once modifier, decrement it so
                     // we'll try again.
                     // The only case where I know this currently happens is when
                     // a bot tries to display a fullscreen "say" verb when it's

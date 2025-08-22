@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +53,6 @@ namespace Boku.UI2D
 
         private CommandMap commandMap = new CommandMap("ModularScrollboxList");
 
-
         GetTexture getTexture = null;       // Texture2D for button icon.
         string label;                       // Label to be rendered next to icon.
         AABB2D box = null;                  // Hit box for mouse testing.
@@ -64,11 +62,11 @@ namespace Boku.UI2D
         ButtonState state = ButtonState.Released;
         Vector4 color_bg = new Vector4(1.0f, 1.0f, 1.0f, 0.0f);        // transparent background
         Vector4 color_bgCurr = new Vector4(1.0f, 1.0f, 1.0f, 0.0f);    // current background, can be focused
-        Vector4 color_seperator = new Vector4(0.1f,0.1f,0.1f,0.0f); // Container seperator 
-        Vector4 color_Bar = new Vector4(0.5f, 0.5f, 0.5f, 1.0f);    // scroll bar seperator 
-        Vector4 color_BarBase = new Vector4(0.75f, 0.75f, 0.75f, 1.0f);    // scroll bar seperator 
-        Vector4 color_border = new Vector4(0.0f, 0.0f, 0.0f, 0.5f); // Container seperator 
-        Vector4 color_FocusItemBase = new Vector4(1.0f, 1.0f, 1.0f, 0.25f); // Item Focus color 
+        Vector4 color_seperator = new Vector4(0.1f,0.1f,0.1f,0.0f); // Container seperator
+        Vector4 color_Bar = new Vector4(0.5f, 0.5f, 0.5f, 1.0f);    // scroll bar seperator
+        Vector4 color_BarBase = new Vector4(0.75f, 0.75f, 0.75f, 1.0f);    // scroll bar seperator
+        Vector4 color_border = new Vector4(0.0f, 0.0f, 0.0f, 0.5f); // Container seperator
+        Vector4 color_FocusItemBase = new Vector4(1.0f, 1.0f, 1.0f, 0.25f); // Item Focus color
         Vector2 size = new Vector2(MIN_WIDTH, MIN_HEIGHT);
 
         Color defaultColor = Color.White;           // Color when not hovered over.
@@ -99,7 +97,7 @@ namespace Boku.UI2D
                 return box.Size;
             }
 
-            set 
+            set
             {
                 if (size != value)
                 {
@@ -118,7 +116,7 @@ namespace Boku.UI2D
         // verticle item separation distance
         public int SeperatorHeight
         {
-            get { return (int)seperatorHeight; }            
+            get { return (int)seperatorHeight; }
             set { seperatorHeight = value; }
         }
 
@@ -156,14 +154,14 @@ namespace Boku.UI2D
         public float TotalContainerHeight
         {
             get {
-                float height = 0.0f; 
+                float height = 0.0f;
                 for (int i = 0; i < scrollItems.Count; i++)
                 {
                     height += scrollItems[i].Height;
                     if (i > 0)
                         height += seperatorHeight;
                 }
-                // HACK  Prevent last item from being too close to 
+                // HACK  Prevent last item from being too close to
                 // the edge when scrolled all the way down.
                 height += 50;
                 return height;
@@ -188,7 +186,7 @@ namespace Boku.UI2D
 
         public Vector2 ScrollBoxSize
         {
-            get 
+            get
             {
                 float boxHeight = CalculateScrollBoxHeight();
 
@@ -236,7 +234,7 @@ namespace Boku.UI2D
                 dirty = true;
             }
         }
-        
+
         public void Deactivate()
         {
             active = false;
@@ -253,7 +251,7 @@ namespace Boku.UI2D
             }
         }
 
-        public ItemScroller(Vector2 pos, Vector2 size, Color baseColor, GetTexture getTexture, 
+        public ItemScroller(Vector2 pos, Vector2 size, Color baseColor, GetTexture getTexture,
             UI2D.Shared.GetFont Font)
         {
             this.scrollItems = new List<ScrollContainer>();
@@ -329,10 +327,10 @@ namespace Boku.UI2D
         {
             return fixedSize;
         }   // end of GetSize()
-       
+
         public void Update(Camera camera)
         {
-            if (!active) 
+            if (!active)
             {
                 return;
             }
@@ -397,7 +395,7 @@ namespace Boku.UI2D
         {
             RenderTarget2D rt = UI2D.Shared.RenderTarget1024_768;
             SpriteBatch batch = UI2D.Shared.SpriteBatch;
-            
+
             SetViewPort(true, rt);
 
             batch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
@@ -407,7 +405,7 @@ namespace Boku.UI2D
                 batch.Draw(rt, dstRect, srcRect, Color.White);
             }
             batch.End();
-            
+
             RestoreViewport();
         }   // end Render()
 
@@ -442,14 +440,12 @@ namespace Boku.UI2D
                 SpriteBatch batch = UI2D.Shared.SpriteBatch;
                 Vector2 baseSize = FixedSize;
 
-
-
                 Vector4 drawColor = GetDrawColor();
                 Texture2D buttonTexture = UI2D.Shared.BlackButtonTexture;
 
                 // Render rectangular baseplate of scroller (maybe a transparent texture...).
                 ssquad.Render(color_bgCurr, pos, baseSize - new Vector2(ScrollBoxSize.X, 0.0f));
-                // Render scroll bar 
+                // Render scroll bar
                 if (TotalContainerHeight > FixedSize.Y)
                 {
                     Vector2 barpos = GetBoxPos();
@@ -599,7 +595,7 @@ namespace Boku.UI2D
             if (MouseInput.PrevScrollWheel > MouseInput.ScrollWheel)
             {
                 FocusNext();
-            } 
+            }
             else if (MouseInput.PrevScrollWheel < MouseInput.ScrollWheel)
             {
                 FocusPrev();
@@ -842,7 +838,7 @@ namespace Boku.UI2D
                 return; // something whent very wrong
             if (scrollItems[indexFocusedItem].Top > 0 &&(scrollItems[indexFocusedItem].Top < FixedSize.Y))
                 return;
-           
+
             float desiredScrollOffset = scrollItems[indexFocusedItem].Top;
 
             desiredScrollOffset = scrollOffset + desiredScrollOffset;
@@ -946,11 +942,11 @@ namespace Boku.UI2D
                 ScrollContainer sContainer = scrollItems[i];
                 sContainer.Width = fixedSize.X - ScrollBoxSize.X;
                 sContainer.ResetWidth();
-            }            
+            }
         }
 
         #endregion
-       
+
     }   // end of class Button
 
 }   // end of namespace Boku.UI2D

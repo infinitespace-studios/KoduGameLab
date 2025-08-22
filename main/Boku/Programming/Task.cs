@@ -19,13 +19,12 @@ using Microsoft.Xna.Framework.Storage;
 using Boku.Base;
 using Boku.Common;
 
-
 namespace Boku.Programming
 {
     /// <summary>
     /// This represents a single running task (not multi-threading but a single thing to accomplish)
     /// It contains an ordered list (priority) of Reflexes that represent how the task is run
-    /// The reflexes share a set of sensors that represent input and 
+    /// The reflexes share a set of sensors that represent input and
     /// they share a set of acutators that represent their output
     /// All reflexes are considered to be run in parrallel
     /// When ever a reflex gets updated, it updates its output in the associated Actuators Arbitrator
@@ -81,13 +80,12 @@ namespace Boku.Programming
         [XmlIgnore]
         public bool IsTurning;
 
-
         public Task()
         {
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="atLoadTime">If true this fixup is happening when the level is being loaded.  If false then it's happening during brain editing.</param>
         /// <param name="incomingLanguageVersion">If atLoadTime is true, this is the version of the language for the level being loaded.</param>
@@ -192,13 +190,13 @@ namespace Boku.Programming
                             // Nested reflexes with active mouse targets should still be acted on
                             // so create valid target and action sets for them.  Note that this
                             // only applies to reflexes with a movement actuator.  This is so you
-                            // can have WHEN MouseLeft DO Move and the result will be that the 
-                            // bot continues to move toward the target (position or bot) even 
+                            // can have WHEN MouseLeft DO Move and the result will be that the
+                            // bot continues to move toward the target (position or bot) even
                             // after the parent reflex goes false.
                             bool mouseTarget = reflex.MousePosition != null || reflex.MouseActor != null;
                             if (mouseTarget && reflex.IsMovement)
                             {
-                                // Create a sensor target set 
+                                // Create a sensor target set
                                 if (reflex.MouseActor != null)
                                 {
                                     // We need to add the mouse actor to the targetSet.
@@ -527,12 +525,12 @@ namespace Boku.Programming
         {
             reflexes.Add(reflex);
         }
-        
+
         public void RemoveReflex(Reflex reflex)
         {
             reflexes.Remove(reflex);
         }
-        
+
         public void InsertReflexBefore(Reflex reflexRef, Reflex reflexNew)
         {
             int indexInsert = reflexes.IndexOf(reflexRef);
@@ -607,7 +605,6 @@ namespace Boku.Programming
                 IsRightMouseButtonPresent |= reflex.rightMouseButtonPresent;
             }
         }
-
 
         /// <summary>
         /// Remove all invalid elements from reflexes

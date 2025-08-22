@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Scenes namespace
 
 using System;
@@ -154,7 +153,7 @@ namespace Boku.Fx
                 get { return effect; }
                 set { effect = value; }
             }
-            
+
             override protected int NumParams
             {
                 get { return NumLights * 2 + 1; }
@@ -323,7 +322,7 @@ namespace Boku.Fx
             if (LightList != null)
             {
                 for (int i = 0; i < LightList.Length; ++i)
-                {                    
+                {
                     Light targetLight = LightList[i];
 
                     //lerp the color
@@ -348,7 +347,7 @@ namespace Boku.Fx
                 */
             }
         }
-        
+
         /// <summary>
         /// Write self to xml
         /// </summary>

@@ -4,7 +4,7 @@
 /*
  * XFileTokenizer.cs
  * Copyright (c) 2006, 2007 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -33,7 +33,6 @@ using System.Text;
 using System.IO;
 using System.Globalization;
 #endregion
-
 
 namespace Xclna.Xna.Animation.Reader
 {
@@ -147,7 +146,6 @@ namespace Xclna.Xna.Animation.Reader
             throw new Exception(error);
         }
 
-
         /// <summary>
         /// Skips a node in a .X file and all child nodes; should be called after the opening
         /// brace, "{", has been read.
@@ -160,7 +158,6 @@ namespace Xclna.Xna.Animation.Reader
                     SkipNode();
 
         }
-
 
         /// <summary>
         /// Parses an integer from a .X file
@@ -204,7 +201,6 @@ namespace Xclna.Xna.Animation.Reader
             return x;
         }
 
- 
         /// <summary>
         /// The current token index of the tokenizer.
         /// </summary>
@@ -212,9 +208,6 @@ namespace Xclna.Xna.Animation.Reader
         {
             get { return tokenIndex; }
         }
-
-        
-
 
         /// <summary>
         /// Parses a string from a .X file
@@ -356,17 +349,12 @@ namespace Xclna.Xna.Animation.Reader
             return new Matrix();
         }
 
-
-
         /// <summary>
         /// Skips tokens in the stream.
         /// </summary>
         /// <returns>The number of tokens to skip.</returns>
         public void SkipTokens(int numToSkip)
         { tokenIndex += numToSkip; }
-
-
-
 
         /// <summary>
         /// Skips a nodes name and its opening curly bracket.
@@ -415,7 +403,7 @@ namespace Xclna.Xna.Animation.Reader
         }
 
         // Takes a string and turns it into an array of tokens.  This is created for performance
-        // over readability.  It is far longer than it *needs* to be and 
+        // over readability.  It is far longer than it *needs* to be and
         // uses a finite state machine to parse the tokens.
         private string[] TokensFromString(string ms)
         {
@@ -438,7 +426,7 @@ namespace Xclna.Xna.Animation.Reader
             // Yes, I used a goto.  They are generally ok in switch statements, although
             // I'm extending my welcome here.  The code goes to FSMSTART whenever
             // we have broken out of a state and want to transition to the start state
-            // (that is, we are not currently building a token).  
+            // (that is, we are not currently building a token).
             FSMSTART:
                 switch (groupnum)
                 {
@@ -523,7 +511,7 @@ namespace Xclna.Xna.Animation.Reader
 
                         }
                         break;
-                    // a string (may or may not start with " and ends with ") 
+                    // a string (may or may not start with " and ends with ")
                     case 1:
                         switch (groupLoc)
                         {
@@ -544,7 +532,6 @@ namespace Xclna.Xna.Animation.Reader
                                     AddChar(c);
                                     break;
                                 }
-
 
                                 strings.Add(CurrentString);
                                 ResetString();

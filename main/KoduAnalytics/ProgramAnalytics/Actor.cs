@@ -46,7 +46,6 @@ namespace KoduAnalytics.ProgramAnalytics
             begin.dest = one;
             stateMachine.Add(begin);
 
-
             //add appropriate transitions
             foreach (Rule r in allrules)
             {
@@ -73,7 +72,7 @@ namespace KoduAnalytics.ProgramAnalytics
                     else
                     {
                         t.Condition = condition;
-                    }    
+                    }
                     State src = stateMachine.get(currentpage.ToString());
                     State dest = stateMachine.get(destpage);
                     t.src = src;
@@ -82,7 +81,7 @@ namespace KoduAnalytics.ProgramAnalytics
 
                 }
                 ////look for transitions to terminal state here
-                //if (r.Action.Contains("actuator.gameover") 
+                //if (r.Action.Contains("actuator.gameover")
                 //    || r.Action.Contains("actuator.victory"))
                 //{
                 //    Transition t = new Transition();
@@ -118,7 +117,7 @@ namespace KoduAnalytics.ProgramAnalytics
             int used = 0;
 
             used = (from s in stateMachine.states
-                   where (s.incoming.Count() > 0 || s.outgoing.Count() > 0) 
+                   where (s.incoming.Count() > 0 || s.outgoing.Count() > 0)
                    && s.name != "win" && s.name != "lose"
                    select s).Count();
 

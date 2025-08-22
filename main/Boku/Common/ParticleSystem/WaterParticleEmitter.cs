@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -24,7 +23,7 @@ namespace Boku.Common.ParticleSystem
 {
     /// <summary>
     /// Emitter for rendering floating particles using Perlin noise to control the animation.
-    /// While this isn't enforced, the assumption is that there is only one of these and 
+    /// While this isn't enforced, the assumption is that there is only one of these and
     /// that it is attached to the terrain since the particle set needs to be updated every
     /// time the terrain is changed.
     /// </summary>
@@ -38,7 +37,6 @@ namespace Boku.Common.ParticleSystem
 
         private int numSprites = 0;
         private int maxSprites = 10000;         // Maxes out at 10k or so because of using 16 bit indices.
-
 
         private Vector2 noiseCenter;
         private float noiseRadius;
@@ -166,7 +164,6 @@ namespace Boku.Common.ParticleSystem
             BokuGame.Load(this);
         }   // end of c'tor
 
-
         protected void Init(GraphicsDevice device)
         {
             if (BokuSettings.Settings.PreferReach)
@@ -240,7 +237,7 @@ namespace Boku.Common.ParticleSystem
             float volume = 0.0f;
 
             /// Waves go strictly down from the water height (waterHeight is height at crest),
-            /// and we also reserve a meter at the bottom that we don't fill. 
+            /// and we also reserve a meter at the bottom that we don't fill.
             float extraHeight = 1.0f + terrain.XmlWorldData.waveHeight * 2.0f;
 
             Vector2 pos = Vector2.Zero;
@@ -306,8 +303,8 @@ namespace Boku.Common.ParticleSystem
                         {
                             // Create a new particle in this column of water.
                             Vector3 position = new Vector3(
-                                pos.X + gridSpacing * (float)(rnd.NextDouble() - 0.5), 
-                                pos.Y + gridSpacing * (float)(rnd.NextDouble() - 0.5), 
+                                pos.X + gridSpacing * (float)(rnd.NextDouble() - 0.5),
+                                pos.Y + gridSpacing * (float)(rnd.NextDouble() - 0.5),
                                 terrainHeight + 1.0f + columnHeight * (float)rnd.NextDouble());
                             float radius = minRadius + (float)rnd.NextDouble() * (maxRadius - minRadius);
 
@@ -454,20 +451,12 @@ namespace Boku.Common.ParticleSystem
                 {
                     device.Textures[i] = null;
                 }
-#if !NETFX_CORE
-                for (int i = 0; i < 4; i++)
-                {
-                    device.VertexTextures[i] = null;
-                }
-#endif
             }
             catch
             {
             }
 
         }   // end of WaterParticleEmitter Render()
-
-
 
         public void LoadContent(bool immediate)
         {

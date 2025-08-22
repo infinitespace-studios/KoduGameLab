@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +49,7 @@ namespace Boku.Programming
 
         /// <summary>
         /// Distance from bot, as measured from center of bot to edge of thing.
-        /// 
+        ///
         /// What thing?  I don't have a clue.
         /// </summary>
         float distance;
@@ -73,9 +72,9 @@ namespace Boku.Programming
 
         /// <summary>
         /// Action direction and strength (length of vector).
-        /// 
+        ///
         /// Actually, this is an arbitrary value whose interpretation depends of the type of the BaseAction.
-        /// Need to work to remove this and have Action specific values instead.  Oh, and they should 
+        /// Need to work to remove this and have Action specific values instead.  Oh, and they should
         /// have much better names than "value".
         /// </summary>
         protected Vector3 value;
@@ -142,7 +141,7 @@ namespace Boku.Programming
 
         #endregion
 
-        #region Public 
+        #region Public
 
         public BaseAction()
         {

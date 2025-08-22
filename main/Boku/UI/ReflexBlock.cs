@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ using Boku.Programming;
 using Boku.Input;
 using Boku.Audio;
 
-
 namespace Boku.UI
 {
 
@@ -38,7 +36,7 @@ namespace Boku.UI
         public int Index = -1;
         public int Size = 0;
         public int OriginalIndent = 0;
-        
+
         #endregion
 
         #region Accesssors
@@ -48,7 +46,7 @@ namespace Boku.UI
         /// </summary>
         public bool Moving
         {
-            get 
+            get
             {
                 List<ReflexPanel> panels = InGame.inGame.Editor.ActivePanels;
                 return panels[Index].Moving;
@@ -65,7 +63,7 @@ namespace Boku.UI
 
                     if (value == false)
                     {
-                        // Now that we've stopped moving the block, we may need to 
+                        // Now that we've stopped moving the block, we may need to
                         // adjust its indent level.
                         ValidateIndent();
                     }
@@ -181,7 +179,7 @@ namespace Boku.UI
                 topBlock.Init(topIndex);
 
                 // If the block above this one actually contains this block then
-                // we need to shorten the top block.  This can happen if you're 
+                // we need to shorten the top block.  This can happen if you're
                 // moving a child reflex out of a block.
                 if (Index < topBlock.Index + topBlock.Size)
                 {
@@ -199,7 +197,7 @@ namespace Boku.UI
 
             // Find the block below this one and swap places with it.
             int bottomIndex = Index + Size;
-            // If there are no reflexes below this one, there's 
+            // If there are no reflexes below this one, there's
             // no place to go so don;t do anything.
             if (bottomIndex < panels.Count)
             {
@@ -321,7 +319,6 @@ namespace Boku.UI
             {
                 rlist[b1.Index + i + steps1] = rArray[b1.Index + i];
             }
-
 
             /*
             Debug.Print("before");
@@ -458,7 +455,6 @@ namespace Boku.UI
                 return result;
             }
         }   // end of class ReflexComparer
-
 
         /// <summary>
         /// After an action this adjusts the indent level to ensure it's valid.

@@ -138,7 +138,7 @@ namespace Surfacer
         }
 
         // a clone of the surfaceset object.
-        // there is probably a way to deserialize that directly from an xml node, but the 
+        // there is probably a way to deserialize that directly from an xml node, but the
         // straightest method requires more cross-project integration than I want to tackle right now.
         // if this tool turns out to be really useful, it would be worth revisiting that decision
         class SurfaceSetRecord
@@ -279,11 +279,9 @@ namespace Surfacer
             if (slot8Pick.Enabled)
                 surfSet.SurfaceNames[7] = slot8Pick.SelectedItem as string;
 
-
             surfSet.BumpPath = BumpFld.Text;
             surfSet.DirtPath = DirtFld.Text;
         }
-
 
         // When we load up a surface set, we want to put the right values
         // into the slot pickers.

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace Boku.Common.ParticleSystem
             public Vector3 position;
             public Vector3 velocity;
             public Vector3 acceleration;
-            public float startRadius;   // Radius at start of life. 
+            public float startRadius;   // Radius at start of life.
             public float endRadius;     // Radius at end of life.
             public float lifetime;      // Lifetime in seconds.
             public float rotationRate;  // Radians per second.  Initial rotation is set randomly.
@@ -114,7 +113,6 @@ namespace Boku.Common.ParticleSystem
         {
             get { return false; }
         }
-
 
         protected Effect Effect
         {
@@ -219,7 +217,7 @@ namespace Boku.Common.ParticleSystem
             base.Update();
 
             if(newParticles)
-            {                
+            {
                 // Only update the part of the vertex buffer that has changed.
                 if (firstNewParticleIndex <= lastNewParticleIndex)
                 {
@@ -238,7 +236,7 @@ namespace Boku.Common.ParticleSystem
                 }
 
                 firstNewParticleIndex = -1;
-                
+
                 newParticles = false;
             }
         }   // end of SharedSmokeEmitter Update()
@@ -289,7 +287,7 @@ namespace Boku.Common.ParticleSystem
             effect.Parameters["BumpScroll"].SetValue(filterScroll);
             effect.Parameters["BumpScale"].SetValue(filterScale);
             effect.Parameters["BumpStrength"].SetValue(filterStrength);
-            
+
             effect.Parameters["DepthTexture"].SetValue(InGame.inGame.EffectsRenderTarget);
             //effect.Parameters["Bump"].SetValue(DistortFilter.BumpTexture);
             effect.Parameters["Bump"].SetValue(DistortionManager.Bump);
@@ -332,7 +330,7 @@ namespace Boku.Common.ParticleSystem
 
             if (texture == null)
             {
-                
+
                 texture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\" + TextureName);
             }
 
@@ -364,6 +362,5 @@ namespace Boku.Common.ParticleSystem
         #endregion
 
     }   // end of class SharedSmokeEmitter : BaseSharedEmitter
-
 
 }   // end of namespace Boku.Common.ParticleSystem

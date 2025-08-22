@@ -344,79 +344,7 @@ namespace Boku.Input
         const string BindToken = "Bind";
         protected void LateBindEvents()
         {
-#if NETFX_CORE
             Debug.Assert(false, "Is any of this actually used???");
-#else
-            for (int indexCommand = 0; indexCommand < this.commands.Count; indexCommand++)
-            {
-                InputCommand command = this.commands[indexCommand];
-                if (command != null)
-                {
-
-                    Type type = command.GetType();
-                    Type matchType = Type.GetType("System.String");
-                    FieldInfo[] fieldinfos = type.GetFields();
-
-                    for (int indexFields = 0; indexFields < fieldinfos.Length; indexFields++)
-                    {
-                        FieldInfo field = fieldinfos[indexFields];
-                        Type fieldType = field.FieldType;
-                        if (fieldType == matchType && field.Name.StartsWith(BindToken))
-                        {
-                            string eventMethodName = (string)field.GetValue(command);
-                            if (eventMethodName != null)
-                            {
-                                Type eventTargetType = this.eventTarget.GetType();
-                                // helpful to see what the methods are
-                                //                            MethodInfo[] methodTargetInfos = eventTargetType.GetMethods();
-                                MethodInfo methodTarget = eventTargetType.GetMethod(eventMethodName);
-                                if (methodTarget != null)
-                                {
-                                    string eventName = field.Name.Substring(BindToken.Length);
-                                    EventInfo eventSource = type.GetEvent(eventName);
-                                    if (eventSource != null)
-                                    {
-                                        Type eventSourceType = eventSource.EventHandlerType;
-#if !false
-                                        Delegate eventHandler = Delegate.CreateDelegate(eventSourceType, this.eventTarget, methodTarget);
-#else
-                                    // This seems to work with the latest release (GS2.0).
-                                    // Due to Compact Framework not supporting Delegate.CreateDelegate
-                                    // we have to instance a shim delegate class too provide the functionality
-                                    // based upon the event type
-                                    Delegate eventHandler;
-                                    switch (eventSourceType.Name)
-                                    {
-                                        case "InputCommandChangeVector2Event":
-                                            eventHandler = DelegateBindShimVector2.CreateDelegate(methodTarget, this.eventTarget);
-                                            break;
-                                        case "InputCommandChangeFloatEvent":
-                                            eventHandler = DelegateBindShimFloat.CreateDelegate(methodTarget, this.eventTarget);
-                                            break;
-                                        case "InputCommandEvent":
-                                            eventHandler = DelegateBindShim.CreateDelegate(methodTarget, this.eventTarget);
-                                            break;
-                                        case "InputKeyCommandEvent":
-                                            eventHandler = DelegateBindShimKey.CreateDelegate(methodTarget, this.eventTarget);
-                                            break;
-                                        case "InputCharCommandEvent":
-                                            eventHandler = DelegateBindShimChar.CreateDelegate(methodTarget, this.eventTarget);
-                                            break;
-                                        default:
-                                            throw new System.Exception("event source type not supported");
-                                    }
-#endif
-                                        MethodInfo addHandler = eventSource.GetAddMethod();
-                                        Object[] invokeParams = { eventHandler };
-                                        addHandler.Invoke(command, invokeParams);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-#endif
         }
 
         /// <summary>

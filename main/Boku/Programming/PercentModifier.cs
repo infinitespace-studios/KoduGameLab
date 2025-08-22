@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -22,7 +21,7 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// This modifier is used when calculating scores.  No functionality here. 
+    /// This modifier is used when calculating scores.  No functionality here.
     /// </summary>
     public class PercentModifier : Modifier
     {

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Boku.UI2D
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
     /// and creates a texture on the fly into which the text strings are rendered.
-    /// This is effectively a replacement for the standard radio buttons 
+    /// This is effectively a replacement for the standard radio buttons
     /// designed to work with a controller as input rather than a mouse.
     /// </summary>
     public class UIGridModularRadioBoxElement : UIGridElement
@@ -509,7 +508,6 @@ namespace Boku.UI2D
                     Debug.Assert(false, "numColumns must be 1 or 2, nothing else is supported.");
                 }
 
-
                 batch.End();
 
                 // Restore default blend state.
@@ -545,7 +543,6 @@ namespace Boku.UI2D
                 {
                     //Play selection sound
                     Foley.PlayPressA();
-
 
                     bool indexChanged = hit != curIndex;
                     CurIndex = hit;
@@ -661,11 +658,7 @@ namespace Boku.UI2D
         {
             for (int i = 0; i < list.Count; i++)
             {
-#if NETFX_CORE
                 if(string.Compare(list[i].Key, key, StringComparison.OrdinalIgnoreCase) == 0)
-#else
-                if (string.Compare(list[i].Key, key, true) == 0)
-#endif
                 {
                     curIndex = i;
                     Dirty = true;
@@ -797,9 +790,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularRadioBoxElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

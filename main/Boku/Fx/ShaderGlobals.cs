@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Scenes namespace
 
 using System;
@@ -24,7 +23,7 @@ using Boku.SimWorld.Terra;
 namespace Boku.Fx
 {
     /// <summary>
-    /// Sets all the shader globals per frame.  This includes the 
+    /// Sets all the shader globals per frame.  This includes the
     /// inGame globals as well at the ones used by the UI.
     /// </summary>
     public class ShaderGlobals : GameObject, INeedsDeviceReset
@@ -237,7 +236,7 @@ namespace Boku.Fx
             /// </summary>
             public LightRig CurrentRig
             {
-                get 
+                get
                 {
                     /// In edit mode, if the current rig is pitch black,
                     /// use the dark rig.
@@ -250,7 +249,7 @@ namespace Boku.Fx
                             return lightRigs[6];
                     }
 
-                    return currentRig; 
+                    return currentRig;
                 }
             }
             public Wind CurrentWind
@@ -328,7 +327,6 @@ namespace Boku.Fx
                 int numRigs = ShaderGlobals.NumRigs;
 
                 lightRigs = new LightRig[numRigs];
-
 
                 for (int i = 0; i < numRigs; ++i)
                 {
@@ -573,7 +571,6 @@ namespace Boku.Fx
                         rig.Wrap = 0.0f;
                         break;
 
-
                         /// Rig_UI, must be last in the list
                     default:
                         rig.LightList[0].RotationAxis = new Vector3(0.0f, 0.0f, 1.0f);
@@ -688,7 +685,7 @@ namespace Boku.Fx
             #endregion Members
 
             #region Accessors
-            
+
             public bool EnvTextureIsDefault
             {
                 get { return envTextureName == defaultEnvTextureName; }
@@ -723,7 +720,7 @@ namespace Boku.Fx
             /// <summary>
             /// "Render" for the ShaderGlobals object is a bit different.  What this
             /// is doing is just setting the globals shader values on each effect
-            /// in the system.  The desing of this is a bit of a legacy hack.  In 
+            /// in the system.  The desing of this is a bit of a legacy hack.  In
             /// XNA 3.1 we used the "shared" keyword to ensure that the global values
             /// were set on each shader.  With XNA 4 we don't have support for "shared"
             /// so we keep a list of all the shaders in the system and each frame loop
@@ -739,7 +736,6 @@ namespace Boku.Fx
                 }
             }
 
-
             /// <summary>
             /// Set the parameter values on the given effect.
             /// TODO (****) Can this be made more efficient?  Right now it sets every parameter
@@ -754,7 +750,7 @@ namespace Boku.Fx
 
                 // Don't try and set params if the effect is disposed.  This can happen due to
                 // timing foo during device reset.  Really should clean this all out.  In the
-                // meantime can just return.  The effect should get replaced next frame and 
+                // meantime can just return.  The effect should get replaced next frame and
                 // all will once again be well.
                 if (effect.IsDisposed)
                 {
@@ -807,7 +803,6 @@ namespace Boku.Fx
                 // Set values for point light sources.
                 Luz.SetToEffect(effect, false);
 
-
                 if (effect.Parameters["Shininess"] != null) // In StandardLight.fx
                 {
                     effect.Parameters["Shininess"].SetValue(1.0f);
@@ -822,9 +817,6 @@ namespace Boku.Fx
                     effect.Parameters["EnvironmentMap"].SetValue(envTexture);
                 }
 
-
-
-
             }
 
             /// <summary>
@@ -835,7 +827,7 @@ namespace Boku.Fx
             /// <param name="camera"></param>
             public void SetCamera(Camera camera)
             {
-                // Yes, this is kind of brute force but it is only used in a few places 
+                // Yes, this is kind of brute force but it is only used in a few places
                 // where perf is not an issue.
                 foreach (KeyValuePair<string, Effect> kvp in effectDict)
                 {
@@ -912,7 +904,7 @@ namespace Boku.Fx
                         effect.Parameters["BloomColor"].SetValue(color);
                     }
                 }
-                        
+
             }
 
             public void ReleaseBloomColor()
@@ -1032,12 +1024,12 @@ namespace Boku.Fx
         private Vector4[] sourceLightDir = new Vector4[4];      //used to cache in-transition light values for smooth transitions
         private float sourceLightWrap;
 
-        static string[] rigNames = { 
-            "Day", 
-            "Night", 
-            "Space", 
-            "Dream", 
-            "Venus", 
+        static string[] rigNames = {
+            "Day",
+            "Night",
+            "Space",
+            "Dream",
+            "Venus",
             "Mars",
             "Dark",
             "Really Dark",
@@ -1207,7 +1199,6 @@ namespace Boku.Fx
             BokuGame.bokuGame.shaderGlobals.renderObj.SetCamera(effect, camera);
         }
 
-
         /// <summary>
         /// Find the light rig with specified name and set it to current.
         /// Blasts previously current rig.
@@ -1220,7 +1211,7 @@ namespace Boku.Fx
         }
 
         public void TransitionToLightRig(string name, float transitionTime)
-        {            
+        {
             //check if another transition was running, if so, kill it
             if (shared.RigInTransition)
             {
@@ -1310,7 +1301,7 @@ namespace Boku.Fx
 
         public static Vector4 ParticleTint(bool emissive)
         {
-            return emissive 
+            return emissive
                 ? Vector4.One
                 : SimWorld.SkyBox.Gradient(Terrain.Current.RunTimeSkyIndex)[5];
         }
@@ -1377,8 +1368,8 @@ namespace Boku.Fx
         {
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
-            // Pick nearest constant.  _Most_ rendering uses exctly one of these, 
-            // for the rest we can just fake it.  
+            // Pick nearest constant.  _Most_ rendering uses exctly one of these,
+            // for the rest we can just fake it.
             if (amount <= 0.0f)
             {
                 device.BlendState = bloom0_0;

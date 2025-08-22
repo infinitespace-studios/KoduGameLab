@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -67,7 +66,7 @@ namespace Boku.Programming
             // this started causing timers with random times to fail.  HiddenDefault is evil and
             // should never exist.
             // At a deeper level there's something not quite right with the architecture if it doesn't
-            // allow scores to be used as timer inputs without adding hidden tiles.  Need to understand 
+            // allow scores to be used as timer inputs without adding hidden tiles.  Need to understand
             // this better.
             bool match = true;
 
@@ -160,7 +159,6 @@ namespace Boku.Programming
                     pointsRandom = 5;
                 }
             }
-
 
             if (scoreCount > 0)
             {

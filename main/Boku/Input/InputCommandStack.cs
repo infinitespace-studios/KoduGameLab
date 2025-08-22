@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 // Uncomment this to see debug spew about the command "stack".
 //#define DEBUG_SPEW
 
@@ -36,7 +35,7 @@ namespace Boku.Input
         private static InputConstraint inputConstraint = null;
 
         /// <summary>
-        /// Adds the command map to the stack as the top and 
+        /// Adds the command map to the stack as the top and
         /// input will be directed to the top map of the stack
         /// </summary>
         /// <param name="commandMap"></param>
@@ -50,7 +49,7 @@ namespace Boku.Input
             {
                 prevActiveCommandMap = commandMaps[commandMaps.Count - 1];
             }
-                
+
             commandMaps.Add(commandMap);
             SyncTop(prevActiveCommandMap);
 
@@ -91,8 +90,8 @@ namespace Boku.Input
                 //CommandMap activeMap = commandMaps[commandMaps.Count - 1];
 
                 //commandMaps.Remove(commandMap);
-                // We can't just do a Remove here.  If a command map is in 
-                // the stack more than once the Remove will take out the 
+                // We can't just do a Remove here.  If a command map is in
+                // the stack more than once the Remove will take out the
                 // wrong one.  The whole reason we're in this mess is because
                 // the command "stack" doesn't always act like a stack.  Hence
                 // having to pass in the element that we want to pop.  This
@@ -128,12 +127,11 @@ namespace Boku.Input
         }
 #endif
 
-
         /// <summary>
         /// Returns the CommandMap currently on the top of the stack.  Returns null
-        /// if nothing is there.  
-        /// 
-        /// This should be used to verify that you have input focus before looking at 
+        /// if nothing is there.
+        ///
+        /// This should be used to verify that you have input focus before looking at
         /// analog stick or trigger values unless you can guarantee that you have been
         /// called due to an event being triggered rather than through some other path.
         /// Otherwise you may be getting stale values.
@@ -232,7 +230,7 @@ namespace Boku.Input
 
         /// <summary>
         /// Called on every update by the root game object
-        /// This will update keyboard and gamepad states and 
+        /// This will update keyboard and gamepad states and
         /// then update the top command map input commands
         /// </summary>
         public static void Update()

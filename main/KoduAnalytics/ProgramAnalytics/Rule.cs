@@ -16,7 +16,6 @@ namespace KoduAnalytics.ProgramAnalytics
         public Boolean conditionIsAlways = false;
         public Boolean partOfConditional = false;
 
-
         public Rule(String s)
         {
             int when = s.Trim().IndexOf(" ");
@@ -49,8 +48,8 @@ namespace KoduAnalytics.ProgramAnalytics
                         {
                             tiles[i - 1] = tiles[i - 1] + temp;
                         }
-                        else if (temp == "player" 
-                            || temp == "page" 
+                        else if (temp == "player"
+                            || temp == "page"
                             || temp == "close"
                             || temp == "far")
                         {
@@ -132,7 +131,6 @@ namespace KoduAnalytics.ProgramAnalytics
                 }
             }
         }
-
 
         private int index;
         private int page = 0;

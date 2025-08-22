@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -44,7 +43,6 @@ namespace Boku
 
         }   // end of class UpdateObj
 
-
         //
         //  Fireball
         //
@@ -74,7 +72,7 @@ namespace Boku
         {
         }
 
-        #region Accessors       
+        #region Accessors
         public override RenderObject RenderObject
         {
             get { return null; }
@@ -97,7 +95,7 @@ namespace Boku
                     BokuGame.gameListManager.RemoveObject(this);
                     updateObj.Deactivate();
                     updateList.Remove(updateObj);
-                    
+
                     result = true;
                 }
 
@@ -145,7 +143,6 @@ namespace Boku
         public override void UnloadContent()
         {
         }   // end of Fireball UnloadContent()
-
 
     }   // end of class Fireball
 

@@ -36,16 +36,14 @@ namespace KoduAnalytics.ProgramAnalytics
 
             //read in community files
             //set up LINQ structures
-           
+
             //Does the tile type analysis
             // ta.process();
 
             //find interesting stuff. It's that easy, right?
             ta.getGameInformation();
-            
 
         }
-
 
         public static void runTheStuff()
         {
@@ -91,16 +89,16 @@ namespace KoduAnalytics.ProgramAnalytics
                //     path = System.IO.Path.ChangeExtension(path, null);
                     files.Add(path);
                 }
-                
+
             }
-           // string fullPathToLevelFile = dlog.FileName;//// +Path.DirectorySeparatorChar + BokuGame.Settings.MediaPath + MyWorldsPath + level.WorldId.ToString() + ".Xml";   
+           // string fullPathToLevelFile = dlog.FileName;//// +Path.DirectorySeparatorChar + BokuGame.Settings.MediaPath + MyWorldsPath + level.WorldId.ToString() + ".Xml";
            // getXML(fullPathToLevelFile);
             return files;
         }
 
         public static void getXML(String filename)
         {
-            
+
             Boku.Common.Xml.XmlWorldData xml = Boku.Common.Xml.XmlWorldData.Load(filename, null);
         }
     }

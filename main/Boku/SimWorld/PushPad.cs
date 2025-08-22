@@ -65,7 +65,6 @@ namespace Boku
 
 }   // end of namespace Boku
 
-
 namespace Boku.SimWorld
 {
     /// <summary>

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,12 +24,12 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses when the Microbit is used for input.
-    /// 
+    ///
     /// This sensor acts more like a manager than the true source of the sensor event.
-    /// It will request the MicrobitTilt and MicrobitButton filters to provide 
-    /// the actual input.  This sensor demonstrates a break in the normal use of 
+    /// It will request the MicrobitTilt and MicrobitButton filters to provide
+    /// the actual input.  This sensor demonstrates a break in the normal use of
     /// the model but demonstrates how other elements can be used to solve problems.
-    /// 
+    ///
     /// This is modelled directly on the Microbit sensor
     /// </summary>
     public class MicrobitSensor : Sensor, IMicrobitTile

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -22,7 +21,7 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this modifier acts like a parameter and provides a Verb to be used 
+    /// this modifier acts like a parameter and provides a Verb to be used
     /// as a payload to the actuator
     /// </summary>
     public class PayloadVerbModifier : Modifier

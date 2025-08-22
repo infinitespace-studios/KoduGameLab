@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,16 +12,15 @@ using Boku.Base;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
 
-
 namespace Boku.Common
 {
     /// <summary>
-    /// Class which owns the position, orientation, velocities, 
+    /// Class which owns the position, orientation, velocities,
     /// desired velocities and orientations of objects.
-    /// 
+    ///
     /// Units are meters, radians, seconds.
     /// Rotations are around the Z axis.
-    /// 
+    ///
     /// </summary>
     public class Movement : ICloneable
     {
@@ -36,8 +34,8 @@ namespace Boku.Common
         private Vector3 velocity = Vector3.Zero;
 
         // A hint from the brain telling us that this bot is under user control.
-        private bool userControlled = false;    
-        
+        private bool userControlled = false;
+
         // Internal values.
         // Note that keeping rotationZ as a seperate value can lead to it being out of sync with localMatrix.
         // So, be very careful when setting either of these to ensure that they are always in sync.
@@ -62,7 +60,7 @@ namespace Boku.Common
             get { return userControlled; }
             set { userControlled = value; }
         }
-        
+
         /// <summary>
         /// Current velocity in meters per second.
         /// </summary>
@@ -79,7 +77,7 @@ namespace Boku.Common
         {
             get { return velocity.Length(); }
         }
-        
+
         /// <summary>
         /// Current rate of rotation in radius per second around Z axis.
         /// </summary>
@@ -88,7 +86,7 @@ namespace Boku.Common
             get { return rotationZRate; }
             set { rotationZRate = value; }
         }
-        
+
         /// <summary>
         /// Current rotation around Z axis.
         /// 0..2pi range.
@@ -96,11 +94,11 @@ namespace Boku.Common
         public float RotationZ
         {
             get { return rotationZ; }
-            set 
+            set
             {
                 if (rotationZ != value)
                 {
-                    float deltaZ = value - rotationZ;   
+                    float deltaZ = value - rotationZ;
                     rotationZ = value;
                     rotationZ = MyMath.Modulo(rotationZ, MathHelper.TwoPi);
 
@@ -114,7 +112,7 @@ namespace Boku.Common
                 }
             }
         }
-        
+
         /// <summary>
         /// Current position in the world.
         /// </summary>
@@ -135,7 +133,7 @@ namespace Boku.Common
 
         /// <summary>
         /// Transform matrix associated with current position and rotation.
-        /// 
+        ///
         /// Note that setting the localMatrix will also reset the value of rotationZ
         /// but there is some error accumulation which can happen causing a static
         /// object to rotate to a fixed orientation.  So, if you already know the
@@ -146,7 +144,7 @@ namespace Boku.Common
         {
             get { return localMatrix; }
             // Used if the chassis wants to explicitly create the local matrix.
-            set 
+            set
             {
                 localMatrix = value;
 

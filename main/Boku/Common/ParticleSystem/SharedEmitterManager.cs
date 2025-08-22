@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,12 +20,12 @@ using Boku.Base;
 namespace Boku.Common.ParticleSystem
 {
     /// <summary>
-    /// Provides a common entry point for the sources to add particles to the emitters.  In the 
+    /// Provides a common entry point for the sources to add particles to the emitters.  In the
     /// case of the smoke emitters this also allows there to be several so that we can bin the
     /// particles based on their life span.  This prevents long lived particles from "locking in"
     /// short lived ones.  We only have a sinlge distorted smoke emitter since these all tend
     /// to be short-lived.
-    /// 
+    ///
     /// Note that the emitters managed here are not added to the normal particle system manager.
     /// Since we know more about them we can be a bit more efficient during rendering.
     /// </summary>
@@ -55,7 +54,7 @@ namespace Boku.Common.ParticleSystem
         public static BeamManager Beams
         {
             get { return beam; }
-        } 
+        }
         public static BleepManager Bleeps
         {
             get { return bleep; }
@@ -71,7 +70,7 @@ namespace Boku.Common.ParticleSystem
         #endregion
 
         #region Public
-        
+
         public SharedEmitterManager(ParticleSystemManager manager)
             : base(manager)
         {
@@ -100,7 +99,6 @@ namespace Boku.Common.ParticleSystem
             splash = new SharedSplashEmitter(manager, 1000);
 
         }   // end of c'tor
-
 
         public static void AddSmokeParticle(ref SharedSmokeEmitter.SmokeParticle p)
         {
@@ -170,7 +168,7 @@ namespace Boku.Common.ParticleSystem
 
                 beam.PreRender(camera);
                 beam.Render(camera);
-                beam.PostRender();                
+                beam.PostRender();
 
                 bleep.PreRender(camera);
                 bleep.Render(camera);

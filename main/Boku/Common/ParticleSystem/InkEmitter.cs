@@ -18,7 +18,7 @@ using Boku.Base;
 
 namespace Boku.Common.ParticleSystem
 {
-    // Emits "Explosion" as a series of expanding, rotating 
+    // Emits "Explosion" as a series of expanding, rotating
     // sprites which fade and grow as they age.  The sprites
     // are rendered using additive blending.
     public class InkEmitter : BaseSpriteEmitter
@@ -39,7 +39,7 @@ namespace Boku.Common.ParticleSystem
             Color = new Vector4(0.13f, 0.1f, 0.2f, 1.0f);
             StartRadius = 0.7f;
             EndRadius = 1.4f;
-  
+
             StartAlpha = 1.0f;
             EndAlpha = 0.0f;
 
@@ -94,7 +94,7 @@ namespace Boku.Common.ParticleSystem
 
         public override void Update()
         {
-            base.Update();            
+            base.Update();
         }
 
     }   // end of class InkEmitter

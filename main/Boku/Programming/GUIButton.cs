@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,7 +36,7 @@ namespace Boku.Programming
     {
         /// <summary>
         /// Enum needed to maintain back compat with older levels and
-        /// XML serialization.  Currently we don't even bother with 
+        /// XML serialization.  Currently we don't even bother with
         /// this enum because it's overkill and conflates state in
         /// a way that's just not useful.
         /// </summary>
@@ -144,8 +143,8 @@ namespace Boku.Programming
         public bool Dirty
         {
             get { return dirty; }
-            set 
-            { 
+            set
+            {
                 dirty = value;
                 if (dirty)
                 {
@@ -157,7 +156,7 @@ namespace Boku.Programming
         public Vector2 Position
         {
             get { return position; }
-            set 
+            set
             {
                 if (position != value)
                 {
@@ -209,7 +208,7 @@ namespace Boku.Programming
             this.color = color;
             hitBox = new AABB2D();
         }
-        
+
         public void ChangeState(ButtonState newState)
         {
             prevState = state;

@@ -44,12 +44,12 @@ namespace Boku.Animatics
             /// <returns></returns>
             public Animation this[string name]
             {
-                get 
+                get
                 {
                     Animation anim = null;
                     if (animDict.TryGetValue(name, out anim))
                         return anim;
-                    return null; 
+                    return null;
                 }
             }
             #endregion Accessors
@@ -231,4 +231,3 @@ namespace Boku.Animatics
 ////t = typeof(Boku.Animatics.SkinDataList);
 ////s = t.AssemblyQualifiedName;
 ////Console.WriteLine("The fully qualified assembly name containing the specified class is {0}.", s);
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -151,7 +150,6 @@ namespace Boku.SimWorld
 
         }   // end of Skirt Update()
 
-
         public void LoadGraphicsContent(GraphicsDeviceManager graphics)
         {
             GraphicsDevice device = graphics.GraphicsDevice;
@@ -164,7 +162,7 @@ namespace Boku.SimWorld
             // Copy local data to vertex buffer.
 #if !XBOX360
             vbuf[i].SetData<Terrain.SkirtVertex>(vertices[i], 0, NumVertices ); //, SetDataOptions.Discard);
-#else
+
             vbuf[i].SetData<Terrain.SkirtVertex>(vertices[i], 0, NumVertices ); // , SetDataOptions.None);
 #endif
         }
@@ -182,6 +180,3 @@ namespace Boku.SimWorld
     }   // end of class Skirt
 
 }   // end of namespace Boku.SimWorld
-
-
-

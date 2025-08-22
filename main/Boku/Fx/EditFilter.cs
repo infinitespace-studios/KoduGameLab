@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -65,9 +64,8 @@ namespace Boku.Fx
 
         }   // end of BaseFilter SetUvToPos()
 
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="source">Our brush texture.</param>
         /// <param name="index">Which channel to paint into.  0 is default(just erase from others), 1 is red, 2 is green, 3 is blue.</param>
@@ -98,7 +96,6 @@ namespace Boku.Fx
 
             // Store away the current channels.
 
-
             effect.Parameters["SourceTexture"].SetValue(source);
             effect.Parameters["Color"].SetValue(color);
             effect.Parameters["Alpha"].SetValue(alpha);
@@ -117,7 +114,6 @@ namespace Boku.Fx
 
         }   // end of EditFilter Render()
 
-
         public override void LoadContent(bool immediate)
         {
             // Init the effect.
@@ -132,6 +128,3 @@ namespace Boku.Fx
     }   // end of class EditFilter
 
 }   // end of Boku.Common
-
-
-

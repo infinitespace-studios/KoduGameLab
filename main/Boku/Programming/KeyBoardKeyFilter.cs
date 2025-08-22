@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of gamepad button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class KeyBoardKeyFilter : Filter
     {
@@ -33,7 +33,7 @@ namespace Boku.Programming
         public Keys key = Keys.None;
         [XmlAttribute]
         public Keys key2 = Keys.None;           // Option key used when multiple keys are treated as the same.
-                                                // For instance the "shiftkey" filter reacts to both leftShift and rightShift. 
+                                                // For instance the "shiftkey" filter reacts to both leftShift and rightShift.
 
         [XmlIgnore]
         public Vector2 dir = new Vector2(0, 1);
@@ -145,7 +145,6 @@ namespace Boku.Programming
 
                 param = direction;
             }
-            
 
             return result;
         }

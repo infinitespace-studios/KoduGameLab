@@ -1,14 +1,12 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
 
-#if NETFX_CORE
     using System.Threading.Tasks;
 #endif
 
@@ -18,12 +16,6 @@ namespace BokuShared
     {
         public XmlData()
         {
-#if !NETFX_CORE
-            Debug.Assert(
-                typeof(XmlDataClass).IsSubclassOf(typeof(XmlData<XmlDataClass>)),
-                String.Format("{0} must derive from XmlData<{0}>", typeof(XmlDataClass).ToString())
-            );
-#endif
         }
 
         /// <summary>
@@ -134,9 +126,6 @@ namespace BokuShared
 #if NETFX_CORE
             stream.Flush();
             stream.Dispose();
-#else
-            stream.Close();
-#endif
             return data;
         }
 

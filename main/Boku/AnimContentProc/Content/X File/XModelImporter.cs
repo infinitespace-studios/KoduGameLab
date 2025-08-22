@@ -4,7 +4,7 @@
 /*
  * XModelImporter.cs
  * Copyright (c) 2006, 2007 David Astle, Michael Nikonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -130,11 +130,6 @@ namespace Xclna.Xna.Animation.Content
                 k++;
             }
 
-
-
-
-
-
             FixBindPose(root, absTransformsDict);
 
             return root;
@@ -156,7 +151,7 @@ namespace Xclna.Xna.Animation.Content
                 Matrix abs = absTransformsDict[bone.Name];
                 bone.Transform = abs * Matrix.Invert(bone.Parent.AbsoluteTransform);
             }
-             
+
             foreach (NodeContent child in bone.Children)
             {
                 FixBindPose(child, absTransformsDict);
@@ -192,7 +187,7 @@ namespace Xclna.Xna.Animation.Content
                     //template AnimTicksPerSecond
                     // {
                     //     DWORD AnimTicksPerSecond;
-                    // } 
+                    // }
                     else if (next == "AnimTicksPerSecond")
                     {
                         animTicksPerSecond = tokens.SkipName().NextInt();
@@ -219,7 +214,7 @@ namespace Xclna.Xna.Animation.Content
                 }
                 while (!tokens.AtEnd);
             }
-    
+
         }
 
         /// <summary>
@@ -278,7 +273,7 @@ namespace Xclna.Xna.Animation.Content
         //      ColorRGB specularColor;
         //      ColorRGB emissiveColor;
         //      [...]
-        // } 
+        // }
         /// <summary>
         /// Imports a material, which defines the textures that a mesh uses and the way in which
         /// light reflects off the mesh
@@ -306,7 +301,6 @@ namespace Xclna.Xna.Animation.Content
             // light reflects off the mesh
             Vector3 specularColor = tokens.NextVector3();
             Vector3 emissiveColor = tokens.NextVector3();
-
 
             // Import any textures associated with this material
             for (string token = tokens.NextToken();
@@ -356,11 +350,10 @@ namespace Xclna.Xna.Animation.Content
                     materials.Remove(returnMaterial.Name);
                 materials.Add(returnMaterial.Name, returnMaterial);
             }
-                
+
             return returnMaterial;
 
         }
-
 
         /// <summary>
         /// Gets an absolute path of a content item
@@ -374,17 +367,15 @@ namespace Xclna.Xna.Animation.Content
             string path = Path.GetDirectoryName(fileName) + Path.DirectorySeparatorChar
                 + contentItem;
             return Path.GetFullPath(path);
-            
+
         }
-
-
 
         // A frame can store any data, but is constrained such that each frame must haveB
         // a transform matrix for .X meshes.
         // template Frame
         // {
-        //    [...]			
-        // } 
+        //    [...]
+        // }
         /// <summary>
         /// Imports a data Node in a directx file, usually a Frame node.
         /// </summary>
@@ -434,7 +425,7 @@ namespace Xclna.Xna.Animation.Content
         // template FrameTransformMatrix
         // {
         //     Matrix4x4 frameMatrix;
-        // } 
+        // }
         /// <summary>
         /// Imports a transform matrix attached to a ContentNode
         /// </summary>
@@ -456,7 +447,7 @@ namespace Xclna.Xna.Animation.Content
         // template AnimationSet
         // {
         //     [ Animation ]
-        // } 
+        // }
         /// <summary>
         /// Imports an animation set that is added to the AnimationContentDictionary of
         /// the root frame.
@@ -469,7 +460,7 @@ namespace Xclna.Xna.Animation.Content
             if (animSet.Name == null)
                 animSet.Name = "Animation" + root.Animations.Count.ToString();
 
-            // Fill in all the channels of the animation.  Each channel refers to 
+            // Fill in all the channels of the animation.  Each channel refers to
             // a single bone's role in the animation.
             for (string next = tokens.NextToken(); next != "}"; next = tokens.NextToken())
             {
@@ -480,7 +471,7 @@ namespace Xclna.Xna.Animation.Content
                     // Every channel must be attached to a bone!
                     if (boneName == null)
                         throw new Exception("Animation in file is not attached to any joint");
-                    // Make sure that the duration of the animation is set to the 
+                    // Make sure that the duration of the animation is set to the
                     // duration of the longest animation channel
                     if (anim[anim.Count - 1].Time > animSet.Duration)
                         animSet.Duration = anim[anim.Count - 1].Time;
@@ -495,29 +486,26 @@ namespace Xclna.Xna.Animation.Content
             root.Animations.Add(animSet.Name, animSet);
         }
 
-
-
-
         /*
-         * template AnimationKey 
+         * template AnimationKey
          * {
          *     DWORD keyType;
          *     DWORD nKeys;
          *     array TimedFloatKeys keys[nKeys];
-         * } 
-         * 
-         * 
-         * template TimedFloatKeys 
-         * { 
-         *     DWORD time; 
-         *     FloatKeys tfkeys; 
-         * } 
-         * 
+         * }
+         *
+         *
+         * template TimedFloatKeys
+         * {
+         *     DWORD time;
+         *     FloatKeys tfkeys;
+         * }
+         *
          * template FloatKeys
          * {
          *     DWORD nValues;
          *     array float values[nValues];
-         * }        
+         * }
          */
         /// <summary>
         ///  Imports a key frame list associated with an animation channel
@@ -532,7 +520,7 @@ namespace Xclna.Xna.Animation.Content
             int numFrames = tokens.NextInt();
             AnimationKeyframe[] frames = new AnimationKeyframe[numFrames];
             // Find the ticks per millisecond that defines how fast the animation should go
-            double ticksPerMS = animTicksPerSecond == null ? DEFAULT_TICKS_PER_SECOND /1000.0 
+            double ticksPerMS = animTicksPerSecond == null ? DEFAULT_TICKS_PER_SECOND /1000.0
                 : (double)animTicksPerSecond / 1000.0;
 
             // fill in the frames
@@ -542,7 +530,7 @@ namespace Xclna.Xna.Animation.Content
                 // occurs
                 TimeSpan time = new TimeSpan(0, 0, 0, 0,
                     (int)(tokens.NextInt() / ticksPerMS));
-                // The number of keys that represents the transform for this keyframe. 
+                // The number of keys that represents the transform for this keyframe.
                 // Quaternions (rotation keys) have 4,
                 // Vectors (scale and translation) have 3,
                 // Matrices have 16
@@ -557,7 +545,6 @@ namespace Xclna.Xna.Animation.Content
                         new Vector3(-v.Y,-v.Z,-v.W),
                         v.X);
 
-
                     transform = Matrix.CreateFromQuaternion(q);
                 }
                 else if (numKeys == 3)
@@ -566,7 +553,6 @@ namespace Xclna.Xna.Animation.Content
 
                     if (keyType == 1)
                     {
-
 
                         Matrix.CreateScale(ref v, out transform);
                     }
@@ -583,8 +569,6 @@ namespace Xclna.Xna.Animation.Content
             return frames;
         }
 
-
-
         /*
          * template Animation
          * {
@@ -592,7 +576,7 @@ namespace Xclna.Xna.Animation.Content
          * }
          */
         /// <summary>
-        /// Fills in all the channels of an animation.  Each channel refers to 
+        /// Fills in all the channels of an animation.  Each channel refers to
         /// a single bone's role in the animation.
         /// </summary>
         /// <param name="boneName">The name of the bone associated with the channel</param>
@@ -666,14 +650,13 @@ namespace Xclna.Xna.Animation.Content
                     ContentUtil.ReflectMatrix(ref m);
                     combinedFrames[i].Transform = m; //* Matrix.CreateRotationX(MathHelper.PiOver2);
                     anim.Add(combinedFrames[i]);
-                    
+
                 }
 
             }
             return anim;
         }
         #endregion
-
 
     }
 }

@@ -33,7 +33,6 @@ namespace Boku.SimWorld
 //            TechniqueExt = "Face";
         }   // end of BokuBotSRO c'tor
 
-
         /// <summary>
         /// Returns a static, shareable instance of a BokuBot sro.
         /// </summary>

@@ -122,9 +122,9 @@ namespace Boku.SimWorld.Path
         /// <param name="height"></param>
         /// <returns></returns>
         public override bool GetHeight(
-            Vector3 p0, 
-            Vector3 p1, 
-            Vector3 pos, 
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 pos,
             ref float height)
         {
             float distSq = DistanceSqToSection(p0, p1, pos);
@@ -150,8 +150,8 @@ namespace Boku.SimWorld.Path
         /// <param name="height"></param>
         /// <returns></returns>
         public override bool GetHeight(
-            Vector3 center, 
-            Vector3 pos, 
+            Vector3 center,
+            Vector3 pos,
             ref float height)
         {
             float distSq = (center.X - pos.X) * (center.X - pos.X) + (center.Y - pos.Y) * (center.Y - pos.Y);
@@ -199,8 +199,8 @@ namespace Boku.SimWorld.Path
         /// <param name="second"></param>
         /// <returns></returns>
         public override bool NewFan(
-            Road.Intersection isect, 
-            Road.Section first, 
+            Road.Intersection isect,
+            Road.Section first,
             Road.Section second,
             List<Road.RenderObj> fans)
         {
@@ -238,7 +238,6 @@ namespace Boku.SimWorld.Path
             }
             return NewFan(isect, startRadial, rads, fans);
         }
-
 
         #endregion Public
 
@@ -553,7 +552,7 @@ namespace Boku.SimWorld.Path
             int skipIdx = iQuad >= quadsPerSide
                         ? iQuad - quadsPerSide
                         : quadsPerSide - iQuad - 1;
-            
+
             return skipTable[skipIdx];
         }
 
@@ -643,8 +642,8 @@ namespace Boku.SimWorld.Path
         }
 
         protected virtual bool NewFan(
-            Road.Intersection isect, 
-            Vector2 startRadial, 
+            Road.Intersection isect,
+            Vector2 startRadial,
             double rads,
             List<Road.RenderObj> fans)
         {
@@ -722,7 +721,7 @@ namespace Boku.SimWorld.Path
 
             Debug.Assert(iVert == numVerts);
 
-            // First step per radial is a single tri, 
+            // First step per radial is a single tri,
             // then the rest of the steps are quads
             int quadsPerRadial = vertsPerRadial - 1;
 

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define PROGRAMMING_TILE_HACK
 //#define GENERATE_TILE_MAP
 
@@ -29,16 +28,16 @@ namespace Boku.Programming
 {
     /// <summary>
     /// This class is a management/serializing class for the Programming Tiles
-    /// 
-    /// All Programming Elements exposed in the game as Programming Tiles are 
-    /// defined in the CardSpace.Xml file and read into this class.  Many of the 
-    /// exposed Tiles use the same Programming Element class, just with different 
-    /// properties.  
-    /// This CardSpace.Xml file allows for easy property management like changing 
-    /// the Tiles text or icon without changing code.  Further, it includes 
-    /// properties that allow a tile to be archived (hidden) and properties to 
-    /// hint at how the tiles should be grouped.  
-    /// Lastly the file includes a section to define replacements for �upgraded� 
+    ///
+    /// All Programming Elements exposed in the game as Programming Tiles are
+    /// defined in the CardSpace.Xml file and read into this class.  Many of the
+    /// exposed Tiles use the same Programming Element class, just with different
+    /// properties.
+    /// This CardSpace.Xml file allows for easy property management like changing
+    /// the Tiles text or icon without changing code.  Further, it includes
+    /// properties that allow a tile to be archived (hidden) and properties to
+    /// hint at how the tiles should be grouped.
+    /// Lastly the file includes a section to define replacements for �upgraded�
     /// tiles and a section to define the UI groups Icon and labels.
     /// </summary>
     public class CardSpace
@@ -314,7 +313,6 @@ namespace Boku.Programming
             }
         }
 
-
         [
             XmlArrayItem(typeof(VerbActuator)),
             XmlArrayItem(typeof(NullActuator)),
@@ -344,7 +342,6 @@ namespace Boku.Programming
 
         [XmlIgnore]
         public static CardSpace Cards;
-
 
         public void Pieces(CardType cardType, List<ProgrammingElement> results)
         {
@@ -382,8 +379,8 @@ namespace Boku.Programming
 
         /// <summary>
         /// Find filter by string and return a clone of it.
-        /// 
-        /// TODO (****) Why is this implemented as a list instead of 
+        ///
+        /// TODO (****) Why is this implemented as a list instead of
         /// a dictionary?  Given that there are over 500 filters in
         /// the system, the constant, serial searching seems, um, less
         /// than optimal...
@@ -392,9 +389,9 @@ namespace Boku.Programming
         /// <returns></returns>
         public Filter GetFilter(string idObj)
         {
-            if (idObj == null || idObj == "null") 
-            { 
-                return null; 
+            if (idObj == null || idObj == "null")
+            {
+                return null;
             }
 
             Filter filter;
@@ -426,7 +423,7 @@ namespace Boku.Programming
 
             return null;
         }
-        
+
         /// <summary>
         /// Find selector by string and return a clone of it.
         /// </summary>
@@ -522,7 +519,7 @@ namespace Boku.Programming
 
         /// <summary>
         /// Returns the Atom associated with the id from any group.
-        /// 
+        ///
         /// TODO Deep down inside this is cloning the tile.  This happens
         /// for the tiles EVERY SINGLE FRAME!!!!
         /// </summary>
@@ -628,7 +625,7 @@ namespace Boku.Programming
                     }
                 }
             }
-            
+
             return cardFace.Texture;
         }
 
@@ -722,7 +719,7 @@ namespace Boku.Programming
             }
 
             SpriteBatch batch = UI2D.Shared.SpriteBatch;
-            
+
             InGame.SetRenderTarget(cardFace.Texture);
             device.Clear(Color.Transparent);
 
@@ -841,7 +838,6 @@ namespace Boku.Programming
                 }
             }
 
-#else
             InGame.Clear(Color.Transparent);
 #endif
 
@@ -895,14 +891,13 @@ namespace Boku.Programming
                     position.X = (int)((cardFace.Texture.Width - labelSize.X)/2.0f);
                 }
 
-#if NETFX_CORE
                 if (scale.X == 1.0f)
                 {
                     TextHelper.DrawStringNoBatch(FontLabel, label, position, Color.Black);
                 }
                 else
                 {
-                    // The label is too wide so we want to render it to another 
+                    // The label is too wide so we want to render it to another
                     // texture and then shrink that texture onto our tile.
                     RenderTarget2D tmpRT = UI2D.Shared.RenderTarget256_256;
                     InGame.SetRenderTarget(tmpRT);
@@ -927,11 +922,6 @@ namespace Boku.Programming
                     }
                     batch.End();
                 }
-#else
-                SysFont.StartBatch(null);
-                SysFont.DrawString(label, position, rect, FontLabel().systemFont, Color.Black, scale, outlineColor: new Color(248, 248, 248), outlineWidth: 1.5f);
-                SysFont.EndBatch();
-#endif
             }
 
             // Draw overlay if needed.
@@ -1052,7 +1042,7 @@ namespace Boku.Programming
                 modifier.OnLoad();
             foreach (Group group in GroupDict.Values)
                 group.OnLoad();
-        
+
             // Fix up names for settings tiles.
             foreach (Filter filter in FilterDict.Values)
             {
@@ -1072,7 +1062,7 @@ namespace Boku.Programming
                     m.name = m.upid.Substring(index + 1);
                 }
             }
-        
+
         }   // end of OnLoad()
 
         /// <summary>
@@ -1241,7 +1231,6 @@ namespace Boku.Programming
                 Cards.CacheCardFace(group.upid, group.icon, group.label, group.noLabelIcon);
             }
 
-
 #if GENERATE_TILE_MAP
             List<ProgrammingElement> pieces = new List<ProgrammingElement>();
             Cards.Pieces(CardType.All, pieces);
@@ -1270,12 +1259,9 @@ img { margin-left: 20px; margin-bottom: 20px; }
                 }
             }
 
-
             writer.WriteLine("</body>");
             writer.WriteLine("</html>");
             writer.Close();
-
-
 
             // TileGroups HTML
             writer = Storage4.OpenStreamWriter(@"tilemap\tilegroups.html", Encoding.UTF8);
@@ -1346,8 +1332,6 @@ p { page-break-before: always; }
             writer.Close();
 #endif
 
-
-
 #if PROGRAMMING_TILE_HACK2
             // Hack to create dictionary of all tiles.  Images are written out to cur directory.
             int page = 0;
@@ -1407,7 +1391,6 @@ p { page-break-before: always; }
             return sb.ToString();
         }
 
-
         private static string GetGroupPath(Group group)
         {
             string path = "";
@@ -1431,7 +1414,7 @@ p { page-break-before: always; }
             image.SaveAsPng(stream, image.Width, image.Height);
             url += Convert.ToBase64String(stream.ToArray(), Base64FormattingOptions.None);
             stream.Close();
-#else
+
             WriteTilePng(@"tilemap\images", item);
             string url = "images/" + item.upid + ".png";
             return url;
@@ -1550,7 +1533,6 @@ p { page-break-before: always; }
         }   // end of PageDump
 #endif
 
-
         /// <summary>
         /// Called to rebuild player cards once the gamer profiles are available.
         /// Profiles are _not_ available during CardSpace's InitDevResources, when the
@@ -1558,7 +1540,7 @@ p { page-break-before: always; }
         /// </summary>
         public static void ReCachePlayerCards()
         {
-            // This seems to work just fine as is.  This has to be causing all kinds of 
+            // This seems to work just fine as is.  This has to be causing all kinds of
             // extra processing that just seems like a huge waste of time.
             return;
             /*

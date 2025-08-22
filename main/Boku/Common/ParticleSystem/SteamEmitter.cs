@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,8 +16,8 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Boku.Common.ParticleSystem
 {
-    
-    // Emits "steam puffs" as a series of expanding, rotating 
+
+    // Emits "steam puffs" as a series of expanding, rotating
     // sprites which fade and grow as they age.
     public class SteamEmitter : BaseSpriteEmitter
     {

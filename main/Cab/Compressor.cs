@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-#if NETFX_CORE
     using Windows.Storage;
 #endif
 
@@ -16,19 +15,19 @@ namespace Cab
 {
     /// <summary>
     /// Creates a CAB archive.
-    /// 
+    ///
     /// Usage:
-    /// 
+    ///
     ///     Compressor comp = new Compressor();
     ///     comp.Create(@"C:\MyCabFiles", @"MyArchive.cab");
     ///     comp.AddFile(null, "personal.xml");
     ///     comp.AddFile(null, "virus.exe");
     ///     comp.Destroy();
-    ///     
+    ///
     ///  Limitations:
     ///     The underlying system component "cabinet.dll" does not support
     ///     multithreaded usage. We do nothing to improve on this.
-    ///     
+    ///
     /// </summary>
     public partial class Compressor
     {
@@ -51,196 +50,7 @@ namespace Cab
         {
         }
 
-#if !NETFX_CORE
-        public void Create(string filename) //ToDo(DZ): Is this enough implementation for the memory-only version?
-        {
-            erf = new Cabinet.ERF();
-            ccab = Cabinet.CCAB.Create();
-
-            ccab.cb = int.MaxValue;
-            ccab.cbFolderThresh = int.MaxValue;
-            ccab.setID = ++seq;
-
-            Array.Copy("".ToCharArray(), ccab.szCabPath, "".Length);
-            Array.Copy(filename.ToCharArray(), ccab.szCab, filename.Length);
-
-            handle = Cabinet.FCICreate(
-                ref erf,
-                FciFilePlacedDelegate,
-                FciAllocDelegate,
-                FciFreeDelegate,
-                FciOpenDelegate,
-                FciReadDelegate,
-                FciWriteDelegate,
-                FciCloseDelegate,
-                FciSeekDelegate,
-                FciDeleteDelegate,
-                FciGetTempFileDelegate,
-                ref ccab,
-                IntPtr.Zero);
-
-            if (handle == -1)
-            {
-                throw new Exception("Failed to create cabinet: " + filename);
-            }
-        }
-
-        /// <summary>
-        /// Creates and initializes the CAB file compressor.
-        /// </summary>
-        /// <param name="folder">Where to place the created CAB file. If null, current working directory is used.</param>
-        /// <param name="filename">The name of the CAB file including extension, but without path information.</param>
-        public void Create(string folder, string filename)
-        {
-            erf = new Cabinet.ERF();
-            ccab = Cabinet.CCAB.Create();
-
-            ccab.cb = int.MaxValue;
-            ccab.cbFolderThresh = int.MaxValue;
-            ccab.setID = ++seq;
-
-            // If folder is null, use the current working folder.
-            if (folder == null)
-                folder = Directory.GetCurrentDirectory();
-
-            folder = Path.GetFullPath(folder);
-
-            // Ensure the folder path ends with a backslash
-            if (!folder.EndsWith("" + Cabinet.DirectorySeparatorChar))
-                folder += Cabinet.DirectorySeparatorChar;
-
-            Array.Copy(folder.ToCharArray(), ccab.szCabPath, folder.Length);
-            Array.Copy(filename.ToCharArray(), ccab.szCab, filename.Length);
-
-            handle = Cabinet.FCICreate(
-                ref erf,
-                FciFilePlacedDelegate,
-                FciAllocDelegate,
-                FciFreeDelegate,
-                FciOpenDelegate,
-                FciReadDelegate,
-                FciWriteDelegate,
-                FciCloseDelegate,
-                FciSeekDelegate,
-                FciDeleteDelegate,
-                FciGetTempFileDelegate,
-                ref ccab,
-                IntPtr.Zero);
-
-            if (handle == -1)
-            {
-                throw new Exception("Failed to create cabinet: " + filename);
-            }
-        }
-
-        public void AddFile(string storedPath, string filename, bool compress) //ToDo(DZ): Is this enough implementation for the memory-only version?
-        {
-            ushort compressionType = compress ? (ushort)Cabinet.tcompTYPE_MSZIP : (ushort)Cabinet.tcompTYPE_NONE;
-
-            bool result = Cabinet.FCIAddFile(
-                handle,
-                filename,
-                storedPath,
-                0,
-                FciGetNextCabinetDelegate,
-                FciStatusDelegate,
-                FciGetOpenInfoDelegate,
-                compressionType);
-
-            if (!result)
-            {
-                throw new Exception("Failed to add file to cabinet: " + filename);
-            }
-        }
-
-        /// <summary>
-        /// Adds a file to the CAB.
-        /// </summary>
-        /// <param name="storedPath">The relative path where the file will be extracted by the decompressor.
-        /// If null, this path is derived from the path information in the next parameter.</param>
-        /// <param name="fullPathAndFilename">The full path to the file being added.</param>
-        /// <param name="compress">Whether or not to compress the file data.</param>
-        public void AddFile(string storedPath, string fullPathAndFilename, string filenameOverride, bool compress)
-        {
-            fullPathAndFilename = Path.GetFullPath(fullPathAndFilename);
-
-            // If stored path is null, generate it from the file being added.
-            if (storedPath == null)
-            {
-                storedPath = Path.GetDirectoryName(fullPathAndFilename);
-                string drive = Path.GetPathRoot(storedPath);
-                if (storedPath.StartsWith(drive))
-                    storedPath = storedPath.Substring(drive.Length);
-            }
-
-            // Make sure it ends with a backslash
-            if (!storedPath.EndsWith("" + Cabinet.DirectorySeparatorChar))
-                storedPath = storedPath + Cabinet.DirectorySeparatorChar;
-            // Make sure it doesn't start with a backslash
-            if (storedPath.StartsWith("" + Cabinet.DirectorySeparatorChar))
-                storedPath = storedPath.Substring(1);
-
-            // Build the stored filename with path.
-            string filenameInCab;
-            if (filenameOverride == null)
-                filenameInCab = storedPath + Path.GetFileName(fullPathAndFilename);
-            else
-                filenameInCab = storedPath + Path.GetFileName(filenameOverride);
-
-            ushort compressionType = compress ? (ushort)Cabinet.tcompTYPE_MSZIP : (ushort)Cabinet.tcompTYPE_NONE;
-
-            bool result = Cabinet.FCIAddFile(
-                handle,
-                fullPathAndFilename,
-                filenameInCab,
-                0,
-                FciGetNextCabinetDelegate,
-                FciStatusDelegate,
-                FciGetOpenInfoDelegate,
-                compressionType);
-
-            if (!result)
-            {
-                throw new Exception("Failed to add file to cabinet: " + fullPathAndFilename);
-            }
-        }
-
-        /// <summary>
-        /// Flush internal buffers in preparation for destruction.
-        /// </summary>
-        private void FlushCabinet()
-        {
-            bool result = Cabinet.FCIFlushCabinet(
-                handle,
-                0,
-                FciGetNextCabinetDelegate,
-                FciStatusDelegate);
-
-            if (!result)
-            {
-                throw new Exception("Failed to flush cabinet");
-            }
-        }
-
-        /// <summary>
-        /// Close the CAB file and destroy the compressor context.
-        /// </summary>
-        public void Destroy()
-        {
-            FlushCabinet();
-
-            bool result = Cabinet.FCIDestroy(handle);
-
-            handle = -1;
-
-            if (!result)
-            {
-                throw new Exception("Failed to destroy cab compressor");
-            }
-        }
-#endif
     }   // end of partial class Compressor
-
 
     partial class Compressor
     {
@@ -411,9 +221,6 @@ namespace Cab
             stream.Flush();
             stream.Dispose();
             stream = null;
-#else
-            stream.Close();
-#endif
 
             streams[hf] = null;
             filenames[hf] = null;
@@ -502,11 +309,6 @@ namespace Cab
             pattribs = Util.FileAttributesToDos(fa);
 
             DateTime ct = compressorHelper.GetLastWriteTimeUtc(filename);//File.GetLastWriteTimeUtc(filename);
-#if !NETFX_CORE
-            // This relies on a WIN32 api which makes WinRT very unhappy.
-            Util.DateTimeToDos(ct, out pdate, out ptime);
-#endif
-
             err = 0;
 
             return fh;

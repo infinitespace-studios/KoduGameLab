@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define OPEN_READ_DEBUG
 
 using System;
@@ -14,17 +13,10 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Storage;
 
-
 using System.Xml.Serialization;
-
-#if !NETFX_CORE
-    using System.Management;
-    using Microsoft.Win32;
-#endif
 
 #if CLIENT
 using Boku.Common.Sharing;
-using System.Windows.Forms;
 #endif
 
 namespace Boku.Common
@@ -43,10 +35,10 @@ namespace Boku.Common
     {
 #if END_OF__THE_WORLD
         #region constants
-        
+
         public const int kFileOperationRetryCount = 5;
         public const int kFileOperationRetryWaitMs = 50;
-        
+
         #endregion
 
         #region Members
@@ -70,7 +62,7 @@ namespace Boku.Common
         #endregion Members
 
         #region Accessors
-        
+
         /// <summary>
         /// Path where built in data (mostly .xml) lives.
         /// </summary>
@@ -106,8 +98,8 @@ namespace Boku.Common
         public static string UserOverride
         {
             get { return userOverride; }
-            set 
-            { 
+            set
+            {
                 userLocation = userOverride = value;
                 localEqualsUser = userLocation == userLocal;
             }
@@ -152,7 +144,6 @@ namespace Boku.Common
         }
 
         #endregion Accessors
-
 
         #region Sys Mgmt - Init and Shutdown and Update
         /// <summary>
@@ -229,7 +220,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns>True on success, false on failure.</returns>
         private static bool OpenContainer()
@@ -653,8 +644,6 @@ namespace Boku.Common
             }
 #endif
 
-
-
             Stream stream = null;
 
             int attempts = 0;
@@ -718,7 +707,7 @@ namespace Boku.Common
             {
 #if XBOX
                 // Do nothing?
-#else
+
                 throw new FileNotFoundException(String.Format("File not found in {0}: {1}", sources, name));
 #endif
             }
@@ -793,11 +782,11 @@ namespace Boku.Common
             {
 #if !Xbox
                 System.Windows.Forms.MessageBox.Show(
-                    "\nsource = " + source.ToString() 
-                    + "\nPathBase = " + PathBase(source) 
+                    "\nsource = " + source.ToString()
+                    + "\nPathBase = " + PathBase(source)
                     + "\n name = " + name,
                     "OpenWrite failure.",
-                    System.Windows.Forms.MessageBoxButtons.OK, 
+                    System.Windows.Forms.MessageBoxButtons.OK,
                     System.Windows.Forms.MessageBoxIcon.Asterisk);
 #endif
             }
@@ -963,7 +952,7 @@ namespace Boku.Common
             }
 
             return File.GetLastWriteTimeUtc(Combine(PathBase(StorageSource.TitleSpace), name));
-#else
+
             // Hm, how to implement correctly on Xbox...
             return new DateTime(0);
 #endif
@@ -986,7 +975,7 @@ namespace Boku.Common
             {
                 File.SetLastWriteTimeUtc(Combine(PathBase(StorageSource.TitleSpace), name), dateTimeUtc);
             }
-#else
+
             // Hm, how to implement on Xbox...
 #endif
         }
@@ -998,7 +987,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static bool Delete(string name)
         {
-            // Only bother checking in user space, 
+            // Only bother checking in user space,
             // because we can't delete out of title space anyway
             if (Initialized)
             {
@@ -1112,7 +1101,7 @@ namespace Boku.Common
 #if !XBOX360
         /// <summary>
         /// Find all files with given relative path and filter. Checks title space FIRST, then user.
-        /// Only option we ever use is SearchTopLevelOnly, which seems to be default behavior 
+        /// Only option we ever use is SearchTopLevelOnly, which seems to be default behavior
         /// anyway. Not supported on 360. Should be nuked?
         /// </summary>
         /// <param name="path"></param>
@@ -1146,19 +1135,16 @@ namespace Boku.Common
         }
 #endif // !XBOX360
 
-
         #endregion Generic Files
 
-
         #endregion Public Interfaces
-
 
         #region Path Helpers
         /// <summary>
         /// This helper exists because Path.Combine is so brain dead,
         /// if the second argument starts with a slash, it is returned
         /// as the full path. So Combine("c:\", "\foo.txt") returns "\foo.txt".
-        /// 
+        ///
         /// BUT don't do this if the second arg starts with a double slash.
         /// This happens in classroom settings where user storage is directed to a network share.
         /// </summary>
@@ -1360,8 +1346,7 @@ namespace Boku.Common
             MACAddress = MACAddress.GetHashCode().ToString();
 
             return MACAddress;
-        } 
-
+        }
 
     }   // end of class Storage
 
@@ -1400,6 +1385,5 @@ namespace Boku.Common
         }
 #endif  // END_OF_THE_WORLD
     }
-
 
 }

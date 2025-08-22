@@ -57,7 +57,6 @@ namespace Boku.Common
                 worldPath = BokuGame.DownloadsPath;
             }
 
-
             lock (Synch)
             {
                 for (int i = 0; i < allLevels.Count; ++i)
@@ -71,7 +70,7 @@ namespace Boku.Common
                         thumbFilename = Path.Combine(BokuGame.Settings.MediaPath, worldPath + worldId.ToString());
 
                         // Need to get the terrain file before we delete the main file.  BUT the terrain should be
-                        // deleted after, otherwise the usage test will find the main file and always thing that 
+                        // deleted after, otherwise the usage test will find the main file and always thing that
                         // the terrain file is in use.
                         string terrainFilename = null;
                         try

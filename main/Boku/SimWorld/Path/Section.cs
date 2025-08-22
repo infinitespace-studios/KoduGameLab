@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #define MF_AIRBORNE_THRU
 
 using System;
@@ -205,7 +204,7 @@ namespace Boku.SimWorld.Path
                             info.norm.Y = -sectionToWorld.M22;
                             info.norm.Z = 0.0f;
 
-                            // minus negative 
+                            // minus negative
                             info.depth = radius + collWidth + cen2sec.Y;
                         }
                         info.depth = Math.Max(info.depth, 0.0f);
@@ -226,7 +225,7 @@ namespace Boku.SimWorld.Path
             /// the section of road is a rectangle, so all tests become trivial because
             /// it's an axis aligned problem.
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="src"></param>
             /// <param name="dst"></param>
@@ -348,7 +347,7 @@ namespace Boku.SimWorld.Path
 
                 /// Now case c, piercing the side of the box.
                 /// This is the last chance for a hit.
-                /// 
+                ///
                 if (src2sec.Y < -collWidth)
                 {
                     if (dst2sec.Y > -collWidth)
@@ -564,7 +563,7 @@ namespace Boku.SimWorld.Path
             }
 
             /// <summary>
-            /// Construct self as much as can be done without assurance any neighbors 
+            /// Construct self as much as can be done without assurance any neighbors
             /// have been built.
             /// </summary>
             /// <returns></returns>
@@ -773,7 +772,7 @@ namespace Boku.SimWorld.Path
                 sectionToWorld.M42 = nodeCenter.Y;
 
                 // Align the section's X axis with the axis between the nodes.
-                // Apply no scaling, so computations based on length can still 
+                // Apply no scaling, so computations based on length can still
                 // be done using world space units.
 
                 Vector2 nodeAxis = Edge.Node1.Position2d - Edge.Node0.Position2d;

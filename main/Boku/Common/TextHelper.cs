@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1071,7 +1070,7 @@ namespace Boku.Common
         }   // end of InitButtonAliasDictionary()
 
         /// <summary>
-        /// Checks if the input alias string matches a control input (button/stick/trigger).  
+        /// Checks if the input alias string matches a control input (button/stick/trigger).
         /// If so that input is returned.  If not, ControlInputs.none is returned.
         /// If the alias string contains the angle brackets, these are stripped off.
         /// </summary>
@@ -1118,7 +1117,7 @@ namespace Boku.Common
         }   // end of MatchControlAlias()
 
         /// <summary>
-        /// Used by the ThoughtBalloons to allow icons and scores to 
+        /// Used by the ThoughtBalloons to allow icons and scores to
         /// be "said" by actors.
         /// </summary>
         /// <param name="text"></param>
@@ -1379,8 +1378,8 @@ namespace Boku.Common
         }   // end of GetStringSubstitution()
 
         /// <summary>
-        /// When 'say' is used with a tag in it, we don't want to display 
-        /// the tag in run mode so we use this to remove the tag before 
+        /// When 'say' is used with a tag in it, we don't want to display
+        /// the tag in run mode so we use this to remove the tag before
         /// displaying the text in a thought balloon.
         /// </summary>
         /// <param name="text"></param>
@@ -1442,7 +1441,6 @@ namespace Boku.Common
             }
             text = text.Substring(0, numChars - 1);
         }   // end of ClipStringToWidth()
-
 
         /// <summary>
         /// Split a long message into several lines.
@@ -1533,7 +1531,7 @@ namespace Boku.Common
                             Vector2 size = Font().MeasureString(tmp);
                             if (size.X > maxLineWidth)
                             {
-                                // Too long, so add str as it is and reset tmp 
+                                // Too long, so add str as it is and reset tmp
                                 // to just the one word that didn't fit.
                                 lines.Add(str);
                                 tmp = words[i];
@@ -1554,7 +1552,7 @@ namespace Boku.Common
                 }
             }
 
-            // If the final line ends in a \n then add an extra blank line.  
+            // If the final line ends in a \n then add an extra blank line.
             // This makes the layout and cursor positioning easier.
             if (preserveCharacterCount && (lines.Count == 0 || lines[lines.Count - 1].EndsWith("\n")))
             {
@@ -1565,7 +1563,6 @@ namespace Boku.Common
         static Char[] delimitersParagraphs = new Char[] { '\n' };
         static Char[] delimitersWord = new Char[] { ' ' };
 
-    
         /// <summary>
         /// Based on the justification, this calculate how far the text needs to be offset in X for rendering.
         /// </summary>
@@ -1679,7 +1676,7 @@ namespace Boku.Common
         /// <summary>
         /// Filters out any characters that aren't in the normal range we use for our fonts.
         /// See CharIsValid above for supported ranges.
-        /// If we find and invalid characters we replace them with 
+        /// If we find and invalid characters we replace them with
         /// a space unless we happen to know a better replacement.
         /// </summary>
         /// <param name="str"></param>
@@ -1735,7 +1732,7 @@ namespace Boku.Common
         }   // end FilterInvalidCharacters()
 
         /// <summary>
-        /// Same as SpriteBatch.DrawString() 
+        /// Same as SpriteBatch.DrawString()
         /// Always uses the UI2D.Shared spritebatch.
         /// Uses a static TextBlob to ensure bidi support for the text.
         /// </summary>
@@ -1825,7 +1822,6 @@ namespace Boku.Common
             // Draw the text on top of the shadow.
             TextHelper.DrawString(Font, text, new Vector2(x, y), textColor);
         }   // end of TextHelper DrawStringWithShadow()
-
 
         /// <summary>
         /// Truncates and adds "..." to the string if longer than maxSize.
@@ -1927,7 +1923,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// Looks for URLs in the imput string and replaces the characters of 
+        /// Looks for URLs in the imput string and replaces the characters of
         /// the URL with the replacement chartacter.
         /// </summary>
         /// <param name="str"></param>
@@ -1957,7 +1953,7 @@ namespace Boku.Common
         }   // end of FilterURLs()
 
         /// <summary>
-        /// Looks for email addresses in the imput string and replaces the characters of 
+        /// Looks for email addresses in the imput string and replaces the characters of
         /// the URL with the replacement chartacter.
         /// </summary>
         /// <param name="str"></param>

@@ -22,13 +22,12 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this selector will calculate a vector that provides movement based 
+    /// this selector will calculate a vector that provides movement based
     /// upon the input vector (from a stick) and the camera view vector.
     /// </summary>
     public class CameraRelativeSelector : Selector
     {
         private ActionSet movementSet = new ActionSet();
-
 
         [XmlAttribute]
         public float strength;
@@ -90,7 +89,7 @@ namespace Boku.Programming
 
             if (apply)
             {
-                if (reflex.Actuator != null && 
+                if (reflex.Actuator != null &&
                         (reflex.Actuator.category & Actuator.Category.Action) == Actuator.Category.Action)
                 {
                     // support it as action even it it supports direction also

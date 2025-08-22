@@ -49,7 +49,6 @@ namespace Boku.Web.Trans
         {
             progress.Message = "Sending your feedback...";
 
-
             Message_Instrumentation request = new Message_Instrumentation();
             request.UserName = GetUserName();
             request.Community = Program2.SiteOptions.Community;
@@ -131,7 +130,6 @@ namespace Boku.Web.Trans
 
             return result;
         }
-
 
         #endregion
     }

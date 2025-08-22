@@ -8,7 +8,6 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-
 namespace Boku.Animatics
 {
     internal class SkinDataReader : ContentTypeReader<SkinDataList>

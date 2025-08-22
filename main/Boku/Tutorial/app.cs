@@ -8,8 +8,8 @@ using System.Text;
 namespace Boku.Tutorial
 {
     /// <summary>
-    /// This singleton class wraps and exposes application information in a very easy 
-    /// Tutorial interface.  
+    /// This singleton class wraps and exposes application information in a very easy
+    /// Tutorial interface.
     /// </summary>
     public class App
     {
@@ -19,12 +19,12 @@ namespace Boku.Tutorial
         public static App Instance = new App();
 
         /// <summary>
-        /// This property returns a string that describes the current UI mode.  
-        /// All UI modes are unique.  These are defined by the CommandMap id; 
-        /// either from the dummy command map created in code or the command maps 
-        /// loaded from the input XML files.  In some cases due to different Input systems, 
-        /// it is required to call the Sim.UiMode to get the correct mode.  
-        /// 
+        /// This property returns a string that describes the current UI mode.
+        /// All UI modes are unique.  These are defined by the CommandMap id;
+        /// either from the dummy command map created in code or the command maps
+        /// loaded from the input XML files.  In some cases due to different Input systems,
+        /// it is required to call the Sim.UiMode to get the correct mode.
+        ///
         /// </summary>
         public string UiMode
         {

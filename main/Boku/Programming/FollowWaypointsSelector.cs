@@ -25,11 +25,11 @@ using Boku.SimWorld.Terra;
 namespace Boku.Programming
 {
     /// <summary>
-    /// It will interact with a Waypoint set and provide target positions for the actuator 
+    /// It will interact with a Waypoint set and provide target positions for the actuator
     /// based upon the state of following said Waypoint set.
-    /// 
-    /// this selector is known as �Path�, was �Follow�, and �Waypoints�.  
-    /// 
+    ///
+    /// this selector is known as �Path�, was �Follow�, and �Waypoints�.
+    ///
     /// </summary>
     public class FollowWaypointsSelector : Selector
     {
@@ -52,9 +52,9 @@ namespace Boku.Programming
                                         // current from number then we assume that an earlier reflex already
                                         // is moving along a path.
 
-            public GameActor parent;    // Owning GameActor.  Not actually needed or used but does 
+            public GameActor parent;    // Owning GameActor.  Not actually needed or used but does
                                         // make debugging a bit easier.
-            
+
             /// <summary>
             /// Owning GameActor.  Not actually needed or
             /// used but does make debugging a bit easier.
@@ -92,7 +92,7 @@ namespace Boku.Programming
             public WayPoint.Edge ActiveEdge
             {
                 get { return activeEdge; }
-                set 
+                set
                 {
                     if (value != activeEdge)
                     {
@@ -131,7 +131,7 @@ namespace Boku.Programming
             }
 
             /// <summary>
-            /// Does the current state reflect having a path that matches 
+            /// Does the current state reflect having a path that matches
             /// the input color?
             ///
             /// Note that looking for a path with color NotApplicable is valid
@@ -147,14 +147,13 @@ namespace Boku.Programming
 
         }   // end of class State
 
-
         private bool used = false;
 
         /// <summary>
         /// Whether to affect the altitude of the thing following the path.
         /// </summary>
         private bool controlZ = true;
-        
+
         [XmlAttribute]
         public float strength;
         [XmlAttribute]
@@ -258,7 +257,7 @@ namespace Boku.Programming
 
                 target = gameActor.followPathState.FollowTarget;
 
-                // If not controlling Z, we want movement to be 2D so set 
+                // If not controlling Z, we want movement to be 2D so set
                 // the target Z value to match the actor's current Z value.
                 if (!controlZ)
                 {
@@ -394,7 +393,7 @@ namespace Boku.Programming
                     else
                     {
                     }
-                    
+
                     gameActor.followPathState.ActiveNode = null;
                     gameActor.followPathState.CurrentNode = null;
                     gameActor.followPathState.FrameLastUpdated = Time.FrameCounter;

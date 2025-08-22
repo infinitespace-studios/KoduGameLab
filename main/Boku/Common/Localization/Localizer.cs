@@ -10,9 +10,7 @@ using System.Xml;
 using System.Diagnostics;
 using System.IO;
 
-#if NETFX_CORE
     using Windows.UI.Popups;
-#endif
 
 namespace Boku.Common.Localization
 {
@@ -105,7 +103,7 @@ namespace Boku.Common.Localization
             }
         }
 
-        public static Dictionary<string, List<string>> ReadToDictionary(string fileName, string testName) 
+        public static Dictionary<string, List<string>> ReadToDictionary(string fileName, string testName)
         {
             // DebugLog.WriteLine("ReadToDictionary1");
 
@@ -116,7 +114,7 @@ namespace Boku.Common.Localization
             if(dict == null)
             {
                 // DebugLog.WriteLine("    failed read, trying titlespace");
-                // If we're here the file read failed.  This seems to happen when the 
+                // If we're here the file read failed.  This seems to happen when the
                 // version downloaded from the server is bad.  So, delete the file
                 // so it gets downloaded again on next startup and then read the file
                 // from the TitleSpace.
@@ -124,7 +122,7 @@ namespace Boku.Common.Localization
                 dict = ReadToDictionary(fileName, 1, StorageSource.TitleSpace, testName);
             }
 
-            return dict; 
+            return dict;
         }
 
         public static Dictionary<string, List<string>> ReadToDictionary(string fileName, int startDepth, StorageSource source, string testName)
@@ -142,11 +140,7 @@ namespace Boku.Common.Localization
                 return result;
             }
 
-#if NETFX_CORE
             XmlReader reader = null;
-#else
-            XmlTextReader reader = null;
-#endif
             Stream stream = null;
 
             try
@@ -157,16 +151,11 @@ namespace Boku.Common.Localization
                 stream = Storage4.OpenRead(fileName, StorageSource.All);
 
                 // Create our xml reader
-#if NETFX_CORE
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.ConformanceLevel = ConformanceLevel.Fragment;
                 settings.IgnoreWhitespace = true;
                 settings.IgnoreComments = true;
                 reader = XmlReader.Create(stream, settings);
-#else
-                // DebugLog.WriteLine("    create reader");
-                reader = new XmlTextReader(stream);
-#endif
 
                 // DebugLog.WriteLine("    advance reader");
                 // Advance the reader to the specified start depth
@@ -269,17 +258,10 @@ namespace Boku.Common.Localization
                 result = null;
             }
 
-#if NETFX_CORE
             if(reader != null)
             {
                 reader.Dispose();
             }
-#else
-            if (reader != null)
-            {
-                reader.Close();
-            }
-#endif
             if (stream != null)
             {
                 stream.Close();
@@ -338,7 +320,7 @@ namespace Boku.Common.Localization
                     {
                         return;
                     }
-                    
+
                     reportWriter.WriteLine(fileName + " - Identical to " + DefaultLanguage + ": " + message);
                 }
                 catch (Exception e)
@@ -365,15 +347,7 @@ namespace Boku.Common.Localization
                         {
                         }
 
-#if NETFX_CORE
                         MessageDialog dialog = new MessageDialog("reportPath = " + reportPath + "\nLoadContent failure in Localizer.");
-#else
-                        System.Windows.Forms.MessageBox.Show(
-                            "reportPath = " + reportPath,
-                            "LoadContent failure in Localizer.",
-                            System.Windows.Forms.MessageBoxButtons.OK,
-                            System.Windows.Forms.MessageBoxIcon.Asterisk);
-#endif
                     }
                 }
             }
@@ -384,11 +358,7 @@ namespace Boku.Common.Localization
             if (reportWriter != null)
             {
                 reportWriter.Flush();
-#if NETFX_CORE
                 reportWriter.Dispose();
-#else
-                reportWriter.Close();
-#endif
                 reportWriter = null;
             }
 

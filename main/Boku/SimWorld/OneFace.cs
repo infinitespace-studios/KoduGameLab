@@ -165,7 +165,6 @@ namespace Boku.SimWorld
             BokuGame.Release(ref faceBrowsNormal);
             BokuGame.Release(ref faceBrowsDown);
 
-
             if (effectCache != null)
             {
                 effectCache.UnLoad();

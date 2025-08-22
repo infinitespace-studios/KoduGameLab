@@ -15,9 +15,9 @@ namespace Boku.Common.Gesture
     public class SwipeGestureRecognizer : GestureRecognizer
     {
         //IMPORTANT. FOR GESTURE TO WORK PROPERLY
-        //k_SwipeDeadZone < k_RefPointChangeThreshold < k_SwipeThreshold 
+        //k_SwipeDeadZone < k_RefPointChangeThreshold < k_SwipeThreshold
 
-        //DeadZone radius for the swipe detection.  
+        //DeadZone radius for the swipe detection.
         //When the distance from the ref position to the current position is greater than this then we can actually start direction detection.
         const float k_SwipeDeadZone = 15.0f;
 
@@ -26,14 +26,14 @@ namespace Boku.Common.Gesture
 
         //Minimum travel distance for gesture to validate.
         const float k_SwipeThreshold = 50.0f;
-        
-        //Time that 
+
+        //Time that
         const float k_IdleTimeout = 0.25f;
 
         /// <summary>
-        /// The gesture must follow the four cardinal directions of up/down, left/right. This value 
+        /// The gesture must follow the four cardinal directions of up/down, left/right. This value
         /// lets it deviate a bit from the horizontal or vertical directions.
-        /// Should be kept between 0 and 0.5f, where 0 means no tolerance and 0.5f means about 
+        /// Should be kept between 0 and 0.5f, where 0 means no tolerance and 0.5f means about
         /// 45 degrees of tolerance.
         /// </summary>
         const float k_MaxAveragedDeviationDOT = 0.2f;
@@ -50,7 +50,6 @@ namespace Boku.Common.Gesture
         /// this threshold, we're not a swipe.
         /// </summary>
         const float k_MinimumSpeed = 10.0f;
-
 
         /// <summary>
         /// The speed factor can be used as a gauge of how vigorously the user has swiped. It uses the actual
@@ -71,16 +70,13 @@ namespace Boku.Common.Gesture
         private List<Vector2> m_TouchDeltaList = new List<Vector2>();
         private Vector2 m_AverageVelocity = Vector2.Zero;
 
-
-
         //Swipe Touch Finger ID
         private int m_FingerID = -1;
         public bool IdentifiedFinger { get { return m_FingerID >= 0; } }
 
         private double m_DeadZoneIdleTime = 0;
-        
 
-        //This is the location to compare the current position to ensure we're still going in the right direction.  
+        //This is the location to compare the current position to ensure we're still going in the right direction.
         //It gets updated when the distance from ref to Current is greater than k_RefPointChangeThreshold.
         private Vector2 m_SwipeRefPosition = Vector2.Zero;
 
@@ -101,13 +97,11 @@ namespace Boku.Common.Gesture
             protected set { m_SwipeDirection = value; }
         }
 
-
-
         /// <summary>
         /// Check if the user completed a swipe gesture on *this* frame.
         /// </summary>
         public bool WasSwiped()
-        {            
+        {
             return (m_SwipeDirection != Directions.None) && wasRecognized;
         }
 
@@ -116,11 +110,10 @@ namespace Boku.Common.Gesture
             return 1;
         }
 
-
         protected override void OnTouchReleased(TouchContact[] touches)
         {
             TouchContact tc = (GetRequiredTouchCount() != touches.Length || m_FingerID < 0) ? null : TouchInput.GetTouchContactByFingerId( m_FingerID, touches );
-            
+
             bool bFailed = (null == tc);
             if( !bFailed )
             {
@@ -128,7 +121,7 @@ namespace Boku.Common.Gesture
                 bFailed |= (tc.position - tc.startPosition).LengthSquared() < (k_SwipeThreshold * k_SwipeThreshold);
                 bFailed |= m_SwipeDirection != GetSwipeDirection(Vector2.Normalize(m_AverageVelocity), k_MaxAddendDeviationDOT);
             }
-            
+
             if( bFailed )
             {
                 SetState(GestureState.Failed);
@@ -138,7 +131,6 @@ namespace Boku.Common.Gesture
                 ComputeSpeedFactor();
                 SetState(GestureState.Recognized);
             }
-
 
         }
 
@@ -153,7 +145,7 @@ namespace Boku.Common.Gesture
                 {
                     m_TouchDeltaList.Add(tc.deltaPosition);
                 }
-                
+
                 Vector2 refDeltaPos = tc.position - m_SwipeRefPosition;
                 float refLengthSqr = refDeltaPos.LengthSquared();
 
@@ -198,13 +190,13 @@ namespace Boku.Common.Gesture
                                 }
                             }
                         }
-                        
+
                     }
                 }
 
                 //If we're idling too long in dead zone, fail.
                 bFailed |= (Time.WallClockTotalSeconds - m_DeadZoneIdleTime > k_IdleTimeout);
-                
+
             }
 
             if( bFailed )
@@ -235,19 +227,17 @@ namespace Boku.Common.Gesture
             //Reset frame after was recognized.
             if( !wasRecognized )
             {
-                m_SpeedFactor = 0.0f; 
+                m_SpeedFactor = 0.0f;
                 m_SwipeDirection = Directions.None;
             }
-            
+
             m_AverageVelocity = Vector2.Zero;
             m_TouchDeltaList.Clear();
             m_FingerID = -1;
         }
 
-
-
          /// <summary>
-         /// Extract a swipe direction from a direction vector and a tolerance percent 
+         /// Extract a swipe direction from a direction vector and a tolerance percent
          /// </summary>
          /// <param name="dir">The non-constrained direction vector. Must be normalized.</param>
          /// <param name="tolerance">Percentage of tolerance</param>
@@ -256,22 +246,22 @@ namespace Boku.Common.Gesture
          {
              // Check for cardinal directions
              float minCardinalDot = MathHelper.Clamp((1.0f - tolerance), 0.0f, 1.0f);
- 
+
              if (Vector2.Dot(swipeDir, Vector2.UnitX) >= minCardinalDot)
                  return Directions.East;
- 
+
              if (Vector2.Dot(swipeDir, -Vector2.UnitX) >= minCardinalDot)
                  return Directions.West;
- 
+
              if (Vector2.Dot(swipeDir, Vector2.UnitY) >= minCardinalDot)
                  return Directions.South;
- 
+
              if (Vector2.Dot(swipeDir, -Vector2.UnitY) >= minCardinalDot)
                  return Directions.North;
- 
+
              // Check for intercardinal directions
              float minIntercardinalDot = MathHelper.Clamp((1.0f - 0.5f), 0.0f, 1.0f);
- 
+
              if (Vector2.Dot(swipeDir, Vector2.UnitX) >= minIntercardinalDot)
              {
                  if (Vector2.Dot(swipeDir, -Vector2.UnitY) >= minIntercardinalDot)
@@ -294,20 +284,20 @@ namespace Boku.Common.Gesture
                      return Directions.West | Directions.South;
                  }
              }
- 
+
              return Directions.None;
          }
 
          private void ComputeSpeedFactor()
          {
              float travelFactor = m_AverageVelocity.Length(); // how far along the screen the user has travelled
-             
+
              travelFactor /= (SwipeDirection == Directions.North || SwipeDirection == Directions.South) ? BokuGame.ScreenSize.Y : BokuGame.ScreenSize.X;
- 
+
              travelFactor = MathHelper.Clamp(travelFactor, MIN_TRAVEL_FACTOR, MAX_TRAVEL_FACTOR);
-             
+
              m_SpeedFactor = travelFactor / MAX_TRAVEL_FACTOR;
          }
-        
+
     }
 }

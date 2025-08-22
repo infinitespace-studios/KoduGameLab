@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -19,17 +18,17 @@ namespace Boku.Fx
 {
     /// <summary>
     /// 2D quad which lives in screen space.  Uses pixel coordinates.
-    /// Only one is ever created and is instanced as needed.  This is 
+    /// Only one is ever created and is instanced as needed.  This is
     /// set up to be used as a rectangle that is wider than it is tall
     /// and will map the texture on it such that there's no distortion
     /// at the ends and the texture is stretch across the cetner.
-    ///     
+    ///
     ///     |\  | \_    |\  |
     ///     | \ |   \_  | \ |
     ///     |  \|     \_|  \|
-    ///     
+    ///
     /// Acts like a just slightly more complicated version of ScreenSpaceQuad.
-    /// 
+    ///
     /// </summary>
     public class ScreenSpace3PanelQuad : INeedsDeviceReset
     {
@@ -361,8 +360,8 @@ namespace Boku.Fx
         }   // end of ScreenSpace3PanelQuad RenderStencil()
 
         /// <summary>
-        /// A specialized render call for rendering things like ratings where 
-        /// you want part of the quad rendered with one texture and the rest 
+        /// A specialized render call for rendering things like ratings where
+        /// you want part of the quad rendered with one texture and the rest
         /// of the quad rendered with another.
         /// </summary>
         /// <param name="leftTexture"></param>
@@ -395,7 +394,6 @@ namespace Boku.Fx
                 }
             }
         }   // end of RenderSplitTexture()
-
 
         public void LoadContent(bool immediate)
         {

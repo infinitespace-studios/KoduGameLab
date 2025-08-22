@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Boku.Common namespace
 
 using System;
@@ -56,7 +55,6 @@ namespace Boku.Fx
 
         }   // end of ThresholdFilter Render()
 
-
         public override void LoadContent(bool immediate)
         {
             // Init the effect.
@@ -71,6 +69,3 @@ namespace Boku.Fx
     }   // end of class ThresholdFilter
 
 }   // end of Boku.Common
-
-
-

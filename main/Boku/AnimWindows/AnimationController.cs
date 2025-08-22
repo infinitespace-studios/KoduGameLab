@@ -4,7 +4,7 @@
 /*
  * AnimationController.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -36,7 +36,7 @@ using System.IO;
 
 namespace Xclna.Xna.Animation
 {
-   
+
     /// <summary>
     /// Controls an animation by advancing it's time and affecting
     /// bone transforms
@@ -53,11 +53,11 @@ namespace Xclna.Xna.Animation
         // Multiplied by the time whenever the animation is advanced; determines
         // the playback speed of the animation
         private double speedFactor = 1.0;
-        
+
         // The elapsed time in the animation, can not be greater than the
         // animation duration
         private long elapsedTime = 0;
-        
+
         // Used as a buffer to store the total elapsed ticks every frame so that
         private long elapsed;
 
@@ -145,7 +145,7 @@ namespace Xclna.Xna.Animation
             set { weight = value; }
         }
 
-        #endregion 
+        #endregion
 
         #region Public
 
@@ -160,7 +160,7 @@ namespace Xclna.Xna.Animation
             AnimationInfo sourceAnimation) : base(game)
         {
             animation = sourceAnimation;
-            // This is set so that the controller updates before the 
+            // This is set so that the controller updates before the
             // ModelAnimator by default
             base.UpdateOrder = 0;
             if(game != null)
@@ -222,7 +222,6 @@ namespace Xclna.Xna.Animation
             }
         }
 
-
         /// <summary>
         /// Gets the current transform for the given BonePose object in the animation.
         /// This is only called when a bone pose is affected by the current animation.
@@ -237,7 +236,6 @@ namespace Xclna.Xna.Animation
             int boneIndex = channel.GetIndexByTime(elapsedTime);
             return channel[boneIndex].Transform;
         }
-
 
         /// <summary>
         /// Returns true if the animation contains a track for the given BonePose.
@@ -269,5 +267,3 @@ namespace Xclna.Xna.Animation
     }   // end of class AnimationController
 
 }   // end of namespace Xclna.Xna.Animation
-
-

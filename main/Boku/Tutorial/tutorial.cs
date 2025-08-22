@@ -14,18 +14,18 @@ namespace Boku.Tutorial
     public class Tutorial
     {
         /// <summary>
-        /// This member is the list of instructions to step through.  
-        /// The tutorial writer will create these and add them to the list.  
-        /// Currently today this is a flat list and not a graph; which has some 
-        /// limitations but with our goal to provide simple tutorials this is 
+        /// This member is the list of instructions to step through.
+        /// The tutorial writer will create these and add them to the list.
+        /// Currently today this is a flat list and not a graph; which has some
+        /// limitations but with our goal to provide simple tutorials this is
         /// not a big restriction.  See Class Instruction for more details.
         /// </summary>
         protected List<Instruction> instructions = new List<Instruction>();
         protected int indexActiveInstruction;
         /// <summary>
-        /// This member describes the active input constraint to apply to the input system.  
-        /// This allows the tutorial writer to focus and restrict the user to the set 
-        /// of actions the tutorial can handle and thus help limit the complexity of 
+        /// This member describes the active input constraint to apply to the input system.
+        /// This allows the tutorial writer to focus and restrict the user to the set
+        /// of actions the tutorial can handle and thus help limit the complexity of
         /// state handling to direct the user.  See Class InputConstraint for more details.
         /// </summary>
         protected Boku.Input.InputConstraint inputConstraint = new Boku.Input.InputConstraint();

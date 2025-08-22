@@ -41,7 +41,7 @@ namespace Boku.SimWorld.Path
         /// </summary>
         public virtual FBXModel Model
         {
-            get 
+            get
             {
                 if(model == null)
                     model = ActorManager.GetActor("Popsy").Model;
@@ -154,8 +154,8 @@ namespace Boku.SimWorld.Path
         /// <param name="second"></param>
         /// <returns></returns>
         public override bool NewFan(
-            Road.Intersection isect, 
-            Road.Section first, 
+            Road.Intersection isect,
+            Road.Section first,
             Road.Section second,
             List<Road.RenderObj> fans)
         {

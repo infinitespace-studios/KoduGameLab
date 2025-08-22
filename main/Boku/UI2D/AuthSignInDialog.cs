@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -106,26 +105,15 @@ namespace Boku.UI2D
                         // input like the SaveLevelDialog.
                         prevOnChar = KeyboardInput.OnChar;
                         prevOnKey = KeyboardInput.OnKey;
-#if !NETFX_CORE
-                        prevTextInput = BokuGame.bokuGame.winKeyboard.CharacterEntered;
-#endif
-
                         KeyboardInput.OnKey = KeyInput;
-#if NETFX_CORE
                         Debug.Assert(false, "Does this work?  Why did we prefer winKeyboard?");
                         KeyboardInput.OnChar = TextInput;
-#else
-                        BokuGame.bokuGame.winKeyboard.CharacterEntered = TextInput;
-#endif
                     }
                     else
                     {
                         // Restore keyboard event handlers.
                         KeyboardInput.OnKey = prevOnKey;
                         KeyboardInput.OnChar = prevOnChar;
-#if !NETFX_CORE
-                        BokuGame.bokuGame.winKeyboard.CharacterEntered = prevTextInput;
-#endif
                     }
 
                     active = value;
@@ -336,7 +324,7 @@ namespace Boku.UI2D
             if (!newUserMode)
             {
                 bool previouslySeenHash = true;     // TODO (v-chph) Put test here.  Note we should always return true for guest ( Auth.DefaultCreatorHash ) without having to ping the server.
-                
+
                 if (previouslySeenHash)
                 {
                     // We've seen this name before.
@@ -436,7 +424,7 @@ namespace Boku.UI2D
                 pos.Y += verticalBoxSpacing;
                 blob.RawText = pinString;
                 blob.RenderWithButtons(pos, Color.White);
-                
+
                 // Text boxes.
                 // Creator.
                 creatorBlob.Justification = UIGridElement.Justification.Left;

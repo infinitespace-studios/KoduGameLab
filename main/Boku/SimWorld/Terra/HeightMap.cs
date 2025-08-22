@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -19,15 +18,15 @@ using Boku.Common;
 namespace Boku.SimWorld.Terra
 {
     /// <summary>
-    /// Class to load & manipulate height maps.  Height maps are a 2d array of 
-    /// 16 bit unsigned ints.  For this we'll assume that middle grey, ie 32767 
+    /// Class to load & manipulate height maps.  Height maps are a 2d array of
+    /// 16 bit unsigned ints.  For this we'll assume that middle grey, ie 32767
     /// is the water line and the public interfaces will return this as altitude 0.
     /// </summary>
     public class HeightMap
     {
         private string filename = null;
         private Point size;         // Size of 2d array.
-        private Vector3 scale;      // Scale in world units.  The height map is initially assumed to 
+        private Vector3 scale;      // Scale in world units.  The height map is initially assumed to
                                     // extend in the range [0, 1] in the X and Y directions and [0, 1] along
                                     // the Z axis.  This scale factor fits it into world coordinates.
         private UInt16[,] grid;
@@ -110,11 +109,7 @@ namespace Boku.SimWorld.Terra
 
             Load(br);
 
-#if NETFX_CORE
             br.Dispose();
-#else
-            br.Close();
-#endif
             Storage4.Close(fs);
 
         }   // end of HeightMap c'tor
@@ -130,12 +125,8 @@ namespace Boku.SimWorld.Terra
 
             Save(bw);
 
-#if NETFX_CORE
             bw.Flush();
             bw.Dispose();
-#else
-            bw.Close();
-#endif
             Storage4.Close(fs);
         }   // end of HeightMap Save()
 
@@ -224,7 +215,6 @@ namespace Boku.SimWorld.Terra
             return result;
         }   // end of HeightMap GetHeight()
 
-
         public float GetHeight(Vector3 position)
         {
             Vector2 pos = new Vector2(position.X, position.Y);
@@ -290,7 +280,6 @@ namespace Boku.SimWorld.Terra
             return GetNormal(new Vector2(position.X, position.Y));
         }   // end of HeightMap GetNormal()
 
-
         /// <summary>
         /// Set the height of a particular vertex in the heightmap.  If
         /// the i,j position is out of range the input is ignored.
@@ -312,7 +301,6 @@ namespace Boku.SimWorld.Terra
             grid[i, j] = (UInt16)((float)0xffff * height);
         }   // end of HeightMap SetHeight()
 
-
         /// <summary>
         /// Intersects a ray with the height map.
         /// </summary>
@@ -330,7 +318,7 @@ namespace Boku.SimWorld.Terra
 
             if (hit && boxDistance < maxDistance)
             {
-                // We hit the box surrounding the height map,  
+                // We hit the box surrounding the height map,
                 // now we have to test agianst the data itself.
 
                 // Handle the degenerate case where the ray is straight up or down.
@@ -340,8 +328,8 @@ namespace Boku.SimWorld.Terra
                     float height = GetHeight(localRayPos);
                     float distance = (height - ray.Position.Z) * ray.Direction.Z;
                     hitPoint = new Vector3(
-                        ray.Position.X + box.Min.X, 
-                        ray.Position.Y + box.Min.Y, 
+                        ray.Position.X + box.Min.X,
+                        ray.Position.Y + box.Min.Y,
                         height);
                     return distance > 0.0f;
                 }
@@ -357,8 +345,8 @@ namespace Boku.SimWorld.Terra
                 }
 
                 // Convert the ray to a coordinate system such that
-                // the height map samples are exactly 1 unit apart.  This 
-                // gives us a fixed interger grid to iterate across. 
+                // the height map samples are exactly 1 unit apart.  This
+                // gives us a fixed interger grid to iterate across.
                 Vector3 rayEnd = ray.Position + ray.Direction * (maxDistance - boxDistance);
                 ray.Position = WorldToMap(ray.Position);
                 ray.Direction = WorldToMapDir(ray.Direction);
@@ -378,7 +366,7 @@ namespace Boku.SimWorld.Terra
 
                 bool dominantX = Math.Abs(ray.Direction.X) > Math.Abs(ray.Direction.Y);
 
-                // Keep track of how far the ray has travelled so we can 
+                // Keep track of how far the ray has travelled so we can
                 // bail early if we haven't hit anything by the time we've
                 // gone maxDistance units.
                 float distancePerStep = 0.0f;   // This is the distance that the ray travels for each step in the dominant direction.
@@ -407,7 +395,7 @@ namespace Boku.SimWorld.Terra
                                 return true;
                             }
 
-                            // We need to determine whether the next step is in the 
+                            // We need to determine whether the next step is in the
                             // X direction or Y.  See if Y will over/under flow next step.
                             // If so, step in Y direction first.
                             float tmpY = errorY + ray.Direction.Y * frac;
@@ -469,7 +457,7 @@ namespace Boku.SimWorld.Terra
                                 return true;
                             }
 
-                            // We need to determine whether the next step is in the 
+                            // We need to determine whether the next step is in the
                             // X direction or Y.  See if Y will over/under flow next step.
                             // If so, step in Y direction first.
                             float tmpY = errorY + ray.Direction.Y * frac;
@@ -541,7 +529,7 @@ namespace Boku.SimWorld.Terra
                                 return true;
                             }
 
-                            // We need to determine whether the next step is in the 
+                            // We need to determine whether the next step is in the
                             // X direction or Y.  See if X will over/under flow next step.
                             // If so, step in X direction first.
                             float tmpX = errorX + ray.Direction.X * frac;
@@ -603,7 +591,7 @@ namespace Boku.SimWorld.Terra
                                 return true;
                             }
 
-                            // We need to determine whether the next step is in the 
+                            // We need to determine whether the next step is in the
                             // X direction or Y.  See if X will over/under flow next step.
                             // If so, step in X direction first.
                             float tmpX = errorX + ray.Direction.X * frac;
@@ -657,7 +645,6 @@ namespace Boku.SimWorld.Terra
 
             return false;
         }   // end of HeightMap Intersect()
-
 
         private Vector3 MapToWorld(Vector3 pos)
         {

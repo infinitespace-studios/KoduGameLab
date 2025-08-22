@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -41,7 +40,6 @@ namespace Boku
             {
             }   // end of EditHeightMapUpdateObj c'tor
 
-
             /// <summary>
             /// EditHeightMapUpdateObj Update()
             /// </summary>
@@ -71,7 +69,7 @@ namespace Boku
                     }
 
                     /// Debounce. Make sure the button press that brought
-                    /// us up is released before using it to make changes. 
+                    /// us up is released before using it to make changes.
                     if (starting)
                     {
                         if (pad.ButtonY.IsPressed
@@ -88,9 +86,9 @@ namespace Boku
                     if (pad.ButtonY.IsPressed)
                     {
                         InGame.inGame.terrain.RenderToHeightMap(
-                            shared.editBrushIndex, 
-                            shared.editBrushPosition, 
-                            shared.editBrushRadius, 
+                            shared.editBrushIndex,
+                            shared.editBrushPosition,
+                            shared.editBrushRadius,
                             0 + modeShift);
                         shared.heightMapModified = true;
                         InGame.inGame.IsLevelDirty = true;
@@ -100,9 +98,9 @@ namespace Boku
                     if (pad.ButtonX.IsPressed)
                     {
                         InGame.inGame.terrain.RenderToHeightMap(
-                            shared.editBrushIndex, 
-                            shared.editBrushPosition, 
-                            shared.editBrushRadius, 
+                            shared.editBrushIndex,
+                            shared.editBrushPosition,
+                            shared.editBrushRadius,
                             2 + modeShift);
                         shared.heightMapModified = true;
                         InGame.inGame.IsLevelDirty = true;
@@ -112,8 +110,8 @@ namespace Boku
                     if (pad.ButtonA.IsPressed)
                     {
                         InGame.inGame.terrain.RenderToHeightMap(
-                            shared.editBrushIndex, 
-                            shared.editBrushPosition, 
+                            shared.editBrushIndex,
+                            shared.editBrushPosition,
                             shared.editBrushRadius, 1 + modeShift);
                         shared.heightMapModified = true;
                         InGame.inGame.IsLevelDirty = true;
@@ -135,10 +133,6 @@ namespace Boku
 
         }   // end of class EditHeightMapUpdateObj
 
-
-
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

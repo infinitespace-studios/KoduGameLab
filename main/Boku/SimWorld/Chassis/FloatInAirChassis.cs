@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,7 +42,7 @@ namespace Boku.SimWorld.Chassis
         //
         // TODO (****)
         // These speed and acceleration limits are a bit arbitrary.
-        // Should we use actor.CalcMaxVerticalSpeed() and 
+        // Should we use actor.CalcMaxVerticalSpeed() and
         // actor.CalcMaxVewrticalAcceleration() instead?
         //
 
@@ -51,7 +50,7 @@ namespace Boku.SimWorld.Chassis
         private float maxVerticalAcceleration = DefaultMaxVerticalAcceleration; // How fast can we accelerate up and down.
         private float verticalSpeedMultiplier = DefaultVerticalSpeedMultiplier; // Multiplier controller by Quickly and Slowly tiles.
 
-        #endregion 
+        #endregion
 
         #region Accessors
 
@@ -144,9 +143,9 @@ namespace Boku.SimWorld.Chassis
 
             if (state == GameActor.State.Active)
             {
-                // Init the target Altitude.  This should only happen the very first time 
-                // after a reset.  We want to use the bot's initial height as the original 
-                // target height but at the time the c'tor is called we don't yet know 
+                // Init the target Altitude.  This should only happen the very first time
+                // after a reset.  We want to use the bot's initial height as the original
+                // target height but at the time the c'tor is called we don't yet know
                 // where the bot will be positioned.
                 if (startingAltitude == DefaultStartingAltitude)
                 {
@@ -272,7 +271,7 @@ namespace Boku.SimWorld.Chassis
             float leftWeight = 0.0f;
             float rightWeight = 0.0f;
 
-            // Blend animations based only on relationship between 
+            // Blend animations based only on relationship between
             // actual facing direction and desired heading.  This
             // ignores current speed or rotation rate.
             if (desiredMovement.DesiredVelocity.HasValue || desiredMovement.DesiredTargetLocation.HasValue)

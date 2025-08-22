@@ -78,7 +78,6 @@ namespace Boku.Audio
 
         #endregion Public
 
-
         #region Internal
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace Boku.Audio
         internal override void AddToLookup(Dictionary<string, Voice> lookup)
         {
             base.AddToLookup(lookup);
-            
+
             bool anySpatial = false;
             for (int i = 0; i < children.Count; ++i)
             {
@@ -132,7 +131,6 @@ namespace Boku.Audio
             }
             Spatial = anySpatial;
         }
-
 
         /// <summary>
         /// True if the given emitter is playing our sound (or a descendent's sound).

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,19 +14,19 @@ namespace Boku.Common
 {
     /// <summary>
     /// 2D camera class designed to work with the Sprite class.
-    /// 
+    ///
     /// Works in coordinate space Sprites work in:
     ///     unit is pixels
     ///     X is to the right
     ///     Y is down
     ///     Z (such as it is) is into the screen
-    ///     
+    ///
     ///     Hence, positive rotation is clockwise.  Note that rotating the camera clockwise
     ///     makes it appear like everything being rendered is rotating counter-clockwise.
-    /// 
+    ///
     ///     Position is at center of screen.
     ///     Size is ScreenSize / Zoom
-    ///     
+    ///
     ///     Zoom defaults to 1 (1:1 pixels)
     ///     Zoom > 1 is zoomed in.
     ///     Zoom < 1 is zoomed out.
@@ -222,7 +221,7 @@ namespace Boku.Common
         public void Update()
         {
             Vector2 updateScreenSize = screenSize;
-            // TODO (****) Should be this ClientSize or ViewportSize?  
+            // TODO (****) Should be this ClientSize or ViewportSize?
             // How about BokuGame.ScreenSize?
             // When does it make a difference?  Figure this out and document.
             updateScreenSize = BokuGame.ScreenSize;
@@ -232,7 +231,7 @@ namespace Boku.Common
 
         public void Update(Vector2 updateScreenSize)
         {
-            // TODO (****) Should be this ClientSize or VeiwportSize?  When does it make 
+            // TODO (****) Should be this ClientSize or VeiwportSize?  When does it make
             // a difference?  Figure this out and document.
             //screenSize.X = KoiLibrary.ClientSize.X;
             //screenSize.Y = KoiLibrary.ClientSize.Y;
@@ -253,7 +252,7 @@ namespace Boku.Common
             mat.M42 = -position.Y * cos * zoom - -position.X * sin * zoom;
 
             /*
-            view = Matrix.CreateTranslation(new Vector3(-position, 0)) 
+            view = Matrix.CreateTranslation(new Vector3(-position, 0))
                     * Matrix.CreateRotationZ(-rotation)
                     * Matrix.CreateScale(new Vector3(zoom, zoom, 1))
                     * Matrix.CreateTranslation(new Vector3(screenSize / 2.0f, 0));      // Put 0,0 at center of screen.
@@ -352,9 +351,9 @@ namespace Boku.Common
                 return Frustum.CullResult.TotallyOutside;
             }
 
-            // TODO (****) Note this is not full correct.  You can still have a 
+            // TODO (****) Note this is not full correct.  You can still have a
             // rect which is oriented diagonally with all its vertices off screen
-            // but overlapping a corner of the screen.  A proper, general solution 
+            // but overlapping a corner of the screen.  A proper, general solution
             // would probably be to do the fully inside test and then test each
             // line segment of the rect vs each edge of the screen.  Bit too much
             // overkill for now.

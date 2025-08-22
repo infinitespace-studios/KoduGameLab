@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -38,8 +37,6 @@ using Boku.Audio;
     Try using the shim and pie menu from InGameEditObjectAddItem.  It should be (or could be) made publically accessible.
 
 #endif
-
-
 
 namespace Boku
 {
@@ -122,7 +119,7 @@ namespace Boku
                     return;
                 }
 
-                // If we're just setting the camera's position 
+                // If we're just setting the camera's position
                 // rather than actually editing the world.
                 if (EditWorldParameters.CameraSetMode)
                 {
@@ -156,7 +153,6 @@ namespace Boku
                 {
                     // Not in set camera mode, so do normal stuff.
 
-
                     // Are any of the overlay/popup elements active?
                     bool stuffActive = toolBox.PickersActive
                                         || toolBox.SlidersActive
@@ -182,7 +178,6 @@ namespace Boku
                             HelpOverlay.Push("MouseEditBase");
                         }
                     }
-
 
                     bool newToolSelected = false;
 
@@ -313,7 +308,6 @@ namespace Boku
                     // but it still has to update the pickers.
                     toolBox.Update(toolBar.Hovering);
 
-
                     // Ignore mini-hub and run commands if the pie menu is active
                     if (!(toolBar.CurrentMode == ToolMode.EditObject && inGame.editObjectUpdateObj.newItemSelectorShim.State == UIShim.States.Active))
                     {
@@ -345,7 +339,6 @@ namespace Boku
                     }
                 }
 
-
                 // Update the camera.
                 UpdateCamera();
 
@@ -358,7 +351,6 @@ namespace Boku
                 // TODO (****) Not sure this is 100% the right place for this.
                 ToolTipManager.Update();
                 ThoughtBalloonManager.Update(inGame.shared.camera);
-
 
             }   // end of Update()
 
@@ -376,7 +368,7 @@ namespace Boku
                     // Prime the pump for toolBar rendering.
                     toolBar.Update();
 
-                    // No need for a tool icon in the upper left since they're always 
+                    // No need for a tool icon in the upper left since they're always
                     // visible at the bottom of the screen.  Use this for something else?
                     HelpOverlay.ToolIcon = null;
 
@@ -432,7 +424,6 @@ namespace Boku
                 }
             }   // end of Deactivate()
 
-
             #endregion
 
             #region Internal
@@ -448,7 +439,6 @@ namespace Boku
                 Vector3 lookFrom = parent.Camera.From;
 
                 Vector2 position = new Vector2(shared.CursorPosition.X, shared.CursorPosition.Y);
-
 
                 //allow camera movement in all modes except edit object (or when no object is selected)
                 if ((toolBar.CurrentMode != ToolMode.EditObject || parent.TouchEdit.HighLit==null))
@@ -467,7 +457,7 @@ namespace Boku
 
                     //Note: the above may affect camera desired At - don't use the cursor position until they finish
                     position = new Vector2(parent.Camera.DesiredAt.X, parent.Camera.DesiredAt.Y);
-                    position = parent.TouchEdit.DoCursor(parent.Camera, position);              
+                    position = parent.TouchEdit.DoCursor(parent.Camera, position);
                 }
 
                 Vector3 worldCenter = (Terrain.Max + Terrain.Min) * 0.5f;
@@ -482,7 +472,7 @@ namespace Boku
                 position.Y = MathHelper.Clamp(position.Y, min.Y, max.Y);
 
                 //set the z height to zero so the camera doesn't jump when we switch camera modes
-                shared.CursorPosition = new Vector3(position.X, position.Y, 0.0f); 
+                shared.CursorPosition = new Vector3(position.X, position.Y, 0.0f);
 
                 // Keep the camera from going into the ground.
                 shared.KeepCameraAboveGround();

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +37,7 @@ namespace Boku
         {
             lock (filename)
             {
-                
+
                 try
                 {
                     string dirPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), @"SavedGames\Boku\Player1");

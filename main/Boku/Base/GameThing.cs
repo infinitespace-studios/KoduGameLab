@@ -45,8 +45,8 @@ namespace Boku.Base
             InlineTask,
             PreviousLevel,  //launch the previous level as defined in world parameters
             NextLevel,  // launch the next level as defined in world parameters
-            WaterRaise,  
-            WaterLower,  
+            WaterRaise,
+            WaterLower,
             SetWater,
             Reset,
             Stun,       // temporary effect
@@ -114,7 +114,6 @@ namespace Boku.Base
             SIZEOF
         }
 
-
         /// <summary>
         /// For backward compatibility with the depricated verb arbitrator system's behavior.
         /// This controls verb arbitration.
@@ -179,7 +178,7 @@ namespace Boku.Base
         protected bool firstPerson = false;
         protected bool visible = true;              // Is this thing visible, ie being rendered?
 
-        private GameActor actorHoldingThis = null;   // The actor (if any) currently holding this.  
+        private GameActor actorHoldingThis = null;   // The actor (if any) currently holding this.
                                                     // Change via the accessor only, not directly.
         private GameThing thingBeingHeldByThisActor = null; // The thing (if any) being held by this actor.
 
@@ -204,25 +203,25 @@ namespace Boku.Base
         /// actuators to be able to fire multiple times per frame EXCEPT on the same target.
         /// So, we keep a list of the targets which have had their color changed and the frame
         /// number when that change happened.
-        /// 
+        ///
         /// We don't want to allow multiple applications on the same target because of kode like this:
-        /// 
+        ///
         /// WHEN DO Color Me Red
         /// WHEN DO Color Me Blue
-        /// 
+        ///
         /// In this case, only the first line should ever get applied.  But if I have:
         ///
         /// WHEN See Kodu DO Color It Red
         /// WHEN See Rock DO Color It Blue
-        /// 
+        ///
         /// I want both to run.
-        /// 
+        ///
         /// Additionally there's an issue with changing a characters color multiple times per
         /// frame.  Because of the way the Twitch system works, if you continuously change the
-        /// color of a character it will appear to never change.  What is happening is that the 
+        /// color of a character it will appear to never change.  What is happening is that the
         /// new twitches always start with the existing color.  If a new twitch is created every
         /// frame or multiple times per frame then the color is never moved from it's starting value.
-        /// 
+        ///
         /// These need to be 'protected' since DoGlow is on GameActor which DoColor is on GameThing.
         /// No clue why.
         /// </summary>
@@ -231,7 +230,7 @@ namespace Boku.Base
         protected List<GameThing> GlowTargetList = new List<GameThing>();
         protected int GlowTargetListFrame = -1;
         /// <summary>
-        /// Apply same pattern as above to Open/Close verbs.  We only want one command 
+        /// Apply same pattern as above to Open/Close verbs.  We only want one command
         /// to be applied per target, per frame.
         /// </summary>
         protected List<GameThing> OpenCloseTargetList = new List<GameThing>();
@@ -243,7 +242,7 @@ namespace Boku.Base
         // important since this can be used to hack around a varieity of changes.
         //
         // The first use is a good example of how to use this.  Originally props (coin, star, heart, ammo)
-        // appeared with a fixed rotation rate.  This could not be changed or reversed.  Also, 
+        // appeared with a fixed rotation rate.  This could not be changed or reversed.  Also,
         // the starting rotation could not be set in the editor.  For version >= 1 we now allow
         // the "Turn" verb to be programmed on these objects and no default turning is enabled.
         //
@@ -354,7 +353,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// This is the minimum height of the object.  An object at 
+        /// This is the minimum height of the object.  An object at
         /// this height should appear to be sitting on the ground.
         /// </summary>
         public virtual float MinHeight
@@ -396,7 +395,6 @@ namespace Boku.Base
         {
             get { return 0.1f; }
         }
-
 
         /// <summary>
         /// Whether this bot stays above water or can fly down into it.
@@ -459,7 +457,7 @@ namespace Boku.Base
         public BaseChassis Chassis
         {
             get { return chassis; }
-            set 
+            set
             {
                 if (chassis != value)
                 {
@@ -467,7 +465,7 @@ namespace Boku.Base
                     {
                         chassis.Bind(null);
                     }
-                    
+
                     Debug.Assert(value != null, "Obviously assuming a non-null value being set");
 
                     chassis = value;
@@ -518,7 +516,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Get the "active" classification for this thing.  
+        /// Get the "active" classification for this thing.
         /// Warning, this can mess up.  For instance, if you set the color
         /// on this before revealing, the color won't carry over.
         /// </summary>
@@ -597,7 +595,7 @@ namespace Boku.Base
         /// </summary>
         public Vector3 WorldCollisionCenter
         {
-            get 
+            get
             {
                 GameActor actor = this as GameActor;
                 if(actor == null)
@@ -700,7 +698,6 @@ namespace Boku.Base
 
         #endregion
 
-
         public GameThing(
             string classificationName,
             BaseChassis chassis)
@@ -749,7 +746,7 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Notification this thing is about to be put into the scene. 
+        /// Notification this thing is about to be put into the scene.
         /// If that's okay, return true
         /// else false and the addition will be aborted.
         /// </summary>
@@ -768,7 +765,7 @@ namespace Boku.Base
         protected virtual void Register()
         {
             // TODO (****) We should only be registering objects that are currently moving.
-            // Non-moving objects don't need their chassis ticked every frame. 
+            // Non-moving objects don't need their chassis ticked every frame.
             InGame.inGame.RegisterChassis(this);
         }
 
@@ -821,8 +818,8 @@ namespace Boku.Base
         }
 
         /// <summary>
-        /// Returns the altitude (absolute Z position) for this object 
-        /// when in edit mode.  For some bots (boats) this should be 
+        /// Returns the altitude (absolute Z position) for this object
+        /// when in edit mode.  For some bots (boats) this should be
         /// overridden to also take into account the water level.
         /// </summary>
         public virtual float GetPreferredAltitude()
@@ -1087,7 +1084,7 @@ namespace Boku.Base
 
         #region Verb Handlers (and supporting functions)
 
-        private void ShowFailedLinkDialog(string messageKey)        
+        private void ShowFailedLinkDialog(string messageKey)
         {
             //show a warning - the level is missing
             ModularMessageDialog.ButtonHandler errorHandlerA = delegate(ModularMessageDialog dialog)
@@ -1168,16 +1165,16 @@ namespace Boku.Base
         ///     we need to give the user the opportunity to save it since
         ///     it will be replaced.  If the user chooses to save it then
         ///     we need to be sure to save the start state of the level
-        ///     and not it's current state since actors may have been 
+        ///     and not it's current state since actors may have been
         ///     created or destroyed during the run.  After the save we
         ///     can then load and run the linked level.
-        ///     
+        ///
         /// TODO (****) Currently, on failure this leave the game in
-        /// RunSim mode but all GameThings have been paused so we're 
+        /// RunSim mode but all GameThings have been paused so we're
         /// kind of stuck.  It's not a huge problem but it's also not
         /// very clean.  A return to edit mode might be better.
-        /// 
-        /// TODO (****) This really doens't seem like it should be a 
+        ///
+        /// TODO (****) This really doens't seem like it should be a
         /// method on GameThing.  Think about refactoring it.
         /// </summary>
         /// <returns></returns>
@@ -1191,7 +1188,6 @@ namespace Boku.Base
             //Kill all say dialog
             InGame.inGame.shared.smallTextDisplay.Deactivate();
             InGame.inGame.shared.scrollableTextDisplay.Deactivate();
-
 
             GamePadInput.ClearAllWasPressedState();
             GamePadInput.IgnoreAllUntilReleased();
@@ -1208,11 +1204,11 @@ namespace Boku.Base
             }
             else
             {
-                targetLevel = new Guid(effector.Reflex.Data.ParamString);               
+                targetLevel = new Guid(effector.Reflex.Data.ParamString);
             }
 
-            if (InGame.XmlWorldData!=null && 
-                targetLevel != null && 
+            if (InGame.XmlWorldData!=null &&
+                targetLevel != null &&
                 !BokuGame.bokuGame.loadLevelMenu.LoadingFromString)
             {
                 //check if the level hasn't been saved
@@ -1254,7 +1250,7 @@ namespace Boku.Base
 
                     return true;
                 }
-                
+
                 // Level is up to date - try to skip to next level.
                 // This is the normal, success path.
                 if (BokuGame.bokuGame.loadLevelMenu.SkipToLevel((Guid)InGame.XmlWorldData.LinkedToLevel, (BokuShared.Genres)InGame.XmlWorldData.genres))
@@ -1543,7 +1539,7 @@ namespace Boku.Base
             score.Value = pointsTotal;
 
             // This is a bit of a hack to force a default value of 1 for scores
-            // where the user has programmed something like DO Score+ Red 
+            // where the user has programmed something like DO Score+ Red
             // without giving any info about how many points they want to add.
             // While 0 seems like a more CS oriented default, for younger kids
             // having this default to 1 makes learning about scores easier.
@@ -1622,7 +1618,7 @@ namespace Boku.Base
             GameThing targetThing = (effector.GameThing != null) ? effector.GameThing : effector.Reflex.Task.GameActor;
             GameActor actor = effector.Reflex.Task.GameActor;   // Actor who's scores we want to affect.
             CalculatedScore score = CalculateModifierScore(effector.Reflex, true, scalar == 0 ? 1 : 0);
-            
+
             // If no target was set, default to Red.
             if (score.TargetBucket == ScoreBucket.NotApplicable && score.TargetSettingName == null)
             {
@@ -1830,7 +1826,7 @@ namespace Boku.Base
                         }
 
                     }
-                    
+
                     // Display the line we picked.
                     // Create the thought balloon.  If ignored, roll back the line we're on.
                     if (!ThoughtBalloonManager.CreateThoughtBalloon(this, line, borderColor))
@@ -1948,7 +1944,7 @@ namespace Boku.Base
 
         /// <summary>
         /// temporary effect
-        /// If override, call this base first then modify state as Reset may do that also 
+        /// If override, call this base first then modify state as Reset may do that also
         /// </summary>
         /// <returns></returns>
         protected virtual bool DoStun(BaseAction effector, bool quiet, GameThing executor)
@@ -1981,7 +1977,6 @@ namespace Boku.Base
 
             return supports;
         }
-
 
         /// <summary>
         /// Permanent effect, leave a carcass
@@ -2150,7 +2145,7 @@ namespace Boku.Base
             if (Invulnerable && executor != this)
                 return false;
 
-            CalculatedScore damageDelta = CalculateModifierScore(effector.Reflex, false, 0); 
+            CalculatedScore damageDelta = CalculateModifierScore(effector.Reflex, false, 0);
 
             /// If this is from a missile hit, we've alreday played the "effect".
             /// But we still want an effect if the damage was because of a timer
@@ -2161,7 +2156,6 @@ namespace Boku.Base
             return DoDamage(damageDelta.Value * scalar, GameThing.Verbs.Vaporize, doEffect, quiet, executor, out died);
         }   // end of DoDamage()
 
-
         public bool DoMicrobitSay(BaseAction effector)
         {
             // Get the player number, if its on the rule.
@@ -2170,23 +2164,6 @@ namespace Boku.Base
 
             string str = String.Join(" ", effector.Reflex.SayStrings);
 
-#if !NETFX_CORE
-            if (playerId == GamePadSensor.PlayerId.All)
-            {
-                foreach (var bit in MicrobitManager.Microbits.Values)
-                {
-                    bit.ScrollText(str);
-                }
-            }
-            else
-            {
-                Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-                if (bit != null)
-                {
-                    bit.ScrollText(str);
-                }
-            }
-#endif
             return true;
         }
 
@@ -2260,7 +2237,7 @@ namespace Boku.Base
         /// Shows a pattern of lights on the Microbit's 5x5 display.
         /// Note, this tile needs to be followed by 1 or more MicrobitPatternModifier
         /// tiles which containt the patterns to display.
-        /// 
+        ///
         /// This tile, run by itself will not change the display.
         /// </summary>
         /// <param name="effector"></param>
@@ -2271,30 +2248,6 @@ namespace Boku.Base
             PlayerModifier playerModifier = effector.GetPlayerModifierOrNull();
             GamePadSensor.PlayerId playerId = (playerModifier != null) ? playerModifier.playerIndex : GamePadSensor.PlayerId.All;
 
-#if !NETFX_CORE
-            List<MicroBitDisplayFrame> frames = new List<MicroBitDisplayFrame>();
-            foreach (var pattern in effector.Reflex.MicrobitPatterns)
-            {
-                MicroBitDisplayFrame frame = new MicroBitDisplayFrame(pattern.LEDs, pattern.Duration, pattern.Brightness);
-                frames.Add(frame);
-            }
-
-            if (playerId == GamePadSensor.PlayerId.All)
-            {
-                foreach (var bit in MicrobitManager.Microbits.Values)
-                {
-                    bit.PrintDisplayFrames(frames);
-                }
-            }
-            else
-            {
-                Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-                if (bit != null)
-                {
-                    bit.PrintDisplayFrames(frames);
-                }
-            }
-#endif
             return true;
         }
 
@@ -2307,26 +2260,6 @@ namespace Boku.Base
             int pin = int.Parse(effector.Reflex.Actuator.upid[effector.Reflex.Actuator.upid.Length - 1].ToString());
             pin -= 1;
 
-#if !NETFX_CORE
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                int value = 0;
-                foreach (var modifier in effector.Reflex.Modifiers)
-                {
-                    if (modifier.upid == "modifier.on")
-                    {
-                        value = 1;
-                    }
-                    else if (modifier.upid == "modifier.off")
-                    {
-                        value = 0;
-                    }
-                }
-
-                bit.SetPinValue(pin, value, Microbit.EPinOperatingMode.Digital);
-            }
-#endif
             return true;
         }
 
@@ -2340,32 +2273,6 @@ namespace Boku.Base
             int pin = int.Parse(effector.Reflex.Actuator.upid[effector.Reflex.Actuator.upid.Length - 1].ToString());
             pin -= 1;
 
-#if !NETFX_CORE
-            // Get the microbit.
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                // Calculate the frequency value from the score and score bucket modifiers present.
-                CalculatedScore score = CalculateModifierScore(effector.Reflex, false, 0);
-
-                // If no value was found on the rule, default to value of 1.
-                if (score.OpCount == 0)
-                {
-                    score.Value = 1;
-                }
-
-                // Get units
-                int multiplier = 1;
-                NumericModifier kHzModifier = effector.Reflex.GetModifier<NumericModifier>("modifier.frequencyunits.khz");
-                if (kHzModifier != null)
-                {
-                    multiplier = (int)kHzModifier.value;
-                }
-
-                // Set the frequency.
-                bit.SetPinPwmFrequency(pin, score.Value, multiplier);
-            }
-#endif
             return true;
         }
 
@@ -2379,27 +2286,6 @@ namespace Boku.Base
             int pin = int.Parse(effector.Reflex.Actuator.upid[effector.Reflex.Actuator.upid.Length - 1].ToString());
             pin -= 1;
 
-#if !NETFX_CORE
-            // Get the microbit.
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                // Calculate the frequency value from the score and score bucket modifiers present.
-                CalculatedScore score = CalculateModifierScore(effector.Reflex, false, 0);
-
-                // If no value was found on the rule, default to value of 50%.
-                if (score.OpCount == 0)
-                {
-                    score.Value = 50;
-                }
-
-                // Clamp the value to a valid percentage value.
-                score.Value = MyMath.Clamp(score.Value, 0, 100);
-
-                // Set the pulse width.
-                bit.SetPinPwmDutyCycle(pin, score.Value / 100.0f);
-            }
-#endif
             return true;
         }
 
@@ -2479,7 +2365,6 @@ namespace Boku.Base
         }
 
         #endregion
-
 
         /// <summary>
         /// Necessary for surviving device reset.  Any parts of the object that

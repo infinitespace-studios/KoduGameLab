@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -175,7 +174,7 @@ namespace Boku
         }   // end of Deactivate()
 
         /// <summary>
-        /// Called once per frame by the 
+        /// Called once per frame by the
         /// </summary>
         public void Update()
         {
@@ -240,7 +239,7 @@ namespace Boku
             if (Active)
             {
                 // Center box on screen.
-                // Note we do this here instead of in the Update call because it is 
+                // Note we do this here instead of in the Update call because it is
                 // dependent on the viewport size which may be different at the time
                 // when Update is called versus when Render is called.
                 pos = new Vector2(BokuGame.bokuGame.GraphicsDevice.Viewport.Width, BokuGame.bokuGame.GraphicsDevice.Viewport.Height);
@@ -336,7 +335,7 @@ namespace Boku
                 // Render any active buttons and the text that goes with them.
                 //
 
-                // We need to cal the width of each active button and it's label 
+                // We need to cal the width of each active button and it's label
                 // so we can center the whole set at the bottom of the dialog.
                 // TODO Set this up so we can also right/left justify?
 
@@ -465,4 +464,3 @@ namespace Boku
     }   // end of class MessageDialog
 
 }   // end of namespace Boku
-

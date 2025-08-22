@@ -17,7 +17,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// Specialization of the standard UIGrid for the load level menu.  We need to have a custom
-    /// Refresh() method to handle the rotation and scaling of the tiles and we also need a 
+    /// Refresh() method to handle the rotation and scaling of the tiles and we also need a
     /// custom Render() method to render the tiles from the outside-in so that the drop
     /// shadows layer correctly.
     /// </summary>
@@ -43,7 +43,7 @@ namespace Boku.UI2D
         /// elements return to their base orientations.
         /// </summary>
         private Orientation[] currentOrients;
-        
+
         private UIGridElement.ParamBlob blob;
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Boku.UI2D
             get
             {
                 bool result = true;
-                
+
                 for (int i = 0; i < kWidth; i++)
                 {
                     UIGridLevelElement e = Get(i);
@@ -212,7 +212,7 @@ namespace Boku.UI2D
                     existing.Level = null;
                 }
             }
-            
+
             Log("End Reload");
         }
 
@@ -290,9 +290,9 @@ namespace Boku.UI2D
             return;
 
             /*
-             
+
             index += kFront;
-              
+
             if (index >= 0 && index < kWidth)
             {
                 if (index >= kFront)
@@ -301,7 +301,7 @@ namespace Boku.UI2D
                     UIGridLevelElement e = Get(kWidth - 1);
                     for (int i = kWidth - 1; i > index; i--)
                     {
-                        // We use Add() instead of setting the position directly 
+                        // We use Add() instead of setting the position directly
                         // so that ActualDimensions is kept valid.
                         Add(grid[i - 1, 0], i, 0);
                     }
@@ -318,7 +318,7 @@ namespace Boku.UI2D
                     UIGridLevelElement e = Get(0);
                     for (int i = 0; i < index - 1; i++)
                     {
-                        // We use Add() instead of setting the position directly 
+                        // We use Add() instead of setting the position directly
                         // so that ActualDimensions is kept valid.
                         Add(grid[i + 1, 0], i, 0);
                     }
@@ -335,7 +335,7 @@ namespace Boku.UI2D
         }   // end of SplitAt()
 
         /// <summary>
-        /// Removes the element at index, collapses the rest of the list, 
+        /// Removes the element at index, collapses the rest of the list,
         /// and then adds the removed element back to the end of the list.
         /// </summary>
         /// <param name="index"></param>
@@ -592,7 +592,7 @@ namespace Boku.UI2D
                     residualVelocity = localXMove / 4.0f;
                     hasResidualVelocity = true;
                     TwitchManager.Set<float> set = velocityDelegate;
-                    TwitchManager.CreateTwitch<float>(residualVelocity, 0, set, duration, 
+                    TwitchManager.CreateTwitch<float>(residualVelocity, 0, set, duration,
                         TwitchCurve.Shape.EaseOut);
                 }
                 else if (touch.phase == TouchPhase.Stationary)

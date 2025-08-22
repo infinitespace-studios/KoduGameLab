@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Common;
@@ -34,7 +32,7 @@ namespace Boku
 {
     /// <summary>
     /// Modal text display.  Used for the 'say' verb when 'fullscreen' is checked.
-    /// 
+    ///
     /// TODO This needs a clearer definition of Active, Focus, and Expanded.  When
     /// is each valid?  How can they combine?  What do they mean?  Why does the
     /// NewScroller have a different Active state?
@@ -64,8 +62,8 @@ namespace Boku
         private CommandMap commandMap = new CommandMap("LiveFeedDisplay");
 
         private bool useBackgroundThumbnail = true;
-        private bool expanded = false; 
-       
+        private bool expanded = false;
+
       //  private Texture2D Header_bg  = null;
 
         private Texture2D cloudTR = null;
@@ -94,7 +92,6 @@ namespace Boku
         private Color hoverTextColor = new Color(50, 255, 50);
 
         private bool gettingFeeds = false;
-
 
         // Bounds
         AABB2D aBox = new AABB2D();
@@ -152,7 +149,7 @@ namespace Boku
                     //return UI2D.Shared.GetGameFont13_5;
                 }
             }
-        }        
+        }
 
         private UI2D.Shared.GetFont Font
         {
@@ -163,7 +160,7 @@ namespace Boku
         {
             get { return (state == States.Active); }
         }
-                
+
         public bool UseBackgroundThumbnail
         {
             get { return useBackgroundThumbnail; }
@@ -198,7 +195,6 @@ namespace Boku
             }
         }
 
-
         public Vector2 FeedSize
         {
             get
@@ -206,7 +202,7 @@ namespace Boku
                 if (newsScroller == null)
                     return new Vector2(80.0f, 20.0f);
                 else
-                    return newsScroller.FixedSize; 
+                    return newsScroller.FixedSize;
             }
             set {
                 Vector2 defaultItemSize = ResetScrollBoxSize;
@@ -238,7 +234,6 @@ namespace Boku
             this.flagMoreBlob = new TextBlob(expandFlagFont, Strings.Localize("mainMenu.more"), 80);
             this.flagLessBlob = new TextBlob(expandFlagFont, Strings.Localize("mainMenu.less"), 80);
 
-
             this.newsScroller = new ItemScroller(scrollBoxPos, FeedSize, new Color(0.0f, 0.0f, 0.0f, 0.0f), null, null);
             this.hitBox = new AABB2D(new Vector2(0, 0), FeedSize);
            // this.Header_bg = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\twitter_Icon");
@@ -261,7 +256,7 @@ namespace Boku
 
             //Twitter.GetTweets();
             msNewsFeed.BeginFetchNews();
-            
+
             gettingFeeds = true;
 
         }   // end of c'tor
@@ -314,7 +309,7 @@ namespace Boku
                         gettingFeeds = false;
                         newsScroller.Dirty = true;
                     }
-                    
+
                 }
             }
 
@@ -342,7 +337,7 @@ namespace Boku
                 {
                     camera = new PerspectiveUICamera();
                 }
-                
+
                 if (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
                 {
                     Vector2 hit = MouseInput.GetAspectRatioAdjustedPosition(camera, useOverscanForHitTesting);
@@ -366,7 +361,7 @@ namespace Boku
 
                     if (true) //newsScroller.IsFocused)
                     {
-                        
+
                         if (Actions.ComboUp.WasPressedOrRepeat )
                         {
                             newsScroller.FocusPrev();
@@ -393,8 +388,7 @@ namespace Boku
                     {
                         newsScroller.Activate();
                     }
-                    
-                    
+
                 }
                 else if (GamePadInput.ActiveMode == GamePadInput.InputMode.GamePad)
                 {
@@ -420,7 +414,7 @@ namespace Boku
         private void HandleGamepadInput()
         {
             if (GamePadInput.ActiveMode != GamePadInput.InputMode.GamePad) { return; }
-            
+
             GamePadInput pad = GamePadInput.GetGamePad0();
             if ((Actions.Raise.WasPressedOrRepeat) || (Actions.Up.WasPressedOrRepeat))
             {
@@ -449,7 +443,7 @@ namespace Boku
             if ( true ) //Active)
             {
                 RenderFeedBasePlate();
-                newsScroller.Render();  
+                newsScroller.Render();
             }
         }   // end of LiveFeedDisplay Render()
 
@@ -491,7 +485,7 @@ namespace Boku
             Vector2 pos = new Vector2(2.0f, 80.0f);
             cOffset = pos;
             cOffset.X += cloudTL.Width;
-            cOffset.Y += cloudTL.Height-25.0f; 
+            cOffset.Y += cloudTL.Height-25.0f;
 
             Vector2 baseSize = FeedSize;
             Vector2 iconSize = new Vector2(42.0f, 42.0f);
@@ -501,10 +495,10 @@ namespace Boku
             headerSize.Y *= 0.055f;
             Vector2 headerPos = pos;
             Vector2 baseOffset;
-            baseOffset.Y = (float)cloudTL.Height + cloudLC.Height * scaledBy.Y; 
+            baseOffset.Y = (float)cloudTL.Height + cloudLC.Height * scaledBy.Y;
 
             headerPos.Y -= headerSize.Y;
-            
+
             iconSize = new Vector2(headerSize.Y * 0.95f, headerSize.Y * 0.95f);
 
             Vector2 cornerSize = new Vector2(headerSize.Y * 0.25f, headerSize.Y * 0.25f);
@@ -519,14 +513,14 @@ namespace Boku
             {
                 iconPos.Y += 5.0f;
             }
-             
+
           //  ssquad.Render(baseColor, headerPos, headerSize);
           //  ssquad.Render(baseColor, pos, baseSize);
           //  ssquad.Render(baseColor, headerPos + new Vector2(headerSize.X, cornerSize.Y), new Vector2(cornerSize.X, headerSize.Y - cornerSize.Y));
 
             //Top left cloud
             ssquad.Render(
-                cloudTL, cOffset - new Vector2(cloudTL.Width, cloudTL.Height / 1.25f), 
+                cloudTL, cOffset - new Vector2(cloudTL.Width, cloudTL.Height / 1.25f),
                 new Vector2(cloudTL.Width * xCrushScale,cloudTL.Height/1.25f) , "TexturedRegularAlpha");
             //Bottom left cloud
             ssquad.Render(
@@ -605,7 +599,6 @@ namespace Boku
                 moreLessHitBox.Set(new Vector2(0, 0), new Vector2(0, 0));
             }
 
-
             pos = new Vector2(cOffset.X - ((cloudTL.Width / 1.8f) * xCrushScale) - xCrushPixel, cOffset.Y - cloudTL.Height * 0.65f);
             // Clamp to pixel coords so text doesn't look like #$%.
             pos.X = (int)pos.X + 3;
@@ -641,17 +634,17 @@ namespace Boku
         {
            // if (Header_bg == null)
            // {
-           //     Header_bg = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\twitter_Icon");                
+           //     Header_bg = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\twitter_Icon");
            // }
-            
+
             if (cloudTR == null)
             {
-                cloudTR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenu\cloudTR");                
+                cloudTR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenu\cloudTR");
             }
-            
+
             if (cloudBR == null)
             {
-                cloudBR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenu\cloudBR");                
+                cloudBR = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenu\cloudBR");
             }
 
             if (cloudTL == null)
@@ -684,14 +677,13 @@ namespace Boku
                 cloudRC = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenu\cloudRC");
             }
 
-            
             if (cloudCenter == null)
             {
                 cloudCenter = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenu\cloudCenter");
             }
 
             newsScroller.InitDeviceResources();
-            
+
         }   // end of LiveFeedDisplay InitDeviceResources()
 
         public void UnloadContent()
@@ -706,7 +698,7 @@ namespace Boku
             BokuGame.Release(ref cloudLC);
             BokuGame.Release(ref cloudRC);
             BokuGame.Release(ref cloudCenter);
-            
+
         }   // end of LiveFeedDisplay UnloadContent()
 
         /// <summary>
@@ -719,7 +711,7 @@ namespace Boku
 
         public void Activate()
         {
-           
+
             if (state != States.Active)
             {
                 this.useBackgroundThumbnail = true;// useBackgroundThumbnail;

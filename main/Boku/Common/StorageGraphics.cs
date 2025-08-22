@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #region Using
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,6 @@ using Microsoft.Xna.Framework.Storage;
 
 using System.Xml.Serialization;
 #endregion Using
-
 
 /* This is an extension of the Storage class defined in Storage.cs
  * The goal here is to isolate the graphics dependencies so that it's easier to
@@ -141,12 +139,8 @@ namespace Boku.Common
                     writer.Write(pixel.PackedValue);
                 }
 
-#if NETFX_CORE
                 writer.Flush();
                 writer.Dispose();
-#else
-                writer.Close();
-#endif
                 Close(stream);
 
             }
@@ -187,38 +181,10 @@ namespace Boku.Common
             {
                 // A super-hack for the PC
                 Debug.Assert(false);
-#if !NETFX_CORE
-                // TODO (****) save to dds no longer supported.  Try SaveAsPng() or SaveAsJpeg()
-                //tex.Save("TextureSaveToStream.dds", ImageFileFormat.Dds);
-                // Intentionally uses the filesystem API, not Storage class.
-                Stream file = File.Open("TextureSaveToStream.dds", FileMode.Open);
-                BinaryReader reader = new BinaryReader(file);
-                BinaryWriter writer = new BinaryWriter(stream);
-
-                byte[] buffer = new byte[4096];
-
-                do
-                {
-                    int count = reader.Read(buffer, 0, buffer.Length);
-                    if (count == 0)
-                        break;
-
-                    writer.Write(buffer, 0, count);
-                }
-                while (true);
-
-                reader.Close();
-
-                // Intentionally uses the filesystem API, not Storage class.
-                File.Delete("TextureSaveToStream.dds");
-
-                return true;
-#endif
             }
             return false;
 
         }
-
 
         /// <summary>
         /// Load a texture from a given stream.
@@ -272,7 +238,7 @@ namespace Boku.Common
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        /// 
+        ///
         static public Texture2D TextureLoad(string name)
         {
             return TextureLoad(name, false);
@@ -378,7 +344,7 @@ namespace Boku.Common
 
         public enum TextureFileType
         {
-            png, 
+            png,
             jpg,
             dds
         }
@@ -505,11 +471,7 @@ namespace Boku.Common
                         break;
                 }
 
-#if NETFX_CORE
                 reader.Dispose();
-#else
-                reader.Close();
-#endif
                 Close(stream);
 
                 return tex;

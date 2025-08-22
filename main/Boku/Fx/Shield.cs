@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -78,7 +77,6 @@ namespace Boku.Fx
                     bloom = 1.0f - bloom;
                     bloom *= 0.2f;
                     ShaderGlobals.FixExplicitBloom(bloom);
-
 
                     GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
@@ -369,4 +367,3 @@ namespace Boku.Fx
         #endregion Internal
     };
 };
-

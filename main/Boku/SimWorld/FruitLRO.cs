@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ namespace Boku.SimWorld
         private static FruitSRO sroInstance = null;
 
         // c'tor
-        private FruitSRO() 
+        private FruitSRO()
             : base(@"Models\Fruit")
         {
         }   // end of FruitSRO c'tor
@@ -44,7 +43,7 @@ namespace Boku.SimWorld
 
             return sroInstance;
         }   // end of FruitSRO GetInstance()
-           
+
     }   // end of class FruitSRO
 
 }   // end of namespace Boku.SimWorld

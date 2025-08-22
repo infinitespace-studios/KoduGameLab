@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +25,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses what terrain we're over.
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class TerrainSensor : Sensor
     {
@@ -87,7 +86,7 @@ namespace Boku.Programming
 
             _typeList.Clear();
 
-            /// We never fire until we have valid data to base a trigger on. 
+            /// We never fire until we have valid data to base a trigger on.
 
             if (TerrainMaterial.IsValid(OverrideSenseMaterial, false, false))
             {

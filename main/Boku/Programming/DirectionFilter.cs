@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -80,11 +79,11 @@ namespace Boku.Programming
                         return false;
 
                     combinedDirection |= directFilt.direction;
-                    
+
                     directFiltCount += 1;
                 }
 
-                // If we've gotten here we're good.  The stick is in the 
+                // If we've gotten here we're good.  The stick is in the
                 // right quadrant for the filter so return true.
 
                 result = true;

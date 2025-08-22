@@ -79,10 +79,10 @@ namespace Boku.Programming
         public int WaterMaterial { get { return waterMat; } set { waterMat = value; SetBit(SensorOutputType.WaterMaterial); } }
 
         /*
-        
+
         // WARNING these are commented out so that you don't try and use them.
         // None of the bit values are ever set so these will always return false.
-          
+
         public bool HasInteger { get { return GetBit(SensorOutputType.Integer); } }
         public bool HasReal { get { return GetBit(SensorOutputType.Real); } }
         public bool HasBoolean { get { return GetBit(SensorOutputType.Boolean); } }
@@ -95,7 +95,6 @@ namespace Boku.Programming
         public bool HasWaterMaterial { get { return GetBit(SensorOutputType.WaterMaterial); } }
         */
         public bool HasAnything { get { return hasAnything; } }
-        
 
         public SensorOutputBlock()
         {
@@ -164,7 +163,7 @@ namespace Boku.Programming
                 return
                     Categories.Get((int)BrainCategories.WhenSight) ||
                     Categories.Get((int)BrainCategories.WhenHearing) ||
-                    Categories.Get((int)BrainCategories.WhenEndofPath); 
+                    Categories.Get((int)BrainCategories.WhenEndofPath);
             }
         }
 
@@ -207,12 +206,12 @@ namespace Boku.Programming
         }
 
         /// <summary>
-        /// Start update is called for sensors that sensor GameThings to let the sensor know it 
+        /// Start update is called for sensors that sensor GameThings to let the sensor know it
         /// will called on ThingUpdate for every GameThing in the world and then called on FinishUpdate
         /// This will happen on the GameActors responce cycle and not every update frame
         /// </summary>
         public abstract void StartUpdate(GameActor gameActor);
-        
+
         /// <summary>
         /// Called for every GameThing in the world.
         /// </summary>
@@ -220,7 +219,7 @@ namespace Boku.Programming
         /// <param name="direction"></param>
         /// <param name="range"></param>
         public abstract void ThingUpdate(GameActor gameActor, GameThing gameThing, Vector3 direction, float range);
-        
+
         /// <summary>
         /// Called after all ThingUpdate were called.
         /// </summary>
@@ -235,9 +234,9 @@ namespace Boku.Programming
 
         /// <summary>
         /// Applies special rules, such as the "once" rules (In OnceModifier).
-        /// 
+        ///
         /// In fact this is only ever used for the "once" modifier.  Do we
-        /// actually need all this or could we just check for "once" and 
+        /// actually need all this or could we just check for "once" and
         /// handle that as a special case rather than expecting every single
         /// filter and modifier to need a PostProcessAction?
         /// </summary>
@@ -285,7 +284,7 @@ namespace Boku.Programming
             return false;
         }
 
-        // helper method 
+        // helper method
         protected bool TestObjectSet(Reflex reflex)
         {
             List<Filter> filters = reflex.Filters;
@@ -318,9 +317,9 @@ namespace Boku.Programming
             return match;
 
         }   // end TestObjectSet()
-        
+
     }   // end class Sensor
-    
+
     /// <summary>
     /// Represents a sensed object in the scene. Instances of this class may
     /// appear in more than one sensor target set.
@@ -501,7 +500,6 @@ namespace Boku.Programming
 
     }   // end of class SensorTarget
 
-
     public class SensorTargetSet : IEnumerable
     {
         private Dictionary<int, SensorTarget> sensorTargets = new Dictionary<int, SensorTarget>();
@@ -511,16 +509,16 @@ namespace Boku.Programming
         private object param;
 
         private bool dirty = true;  // Set when the sensorTargets dictionary changes.
-        
+
         /// <summary>
         /// Nearest target, if any, in the target set.
         /// </summary>
         public SensorTarget Nearest
         {
-            get 
+            get
             {
                 SortTargets(justGetFirst: true);
-                return nearestTargets.Count > 0 ? nearestTargets[0] : null; 
+                return nearestTargets.Count > 0 ? nearestTargets[0] : null;
             }
             set { }
         }
@@ -538,10 +536,10 @@ namespace Boku.Programming
         /// </summary>
         public IList<SensorTarget> NearestTargets
         {
-            get 
+            get
             {
-                SortTargets(justGetFirst: false); 
-                return nearestTargets; 
+                SortTargets(justGetFirst: false);
+                return nearestTargets;
             }
         }
 
@@ -723,9 +721,9 @@ namespace Boku.Programming
         /// <summary>
         /// Is this sensor triggering an action caused
         /// by a previous mouse action.  For example if we
-        /// have Mouse Left Move Toward, we will continue 
+        /// have Mouse Left Move Toward, we will continue
         /// to move toward the target until cleared.  So,
-        /// this will be true.  
+        /// this will be true.
         /// </summary>
         public bool ActionMouseTarget
         {

@@ -259,7 +259,6 @@ namespace Boku.Common
 
             cursor.JumpComplete();
 
-
         }
 
         public void Clear()
@@ -278,7 +277,7 @@ namespace Boku.Common
 
         public int Size()
         {
-            return levels.Count;        
+            return levels.Count;
         }
     }
 }

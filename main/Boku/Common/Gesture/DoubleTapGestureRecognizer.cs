@@ -27,10 +27,9 @@ namespace Boku.Common.Gesture
         /// <summary>
         /// How far can the touch positions drift before we consider the gesture failed
         /// </summary>
-        /// //FIXME: these numbers need to be converted to a percentage of screen space - raw pixel values will cause differing behaviour 
+        /// //FIXME: these numbers need to be converted to a percentage of screen space - raw pixel values will cause differing behaviour
         /// //from one touch device to the next
         const float k_MaxTouchDrift = 50.0f;
-
 
         private double m_lastTapTime = 0;
         private bool m_bWaitingForNextTap = false;
@@ -45,7 +44,7 @@ namespace Boku.Common.Gesture
 
         public Vector2 InitialPosition
         {
-            get { return m_initialPosition; }        
+            get { return m_initialPosition; }
         }
 
         protected override int GetRequiredTouchCount()
@@ -68,7 +67,7 @@ namespace Boku.Common.Gesture
                     m_bWaitingForNextTap = false;
                 }
             }
-            
+
             if( !m_bWaitingForNextTap )
             {
                 m_lastTapTime = 0;
@@ -97,7 +96,7 @@ namespace Boku.Common.Gesture
         protected override void OnTouchReleased(TouchContact[] touches)
         {
             bool bFailed = touches.Length != GetRequiredTouchCount();
-            
+
             TouchContact tc = TouchInput.GetTouchContactByFingerId(m_FingerId, touches);
             bFailed |= !IsTouchContactValidForTap( tc );
 
@@ -111,7 +110,7 @@ namespace Boku.Common.Gesture
                 if( m_bWaitingForNextTap )
                 {
                     m_bWaitingForNextTap = false;
-                    
+
                     Debug.Assert( null != tc );
 
                     m_position = tc.position;
@@ -148,7 +147,6 @@ namespace Boku.Common.Gesture
                 SetState(GestureState.Failed);
             }
         }
-
 
         private bool IsTouchContactValidForTap(TouchContact tc)
         {

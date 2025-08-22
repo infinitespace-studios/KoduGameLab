@@ -133,9 +133,9 @@ namespace Boku.Common
 
             //active time spent in Kodu
             ActiveSession,
-            
+
             //time in main menu
-            MainMenuTime, 
+            MainMenuTime,
 
             // Time spent in the community level browser UI.
             CommunityUI,
@@ -226,7 +226,6 @@ namespace Boku.Common
         #endregion
     }
 
-
     /// <summary>
     /// Instrumentation API.  There are three instruments defined:
     /// Events, Counters, and Timers.
@@ -234,7 +233,7 @@ namespace Boku.Common
     public static partial class Instrumentation
     {
         #region Public
-        
+
         //The list of currently active timers.
         public static Dictionary<TimerId, object> activeTimers = new Dictionary<TimerId, object>();
 
@@ -388,7 +387,6 @@ namespace Boku.Common
             return timer;
         }
 
-        
         /// <summary>
         /// Stops a timer.
         /// </summary>
@@ -419,7 +417,7 @@ namespace Boku.Common
          * When the user does not exit through the menu, then not all
          * timers get stopped. This method is called to stop all remaining
          * timers. Without it, we are missing quite a bit of timer information
-         * upon exit. 
+         * upon exit.
          */
         public static void StopAllTimers()
         {
@@ -535,7 +533,6 @@ namespace Boku.Common
 
         #endregion
     }
-
 
     /// Internal machinations of the Instrumentation class.
     public static partial class Instrumentation

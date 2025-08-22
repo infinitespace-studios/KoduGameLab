@@ -1,14 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define ANIMATION_DEBUG
 //#define ANIMATION_DEBUG_MINIMAL       //  show minimal anim info - useful for video capture of oneshots. must also turn on ANIMATION_DEBUG
 
 ///
 /// This was originally in Common, but migrated here when the new animation
 /// system was written.
-/// 
+///
 
 using System;
 using System.Collections;
@@ -32,12 +31,12 @@ using Boku.Animatics;
 namespace Boku.Animatics
 {
     /// <summary>
-    /// Class to hold all the animation controllers for an actor and the 
+    /// Class to hold all the animation controllers for an actor and the
     /// functions associated with them.
     /// </summary>
     public class AnimationSet
     {
-        #region Members 
+        #region Members
 
         private GameActor parent = null;
         private BlendController blendController = null;    // Holds all the other controllers and blends between them.
@@ -46,7 +45,7 @@ namespace Boku.Animatics
                                                 // 0 = idle, 1 = produce
 
         /// <summary>
-        /// These are the looping/continuous animations that are blended 
+        /// These are the looping/continuous animations that are blended
         /// together based on the movement of the chassis.
         /// </summary>
         private SimpleController idleController = null;
@@ -62,9 +61,9 @@ namespace Boku.Animatics
         private SimpleController scanController = null;
 
         /// <summary>
-        /// Controllers for one-shot animations.  Note that these are lists of 
-        /// controllers.  This allows there to be multiple versions of each 
-        /// animation.  When an event is triggered we randomly pick from the 
+        /// Controllers for one-shot animations.  Note that these are lists of
+        /// controllers.  This allows there to be multiple versions of each
+        /// animation.  When an event is triggered we randomly pick from the
         /// available animations.  We also keep a list with all the one-shot
         /// controllers since this is often easier to work with.
         /// </summary>
@@ -100,7 +99,7 @@ namespace Boku.Animatics
         private bool isOpen = true;             // State of bots that open/close.
         private bool hasIdleWhileOpen = false;  // There are two categories of bots that have the ability to open and close.
                                                 // This flag let's us distinguish between them and act accordingly.
-                                                // This will be false for bots like the turtle and stickboy where the default 
+                                                // This will be false for bots like the turtle and stickboy where the default
                                                 // idle state is 'open' and the 'closed' state is just the last frame of the 'close' animation.
                                                 // This will be true for bot like the factory and hut.  For these bots the default
                                                 // idle animation shows the bot in the 'closed' state.  The 'idleWhileOpen' animation
@@ -110,12 +109,12 @@ namespace Boku.Animatics
         // For the entertainment animation, we want it to run randomly but only if
         // the bot is doing nothing else except the idle animation.
         //
-        private double lastNonIdleTime = 0.0f;  // This is updated to the current time whenever 
+        private double lastNonIdleTime = 0.0f;  // This is updated to the current time whenever
                                                 // any non-idle animation is playing.
         private float minWaitTime = 5.0f;       // The minimum amount of time we'll have between idle animations.
         private float deltaWaitTime = 10.0f;    // The random amount of time added on to the minimum wait time.
-        private float waitTime = 5.0f;          // The amount of time we're waiting before triggering an entertainment 
-                                                // animation.  This will get reset each time an entertainment animation 
+        private float waitTime = 5.0f;          // The amount of time we're waiting before triggering an entertainment
+                                                // animation.  This will get reset each time an entertainment animation
                                                 // is triggered.
         private long idleTicks;                 // This is where the idle animation is in it's loop when we decide to
                                                 // start an entertainment animation.  We'll use this to tell when the
@@ -363,7 +362,6 @@ namespace Boku.Animatics
             get { return inspectController; }
         }
 
-
         /// <summary>
         /// Debug access to the beam controller.
         /// </summary>
@@ -379,7 +377,6 @@ namespace Boku.Animatics
         {
             get { return scanController; }
         }
-
 
         /// <summary>
         /// List of all one-shot controllers.
@@ -419,7 +416,7 @@ namespace Boku.Animatics
             {
                 blendController = new BlendController(animator, parent.GetType().ToString());
 
-                // Set up looped animations.  Start them at a random spot 
+                // Set up looped animations.  Start them at a random spot
                 // in their cycle so all the bots don't look like clones.
                 idleController = animator.TryMake("idle", null);
                 idleController.SetToRandom();
@@ -463,7 +460,7 @@ namespace Boku.Animatics
                 blendController.Add(produceController);
                 produceWhileOpenController.Weight = 0.0f;
                 blendController.Add(produceWhileOpenController);
-                
+
                 forwardController.Weight = 0.0f;
                 blendController.Add(forwardController);
                 backwardsController.Weight = 0.0f;
@@ -482,7 +479,7 @@ namespace Boku.Animatics
 
                 // Set up lists for one-shot animations.
                 allOneShotControllers = new List<SimpleController>();
-                
+
                 closeControllers = GetControllerList(animator, "close");
                 openControllers = GetControllerList(animator, "open");
                 idleCloseControllers = GetControllerList(animator, "idleclose");
@@ -521,12 +518,10 @@ namespace Boku.Animatics
 
         }   // end of c'tor
 
-
         public void InitDefaults()
         {
             IsOpen = true;
             OneShotAnimationActive = false;
-
 
             if (idleController != null)
             {
@@ -664,8 +659,8 @@ namespace Boku.Animatics
                     }
 
                     // This is kind of a hack for characters that don't have an
-                    // idleWhileOpen.  After closing, we want to stick 
-                    // with the last frame of the close animation rather than 
+                    // idleWhileOpen.  After closing, we want to stick
+                    // with the last frame of the close animation rather than
                     // going back to the idle animation.
                     if (!isOpen && closeControllers.Count > 0 && !hasIdleWhileOpen)
                     {
@@ -748,12 +743,12 @@ namespace Boku.Animatics
                     idleController.Weight += MathHelper.Clamp(w - backwardsController.Weight, 0.0f, 1.0f);
 
                     // Normalize weighting of looped animations.
-                    float sum = idleController.Weight + forwardController.Weight + 
-                                    backwardsController.Weight + 
-                                    rightController.Weight + 
-                                    leftController.Weight + 
+                    float sum = idleController.Weight + forwardController.Weight +
+                                    backwardsController.Weight +
+                                    rightController.Weight +
+                                    leftController.Weight +
                                     inspectController.Weight +
-                                    beamController.Weight + 
+                                    beamController.Weight +
                                     scanController.Weight;
 
                     if (sum != 1.0f)
@@ -793,10 +788,10 @@ namespace Boku.Animatics
                     }
                 }
 
-                // Time-wise, we've waited long enough to start an entertainment 
+                // Time-wise, we've waited long enough to start an entertainment
                 // but now we want to wait until the idle animation loops so that
                 // we don't get a pop in the animation.  For bots with a backwards
-                // animation used by wind we also want to take this time to 
+                // animation used by wind we also want to take this time to
                 // attenuate the wind animation since it too will cause a pop.
                 float elapsed = (float)(Time.GameTimeTotalSeconds - lastNonIdleTime);
                 if (isIdle && elapsed > waitTime && idleValueAtEntStart == 0)
@@ -821,13 +816,13 @@ namespace Boku.Animatics
                 }
                 idleTicks = idleController.CurrentTicks;
 
-                // Finally, if we have specific idle animations for 'open' and 'closed' 
+                // Finally, if we have specific idle animations for 'open' and 'closed'
                 // states, substitute those for the generic idle animation.
                 // Also blend with 'produce' animations here.
                 if (hasIdleWhileOpen)
                 {
                     float weight = idleController.Weight;
-                    
+
                     // Zero out everything to start.
                     idleController.Weight = 0.0f;
                     idleWhileOpenController.Weight = 0.0f;
@@ -857,7 +852,7 @@ namespace Boku.Animatics
                 // Debug for finding cases where multiple controllers have full weight.
                 {
                     float t = 0.0f;
-                        
+
                     t += idleController.Weight;
                     t += idleWhileOpenController.Weight;
                     t += produceController.Weight;
@@ -1231,7 +1226,7 @@ namespace Boku.Animatics
 
                 int index = BokuGame.bokuGame.rnd.Next(openControllers.Count);
                 openControllers[index].SetToBegin();
-                
+
                 isOpen = true;
                 PlayCue(parent.OpenSoundName);
             }
@@ -1278,7 +1273,7 @@ namespace Boku.Animatics
 
                 int index = BokuGame.bokuGame.rnd.Next(closeControllers.Count);
                 closeControllers[index].SetToBegin();
-                
+
                 isOpen = false;
                 PlayCue(parent.CloseSoundName);
             }
@@ -1314,7 +1309,7 @@ namespace Boku.Animatics
         }   // end of StartcloseAnimation()
 
         /// <summary>
-        /// Starts a one-shot animation based on the passed 
+        /// Starts a one-shot animation based on the passed
         /// in index.  Used by the anim debug mode.
         /// </summary>
         /// <param name="i"></param>
@@ -1371,11 +1366,7 @@ namespace Boku.Animatics
                         listener.Up = InGame.inGame.Camera.ViewUp;
                         listener.Velocity = Vector3.Zero;
 
-#if NETFX_CORE
                         BokuGame.Audio.SoundBank.PlayCue(name);
-#else
-                        BokuGame.Audio.SoundBank.PlayCue(name, listener, emitter);
-#endif
                     }
                 }
                 catch (Exception e)
@@ -1390,7 +1381,7 @@ namespace Boku.Animatics
         /// Create a list of one-shot controllers for a given animation.
         /// </summary>
         /// <param name="name">The name of the animation(s) we're looking for.</param>
-        /// 
+        ///
         /// <returns></returns>
         private List<SimpleController> GetControllerList(AnimationInstance animator, string name)
         {
@@ -1435,12 +1426,12 @@ namespace Boku.Animatics
 
         /// <summary>
         /// Calculates the new animation weight by lerping from the current value to the target value.
-        /// 
+        ///
         /// While the lerp produces smooth transitions it has the downside that when going
-        /// to 0 it never quite gets there.  Kind of a Zeno's Paradox kind of thing.  For 
+        /// to 0 it never quite gets there.  Kind of a Zeno's Paradox kind of thing.  For
         /// perf reasons it would be nice to have the weightings actually go to 0 so these
         /// animations can be skipped in update.  So, in an attempt to fix this when an
-        /// animation's target weight is 0 we will use a slightly negative number in the 
+        /// animation's target weight is 0 we will use a slightly negative number in the
         /// lerp.  We can then clamp the resulting value to 0 when it goes negative.
         /// </summary>
         /// <param name="curWeight"></param>
@@ -1642,7 +1633,7 @@ namespace Boku.Animatics
                                 case Keys.Down:
                                     if (Time.Paused)
                                     {
-                                        // We can't go back a single frame by giving the clock a negative 
+                                        // We can't go back a single frame by giving the clock a negative
                                         // number without breaking all kinds of other stuff.  So, just tick
                                         // back the active animation.
                                         if (anims.OneShotAnimationActive)
@@ -1757,10 +1748,9 @@ namespace Boku.Animatics
                                 actor.Movement.Rotation = lockedRotation;
                         }
 
-                        // Force off camera folling for this actor so the 
+                        // Force off camera folling for this actor so the
                         // camera is freed up to be controlled by the user.
                         //actor.Parameters.cameraMode = GameActor.CameraFollowModes.Never;
-
 
 #if !ANIMATION_DEBUG_MINIMAL
                         // List this actor's animation set.
@@ -1892,7 +1882,6 @@ namespace Boku.Animatics
                             curFrame = 1 + (int)(elapsed * 30.0);
                             Display(@"Scan frame     : " + curFrame.ToString() + @" / " + totalFrames.ToString(), anims.ScanWeight > 0.1f ? highlight : color);
 
-
                         }
                     }
                     else
@@ -1931,7 +1920,6 @@ namespace Boku.Animatics
 
 #endif  // ANIMATION_DEBUG
         #endregion Alex's Debug Section
-
 
         #endregion
 

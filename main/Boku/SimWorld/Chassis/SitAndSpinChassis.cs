@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -50,8 +49,8 @@ namespace Boku.SimWorld.Chassis
 
             ApplyDesiredRotation(movement, Parent.DesiredMovement);
 
-            // Adjust actor's height to follow the terrain.  This doesn't seem 
-            // like it should need doing but collisions can change the height 
+            // Adjust actor's height to follow the terrain.  This doesn't seem
+            // like it should need doing but collisions can change the height
             // when we don't want it changed.
             movement.Altitude = MyMath.Lerp(movement.Altitude, EditHeight + Terrain.GetTerrainAndPathHeight(movement.Position), 0.1f * 30.0f * secs);
 

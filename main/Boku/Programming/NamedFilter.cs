@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -132,7 +131,7 @@ namespace Boku.Programming
         static public void UnregisterAllNamedFiltersInCardSpace()
         {
             // We know that the NamedFilters are at the end of the list
-            // so we can use this to be a bit smarter about how we 
+            // so we can use this to be a bit smarter about how we
             // remove them.
             int count = CardSpace.Cards.FilterDict.Keys.Count;
             string[] keys = new string[count];
@@ -145,7 +144,6 @@ namespace Boku.Programming
             }
 
         }   // end of UnregisterAllNamedFiltersInCardSpace()
-
 
         static public NamedFilter RegisterInCardSpace(GameActor actor)
         {

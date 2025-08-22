@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -372,9 +371,9 @@ namespace Boku.SimWorld.Path
             #endregion Budget Junk
 
             /// <summary>
-            /// Scans through the path ensuring that all the nodes in the path are 
-            /// connected by edges.  If not, it splits this path into multiple paths 
-            /// of the same color.  Also checks all edges to make sure that they are 
+            /// Scans through the path ensuring that all the nodes in the path are
+            /// connected by edges.  If not, it splits this path into multiple paths
+            /// of the same color.  Also checks all edges to make sure that they are
             /// only connected to nodes in this path.  If not, they are just deleted.
             /// </summary>
             public void EnsureCoherence()
@@ -421,7 +420,7 @@ namespace Boku.SimWorld.Path
                         ///Note that in this loop, no nodes or edges are created or destroyed,
                         ///just moved from one path to another. So no bookkeeping on counts
                         ///is needed.
-                        
+
                         // Remove this node from the current path.
                         Nodes.RemoveAt(i);
                         // Create a new path for the node in the same color and add the node to the path.
@@ -469,7 +468,7 @@ namespace Boku.SimWorld.Path
                     foreach (Node node in Nodes)
                     {
                         node.Airborne = false;
-                        node.Position = node.Position;    // Setting the position automatically resets the height.                    
+                        node.Position = node.Position;    // Setting the position automatically resets the height.
                     }
                     foreach (Edge edge in Edges)
                     {

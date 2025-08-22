@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,9 +27,9 @@ using Boku.Fx;
 namespace Boku
 {
     /// <summary>
-    /// Menu of available materials.  This is a generic element that 
+    /// Menu of available materials.  This is a generic element that
     /// should be able to be used over the top of any tool.
-    /// 
+    ///
     /// Tools which want to use the MaterialPicker should set Active to true
     /// when they start up and back to false when they exit.  Note that
     /// setting Active to true just has the pikcer listen for being made
@@ -53,8 +52,8 @@ namespace Boku
         public override bool Hidden
         {
             get { return base.Hidden; }
-            set 
-            { 
+            set
+            {
                 base.Hidden = value;
                 if (!value)
                 {
@@ -213,10 +212,7 @@ namespace Boku
         {
             float scaleY = Math.Min((float)BokuGame.ScreenSize.Y / 576.0f, 1.0f);
 
-
             AABB2D box = new AABB2D(new Vector2(0, (BokuGame.ScreenSize.Y - (200.0f) * scaleY)), BokuGame.ScreenSize);
-
-
 
             TouchContact focusedTouch = null;
 
@@ -251,7 +247,7 @@ namespace Boku
                     {
                         //Check to see if the dragging threshold has been exceeded to change material.
                         Vector2 distance = focusedTouch.position - focusedTouch.startPosition;
-                        
+
                         //Did we start a drag?
                         if( Math.Abs(distance.X) >= 20.0f )
                         {
@@ -270,7 +266,7 @@ namespace Boku
                                m_DragDelta.X -= 200.0f;
                             }
                             else if( m_DragDelta.X <= -200.0f )
-                            {                            
+                            {
                                IncrementFocus();
                                m_DragDelta.X += 200.0f;
                             }
@@ -348,7 +344,6 @@ namespace Boku
 
             return true;
         }   // end of HandleTouchInput()
-
 
         private bool RayIntersectWithMaterials( Ray ray )
         {
@@ -523,7 +518,7 @@ namespace Boku
                     float alpha = Math.Min((float)(dTime / kFadeTime), 1.0f);
                     Vector2 offset = size * 0.4f;
                     size *= 0.4f;
-                    // Note the 12/64 in the positioning accounts for the fact that the 
+                    // Note the 12/64 in the positioning accounts for the fact that the
                     // button textures only use the upper 40x40 out of the 64x64 space they allocate.
                     // The 12 is actually (64-40)/2.
                     quad.Render(camera, ButtonTextures.RightTrigger, alpha, position + offset + size * 12.0f / 64.0f, size, @"TexturedRegularAlpha");
@@ -560,4 +555,3 @@ namespace Boku
     }   // end of class MaterialPicker
 
 }   // end of namespace Boku
-

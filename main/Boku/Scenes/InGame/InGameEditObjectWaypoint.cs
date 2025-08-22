@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +22,7 @@ using Boku.Common.Gesture;
 /// Unknown
 ///         - Cursor under Node => Node
 ///         - Cursor under Edge => Edge
-/// Node    
+/// Node
 ///         - <A> => MoveNode               || Node becomes selected node
 ///         - <X> => Path                   || node.Path becomes edit path
 ///         - <Y> => AddNode                || node becomes ActiveNode
@@ -34,37 +32,37 @@ using Boku.Common.Gesture;
 ///
 /// Path
 ///         - <A> => MovePath               || Path becomes selected path
-///         - <X> => Node/Edge***           || If cursor under node(edge), node(edge) becomes edit 
+///         - <X> => Node/Edge***           || If cursor under node(edge), node(edge) becomes edit
 ///                                         || node(edge), else go to unknown.
 ///         - <Trig-L> => Object Edit       || Entire path is deleted
 ///         - Move cursor => Object Edit    || path stops being edit path
 ///         - <B> => Tool Menu              || back out to tool menu
-///         
+///
 /// Edge
 ///         - <A> => MoveEdge               || Edge becomes selected edge
 ///         - <X> => Path                   || Edge.path becomes edit path
 ///         - <Trig-L> => Object Edit       || Edge (and connected nodes) deleted
 ///         - Move cursor => Object Edit    || edge stops being edit edge
 ///         - <B> => Tool Menu              || back out to tool menu
-///         
+///
 /// MoveNode
-///         - <A> => Node                   || drop selected node where it is, 
+///         - <A> => Node                   || drop selected node where it is,
 ///                                         || have no selected node, node becomes edit node
 ///         - <X> => MovePath               || drop selected node where it is, select node.Path
 ///         - <Tr-L> => Object Edit         || delete selected node (and connected edges)
-///         - <B> => Node                   || drop selected node where it is, 
+///         - <B> => Node                   || drop selected node where it is,
 ///                                         || have no selected node, node becomes edit node
-///         
+///
 /// MovePath
-///         - <A> => Path                   || drop selected path where it is, 
+///         - <A> => Path                   || drop selected path where it is,
 ///                                         || have no selected path, path becomes edit path
 ///         - <X> => MoveNode/MoveEdge***   || drop selected path where it is
-///                                         || If cursor under node(edge), node(edge) becomes selected 
+///                                         || If cursor under node(edge), node(edge) becomes selected
 ///                                         || node(edge), else go to unknown.
 ///         - <Trig-L> => Object Edit       || Entire path deleted.
 ///         - <B> => Path                   || drop selected path where it is
 ///                                         || have no selected path, path becomes edit path
-///         
+///
 /// MoveEdge
 ///         - <A> => Edge                   || drop edge where it is
 ///                                         || have no selected edge, edge becomes edit edge
@@ -72,7 +70,7 @@ using Boku.Common.Gesture;
 ///         - <Trig-L> => Object Edit       || edge and both nodes deleted.
 ///         - <B> => Edge                   || drop edge where it is
 ///                                         || have no selected edge, edge becomes edit edge
-///         
+///
 /// AddNode
 ///         - <A> => AddNode                || Create node and edge to ActiveNode
 ///                                         || New node becomes ActiveNode
@@ -175,7 +173,7 @@ namespace Boku
             public WayPoint.Node FromNode
             {
                 get { return fromNode; }
-                private set 
+                private set
                 {
                     if (fromNode != value)
                     {
@@ -367,12 +365,10 @@ namespace Boku
                 get { return mouseOver.distance; }
             }
 
-            
             public static float TouchOverDistance
             {
                 get { return touchOver.distance; }
             }
-
 
             /// <summary>
             /// Is the mouse currently being used to drag path parts about? If
@@ -436,7 +432,7 @@ namespace Boku
                                 pos = FromNode.Position2d;
                             }
                         }
-                        else 
+                        else
                         {
                             if (ActiveNode != null)
                             {
@@ -449,7 +445,7 @@ namespace Boku
                                 pos = (ActiveEdge.Node0.Position2d + ActiveEdge.Node1.Position2d) * 0.5f;
                             }
                         }
-                        height += Terrain.GetTerrainHeightFlat(CursorPosition2d()) 
+                        height += Terrain.GetTerrainHeightFlat(CursorPosition2d())
                             - Terrain.GetTerrainAndPathHeight(CursorPosition());
                     }
                     return height;
@@ -479,7 +475,7 @@ namespace Boku
             public bool Update()
             {
                 pad = GamePadInput.GetGamePad0();
-                
+
                 ValidateMode();
 
                 AdjustTypeAndColor();
@@ -529,7 +525,7 @@ namespace Boku
             /// <summary>
             /// Render the highlight for whatever nodes/edges are being edited,
             /// including the fake node/edge placeholders when adding a new node.
-            /// For GamePadInput, the real node/edge highlight rendering happens 
+            /// For GamePadInput, the real node/edge highlight rendering happens
             /// in the waypoint code, but the mouseOver version handles the whole thing.
             /// </summary>
             /// <param name="camera"></param>
@@ -663,7 +659,7 @@ namespace Boku
                 {
                     return mouseOver.DoCursor(pos);
                 }
-                
+
             }
 
             #endregion Public
@@ -1083,7 +1079,7 @@ namespace Boku
                 Delete,
                 NoBudget
             }
-            
+
             /// <summary>
             /// Play the right sound to go with the mode change.
             /// </summary>
@@ -1153,7 +1149,7 @@ namespace Boku
                 }
             }
 
-            /// Node    
+            /// Node
             ///         - <A> => MoveNode               || Node becomes selected node
             ///         - <X> => Path                   || node.Path becomes edit path
             ///         - <Y> => AddNode                || node becomes ActiveNode
@@ -1208,14 +1204,14 @@ namespace Boku
 
             /// Path
             ///         - <A> => MovePath               || Path becomes selected path
-            ///         - <X> => Node/Edge***           || If cursor under node(edge), node(edge) becomes edit 
+            ///         - <X> => Node/Edge***           || If cursor under node(edge), node(edge) becomes edit
             ///                                         || node(edge), else go to unknown.
             ///         - <Trig-L> => Object Edit       || Entire path is deleted
             ///         - Move cursor => Object Edit    || path stops being edit path
             ///         - <B> => Tool Menu              || back out to tool menu
-            ///         
+            ///
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="pad"></param>
             /// <returns></returns>
@@ -1268,9 +1264,9 @@ namespace Boku
             ///         - <Trig-L> => Object Edit       || Edge (and connected nodes) deleted
             ///         - Move cursor => Object Edit    || edge stops being edit edge
             ///         - <B> => Tool Menu              || back out to tool menu
-            ///         
+            ///
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="pad"></param>
             /// <returns></returns>
@@ -1326,15 +1322,15 @@ namespace Boku
             }
 
             /// MoveNode
-            ///         - <A> => Node                   || drop selected node where it is, 
+            ///         - <A> => Node                   || drop selected node where it is,
             ///                                         || have no selected node, node becomes edit node
             ///         - <X> => MovePath               || drop selected node where it is, select node.Path
             ///         - <Tr-L> => Object Edit         || delete selected node (and connected edges)
-            ///         - <B> => Node                   || drop selected node where it is, 
+            ///         - <B> => Node                   || drop selected node where it is,
             ///                                         || have no selected node, node becomes edit node
-            ///         
+            ///
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="pad"></param>
             /// <returns></returns>
@@ -1395,7 +1391,7 @@ namespace Boku
             ///         - <B> => Edge                   || drop edge where it is
             ///                                         || have no selected edge, edge becomes edit edge
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="pad"></param>
             /// <returns></returns>
@@ -1458,18 +1454,18 @@ namespace Boku
             }
 
             /// MovePath
-            ///         - <A> => Path                   || drop selected path where it is, 
+            ///         - <A> => Path                   || drop selected path where it is,
             ///                                         || have no selected path, path becomes edit path
             ///         - <X> => MoveNode/MoveEdge***   || drop selected path where it is
-            ///                                         || If cursor under node(edge), node(edge) becomes selected 
+            ///                                         || If cursor under node(edge), node(edge) becomes selected
             ///                                         || node(edge), else go to unknown.
             ///         - <Trig-L> => Object Edit       || Entire path deleted.
             ///         - <B> => Path                   || drop selected path where it is
             ///                                         || have no selected path, path becomes edit path
-            ///         
-            ///         
+            ///
+            ///
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="pad"></param>
             /// <returns></returns>
@@ -1537,7 +1533,7 @@ namespace Boku
             ///                                         || ActiveNode doesn't change.
             ///         - <B> => Object Edit            || ActiveNode stops being ActiveNode
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="pad"></param>
             /// <returns></returns>
@@ -1717,9 +1713,9 @@ namespace Boku
                     if (upDown != leftRight)
                     {
                         // DOn't make UI noises on repeat presses.
-                        bool quiet = Actions.NextType.WasRepeatPressed 
-                            || Actions.PrevType.WasRepeatPressed 
-                            || Actions.ColorLeft.WasRepeatPressed 
+                        bool quiet = Actions.NextType.WasRepeatPressed
+                            || Actions.PrevType.WasRepeatPressed
+                            || Actions.ColorLeft.WasRepeatPressed
                             || Actions.ColorRight.WasRepeatPressed;
                         Click(ModeChange.Accept, quiet);
                         Changed();
@@ -1924,7 +1920,6 @@ namespace Boku
                 return delta;
             }
 
-
             /// <summary>
             /// Delete input node with effects.
             /// </summary>
@@ -1982,7 +1977,7 @@ namespace Boku
                 Changed();
             }
 
-            /// objDist is distance to nearest object. 
+            /// objDist is distance to nearest object.
             /// If we are in unknown mode, we grab a node or edge only if
             ///     dist < objDist && dist < snapCapDist
             /// if we are in edit mode (Node,Path,Edge), then we give it up only if

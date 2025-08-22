@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,10 +25,10 @@ namespace Boku.Programming
     /// <summary>
     /// Senses when the a game score has changed.
     /// Actually this has also mutated to being use to compare scores against a value
-    /// and against each other.  Because of this we need something better for the 
+    /// and against each other.  Because of this we need something better for the
     /// param than just a scorebucket.  Hence the GameScoredSensorResult class.
-    /// 
-    /// This sensor demonstrates one of the few Event based sensors.  
+    ///
+    /// This sensor demonstrates one of the few Event based sensors.
     /// It will only get updated when the actual score changes.
     /// </summary>
     public class GameScoredSensor : Sensor
@@ -81,7 +80,6 @@ namespace Boku.Programming
         {
         }
 
-
         public override void ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {
             reflex.targetSet.Param = Filter.ScoresFromFilterSet(gameActor, reflex);
@@ -93,24 +91,24 @@ namespace Boku.Programming
     /// <summary>
     /// A wrapper class to contain all the options/data for the Scored sensor.
     /// The values depend on how the sensor is used.
-    /// 
+    ///
     /// --Testing for change.
     /// WHEN Red DO
     ///     TestingForChange will be true.
     ///     ScoreChanged will tell you whether the score has changed this frame.
-    ///   
+    ///
     /// --Testing against a value.
     /// WHEN Red 5Points 2Points Green
     ///     Left will contain the value for red.
     ///     Right will contain value to compare against.
     ///     CompareOp will contain the op to apply.
-    /// 
+    ///
     /// --Comparisons
     /// WHEN Red White 2Points > Blue Blue Random Green 5Points
     ///     Left will contain the sum of the values to the left of the comparison.
     ///     Right will contain the sum of the values to the right of the comparison.
     ///     CompareOp will contain the op to apply.
-    ///  
+    ///
     /// </summary>
     public class GameScoredSensorResult
     {

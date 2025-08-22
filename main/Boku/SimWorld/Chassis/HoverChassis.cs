@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -92,11 +91,11 @@ namespace Boku.SimWorld.Chassis
 
                 if (Jump && CanJump())
                 {
-                    // If we've already jumped but not yet landed or double-jumped, 
+                    // If we've already jumped but not yet landed or double-jumped,
                     // see if we're allowed to double jump.
                     if (landing && !doubleJumping)
                     {
-                        // Look for the vertical velocity to be slow as an 
+                        // Look for the vertical velocity to be slow as an
                         // indicator of the top of the arc.
                         if (Math.Abs(velocity.Z) < 0.15f)
                         {
@@ -135,7 +134,7 @@ namespace Boku.SimWorld.Chassis
             // Balance hover force with gravity so that chassis stays at the right height.
             // Note that we use the previous position for this since we "know" it's valid.
             //
-            {            
+            {
                 // Create local copies to work on.  Will be copied back to movement below.
                 Vector3 velocity = movement.Velocity;
                 Vector3 position = movement.Position;
@@ -319,7 +318,7 @@ namespace Boku.SimWorld.Chassis
         }
 
         /// <summary>
-        /// Based on the chassis' internal values, sets the blend values for the 
+        /// Based on the chassis' internal values, sets the blend values for the
         /// four standard looping animations.
         /// </summary>
         /// <param name="anims"></param>

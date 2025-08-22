@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -128,7 +127,7 @@ namespace Boku.Common.ParticleSystem
         protected float positionJitter = 0.0f;    // Magnitude of random offset applied to new particles from the emitter's position.
         protected Vector3 velocity;               // Velocity of emitter.
         protected Vector4 color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-        protected float startRadius = 0.9f;      
+        protected float startRadius = 0.9f;
         protected float endRadius = 5.0f;
         protected float startAlpha = 0.4f;
         protected float endAlpha = 0.0f;
@@ -353,7 +352,6 @@ namespace Boku.Common.ParticleSystem
             particleList.Clear();
         }
 
-
         private static void Init()
         {
             localIndices = new Int16[6 * maxSprites];
@@ -399,7 +397,7 @@ namespace Boku.Common.ParticleSystem
                     partial += dt * adjustedEmissionRate;
                 }
 
-                // Emit as many particles as needed this 
+                // Emit as many particles as needed this
                 // frame to keep up with the emission rate.
                 while (partial >= 1.0f)
                 {
@@ -491,7 +489,7 @@ namespace Boku.Common.ParticleSystem
                 // have an Update call per particle.  These are lightweight enough that we
                 // can just update them directly.
                 UpdateParticles(dt);
-                
+
                 // See if we've died.
                 if (Dying && particleList.Count == 0)
                 {
@@ -530,7 +528,6 @@ namespace Boku.Common.ParticleSystem
                 UpdateVerts();
 
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
-
 
                 // Get the effect we need.
                 Effect effect = manager.Effect2d;
@@ -572,7 +569,6 @@ namespace Boku.Common.ParticleSystem
             }   // end of if active
 
         }   // end of Emitter Render()
-
 
         public static void LoadContent(bool immediate)
         {
@@ -625,10 +621,9 @@ namespace Boku.Common.ParticleSystem
                     part.Set(pos, velocity, lifeTime, color, maxRotation, numTiles);
                 }
             }
-            
+
             return part;
         }
-
 
     }   // end of class BaseSpriteEmitter
 

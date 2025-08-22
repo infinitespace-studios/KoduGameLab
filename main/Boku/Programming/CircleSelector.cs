@@ -24,14 +24,14 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Circle the target
-    /// 
-    /// this selector will do one of two things.  
-    /// First, if the distance to the first Action Thing is greater than 
-    /// the circling distance, then it will move toward the first Action Thing.  
-    /// Otherwise if the distance is equal or less than the circling distance, 
-    /// it will calculate a set of waypoints that circle the target and 
+    ///
+    /// this selector will do one of two things.
+    /// First, if the distance to the first Action Thing is greater than
+    /// the circling distance, then it will move toward the first Action Thing.
+    /// Otherwise if the distance is equal or less than the circling distance,
+    /// it will calculate a set of waypoints that circle the target and
     /// start navigating those points.
-    /// 
+    ///
     /// NOTE - mattmac - 1.2.2008 - this doesn't work when the thing you're trying to circle is moving
     /// waypoints are not updated until the target moves beyond a threshold
     /// Basically, it draws a circle around the character and then follows it blindly until the
@@ -39,8 +39,8 @@ namespace Boku.Programming
     /// the target is moving, if waypoints are indeed the best approach to take.
     /// There is no easy answer; the target may be faster than the circler, and the target
     /// will necessarily go out of the circler's sight periodically. Cut?
-    /// 
-    /// Rewritten. It's now much shorter, doesn't have those ridiculous waypoints, and 
+    ///
+    /// Rewritten. It's now much shorter, doesn't have those ridiculous waypoints, and
     /// actually works. *** 12.9.08
     /// </summary>
     public class CircleSelector : Selector

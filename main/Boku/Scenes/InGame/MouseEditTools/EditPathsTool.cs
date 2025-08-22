@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +33,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
     public class EditPathsTool : BaseMouseEditTool, INeedsDeviceReset
     {
         #region Members
-        
+
         private static EditPathsTool instance = null;
 
         private Boku.InGame.WayPointEdit.MouseOver mouseOver = Boku.InGame.WayPointEdit.mouseOver;
@@ -249,23 +248,21 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 inGame.shared.addItemHelpCard.Update();
 
                 if (sliderActive)
-                {                    
+                {
                     if (GamePadInput.ActiveMode == GamePadInput.InputMode.Touch)
                         UpdateTouchSliders(uicamera);
                     else if (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
-                        UpdateMouseSliders(uicamera);                    
+                        UpdateMouseSliders(uicamera);
                 }
 
                 SelectOverlay();
 
-                // If the slider is still active, we're done.  
+                // If the slider is still active, we're done.
                 // We don't want any other input acted upon.
                 if (sliderActive)
                 {
                     return;
                 }
-
-
 
                 if (GamePadInput.ActiveMode == GamePadInput.InputMode.Touch)
                 {
@@ -278,7 +275,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 }
             }   // end if active.
 
-            // This tool is odd enough compared to the standard 
+            // This tool is odd enough compared to the standard
             // tools that we don't want to call the base update.
             //base.Update();
 
@@ -337,8 +334,8 @@ namespace Boku.Scenes.InGame.MouseEditTools
 
                 // If the user presses the left button while not over anything
                 // start adding a plain path.
-                if (allowNewPath && 
-                    !touchOver.Adding && !touchOver.Adjusting && 
+                if (allowNewPath &&
+                    !touchOver.Adding && !touchOver.Adjusting &&
                     TouchGestureManager.Get().TapGesture.WasRecognized &&
                     Boku.InGame.inGame.touchEditUpdateObj.ToolBar.IsButtonActionToggledOn(ToolBar.TouchControls.BrushActionIDs.baNode) &&
                     Boku.InGame.inGame.TouchEdit.HasNonUITouch())
@@ -584,12 +581,11 @@ namespace Boku.Scenes.InGame.MouseEditTools
         private void UpdateMouseSliders(Camera uicamera)
         {
             Vector2 hitPos = new Vector2(MouseInput.Position.X, MouseInput.Position.Y);
-            
+
             Matrix mat = Matrix.Invert(slider.WorldMatrix);
 
             // Convert mouse hit into UV coords.
             Vector2 hitUV = TouchInput.GetHitUV(hitPos, uicamera, ref mat, slider.Size.X, slider.Size.Y, useRtCoords: false);
-
 
             bool outside = true;
             if (hitUV.X >= 0 && hitUV.X < 1 && hitUV.Y >= 0 && hitUV.Y < 1)
@@ -729,8 +725,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
                     // Render menu using local camera.
                     Fx.ShaderGlobals.SetCamera(camera);
 
-
-
                     float tutScale = 1.0f;
                     if (BokuGame.ScreenSize.X > BokuGame.ScreenSize.Y)
                     {
@@ -765,7 +759,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
             }
         }   // end of Render()
 
-
         #endregion Public
 
         #region Internal
@@ -790,7 +783,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
 
             nodeMenu.DeleteAll();
 
-            //add more is not supported in this fashion when in touch mode - instead, just use add mode, select the starting point, and then start 
+            //add more is not supported in this fashion when in touch mode - instead, just use add mode, select the starting point, and then start
             //adding
             if (GamePadInput.ActiveMode != GamePadInput.InputMode.Touch)
             {
@@ -872,7 +865,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
         {
             if (menu.CurString == Strings.Localize("mouseEdit.addMore"))
             {
-                //add more is not supported in this fashion when in touch mode - instead, just use add mode, select the starting point, and then start 
+                //add more is not supported in this fashion when in touch mode - instead, just use add mode, select the starting point, and then start
                 //adding
                 if (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
                 {
@@ -1073,7 +1066,6 @@ namespace Boku.Scenes.InGame.MouseEditTools
         }   // end of OnDeactivate()
         #endregion Internal
 
-
         #region INeedsDeviceReset Members
 
         public void LoadContent(bool immediate)
@@ -1113,5 +1105,3 @@ namespace Boku.Scenes.InGame.MouseEditTools
     }   // class EditPathsTool
 
 }   // end of namespace Boku.Scenes.InGame.MouseEditTools
-
-

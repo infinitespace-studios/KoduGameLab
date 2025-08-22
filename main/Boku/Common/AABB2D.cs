@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -294,5 +293,3 @@ namespace Boku.Common
     }   // end of class AABB2D
 
 }   // end of namespace Boku.Common
-
-

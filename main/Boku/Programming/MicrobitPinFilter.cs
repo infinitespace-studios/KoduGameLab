@@ -24,8 +24,8 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Hybrid filter that provides the source of Microbit pin input.
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class MicrobitPinFilter : Filter, IMicrobitTile
     {
@@ -76,26 +76,6 @@ namespace Boku.Programming
                     }
                 }
             }
-
-#if !NETFX_CORE
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                // Get the correct button.
-                switch (pin)
-                {
-                    case MicrobitPin.Pin1:
-                        result = bit.ReadPinValue(0, Microbit.EPinOperatingMode.Digital);
-                        break;
-                    case MicrobitPin.Pin2:
-                        result = bit.ReadPinValue(1, Microbit.EPinOperatingMode.Digital);
-                        break;
-                    case MicrobitPin.Pin3:
-                        result = bit.ReadPinValue(2, Microbit.EPinOperatingMode.Digital);
-                        break;
-                }
-            }
-#endif
 
             // Return as a parameter a vector that can be used for input to the movement system, so
             // that players can drive and turn bots using gamepad buttons.

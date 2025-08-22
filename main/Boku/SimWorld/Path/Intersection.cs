@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #define MF_AIRBORNE_THRU
 
 using System;
@@ -164,7 +163,7 @@ namespace Boku.SimWorld.Path
                     float collBot = baseHeight + Road.Generator.CollEndBase;
                     if (!Road.Generator.PassUnderEnd)
                         collBot = 0.0f;
-                    if ((center.Z + radius < collTop) 
+                    if ((center.Z + radius < collTop)
                         && (center.Z - radius > collBot))
                     {
                         Vector2 cen2 = new Vector2(center.X, center.Y);
@@ -376,7 +375,6 @@ namespace Boku.SimWorld.Path
                 return false;
             }
 
-
             /// <summary>
             /// Render this intersection of road/wall
             /// </summary>
@@ -532,7 +530,7 @@ namespace Boku.SimWorld.Path
             }
 
             /// <summary>
-            /// Return the height we think pos should be at. 
+            /// Return the height we think pos should be at.
             /// </summary>
             /// <param name="pos"></param>
             /// <returns></returns>
@@ -560,7 +558,7 @@ namespace Boku.SimWorld.Path
             }
 
             /// <summary>
-            /// Return the height we think pos should be at. 
+            /// Return the height we think pos should be at.
             /// </summary>
             /// <param name="pos"></param>
             /// <returns></returns>

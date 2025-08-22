@@ -9,11 +9,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
 
-#if NETFX_CORE
-#else
-    using System.Data;
-#endif
-
 using System.IO;
 
 using Microsoft.Xna.Framework;
@@ -27,7 +22,7 @@ using Boku.Base;
 using Boku.Common;
 using Boku.UI2D;
 
-#if false //replaced all this by parsing JSON in GetFeedList. 
+#if false //replaced all this by parsing JSON in GetFeedList.
 
 namespace Boku
 {
@@ -52,7 +47,7 @@ namespace Boku
         private string keyDate ="Date";
         private string keyTwitter ="TwitterMessage";
         private FeedSection currentFeedSection;
-       
+
         private DataSet rssData = new DataSet();
         public List<String> ParseItems(string rawData)
         {
@@ -70,7 +65,6 @@ namespace Boku
             return items;
         }
 
-
         public bool AddFeed(string rawData, ref List<FeedMs> msFeed, int width, Shared.GetFont tFont, Shared.GetFont dFont, Shared.GetFont bFont)
         {
             char lastChar;
@@ -78,7 +72,7 @@ namespace Boku
 
             TextBlobHL TextBlobHL = new TextBlobHL(bFont,"label",width);
             FeedMs feedItem = null;
-            
+
             currentFeedSection =  FeedSection.keyNone;
             if (rawData.StartsWith("\"" + keyTitle + "\""))
             {
@@ -106,19 +100,18 @@ namespace Boku
                         currentFeedSection = FeedSection.keyLink;
                     }
                     else if ( field.Contains( keyTwitter) )
-                    {                            
+                    {
                         currentFeedSection = FeedSection.keyTwitter;
                     }
                     else if ( field.Contains( keyDate ) )
                     {
                         currentFeedSection = FeedSection.keyDate;
-                    }                        
+                    }
                     lastChar = field[0];
                 }
                 msFeed.Add(feedItem);
             }
 
-          
             return true;
         }
 
@@ -130,15 +123,15 @@ namespace Boku
                     newsItem.Title = data;
                     ; break;
                 case FeedSection.keyText:
-                    newsItem.Body = data; 
+                    newsItem.Body = data;
                     break;
                 case FeedSection.keyDate:
-                    newsItem.DateString = data; 
+                    newsItem.DateString = data;
                     break;
-                case FeedSection.keyTwitter: ; 
+                case FeedSection.keyTwitter: ;
                     break;
                 case FeedSection.keyLink:
-                    newsItem.CreateHyperlink(HyperlinkType.URL, "\nRead more Here!", data); 
+                    newsItem.CreateHyperlink(HyperlinkType.URL, "\nRead more Here!", data);
                     break;
             }
         }

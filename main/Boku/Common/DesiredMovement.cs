@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,18 +15,18 @@ namespace Boku.Common
     /// <summary>
     /// This class is the connection point between brain actions and those
     /// actions being applied by the chassis to doing actual movement.
-    /// 
-    /// Each value in this class has a nullable type which allows you to tell 
+    ///
+    /// Each value in this class has a nullable type which allows you to tell
     /// whether or not we have a valid value.  For instance, if a character
     /// is just turning, then the velocity and target location values will
     /// not be valid since they are not being used.
-    /// 
+    ///
     /// In addition to setting the desired values, the brain also need to set
     /// the max speeds and accelerations.  These will be based on the actor's
     /// base values and modified by any quickly/slowly modifiers.  When doing
-    /// movement updates, the chassis should only look at these values, not 
+    /// movement updates, the chassis should only look at these values, not
     /// the base actor values.
-    /// 
+    ///
     /// Note that the only way to set any of these values is through the Set*()
     /// functions.  This is deliberate since it forces you set set the related
     /// speed and acceleration values when giving a target value.  Don't cheat
@@ -217,7 +216,7 @@ namespace Boku.Common
         /// Is this bot just coasting?  True if none of the Desired* values are set.
         /// Use to determine when to add friction.
         /// This includes velocity, rotation, and altitude values.
-        /// 
+        ///
         /// TODO (****) Probably doesn't help much but we could have all the Coasting
         /// bools cleared in Reset() and then accumulated as the Set* methods are called.
         /// This would remove the need for all the .HasValue testing.
@@ -230,9 +229,9 @@ namespace Boku.Common
 
                 coasting = true
                     && !desiredVelocity.HasValue
-                    && !desiredTargetLocation.HasValue 
-                    && !desiredRotationRateZ.HasValue 
-                    && !desiredRotationAngleZ.HasValue 
+                    && !desiredTargetLocation.HasValue
+                    && !desiredRotationRateZ.HasValue
+                    && !desiredRotationAngleZ.HasValue
                     && !desiredVerticalSpeed.HasValue
                     && !desiredAltitude.HasValue;
 
@@ -246,7 +245,7 @@ namespace Boku.Common
         /// purpose so that mouse-look works correctly.  We want
         /// coasting to be true even if rotation is happening so
         /// that friction takes affect and stop the movement.
-        /// 
+        ///
         /// True if we have user input for horizontal movement.
         /// False if no user input for horizontal movement.
         /// </summary>
@@ -289,7 +288,7 @@ namespace Boku.Common
         #region Public
 
         /// <summary>
-        /// Set the desired velocity for the bot along with max speed 
+        /// Set the desired velocity for the bot along with max speed
         /// and acceleration limits it can use to achieve that velocity.
         /// </summary>
         /// <param name="velocity"></param>
@@ -307,7 +306,7 @@ namespace Boku.Common
         }   // end of SetDesiredVelocity()
 
         /// <summary>
-        /// Set the desired target location for the bot along with max speed 
+        /// Set the desired target location for the bot along with max speed
         /// and acceleration limits it can use to get there.  Chassis should
         /// slow to a stop at this point.
         /// </summary>
@@ -326,7 +325,7 @@ namespace Boku.Common
         }   // end of SetDesiredTargetLocation()
 
         /// <summary>
-        /// Set the desired rotation rate for the bot along with max rotation 
+        /// Set the desired rotation rate for the bot along with max rotation
         /// and acceleration limits it can use to achieve that rate.
         /// </summary>
         /// <param name="rotationRate"></param>
@@ -342,7 +341,7 @@ namespace Boku.Common
         }   // end of SetDesiredRotationRate()
 
         /// <summary>
-        /// Set the desired rotation angle for the bot along with max rotation 
+        /// Set the desired rotation angle for the bot along with max rotation
         /// and acceleration limits it can use to achieve that angle.  Actor
         /// should slow to stop rotatiing at this angle without overshooting.
         /// </summary>
@@ -359,7 +358,7 @@ namespace Boku.Common
         }   // end of SetDesiredRotationAngle()
 
         /// <summary>
-        /// Set the desired vertical speed for the bot along with max speed 
+        /// Set the desired vertical speed for the bot along with max speed
         /// and acceleration limits it can use to achieve that speed.
         /// </summary>
         /// <param name="verticalSpeed"></param>
@@ -399,7 +398,7 @@ namespace Boku.Common
         }   // end of SetAvoidTarget()
 
         /// <summary>
-        /// Adds an external force to this actor.  External forces are 
+        /// Adds an external force to this actor.  External forces are
         /// summed together and applied as a single, aggregate force.
         /// Currently, this is only used by fan's push/pull.
         /// </summary>
@@ -435,7 +434,5 @@ namespace Boku.Common
         #endregion
 
     }   // end of class DesiredMovement
-
-
 
 }   // end of namespace Boku.Common

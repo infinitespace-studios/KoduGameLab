@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
-// Uncomment the following line to cause fake presence 
+// Uncomment the following line to cause fake presence
 // events to be fed to the sharing presence display.
 //#define PRESENCE_DEBUG
 
@@ -17,23 +16,14 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if NETFX_CORE
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.Storage.Streams;
 using Windows.System;
-#else
-using System.Windows.Forms;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-#if !NETFX_CORE
-using Microsoft.Xna.Framework.Net;
-#endif
-
-
 using Boku.Base;
 using Boku.Common;
 using Boku.Common.Gesture;
@@ -69,7 +59,7 @@ namespace Boku
 
             public bool isDeleteActive = false;         // Is the user allowed to delete this world?
 
-            public string userName = null;              // The name of the current user.  Used to decided whether or 
+            public string userName = null;              // The name of the current user.  Used to decided whether or
                                                         // not she may delete a file from the community.
 
             public bool isAttaching = false;            // Are we in attach-level mode?
@@ -110,7 +100,7 @@ namespace Boku
             public AABB2D downloadsBox = new AABB2D();          // Hitbox for num downloads.
 
             public ILevelBrowser mainBrowser = null;
-            public ILevelBrowser altBrowser = null;         // On the Sharing page we also need to be able to toggle between 
+            public ILevelBrowser altBrowser = null;         // On the Sharing page we also need to be able to toggle between
             // using the SharingBrowser and the LocalBrowser.  We use this
             // as a place to hang the currently unused one.
 
@@ -196,7 +186,6 @@ namespace Boku
                 levelSorter.SortDirection = SortDirection.Descending;
 
                 textLineEditor = new TextLineEditor(searchBox, levelFilter.SearchString, @"Textures\UI2D\SearchIcon");
-
 
                 // Create level grid.
                 levelGrid = new LoadLevelMenuUIGrid(
@@ -392,7 +381,6 @@ namespace Boku
                     }
                 }
 
-
             }   // end of SetAuxMenuDefaultSelections()
 
             #endregion
@@ -400,7 +388,7 @@ namespace Boku
             #region Internal
 
             /// <summary>
-            /// Sets up the SortBy 
+            /// Sets up the SortBy
             /// </summary>
             public void SetUpAuxMenus()
             {
@@ -558,15 +546,6 @@ namespace Boku
                     }
 
 #if !HIDE_LIKES
-#if !NETFX_CORE
-                    // Not available for Win8 version since we haven't fixed the auth issue.
-
-                    // Likes (will need to auth first)
-                    popup.AddItem(Strings.Localize("loadLevelMenu.like"), PopupOnLike);
-
-                    // Comments (can read but needs auth to leave a new comment)
-                    popup.AddItem(Strings.Localize("loadLevelMenu.comments"), PopupOnComments);
-#endif
 #endif
 
                     // Always allow abuse reporting.  No longer allow un-reporting.
@@ -587,7 +566,6 @@ namespace Boku
                     Debug.Assert(false, "Unrecognized browser type");
                 }
             }   // end of SetUpPopup()
-
 
             private void AttachSelectedLevel()
             {
@@ -660,7 +638,7 @@ namespace Boku
                 }
                 else
                 {
-                    // SelectionElement is null which implies that the grid has not yet been populated so 
+                    // SelectionElement is null which implies that the grid has not yet been populated so
                     // don't let the user make a choice.  Note that they can still exit if they choose.
 
                     // Reactivate the grid and return.
@@ -690,13 +668,8 @@ namespace Boku
                     }
 
                     string exportedFilename = null;
-#if NETFX_CORE
                     // Show WinRT happy save file dialog.
                     PickSaveFile(level);
-
-#else
-                    exportedFilename = ShowExportDialog(level);
-#endif
 
                     return exportedFilename;
 
@@ -706,7 +679,6 @@ namespace Boku
 
             }   // end of ExportSelectedLevel()
 
-#if NETFX_CORE
             private async void PickSaveFile(LevelMetadata level)
             {
                 FileSavePicker savePicker = new FileSavePicker();
@@ -736,64 +708,6 @@ namespace Boku
                     //stream.Dispose();
                 }
             }
-#endif
-
-#if !NETFX_CORE
-
-            /// <summary>
-            /// Shows dialog for exporting file.  Returns name chosen to export to.
-            /// </summary>
-            /// <param name="level"></param>
-            /// <returns>Filename we exported to, null if user backs out.</returns>
-            private string ShowExportDialog(LevelMetadata level)
-            {
-                // Create new SaveFileDialog.
-                SaveFileDialog DialogSave = new SaveFileDialog();
-
-                // Default file extension.
-                DialogSave.DefaultExt = "Kodu2";
-
-                // Available file extensions.
-                DialogSave.Filter = "Kodu files (*.Kodu2)|*.Kodu2";
-
-                // Adds a extension if the user does not.
-                DialogSave.AddExtension = true;
-
-                // Restores the selected directory, next time this is activated.
-                DialogSave.RestoreDirectory = true;
-
-                if (level.PreviousLink() != null || level.NextLink() != null)
-                {
-                    // Dialog title.
-                    DialogSave.Title = Strings.Localize("loadLevelMenu.exportMultiDialogTitle");
-                }
-                else
-                {
-                    // Dialog title.
-                    DialogSave.Title = Strings.Localize("loadLevelMenu.exportDialogTitle");
-                }
-
-                // Startup directory
-                DialogSave.InitialDirectory = @"c:/My Documents/Kodu";
-
-                // Set the default filename.
-                DialogSave.FileName = GenerateDefaultFileName(level, true);
-
-                string result = null;
-
-                // Show the dialog and process the result.
-                if (DialogSave.ShowDialog() == DialogResult.OK)
-                {
-                    ExportLevel(level, DialogSave.FileName, null);
-                    result = DialogSave.FileName;
-                }
-
-                DialogSave.Dispose();
-                DialogSave = null;
-
-                return result;
-            }   // end of ShowExportDialog()
-#endif
 
             private void Callback_ExportSelectedLevel(AsyncOperation op)
             {
@@ -803,28 +717,16 @@ namespace Boku
                 string fileNameWithoutExtension = GenerateDefaultFileName(level, false);
 
                 // If this filename is already in use, add a unique digit on the end.
-#if NETFX_CORE
                 string fileName = String.Format("{0}.kodu2", fileNameWithoutExtension);
-#else
-                string fileName = String.Format("{0}.kodu2", fileNameWithoutExtension);
-#endif
                 int rev = 1;
                 while (true)
                 {
-#if NETFX_CORE
                     if (!Storage4.FileExists(LevelPackage.ExportsPath + fileName, StorageSource.UserSpace))
-#else
-                    if (!File.Exists(LevelPackage.ExportsPath + fileName))
-#endif
                     {
                         break;
                     }
 
-#if NETFX_CORE
                     fileName = String.Format("{0} ({1}).kodu2", fileNameWithoutExtension, rev);
-#else
-                    fileName = String.Format("{0} ({1}).kodu2", fileNameWithoutExtension, rev);
-#endif
                     rev += 1;
                 }
 
@@ -836,14 +738,14 @@ namespace Boku
             //pre: assumes level is at the start of the chain
             //pre: assumes valid filename is passed in
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="level"></param>
             /// <param name="fileName"></param>
             /// <param name="outStream">May be null.  If not null this is used.  If this is null then fileName is used.</param>
             private void ExportLevel(LevelMetadata level, string fileName, Stream outStream)
             {
-                //only the first level in a chain should ever make it this far 
+                //only the first level in a chain should ever make it this far
                 //(higher up, we determine it's a package and pass in the first level)
                 Debug.Assert(level.LinkedFromLevel == null);
 
@@ -860,61 +762,22 @@ namespace Boku
                 {
                     string folderName = Utils.FolderNameFromFlags(level.Genres);
 
-#if NETFX_CORE
                     string fullPathToLevelFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, level.WorldId.ToString() + ".Xml");
-#else
-                    string fullPathToLevelFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, folderName, level.WorldId.ToString() + ".Xml");
-#endif
-
-#if EXPORT_DEBUG_HACK
-                    {
-                        string message = "Main File\n" +
-                                        "UserLocation : " + Storage4.UserLocation + "\n" +
-                                        "MediaPath : " + BokuGame.Settings.MediaPath + "\n" +
-                                        "folderName : " + folderName + "\n" +
-                                        "fileName : " + level.WorldId.ToString() + ".Xml\n\n" +
-                                        "fullPath : " + fullPathToLevelFile;
-                        var result = System.Windows.Forms.MessageBox.Show(message);
-                    }
-#endif
 
                     levelFiles.Add(fullPathToLevelFile);
 
                     //load the xml so we can find the stuff, thumbnail and terrain file paths
                     XmlWorldData xml = XmlWorldData.Load(fullPathToLevelFile, XnaStorageHelper.Instance);
 
-#if !NETFX_CORE
-                    if (xml == null)
-                    {
-                        string message = "Failed to open for export:\n" + fullPathToLevelFile;
-                        var result = System.Windows.Forms.MessageBox.Show(message);
-
-                        return;
-                    }
-#endif
-
-#if NETFX_CORE
                     string fullPathToStuffFile = Path.Combine(BokuGame.Settings.MediaPath, xml.stuffFilename);
-#else
-                    string fullPathToStuffFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, xml.stuffFilename);
-#endif
 
                     stuffFiles.Add(fullPathToStuffFile);
 
-#if NETFX_CORE
                     string fullPathToThumbnailFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Dds");
-#else
-                    string fullPathToThumbnailFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Dds");
-#endif
                     thumbnailFiles.Add(fullPathToThumbnailFile);
 
-#if NETFX_CORE
                     string fullPathToScreenshotFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Jpg");
-#else
-                    string fullPathToScreenshotFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Jpg");
-#endif
                     screenshotFiles.Add(fullPathToScreenshotFile);
-
 
                     // Only provide terrain file if it is not a builtin terrain.
                     // TODO Rethink this.  Maybe put terrain in every file.
@@ -922,11 +785,7 @@ namespace Boku
                     string partialPathToTerrainFile = Path.Combine(BokuGame.Settings.MediaPath, xml.xmlTerrainData2.virtualMapFile);
                     if (Storage4.FileExists(partialPathToTerrainFile, StorageSource.UserSpace))
                     {
-#if NETFX_CORE
                         fullPathToTerrainFile = partialPathToTerrainFile;
-#else
-                        fullPathToTerrainFile = Path.Combine(Storage4.UserLocation, partialPathToTerrainFile);
-#endif
                     }
                     terrainFiles.Add(fullPathToTerrainFile);
 
@@ -945,7 +804,6 @@ namespace Boku
                     fileName,
                     outStream);
             }   // end of ExportLevel()
-
 
             private string GenerateDefaultFileName(LevelMetadata level, bool withExtension)
             {
@@ -1136,22 +994,6 @@ namespace Boku
                     if (exportedFilename != null)
                     {
                         // For WinRT we will show a dialog even though we are fullscreen.
-#if !NETFX_CORE
-                        // Only display message on fullscreen.  On windowed we 
-                        // use the SaveDialog instead.
-                        // TODO (****) *** Aren't we always windowed now?
-                        //if (Boku.BokuGame.Graphics.IsFullScreen)
-                        {
-                            if (parent.shared.CurWorld.LinkedFromLevel != null || parent.shared.CurWorld.LinkedToLevel != null)
-                            {
-                                parent.ShowLinkedLevelExportedDialog();
-                            }
-                            else
-                            {
-                                parent.ShowLevelExportedDialog(exportedFilename);
-                            }
-                        }
-#endif
                     }
                 }
             }
@@ -1163,7 +1005,6 @@ namespace Boku
                 communityShareMenu.Activate(parent.shared.CurWorld);
 
             }
-
 
             /// <summary>
             /// Video output hack.
@@ -1288,7 +1129,6 @@ namespace Boku
                 PopupOnPlayOrEdit(true);
             }
 
-
             private void PopupOnPlayOrEdit(bool bEditMode)
             {
                 popup.Active = false;
@@ -1299,7 +1139,7 @@ namespace Boku
                 }
                 else
                 {
-                    // SelectionElement is null which implies that the grid has not yet been populated so 
+                    // SelectionElement is null which implies that the grid has not yet been populated so
                     // don't let the user make a choice.  Note that they can still exit if they choose.
 
                     // Reactivate the grid and return.
@@ -1379,7 +1219,6 @@ namespace Boku
                     parent.shared.CurWorld.FlaggedByMe = true;
                 }
             }
-
 
             public void PopupOnDelete()
             {
@@ -1580,7 +1419,6 @@ namespace Boku
                 SetAuxMenuDefaultSelections();
             }   // end of AuxOnCancel()
 
-
             public void StartFetchingThumbnails(ILevelSetCursor cursor)
             {
                 // Most recent thumbnail requests are serviced first, so walk from left
@@ -1745,8 +1583,8 @@ namespace Boku
                     parent.FeedFakeSharingEvents();
                 }
 #endif
-                // We need to do this ever frame instead of just at activation 
-                // time since deactivation of the previous scene and activation 
+                // We need to do this ever frame instead of just at activation
+                // time since deactivation of the previous scene and activation
                 // of this scene don't always happen in that order.
                 AuthUI.ShowStatusDialog();
 
@@ -1795,7 +1633,7 @@ namespace Boku
                 HandleTouchInput();
 
                 // Note that no input goes to the levelGrid while the popup (or the sort list) is active.
-                // TODO (****) Should this be rethought to send input to those items first instead of 
+                // TODO (****) Should this be rethought to send input to those items first instead of
                 // updating the main list first?
                 if (shared.levelGrid != null && shared.popup.Active == false && shared.sortList.Active == false && parent.pendingState != States.Inactive)
                 {
@@ -1815,7 +1653,7 @@ namespace Boku
                         shared.mainBrowser.Reset();
                     }
 
-                    // The level info comes in asynchronously.  So check 
+                    // The level info comes in asynchronously.  So check
                     // it and split the description text when it arrives.
                     SplitText();
 
@@ -1827,7 +1665,7 @@ namespace Boku
                 {
                     Matrix world = Matrix.Identity;
 
-                    // Need to update the lists before the grids otherwise 
+                    // Need to update the lists before the grids otherwise
                     // the grid will steal input.
                     if (shared.sortList != null)
                     {
@@ -1916,7 +1754,7 @@ namespace Boku
                     //                        shared.levelGrid.Update(ref world);
                     //                    }
 
-                    // Look at the world that is currently in focus and set 
+                    // Look at the world that is currently in focus and set
                     // the appropriate shared bools so we know where we are.
                     // Start by turning off everything so we've got a known state.
                     shared.isDownload = false;
@@ -1934,7 +1772,7 @@ namespace Boku
                         shared.isBuiltInWorld = (info.Genres & Genres.BuiltInWorlds) != 0;
                         shared.isDownload = (info.Genres & Genres.Downloads) != 0;
 
-                        // Users may delete their own worlds or worlds they've downloaded.  
+                        // Users may delete their own worlds or worlds they've downloaded.
                         shared.isDeleteActive =
                             //(info.Creator == shared.userName && shared.isMyWorld) ||
                             shared.isMyWorld ||
@@ -1955,7 +1793,7 @@ namespace Boku
                         shared.isDeleteActive &= (parent.CurrentBrowserType != LevelBrowserType.Sharing);
                     }
 
-                    // The level info comes in asynchronously.  So check 
+                    // The level info comes in asynchronously.  So check
                     // it and split the description text when it arrives.
                     SplitText();
 
@@ -2176,7 +2014,6 @@ namespace Boku
                             shared.levelGrid.MoveRight();
                         }
 
-
                     }
 
                     // Mouse input for activating show or sort menus.
@@ -2239,12 +2076,8 @@ namespace Boku
                     }
                 }
 
-
-
                 // Check for hover and adjust text color to match.
                 Color newColor;
-
-
 
                 newColor = shared.sortBox.Contains(hit) ? shared.hoverTextColor : shared.lightTextColor;
                 if (newColor != shared.sortTargetColor)
@@ -2268,26 +2101,14 @@ namespace Boku
 #if !HIDE_LIKES
                 if (shared.likesBox.LeftPressed(hit))
                 {
-#if NETFX_CORE
                     Debug.Assert(false, "Figure out how to launch IE from a URL in WinRT.");
-#else
-                    try
-                    {
-                        shared.PopupOnLike();
-                    }
-                    catch { }
-#endif
                 }
 
                 if (shared.commentsBox.LeftPressed(hit))
                 {
                     try
                     {
-#if NETFX_CORE
                         Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                        shared.PopupOnComments();
-#endif
                     }
                     catch { }
                 }
@@ -2297,11 +2118,7 @@ namespace Boku
                 {
                     try
                     {
-#if NETFX_CORE
                         Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                        shared.PopupOnDownload();
-#endif
                     }
                     catch { }
                 }
@@ -2585,13 +2402,7 @@ namespace Boku
                         {
                             try
                             {
-#if NETFX_CORE
                                 Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                                //Process.Start(shared.CurWorld.Permalink);
-
-                                shared.PopupOnLike();
-#endif
                             }
                             catch { }
                         }
@@ -2603,12 +2414,7 @@ namespace Boku
                         {
                             try
                             {
-#if NETFX_CORE
                                 Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                                //Process.Start(shared.CurWorld.Permalink);
-                                shared.PopupOnDownload();
-#endif
                             }
                             catch { }
                         }
@@ -2683,7 +2489,7 @@ namespace Boku
                     {
                         string description = null;
                         description += info.Description;
-                        // We need to limit the width on the sharing browser more so that 
+                        // We need to limit the width on the sharing browser more so that
                         // we have room for the presence information to fit.
                         int maxWidth = parent.OriginalBrowserType == LevelBrowserType.Sharing ? 460 : 900;
                         info.UIDescBlob = new TextBlob(parent.renderObj.FontSmall, description, maxWidth);
@@ -2702,8 +2508,8 @@ namespace Boku
             #region Internal
 
             /// <summary>
-            /// Deletes the current world.  If local then from the local 
-            /// machine.  If in the community site then sends a message 
+            /// Deletes the current world.  If local then from the local
+            /// machine.  If in the community site then sends a message
             /// to the server to delete the world.
             /// </summary>
             public bool DeleteCurrentWorld()
@@ -2714,7 +2520,6 @@ namespace Boku
                     DeleteCallback,
                     shared.CurWorld.Browser);
             }
-
 
             //
             // Callbacks for Async server calls.
@@ -2766,7 +2571,6 @@ namespace Boku
                 }
             }   // end of GetWorldDataCallback()
 
-
             public override void Activate()
             {
                 shared.levelGrid.LoadContent(true);
@@ -2784,7 +2588,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class LoadLevelMenu UpdateObj  
+        }   // end of class LoadLevelMenu UpdateObj
 
         protected class RenderObj : RenderObject, INeedsDeviceReset
         {
@@ -2856,7 +2660,7 @@ namespace Boku
                 // Render the scene to our rendertarget.
                 InGame.SetRenderTarget(rt);
 
-                // Needed to clear the depth buffer so we don't see a silhouette 
+                // Needed to clear the depth buffer so we don't see a silhouette
                 // of the main menu and greeter Kodu.
                 device.Clear(Color.Transparent);
 
@@ -2886,13 +2690,11 @@ namespace Boku
 
                 quad.Render(bkg, Vector2.Zero, rtSize, "TexturedNoAlpha");
 
-
                 Color darkTextColor = new Color(40, 40, 40);
                 Color greyTextColor = new Color(127, 127, 127);
                 Color lightTextColor = new Color(255, 255, 255);
                 Color greenTextColor = new Color(12, 255, 0);
                 Color blueText = new Color(12, 150, 209);
-
 
                 SpriteBatch batch = UI2D.Shared.SpriteBatch;
 
@@ -2956,11 +2758,7 @@ namespace Boku
                     // Date and creator name.
                     Vector2 datePosition = pos;
                     DateTime localWriteTime = info.LastWriteTime.ToLocalTime();
-#if NETFX_CORE
                     string dateStr = localWriteTime.ToString() + " " + localWriteTime.ToString();
-#else
-                    string dateStr = localWriteTime.ToShortDateString() + " " + localWriteTime.ToShortTimeString();
-#endif
 
                     if (info.Creator != null)
                     {
@@ -3173,7 +2971,6 @@ namespace Boku
                 if (shared.levelGrid.NoValidLevels)
                 {
                     string str = String.Empty;
-
 
                     if (counter > 0)
                         --counter;
@@ -3413,7 +3210,6 @@ namespace Boku
                 }
             }   // end of RenderAuxMenuShadow()
 
-
             public override void Activate()
             {
             }
@@ -3513,7 +3309,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class LoadLevelMenu RenderObj     
+        }   // end of class LoadLevelMenu RenderObj
 
         #region Members
 
@@ -3661,7 +3457,6 @@ namespace Boku
                 return savedUIStates[(int)LocalLevelMode];
             }
         }
-
 
         // c'tor
         public LoadLevelMenu(LevelBrowserType browserType)
@@ -3855,7 +3650,6 @@ namespace Boku
             ModularMessageDialogManager.Instance.AddDialog(text, ReturnToLevelGrid, labelA);
         }
 
-
         public void ShowTargetAlreadyLinkedDialog(Guid targetLink)
         {
             //handler for "continue" - user wants to play anyway
@@ -3912,8 +3706,6 @@ namespace Boku
             //reactive the grid
             shared.levelGrid.Active = true;
         }
-
-
 
         public void OnSelect(UIGrid grid)
         {
@@ -4274,8 +4066,6 @@ namespace Boku
             }
         }
 
-
-
         private void WorldDownloadComplete(WorldDataPacket packet, byte[] thumbnailBytes, LevelMetadata level)
         {
             if (!XmlDataHelper.WriteWorldDataPacketToDisk(packet, thumbnailBytes, level.LastWriteTime))
@@ -4318,7 +4108,6 @@ namespace Boku
                     shared.popup.Active = false;
                 }
 
-
                 // Do stack handling here.  If we do it in the update object we have no
                 // clue which order things get pushed and popped and madness ensues.
                 CommandStack.Pop(commandMap);
@@ -4343,7 +4132,6 @@ namespace Boku
                 {
                     shared.bucketsGrid.Active = false;
                 }
-
 
                 //
                 // Shut down all the browser instances.
@@ -4511,7 +4299,7 @@ namespace Boku
 
         /// <summary>
         /// Converts byte array to Base64 while also doing character
-        /// substitutions to ensure that the resutling string is 
+        /// substitutions to ensure that the resutling string is
         /// valid to use in a URL.
         /// </summary>
         /// <param name="bytes"></param>

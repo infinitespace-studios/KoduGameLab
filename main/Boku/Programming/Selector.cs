@@ -47,7 +47,6 @@ namespace Boku.Programming
         [XmlIgnore]
         public ActionSet ActionSet { get { return actionSet; } }
 
-
         /// <summary>
         /// Copy base properties when cloning to reduce risk of error when adding a new selector
         /// </summary>

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,14 +41,14 @@ namespace Boku.UI
         public const int indexDefaultCard = -1;
 
         public Vector3 position = Vector3.Zero;     // Used to try and work around the issues that arise when
-                                                    // removing the references to Twitches.  The core of the 
+                                                    // removing the references to Twitches.  The core of the
                                                     // problem is that all of the movement for the ReflexHandle
                                                     // has been defined as relative rather than absolute.  This
                                                     // means that any active twitches have to complete before
                                                     // you can do the next movement since you need to know the
                                                     // final position before adding the offset.  So, this variable
-                                                    // will contain the position of the ReflexHandle as if the 
-                                                    // Twitches didn't exist.  It will also be a container for 
+                                                    // will contain the position of the ReflexHandle as if the
+                                                    // Twitches didn't exist.  It will also be a container for
                                                     // much frustration and head shaking.
 
         private static List<ReflexData> cutPasteBuffer = null;
@@ -124,7 +123,6 @@ namespace Boku.UI
         protected UpdateControl updateObj; // active update object
         protected UpdateControl updateObjPending;
         protected UpdateObjEditCards updateObjEditCards;
-
 
         public List<IControl> listControls = new List<IControl>();              // Active controls to navigate right and left through.
         protected List<RenderObject> listWhenClause = new List<RenderObject>(); // Render objects for the when clause, excluding ReflexCards.
@@ -227,9 +225,9 @@ namespace Boku.UI
             renderClause.GetPositionTransform(idRightAnchor, out anchor);
             return linked * anchor;
         }
-        protected void AddCard(Matrix local, 
-                ProgrammingElement element, 
-                CardSpace.CardType cardType, 
+        protected void AddCard(Matrix local,
+                ProgrammingElement element,
+                CardSpace.CardType cardType,
                 ControlRenderObj renderClause)
         {
             ReflexCard card = new ReflexCard(this, reflex, element, cardType, controls);
@@ -241,7 +239,7 @@ namespace Boku.UI
             listControls.Add(card);
             card.Change += CardChanged;
         }
-        
+
         public ReflexPanel(Object parent, Reflex reflex, ControlCollection controls)
         {
             this.parent = parent;
@@ -295,9 +293,9 @@ namespace Boku.UI
             if (reflex.Sensor != null)
             {
                 chain = AddClauseRepeat(this.listWhenClause, out local, chain, idWhenClause, idState);
-                AddCard(local, 
-                        reflex.Sensor, 
-                        CardSpace.CardType.Sensor, 
+                AddCard(local,
+                        reflex.Sensor,
+                        CardSpace.CardType.Sensor,
                         this.listWhenClause[this.listWhenClause.Count-1] as ControlRenderObj);
                 plusType = CardSpace.CardType.Filter;
                 plusElement = CardSpace.Cards.NullFilter;
@@ -310,8 +308,8 @@ namespace Boku.UI
                     Filter filter = reflex.RawFilters[iFilter] as Filter;
 
                     chain = AddClauseRepeat(this.listWhenClause, out local, chain, idWhenClause, idState);
-                    AddCard(local, 
-                            filter, 
+                    AddCard(local,
+                            filter,
                             CardSpace.CardType.Filter,
                             this.listWhenClause[this.listWhenClause.Count - 1] as ControlRenderObj);
                 }
@@ -340,8 +338,8 @@ namespace Boku.UI
             if (reflex.Actuator != null)
             {
                 chain = AddClauseRepeat(this.listDoClause, out local, chain, idDoClause, idState);
-                AddCard(local, 
-                        reflex.Actuator, 
+                AddCard(local,
+                        reflex.Actuator,
                         CardSpace.CardType.Actuator,
                         this.listDoClause[this.listDoClause.Count - 1] as ControlRenderObj);
                 // Specify Selector type here, since selector menu will pull in modifiers as well.
@@ -352,8 +350,8 @@ namespace Boku.UI
             if (reflex.Selector != null && !reflex.Selector.hiddenDefault)
             {
                 chain = AddClauseRepeat(this.listDoClause, out local, chain, idDoClause, idState);
-                AddCard(local, 
-                        reflex.Selector, 
+                AddCard(local,
+                        reflex.Selector,
                         CardSpace.CardType.Selector,
                         this.listDoClause[this.listDoClause.Count - 1] as ControlRenderObj);
                 // Specify Selector type here, since selector menu will pull in modifiers as well.
@@ -368,8 +366,8 @@ namespace Boku.UI
                     Modifier modifier = reflex.Modifiers[iModifier] as Modifier;
 
                     chain = AddClauseRepeat(this.listDoClause, out local, chain, idDoClause, idState);
-                    AddCard(local, 
-                            modifier, 
+                    AddCard(local,
+                            modifier,
                             CardSpace.CardType.Modifier,
                             this.listDoClause[this.listDoClause.Count - 1] as ControlRenderObj);
                 }
@@ -482,8 +480,6 @@ namespace Boku.UI
         {
             CleanseDependantCards(reflexCard, null);
         }
-
-
 
         protected void ChangeCard(ReflexCard reflexCard, ProgrammingElement pendingCard)
         {
@@ -669,7 +665,7 @@ namespace Boku.UI
                     {
                         HelpOverlay.Push("RowHandleFullPasteBuffer");
                     }
-                } 
+                }
                 else if (indexActiveCard == 0 || indexActiveCard == -1)
                 {
                     // Moving away from the handle OR moving to a newly created row.
@@ -781,7 +777,7 @@ namespace Boku.UI
                 //updateObj.Activate();
                 renderList.Add(renderPanel);
                 SwitchRenderStateTo(ControlRenderObj.idStateNormal);
-                
+
                 renderPanel.Activate();
             }
             else if (state == States.Hot)
@@ -797,7 +793,7 @@ namespace Boku.UI
             if (state == States.Hot)
             {
                 updateObj.Deactivate();
-                
+
             }
             // also set active card state as we are acting like a thin container
             if (this.indexActiveCard >= 0 && this.indexActiveCard < listControls.Count)
@@ -912,7 +908,6 @@ namespace Boku.UI
             {
                 ApplyUpdateObjChange(updateList, renderList);
             }
-            
 
             if (state != pendingState)
             {
@@ -986,7 +981,7 @@ namespace Boku.UI
                 ITransform t = this as ITransform;
                 position = t.Local.Translation;
             }
-        }   
+        }
 
         override public void Deactivate()
         {
@@ -1065,7 +1060,7 @@ namespace Boku.UI
 
         /// <summary>
         /// Moves the curent panel to the correct indent position to match it's current indent level.
-        /// If the panel is already in the correct position, nothing happens.  This is designed to 
+        /// If the panel is already in the correct position, nothing happens.  This is designed to
         /// work fine if called every frame for each panel.
         /// </summary>
         public void AnimatePanelIndent(bool force)
@@ -1201,7 +1196,6 @@ namespace Boku.UI
                 }
             }
         }
-        
-        
+
     }
 }

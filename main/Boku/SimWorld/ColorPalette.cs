@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -69,7 +68,7 @@ namespace Boku.SimWorld
         public bool Active
         {
             get { return active; }
-            set 
+            set
             {
                 if (active != value)
                 {
@@ -115,7 +114,7 @@ namespace Boku.SimWorld
             for (int i = 0; i < numEntries; i++)
             {
                 buttons[i] = new UIGrid2DTextureElement(blob, null);
-                buttons[i].NoZ = false; 
+                buttons[i].NoZ = false;
 
                 // Set initial size.
                 textureSize[i] = inactiveSize;
@@ -158,7 +157,7 @@ namespace Boku.SimWorld
                 // to determine the button's actual dimensions.
                 // Also, the texture position represents the center of the button, so we need to adjust for our
                 // actual button position (the top left).
-                Vector2 buttonPosition = texturePosition[i] - 
+                Vector2 buttonPosition = texturePosition[i] -
                     new Vector2(textureSize[i] / 2.0f, -textureSize[i] / 2.0f);
                 Point topLeftCoord = camera.WorldToScreenCoords(new Vector3(buttonPosition, 0.0f));
                 Vector2 textureBottomRightPosition =
@@ -257,7 +256,6 @@ namespace Boku.SimWorld
 
         }   // end of ColorPalette Render()
 
-
         public static Classification.Colors GetColorFromIndex(int colorIndex)
         {
             Classification.Colors color = Classification.Colors.Red;
@@ -347,7 +345,6 @@ namespace Boku.SimWorld
             return index;
 
         }   // end of ColorPalette GetIndexFromColor()
-
 
         public void LoadContent(bool immediate)
         {

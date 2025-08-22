@@ -33,7 +33,6 @@ namespace Surfacer
         {
             LoadDictionary();
 
-
             BuildSurfaceList();
             SurfaceList.SelectedIndex = 0;
 
@@ -53,7 +52,7 @@ namespace Surfacer
                 SurfaceList.Items.Add(surf);
             }
         }
-        
+
         // Dictionary of all known character surfaces
         // This does not contain mappings from characters to used surfaces; that's done separately
         private SurfaceDict surfaces;
@@ -84,7 +83,7 @@ namespace Surfacer
         {
             get
             {
-                // NOTE that this comes from the content directory of the running app, 
+                // NOTE that this comes from the content directory of the running app,
                 // not the project directory. Once you have a surface dictionary you like,
                 // you have to move it and check it in manually.
                 return @"Content\Xml\Actors\SurfaceDict.xml";
@@ -128,8 +127,6 @@ namespace Surfacer
             surfaces.Save(fileName, BokuShared.FileStorageHelper.Instance);
             SurfaceIsDirty = false;
         }
-
-
 
         #endregion
 
@@ -388,7 +385,6 @@ namespace Surfacer
 
         #endregion
 
-
         private void TintMulRNum_ValueChanged(object sender, EventArgs e)
         {
             UpdateTintMulFromNumericComponentUI();
@@ -410,7 +406,6 @@ namespace Surfacer
         {
             SimpleColorPick(DiffuseBtn);
         }
-
 
         /* Given a button, open a color picker and allow the user to choose a color.
          * If the color is accepted (i.e. the use does not press cancel,) set
@@ -621,4 +616,3 @@ namespace Surfacer
         }
     }
 }
-

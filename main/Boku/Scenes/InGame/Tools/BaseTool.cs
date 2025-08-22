@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,7 +35,7 @@ namespace Boku.Scenes.InGame.Tools
         // Add an entry to Strings.cs in the tools struct and add the actual string to Strings.Xml.
         private string description = null;
 
-        // This is the ID of the help overlay associated with the tool.  Add the text strings for the 
+        // This is the ID of the help overlay associated with the tool.  Add the text strings for the
         // help overlay in HelpOverlay.Xml.
         private string helpOverlayID = null;
         private string helpOverlayMagicBrushID = null;
@@ -133,7 +132,7 @@ namespace Boku.Scenes.InGame.Tools
             set { description = value; }
         }
         /// <summary>
-        /// The string used to identify which help overlay 
+        /// The string used to identify which help overlay
         /// to activate while this tool is active.
         /// </summary>
         public string HelpOverlayID
@@ -142,7 +141,7 @@ namespace Boku.Scenes.InGame.Tools
             set { helpOverlayID = value; }
         }
         /// <summary>
-        /// The string used to identify which help overlay 
+        /// The string used to identify which help overlay
         /// to activate while this tool is active and the
         /// magic brush is in action.
         /// </summary>
@@ -318,7 +317,7 @@ namespace Boku.Scenes.InGame.Tools
         {
             get { return aButtonWasPressed; }
         }
-        #endregion 
+        #endregion
 
         #region Public
         /// <summary>
@@ -384,7 +383,7 @@ namespace Boku.Scenes.InGame.Tools
         }   // end of BaseTool Update()
 
         /// <summary>
-        /// Override this to provide a place to initialize 
+        /// Override this to provide a place to initialize
         /// anything that needs to be done on a per-use basis.
         /// </summary>
         public virtual void OnActivate()
@@ -578,8 +577,8 @@ namespace Boku.Scenes.InGame.Tools
                 return;
             }
             Brush2DManager.Brush2D brush = Brush2DManager.GetBrush(shared.editBrushIndex);
-            bool isSelection = 
-                (brush != null) 
+            bool isSelection =
+                (brush != null)
                 && ((brush.Type & Brush2DManager.BrushType.Selection) != 0);
 
             if (isSelection)

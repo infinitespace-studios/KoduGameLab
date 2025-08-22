@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.IO;
 using System.Collections;
@@ -21,7 +20,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
-    /// and creates a texture on the fly into which the checkbox and the 
+    /// and creates a texture on the fly into which the checkbox and the
     /// associated text string are rendered.
     /// This is the new, modular version call so because of the way the
     /// parts fit together.
@@ -339,7 +338,6 @@ namespace Boku.UI2D
                 position.Y = 64;
                 size.Y = nextLevelBlack.Height;
                 quad.Render(nextLevelBlack, position, size, "TexturedRegularAlpha");
-                
 
                 // Render the image.
                 position.X = 6;
@@ -408,7 +406,7 @@ namespace Boku.UI2D
                     position.X = w - 54;
                     position.Y = h - 54;
                     size = new Vector2(64, 64);
-                   
+
                     quad.Render(ButtonTextures.XButton, position, size, "TexturedRegularAlpha");
 
                     //prepare position for "clear" label
@@ -430,7 +428,6 @@ namespace Boku.UI2D
                     //no clear hit box if it's not being rendered
                     clearHitBox.Set(Vector2.Zero, Vector2.Zero);
                 }
-
 
                 // Restore write channels
                 device.BlendState = BlendState.AlphaBlend;
@@ -467,7 +464,7 @@ namespace Boku.UI2D
             {
                 nextLevelMiddleBlack = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\GridElements\MiddleBlack");
             }
-            
+
             if (nextLevelBlack == null)
             {
                 nextLevelBlack = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\GridElements\RadioBoxBlack");
@@ -483,7 +480,7 @@ namespace Boku.UI2D
         public override void InitDeviceResources(GraphicsDevice device)
         {
             int w = 512;
-            int h = 64 + 128;           
+            int h = 64 + 128;
 
             //make sure the height keeps proper dimensions
             height = h * width / w;
@@ -554,9 +551,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularCheckboxElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

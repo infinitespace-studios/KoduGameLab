@@ -24,7 +24,6 @@ namespace Boku
     using Color = System.Drawing.Color;
     using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-
     /// <summary>
     /// Custom control uses the XNA Framework GraphicsDevice to render onto
     /// a Windows Form. Derived classes can override the Initialize and Draw
@@ -34,16 +33,13 @@ namespace Boku
     {
         #region Fields
 
-
         // However many GraphicsDeviceControl instances you have, they all share
         // the same underlying GraphicsDevice, managed by this helper service.
         GraphicsDeviceService graphicsDeviceService;
 
-
         #endregion
 
         #region Properties
-
 
         /// <summary>
         /// Gets a GraphicsDevice that can be used to draw onto this control.
@@ -52,7 +48,6 @@ namespace Boku
         {
             get { return graphicsDeviceService.GraphicsDevice; }
         }
-
 
         /// <summary>
         /// Gets an IServiceProvider containing our IGraphicsDeviceService.
@@ -66,11 +61,9 @@ namespace Boku
 
         ServiceContainer services = new ServiceContainer();
 
-
         #endregion
 
         #region Initialization
-
 
         /// <summary>
         /// Initializes the control.
@@ -94,7 +87,6 @@ namespace Boku
             base.OnCreateControl();
         }
 
-
         /// <summary>
         /// Disposes the control.
         /// </summary>
@@ -109,11 +101,9 @@ namespace Boku
             base.Dispose(disposing);
         }
 
-
         #endregion
 
         #region Paint
-
 
         /// <summary>
         /// Redraws the control in response to a WinForms paint message.
@@ -134,7 +124,6 @@ namespace Boku
                 PaintUsingSystemDrawing(e.Graphics, beginDrawError);
             }
         }
-
 
         /// <summary>
         /// Attempts to begin drawing the control. Returns an error message string
@@ -195,7 +184,6 @@ namespace Boku
             return null;
         }
 
-
         /// <summary>
         /// Ends drawing the control. This is called after derived classes
         /// have finished their Draw method, and is responsible for presenting
@@ -218,7 +206,6 @@ namespace Boku
                 // so we just swallow the exception.
             }
         }
-
 
         /// <summary>
         /// Helper used by BeginDraw. This checks the graphics device status,
@@ -267,7 +254,6 @@ namespace Boku
             return null;
         }
 
-
         /// <summary>
         /// If we do not have a valid graphics device (for instance if the device
         /// is lost, or if we are running inside the Form designer), we must use
@@ -289,7 +275,6 @@ namespace Boku
             }
         }
 
-
         /// <summary>
         /// Ignores WinForms paint-background messages. The default implementation
         /// would clear the control to the current background color, causing
@@ -300,11 +285,9 @@ namespace Boku
         {
         }
 
-
         #endregion
 
         #region Abstract Methods
-
 
         /// <summary>
         /// Derived classes override this to initialize their drawing code.
@@ -314,7 +297,6 @@ namespace Boku
             // Must be overridden
         }
 
-
         /// <summary>
         /// Derived classes override this to draw themselves using the GraphicsDevice.
         /// </summary>
@@ -322,7 +304,6 @@ namespace Boku
         {
             // Must be overridden
         }
-
 
         #endregion
     }

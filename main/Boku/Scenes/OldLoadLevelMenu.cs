@@ -27,7 +27,7 @@ using Boku.SimWorld;
 namespace Boku
 {
     /// <summary>
-    /// The is the main menu for loading levels.  It's a tabbed page where each tab is a 
+    /// The is the main menu for loading levels.  It's a tabbed page where each tab is a
     /// different catagory of levels.  On each page we then have a list menu of available
     /// levels.  The pages are:
     ///     Missions
@@ -73,8 +73,8 @@ namespace Boku
 
             public Texture backgroundTexture = null;
 
-            public int numWorlds = -1;      // The number of worlds being displayed in the 
-                                            // bottom bar.  When this no longer matches reality 
+            public int numWorlds = -1;      // The number of worlds being displayed in the
+                                            // bottom bar.  When this no longer matches reality
                                             // then the bottom bar texture must be updated.
 
             public LevelSort.SortBy curSortOrder = LevelSort.SortBy.UnSorted;
@@ -126,7 +126,7 @@ namespace Boku
 #if HIDE_MISSIONS
                 // Provide offset to center remaining tabs.
                 offset = -0.75f;
-#endif 
+#endif
 
                 blob.selectedColor = selectedColor;
                 blob.unselectedColor = unselectedColor;
@@ -166,7 +166,7 @@ namespace Boku
                 {
 #if !XBOX360
                     files = Storage.GetFiles(path, filter, SearchOption.TopDirectoryOnly);
-#else
+
                     files = Storage.GetFiles(path, filter);
 #endif
                 }
@@ -175,7 +175,7 @@ namespace Boku
                     // The directory will be empty, so no need to get files again
                     // we do this as a convenience and its really not needed.
                 }
-                
+
                 UIGrid grid = null;
 
                 if (files != null && files.Length > 0)
@@ -228,15 +228,15 @@ namespace Boku
                             thumb = Storage.TextureLoad(path + thumbFilename);
                         }
                         catch { }
-                        
+
                         UIGridWorldTile tile = new UIGridWorldTile(
                             blob,
                             xmlWorldData.id,
-                            fullPath, 
-                            xmlWorldData.name, 
-                            xmlWorldData.description, 
-                            xmlWorldData.creator, 
-                            dateTime, 
+                            fullPath,
+                            xmlWorldData.name,
+                            xmlWorldData.description,
+                            xmlWorldData.creator,
+                            dateTime,
                             xmlWorldData.rating,
                             thumb
                         );
@@ -314,7 +314,7 @@ namespace Boku
                     InGame.Clear(Color.TransparentBlack);
 
                     BitmapFont font = BokuGame.fontBerlinSansFBDemiBold20;
-                    
+
                     // Render the label text into the texture.
                     const int dpi = 128;
                     const float buttonSpacing = 0.1f;   // Magic number gotten through trial and error.  No other reason.
@@ -374,11 +374,9 @@ namespace Boku
                     x += DrawText(str, x, y, bottomBar.TextColor);
 
                     // Note:
-                    // The button graphics are rendered on the fly in the Render() 
-                    // call rather than being rendered into the texture so they 
+                    // The button graphics are rendered on the fly in the Render()
+                    // call rather than being rendered into the texture so they
                     // don't get washed out by the specular highlights.
-                    
-                    
 
                     // Restore backbuffer.
                     InGame.RestoreRenderTarget();
@@ -407,7 +405,6 @@ namespace Boku
                 return font.MeasureString(str);
             }   // end of DrawText()
 
-            
             public void LoadGraphicsContent(GraphicsDeviceManager graphics)
             {
                 BokuGame.Load(missionsGrid);
@@ -523,7 +520,6 @@ namespace Boku
                         }
 #endif
 
-
                         // Update active state.
                         if (curGrid != null)
                         {
@@ -631,7 +627,7 @@ namespace Boku
                         }   // end if curGrid != null
 
                    }   // end if 'X' was pressed.
-                
+
                 }   // end of if we have input focus
 
                 // If we're not shutting down, update the tabs and the child grids.
@@ -731,7 +727,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class LoadLevelMenu UpdateObj  
+        }   // end of class LoadLevelMenu UpdateObj
 
         protected class RenderObj : RenderObject
         {
@@ -778,7 +774,6 @@ namespace Boku
                 shared.starterWorldsTab.Render(shared.camera);
                 shared.downloadsTab.Render(shared.camera);
 
-                
                 // Render the bottom bar.  Well, actually, instead of rendering the bar
                 // we'll just steal the texture from it and render than.
                 shared.bottomBar.Render(shared.camera);
@@ -809,7 +804,7 @@ namespace Boku
 
             #endregion
 
-        }   // end of class LoadLevelMenu RenderObj     
+        }   // end of class LoadLevelMenu RenderObj
 
         #region Members
 
@@ -838,7 +833,7 @@ namespace Boku
         }
 #if HIDE_MISSIONS
         private Tab curTab = Tab.MyWorlds;
-#else
+
         private Tab curTab = Tab.Missions;
 #endif
 
@@ -920,7 +915,6 @@ namespace Boku
             MainMenu.Instance.Activate();
         }
 
-        
         /// <summary>
         /// Set the Downloads tab as active.
         /// </summary>
@@ -1023,12 +1017,11 @@ namespace Boku
                 {
                     grid.Active = false;
                 }
-                
+
                 pendingState = States.Inactive;
                 BokuGame.objectListDirty = true;
             }
         }
-
 
         public void LoadGraphicsContent(GraphicsDeviceManager graphics)
         {
@@ -1045,5 +1038,3 @@ namespace Boku
     }   // end of class LoadLevelMenu
 
 }   // end of namespace Boku
-
-

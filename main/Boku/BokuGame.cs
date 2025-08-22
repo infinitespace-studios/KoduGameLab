@@ -11,7 +11,6 @@
 //#define LOG_CONTENT_LOADS
 #endif
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +27,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku.Base;
 using Boku.Fx;
@@ -48,21 +46,15 @@ using Boku.Audio;
 using BokuShared;
 using Boku.Common.Localization;
 
-
 namespace Boku
 {
     /// <summary>
     /// Boku, the story of a boy and his code.
     /// </summary>
-#if NETFX_CORE
     partial class BokuGame : Microsoft.Xna.Framework.Game
-#else
-    partial class BokuGame
-#endif
     {
         // instrumentation
         static object sessionTimerInstrument;
-
 
         public static int ThreadId;
         public static bool Running = true;
@@ -87,20 +79,13 @@ namespace Boku
         // SGI_MOD - picture support
         private static PictureManager pictureManager = new PictureManager();
 
-#if NETFX_CORE
         // For Win8 we'll try and replace all calls to WinKeyboard
         // with ones from the KeyboardInput class.
-#else
-        /// <summary>
-        /// Winkeyboard object for reading processed keyboard input.
-        /// </summary>
-        public WinKeyboard winKeyboard = null;
-#endif        
 
         //
         // Scenes, modes, whatever you want to call them.
         //
-        public TitleScreenMode titleScreenMode;  // Where the game starts. 
+        public TitleScreenMode titleScreenMode;  // Where the game starts.
         public ShaderGlobals shaderGlobals;
         public SurfaceDict Surfaces;
         public MainMenu mainMenu;
@@ -139,7 +124,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// Is the game running in HiDef?  Based on a combination 
+        /// Is the game running in HiDef?  Based on a combination
         /// of the HW capability and the user preference.  This
         /// should be checked in game rather than PreferReach.
         /// </summary>
@@ -161,8 +146,8 @@ namespace Boku
                 if (bokuGame.screenSize != value)
                 {
                     bokuGame.screenSize = value;
-                    // If in Reach mode we want to limit the screenSize 
-                    // to 2048 in either direction since that's the 
+                    // If in Reach mode we want to limit the screenSize
+                    // to 2048 in either direction since that's the
                     // texture (and rendertarget) size limit.
                     // Try to keep proper aspect ratio.  In HiDef the limit
                     // is 4096.
@@ -199,36 +184,6 @@ namespace Boku
             get { return bokuGame.screenPosition; }
             set { bokuGame.screenPosition = value; }
         }
-        
-#if !NETFX_CORE
-        bool isMouseVisible = true;
-        public bool IsMouseVisible
-        {
-            get { return isMouseVisible; }
-            set
-            {
-                if (isMouseVisible != value)
-                {
-                    isMouseVisible = value;
-                    if (isMouseVisible)
-                    {
-                        Cursor.Show();
-                    }
-                    else
-                    {
-                        Cursor.Hide();
-                    }
-                }
-            }
-        }
-#endif
-
-#if !NETFX_CORE
-        public bool IsActive
-        {
-            get { return XNAControl.Instance.Focused; }
-        }
-#endif
 
         public static bool objectListDirty
         {
@@ -237,9 +192,9 @@ namespace Boku
         }
         public static Boku.Properties.Settings Settings
         {
-            get 
-            { 
-                return Boku.Properties.Settings.Default; 
+            get
+            {
+                return Boku.Properties.Settings.Default;
             }
         }
         public static TwitchManager TwitchManager
@@ -367,7 +322,7 @@ namespace Boku
             Auth.Init();
 
             //Guide.SimulateTrialMode = true;
-            
+
             // TODO (****) *** Do we need this code any more?
             InitializeComponent();
 
@@ -444,7 +399,6 @@ namespace Boku
         {
             Surfaces = SurfaceDict.Load(@"Content\Xml\Actors\SurfaceDict.xml", XnaStorageHelper.Instance);
         }
-
 
         // Loads static items that don't implement INeedsDeviceReset
         class StaticContent : INeedsDeviceReset
@@ -711,7 +665,6 @@ namespace Boku
             //Debug.WriteLine("End LoadContent");
 
         }   // end of BokuGame LoadContent()
-#endif
 
         public void UnloadContent()
         {
@@ -749,7 +702,6 @@ namespace Boku
             //Debug.WriteLine("End UnloadContent");
 
         }   // end of BokuGame UnloadContent()
-
 
         public void DeviceResetHandler(object sender, EventArgs e)
         {
@@ -797,7 +749,6 @@ namespace Boku
         public void BeginRun()
         {
         }   // end of BeginRun()
-
 
         // Create of couple of timer objects mostly just to show how they work.
         // I've indented the Refresh output so that it's easier to distinguish
@@ -880,7 +831,7 @@ namespace Boku
             updateTimer.Start();
 #endif
 
-            // JW - The Slingshot and TouchButtons updates must be positioned before the gameListManager 
+            // JW - The Slingshot and TouchButtons updates must be positioned before the gameListManager
             // update, as they are intended to update their internal state before any actor brain updates.
             TouchVirtualController.Update();
 
@@ -913,19 +864,16 @@ namespace Boku
             // Update all the objects currently in the game.
 //            updateGameListTimer.Start();
 
-
             // Keep camera res in sync with screen res.
             InGame.inGame.Camera.Resolution = new Point((int)BokuGame.ScreenSize.X, (int)BokuGame.ScreenSize.Y);
             InGame.inGame.Camera.Update();
 
             ///PV: update the touch subsystem
             // JW - NOTE: We have moved the TouchEdit update from the InGame::UpdateObjects() call
-            // (where MouseEdit is updated) because the tools are updated before UpdateObjects() 
+            // (where MouseEdit is updated) because the tools are updated before UpdateObjects()
             // is called. By moving it here, the tools are now getting to-the-frame-accurate data
             // from the TouchEdit's HitInfo object.
             TouchEdit.Update(InGame.inGame.Camera);
-
-           
 
             gameListManager.Update();
 //            updateGameListTimer.Stop();
@@ -1050,74 +998,6 @@ namespace Boku
         private void ScreenGrab()
         {
 // (TODO (****) BROKEN
-#if !NETFX_CORE
-            if (Actions.PrintScreen.WasPressed || Actions.ShiftPrintScreen.WasPressed || pictureManager.DoScreenGrab)
-            {
-                bool debugCapture = Actions.ShiftPrintScreen.WasPressed;
-
-                Actions.PrintScreen.ClearAllWasPressedState();
-                Actions.ShiftPrintScreen.ClearAllWasPressedState();
-
-                GraphicsDevice device = GraphicsDevice;
-                int width = device.PresentationParameters.BackBufferWidth;
-                int height = device.PresentationParameters.BackBufferHeight;
-
-                // Get the back buffer data.
-                Color[] data = new Color[width * height];
-                if (hidef)
-                {
-                    device.GetBackBufferData<Color>(data);
-                }
-                else
-                {
-                    InGame.inGame.FullRenderTarget0.GetData<Color>(data);
-                }
-
-                // Create a texture for it.
-                Texture2D screenGrab = new Texture2D(device, width, height);
-                screenGrab.SetData<Color>(data);
-
-                // Save texture to Jpg.
-                string fileName = ScreenGrabName();
-                Storage4.TextureSaveAsJpeg(screenGrab, fileName);
-
-                // If needed, save as PNG with transparency, if any.
-                if (debugCapture)
-                {
-                    fileName = fileName.Replace(".Jpg", ".png");
-                    Storage4.TextureSaveAsPng(screenGrab, fileName);
-                }
-
-                BokuGame.Release(ref screenGrab);
-
-                // Should we print?
-                bool print = KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightControl)
-                            || KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.LeftControl);
-                if (print)
-                {
-                    try
-                    {
-                        Process myProcess = new Process();
-                        string fullPath = Path.Combine(Storage4.UserLocation, fileName);
-
-                        myProcess.StartInfo.FileName = fullPath; 
-                        myProcess.StartInfo.Verb = "Print";
-                        myProcess.StartInfo.CreateNoWindow = true;
-                        myProcess.Start();
-                    }
-                    catch
-                    {
-                    }
-
-                }
-
-                // SGI_MOD - picture support
-                if (pictureManager.DoScreenGrab)
-                {
-                    pictureManager.ScreenGrabFinished();
-                }
-            }
-#endif
         }   // end of ScreenGrab()
 
         private string ScreenGrabName()
@@ -1255,20 +1135,20 @@ namespace Boku
         /// On the other hand, other things must be Disposed immediately, because
         /// they represent precious finite resources that others will be needing
         /// right away.
-        /// 
+        ///
         /// The generic case is to call the object's Dispose method. We have
         /// specializations that override this behavior for the types we don't
         /// want disposed.
-        /// 
+        ///
         /// Obviously when you add a new type, you should think very carefully for at
         /// least 10 seconds about whether its Dispose should be called or not.
-        /// 
+        ///
         /// Regarding the Assert that the type is derived from IDisposable, these functions
         /// are strictly for regulating whether an IDisposable's Dispose() should be
         /// called before letting go of it. If it's not an IDisposable, you are safe
         /// in just setting the ref to null. So Don't add Release for anything not
         /// derived from IDisposable.
-        /// 
+        ///
 
         public static void Release<T>(ref T foo) where T : IDisposable
         {
@@ -1308,6 +1188,3 @@ namespace Boku
     }   // end of class BokuGame
 
 }   // end of namespace Boku
-
-
-

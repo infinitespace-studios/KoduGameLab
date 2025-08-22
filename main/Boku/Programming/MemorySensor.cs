@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -22,9 +21,9 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses GameThings that have been remembered
-    /// 
-    /// this sensor is archived.  
-    /// The currently plan is to move its functionality into other sensors 
+    ///
+    /// this sensor is archived.
+    /// The currently plan is to move its functionality into other sensors
     /// as inherent functionality rather than expose the complexity.
     /// </summary>
     public class MemorySensor : Sensor

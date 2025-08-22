@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -133,7 +132,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// Uses an alternate shader for rendering.  This shader treats the texture
-        /// contents as fully lit and doesn't attenuate the textured pixels by the 
+        /// contents as fully lit and doesn't attenuate the textured pixels by the
         /// alpha of the object color.
         /// </summary>
         public bool AltShader
@@ -144,7 +143,7 @@ namespace Boku.UI2D
 
         /// <summary>
         /// Uses an alternate shader for rendering.  This shader treats the texture
-        /// contents as fully lit and doesn't attenuate the textured pixels by the 
+        /// contents as fully lit and doesn't attenuate the textured pixels by the
         /// alpha of the object color.  Assumes pre-multiplied alpha in the texture.
         /// </summary>
         public bool AltPreMultAlphaShader
@@ -167,7 +166,7 @@ namespace Boku.UI2D
             get { return leds; }
             set
             {
-                // Need to copy values, not just the reference so if we cancel 
+                // Need to copy values, not just the reference so if we cancel
                 // out we haven't overwritten the original values.
                 for (int i = 0; i < 25; i++)
                 {
@@ -368,9 +367,3 @@ namespace Boku.UI2D
     }   // end of class UIGrid2DLEDArrayElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

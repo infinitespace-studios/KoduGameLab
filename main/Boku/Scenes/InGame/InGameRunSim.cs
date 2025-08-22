@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ using Boku.Common.Gesture;
 namespace Boku
 {
     /// <summary>
-    /// This just separates out the simulation part 
+    /// This just separates out the simulation part
     /// of InGame to make it easier to find things.
     /// </summary>
     public partial class InGame : GameObject, INeedsDeviceReset
@@ -42,7 +41,7 @@ namespace Boku
         protected class RunSimUpdateObj : InGameUpdateObject
         {
             #region Members
-            
+
             private InGame parent = null;
             private Shared shared = null;
             public List<UpdateObject> updateList = null; // Children's update list.
@@ -77,15 +76,11 @@ namespace Boku
                 base.Update();
 
                 parent.Camera.Update();
-                
+
                 float secs = Time.WallClockFrameSeconds;
 
                 ThoughtBalloonManager.Update(shared.camera);
                 SaidStringManager.Update();
-#if !NETFX_CORE
-                MicrobitManager.Update();
-#endif
-
                 // Start with visible cursor.
                 parent.cursor3D.Activate();
                 parent.cursor3D.Rep = Cursor3D.Visual.RunSim;
@@ -179,7 +174,7 @@ namespace Boku
 
                         break;
                     }
-                    
+
                     //
                     // 4) Follow mode caused by user controlled bot(s).
                     //
@@ -208,8 +203,7 @@ namespace Boku
                     shared.camera.PlayCameraAt = shared.camera.At;
 
                     shared.camera.FollowCameraValid = false;
-                    
-                    
+
                     // Final break just to be sure the loop exits.
                     break;
                 }
@@ -315,13 +309,8 @@ namespace Boku
                         if (swipeGesture.WasRecognized &&
                             swipeGesture.SwipeDirection == Directions.North)
                         {
-#if NETFX_CORE
                             float halfWidth = (float)BokuGame.bokuGame.Window.ClientBounds.Width * 0.5f;
                             float height = (float)BokuGame.bokuGame.Window.ClientBounds.Height;
-#else
-                            float halfWidth = (float)XNAControl.Instance.ClientSize.Width * 0.5f;
-                            float height = (float)XNAControl.Instance.ClientSize.Height;
-#endif
 
                             //center half of the screen width-wise
                             float minX = halfWidth - (halfWidth * k_TouchExitAreaWidthPercent);
@@ -329,7 +318,6 @@ namespace Boku
 
                             //bottom 20% height-wise
                             float minY = height - (height * k_TouchExitAreaHeightPercent);
-
 
                             Vector2 pos = swipeGesture.InitialPosition;
                             if (pos.X >= minX && pos.X <= maxX && pos.Y >= minY)
@@ -348,13 +336,8 @@ namespace Boku
                             TapGestureRecognizer hackTapGesture = TouchGestureManager.Get().TapGesture;
                             if (hackTapGesture.WasTapped())
                             {
-#if NETFX_CORE
                                 float halfWidth = (float)BokuGame.bokuGame.Window.ClientBounds.Width * 0.5f;
                                 float height = (float)BokuGame.bokuGame.Window.ClientBounds.Height;
-#else
-                                float halfWidth = (float)XNAControl.Instance.ClientSize.Width * 0.5f;
-                                float height = (float)XNAControl.Instance.ClientSize.Height;
-#endif
 
                                 //center area of the screen width-wise
                                 float minX = halfWidth - (halfWidth * 0.1f);
@@ -478,8 +461,8 @@ namespace Boku
                 if (tapGesture.WasTapped() )
                 {
                     // JW - Until we have proper Touch help overlays, we are still using the mouse/keyboard
-                    // overlays. The mouse handling code for these depends on being able to 'absorb' pressed 
-                    // info to hide it from later callers. Our touch stuff doesn't (and really shouldn't) 
+                    // overlays. The mouse handling code for these depends on being able to 'absorb' pressed
+                    // info to hide it from later callers. Our touch stuff doesn't (and really shouldn't)
                     // do this. So, we handle cases here based on what type of overlay is being displayed.
                     if (HelpOverlay.Peek() == "RunSimulationPreGame")
                     {
@@ -555,18 +538,13 @@ namespace Boku
                     SwipeGestureRecognizer swipeGesture = TouchGestureManager.Get().SwipeGesture;
                     if ( bAllowCameraMovement && swipeGesture.IdentifiedFinger )
                     {
-#if NETFX_CORE
                         float halfWidth = (float)BokuGame.bokuGame.Window.ClientBounds.Width * 0.5f;
                         float height = (float)BokuGame.bokuGame.Window.ClientBounds.Height;
-#else
-                        float halfWidth = (float)XNAControl.Instance.ClientSize.Width * 0.5f;
-                        float height = (float)XNAControl.Instance.ClientSize.Height;
-#endif
 
                         //center half of the screen width-wise
                         float minX = halfWidth - (halfWidth * k_TouchExitAreaWidthPercent);
                         float maxX = halfWidth + (halfWidth * k_TouchExitAreaWidthPercent);
-                        
+
                         //bottom 20% height-wise
                         float minY = height - (height * k_TouchExitAreaHeightPercent);
 
@@ -638,7 +616,7 @@ namespace Boku
                     if (GamePadInput.ActiveMode == GamePadInput.InputMode.Touch)
                     {
                         position = new Vector2(parent.Camera.DesiredAt.X, parent.Camera.DesiredAt.Y);
-                        position = parent.TouchEdit.DoCursor(parent.Camera, position);   
+                        position = parent.TouchEdit.DoCursor(parent.Camera, position);
                     }
 
                     shared.CursorPosition = new Vector3(position, shared.CursorPosition.Z);
@@ -660,7 +638,7 @@ namespace Boku
                 shared.camera.DesiredAt = shared.CursorPosition;
 
             }   // end of RunSimUpdateObj MoveCameraEditMode()
-            
+
             private void MoveCameraActorMode(bool inputFocus, bool ignoreRotation)
             {
                 // Start with any first person actor.  If none then follow
@@ -684,9 +662,9 @@ namespace Boku
                     {
                         shared.CursorPosition = actor.Movement.Position;
 
-                        // If we're controlling an actor, align the camera with the actor's heading.  
-                        // The user is still able to use the right stick to orbit around the actor but 
-                        // as soon as the stick is let go the camera will return to being directly 
+                        // If we're controlling an actor, align the camera with the actor's heading.
+                        // The user is still able to use the right stick to orbit around the actor but
+                        // as soon as the stick is let go the camera will return to being directly
                         // behind the actor.
                         if (actor.Chassis.HasFacingDirection)
                         {
@@ -711,14 +689,14 @@ namespace Boku
                 }
                 else
                 {
-                    // We may not have input focus but we still need to move the 
-                    // camera.  This may be because we in PreGame mode and want 
+                    // We may not have input focus but we still need to move the
+                    // camera.  This may be because we in PreGame mode and want
                     // the camera to snap to the right place before the game starts.
                     if (actor != null)
                     {
                         shared.CursorPosition = actor.Movement.Position;
 
-                        // If we're controlling an actor, align the camera with the actor's heading.  
+                        // If we're controlling an actor, align the camera with the actor's heading.
                         float secs = Time.WallClockFrameSeconds;
                         float t = Math.Max(1.0f, 10.0f * secs);
                         parent.Camera.DesiredRotation = MyMath.Lerp(parent.Camera.Rotation, actor.Movement.RotationZ, t);
@@ -740,7 +718,7 @@ namespace Boku
                 // the Fastbot which have their origin at the bottom.
                 if (actor != null)
                 {
-                    // Try and smooth out the vertical for the camera.  
+                    // Try and smooth out the vertical for the camera.
                     // Note that running into the ground will still cause the camera to jump upward.
                     Vector3 curAt = shared.camera.DesiredAt;
                     Vector3 target = shared.CursorPosition + new Vector3(0, 0, actor.Chassis.EyeOffset);
@@ -848,7 +826,7 @@ namespace Boku
                     // Adjust pitch.
                     float dPitch = GamePadInput.InvertCamY() ? -pad.RightStick.Y : pad.RightStick.Y;
                     parent.Camera.DesiredPitch -= dPitch * Time.WallClockFrameSeconds * kOrbitSpeed;
-                    
+
                     // Shoulder buttons track camera in/out.
                     if (pad.LeftShoulder.IsPressed)
                     {
@@ -915,7 +893,7 @@ namespace Boku
                         BoundingSphere s = focusList[i].BoundingSphere;
                         s.Center += focusList[i].Movement.LocalMatrix.Translation;
 
-                        // Increase the radius to provide a little cushion at the edge of the screen.  
+                        // Increase the radius to provide a little cushion at the edge of the screen.
                         // For user controlled characters this cushion should be greater.
                         s.Radius *= focusList[i].Movement.UserControlled ? 5.0f : 3.0f;
 
@@ -979,7 +957,6 @@ namespace Boku
                 }
             }   // end of SetUpCameraFollowMode()
 
-
             private object timerInstrument = null;
 
             // Just a safeguard against being activated/deactivated multiple times.
@@ -1004,22 +981,14 @@ namespace Boku
                     // This is commented out since it was removing Creatables from the level
                     // when it shouldn't.  In particular if you restart Kodu, find a level in
                     // the LoadLevelMenu, and choose Edit, it would remove all the creatables.
-                    // Running and then editing would restore them so it's not peristing the 
+                    // Running and then editing would restore them so it's not peristing the
                     // removal.
                     // Normally I'd just delete the line but if this change starts causing issues
-                    // it might help to know this was here.  If it's now 2019 or later you can 
+                    // it might help to know this was here.  If it's now 2019 or later you can
                     // probably feel free to remove this.  :-)
                     //parent.RemoveCreatablesFromScene();
 
                     timerInstrument = Instrumentation.StartTimer(Instrumentation.TimerId.InGameRunSim);
-
-#if !NETFX_CORE
-                    // Refresh the list of attached microbits.
-                    {
-                        System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(MicrobitManager.RefreshWorker));
-                        t.Start();
-                    }
-#endif
 
                     // Be sure all Auth UI is hidden.
                     AuthUI.HideAllDialogs();
@@ -1029,12 +998,8 @@ namespace Boku
 
                 if (Program2.CmdLine.Exists("analytics"))
                 {
-#if !NETFX_CORE
-                    Console.WriteLine("Begin Analytics");
-#endif
                     ObjectAnalysis oa = new ObjectAnalysis();
                     oa.beginAnalysis(MainMenu.StartupWorldFilename.ToString());
-
 
                   //  GamePadInput.stopActiveInputTimer();
 
@@ -1042,11 +1007,7 @@ namespace Boku
                     Deactivate();
 
                     // Wave bye, bye.
-#if NETFX_CORE
                     Windows.UI.Xaml.Application.Current.Exit();
-#else
-                BokuGame.bokuGame.Exit();
-#endif
                 }
             }   // end of RunSimUpdateObj Activate()
 
@@ -1072,15 +1033,10 @@ namespace Boku
 
                     Instrumentation.StopTimer(timerInstrument);
 
-#if !NETFX_CORE
-                    MicrobitManager.ReleaseDevices();
-#endif
-
                     base.Deactivate();
 
           //          ObjectAnalysis oa = new ObjectAnalysis();
                     //oa.beginAnalysis("out.txt");
-
 
                 }
             }   // end of RunSimUpdateObj Deactivate()
@@ -1089,8 +1045,6 @@ namespace Boku
 
         }   // end of class RunSimUpdateObj
 
-
     }   // end of class InGame
 
 }   // end of namespace Boku
-

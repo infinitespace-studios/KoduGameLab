@@ -78,27 +78,19 @@ namespace Boku.Input
         {
             get
             {
-#if NETFX_CORE
                 Debug.Assert(false, "Do we need this?  Can we always just look for Shift being pressed?");
                 return false;
-#else
-                return Console.CapsLock;
-#endif
             }
         }
         public bool NumLock
         {
             get
             {
-#if NETFX_CORE
                 Debug.Assert(false, "No clue here...");
                 return false;
-#else
-                return Console.NumberLock;
-#endif
             }
         }
-        
+
         protected Keys[] pressedKeys;
         protected enum KeyCommandState
         {
@@ -167,10 +159,10 @@ namespace Boku.Input
         {
             // don't support alt, ctrl, and windows keys pressed or
             // if the primary is a modifier key
-            if (!IsModifierKey(primaryKey) && 
-                keyState.IsKeyUp(Keys.LeftAlt) && keyState.IsKeyUp(Keys.RightAlt) && 
-                keyState.IsKeyUp(Keys.LeftControl) && keyState.IsKeyUp(Keys.RightControl) && 
-                keyState.IsKeyUp(Keys.LeftWindows) && keyState.IsKeyUp(Keys.RightWindows)) 
+            if (!IsModifierKey(primaryKey) &&
+                keyState.IsKeyUp(Keys.LeftAlt) && keyState.IsKeyUp(Keys.RightAlt) &&
+                keyState.IsKeyUp(Keys.LeftControl) && keyState.IsKeyUp(Keys.RightControl) &&
+                keyState.IsKeyUp(Keys.LeftWindows) && keyState.IsKeyUp(Keys.RightWindows))
             {
                 // Only accept a keystroke if not a duplicate.
                 if (!DuplicateKey(primaryKey))
@@ -356,7 +348,7 @@ namespace Boku.Input
                             key == Keys.LeftWindows ||
                             key == Keys.RightWindows ||
                             key == Keys.CapsLock ||
-                            key == Keys.NumLock || 
+                            key == Keys.NumLock ||
                             key == Keys.Scroll);
         }
 
@@ -365,9 +357,9 @@ namespace Boku.Input
             bool keyIsPressed = false;
 
             Keys[] currentPressedKeys = keyState.GetPressedKeys();
-            
+
             // walk both sets of keys; the prev and current
-            // which are in order and 
+            // which are in order and
             // trigger repeat, press, and release events
             int indexPrev = 0;
             int indexCurr = 0;

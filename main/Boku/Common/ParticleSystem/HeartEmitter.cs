@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -17,9 +16,9 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Boku.Common.ParticleSystem
 {
-    // Emits "Heart puffs" as a series of expanding, rotating 
+    // Emits "Heart puffs" as a series of expanding, rotating
     // sprites which fade and grow as they age.  These are to
-    // be used when an object is being dragged or when it 
+    // be used when an object is being dragged or when it
     // bounces on the ground.
     public class HeartEmitter : BaseSpriteEmitter
     {

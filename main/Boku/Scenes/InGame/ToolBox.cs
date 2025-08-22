@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,13 +55,13 @@ namespace Boku
         public InGame.UpdateMode CurrentMode
         {
             get { return currentMode; }
-            set 
-            { 
+            set
+            {
                 if(activeTool != null)
                 {
                     activeTool.Active = false;
                 }
-                currentMode = value; 
+                currentMode = value;
                 switch(currentMode)
                 {
                     case InGame.UpdateMode.TerrainUpDown:
@@ -123,11 +122,11 @@ namespace Boku
 
         public bool PickersActive
         {
-            get 
-            { 
-                return !BrushPicker.Hidden 
-                        || !MaterialPicker.Hidden 
-                        || !WaterPicker.Hidden; 
+            get
+            {
+                return !BrushPicker.Hidden
+                        || !MaterialPicker.Hidden
+                        || !WaterPicker.Hidden;
             }
         }
 
@@ -185,7 +184,6 @@ namespace Boku
 
         }   // end of ToolBox Render()
 
-
         public void RestartCurrentTool()
         {
             if (activeTool != null)
@@ -227,7 +225,6 @@ namespace Boku
             }
         }
 
-
         public void LoadContent(bool immediate)
         {
             BokuGame.Load(brushPicker, immediate);
@@ -262,5 +259,3 @@ namespace Boku
     }   // end of class ToolBox
 
 }   // end of namespace Boku
-
-

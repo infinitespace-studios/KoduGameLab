@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Diagnostics;
 using System.IO;
 
-#if NETFX_CORE
     using Windows.Storage;
     using Windows.Storage.Streams;
     using System.Threading.Tasks;
@@ -41,38 +39,23 @@ namespace BokuShared
 #if NETFX_CORE
             Debug.Assert(false, "Should never be called in WinRT");
             return null;
-#else
-            return File.OpenRead(filename);
-#endif
         }
 
         public override Stream OpenRead(string filename, int flags)
         {
-#if NETFX_CORE
             Debug.Assert(false, "Should never be called in WinRT");
             return null;
-#else
-            return File.OpenRead(filename);
-#endif
         }
 
         public override Stream OpenWrite(string filename)
         {
-#if NETFX_CORE
             Debug.Assert(false, "Should never be called in WinRT");
             return null;
-#else
-            return File.OpenWrite(filename);
-#endif
         }
 
         public override void Close(Stream stream)
         {
-#if NETFX_CORE
             Debug.Assert(false, "Should never be called in WinRT");
-#else
-            stream.Close();
-#endif
         }
 
     }

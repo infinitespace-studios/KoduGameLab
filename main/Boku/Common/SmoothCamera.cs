@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -18,7 +17,7 @@ using Boku.SimWorld.Terra;      // Used for limiting camera to skybox.
 namespace Boku.Common
 {
     /// <summary>
-    /// A wrapper class for the normal camera that smooths its motion 
+    /// A wrapper class for the normal camera that smooths its motion
     /// and does collision detection with the terrain and game things.
     /// </summary>
     public class SmoothCamera : SimCamera
@@ -53,7 +52,7 @@ namespace Boku.Common
         private float minDistance = 1.0f;
         private float maxPitch = 1.5f;              // Don't allow the pitch to go vertical.
 
-        private bool bumped = false;                // If we're in bumped state, don't change Z unless X or Y change.                     
+        private bool bumped = false;                // If we're in bumped state, don't change Z unless X or Y change.
         private bool pitchChanged = false;
         #endregion
 
@@ -81,13 +80,13 @@ namespace Boku.Common
         public Vector3 EyeOffset
         {
             get { return eyeOffset; }
-            set 
+            set
             {
                 Debug.Assert(!float.IsNaN(value.X));
                 eyeOffset = value;
                 desiredEyeOffset = value;
                 UpdateValues();
-            } 
+            }
         }
 
         /// <summary>
@@ -98,9 +97,9 @@ namespace Boku.Common
         public new Vector3 At
         {
             get { return base.At; }
-            set 
-            { 
-                base.At = value; 
+            set
+            {
+                base.At = value;
                 UpdateValues();
             }
         }
@@ -111,11 +110,11 @@ namespace Boku.Common
         public Vector3 DesiredAt
         {
             get { return desiredAt; }
-            set 
+            set
             {
                 if (desiredAt != value)
                 {
-                    desiredAt = value; 
+                    desiredAt = value;
                 }
             }
         }
@@ -126,7 +125,7 @@ namespace Boku.Common
         public Vector3 DesiredEyeOffset
         {
             get { return desiredEyeOffset; }
-            set 
+            set
             {
                 Debug.Assert(!float.IsNaN(value.X));
                 desiredEyeOffset = value;
@@ -141,7 +140,7 @@ namespace Boku.Common
         public float DesiredRotation
         {
             get { return desiredRotation; }
-            set 
+            set
             {
                 if (desiredRotation != value)
                 {
@@ -161,7 +160,7 @@ namespace Boku.Common
         public float DesiredPitch
         {
             get { return desiredPitch; }
-            set 
+            set
             {
                 value = MathHelper.Clamp(value, -maxPitch, maxPitch);
 
@@ -189,7 +188,7 @@ namespace Boku.Common
         public float DesiredDistance
         {
             get { return desiredDistance; }
-            set 
+            set
             {
                 Debug.Assert(!float.IsNaN(value));
                 value = Math.Max(value, minDistance);
@@ -203,7 +202,7 @@ namespace Boku.Common
 
         public float BumpedZ
         {
-            set 
+            set
             {
                 Vector3 cur = eyeOffset;
                 cur.Z += value;
@@ -219,14 +218,13 @@ namespace Boku.Common
             }
         }
 
-
         /// <summary>
         /// The camera's rotation around the focus point.
         /// </summary>
         public float Rotation
         {
             get { return rotation; }
-            set 
+            set
             {
                 // Modify EyeOffset to get the new rotation value.
                 float dTheta = value - rotation;
@@ -242,7 +240,7 @@ namespace Boku.Common
         public float Pitch
         {
             get { return pitch; }
-            set 
+            set
             {
                 value = MathHelper.Clamp(value, -maxPitch, maxPitch);
 
@@ -260,7 +258,7 @@ namespace Boku.Common
         public float Distance
         {
             get { return distance; }
-            set 
+            set
             {
                 float dist = eyeOffset.Length();
                 if (dist != value)
@@ -290,7 +288,6 @@ namespace Boku.Common
             get { return followCameraDistance; }
             set { followCameraDistance = value; }
         }
-
 
         /// <summary>
         /// Are the PlayCameraFrom and PlayCameraAt values valid?
@@ -339,7 +336,7 @@ namespace Boku.Common
         #endregion
 
         #region Public
-        
+
         /// <summary>
         /// c'tor
         /// </summary>
@@ -349,7 +346,7 @@ namespace Boku.Common
 
         public void RotateAboutArbitraryPoint(Vector3 position, float angleRads)
         {
-            Matrix toTargetSpace = Matrix.CreateTranslation(-position) * 
+            Matrix toTargetSpace = Matrix.CreateTranslation(-position) *
                                     Matrix.CreateRotationZ(angleRads) *
                                     Matrix.CreateTranslation(position);
 
@@ -454,7 +451,7 @@ namespace Boku.Common
             desiredRotation = MyMath.ZRotationFromDirection(-offsetNoZ);
             desiredPitch = (float)Math.Atan2(-desiredEyeOffset.Z, len);
         }   // end of UpdateValues()
-        
+
         #endregion
 
     }   // end of class SmoothCamera

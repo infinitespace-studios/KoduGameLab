@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -63,7 +62,7 @@ namespace Boku.Base
             XYZ,
             YXZ,
         };
-        private static int[,] RotOrderLookup = 
+        private static int[,] RotOrderLookup =
         {
             {2,1,0}, // RotationVectorOrder.ZYX
             {2,0,1}, // RotationVectorOrder.ZXY
@@ -77,7 +76,7 @@ namespace Boku.Base
         private Vector3 rotation;
         private RotationVectorOrder rotationOrder;
         private Vector3 translationOrigin;
-        
+
         private bool opaque;
 
         public Transform()
@@ -301,5 +300,4 @@ namespace Boku.Base
         }
     }
 
-    
 }

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Boku.UI2D
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
     /// and creates a texture on the fly into which the text strings are rendered.
-    /// This is effectively a replacement for the standard radio buttons 
+    /// This is effectively a replacement for the standard radio buttons
     /// designed to work with a controller as input rather than a mouse.
     /// </summary>
     public class UIGridTextListElement : UIGridElement
@@ -221,7 +220,6 @@ namespace Boku.UI2D
         /// <param name="text"></param>
         public void AddText(string text)
         {
-            
 
             TextLine line = new TextLine(this, TextHelper.FilterInvalidCharacters(text), Font, true);
             textList.Add(line);
@@ -229,7 +227,7 @@ namespace Boku.UI2D
             // Grow size for each line of text.
             height += (Font().LineSpacing + Margin.Y) / (float)dpi;
             // Note the 64 in the following line is the width of the checkbox
-            // except I can't get it directly from the checkbox since it's 
+            // except I can't get it directly from the checkbox since it's
             // not loaded yet.
             float lineWidth = ((int)(Font().MeasureString(text).X) + Margin.X * 2 + 64) / (float)dpi;
             width = MathHelper.Max(width, lineWidth);
@@ -278,7 +276,6 @@ namespace Boku.UI2D
 
         public void RecalcPositions()
         {
-            
 
             int dy = Font().LineSpacing;
             int y = Margin.Y + dy;
@@ -325,7 +322,7 @@ namespace Boku.UI2D
                 // Title.
                 quad.Render(title.Texture, title.Position, title.Size, @"TexturedRegularAlpha");
 
-                // The list.  Render these bottom to top so if they overlap we're at least 
+                // The list.  Render these bottom to top so if they overlap we're at least
                 // seeing the selected on unobscured.
                 for (int i = textList.Count - 1; i >= 0; i--)
                 {
@@ -369,11 +366,9 @@ namespace Boku.UI2D
         {
         }   // end of HandleMouseInput()
 
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
         }   // end of HandleTouchInput()
-
 
         public override void Render(Camera camera)
         {
@@ -546,9 +541,3 @@ namespace Boku.UI2D
     }   // end of class UIGridTextListElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -74,7 +73,6 @@ namespace Boku.UI
             }
             return controlRenderObj;
         }
-
 
         public void LoadContent(bool immediate)
         {

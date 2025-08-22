@@ -14,9 +14,7 @@ using System.Xml.Serialization;
 
 using Microsoft.Xna.Framework;
 
-#if NETFX_CORE
     using Windows.Foundation;
-#endif
 
 using Boku;
 using BokuShared;
@@ -123,7 +121,7 @@ namespace Boku.Common.Xml
         public string creatorIdHash = Auth.DefaultCreatorHash;
 
         private static XmlOptionsData _instance = null;
-        
+
         #endregion
 
         #region Accessors
@@ -162,7 +160,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.creatorName != value)
                 {
-                    Instance.creatorName = value; 
+                    Instance.creatorName = value;
                     Save();
                 }
             }
@@ -174,7 +172,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.creatorIdHash != value)
                 {
-                    Instance.creatorIdHash = value; 
+                    Instance.creatorIdHash = value;
                     Save();
                 }
             }
@@ -187,7 +185,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.showToolTips != value)
                 {
-                    Instance.showToolTips = value; 
+                    Instance.showToolTips = value;
                     Save();
                 }
             }
@@ -200,7 +198,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.showHints != value)
                 {
-                    Instance.showHints = value; 
+                    Instance.showHints = value;
                     Save();
                 }
             }
@@ -213,7 +211,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.showFramerate != value)
                 {
-                    Instance.showFramerate = value; 
+                    Instance.showFramerate = value;
                     Save();
                 }
             }
@@ -226,13 +224,12 @@ namespace Boku.Common.Xml
             {
                 if (Instance.modalToolMenu != value)
                 {
-                    Instance.modalToolMenu = value; 
+                    Instance.modalToolMenu = value;
                     Save();
                 }
             }
         }
 
-#if NETFX_CORE
         public static string GetCurrentUsername()
         {
             IAsyncOperation<string> op = Windows.System.UserProfile.UserInformation.GetDisplayNameAsync();
@@ -240,7 +237,6 @@ namespace Boku.Common.Xml
             string username = op.GetResults();
             return username;
         }
-#endif
 
         /// <summary>
         /// Username set by user at startup.
@@ -251,11 +247,8 @@ namespace Boku.Common.Xml
             {
                 if (String.IsNullOrEmpty(Instance.username))
                 {
-#if NETFX_CORE
+
                     Instance.username = GetCurrentUsername();
-#else
-                    Instance.username = System.Environment.UserName;
-#endif
                 }
                 return Instance.username;
             }
@@ -263,7 +256,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.username != value)
                 {
-                    Instance.username = value; 
+                    Instance.username = value;
                     Save();
                 }
             }
@@ -278,7 +271,7 @@ namespace Boku.Common.Xml
         public static int HelpLevel
         {
             get { return Instance.helpLevel; }
-            set 
+            set
             {
                 if (Instance.helpLevel != value)
                 {
@@ -304,7 +297,7 @@ namespace Boku.Common.Xml
         public static float UIVolume
         {
             get { return Instance.uiVolume; }
-            set 
+            set
             {
                 if (Instance.uiVolume != value)
                 {
@@ -318,7 +311,7 @@ namespace Boku.Common.Xml
         public static float FoleyVolume
         {
             get { return Instance.foleyVolume; }
-            set 
+            set
             {
                 if (Instance.foleyVolume != value)
                 {
@@ -333,7 +326,7 @@ namespace Boku.Common.Xml
         public static float MusicVolume
         {
             get { return Instance.musicVolume; }
-            set 
+            set
             {
                 if (Instance.musicVolume != value)
                 {
@@ -346,7 +339,7 @@ namespace Boku.Common.Xml
         }
 
         /// <summary>
-        /// CheckForUpdatesWasSet keeps track of whether of not the user manually 
+        /// CheckForUpdatesWasSet keeps track of whether of not the user manually
         /// set the CheckForUpdates flag.  If so, we use the flag.  If not we set
         /// the default value by looking for the site options file.
         /// The user can set the CheckForUpdates flag either via the OptionsMenu
@@ -374,7 +367,7 @@ namespace Boku.Common.Xml
         }
 
         /// <summary>
-        /// SendInstrumentationWasSet keeps track of whether of not the user manually 
+        /// SendInstrumentationWasSet keeps track of whether of not the user manually
         /// set the SendInstrumentation flag.  If so, we use the flag.  If not we set
         /// the default value by looking for the site options file.
         /// The user can set the SendInstrumentation flag either via the OptionsMenu
@@ -408,7 +401,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.showIntroVideo != value)
                 {
-                    Instance.showIntroVideo = value; 
+                    Instance.showIntroVideo = value;
                 }
                 Save();
             }
@@ -438,7 +431,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.webUserSecret != value)
                 {
-                    Instance.webUserSecret = value; 
+                    Instance.webUserSecret = value;
                     Save();
                 }
             }
@@ -456,7 +449,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.persistWebLogin != value)
                 {
-                    Instance.persistWebLogin = value; 
+                    Instance.persistWebLogin = value;
                     Save();
                 }
             }
@@ -472,7 +465,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.showTutorialDebug != value)
                 {
-                    Instance.showTutorialDebug = value; 
+                    Instance.showTutorialDebug = value;
                 }
                 Save();
             }
@@ -496,7 +489,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.langauge != value)
                 {
-                    Instance.langauge = value; 
+                    Instance.langauge = value;
                     Save();
                 }
             }
@@ -529,7 +522,7 @@ namespace Boku.Common.Xml
             {
                 if (Instance.showMicrobitTiles != value)
                 {
-                    Instance.showMicrobitTiles = value; 
+                    Instance.showMicrobitTiles = value;
                     Save();
                 }
             }
@@ -542,8 +535,8 @@ namespace Boku.Common.Xml
         }
 
         /// <summary>
-        /// Private accessor for current instance.  Note we use lazy evaluation 
-        /// to put off the creation as long as possible to give Storage4 time 
+        /// Private accessor for current instance.  Note we use lazy evaluation
+        /// to put off the creation as long as possible to give Storage4 time
         /// to get settled.
         /// </summary>
         private static XmlOptionsData Instance
@@ -633,7 +626,7 @@ namespace Boku.Common.Xml
         {
             _instance = Load();
 
-            // If not loaded, create a new default. 
+            // If not loaded, create a new default.
             if (_instance == null)
             {
                 _instance = new XmlOptionsData();
@@ -682,7 +675,7 @@ namespace Boku.Common.Xml
         private static XmlOptionsData Load()
         {
             XmlOptionsData xmlData = null;
-            
+
             Stream stream = null;
 
             DateTime xmlFileTime= new DateTime();//used to compare against InstallLanguage.txt

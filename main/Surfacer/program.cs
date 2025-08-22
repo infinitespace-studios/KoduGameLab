@@ -11,7 +11,7 @@ namespace Surfacer
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        /// STAThreadAttribute 
+        /// STAThreadAttribute
         [STAThreadAttribute]
         static void Main(string[] args)
         {
@@ -21,4 +21,3 @@ namespace Surfacer
         }
     }
 }
-

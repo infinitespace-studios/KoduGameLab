@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -23,12 +22,12 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Filters and returns positive action based upon the number of GameThings in the SensorSet
-    /// 
-    /// Including the lack of anything in the set.  
-    /// It is also used as a hidden default to represent a filter to check 
-    /// the presence of ANY in the set (included on all reflexes if not already 
+    ///
+    /// Including the lack of anything in the set.
+    /// It is also used as a hidden default to represent a filter to check
+    /// the presence of ANY in the set (included on all reflexes if not already
     /// present in another form).
-    /// 
+    ///
     /// replaces AnythingFilter and NothingFilter
     /// </summary>
     public class CountFilter : Filter
@@ -45,7 +44,6 @@ namespace Boku.Programming
         [XmlAttribute]
         public Operand operand2;
 
-
         public CountFilter()
         {
         }
@@ -53,7 +51,7 @@ namespace Boku.Programming
         public override ProgrammingElement Clone()
         {
             CountFilter clone = new CountFilter();
-            CopyTo(clone);            
+            CopyTo(clone);
             return clone;
         }
 
@@ -73,7 +71,7 @@ namespace Boku.Programming
         public override bool MatchAction(Reflex reflex, out object param)
         {
             param = null;
-            
+
             bool match = Compare(reflex.targetSet.Count);
 
             return match;

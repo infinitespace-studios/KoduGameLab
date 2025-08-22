@@ -101,7 +101,7 @@ namespace Boku.Base
         {
             get { return soundbank; }
         }
-  
+
         public Audio()
         {
             engine = new AudioEngine(@"Content\Audio\boku temp.xgs");

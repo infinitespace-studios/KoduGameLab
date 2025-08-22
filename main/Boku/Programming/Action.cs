@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,19 +49,19 @@ namespace Boku.Programming
 
         /// <summary>
         /// Old-style action.  Should be replaced?  TargetDirectionAction?
-        /// 
+        ///
         /// We still use this for stuff like shooting.
-        /// 
+        ///
         /// WHEN See Apple DO Shoot
         ///     gameThing is the nearest apple
         ///     direction is the direction to shoot
         ///     distance is distance to apple
-        /// 
+        ///
         /// WHEN GamePad AButton DO Shoot
         ///     gameThing is null
         ///     direction is forward
         ///     distance is 1
-        ///     
+        ///
         /// </summary>
         /// <param name="distance"></param>
         /// <param name="direction"></param>
@@ -73,9 +72,9 @@ namespace Boku.Programming
         /// <returns></returns>
         static public Attractor AllocAttractor(float distance,
                                                 Vector3 direction,
-                                                GameThing gameThing, 
-                                                Reflex reflex, 
-                                                bool canBlend = false, 
+                                                GameThing gameThing,
+                                                Reflex reflex,
+                                                bool canBlend = false,
                                                 BaseAction.SpecialInstruction specialInstruction = BaseAction.SpecialInstruction.None)
         {
             Attractor attractor;
@@ -96,7 +95,6 @@ namespace Boku.Programming
 
             return attractor;
         }   // end of AllocAttractor()
-
 
         //
         //
@@ -306,8 +304,8 @@ namespace Boku.Programming
 
         #endregion
 
-        #region Internal 
-        
+        #region Internal
+
         #endregion
 
     }   // end of class Action
@@ -315,7 +313,7 @@ namespace Boku.Programming
     /// <summary>
     /// Attractor is a legacy action that is still used by the ClosestSelector.
     /// Not sure if it's worth rewriting or even just renaming.
-    /// 
+    ///
     /// Also referenced by MoveLeftRightSelector and SpinSelector both of
     /// which are archived.
     /// </summary>
@@ -392,7 +390,7 @@ namespace Boku.Programming
         }   // end of Apply()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reflex"></param>
         public void Init(Reflex reflex, float speed = 0)
@@ -444,7 +442,7 @@ namespace Boku.Programming
         }   // end of Apply()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reflex"></param>
         /// <param name="velocity"></param>

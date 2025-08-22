@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +18,7 @@ namespace Boku.SimWorld.Chassis
     struct PipeConnection
     {
         //source pos used to check snapping (will be source object's center position + an offset based on connection position)
-        public Vector3 SourcePos { get; set; } 
+        public Vector3 SourcePos { get; set; }
         //up vector of the source pipe - used for determining if the pipes need to be pushed together
         public Vector3 SourceUpDir { get; set; }
         //target pos of the connection (which connecting position on another pipe did we snap to)
@@ -58,7 +57,7 @@ namespace Boku.SimWorld.Chassis
         private const float kGridSize = 2.0f; //should align with actual content size
         private const float kPushTogetherFactor = 2.5f; //how much to push pipes together when their up vectors are not aligned
         private const float kMaxSnapOffset = 2.0f; //within what radius will we snap to a point
-        
+
         #region Members
         //current pipe's rotation based on terrain and yaw-snapped angle
         private float m_terrainPitch;
@@ -67,7 +66,6 @@ namespace Boku.SimWorld.Chassis
 
         //current pipe's pipe tyoe
         private PipeTypeEnum m_pipeType;
-
 
         //was this pipe snapped last frame?
         private bool m_bIsSnapped;
@@ -122,7 +120,6 @@ namespace Boku.SimWorld.Chassis
             m_lastSnapTarget = Vector3.Zero;
         }
 
-        
         public override void PreCollisionTestUpdate(GameThing thing)
         {
             bool isSelected = IsSelectedActor(thing);
@@ -156,7 +153,7 @@ namespace Boku.SimWorld.Chassis
 
                 //when selected, use the cursor as a starting point for all math to avoid twitching
                 if (FindSnapToConnection(thing, snapFromPosition, out snapToConnection))
-                {                    
+                {
                     //we found a connection, apply the 2D offset to the snap position (i.e. difference in movement needed to make source line up with target)
                     //ignore z movement for this
                     Vector3 snapOffset = snapToConnection.TargetPos - snapToConnection.SourcePos;
@@ -165,7 +162,6 @@ namespace Boku.SimWorld.Chassis
                     snapToPosition = snapFromPosition + snapOffset;
                 }
             }
-           
 
             //difference between the object at it's current height and the object when it's on the ground
             float editHeightDiff = Parent.EditHeight - Parent.MinHeight;
@@ -207,7 +203,7 @@ namespace Boku.SimWorld.Chassis
                     maxHeight = Math.Max(heightForward, heightBackward);
 
                     //update snap position on Z axis to be average of all connection points plus edit height
-                    snapToPosition.Z = (heightForward + heightCenter + heightBackward) / 3.0f + EditHeight; 
+                    snapToPosition.Z = (heightForward + heightCenter + heightBackward) / 3.0f + EditHeight;
 
                     break;
 
@@ -241,7 +237,6 @@ namespace Boku.SimWorld.Chassis
             m_terrainPitch = MyMath.Clamp<float>(m_terrainPitch, -MathHelper.PiOver2, MathHelper.PiOver2) * rotationWeight;
             m_terrainRoll = MyMath.Clamp<float>(m_terrainRoll, -MathHelper.PiOver2, MathHelper.PiOver2) * rotationWeight;
 
-
             //update the snap position, then factor it into the matrix with rotations
             //this is necessary as the kodu framework assumes a single rotation (about z), but we're actually rotating on all three axis
             // in order to align the pipes to the terrain
@@ -250,7 +245,7 @@ namespace Boku.SimWorld.Chassis
             //generate the rotation matrix based on movement facing direction, terrain pitch and terrain roll
             Matrix local = Matrix.CreateRotationY(m_terrainPitch) * //rotation due to pitch from terrain in X (rotated around Y)
                                 Matrix.CreateRotationX(-m_terrainRoll) *//rotation due to roll from terrain in Y (rotated around X)
-                                Matrix.CreateRotationZ(m_snappedYaw); //normal rotation due to direction facing            
+                                Matrix.CreateRotationZ(m_snappedYaw); //normal rotation due to direction facing
 
             //set translation to the snapped to position
             local.Translation = thing.Movement.Position;
@@ -264,7 +259,7 @@ namespace Boku.SimWorld.Chassis
         private List<PipeConnection> GenerateConnections(GameActor actor, Vector3 fromPosition)
         {
             List<PipeConnection> connections = new List<PipeConnection>();
-            
+
             PipeChassis chassis = actor.Chassis as PipeChassis;
             if (chassis == null)
             {
@@ -274,7 +269,7 @@ namespace Boku.SimWorld.Chassis
             //determine modified direction vectors based on rotation
             Matrix rotationMat = Matrix.CreateRotationY(chassis.m_terrainPitch) * //rotation due to pitch from terrain in X (rotated around Y)
                                 Matrix.CreateRotationX(-chassis.m_terrainRoll) *//rotation due to roll from terrain in Y (rotated around X)
-                                Matrix.CreateRotationZ(chassis.m_snappedYaw); //normal rotation due to direction facing     
+                                Matrix.CreateRotationZ(chassis.m_snappedYaw); //normal rotation due to direction facing
 
             Vector3 facingDir = Vector3.TransformNormal(new Vector3(1.0f, 0.0f, 0.0f), rotationMat);
             facingDir.Normalize();
@@ -338,7 +333,6 @@ namespace Boku.SimWorld.Chassis
             return connections;
         }
 
-
         //helper function that, based on a given actor and reference position, will find the best connection to snap to
         //returns false if no connection found (pipe is not close to other pipes)
         private bool FindSnapToConnection(GameThing thing, Vector3 snapFromPosition, out PipeConnection snapToConnection)
@@ -355,7 +349,7 @@ namespace Boku.SimWorld.Chassis
             //generate a list of all candidate snap to targets
             List<CandidateConnection> candidates = new List<CandidateConnection>();
 
-            for (int i=0; i<connections.Count; ++i) 
+            for (int i=0; i<connections.Count; ++i)
             {
                 PipeConnection connection = connections[i];
 
@@ -372,7 +366,7 @@ namespace Boku.SimWorld.Chassis
             //find the candidate with the highest weight
             CandidateConnection bestCandidate = new CandidateConnection();
             bestCandidate.Weight = float.MinValue;
-            
+
             for (int j = 0; j < candidates.Count; ++j)
             {
                 if (candidates[j].Weight > bestCandidate.Weight)
@@ -395,7 +389,7 @@ namespace Boku.SimWorld.Chassis
             ///////////////////////////////////////////
             //JITTER REDUCTION + PUSH TOGETHER LOGIC
             // The below code pushes together pipe pieces whose up vectors are not aligned, attempting to cover gaps
-            // It also looks for cases where the source conditions were identical to last frame, and uses cached values 
+            // It also looks for cases where the source conditions were identical to last frame, and uses cached values
             //  instead if so, preventing jitter
             ///////////////////////////////////////////
 
@@ -474,7 +468,7 @@ namespace Boku.SimWorld.Chassis
 
                             float distance = snapVector.Length();
                             //if distance is in max offset or, if it's exactly where we snapped to last time, allow for double the radius to consider it valid
-                            if (distance <= kMaxSnapOffset * Parent.ReScale || 
+                            if (distance <= kMaxSnapOffset * Parent.ReScale ||
                                 (m_bIsSnapped && m_lastSnapSourceIndex == sourceIndex && distance < kMaxSnapOffset * Parent.ReScale * 2.0f))
                             {
                                 float weight = 1.0f - MathHelper.Clamp(distance/kMaxSnapOffset, 0.0f, 1.0f);
@@ -493,10 +487,10 @@ namespace Boku.SimWorld.Chassis
                                 }
 
                                 //found a candidate, add it to the lsit
-                                CandidateConnection newCandidate = new CandidateConnection { SourceConnectionIndex = sourceIndex, 
-                                                                                                SnapToPosition = nextSnapPoint.SourcePos, 
-                                                                                                UpDir = nextSnapPoint.SourceUpDir, 
-                                                                                                CenterPosition = actor.Movement.Position, 
+                                CandidateConnection newCandidate = new CandidateConnection { SourceConnectionIndex = sourceIndex,
+                                                                                                SnapToPosition = nextSnapPoint.SourcePos,
+                                                                                                UpDir = nextSnapPoint.SourceUpDir,
+                                                                                                CenterPosition = actor.Movement.Position,
                                                                                                 Weight = weight,
                                                                                                 RetainSnap = retainSnap };
                                 snapCandidates.Add(newCandidate);
@@ -562,5 +556,5 @@ namespace Boku.SimWorld.Chassis
                 Utils.DrawAxis(camera, connection.SourcePos);
             }
         }
-    }   
+    }
 }   // end of namespace Boku.SimWorld.Chassis

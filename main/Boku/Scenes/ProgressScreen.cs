@@ -25,7 +25,6 @@ namespace Boku
         CommandMap commandMap;
         List<ProgressOperation> operations;
 
-
         public static ProgressScreen Instance
         {
             get { return instance; }
@@ -132,7 +131,6 @@ namespace Boku
         object userState;
         bool alwaysShow;
         double startTime;
-
 
         public bool LongRunning
         {

@@ -32,8 +32,8 @@ namespace Boku.SimWorld.Path
         /// Put down a tree at the intersection.
         /// </summary>
         public override bool NewFan(
-            Road.Intersection isect, 
-            Road.Section first, 
+            Road.Intersection isect,
+            Road.Section first,
             Road.Section second,
             List<Road.RenderObj> fans)
         {
@@ -71,7 +71,7 @@ namespace Boku.SimWorld.Path
                     multiRo.RenderObjList.Add(ro);
 
                 }
-                
+
                 fans.Add(multiRo);
 
                 return count > 0;

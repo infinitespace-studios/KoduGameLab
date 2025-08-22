@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Scenes namespace
 
 using System;
@@ -32,7 +31,7 @@ namespace Boku.Fx
                 0.0125f
             };
             private Vector3[] colors = new Vector3[3]
-            { 
+            {
                 new Vector3(0.4f, 0.4f, 0.4f),
                 new Vector3(1.0f, 1.0f, 1.0f),
                 new Vector3(0.5f, 0.5f, 0.5f)
@@ -61,8 +60,8 @@ namespace Boku.Fx
             protected Luz Luz
             {
                 get { return luz; }
-                private set 
-                { 
+                private set
+                {
                     luz = value;
                     Reset();
                 }
@@ -185,7 +184,6 @@ namespace Boku.Fx
                 radii[1] = 1.0f;
                 radii[2] = 0.0125f;
             }
-
 
             private static MuzzleLuz Get(Matrix offset)
             {

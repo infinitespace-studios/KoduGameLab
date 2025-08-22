@@ -4,7 +4,7 @@
 /*
  * MultiBlendController.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -69,7 +69,7 @@ namespace Xclna.Xna.Animation
         /// Creates a new MultiBlendController
         /// </summary>
         /// <param name="game">The game.</param>
-        public MultiBlendController(Game game) : base(game) 
+        public MultiBlendController(Game game) : base(game)
         {
             if (game != null)
             {
@@ -79,7 +79,6 @@ namespace Xclna.Xna.Animation
             animationControllers = new List<IAnimationController>();
 
         }   // end of c'tor
-
 
         /// <summary>
         /// Gets the current bone transform.
@@ -113,7 +112,7 @@ namespace Xclna.Xna.Animation
                     }
                 }
             }
-            
+
             return transform;
 
         }   // end of GetCurrentBoneTransform()

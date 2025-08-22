@@ -23,7 +23,7 @@ namespace Boku.Programming
     {
         public TestTask()
         {
-           
+
         }
 
         public TestTask(string id )
@@ -55,7 +55,7 @@ namespace Boku.Programming
             {
                 moveReflex.Use += delegate() { brain.GameActor.BalloonExpress(GameActor.BalloonExpressions.Searching); };
             }
-            
+
         }
 
         protected void Eat(GameThing gameThing, ref Cue cueEat)
@@ -77,6 +77,5 @@ namespace Boku.Programming
             cueEat.Play();
         }
 
-       
     }
 }

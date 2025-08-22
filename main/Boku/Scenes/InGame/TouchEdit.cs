@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Define MF_PITCH_OR_YAW for a mode that lets the user be affecting
 /// pitch OR yaw, but not both at a time. The mode is determined when
-/// the right button is down and the mouse moves. 
-// #define MF_PITCH_OR_YAW 
+/// the right button is down and the mouse moves.
+// #define MF_PITCH_OR_YAW
 
 using System;
 using System.Collections.Generic;
@@ -98,12 +97,12 @@ namespace Boku
 
             /// <summary>
             /// Where the touch LOS ray hits the ActorHit's collision hull. For
-            /// mobile bots, that's a sphere, for other bots (e.g. factory) it's 
+            /// mobile bots, that's a sphere, for other bots (e.g. factory) it's
             /// a set of collision primitives. Undefined if !HaveActor.
             /// </summary>
             public Vector3 ActorPosition
             {
-                get 
+                get
                 {
                     Vector3 pos = actorPosition;
 
@@ -138,7 +137,7 @@ namespace Boku
             }
 
             /// <summary>
-            /// True if current mouse LOS hits no terrain, but does cross the 
+            /// True if current mouse LOS hits no terrain, but does cross the
             /// zero height plane.
             /// </summary>
             public bool ZeroPlaneHit
@@ -152,7 +151,7 @@ namespace Boku
             /// </summary>
             public Vector3 TerrainPosition
             {
-                get 
+                get
                 {
                     Vector3 pos = terrainPosition;
 
@@ -162,7 +161,7 @@ namespace Boku
                         pos = InGame.SnapPosition(pos);
                     }
 
-                    return pos; 
+                    return pos;
                 }
                 internal set { terrainPosition = value; }
             }
@@ -218,7 +217,6 @@ namespace Boku
         private GameActor quasiSelected = null;
         private bool quasiSelectionActive = false; //whether or not the user is actively touching the selection actor (but not dragging)
         private Distortion quasiHighlight = null;
-
 
         private float moveTime = 0.0f;
         private Vector2 moveFrom = Vector2.Zero;
@@ -390,11 +388,11 @@ namespace Boku
 
                 //Calculating speed of translation.
                 float zoomSpeed = 25.0f * pinchScale * (float)Time.WallClockFrameSeconds;
-               
+
                 //Getting camera specific values for moving the camera (Not really zoom as the frustum doesnt change, we're just bringing the camera closer and further away).
                 Vector3 camPos = camera.DesiredAt + camera.DesiredEyeOffset;
                 Vector3 nextCamPos = camPos;
-                
+
                 Vector3 cameraPosToPinchPos_Norm = Vector3.Normalize( worldPos - camPos );
 
                 //When this is set to true we restrict zoom partially.
@@ -423,7 +421,6 @@ namespace Boku
                 float forwardDelta = Vector3.Dot( deltaCamPos, -camera.ViewDir );
                 float sideDelta = Vector3.Dot( deltaCamPos, camera.ViewRight );
 
-                
                 //Calculate new desired values.
                 Vector3 desiredAtDelta = sideDelta * camera.ViewRight;
                 float desiredDistance = camera.DesiredDistance + forwardDelta;
@@ -433,7 +430,7 @@ namespace Boku
                 {
                     float initialDesiredDistance = desiredDistance;
                     desiredDistance = Math.Max(4.0f, desiredDistance);
-                    
+
                     //We have altered the distance so we must also alter desiredAt
                     if( desiredDistance != initialDesiredDistance )
                     {
@@ -491,7 +488,7 @@ namespace Boku
                 //only allow editing highlight for non-UI touches or if we're "un-touching" the actor
                 if (Boku.InGame.inGame.TouchEdit.HasNonUITouch() || touchHitInfo.ActorHit == null)
                 {
-                    ChangeQuasi(touchHitInfo.ActorHit, false);        
+                    ChangeQuasi(touchHitInfo.ActorHit, false);
                 }
             }
             else if (TouchInput.TouchCount==1 && TouchInput.InitialActorHit != null)
@@ -502,7 +499,7 @@ namespace Boku
                     ChangeQuasi(TouchInput.InitialActorHit, false);
                 }
                 else if (TouchGestureManager.Get().TouchHoldGesture.SlightHoldMade)
-                {                    
+                {
                     ChangeQuasi(TouchInput.InitialActorHit, true);
                 }
             }
@@ -515,21 +512,20 @@ namespace Boku
             CheckQuasi(true);
         }
 
-
         /// <summary>
         /// Cache away info about what object and/or terrain are
         /// currently under the mouse.
         /// </summary>
         /// <param name="camera"></param>
         public static void Update(Camera camera)
-        {            
+        {
             touchHitInfo.Clear();
 
             TouchContact touchInput = TouchInput.GetOldestTouch();
             if (touchInput == null)
             {
                 return;
-            }           
+            }
 
             Vector3 src = camera.ActualFrom;
             Vector3 ray = FindRay(camera, TouchInput.GetAsPoint(touchInput.position));
@@ -683,10 +679,10 @@ namespace Boku
                 {
                     HitInfo.LastTouchEditPos = hit;
                 }
-                
+
                 return new Vector2(hit.X, hit.Y);
             }
-            
+
             return new Vector2(HitInfo.LastTouchEditPos.X, HitInfo.LastTouchEditPos.Y);
         }
 
@@ -752,7 +748,7 @@ namespace Boku
             /// Double tap gesture.
             DoubleTapGestureRecognizer dblTapGesture = TouchGestureManager.Get().DoubleTapGesture;
 
-            if (dblTapGesture.WasRecognized && 
+            if (dblTapGesture.WasRecognized &&
                 (HitInfo.TerrainHit || HitInfo.ZeroPlaneHit) &&
                 !GUIButtonManager.IsOverUIButton( dblTapGesture.Position ) &&
                 (null == InGame.inGame.touchEditUpdateObj || null == InGame.inGame.touchEditUpdateObj.ToolBar || InGame.inGame.touchEditUpdateObj.ToolBar.CurrentMode != InGame.BaseEditUpdateObj.ToolMode.EditObject) )
@@ -900,8 +896,6 @@ namespace Boku
             }
         }
 
-
-
         /// <summary>
         /// Create a yellow highlight for the mouse-over'd object.
         /// </summary>
@@ -1027,7 +1021,7 @@ namespace Boku
 
                 if ( null != dragGesture && dragGesture.IsDragging )
                 {
-                    if (touch.position - touch.previousPosition != Vector2.Zero 
+                    if (touch.position - touch.previousPosition != Vector2.Zero
                         && resolution.X>0.0f && resolution.Y>0.0f)
                     {
 
@@ -1070,7 +1064,7 @@ namespace Boku
         /// <param name="camera"></param>
         public void ProcessCameraRotation(SmoothCamera camera)
         {
-            if (TouchInput.IsTouched && TouchInput.TouchCount == 2) 
+            if (TouchInput.IsTouched && TouchInput.TouchCount == 2)
             {
                 //check if both touches are moving
                 for (int i = 0; i < TouchInput.TouchCount; i++)
@@ -1188,7 +1182,7 @@ namespace Boku
                 dir1.Normalize();
 
                 //if the vectors are within five degrees of each other then return true
-                return Vector2.Dot(dir0, dir1) >= Math.Cos(MathHelper.ToRadians(5.0f)); 
+                return Vector2.Dot(dir0, dir1) >= Math.Cos(MathHelper.ToRadians(5.0f));
 
             }
             return false;
@@ -1262,9 +1256,8 @@ namespace Boku
             return false;
         }
 
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="touchPosition"></param>
         /// <param name="granularityX"></param>
@@ -1319,7 +1312,6 @@ namespace Boku
             }
         }
 
-
         /// <summary>
         /// Move the world according to mouse dragging.
         /// </summary>
@@ -1329,11 +1321,11 @@ namespace Boku
         private Vector2 Drag(Camera camera, Vector2 position)
         {
             //two ways to drag: one finger drag (any direction), two finger drag (horizontal only)
-            
+
             //first, check early out for conditions that both reject:
             //don't allow dragging if rotating, pinching, double dragging (vertical), or we don't have a single touch
             if (!TouchInput.IsTouched ||
-                TouchInput.TouchCount<=0 || 
+                TouchInput.TouchCount<=0 ||
                 TouchInput.TouchCount>2)
             {
                 return position;
@@ -1354,10 +1346,8 @@ namespace Boku
                 return position;
             }
 
-
             return position;
         }
-
 
         private List<Vector2Object> previousDeltas = new List<Vector2Object>(); //Vector2.Zero;
         private Vector2 previousDelta = Vector2.Zero;
@@ -1370,7 +1360,6 @@ namespace Boku
         private Vector2 currentPosition = Vector2.Zero;
         private List<Vector2> listPositions = new List<Vector2>();
         private List<float> listPositionTimes = new List<float>();
-        
 
         /// <summary>
         /// Simple object class to store the cameras delta position (used in the twitch delta
@@ -1552,7 +1541,7 @@ namespace Boku
         }
 
         /// <summary>
-        /// Find where a ray through input mouse position (pixel coords) 
+        /// Find where a ray through input mouse position (pixel coords)
         /// passes through the horizontal plane at height h.
         /// </summary>
         /// <param name="camera"></param>
@@ -1601,7 +1590,7 @@ namespace Boku
             get
             {
                 return TouchInput.IsTouched;
-                //return 
+                //return
                 //    TouchInput.IsTouched
                 //    && !disableRightOrbit;
             }
@@ -1616,7 +1605,7 @@ namespace Boku
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightAlt)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.LeftShift)
                     && !KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightShift)
-                    
+
                     && !disableRightOrbit;
             }
              */
@@ -1724,7 +1713,6 @@ namespace Boku
         {
             return new Vector2(p.X * ndcToPixel.X + ndcToPixel.Z, -p.Y * ndcToPixel.Y + ndcToPixel.W);
         }
-
 
         ////////////////////////
 

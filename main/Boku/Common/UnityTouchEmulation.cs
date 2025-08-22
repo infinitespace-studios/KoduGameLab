@@ -6,46 +6,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-#if !NETFX_CORE
-    using TouchHook;
-    using System.Windows.Forms;
-#endif
+using TouchHook;
+using System.Windows.Forms;
 
 namespace Boku.Common
 {
-#if !NETFX_CORE
     public static class Input
     {
         #region Members
         // Contains a list of touch objects which store the data sent from TouchHook messages
         private static List<EventTouch> eventTouches = new List<EventTouch>();
-
-        // Contains the list of touches that are exposed to queries from the application.
-        // This list is populated during the Update() by the "eventTouches" list.
+        // Contains a static list of touch for this frame
         private static List<Touch> touchesThisFrame = new List<Touch>();
-
-        private static int touchCountThisFrame = 0;
-        private static bool isMultiTouchEnabled = false;
-        //private static float maxTimeBetweenTaps = 1.0f;
-
-        /// <summary>
-        /// Hook into low level windows messages related to raw touch data.
-        /// </summary>
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-        private static WM_MouseHook touchHook;
-#else
-        //private static WM_TouchHook messageTouchHook;
-        private static WM_TouchHook cwTouchHook;
-#endif
+        // Contains a list of toucheventargs that needs processing
+        private static List<TouchEventArgs> recordEventArgs = new List<TouchEventArgs>();
+        
+        private static WM_TouchHook cwTouchHook = null;
 
         #endregion Members
-
 
         #region Accessors
 
         public static int EventTouchCount
         {
-            get 
+            get
             {
                 return eventTouches.Count;
             }
@@ -84,17 +68,11 @@ namespace Boku.Common
 
         #endregion Accessors
 
-
         #region Event Handlers
 
         private static List<TouchEventArgs> recordEventArgs = new List<TouchEventArgs>();
 
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-        private const int mouseId = 1000;
-        private static void MouseDownHandler(object sender, MouseEventArgs e)
-#else
         private static void TouchDownHandler(object sender, TouchEventArgs e)
-#endif
         {
             TouchEventArgs eva = new TouchEventArgs();
             eva.id = e.id;
@@ -106,11 +84,7 @@ namespace Boku.Common
             Vector2 screenPosition = ScreenToClient(e.x, e.y);
             foreach (EventTouch t in eventTouches)
             {
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-                if( t.fingerId == mouseId )
-#else
                 if (t.fingerId == e.id)
-#endif
                 {
                     found = t;
                     //Console.WriteLine("TouchDown: t.postion= " + t.position.ToString() + ", phase=" + t.phase.ToString() + ", EventTouch=" + t.ToString());
@@ -137,11 +111,7 @@ namespace Boku.Common
             else
             {
                 found = new EventTouch(screenPosition);
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-                found.fingerId = mouseId;// e.id;
-#else
                 found.fingerId = e.id;
-#endif
                 //found.deltaPosition = new Vector2();
                 found.startTime = Time.WallClockTotalSeconds;
                 //PV New place for the code
@@ -155,79 +125,21 @@ namespace Boku.Common
             found.position = screenPosition;
         }
 
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-        private static void MouseMoveHandler(object sender, MouseEventArgs e)
-#else
         private static void TouchMoveHandler(object sender, TouchEventArgs e)
-#endif
         {
             EventTouch found = null;
             Vector2 screenPosition = ScreenToClient(e.x, e.y);
             foreach (EventTouch t in eventTouches)
             {
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-                if( t.fingerId == mouseId )
-#else
                 if (t.fingerId == e.id)
-#endif
                 {
                     found = t;
                     break;
                 }
             }
-
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-            if (found == null )
-            {
-                // The mouse can still move when the touch has not started, therefore the touches list is empty.
-                return;
-            }
-#endif
-            // If we don't have a touch then something went wrong... we should only be moving 
-            // existing touches, not new ones.
-            if (found == null)
-            {
-                Console.WriteLine("Processing an MOVE event for a non-existant touch contact");
-                return;
-            }
-
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-            if (found.phase == TouchPhase.Ended)
-            {
-                // The mouse can move even if it isn't 'touching' the screen... this breaks the simulated touch!!! so, lets happily ignore this and just go on our way
-                return;
-            }
-#endif
-
-            if (found.timeOfLastChange == Time.WallClockTotalSeconds)
-            {
-                //Console.WriteLine("Ignoring MOVE event due to zero delta time. {0}", found.fingerId);
-                // This is an extraneous message from the OS. It seems that windows doesn't really know what its doing here... we get a touch down event imediately followed by a move.
-                // so we never see the down.
-                return;
-            }
-
-            found.UpdateTimeOfChange(Time.WallClockTotalSeconds);
-
-            //copy the screen position first so that it can get filtered
-            Vector2 oldPosition = found.position;
-            found.position = screenPosition;
-
-            Vector2 deltaPosition = found.position - oldPosition;
-            found.deltaPosition = deltaPosition;
-
-
-            found.deltaPosition = deltaPosition;
-            //found.tapCount = 0;
-            // Set the phase to moved
-            found.phase = TouchPhase.Moved;
         }
 
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-        private static void MouseUpHandler(object sender, MouseEventArgs e)
-#else
         private static void TouchUpHandler(object sender, TouchEventArgs e)
-#endif
         {
             TouchEventArgs teaFind = recordEventArgs.Find(
             delegate(TouchEventArgs tea)
@@ -245,11 +157,7 @@ namespace Boku.Common
             Vector2 screenPosition = ScreenToClient(e.x, e.y);
             foreach (EventTouch t in eventTouches)
             {
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-                if( t.fingerId == mouseId )
-#else
                 if (t.fingerId == e.id)
-#endif
                 {
                     found = t;
                     //Console.WriteLine("TouchUp: t.postion= " + t.position.ToString() + ", phase=" + t.phase.ToString() + ", EventTouch=" + t.ToString() );
@@ -258,7 +166,7 @@ namespace Boku.Common
                 }
             }
 
-            // If we don't have a touch then something went wrong... we should have up events on 
+            // If we don't have a touch then something went wrong... we should have up events on
             // existing touches, not new ones.
             if (found == null)
             {
@@ -273,7 +181,7 @@ namespace Boku.Common
             //{
             //    Console.WriteLine("Touch Up on same event?  Setting delayed end... {0}", found.fingerId);
 
-            //    // This is part of the bug where we get a touch down and up as part of the same message queue... 
+            //    // This is part of the bug where we get a touch down and up as part of the same message queue...
             //    // so to fix it we delay the touch end by one frame
             //    found.delayedEnd = true;
             //}
@@ -304,23 +212,14 @@ namespace Boku.Common
 
         public static void Init()
         {
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-            touchHook = new WM_MouseHook(BokuGame.bokuGame.Window.Handle);
-#else
             IntPtr mainformHandle = MainForm.Instance.Handle;
             IntPtr xnaControlHandle = XNAControl.Instance.Handle;
             cwTouchHook = new WM_TouchHook(xnaControlHandle, TouchHook.HookType.WH_CALLWNDPROC);
             //messageTouchHook = new WM_TouchHook(BokuGame.bokuGame.Window.Handle, TouchHook.HookType.WH_GETMESSAGE);
-#endif
             WM_TouchHook.DisableNativePressAndHoldGesture = true;
             //messageTouchHook.InstallHook();
             cwTouchHook.InstallHook();
 
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-            touchHook.MouseDown += new EventHandler<MouseEventArgs>(MouseDownHandler);
-            touchHook.MouseMove += new EventHandler<MouseEventArgs>(MouseMoveHandler);
-            touchHook.MouseUp += new EventHandler<MouseEventArgs>(MouseUpHandler);
-#else
             cwTouchHook.TouchDown += new EventHandler<TouchEventArgs>(TouchDownHandler);
             cwTouchHook.TouchMove += new EventHandler<TouchEventArgs>(TouchMoveHandler);
             cwTouchHook.TouchUp += new EventHandler<TouchEventArgs>(TouchUpHandler);
@@ -331,15 +230,14 @@ namespace Boku.Common
 
             //store the max touch count detected at startup
             TouchInput.TouchAvailable = cwTouchHook.IsTouchAvailable();
-            TouchInput.MaxTouchCount = cwTouchHook.GetMaxTouches();            
-#endif
+            TouchInput.MaxTouchCount = cwTouchHook.GetMaxTouches();
         }
 
         public static Touch GetTouch(int index)
         {
             if (index < 0 || index >= touchesThisFrame.Count)
             {
-                throw new IndexOutOfRangeException("Attempting to retrieve a touch using a bad index: " + index.ToString()); 
+                throw new IndexOutOfRangeException("Attempting to retrieve a touch using a bad index: " + index.ToString());
             }
             return touchesThisFrame[index];
         }
@@ -350,7 +248,7 @@ namespace Boku.Common
             eventstring = "";
             foreach (EventTouch t in eventTouches)
             {
-                eventstring += "id="+t.fingerId.ToString() 
+                eventstring += "id="+t.fingerId.ToString()
                               +",ph="+t.phase.ToString()
                               +",isOld="+t.isOld.ToString()
                               +",isNew="+t.isNew.ToString()
@@ -441,7 +339,7 @@ namespace Boku.Common
                 {
                     case TouchPhase.Began:
                     {
-                        // Set the {t} object to stationary, this will be updated to moved if needed or copied into the 
+                        // Set the {t} object to stationary, this will be updated to moved if needed or copied into the
                         // {touch} object next frame. This way we only see the Began phase for one frame.
                         eventTouch.phase = TouchPhase.Stationary;
                         eventTouch.isOld = false;
@@ -496,7 +394,7 @@ namespace Boku.Common
                 //touch.tapCount = eventTouch.tapCount;
 
                 currentTouchThisFrame.deltaTime = eventTouch.deltaTime;
-            
+
                 // Here we handle any touch-up messages whose processing is to be delayed by a frame.
                 // We set the 'touches' phase to ended, which will then be propogated to
                 // 'touchesThisFrame' on the following frame.
@@ -560,7 +458,7 @@ namespace Boku.Common
             public EventTouch(Vector2 touchPosition)
             {
                 position = touchPosition;
-                
+
                 deltaPosition = new Vector2();
                 timeDelta = 0.0f;
                 //tapCount = 0;
@@ -587,15 +485,13 @@ namespace Boku.Common
         }
     }
 
-#endif
-
     public class Touch
     {
         public int fingerId;
         public Vector2 position;
         public Vector2 deltaPosition;
         public float deltaTime;
-        //public int tapCount; 
+        //public int tapCount;
         public TouchPhase phase;
     }
 

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,7 +43,7 @@ namespace Boku
             public override void Activate()
             {
             }
-            
+
             public override void Deactivate()
             {
             }
@@ -112,13 +111,11 @@ namespace Boku
 
                 Vector2 screenSize = BokuGame.ScreenSize;
 
-#if NETFX_CORE
                 // For some reason, right at the start, this shows up as 0, 0.
                 if (screenSize == Vector2.Zero)
                 {
                     screenSize = new Vector2(device.Viewport.Width, device.Viewport.Height);
                 }
-#endif
 
                 Vector2 backgroundSize = new Vector2(backgroundTexture.Width, backgroundTexture.Height);
                 Vector2 logoSize = new Vector2(logoTexture.Width, logoTexture.Height);
@@ -137,7 +134,7 @@ namespace Boku
                     // Apply the background.
                     batch.Draw(backgroundTexture, position, Color.White);
 
-                    // Render dots.                
+                    // Render dots.
                     for (int i = 0; i < 4; i++)
                     {
                         Vector2 size = new Vector2(dots[i].radius);
@@ -145,7 +142,7 @@ namespace Boku
                         size *= 2;
                         Color color = new Color(1, 1, 1, dots[i].alpha);
                         batch.Draw(dotTexture, new Rectangle((int)pos.X, (int)pos.Y, (int)size.X, (int)size.Y), color);
-                        // Reflection 
+                        // Reflection
                         color = new Color(1, 1, 1, dots[i].alpha * 0.15f);
                         batch.Draw(dotTexture, new Rectangle((int)pos.X, (int)pos.Y + 150, (int)size.X, (int)size.Y), color);
                     }
@@ -167,9 +164,9 @@ namespace Boku
                     }
                 }
                 batch.End();
-                
+
             }   // end of Render()
-            
+
             public override void Activate()
             {
             }
@@ -246,7 +243,7 @@ namespace Boku
 
             renderObj = new RenderObj(ref shared);
             updateObj = new UpdateObj(ref shared);
-            
+
         }   // end of TitleScreen c'tor
 
         private void ContentLoadComplete()
@@ -254,7 +251,6 @@ namespace Boku
             WaitMode = true;
         }
 
-#if NETFX_CORE
         /// <summary>
         /// Hacked render call to help make the WinRT startup look better.
         /// </summary>
@@ -264,7 +260,6 @@ namespace Boku
             renderObj.LoadContent(true);
             renderObj.Render(null);
         }
-#endif
 
         public override bool Refresh(List<UpdateObject> updateList, List<RenderObject> renderList)
         {
@@ -304,12 +299,6 @@ namespace Boku
                 pendingState = States.Active;
                 BokuGame.objectListDirty = true;
 
-#if !NETFX_CORE
-                // Bring window to top.
-                bool prevTopMost = MainForm.Instance.TopMost;
-                MainForm.Instance.TopMost = true;
-                MainForm.Instance.TopMost = prevTopMost;
-#endif
             }
         }
         override public void Deactivate()
@@ -319,12 +308,6 @@ namespace Boku
                 pendingState = States.Inactive;
                 BokuGame.objectListDirty = true;
 
-#if !NETFX_CORE
-                // Bring window to top.
-                bool prevTopMost = MainForm.Instance.TopMost;
-                MainForm.Instance.TopMost = true;
-                MainForm.Instance.TopMost = prevTopMost;
-#endif
             }
         }
 

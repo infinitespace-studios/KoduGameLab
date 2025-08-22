@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,7 +44,7 @@ namespace Boku
             private float cutPasteRotation = 0.0f;          // Rotation to paste at.
             public Object selectedObject = null;            // The selected object.
 
-            public GameThing lastClonedThing = null;        // Temporary ref to most recently clone thing used to prevent 
+            public GameThing lastClonedThing = null;        // Temporary ref to most recently clone thing used to prevent
                                                             // collisions between this thing and the selected object.
 
             public Distortion selectionHighLight = null;
@@ -106,7 +105,6 @@ namespace Boku
                 newItemSelectorShim = new UIShim(AddUISelector, out newItemSelector, false);
             }   // end of EditObjectUpdateObj c'tor
 
-
             /// <summary>
             /// EditObjectUpdateObj Update()
             /// </summary>
@@ -129,7 +127,7 @@ namespace Boku
                 shared.smallTextDisplay.Update(shared.camera);
                 shared.scrollableTextDisplay.Update(shared.camera);
 
-                // If we're just setting the camera's position 
+                // If we're just setting the camera's position
                 // rather than actually editing the world.
                 if (EditWorldParameters.CameraSetMode)
                 {
@@ -159,7 +157,7 @@ namespace Boku
                     // is getting out of sync with the current InGame mode and the help overlay
                     // stack.  The problem seems to have a distinct signature so until the
                     // bug can be tracked down and fixed we can work around it with this hack.
-                    // What this is doing is checking to see if the "signature" of the 
+                    // What this is doing is checking to see if the "signature" of the
                     // problem is in evidence and if so, then adjusting things to make them
                     // better.  I'm leaving an assert in the code so we don't just forget about it.
                     if (CommandStack.Depth() == 1 && CommandStack.Peek().name == "PreGameBase")
@@ -177,7 +175,6 @@ namespace Boku
                         }
                         HelpOverlay.Push("ObjectEditEmptyClipboard");
                     }
-
 
                     // Check if we have input focus.  Don't do any input
                     // related update if we don't.
@@ -264,13 +261,13 @@ namespace Boku
                                     // everthing works as expected.  But here's the rub.  Below here we call
                                     // UpdateWorld() which does the collision checks.  If we don't return here
                                     // then the collision checks will be done, no collisions will be found
-                                    // between the cloned thing and the selected(picked up) object and the 
+                                    // between the cloned thing and the selected(picked up) object and the
                                     // LastClonedThing ref will be cleared.  The reason that the checks will
                                     // fail is that the cloned thing doesn't exist in the world yet.  Yes, more
                                     // issues with the delayed refresh stuff.  So, by returning here we let
                                     // Refresh do it's thing and add the the newly cloned thing to the world
                                     // and then again on the next frame everything will once again work.
-                                    // Honestly, when was the last time you saw this much of a comment on a 
+                                    // Honestly, when was the last time you saw this much of a comment on a
                                     // return statement?
                                     return;
                                 }
@@ -280,7 +277,6 @@ namespace Boku
                                     PasteAction();
                                 }
                             }
-
 
                             // The A button
                             if (Actions.Add.WasPressed)
@@ -304,7 +300,6 @@ namespace Boku
                             }   // end if A button pressed
                         }
 
-
                         // Assign the new position to the 3d cursor and then read it back since
                         // it will modify the height to accommodate the terrain.
                         parent.cursor3D.Position = shared.CursorPosition;
@@ -326,8 +321,8 @@ namespace Boku
                             editFocusObject = selectedObject;
                             LastSelectedActor = editFocusObject as GameActor;
 
-                            // While we're here, let's also make sure that it's position 
-                            // matches the cursor.  This handles dragging the object with 
+                            // While we're here, let's also make sure that it's position
+                            // matches the cursor.  This handles dragging the object with
                             // the cursor and creating dust as the object is dragged.
                             DragSelectedObject();
 
@@ -379,8 +374,8 @@ namespace Boku
                                         InGame.IsLevelDirty = true;
                                     }
                                 }
-                                if (!actor.IsTree || 
-                                    (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse) || 
+                                if (!actor.IsTree ||
+                                    (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse) ||
                                     (GamePadInput.ActiveMode == GamePadInput.InputMode.Touch))
                                 {
                                     float delta = 0.0f;
@@ -431,7 +426,7 @@ namespace Boku
                                 {
                                     InGame.IsLevelDirty = true;
 
-                                    // Hide the color palette and then return.  If we just fall 
+                                    // Hide the color palette and then return.  If we just fall
                                     // through then the color palette will be re-enabled.
                                     ColorPalette.Active = false;
                                 }
@@ -459,7 +454,7 @@ namespace Boku
                                 /// will dirty the world appropriately. We con't need to dirty the world
                                 /// just to look at them.
 
-                                // Hide the color palette and then return.  If we just fall 
+                                // Hide the color palette and then return.  If we just fall
                                 // through then the color palette will be re-enabled.
                                 ColorPalette.Active = false;
                                 return;
@@ -636,7 +631,6 @@ namespace Boku
                 }
             }   // DragSelectedObject()
 
-
             /// <summary>
             /// Check if the cursor is close enough to anything to have that
             /// object be considered "in focus".  If so, snap toward it.
@@ -689,7 +683,7 @@ namespace Boku
                 }
                 if (shared.editWayPoint.MoveMode)
                 {
-                    /// If we're moving things, the things will follow the cursor, 
+                    /// If we're moving things, the things will follow the cursor,
                     /// the cursor doesn't need to also follow them.
                     editFocusObject = null;
                 }
@@ -736,7 +730,7 @@ namespace Boku
                 }
                 else
                 {
-                    // See if we've moved far enough away from the 
+                    // See if we've moved far enough away from the
                     // previous snap to reset.
                     GameThing thing = snapObject as GameThing;
                     Vector3 delta = new Vector3();
@@ -793,8 +787,8 @@ namespace Boku
 
                 if (!shared.editWayPoint.Active)
                 {
-                    // We've now found the nearest object.  If close enough, keep it 
-                    // and turn the cursor blue to indicate it is in focus.  If not 
+                    // We've now found the nearest object.  If close enough, keep it
+                    // and turn the cursor blue to indicate it is in focus.  If not
                     // close enough set the cursor to white and null the focus object.
                     const float nearThreshold = 0.5f;
                     if (distance > nearThreshold)
@@ -819,7 +813,7 @@ namespace Boku
             }   // end of CheckForEditFocusObject()
 
             /// <summary>
-            /// Copies the inFocus or selected object to the 
+            /// Copies the inFocus or selected object to the
             /// cut/paste buffer and deletes it from the world.
             /// </summary>
             internal void CutAction(object editObject)
@@ -852,7 +846,7 @@ namespace Boku
             }
 
             /// <summary>
-            /// Copies the inFocus or selected object to the 
+            /// Copies the inFocus or selected object to the
             /// cut/paste buffer.
             /// </summary>
             internal void CopyAction(object editObject)
@@ -1046,7 +1040,7 @@ namespace Boku
                 if (actor != null)
                 {
                     ColorPalette.Active = true;
-                    // If there's no active node then make sure that the color displayed by 
+                    // If there's no active node then make sure that the color displayed by
                     // the palette matches the color of the object under the cursor.
                     shared.curObjectColor = ColorPalette.GetIndexFromColor(actor.ClassColor);
                 }
@@ -1055,7 +1049,6 @@ namespace Boku
                     // WayPointEdit takes care of colors itself.
                     ColorPalette.Active = shared.editWayPoint.ColorActive;
                 }
-
 
                 if (ColorPalette.Active)
                 {
@@ -1090,7 +1083,6 @@ namespace Boku
                 }   // end if WayPointColorPalette is active.
 
             }   // end of UpdateColorPalette()
-
 
             protected void UpdateFocusEffects()
             {
@@ -1213,5 +1205,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

@@ -31,14 +31,13 @@ namespace Boku.SimWorld
             {
                 this.parent = parent;
                 this.cursor3d = cursor3d;
-            } 
-
+            }
 
             public override void Update()
             {
                 // Match position of the static Cursor3D.
                 parent.Movement.Position = cursor3d.Position;
-            } 
+            }
 
             public override void Activate()
             {
@@ -51,7 +50,7 @@ namespace Boku.SimWorld
         }
 
         private UpdateCursorObj updateObj = null;
-        
+
         private bool state = false;
         private bool pendingState = false;
 

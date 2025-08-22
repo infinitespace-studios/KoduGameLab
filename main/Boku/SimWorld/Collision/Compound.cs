@@ -25,8 +25,8 @@ namespace Boku.SimWorld.Collision
         public override string DebugName
         {
             get { return base.DebugName; }
-            set 
-            { 
+            set
+            {
                 base.DebugName = value;
 
                 for (int i = 0; i < children.Count; ++i)

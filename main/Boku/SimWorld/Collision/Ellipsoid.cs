@@ -69,7 +69,7 @@ namespace Boku.SimWorld.Collision
 
             /// Move the problem to the space in which the expanded ellipse is a unit sphere
             /// centered at the origin.
-            /// 
+            ///
             /// Expand our radii by radius
             float localRadius = WorldToLocalRadius(radius);
             Matrix ellipseToSphere = Matrix.CreateScale(
@@ -108,8 +108,8 @@ namespace Boku.SimWorld.Collision
                 /// Transform the hit point and normal back to world space
                 Vector3 normWorld = Vector3.TransformNormal(localNormal, LocalToWorld);
                 normWorld.Normalize();
-                
-                /// Move the hit point into the ellipse by the normalized hit normal 
+
+                /// Move the hit point into the ellipse by the normalized hit normal
                 /// times the radius.
 
                 SetCollPrim(
@@ -167,8 +167,8 @@ namespace Boku.SimWorld.Collision
 
             if (Vector3.DistanceSquared(closest, p0) <= radius * radius)
             {
-                Vector3 normal = lengthSq < 1.0f 
-                    ? p0 - LocalToWorld.Translation 
+                Vector3 normal = lengthSq < 1.0f
+                    ? p0 - LocalToWorld.Translation
                     : p0 - closest;
                 return SetCollPrimTouching(
                     p0,

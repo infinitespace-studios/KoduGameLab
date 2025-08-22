@@ -446,7 +446,7 @@ namespace Boku.SimWorld
                 case GazeState.Directed:
                     {
                         Vector3 dir3d = gazeTarget - movement.Position;     // Direction we want to look.
-                        Vector2 dir2d = new Vector2(dir3d.X, dir3d.Y);      // 2d version 
+                        Vector2 dir2d = new Vector2(dir3d.X, dir3d.Y);      // 2d version
                         dir2d.Normalize();
                         // Get targetAngle in +- PI range
                         float targetAngle = dir2d.Y < 0.0f ? -(float)Math.Acos(dir2d.X) : (float)(Math.Acos(dir2d.X));
@@ -510,7 +510,7 @@ namespace Boku.SimWorld
             }
         }   // end of Face SetGaze()
 
-        public virtual void LoadContent(bool immediate) 
+        public virtual void LoadContent(bool immediate)
         {
             if (faceEyesPupils == null)
             {
@@ -526,7 +526,7 @@ namespace Boku.SimWorld
         {
         }
 
-        public virtual void UnloadContent() 
+        public virtual void UnloadContent()
         {
             faceEyesPupils = null;
             faceEyesPupilsCross = null;
@@ -652,7 +652,7 @@ namespace Boku.SimWorld
                 FaceChange(state);
             }
 
-            // A change of state may change the size of the pupils.  If so, 
+            // A change of state may change the size of the pupils.  If so,
             // launch a twitch to smoothly change the size.
             if (newState)
             {
@@ -669,7 +669,6 @@ namespace Boku.SimWorld
                 }
             }
         }   // end of Face SetState()
-
 
         #endregion Internal
     }

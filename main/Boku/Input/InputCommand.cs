@@ -22,7 +22,7 @@ namespace Boku.Input
     /// Represents the base abstraction for input command
     /// An input command is an object that represents one hardware input element
     /// An example would be a single keyboard key ("enter") or a game pad button ("start")
-    /// 
+    ///
     /// There is currently no need to use this class outside this module as all
     /// usefull classes are represented below
     /// </summary>
@@ -30,10 +30,10 @@ namespace Boku.Input
     {
         protected const double timeAutoRepeat = 1.0 / 15.0;     // Was 8.0
         protected const double timeFirstAutoRepeat = 0.3;       // Was 0.33
-        
+
         /// <summary>
         /// Temporary per update frame storage of key states (Game pad state is handled in GamepadInput)
-        /// 
+        ///
         /// </summary>
         protected static KeyboardState keyState;
         protected static KeyboardState[] chatpadStates = new KeyboardState[(int)PlayerIndex.Four + 1];
@@ -70,11 +70,11 @@ namespace Boku.Input
         abstract public void Reset();
 
         /// <summary>
-        /// This will be called by the InputCommmandStack to sync 
+        /// This will be called by the InputCommmandStack to sync
         /// to the current state for the input command type
         /// This happens when a new command stack is pushed so that
         /// the new stack will represent the current state and correctly call events
-        /// 
+        ///
         /// </summary>
         abstract public void Sync( );
     }

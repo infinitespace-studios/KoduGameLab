@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Common namespace
 
 using System;
@@ -44,7 +43,7 @@ namespace Boku.Fx
             private static EffectParameter Parameter(EffectParams param)
             {
                 return effectCache.Parameter((int)param);
-            }            
+            }
             #endregion
 
             #region Accessors
@@ -53,7 +52,6 @@ namespace Boku.Fx
                 get { return mask; }
             }
             #endregion
-
 
             #region Public
 
@@ -68,7 +66,7 @@ namespace Boku.Fx
                 {
                     intensity.X = intensity.Z;
                     intensity.Y = intensity.Z;
-                    
+
                     size.X = size.Z;
                     size.Y = size.Z;
 

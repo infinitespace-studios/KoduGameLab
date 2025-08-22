@@ -223,7 +223,7 @@ namespace Boku.Input
                 Keys[] currentPressedKeys = chatpadStates[(int)this.playerIndex].GetPressedKeys();
 
                 // walk both sets of keys; the prev and current
-                // which are in order and 
+                // which are in order and
                 // trigger repeat, press, and release events
                 int indexPrev = 0;
                 int indexCurr = 0;

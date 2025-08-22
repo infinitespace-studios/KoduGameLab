@@ -130,7 +130,7 @@ namespace Boku.Common
             StaticActor result = null;
 
             Actors.TryGetValue(nonLocalizedName, out result);
-            
+
             return result;
         }
     }

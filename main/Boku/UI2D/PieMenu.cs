@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ using Boku.Common.Gesture;
 namespace Boku.UI
 {
     /// <summary>
-    ///  This class provides a generic use of a pie wheele UI menu that can support Icons, text, and 
+    ///  This class provides a generic use of a pie wheele UI menu that can support Icons, text, and
     ///  attached objects for the purpose of user activated "return items" <<ie: user chose this.>>
     ///  This menu sytem fully suports rich hierarchy as well as use as a flat pie where the
     ///  caller can add one slice at a time.
@@ -37,7 +36,7 @@ namespace Boku.UI
     {
         /// <summary>
         /// To build a pie menu with hierarchy depth a "Recipie" must be constructed
-        /// consisting of a list of these "PieRecipeItem"'s 
+        /// consisting of a list of these "PieRecipeItem"'s
         /// Note: you must include a (texture) for the icon OR (font & text) for display
         /// The "menuItem" is Any object you choose to associate with the indevidual menu item
         /// and will be returned on ching if an item was chosen by the user.
@@ -174,7 +173,7 @@ namespace Boku.UI
             private Object menuItem = null;
             private bool isFocused = false;
             private Vector2 positionOffest; // from the pies center
-            
+
             #endregion
 
             public float IconSize
@@ -201,7 +200,7 @@ namespace Boku.UI
             {
                 get { return positionOffest; }
                 set {  positionOffest = value; }
-            }           
+            }
 
             public Texture2D IconTexture
             {
@@ -218,13 +217,13 @@ namespace Boku.UI
             public bool Focused
             {
                 get { return isFocused;  }
-                set 
+                set
                 {
                     if (isFocused != value)
                     {
                         isFocused = value;
                         SetFocused();
-                    }  
+                    }
                 }
             }
 
@@ -346,7 +345,7 @@ namespace Boku.UI
             public bool Visible
             {
                 get { return visible; }
-                set { 
+                set {
                     visible = value;
                     if (visible)
                         indexPickedItem = -1;
@@ -358,7 +357,7 @@ namespace Boku.UI
                 this.parent = parentPie;
                 this.rootRecipe = recipe;
             }
-            // constructor 
+            // constructor
             public PieDisk(PieDisk parentPie)
             {
                 parent = parentPie;
@@ -379,7 +378,6 @@ namespace Boku.UI
                 slices.Add(slice);
             }
 
-
             // builds either the sing disk or, if given the complete hierarchy
             public void BakePie(bool isVisible)
             {
@@ -393,7 +391,7 @@ namespace Boku.UI
 
                         PieMenuSlice slice = new PieMenuSlice(pieRecipeSlice);
                         AddSlice(slice);
-                        if (pieRecipeSlice.subList!= null &&  pieRecipeSlice.subList.Count > 0) 
+                        if (pieRecipeSlice.subList!= null &&  pieRecipeSlice.subList.Count > 0)
                         { // this is a "group node" with another pie structure below
                             PieDisk fullPie = new PieDisk(this, pieRecipeSlice);
                             slice.subDisk = fullPie;
@@ -437,7 +435,7 @@ namespace Boku.UI
                 // adjust spacing if radius is smaller than the inner radius (one item)
                 if (this.radiusAtItems < maxItemRadius * 2.0f)
                 {
-                    // radius is too small, must increase 
+                    // radius is too small, must increase
                     this.radiusAtItems = maxItemRadius * 2.0f + radiusAtItemSpacing;
                     // and provide the extra spacing between items on the circumference
                     float newCircumference = MathHelper.TwoPi * this.radiusAtItems;
@@ -450,7 +448,6 @@ namespace Boku.UI
 
                 Vector2 posUV = Vector2.Zero;
                 Matrix invWorld = Matrix.Invert(worldMatrix);
-                 
 
                 Fugly fuglyTransform = new Fugly();
                 for (int indexItem = 0; indexItem < slices.Count; indexItem++)
@@ -462,29 +459,28 @@ namespace Boku.UI
                     }
 
                     float rot = MathHelper.PiOver2 - indexItem * arcLength;
-                    
+
                   //  slices[indexItem].mySlice = BuildPieSlice(el, arcLength, radiusInside, radiusOutside);
                     slices[indexItem].mySlice = BuildPieSlice(slices[indexItem].sliceType, arcLength, radiusInside, radiusOutside);
                     innerRadius = radiusInside;
                     outerRadius = radiusOutside;
 
-      
                     // create a slice for every item
 
                     ITransform transformSlice = slices[indexItem].mySlice as ITransform;
-                  
+
                     // rotate the slice into place
                     transformSlice.Local.OriginTranslation = SliceOffsetDefault; // move away from center to space them
                     transformSlice.Local.RotationZ = rot;
                     transformSlice.Compose();
-                    
+
                     // setting position for the icon....
                     Matrix rotation = Matrix.CreateRotationZ( rot );
                     Vector3 fixRotation = new Vector3(radiusInside + (radiusOutside - radiusInside) * 0.6f, 0.0f, 0.0f);
-           
+
                     slices[indexItem].Position = camera.WorldToScreenCoordsVector2( Vector3.Transform(fixRotation, rotation));
                     slices[indexItem].Position -= slices[indexItem].WhenBlockSize/2;
-                    
+
                 }
             }
 
@@ -496,8 +492,8 @@ namespace Boku.UI
                 for (int indexItem = 0; indexItem < slices.Count; indexItem++)
                 {
                     PieMenuSlice tmpItemData = slices[indexItem];
-                    
-                    float diagonal = (float)Math.Sqrt( Math.Pow(tmpItemData.IconTexture.Height,2) + 
+
+                    float diagonal = (float)Math.Sqrt( Math.Pow(tmpItemData.IconTexture.Height,2) +
                                                     Math.Pow(tmpItemData.IconTexture.Width,2));
                     diagonal *= iconScaling;
                     if (tmpItemData != null)
@@ -517,14 +513,13 @@ namespace Boku.UI
                 return true;
             }
 
-
             public int GetSliceAtAngle(Vector2 pos)
             {
                 Vector2 dir = pos;
                 dir.Normalize();
                 int sliceIndexAtPos = -1;
 
-                // Calc the angle of the stick.  Set this up so that directly up results 
+                // Calc the angle of the stick.  Set this up so that directly up results
                 // in an angle of 0 and to the right results in pi/2 (clockwise).
                 double angle = Math.Acos(dir.Y);
                 if (dir.X < 0.0f)
@@ -561,8 +556,8 @@ namespace Boku.UI
                         relative = relative + MathHelper.TwoPi;
                     }
 
-                    // Calc max relative angle we need before switching to the 
-                    // next item.  Use half the width of the pie segment plus 
+                    // Calc max relative angle we need before switching to the
+                    // next item.  Use half the width of the pie segment plus
                     // a little extra to provide some hysteresis.
                     double maxAngle = arcItem / 2.0f;
                     // Only apply hysteresis when we have more that 4 items in the
@@ -604,7 +599,7 @@ namespace Boku.UI
                 float twitchTime = 0.1f;
 
                 // Undo previous slice selection state.
-                if ((this.indexLastHoverItem >-1) && 
+                if ((this.indexLastHoverItem >-1) &&
                     (this.indexLastHoverItem != indexNew))
                 {
                     PieMenuSlice menuSlice = this.slices[indexLastHoverItem];
@@ -619,17 +614,17 @@ namespace Boku.UI
                             transformSlice.Compose();
                         };
                         TwitchManager.CreateTwitch<Vector3>(
-                            transformSlice.Local.OriginTranslation, 
-                            SliceOffsetDefault, 
-                            set, 
-                            twitchTime, 
+                            transformSlice.Local.OriginTranslation,
+                            SliceOffsetDefault,
+                            set,
+                            twitchTime,
                             TwitchCurve.Shape.EaseInOut);
                     }
                 }
 
                 // apply new slice selection state
                // if (indexNew != indexCenteredItem)
-                if ((indexNew >-1) && 
+                if ((indexNew >-1) &&
                     (indexNew != indexCurrentHoverItem))
                 {
                     PieMenuSlice menuSlice = this.slices[indexNew];
@@ -646,10 +641,10 @@ namespace Boku.UI
                                 transformSlice.Compose();
                             };
                             TwitchManager.CreateTwitch<Vector3>(
-                                transformSlice.Local.OriginTranslation, 
-                                new Vector3(0.20f, 0.0f, 0.0f), 
-                                set, 
-                                twitchTime, 
+                                transformSlice.Local.OriginTranslation,
+                                new Vector3(0.20f, 0.0f, 0.0f),
+                                set,
+                                twitchTime,
                                 TwitchCurve.Shape.EaseInOut);
                         }
                     }
@@ -668,7 +663,7 @@ namespace Boku.UI
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
                 // Center on screen and just high enough to clear bottom help overlay text.
                 Vector2 screenSize = new Vector2(device.Viewport.Width, device.Viewport.Height);
-                
+
                 int sliceIndex = -1;
 
                 for (int i = 0; i < TouchInput.TouchCount; i++)
@@ -767,7 +762,7 @@ namespace Boku.UI
 
 #region Members and Constants
         private bool active=false;
-        private Effect effect = null; 
+        private Effect effect = null;
         //private ReflexCard rootCardNode = null;
         private PieRecipeItem rootRecipe;
         static private UiCamera camera = new UiCamera();
@@ -777,7 +772,7 @@ namespace Boku.UI
         private PieDisk activeDisk = null;
 
         private int focusedDiskNo = 0;
-#endregion    
+#endregion
 
 #region Accessors
         public bool Active
@@ -847,7 +842,7 @@ namespace Boku.UI
             this.rootRecipe = rootRecipe; // remember this one....
             this.rootDisk = new PieDisk(this, rootRecipe);
             this.rootDisk.ScreenPosition = desiredLocation;
-     
+
         }
 
         // constructor EMPTY PIE!
@@ -876,7 +871,7 @@ namespace Boku.UI
         // Add a simple slice to the main pie
         public void AddSlice(Object menuItem, Texture2D iconTexture, UI2D.Shared.GetFont font, string displaytext)
         {
-            PieMenuSlice slice = new PieMenuSlice(menuItem, iconTexture, font, displaytext);            
+            PieMenuSlice slice = new PieMenuSlice(menuItem, iconTexture, font, displaytext);
             this.rootDisk.AddSlice(slice);
         }
 
@@ -979,7 +974,7 @@ namespace Boku.UI
             bool fadeAlpha = false;
             if (depth != CurrentDiskNo)
                 fadeAlpha = true;
-            
+
             if (fadeAlpha)
             {
                 alphaLevel = 0.82f;
@@ -987,17 +982,16 @@ namespace Boku.UI
                     alphaLevel -= (CurrentDiskNo - depth) / 10.0f;
             }
 
-            GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;    
+            GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
             Matrix viewMatrix = camera.ViewMatrix;
             Matrix projMatrix = camera.ProjectionMatrix;
             Matrix worldMatrix = pieSlice.mySlice.localTransform.Matrix;
-            worldMatrix.Translation += new Vector3(orthPos.X, orthPos.Y, 0.0f);  
+            worldMatrix.Translation += new Vector3(orthPos.X, orthPos.Y, 0.0f);
 
             Matrix worldViewProjMatrix = worldMatrix * viewMatrix * projMatrix;
 
             effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
             effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-
 
             Vector4 baseColor = PieSelector.RenderObjSlice.ColorNormal;
             // used for debugging
@@ -1010,7 +1004,6 @@ namespace Boku.UI
             baseColor = pieSlice.DiffuseColor;
             if (fadeAlpha)
                 baseColor.W = alphaLevel;
-
 
             effect.Parameters["DiffuseColor"].SetValue(baseColor);
             effect.Parameters["SpecularColor"].SetValue(new Vector4(0.12f, 0.12f, 0.12f, alphaLevel));
@@ -1028,7 +1021,6 @@ namespace Boku.UI
             }
 
             pieSlice.mySlice.Render(device, effect);
-
 
             // render icon if there is one
             if (pieSlice.IconTexture != null)

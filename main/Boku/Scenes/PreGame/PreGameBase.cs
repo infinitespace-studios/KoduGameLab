@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -44,7 +43,7 @@ namespace Boku
             public bool Active
             {
                 get { return active; }
-                set 
+                set
                 {
                     if (active != value)
                     {
@@ -75,7 +74,7 @@ namespace Boku
 
             }   // end of PreGameBase c'tor
 
-            public virtual void Update() 
+            public virtual void Update()
             {
                 // Default Update lets pregame run until user kicks it out.
                 if (commandMap == CommandStack.Peek() && Active)
@@ -113,7 +112,7 @@ namespace Boku
                 }
             }   // end of PreGameBase Update()
 
-            public virtual void Render(Camera camera) 
+            public virtual void Render(Camera camera)
             {
                 // This space intentionally left blank.
             }   // end of PreGameBase Render()
@@ -146,5 +145,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

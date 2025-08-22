@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// Specialization of the standard UIGrid for the brush picker.  We need to have a custom
-    /// Refresh() method to handle the rotation and scaling of the tiles and we also need a 
+    /// Refresh() method to handle the rotation and scaling of the tiles and we also need a
     /// custom Render() method to render the tiles from the outside-in so that the drop
     /// shadows and transparency layer correctly.
     /// TODO Code is based on the ToolMenuUIGrid so we may be able to refactor to a common base class.
@@ -51,7 +50,6 @@ namespace Boku.UI2D
         #endregion
 
         #region Public
-
 
         public BrushPickerUIGrid(
             UIGridEvent onSelect,
@@ -121,7 +119,6 @@ namespace Boku.UI2D
             HelpOverlay.ReplaceTop(overlay);
 
         }   // end of Update();
-
 
         public override void Render(Camera camera)
         {

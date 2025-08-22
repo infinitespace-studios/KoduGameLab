@@ -505,4 +505,3 @@ namespace BokuShared.Wire
 
     #endregion
 }
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -144,7 +143,7 @@ namespace Boku.UI2D
 
             effect.CurrentTechnique = technique;
 
-            // We need to push the near plane out more than is normal for UI 
+            // We need to push the near plane out more than is normal for UI
             // so that the material cubes don't render behind the terrain.
             Camera cam = camera;
             cam.NearClip = 6.0f;
@@ -176,57 +175,10 @@ namespace Boku.UI2D
             terrain.ParameterEdit(Terrain.EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
             terrain.ParameterEdit(Terrain.EffectParams.WarpCenter).SetValue(Vector4.Zero);
 
-#if NETFX_CORE
                 // Note: Indexing into shaders doesn't work with MG.  Apparently it
                 // was some hack done in XNA related to the Effect code they used.
-                // Anyway, instead of using this indexing we need to pick and set 
+                // Anyway, instead of using this indexing we need to pick and set
                 // the right technique which we do further down from here.
-#else
-            if (BokuSettings.Settings.PreferReach)
-            {
-                //Select the VS based on the number of point-lights
-                var lightNum = Boku.Fx.Luz.Count;
-                if (lightNum > 6)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(4);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(4);
-                }
-                else if (lightNum > 4)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(3);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(3);
-                }
-                else if (lightNum > 2)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(2);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(2);
-                }
-                else if (lightNum > 0)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(1);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(1);
-                }
-                else
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(0);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(0);
-                }
-
-                //Select the PS
-                terrain.ParameterColor(Terrain.EffectParams.PSIndex).SetValue(0);
-                terrain.ParameterEdit(Terrain.EffectParams.PSIndex).SetValue(0);
-            }
-            else // Shader Model v3
-            {
-                //SM3 only uses one VS
-                terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(5);
-                terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(5);
-
-                //Select the PS
-                terrain.ParameterColor(Terrain.EffectParams.PSIndex).SetValue(2);
-                terrain.ParameterEdit(Terrain.EffectParams.PSIndex).SetValue(2);
-            }
-#endif
 
             if (MaterialPicker.FabricMode)
             {
@@ -243,7 +195,6 @@ namespace Boku.UI2D
 
                 TerrainMaterial mat = TerrainMaterial.Get(materialIndex);
 
-#if NETFX_CORE
                 int lightNum = Boku.Fx.Luz.Count;
                 if (lightNum > 6)
                 {
@@ -265,9 +216,6 @@ namespace Boku.UI2D
                 {
                     effect.CurrentTechnique = effect.Techniques["TerrainColorPass_L0_FA_SM2"];
                 }
-#else
-                effect.CurrentTechnique = mat.TechniqueColor(TerrainMaterial.EffectTechs_FA.TerrainColorPass_FA);
-#endif
                 foreach (EffectPass pass in effect.CurrentTechnique.Passes)
                 {
                     pass.Apply();
@@ -297,8 +245,7 @@ namespace Boku.UI2D
                 }
 
                 TerrainMaterial mat = TerrainMaterial.Get(materialIndex);
-                
-#if NETFX_CORE
+
                 int lightNum = Boku.Fx.Luz.Count;
                 if (lightNum > 6)
                 {
@@ -320,9 +267,6 @@ namespace Boku.UI2D
                 {
                     effect.CurrentTechnique = effect.Techniques["TerrainColorPass_L0_FD_SM2"];
                 }
-#else
-                effect.CurrentTechnique = mat.TechniqueColor(TerrainMaterial.EffectTechs.TerrainColorPass);
-#endif
 
                 foreach (EffectPass pass in effect.CurrentTechnique.Passes)
                 {
@@ -594,7 +538,7 @@ namespace Boku.UI2D
                 // WTF? If we have 37 vertices the indices should be
                 // in the range 0..36 inclusive.  Instead they're 1..37.
                 // How did this ever work?
-                // Ok, in the call to DrawPrimitives -1 was passed as the vertexOffset.  
+                // Ok, in the call to DrawPrimitives -1 was passed as the vertexOffset.
                 // Also, the number of vertices was passed as 36 instead of the actual 37.
                 // The end result is that this more or less worked on nVidia and Intel chipsets
                 // but totally failed to render on ATI chipsets.  DON"T DO THIS!

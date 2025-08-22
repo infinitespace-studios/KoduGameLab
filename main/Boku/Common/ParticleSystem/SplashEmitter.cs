@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -75,7 +74,7 @@ namespace Boku.Common.ParticleSystem
 
                 SharedEmitterManager.Splashes.AddParticle(ref party);
             }
-        }   
+        }
 
         /// <summary>
         /// Add in some explicit splashes

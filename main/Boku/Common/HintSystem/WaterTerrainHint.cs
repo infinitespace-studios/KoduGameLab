@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,7 +45,7 @@ namespace Boku.Common.HintSystem
                 // GamePad mode.
                 if(InGame.inGame.CurrentUpdateMode == InGame.UpdateMode.TerrainWater)
                 {
-                    
+
                     editingWater = true;
                 }
             }

@@ -33,7 +33,7 @@ namespace Boku.Common.Gesture
         {
             get { return m_InitialPosition; }
         }
-  
+
         public Vector2 DragPosition
         {
             get { return m_Position; }
@@ -52,19 +52,17 @@ namespace Boku.Common.Gesture
         private double m_MinMoveTime = 0;
         private Vector2 m_MinMoveDelta = Vector2.Zero;
 
-
         /// <summary>
         /// We are considered dragging throughout the drag gesture.
         /// </summary>
         public bool IsDragging
         {
-            get 
-            { 
+            get
+            {
                 return GestureState.Began == GetState() ||
-                       GestureState.Changed == GetState(); 
+                       GestureState.Changed == GetState();
             }
         }
-
 
         protected override void OnReset()
         {
@@ -73,7 +71,7 @@ namespace Boku.Common.Gesture
             m_MinMoveTime = 0.0f;
         }
 
-        protected override void OnTouchPressed(TouchContact[] touches) 
+        protected override void OnTouchPressed(TouchContact[] touches)
         {
             Debug.Assert(GetRequiredTouchCount() > 0);
             if( GetRequiredTouchCount() != touches.Length )
@@ -102,7 +100,7 @@ namespace Boku.Common.Gesture
         protected override void OnTouchMoved(TouchContact[] touches)
         {
             TouchContact tc =  (GetRequiredTouchCount() != touches.Length || m_FingerID < 0) ? null : TouchInput.GetTouchContactByFingerId( m_FingerID, touches );
-            
+
             if( null == tc )
             {
                 SetState(GestureState.Failed);

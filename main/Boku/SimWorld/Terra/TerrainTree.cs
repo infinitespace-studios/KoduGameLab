@@ -191,8 +191,6 @@ namespace Boku.SimWorld
 
         #region Renderable Versions
 
-
-
         /// <summary>
         /// Make vertex buffers
         /// </summary>
@@ -361,7 +359,7 @@ namespace Boku.SimWorld
         /// <param name="jTile"></param>
         /// <param name="firstVert"></param>
         /// <param name="numVerts"></param>
-        static protected void MakeSkirtIndices(int iTile, int jTile, int firstVert, 
+        static protected void MakeSkirtIndices(int iTile, int jTile, int firstVert,
             int numVerts, List<SkirtVertex> skirtVerts)
         {
             int numQuads = (numVerts / 2) - 1;
@@ -665,7 +663,6 @@ namespace Boku.SimWorld
         }
 
         #endregion Renderable Versions
-
 
         /// <summary>
         /// Dispose of old tree and rebuild from scratch
@@ -1214,7 +1211,6 @@ namespace Boku.SimWorld
                 int idxX = (int)x;
                 int idxY = (int)y;
 
-
                 pC.Z = heightMap.GetHeight(idxX, idxY);
                 Vector3 nC = heightMap.GetNormal(idxX, idxY);
 
@@ -1497,7 +1493,7 @@ namespace Boku.SimWorld
                 card[(int)which] = vert;
                 return vert;
             }
-            /// 
+            ///
             /// <summary>
             ///         vu0     vu1
             ///         |       |
@@ -1658,7 +1654,7 @@ namespace Boku.SimWorld
             /// <summary>
             /// Unfinished part of Catmull-Clark (approximating) subdivision.
             /// To ensure the verts are still shared, the parent needs to generate
-            /// the even verts (corners) at MakeChildren, and share them with the 
+            /// the even verts (corners) at MakeChildren, and share them with the
             /// appropriate neighbors.
             /// </summary>
             protected void ShareParentVertsCC()

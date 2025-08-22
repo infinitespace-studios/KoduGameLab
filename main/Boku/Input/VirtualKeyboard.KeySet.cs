@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Xml;
 using System.Xml.Serialization;
@@ -56,7 +55,7 @@ namespace Boku.Input
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns>Return key if autorepeating.</returns>
             public Key Update()

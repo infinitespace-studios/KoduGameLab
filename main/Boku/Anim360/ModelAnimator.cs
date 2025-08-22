@@ -4,7 +4,7 @@
 /*
  * ModelAnimator.cs
  * Copyright (c) 2007 David Astle, Michael Nikonov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -43,7 +43,6 @@ namespace Xclna.Xna.Animation
     public  class ModelAnimator : DrawableGameComponent
     {
 
-
         #region Member Variables
         // Stores the world transform for the animation controller.
         private Matrix world = Matrix.Identity;
@@ -68,7 +67,7 @@ namespace Xclna.Xna.Animation
 
         // Store the number of meshes in the model
         private readonly int numMeshes;
-        
+
         // Stores the number of effects/ModelMeshParts
         private readonly int numEffects;
 
@@ -84,7 +83,6 @@ namespace Xclna.Xna.Animation
         #endregion
 
         #region General Properties
-
 
         /// <summary>
         /// Gets or sets the world matrix for the animation scene.
@@ -145,7 +143,6 @@ namespace Xclna.Xna.Animation
                 foreach (Effect effect in mesh.Effects)
                     numEffects++;
 
-
             // Initialize the arrays that store effect parameters
             modelEffects = new Effect[numEffects];
             worldParams = new EffectParameter[numEffects];
@@ -173,7 +170,7 @@ namespace Xclna.Xna.Animation
             // Update after AnimationController by default
             base.UpdateOrder = 1;
             game.Components.Add(this);
-   
+
             // Test to see if model has too many bones
             for (int i = 0; i < model.Meshes.Count; i++ )
             {
@@ -241,9 +238,9 @@ namespace Xclna.Xna.Animation
         }
 
         /// <summary>
-        /// Gets a collection of effects, one per ModelMeshPart, that are used by 
+        /// Gets a collection of effects, one per ModelMeshPart, that are used by
         /// the ModelAnimator. The first index of the collection corresponds to the
-        /// effect used to draw the first ModelMeshPart of the first Mesh, and the 
+        /// effect used to draw the first ModelMeshPart of the first Mesh, and the
         /// last index corresponds to the effect used to drwa the last ModelMeshPart
         /// of the last Mesh.
         /// </summary>
@@ -254,7 +251,6 @@ namespace Xclna.Xna.Animation
 
         #region Animation and Update Routines
 
-
         /// <summary>
         /// Updates the animator by finding the current absolute transforms.
         /// </summary>
@@ -262,7 +258,7 @@ namespace Xclna.Xna.Animation
         public override void Update(GameTime gameTime)
         {
             bonePoses.CopyAbsoluteTransformsTo(pose);
-            for (int i = 0; i < skinInfo.Length; i ++) 
+            for (int i = 0; i < skinInfo.Length; i ++)
             {
                 if (palette[i] == null)
                     continue;
@@ -284,7 +280,6 @@ namespace Xclna.Xna.Animation
 
         }
 
-
         /// <summary>
         /// Copies the current absolute transforms to the specified array.
         /// </summary>
@@ -303,7 +298,6 @@ namespace Xclna.Xna.Animation
         {
             return pose[boneIndex];
         }
-
 
         /// <summary>
         /// Gets a list of objects that are attached to a bone in the model.
@@ -340,11 +334,10 @@ namespace Xclna.Xna.Animation
                     {
                         foreach (Effect effect in mesh.Effects)
                         {
-                   
+
                                 worldParams[index].SetValue(
-               
+
                                     world);
-                            
 
                             matrixPaletteParams[index].SetValue(palette[i]);
                             index++;
@@ -368,7 +361,6 @@ namespace Xclna.Xna.Animation
                         if (currentPart.NumVertices == 0 || currentPart.PrimitiveCount == 0)
                             continue;
                         Effect currentEffect = modelEffects[effectStartIndex+j];
-      
 
                         device.VertexDeclaration = currentPart.VertexDeclaration;
                         device.Vertices[0].SetSource(mesh.VertexBuffer, currentPart.StreamOffset,
@@ -401,7 +393,7 @@ namespace Xclna.Xna.Animation
                     "likely because the model uses too many bones for the matrix palette.  The default palette size "
                     + "is 56 for windows and 40 for Xbox.");
             }
-            
+
         }
         #endregion
     }

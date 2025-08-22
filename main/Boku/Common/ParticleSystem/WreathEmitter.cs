@@ -99,7 +99,7 @@ namespace Boku.Common.ParticleSystem
                     partial += dt * adjustedEmissionRate;
                 }
 
-                // Emit as many particles as needed this 
+                // Emit as many particles as needed this
                 // frame to keep up with the emission rate.
                 while (partial >= 1.0f)
                 {
@@ -181,7 +181,7 @@ namespace Boku.Common.ParticleSystem
                             + cosTheta * new Vector2(fromCenter.Y, -fromCenter.X));
                     particle.position.X += delPos.X;
                     particle.position.Y += delPos.Y;
-                                                                
+
                     i++;
                 }
 

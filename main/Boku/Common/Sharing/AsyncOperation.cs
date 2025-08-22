@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 
-
 namespace Boku.Common.Sharing
 {
     public delegate void AsyncOpCallback(AsyncOperation op);
@@ -92,7 +91,6 @@ namespace Boku.Common.Sharing
         /// </summary>
         public object Tag { get; set; }
 
-
         public AsyncOperation(AsyncOperations op, AsyncOpCallback callback, object param, object pwner)
         {
             this.op = op;
@@ -119,11 +117,7 @@ namespace Boku.Common.Sharing
         {
             Log("Queueing " + GetType().Name);
 
-#if NETFX_CORE
             Debug.Assert(false, "What are we doing with LiveManager?");
-#else
-            //LiveManager._QueueOperation(this, startImmediately);
-#endif
         }
 
         /// <summary>
@@ -168,11 +162,7 @@ namespace Boku.Common.Sharing
             succeeded = success;
 
             // Queue ourselves for completion by the main thread.
-#if NETFX_CORE
             Debug.Assert(false, "What are we doing with LiveManager?");
-#else
-            //LiveManager._CompleteOperation(this);
-#endif
         }
 
         private void Log(string msg)
@@ -181,7 +171,6 @@ namespace Boku.Common.Sharing
             Debug.WriteLine(msg);
 #endif
         }
-
 
         protected abstract void IStart();
 
@@ -197,7 +186,7 @@ namespace Boku.Common.Sharing
 
     /// <summary>
     /// Static class for handling frame delayed callbacks.
-    /// This would probably make more sense as an extention of the 
+    /// This would probably make more sense as an extention of the
     /// Time class but that would require more rework.
     /// </summary>
     public static class AsyncOps

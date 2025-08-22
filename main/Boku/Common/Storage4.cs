@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if !PREBOOT
 //#define IMPORT_DEBUG
 #endif
@@ -13,7 +12,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
 
-#if NETFX_CORE
     using Windows.Foundation;
     using Windows.Management;
     using Windows.Storage;
@@ -21,9 +19,6 @@ using System.Diagnostics;
     using Windows.Storage.Search;
     using Windows.Storage.Streams;
     using Windows.System.UserProfile;
-#else
-    using System.Management;
-#endif 
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +26,6 @@ using System.Xml.Serialization;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Storage;
-
 
 using Boku;
 
@@ -45,7 +39,6 @@ namespace Boku.Common
         All = TitleSpace | UserSpace
     }
 
-#if NETFX_CORE
     public static class MyExtensions
     {
         /// <summary>
@@ -75,7 +68,6 @@ namespace Boku.Common
             sw.Dispose();
         }
     }
-#endif
 
     public partial class Storage4
     {
@@ -88,11 +80,9 @@ namespace Boku.Common
 
         static string uniqueMachineID = String.Empty;   // Filled in during Init()
 
-#if NETFX_CORE
         static StorageFolder TitleSpaceFolder;          // Filled in during Init().
         static public StorageFolder UserSpaceFolder;    // In WinRT this is the app's local storage folder
         static StorageFolder TempFolder;
-#endif
 
         #endregion
 
@@ -153,12 +143,11 @@ namespace Boku.Common
             get { return uniqueMachineID; }
         }
 
-#if NETFX_CORE
         static string username = "";
         // Current username
         public static string Username
         {
-            get 
+            get
             {
                 if(string.IsNullOrEmpty(username))
                 {
@@ -185,17 +174,14 @@ namespace Boku.Common
             }
             set { username = value; }
         }
-#endif
 
         #endregion
 
         #region Public
 
         //
-        // NOTE : Trying to ifdef individual lines to get NETFX_CORE to work with .Net is 
+        // NOTE : Trying to ifdef individual lines to get NETFX_CORE to work with .Net is
         // too messy so I've just created two large sections.
-
-#if NETFX_CORE
 
         /// <summary>
         /// One time init of storage.
@@ -215,7 +201,6 @@ namespace Boku.Common
 
             uniqueMachineID = GetHashedMachineID();
         }
-
 
         /// <summary>
         /// Starting with the given folder as the root, uses the path to find
@@ -294,7 +279,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static StorageFile GetStorageFile(string fullPath, StorageSource sources)
         {
-            // Note, for GetStorageFile() calls we don't need to split the 
+            // Note, for GetStorageFile() calls we don't need to split the
             // path from the filename.
 
             // If both StorageSource flags are set, try user space first.
@@ -466,7 +451,7 @@ namespace Boku.Common
         }   // end of Close()
 
         /// <summary>
-        /// Copys the StorageFile to the StorageFolder.  Returns a 
+        /// Copys the StorageFile to the StorageFolder.  Returns a
         /// StorageFile for the newly created file.
         /// </summary>
         /// <param name="file"></param>
@@ -492,7 +477,7 @@ namespace Boku.Common
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="path"></param>
         /// <param name="filter">Assume filter is of the form "*.ext".  Will strip off the '*' and use the extesion for filtering.</param>
@@ -905,8 +890,6 @@ namespace Boku.Common
             return result;
         }   // end of GetHashedMachineID()
 
-#else // not NETFX_CORE
-
         /// <summary>
         /// One time init of storage.
         /// </summary>
@@ -997,7 +980,7 @@ namespace Boku.Common
                 {
                     File.Delete(fullPath);
                 }
-                
+
                 // Ensure the directory exists.
                 string dirPath = Path.GetDirectoryName(fullPath);
                 if (!Directory.Exists(dirPath))
@@ -1056,7 +1039,6 @@ namespace Boku.Common
                 stream.Close();
             }
         }   // end of Close()
-
 
         public static String[] GetFiles(string path, StorageSource sources)
         {
@@ -1274,7 +1256,7 @@ namespace Boku.Common
 
         /// <summary>
         /// Deletes the specified file.  Assumes
-        /// it must be userspace.  
+        /// it must be userspace.
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns>true on success</returns>
@@ -1442,26 +1424,9 @@ namespace Boku.Common
             return MACAddress;
         }   // end of GetHashedMACAddress()
 
-
-#endif
-
-
-
-
         //
         // Methods common to .Net and NETFX_CORE
         //
-
-        public static StreamWriter OpenStreamWriter(string filePath, Encoding encoding = null)
-        {
-            Stream stream = OpenWrite(filePath);
-            StreamWriter sw = null;
-            if (stream != null)
-            {
-                sw = encoding == null ? new StreamWriter(stream) : new StreamWriter(stream, encoding);
-            }
-            return sw;
-        }
 
         #endregion
 
@@ -1503,12 +1468,20 @@ namespace Boku.Common
             return total;
         }   // end of Concat()
 
+        public static StreamWriter OpenStreamWriter(string filePath, Encoding encoding = null)
+        {
+            Stream stream = OpenWrite(filePath);
+            StreamWriter sw = null;
+            if (stream != null)
+            {
+                sw = encoding == null ? new StreamWriter(stream) : new StreamWriter(stream, encoding);
+            }
+            return sw;
+        }
 
         #endregion
 
     }   // end of class Storage4
-
-
 
     public class XnaStorageHelper : BokuShared.StorageHelper
     {
@@ -1544,6 +1517,5 @@ namespace Boku.Common
             Storage4.Close(stream);
         }
     }   // end of class XnaStorageHelper
-
 
 }   // end of namespace Boku.Common

@@ -1,15 +1,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if !NETFX_CORE
-using System.Drawing;
-#endif
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -24,7 +19,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// A class with static instances of shared UI bits including renderTargets and fonts.
-    /// You should never hold on to a reference to these since they may change with a 
+    /// You should never hold on to a reference to these since they may change with a
     /// device reset.
     /// </summary>
     public class Shared
@@ -95,7 +90,6 @@ namespace Boku.UI2D
                     fontName = "Arial";
                 }
 
-
                 return fontName;
             }
         }
@@ -147,9 +141,6 @@ namespace Boku.UI2D
                 if (gameFont10 == null)
                 {
                     gameFont10 = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont10.systemFont = SysFont.GetSystemFont(UIFontName, 10.0f, FontStyle.Regular);
-#endif
                     gameFont10.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri10");
                 }
                 return gameFont10;
@@ -162,9 +153,6 @@ namespace Boku.UI2D
                 if (gameFont13_5 == null)
                 {
                     gameFont13_5 = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont13_5.systemFont = SysFont.GetSystemFont(UIFontName, 13.5f, FontStyle.Regular);
-#endif
                     gameFont13_5.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri13_5");
                 }
                 return gameFont13_5;
@@ -177,9 +165,6 @@ namespace Boku.UI2D
                 if (gameFont15_75 == null)
                 {
                     gameFont15_75 = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont15_75.systemFont = SysFont.GetSystemFont(UIFontName, 15.75f, FontStyle.Regular);
-#endif
                     gameFont15_75.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri15_75");
                 }
                 return gameFont15_75;
@@ -192,9 +177,6 @@ namespace Boku.UI2D
                 if (gameFont18Bold == null)
                 {
                     gameFont18Bold = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont18Bold.systemFont = SysFont.GetSystemFont(UIFontName, 18.0f, FontStyle.Bold);
-#endif
                     gameFont18Bold.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri18Bold");
                 }
                 return gameFont18Bold;
@@ -207,9 +189,6 @@ namespace Boku.UI2D
                 if (gameFont20 == null)
                 {
                     gameFont20 = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont20.systemFont = SysFont.GetSystemFont(UIFontName, 20.0f, FontStyle.Regular);
-#endif
                     gameFont20.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri20");
                 }
                 return gameFont20;
@@ -222,9 +201,6 @@ namespace Boku.UI2D
                 if (gameFont24 == null)
                 {
                     gameFont24 = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont24.systemFont = SysFont.GetSystemFont(UIFontName, 24.0f, FontStyle.Regular);
-#endif
                     gameFont24.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri24");
                 }
                 return gameFont24;
@@ -237,9 +213,6 @@ namespace Boku.UI2D
                 if (gameFont24Bold == null)
                 {
                     gameFont24Bold = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont24Bold.systemFont = SysFont.GetSystemFont(UIFontName, 24.0f, FontStyle.Bold);
-#endif
                     gameFont24Bold.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri24Bold");
                 }
                 return gameFont24Bold;
@@ -252,9 +225,6 @@ namespace Boku.UI2D
                 if (gameFont30Bold == null)
                 {
                     gameFont30Bold = new FontWrapper();
-#if !NETFX_CORE
-                    gameFont30Bold.systemFont = SysFont.GetSystemFont(UIFontName, 30.0f, FontStyle.Bold);
-#endif
                     gameFont30Bold.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\Calibri30Bold");
                 }
                 return gameFont30Bold;
@@ -267,9 +237,6 @@ namespace Boku.UI2D
                 if (cardLabel == null)
                 {
                     cardLabel = new FontWrapper();
-#if !NETFX_CORE
-                    cardLabel.systemFont = SysFont.GetSystemFont("Arial", 20.0f, FontStyle.Bold);
-#endif
                     cardLabel.spriteFont = BokuGame.Load<SpriteFont>(BokuGame.Settings.MediaPath + @"Fonts\CardLabel");
                 }
                 return cardLabel;
@@ -291,7 +258,6 @@ namespace Boku.UI2D
                 return gameFontLineNumbers;
             }
         }
-
 
         /// <summary>
         /// Note:  Do not hold on to this reference for more than the
@@ -354,8 +320,8 @@ namespace Boku.UI2D
                     renderTargetDepthStencil1024_768 = new RenderTarget2D(
                         BokuGame.bokuGame.GraphicsDevice,
                         width, height, false,
-                        SurfaceFormat.Color, 
-                        DepthFormat.Depth24Stencil8, 0, 
+                        SurfaceFormat.Color,
+                        DepthFormat.Depth24Stencil8, 0,
                         RenderTargetUsage.PlatformContents);
                     InGame.GetRT("UI2D.Shared:renderTargetDepthStencil1024_768", renderTargetDepthStencil1024_768);
                 }
@@ -415,7 +381,7 @@ namespace Boku.UI2D
         /// </summary>
         public static RenderTarget2D RenderTarget1024_768
         {
-            get 
+            get
             {
                 if (renderTarget1024_768 == null || renderTarget1024_768.IsDisposed || renderTarget1024_768.GraphicsDevice.IsDisposed)
                 {
@@ -429,7 +395,7 @@ namespace Boku.UI2D
                         RenderTargetUsage.PlatformContents);
                     InGame.GetRT("UI2D.Shared:renderTarget1024_768", renderTarget1024_768);
                 }
-                return renderTarget1024_768; 
+                return renderTarget1024_768;
             }
         }
         /// <summary>
@@ -461,7 +427,7 @@ namespace Boku.UI2D
         /// </summary>
         public static RenderTarget2D RenderTarget512_302
         {
-            get 
+            get
             {
                 if (renderTarget512_302 == null || renderTarget512_302.IsDisposed || renderTarget512_302.GraphicsDevice.IsDisposed)
                 {
@@ -475,7 +441,7 @@ namespace Boku.UI2D
                         RenderTargetUsage.PlatformContents);
                     InGame.GetRT("UI2D.Shared:renderTarget512_302", renderTarget512_302);
                 }
-                return renderTarget512_302; 
+                return renderTarget512_302;
             }
         }
         /// <summary>
@@ -549,27 +515,27 @@ namespace Boku.UI2D
 
         public static Texture2D BlackButtonTexture
         {
-            get 
+            get
             {
                 if (blackButtonTexture == null || blackButtonTexture.IsDisposed || blackButtonTexture.GraphicsDevice.IsDisposed)
                 {
                     blackButtonTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\GridElements\BlackTextTile");
                 }
 
-                return blackButtonTexture; 
+                return blackButtonTexture;
             }
         }
 
         public static Texture2D UpDownArrowsTexture
         {
-            get 
+            get
             {
                 if (upDownArrowsTexture == null || upDownArrowsTexture.IsDisposed || upDownArrowsTexture.GraphicsDevice.IsDisposed)
                 {
                     upDownArrowsTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\HelpCard\UpDownArrows");
                 }
 
-                return upDownArrowsTexture; 
+                return upDownArrowsTexture;
             }
         }
 
@@ -639,7 +605,6 @@ namespace Boku.UI2D
             get { return quadIndices; }
         }
 
-
         #endregion
 
         #region Public
@@ -650,7 +615,7 @@ namespace Boku.UI2D
         /// <summary>
         /// These delegates are used to provide a level of indirection for objects that
         /// need to hold onto a reference to a font.  Since a device reset may change the
-        /// underlying font we instead give the objects a delegate which returns the 
+        /// underlying font we instead give the objects a delegate which returns the
         /// correct font.
         /// </summary>
         public static GetFont GetGameFont10 = delegate() { return UI2D.Shared.GameFont10; };
@@ -691,7 +656,6 @@ namespace Boku.UI2D
             {
                 upDownArrowsTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\HelpCard\UpDownArrows");
             }
-
 
         } // end of InitDeviceResources()
 
@@ -762,9 +726,7 @@ namespace Boku.UI2D
             if (renderTargetDepthStencil1280_720 == null)
             {
                 int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
-#if NETFX_CORE
                 numSamples = 0;
-#endif
                 renderTargetDepthStencil1280_720 = new RenderTarget2D(
                     device,
                     width, height, false,

@@ -296,7 +296,7 @@ namespace Boku.SimWorld.Collision
             localToPlane = Matrix.Transpose(planeToLocal);
 
             planeToLocal = Matrix.Multiply(
-                planeToLocal, 
+                planeToLocal,
                 Matrix.CreateTranslation((localMin + localMax) * 0.5f));
             localToPlane = Matrix.Multiply(
                 Matrix.CreateTranslation(-(localMin + localMax) * 0.5f),

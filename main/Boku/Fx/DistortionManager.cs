@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 /// Relocated from Common namespace
 
 using System;
@@ -141,7 +140,7 @@ namespace Boku.Fx
             Vector3 maxSize = new Vector3(1.2f, 1.2f, 1.2f);
 
             Distortion lie = Add(thing, life, maxSize);
-            
+
             lie.EnableBump(true);
 
             lie.EnableGlow(true);
@@ -194,7 +193,7 @@ namespace Boku.Fx
         }
 
         /// <summary>
-        /// Set renderEffects state and render SM3 versions of distortions. 
+        /// Set renderEffects state and render SM3 versions of distortions.
         /// </summary>
         /// <param name="camera"></param>
         /// <param name="effectsImage"></param>
@@ -283,8 +282,7 @@ namespace Boku.Fx
                 return;
             }
             InGame.inGame.renderEffects = InGame.RenderEffect.BloomPass;
-            
-            
+
             // Need to jumpt through some hoops here to get the right thing to happen
             // when we're in tutorial mode.  Basically we're setting up a custom viewport
             // that has the same aspect ratio and offset that the main one has but is
@@ -318,7 +316,6 @@ namespace Boku.Fx
 
             InGame.inGame.renderEffects = InGame.RenderEffect.Normal;
         }
-
 
         public static void LoadContent(bool immediate)
         {
@@ -359,7 +356,7 @@ namespace Boku.Fx
         {
             BokuGame.Release(ref bump);
             BokuGame.Release(ref partyEffect);
-            
+
             effectCache.UnLoad();
 
             if (distFilter != null)

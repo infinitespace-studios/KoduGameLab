@@ -31,14 +31,14 @@ namespace Boku.Common
 
         /// <summary>
         /// Based on the current filter's tags, decides whether or not a level matches.
-        /// Note that this logic must match the logic on the server side otherwise 
+        /// Note that this logic must match the logic on the server side otherwise
         /// madness ensues.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         virtual public bool Matches(LevelMetadata item)
         {
-            //check for server side matching 
+            //check for server side matching
             if (ServerSideMatching)
             {
                 return true;

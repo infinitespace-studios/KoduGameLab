@@ -24,7 +24,7 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Used as a Parameter Filter used by the GamePadSensor
-    /// 
+    ///
     /// </summary>
     public class PlayerFilter : Filter
     {

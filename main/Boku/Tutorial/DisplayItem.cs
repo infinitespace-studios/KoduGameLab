@@ -16,7 +16,7 @@ namespace Boku.Tutorial
     /// <summary>
     /// This represents the base class for instructions and hints
     /// It contains common concepts and functionality from both
-    /// 
+    ///
     /// </summary>
     public abstract class DisplayItem
     {
@@ -29,7 +29,7 @@ namespace Boku.Tutorial
             Bottom = 0x0008,
         }
         /// <summary>
-        /// This is the text that represents the title of the instruction/hint; 
+        /// This is the text that represents the title of the instruction/hint;
         /// </summary>
         public string title;
 
@@ -61,7 +61,7 @@ namespace Boku.Tutorial
         public abstract void Render();
         public abstract void Activate();
         public abstract void Deactivate();
-        
+
         public bool Complete
         {
             get

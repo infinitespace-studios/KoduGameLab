@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -40,7 +39,7 @@ namespace Boku.Programming
         {
             base.CopyTo(clone);
         }
-        
+
         public override void StartUpdate(GameActor gameActor)
         {
         }
@@ -58,6 +57,5 @@ namespace Boku.Programming
             reflex.targetSet.Action = TestObjectSet(reflex);
         }
     }
-
 
 }

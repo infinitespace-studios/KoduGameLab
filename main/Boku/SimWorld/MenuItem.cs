@@ -27,7 +27,7 @@ namespace Boku.SimWorld
             get { return scaleModelFixup; }
             set { scaleModelFixup = value; }
         }
-        
+
         public Classification.Colors Color
         {
             get { return color; }

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -25,46 +24,46 @@ namespace Boku.Base
     {
         /// <summary>
         /// Load content from disk.
-        /// 
+        ///
         /// Never call this function directly, not even for child objects.
         /// NOTE: It IS NOT SAFE to access the graphics device from within
         /// this function.
         ///
-        /// To pass this call to children, call: 
-        /// 
+        /// To pass this call to children, call:
+        ///
         ///     // You must pass the 'immediate' parameter unchanged.
         ///     BokuGame.Load(childObj, immediate);
-        /// 
+        ///
         /// </summary>
         void LoadContent(bool immediate);
 
         /// <summary>
         /// Allocate device resources.
-        /// 
+        ///
         /// Never call this function directly, not even for child objects.
         /// NOTE: It IS SAFE to access the graphics device from within this
         /// function.
-        /// 
+        ///
         /// No need to do anything special to pass this call to children.
         /// The ContentLoader will automatically call this method on the
         /// child objects you queued for load in LoadContent.
-        /// 
+        ///
         /// </summary>
         /// <param name="graphics"></param>
         void InitDeviceResources(GraphicsDevice device);
 
         /// <summary>
         /// Release assets and graphics device resources.
-        /// 
+        ///
         /// To unload a child object, call:
-        /// 
+        ///
         ///     BokuGame.Unload(childObj);
-        /// 
+        ///
         /// To release an asset or device state, call:
-        /// 
+        ///
         ///     // Or you could just set it to null.
         ///     BokuGame.Release(ref asset);
-        /// 
+        ///
         /// </summary>
         void UnloadContent();
 

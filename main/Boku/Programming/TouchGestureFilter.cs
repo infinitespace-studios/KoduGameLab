@@ -34,8 +34,8 @@ namespace Boku.Programming
 
     /// <summary>
     /// Hybrid filter that provides the source of mouse button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class TouchGestureFilter : Filter
     {
@@ -60,7 +60,7 @@ namespace Boku.Programming
         /// Last captured tap position by this reflex
         /// </summary>
         private Vector2 tapPosition = Vector2.Zero;
-        
+
         [XmlIgnore]
         public Vector2 TapPosition
         {
@@ -159,7 +159,7 @@ namespace Boku.Programming
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reflex"></param>
         /// <param name="param"></param>
@@ -194,7 +194,7 @@ namespace Boku.Programming
                     }
                 }
 
-                // Set the touch position and touch actor based on TouchEdit data and 
+                // Set the touch position and touch actor based on TouchEdit data and
                 // whether we've hit an actor or not.
                 bool meFilter = reflex.Data.FilterExists("filter.me");
                 if (TouchEdit.HitInfo.ActorHit != null)

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -136,7 +135,7 @@ namespace Boku.Common.ParticleSystem
                 {
                     partial += dt * emissionRate;
 
-                    // Emit as many particles as needed this 
+                    // Emit as many particles as needed this
                     // frame to keep up with the emission rate.
                     while (partial >= 1.0f)
                     {

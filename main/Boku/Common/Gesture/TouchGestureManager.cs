@@ -22,7 +22,7 @@ namespace Boku.Common.Gesture
         DoubleDrag,
         Pinch,
         Rotate,
-        
+
         COUNT,
         INVALID, //INVALID MUST BE AFTER COUNT
 
@@ -46,14 +46,14 @@ namespace Boku.Common.Gesture
             m_gestures[(int)TouchGestureType.Tap] = m_tapGesture;
             m_gestures[(int)TouchGestureType.DoubleTap] = m_doubleTapGesture;
             m_gestures[(int)TouchGestureType.TapHold] = m_touchHoldGesture;
-            
+
             m_gestures[(int)TouchGestureType.Drag] = m_dragGesture;
             m_gestures[(int)TouchGestureType.DoubleDrag] = m_doubleDragGesture;
 
             m_gestures[(int)TouchGestureType.Pinch] = m_pinchGesture;
             m_gestures[(int)TouchGestureType.Rotate] = m_rotateGesture;
             m_gestures[(int)TouchGestureType.Swipe] = m_swipeGesture;
-            
+
         }
         //----------------------------------------------
 
@@ -77,7 +77,6 @@ namespace Boku.Common.Gesture
         {
             get { return m_doubleDragGesture; }
         }
-
 
         private DragGestureRecognizer m_dragGesture = new DragGestureRecognizer();
         public DragGestureRecognizer DragGesture
@@ -108,7 +107,6 @@ namespace Boku.Common.Gesture
         {
             get { return m_touchHoldGesture; }
         }
-
 
         public void Update()
         {
@@ -147,7 +145,7 @@ namespace Boku.Common.Gesture
         public GestureRecognizer GetActiveGesture(TouchGestureType type, params TouchGestureType[] ifBeforeTheseTypes )
         {
             Debug.Assert(type < TouchGestureType.COUNT);
-            
+
             GestureRecognizer retGesture = null;
             if( TouchGestureType.CONTINUOUS_START <= type  && type <= TouchGestureType.CONTINUOUS_END )
             {

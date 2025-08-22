@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -100,7 +99,7 @@ namespace Boku.UI2D
                 batch.Begin();
                 TextHelper.DrawString(Font, Strings.Localize("editObjectParams.back"), position, color);
                 batch.End();
-                
+
                 InGame.RestoreRenderTarget();
 
                 texture = new Texture2D(device, 128, 128, false, SurfaceFormat.Color);
@@ -140,6 +139,5 @@ namespace Boku.UI2D
         #endregion
 
     }   // end of class UIGridModularOKSquare
-
 
 }   // end of namespace Boku.UI2D

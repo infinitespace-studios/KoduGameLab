@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -37,7 +36,7 @@ namespace Boku.Common.ParticleSystem
                                                 // that actors in the scene can respond to this particle.
 
             // Each fireball has its own smoke emitter.  We may have to change this to
-            // a shared static if we need to better control the overall number of 
+            // a shared static if we need to better control the overall number of
             // particles in the scene.
             public SmokeEmitter smokeEmitter = null;
 
@@ -226,7 +225,7 @@ namespace Boku.Common.ParticleSystem
                 {
                     FireballParticle particle = (FireballParticle)particleList[i];
 
-                    // Need to check age since we may still have expired 
+                    // Need to check age since we may still have expired
                     // particles in the list while their smoke fades.
                     if (particle.age < particle.lifetime)
                     {
@@ -270,7 +269,6 @@ namespace Boku.Common.ParticleSystem
                 shotPending = true;
             }
         }   // end of FireballEmitter Shoot()
-
 
     }   // end of class FireballEmitter
 

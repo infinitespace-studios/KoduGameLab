@@ -4,7 +4,7 @@
 /*
  * AnimationReader.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -35,7 +35,6 @@ using Microsoft.Xna.Framework.Content;
 namespace Xclna.Xna.Animation.Content
 {
 
-
     // Reads in processed animation info written in the pipeline
     internal sealed class AnimationReader : ContentTypeReader<AnimationInfoCollection>
     {
@@ -49,14 +48,14 @@ namespace Xclna.Xna.Animation.Content
         {
             AnimationInfoCollection dict = new AnimationInfoCollection();
             int numAnimations = input.ReadInt32();
-            
+
             // Read all the animations
             for (int i = 0; i < numAnimations; i++)
             {
                 string animationName = input.ReadString();
                 int numBoneAnimations = input.ReadInt32();
 
-                List<BoneKeyframeCollection> animList 
+                List<BoneKeyframeCollection> animList
                     = new List<BoneKeyframeCollection>();
 
                 // Read all the animation tracks for the current animation
@@ -74,7 +73,7 @@ namespace Xclna.Xna.Animation.Content
                             input.ReadInt64());
                         boneAnimationList.Add(frame);
                     }
-                    BoneKeyframeCollection boneAnimation = 
+                    BoneKeyframeCollection boneAnimation =
                         new BoneKeyframeCollection(boneName,boneAnimationList);
 
                     animList.Add(boneAnimation);

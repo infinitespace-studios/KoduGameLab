@@ -44,7 +44,6 @@ namespace Boku.Common
             get { return currOpCount > 0; }
         }
 
-
         public LevelSetCursor(
             ILevelBrowser browser,
             Guid desiredSelection,
@@ -181,7 +180,7 @@ namespace Boku.Common
             else if (index == -1)
             {
                 // The query has been cleared. Reset a few state variables and
-                // then make the callback with the special value MaxValue to 
+                // then make the callback with the special value MaxValue to
                 // communicate to the app that it should clear its state as well.
                 QueryPointer = 0;
                 totalOpCount = 0;

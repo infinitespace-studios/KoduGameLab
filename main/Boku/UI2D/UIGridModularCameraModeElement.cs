@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -93,7 +92,7 @@ namespace Boku.UI2D
                         {
                             HelpOverlay.Push(@"ModularCameraMode");
                         }
-                    
+
                         TwitchManager.Set<float> set = delegate(float val, Object param) { dim = val; };
                         TwitchManager.CreateTwitch<float>(dim, 1.0f, set, 0.2f, TwitchCurve.Shape.EaseInOut);
                     }
@@ -309,8 +308,6 @@ namespace Boku.UI2D
             }
         }   // end of HandleMouseInput()
 
-
-
         public override void HandleTouchInput(TouchContact touch, Vector2 hitUV)
         {
             /// \TODO: JB implement
@@ -354,7 +351,6 @@ namespace Boku.UI2D
             }
         }
 
-
         public override void Render(Camera camera)
         {
             effect.CurrentTechnique = effect.Techniques["NormalMappedWithEnv"];
@@ -388,7 +384,6 @@ namespace Boku.UI2D
                 int h = diffuse.Height;
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
-                
 
                 // Render the white background.
                 Vector2 position = Vector2.Zero;
@@ -422,7 +417,6 @@ namespace Boku.UI2D
                 quad.Render(CurIndex == 1 ? indicatorLit : indicatorUnlit, position, size, "TexturedRegularAlpha");
                 position = new Vector2(512 - 105 - size.X, 140);
                 quad.Render(CurIndex == 2 ? indicatorLit : indicatorUnlit, position, size, "TexturedRegularAlpha");
-
 
                 // Disable writing to alpha channel.
                 // This prevents transparent fringing around the text.
@@ -606,9 +600,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularCameraModeElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

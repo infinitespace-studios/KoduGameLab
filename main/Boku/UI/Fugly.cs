@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,8 +23,8 @@ using Boku.Audio;
 namespace Boku.UI
 {
     /// <summary>
-    /// A fugly is a special little object that is used to lure the 
-    /// programming cursor away from its normal position and place 
+    /// A fugly is a special little object that is used to lure the
+    /// programming cursor away from its normal position and place
     /// it at the top of the screen where the Page Handle resides.
     /// Fuglys are mutants.  Even though they inherit from ITransform
     /// they have no parents.

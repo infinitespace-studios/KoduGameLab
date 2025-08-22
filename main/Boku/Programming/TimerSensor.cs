@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,11 +24,11 @@ namespace Boku.Programming
 {
     /// <summary>
     /// Senses when a timer has expired
-    /// 
+    ///
     /// It acts more of the manager of TimerFilters rather than the true input of the sensor
-    /// 
-    /// this sensor is one of the few FastPoll sensors.  
-    /// This means that it will be updated on every Update rather than 
+    ///
+    /// this sensor is one of the few FastPoll sensors.
+    /// This means that it will be updated on every Update rather than
     /// on every brain reaction cycle (about every 0.33 seconds).
     /// </summary>
     public class TimerSensor : Sensor
@@ -57,7 +56,6 @@ namespace Boku.Programming
         public override void FinishUpdate(GameActor gameActor)
         {
         }
-
 
         public override void ComposeSensorTargetSet(GameActor gameActor, Reflex reflex)
         {

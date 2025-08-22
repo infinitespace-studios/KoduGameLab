@@ -1,19 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-#if NETFX_CORE
     using System.Runtime.InteropServices.WindowsRuntime;
     using Windows.Security.Cryptography;
     using Windows.Security.Cryptography.Core;
     using Windows.Storage.Streams;
-#else
-    using System.Security.Cryptography;
-#endif
 
 namespace BokuShared
 {
@@ -87,17 +82,12 @@ namespace BokuShared
 
             byte[] result;
 
-#if NETFX_CORE
             HashAlgorithmProvider alg = Windows.Security.Cryptography.Core.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
             CryptographicHash hash = alg.CreateHash();
             IBuffer buffer = CryptographicBuffer.CreateFromByteArray(data);
             hash.Append(buffer);
             IBuffer hashBuff = hash.GetValueAndReset();
             result = hashBuff.ToArray();
-#else
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-            result = md5.ComputeHash(data);
-#endif       
 
             return result;
         }   // end of MD5()
@@ -110,7 +100,7 @@ namespace BokuShared
         }
 
         /// <summary>
-        /// Given a pin, determines if it is valid.  "Valid" in 
+        /// Given a pin, determines if it is valid.  "Valid" in
         /// this case means that it's not trivially simple.
         /// </summary>
         /// <param name="pin"></param>
@@ -231,9 +221,8 @@ namespace BokuShared
             return result;
         }   // end of CreateChecksumHash()
 
-
         /// <summary>
-        /// Creates checksum hash based on dateTime using the 
+        /// Creates checksum hash based on dateTime using the
         /// current creator and pin.
         /// </summary>
         /// <param name="dateTime"></param>
@@ -270,7 +259,7 @@ namespace BokuShared
         }   // end of ExtractPin()
 
         /// <summary>
-        /// Extracts pin from given 
+        /// Extracts pin from given
         /// </summary>
         /// <param name="fileChecksum"></param>
         /// <param name="creatorName"></param>

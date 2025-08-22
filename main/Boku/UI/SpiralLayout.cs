@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -44,7 +43,7 @@ namespace Boku.UI
             float radiusSpiral = this.maxItemRadius * 2.0f;
 
             {
-                // radius is too small, must increase 
+                // radius is too small, must increase
                 // this is assuming the center composed item is the same size as the other items
                 radius = this.maxItemRadius * 2.0f;
                 // and provide the extra spacing between items on the circumference
@@ -52,7 +51,6 @@ namespace Boku.UI
                 spacingCircumference = (newCircumference - neededCircumference) / items.Count;
                 neededCircumference = newCircumference;
             }
-
 
             // layout items into position spiraling on the circumference
             //

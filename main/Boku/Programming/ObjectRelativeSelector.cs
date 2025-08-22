@@ -22,7 +22,7 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this selector will calculate a vector that provides movement based 
+    /// this selector will calculate a vector that provides movement based
     /// upon the input vector (from a stick) and the camera view vector.
     /// </summary>
     public class ObjectRelativeSelector : Selector
@@ -92,11 +92,11 @@ namespace Boku.Programming
                                  0.0f);
 
             // We used to normalize here but that makes movement binary instead of analog, ie
-            // it acts as if the stick is fully over all the time instead of allowing for 
+            // it acts as if the stick is fully over all the time instead of allowing for
             // finer control.
             /*
             value.Normalize();
-            // If value was 0,0,0 we'll get NaNs when we normalize so check for this 
+            // If value was 0,0,0 we'll get NaNs when we normalize so check for this
             // and restore valid values for value.  (sorry, couldn't resist)
             if (float.IsNaN(value.X))
             {

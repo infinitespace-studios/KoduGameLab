@@ -32,8 +32,8 @@ namespace Boku.Programming
 
     /// <summary>
     /// Hybrid filter that provides the source of mouse button input
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
     public class MouseFilter : Filter
     {
@@ -84,7 +84,6 @@ namespace Boku.Programming
             }
         }
 
-
         public override ProgrammingElement Clone()
         {
             MouseFilter clone = new MouseFilter();
@@ -104,7 +103,7 @@ namespace Boku.Programming
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reflex"></param>
         /// <param name="param"></param>
@@ -120,7 +119,7 @@ namespace Boku.Programming
             // Only set the mouse position onto the reflex if the filter actually passes.
             if (result)
             {
-                
+
                 // If we have a Once modifier, clear it on mouse down.
                 if (wasPressed)
                 {

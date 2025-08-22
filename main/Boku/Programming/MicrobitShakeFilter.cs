@@ -52,38 +52,6 @@ namespace Boku.Programming
 
             bool shaken = false;
 
-#if !NETFX_CORE
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                int currGeneration = bit.State.Generation;
-
-                if (currGeneration != 0 && currGeneration != prevGeneration)
-                {
-                    Vector3 currAccel = bit.State.Acc;
-                    Vector3 accelDiff = currAccel - prevAccel;
-                    prevAccel = currAccel;
-                    prevGeneration = currGeneration;
-                    float strength = accelDiff.Length();
-
-                    // Default range [1, 2]
-                    float minStrength = 1;
-                    float maxStrength = 2;  // 2G - This is the maximum length of micro:bit's accelerometer vector (configured in kodu-microbit.hex).
-
-                    int stronglyCount = reflex.Data.GetFilterCount("filter.strongly");
-                    // Range adjustment upward to [1.5, 2]
-                    minStrength += stronglyCount * 0.166f;
-                    int weaklyCount = reflex.Data.GetFilterCount("filter.weakly");
-                    // Range adjustment downward to [0.075, 0.2]
-                    minStrength -= weaklyCount * 0.308f;
-                    maxStrength -= weaklyCount * 0.6f;
-
-                    shaken = (strength >= minStrength && strength <= maxStrength);
-                    //System.Diagnostics.Debug.WriteLine(String.Format("range [{0},{1}], value {2}, {3}", minStrength, maxStrength, strength, shaken ? "SHAKE!" : ""));
-                }
-            }
-#endif
-
             param = shaken;
 
             return shaken;

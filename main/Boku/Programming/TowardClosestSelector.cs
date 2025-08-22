@@ -22,9 +22,9 @@ using Boku.Common;
 namespace Boku.Programming
 {
     /// <summary>
-    /// this selector will find the closest Action Thing and 
+    /// this selector will find the closest Action Thing and
     /// calculate a vector toward it and hand this to the actuator�s arbitrator.
-    /// 
+    ///
     /// It is known also as Toward
     /// </summary>
     public class TowardClosestSelector : Selector

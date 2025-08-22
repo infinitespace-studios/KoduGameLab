@@ -13,14 +13,9 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
 
-#if NETFX_CORE
     using Windows.Data;
     using Windows.Web;
     using System.Runtime.Serialization.Json;
-#else
-    using System.Data;
-    using System.Web;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -34,7 +29,6 @@ using Boku.Common;
 using Boku.UI2D;
 using Boku.Fx;
 using Boku.Common.Localization;
-
 
 namespace Boku
 {
@@ -56,7 +50,7 @@ namespace Boku
         private OpState currentState = OpState.Idle;
         private IAsyncResult getFeedResult = null;
         private double opStartTime = 0;
-        
+
         /// <summary>
         ///  unprocesses string data representing each news item
         /// </summary>
@@ -77,7 +71,6 @@ namespace Boku
 
         }
 
-        
         //static bool getFeedComplete = false;
         public void BeginFetchNews()
         {
@@ -87,12 +80,6 @@ namespace Boku
                 int itemCount = feedFetchCount;
                 string baseUrl =  Program2.SiteOptions.KGLUrl + "/API/GetLatestNews?tag=client";
                 string paramUrl = "&region=" + GetLangRegion();
-#if !NETFX_CORE
-                // TODO (****) This doesn't do anything anyway.  Should it be removed?
-                string paramRegionUrl = Thread.CurrentThread.CurrentCulture.Name;
-
-                paramRegionUrl = "-" + paramRegionUrl;
-#endif
                 Uri feedUri = CreateUpdateFeedURI(baseUrl + paramUrl, itemCount);
                 opStartTime = Time.GameTimeTotalSeconds + GET_TIMEOUT_SECS;
                 currentState = OpState.Retrieving;
@@ -122,7 +109,6 @@ namespace Boku
             string paramLang = Localizer.LocalLanguage;
             string paramRegion = "en-US";
 
-#if NETFX_CORE
             var preferredLanguages = Windows.Globalization.ApplicationLanguages.Languages;
             if (preferredLanguages.Count > 0)
             {
@@ -134,9 +120,6 @@ namespace Boku
             {
                 paramRegion = "en-US";
             }
-#else
-            paramRegion = Thread.CurrentThread.CurrentCulture.Name; // Should get "en-US" for local starts...
-#endif
 
             if (BokuSettings.Settings.Language != null && BokuSettings.Settings.Language.Length == 2)
             {
@@ -175,7 +158,7 @@ namespace Boku
             // &count=2&include_entities=true
             string htmlURL = baseUrl;// +"&count=" + items;
             Uri uri = new Uri(htmlURL);
-            return uri; 
+            return uri;
         }
 
         bool RequestFeed(string url)
@@ -188,8 +171,8 @@ namespace Boku
 
                 request.ContentType = "application/json";
                 request.BeginGetResponse(new AsyncCallback(ReadFeedCallback), request);
-                
-                sent = true;                
+
+                sent = true;
             }
             catch (Exception ex)
             {
@@ -212,7 +195,7 @@ namespace Boku
                   new StreamReader(response.GetResponseStream()))
                 {
                     string resultString = streamReader1.ReadToEnd();
-                    //Handle single quote. 
+                    //Handle single quote.
                     //Not sure why this is needed since quotes are handled correctly.
                     resultString = resultString.Replace("\\u0027", "'");
                     rawGetData = resultString;
@@ -238,16 +221,11 @@ namespace Boku
             List<FeedMs> allFeeds = new List<FeedMs>();
             try
             {
-#if NETFX_CORE
-                // For some reason the WinRT Json Serializer doesn't want to 
+                // For some reason the WinRT Json Serializer doesn't want to
                 // deserialize our objects so we'll just have to do it manually.
                 //var items = Deserialize<List<Dictionary<string, string>>>(rawGetData);
 
                 List<Dictionary<string, string>> items = HackDeserialize(rawGetData);
-#else
-                var js = new System.Web.Script.Serialization.JavaScriptSerializer();
-                var items = js.Deserialize<List<Dictionary<string, string>>>(rawGetData);
-#endif
 
                 //build news feed.
                 foreach (var item in items)
@@ -264,7 +242,6 @@ namespace Boku
             return allFeeds;
         }
 
-#if NETFX_CORE
         T Deserialize<T>(string json)
         {
             var bytes = Encoding.Unicode.GetBytes(json);
@@ -359,8 +336,6 @@ namespace Boku
 
             return index;
         }
-#endif
-
 
 /*
         /// <summary>
@@ -419,9 +394,9 @@ namespace Boku
 */
         public void Update()
         {
-            if (currentState != OpState.Retrieving) 
+            if (currentState != OpState.Retrieving)
             {
-                return; 
+                return;
             }
 
 /*            if ( getFeedResult.IsCompleted )
@@ -436,7 +411,7 @@ namespace Boku
                 }
 
             }
-    
+
             //  newsClips = listCaller.EndInvoke(getFeedsResult);
             else if(Time.GameTimeTotalSeconds > opStartTime)
             {

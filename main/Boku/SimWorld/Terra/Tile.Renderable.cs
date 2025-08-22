@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 #if DEBUG
 #define Debug_CountTerrainVerts
 #define Debug_DrawNormalsWithF8
@@ -28,7 +27,7 @@ namespace Boku.SimWorld.Terra
         /// A tile's Renderable is the combination of the geometry
         /// extracted from the tile's heightmap, along with the material
         /// information for this section.
-        /// 
+        ///
         /// A Tile will have a collection of Renderables, one for each material.
         /// </summary>
         internal partial class Renderable
@@ -52,7 +51,6 @@ namespace Boku.SimWorld.Terra
             private static int localVertsPoolSize_FD = 0;       // Number of arrays in the pool.
             private static int localVertsPoolIndex_FD = 0;      // Next available index.  Array may or may not already be allocated.
             private static int localVertsArraySize_FD = 0;      // Number of vertices in each array.
-
 
             #region Accessors
 
@@ -144,11 +142,10 @@ namespace Boku.SimWorld.Terra
                 }
             }
 
-
             #endregion
 
             /// <summary>
-            /// Clears the local vertex and index counts paving the way 
+            /// Clears the local vertex and index counts paving the way
             /// for creating new vertices using the same buffers.
             /// </summary>
             public void ClearLocalVertexCounts()
@@ -211,7 +208,7 @@ namespace Boku.SimWorld.Terra
                     return localVerts_FA;
                 }
             }
-            
+
             private Terrain.TerrainVertex_FA[] localVerts_FA = null;        // Local verts array used for this tile/material.
 
             private static Terrain.TerrainVertex_FA[][] localVertsPool_FA;  // Static pool of local verts arrays shared by all Renderables.
@@ -219,7 +216,7 @@ namespace Boku.SimWorld.Terra
             private static int localVertsPoolSize_FA = 0;       // Number of arrays in the pool.
             private static int localVertsPoolIndex_FA = 0;      // Next available index.  Array may or may not already be allocated.
             private static int localVertsArraySize_FA = 0;      // Number of vertices in each local verts array.
-            
+
             //Vertex buffer
             private VertexBuffer vBuff_FA;
             public VertexBuffer VertexBuffer_FA { get { return vBuff_FA; } }
@@ -255,7 +252,7 @@ namespace Boku.SimWorld.Terra
                     return localIndices_FA;
                 }
             }
-            
+
             private UInt16[] localIndices_FA = null;
 
             private static UInt16[][] localIndicesPool_FA;
@@ -999,7 +996,7 @@ namespace Boku.SimWorld.Terra
 
                 // When allocating a buffer, allocate it the size needed plus the cushion size.
                 // This will help minimize churning by preventing lots of small changes.
-                const int kCushion = 300;   
+                const int kCushion = 300;
 
                 if (IsFabric())
                 {
@@ -1261,7 +1258,7 @@ namespace Boku.SimWorld.Terra
             #endregion
 
             #endregion INTERNAL
-    
+
         }   // end of class Renderable
 
     }   // end of class Tile

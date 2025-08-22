@@ -22,7 +22,7 @@ namespace Boku.Input
     /// This represents the abstraction for the game pad button unput command
     /// It provides core work for all game pad buttons and relies on ButtonCommand for
     /// exposed calls
-    /// 
+    ///
     /// There is currently no need to use this class outside this module as all
     /// usefull classes are represented below
     /// </summary>
@@ -37,7 +37,7 @@ namespace Boku.Input
             {
                 // specifically call property
                 this.Pressed = IsPressed();
-                
+
                 if (timerAutoRepeat.Running)
                 {
                     timerAutoRepeat.Update();
@@ -310,7 +310,6 @@ namespace Boku.Input
             return GamePadInput.GetGamePad(this.playerIndex).DPadUp.ButtonState == ButtonState.Pressed;
         }
     }
-
 
     /// <summary>
     /// Represents the GamePad DPad Down button

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -82,7 +81,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                 if (MouseEdit.TriggerSample())
                 {
                     MouseInput.Left.IgnoreUntilReleased = true;
-                    
+
                     // Prevent terrain from being painted when Alt is being used to select material.
                     editMode = Terrain.EditMode.Noop;
 
@@ -96,7 +95,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
                         Foley.PlayCut();
                     }
                 }
-            } 
+            }
             else if (!PickerXInUse && !PickerYInUse)
             {
                 if (DebouncePending)
@@ -104,7 +103,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
 
                 if (GamePadInput.ActiveMode == GamePadInput.InputMode.KeyboardMouse)
                 {
-                    // Set the mode based on whether or not 
+                    // Set the mode based on whether or not
                     // option keys are pressed.
                     if (MouseInput.Left.WasPressed)
                     {
@@ -203,5 +202,3 @@ namespace Boku.Scenes.InGame.MouseEditTools
     }   // class PaintTool
 
 }   // end of namespace Boku.Scenes.InGame.MouseEditTools
-
-

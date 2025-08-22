@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,10 +35,10 @@ namespace Boku.Animatics
         public float Weight
         {
             get { return weight; }
-            set 
+            set
             {
                 Debug.Assert((weight >= -kWeightTol) && (weight <= 1 + kWeightTol));
-                weight = value; 
+                weight = value;
             }
         }
         /// <summary>

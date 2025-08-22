@@ -4,7 +4,7 @@
 /*
  * BonePose.cs
  * Copyright (c) 2006 David Astle
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
  * "Software"), to deal in the Software without restriction, including
@@ -39,11 +39,11 @@ namespace Xclna.Xna.Animation
     /// A collection of BonePose objects that represent the bone transforms of a model
     /// as affected by animations.
     /// </summary>
-    public class BonePoseCollection 
+    public class BonePoseCollection
         : System.Collections.ObjectModel.ReadOnlyCollection<BonePose>
     {
         // A dictionary for quick access to bone poses based on bone name
-        private Dictionary<string, BonePose> boneDict 
+        private Dictionary<string, BonePose> boneDict
             = new Dictionary<string, BonePose>();
 
         // This class should not be externally instantiated
@@ -85,7 +85,7 @@ namespace Xclna.Xna.Animation
         /// Computes the absolute transforms for the collection and copies
         /// the values.
         /// </summary>
-        /// <param name="transforms">The array into which the transforms will be 
+        /// <param name="transforms">The array into which the transforms will be
         /// copied.</param>
         public void CopyAbsoluteTransformsTo(Matrix[] transforms)
         {
@@ -107,11 +107,10 @@ namespace Xclna.Xna.Animation
                         parentRotation);
                     currentTranslation += parentTransform.Translation;
                     currentTranslation = parentTransform.Translation + curTransform.Translation;
-                    
+
                     transforms[i] = currentRotation * parentRotation;
                     transforms[i] = curTransform * parentTransform;
 
-   
                 }
                 else
                 {
@@ -120,11 +119,10 @@ namespace Xclna.Xna.Animation
             }
         }
 
-
         /// <summary>
         /// Gets a BonePose object.
         /// </summary>
-        /// <param name="boneName">The name of the bone for which the BonePose 
+        /// <param name="boneName">The name of the bone for which the BonePose
         /// will be returned.</param>
         /// <returns>The BonePose associated with the bone name.</returns>
         public BonePose this[string boneName]
@@ -150,7 +148,7 @@ namespace Xclna.Xna.Animation
         private BonePose parent = null;
         private IAnimationController currentAnimation = null;
         private IAnimationController currentBlendAnimation = null;
-        // THe amount to interpolate between the current animation and 
+        // THe amount to interpolate between the current animation and
         // the current blend animation
         private float blendFactor = 0;
         private BonePoseCollection children;
@@ -161,7 +159,7 @@ namespace Xclna.Xna.Animation
         private bool doesBlendContainChannel = false;
 
         // Internal creation
-        internal BonePose(ModelBone bone, 
+        internal BonePose(ModelBone bone,
             ModelBoneCollection bones,
             BonePose[] anims)
         {
@@ -210,13 +208,12 @@ namespace Xclna.Xna.Animation
         /// </summary>
         public BonePoseCollection GetHierarchy()
         {
- 
+
                 List<BonePose> poses = new List<BonePose>();
                 FindHierarchy(poses);
                 return new BonePoseCollection(poses);
-            
-        }
 
+        }
 
         /// <summary>
         /// Gets the bone's parent.
@@ -262,7 +259,7 @@ namespace Xclna.Xna.Animation
                         {
                             // Update info on whether or not the current anim
                             // contains a track for this bone
-                            doesAnimContainChannel = 
+                            doesAnimContainChannel =
                                 value.ContainsAnimationTrack(this);
                             value.AnimationTracksChanged += new EventHandler(current_AnimationTracksChanged);
                         }
@@ -319,7 +316,6 @@ namespace Xclna.Xna.Animation
                 this.currentBlendAnimation.ContainsAnimationTrack(this);
         }
 
-
         /// <summary>
         /// Gets or sets the amount to interpolate between the current animation and
         /// the current blend animation, if the current blend animation is not null
@@ -329,7 +325,7 @@ namespace Xclna.Xna.Animation
             get { return blendFactor; }
             set { blendFactor = value; }
         }
-        
+
         /// <summary>
         /// Represents the matrix used by the BonePose when it is not affected by
         /// an animation or when the animation does not contain a track for the bone.
@@ -346,7 +342,7 @@ namespace Xclna.Xna.Animation
         /// </summary>
         public Matrix GetCurrentTransform()
         {
- 
+
             // If the bone is not currently affected by an animation
             if (currentAnimation == null || !doesAnimContainChannel)
             {
@@ -356,8 +352,8 @@ namespace Xclna.Xna.Animation
                 {
                     blendMatrix = currentBlendAnimation.GetCurrentBoneTransform(this);
                     Util.SlerpMatrix(
-                        ref defaultMatrix, 
-                        ref blendMatrix, 
+                        ref defaultMatrix,
+                        ref blendMatrix,
                         BlendFactor,
                         out returnMatrix);
                 }
@@ -378,7 +374,7 @@ namespace Xclna.Xna.Animation
                     blendMatrix = currentBlendAnimation.GetCurrentBoneTransform(this);
                     Util.SlerpMatrix(
                         ref currentMatrixBuffer,
-                        ref blendMatrix, 
+                        ref blendMatrix,
                         BlendFactor,
                         out returnMatrix);
                 }
@@ -386,9 +382,9 @@ namespace Xclna.Xna.Animation
                 else
                     return currentMatrixBuffer;
             }
-            
+
             return returnMatrix;
-            
+
         }
     }
 }

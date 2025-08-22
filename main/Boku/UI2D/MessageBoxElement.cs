@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -264,7 +263,6 @@ namespace Boku.UI2D
 
             batch.End();
 
-
             // Restore backbuffer and depth buffer.
             InGame.RestoreRenderTarget();
         }
@@ -278,9 +276,3 @@ namespace Boku.UI2D
     }   // end of class MessageBoxElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 
@@ -20,7 +19,7 @@ namespace Boku.UI2D
 {
     /// <summary>
     /// An instance of UIElement that uses a 9-grid element for its geometry
-    /// and creates a texture on the fly into which the checkbox and the 
+    /// and creates a texture on the fly into which the checkbox and the
     /// associated text string are rendered.
     /// This is the new, modular version call so because of the way the
     /// parts fit together.
@@ -35,7 +34,7 @@ namespace Boku.UI2D
 
         private string normalMapName = null;
         private Texture2D normalMap = null;
-        
+
         private Texture2D checkboxWhite = null;
         private Texture2D checkOff = null;
         private Texture2D checkOn = null;
@@ -284,7 +283,7 @@ namespace Boku.UI2D
                     }
                 }
             }
-            else 
+            else
             {
                 // The hit region is the square at the left end of the tile.
                 float maxU = height / width;
@@ -372,7 +371,6 @@ namespace Boku.UI2D
 
                 ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
 
-
                 // Render the white region with highlight.
                 Vector2 position = new Vector2(h - 2, 0);
                 Vector2 size = new Vector2(w, h) - position;
@@ -402,7 +400,7 @@ namespace Boku.UI2D
                 TextBlob blob = new TextBlob(Font, label, w - (int)position.X - margin);
 
                 position.Y = (int)((h - blob.TotalSpacing) / 2.0f) - 2;
-                
+
                 if (blob.NumLines == 2)
                 {
                     position.Y -= blob.TotalSpacing / 2.0f;
@@ -574,9 +572,3 @@ namespace Boku.UI2D
     }   // end of class UIGridModularCheckboxElement
 
 }   // end of namespace Boku.UI2D
-
-
-
-
-
-

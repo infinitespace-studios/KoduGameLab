@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -28,7 +27,7 @@ namespace Boku.SimWorld
         private static GateBotSRO sroInstance = null;
 
         // c'tor
-        private GateBotSRO() 
+        private GateBotSRO()
             : base(@"Models\gate")
         {
         }   // end of GateBotSRO c'tor

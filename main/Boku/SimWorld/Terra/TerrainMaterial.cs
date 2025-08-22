@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -46,7 +45,7 @@ namespace Boku.SimWorld.Terra
             TopEmissive,
             SpecularPower,
             BotTex,
-            TopTex,            
+            TopTex,
             BotBumpStrength,
             TopBumpStrength,
             BotUVWToUV,
@@ -349,9 +348,9 @@ namespace Boku.SimWorld.Terra
         #region PUBLIC
         public static float GetUIPriority(ushort matIdx)
         {
-            return uiPriDict[matIdx] 
-                    + (IsUsed(matIdx) || HasFlags(matIdx, Flags.Selection) 
-                        ? 10000 
+            return uiPriDict[matIdx]
+                    + (IsUsed(matIdx) || HasFlags(matIdx, Flags.Selection)
+                        ? 10000
                         : 0);
         }
         public static TerrainMaterial Get(int matIdx) { return Get((ushort)matIdx); }
@@ -374,7 +373,7 @@ namespace Boku.SimWorld.Terra
         {
             Users.Clear();
         }
-        
+
         /// <summary>
         /// Checks if a currentl terrain color is valid.
         /// </summary>
@@ -449,14 +448,14 @@ namespace Boku.SimWorld.Terra
         /// Constructor
         /// </summary>
         public TerrainMaterial()
-        {            
+        {
         }
 
         public void Init(XmlTerrainMaterialData data)
         {
             xmlData = data;
         }
-        
+
         public void Setup_FD(bool forUI)
         {
             if (forUI)
@@ -679,12 +678,12 @@ namespace Boku.SimWorld.Terra
 
             effectCacheColor = new EffectCacheWithTechs(
                 new Type[]
-                    { 
-                        typeof(EffectParams), 
+                    {
+                        typeof(EffectParams),
                         typeof(EffectParams_FA)
                     },
                 new Type[]
-                    { 
+                    {
                         typeof(EffectTechs),
                         typeof(EffectTechs_FA)
                     });
@@ -702,12 +701,12 @@ namespace Boku.SimWorld.Terra
 
             effectCacheEdit = new EffectCacheWithTechs(
                 new Type[]
-                    { 
+                    {
                         typeof(EffectParams) ,
                         typeof(EffectParams_FA)
                     },
                 new Type[]
-                    { 
+                    {
                         typeof(EffectTechs),
                         typeof(EffectTechs_FA)
                     });
@@ -797,7 +796,7 @@ namespace Boku.SimWorld.Terra
         private void MakeTransforms()
         {
             /// Default is to make the bumpmap square. So
-            /// one tiling horizontally (or square width) should be one 
+            /// one tiling horizontally (or square width) should be one
             /// tiling vertically as well. If the topdownsquare isn't a square
             /// but a rectangle, split the difference.
             float botZScale = BotClamped ? -1.0f : -1.0f / BotScale;
@@ -1031,7 +1030,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Print styles end
                 /// One-offs styles begin
-                /// 
+                ///
 
                 #region One Offs
                 case 15:
@@ -1053,7 +1052,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// One-offs styles end
                 /// Realistics styles begin
-                /// 
+                ///
 
                 #region Realistics
                 case 1:
@@ -1195,7 +1194,6 @@ namespace Boku.SimWorld.Terra
                     Gloss = 0.5f;
                     BotScale = 4f;
 
-
                     xmlData.CollisionSound = Boku.Audio.Foley.CollisionSound.dirt;
                     uiPriDict[matIdx] = 50f;
                     break;
@@ -1254,14 +1252,12 @@ namespace Boku.SimWorld.Terra
                     uiPriDict[matIdx] = 50f;
                     break;
 
-
                 #endregion Realistics
-
 
                 ///
                 /// Realistics styles end
                 /// Metal styles begin
-                /// 
+                ///
 
                 #region Metals
                 case 0:
@@ -1301,7 +1297,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Metal styles end
                 /// Decorated single cube (dotted) styles begin
-                /// 
+                ///
 
                 #region Decorated Singles
                 case 2:
@@ -1506,7 +1502,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Decorated single cube (dotted) styles end
                 /// Generic plastic block styles begin
-                /// 
+                ///
                 #region Plastics
 
                 case 25:                                                        // flat-top chamfer box - black
@@ -1572,7 +1568,6 @@ namespace Boku.SimWorld.Terra
                     uiPriDict[matIdx] = 19f;
                     break;
 
-
                 case 61:
                     ChamferBox_SM2(
                         PaletteEntry(Palette.Blue),
@@ -1586,7 +1581,6 @@ namespace Boku.SimWorld.Terra
                         Foley.CollisionSound.plasticSoft);
                     uiPriDict[matIdx] = 19f;
                     break;
-
 
                 case 63:
                     ChamferBox_SM2(
@@ -1958,7 +1952,6 @@ namespace Boku.SimWorld.Terra
                     uiPriDict[matIdx] = 15f;
                     break;
 
-
                 case 111:                                                        // flat-top chamfer box - brown
                     FlatTopChamfer_SM2(
                         PaletteEntry(Palette.Tan),
@@ -2027,14 +2020,14 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Generic plastic block styles end
                 /// Glowing cubes styles begin
-                /// 
+                ///
                 #region Glowing
                 // Glowing orange (yellow plus diffuse red)
                 case 16:
                     GlowCube_SM2(new Vector4(1f, 0f, 0f, 1.0f),
                         new Vector4(.5f, .5f, 0f, 0.8f));
                     break;
-                // Glowing blue 
+                // Glowing blue
                 case 18:
                     GlowCube_SM2(new Vector4(84f / 256f, 197f / 256f, 256f, 1.0f),
                         new Vector4(42f / 256f, 96f / 256f, 128f, 0.9f));
@@ -2065,7 +2058,7 @@ namespace Boku.SimWorld.Terra
 
                 ///
                 /// Glowing cubes styles end
-                /// 
+                ///
 
                 //ToDo (DZ): Do we need this?
                 //case TerrainMaterial.MaxNum:
@@ -2299,7 +2292,7 @@ namespace Boku.SimWorld.Terra
                     Color = new Vector4(1f, 0f, 0f, 1.0f);
                     //                        Color = new Vector4(248f / 256f, 241f / 256f, 60f / 256f, 1.0f);
                     break;
-                // Glowing blue 
+                // Glowing blue
                 case 18:
                     xmlData.BotDiffuse[(int)Tile.Face.Top]
                         = @"Textures\Terrain\GroundTextures\chamfer_box_desat";
@@ -2477,7 +2470,6 @@ namespace Boku.SimWorld.Terra
                     Gloss = .01f;
                     Step = 0.5f;
                     break;
-
 
                 //ToDo (DZ): Do we need this?
                 //case TerrainMaterial.MaxNum:
@@ -2912,10 +2904,10 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Print styles end
                 /// One-offs styles begin
-                /// 
+                ///
 
                 #region One Offs
-                case 15: 
+                case 15:
                     xmlData.BotBump[(int)Tile.Face.Top]
                         = @"Textures\Terrain\GroundTextures\alphabet_norm";
                     xmlData.BotBump[(int)Tile.Face.Front]
@@ -2933,7 +2925,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// One-offs styles end
                 /// Realistics styles begin
-                /// 
+                ///
 
                 #region Realistics
                 case 1:
@@ -3020,7 +3012,6 @@ namespace Boku.SimWorld.Terra
                     // both layers will use the same bump for now -
                     Step = 0.25f;
 
-
                     // bottom layer is the lava
                     xmlData.BotBump[(int)Tile.Face.Top]
                         = @"Textures\white";
@@ -3036,7 +3027,6 @@ namespace Boku.SimWorld.Terra
                     Color = new Vector4(23.5f / 256f, 13.0f / 256f, 1.8f / 256f, 1.0f); // .5f);       // orange with high glow
                     Gloss = 0f;
                     BotBumpStrength = 1.0f;
-
 
                     TechniqueExt = "Masked";
 
@@ -3248,14 +3238,12 @@ namespace Boku.SimWorld.Terra
                     uiPriDict[matIdx] = 50f;
                     break;
 
-
                 #endregion Realistics
-
 
                 ///
                 /// Realistics styles end
                 /// Metal styles begin
-                /// 
+                ///
 
                 #region Metals
                 case 0:
@@ -3297,7 +3285,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Metal styles end
                 /// Decorated single cube (dotted) styles begin
-                /// 
+                ///
 
                 #region Decorated Singles
                 case 2:
@@ -3673,7 +3661,7 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Decorated single cube (dotted) styles end
                 /// Generic plastic block styles begin
-                /// 
+                ///
                 #region Plastics
 
                 case 25:                                                        // flat-top chamfer box - black
@@ -3739,7 +3727,6 @@ namespace Boku.SimWorld.Terra
                     uiPriDict[matIdx] = 19f;
                     break;
 
-
                 case 61:
                     ChamferBox_SM3(
                         PaletteEntry(Palette.Blue),
@@ -3753,7 +3740,6 @@ namespace Boku.SimWorld.Terra
                         Foley.CollisionSound.plasticSoft);
                     uiPriDict[matIdx] = 19f;
                     break;
-
 
                 case 63:
                     ChamferBox_SM3(
@@ -3889,7 +3875,7 @@ namespace Boku.SimWorld.Terra
 
                 #region Hewn
 
-                case 80:                     
+                case 80:
                     Hewn_SM3(
                         PaletteEntry(Palette.DarkRed),
                         Foley.CollisionSound.dirt);
@@ -3991,7 +3977,7 @@ namespace Boku.SimWorld.Terra
                 #region Bubble
                 case 93:                     // bubble turf
                     BubbleTurf_SM3(
-                        PaletteEntry(Palette.DarkRed), 
+                        PaletteEntry(Palette.DarkRed),
                         Foley.CollisionSound.grass);
                     uiPriDict[matIdx] = 16f;
                     break;
@@ -4125,7 +4111,6 @@ namespace Boku.SimWorld.Terra
                     uiPriDict[matIdx] = 15f;
                     break;
 
-
                 case 111:                                                        // flat-top chamfer box - brown
                     FlatTopChamfer_SM3(
                         PaletteEntry(Palette.Tan),
@@ -4194,26 +4179,26 @@ namespace Boku.SimWorld.Terra
                 ///
                 /// Generic plastic block styles end
                 /// Glowing cubes styles begin
-                /// 
+                ///
                 #region Glowing
                     // Glowing orange (yellow plus diffuse red)
                 case 16:
                     GlowCube_SM3(new Vector4(1f, 0f, 0f, 1.0f),
                         new Vector4(.5f, .5f, 0f, 0.8f));
                     break;
-                // Glowing blue 
+                // Glowing blue
                 case 18:
                     GlowCube_SM3(new Vector4(84f / 256f, 197f / 256f, 256f, 1.0f),
                         new Vector4(42f / 256f, 96f / 256f, 128f, 0.9f));
                     break;
                 // Glowing red
                 case 19:
-                    GlowCube_SM3(new Vector4(1f, .1f, 0f, 1.0f), 
+                    GlowCube_SM3(new Vector4(1f, .1f, 0f, 1.0f),
                         new Vector4(0.5f, .05f, 0f, 0.9f));
                     break;
                 // Glowing purple
                 case 20:
-                    GlowCube_SM3(new Vector4(0, 0, 1.0f, 1.0f), 
+                    GlowCube_SM3(new Vector4(0, 0, 1.0f, 1.0f),
                         new Vector4(.4f, 0f, 0f, 0.75f));
                     break;
 
@@ -4232,7 +4217,7 @@ namespace Boku.SimWorld.Terra
 
                 ///
                 /// Glowing cubes styles end
-                /// 
+                ///
 
                 //ToDo (DZ): Do we need this?
                 //case TerrainMaterial.MaxNum:
@@ -4379,7 +4364,7 @@ namespace Boku.SimWorld.Terra
         }
 
         private static Vector4[] BasicPalette = new Vector4[(int)Palette.Count]
-            { 
+            {
                 new Vector4(123.0f / 255.9f, 3.0f / 255.9f, 25.0f / 255.9f, 1.0f),
                 new Vector4(214.0f / 255.9f, 6.0f / 255.9f, 34.0f / 255.9f, 1.0f),
                 new Vector4(255.0f / 255.9f, 173.0f / 255.9f, 51.0f / 255.9f, 1.0f),

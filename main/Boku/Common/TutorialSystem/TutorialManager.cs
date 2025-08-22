@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -107,7 +106,7 @@ namespace Boku.Common.TutorialSystem
         }
 
         /// <summary>
-        /// The index of the current step.  This shouldn't be needed outside of 
+        /// The index of the current step.  This shouldn't be needed outside of
         /// the tutorial system but it's been exposed so that the PreGame code
         /// can shut itself off if we're in a tutorial.
         /// </summary>
@@ -206,7 +205,7 @@ namespace Boku.Common.TutorialSystem
             }
 
             // Test for null shouldn't be needed in normal operation but allows
-            // for debugging of screen position and scaling without having to 
+            // for debugging of screen position and scaling without having to
             // run a full tutorial level.
             if (Active && InGame.XmlWorldData != null)
             {
@@ -249,7 +248,7 @@ namespace Boku.Common.TutorialSystem
                     }
 
                     // Check for completion.  If we have a completion test then use that
-                    // as the criteria.  If not, we consider the step complete when the 
+                    // as the criteria.  If not, we consider the step complete when the
                     // target mode is reached.
 
                     if (curStep.CompletionTest == null)
@@ -267,8 +266,8 @@ namespace Boku.Common.TutorialSystem
                         }
                     }
 
-                    // Hack.  Right now the code is set up to latch targetModeReached until that step is 
-                    // completed.  This behavior is required for some things to work correctly but this 
+                    // Hack.  Right now the code is set up to latch targetModeReached until that step is
+                    // completed.  This behavior is required for some things to work correctly but this
                     // also causes a problem; when the user moves away from the target mode they no
                     // longer get instructions on how to get to the target mode.  So hack in special
                     // case code for times where this a problem.
@@ -331,7 +330,7 @@ namespace Boku.Common.TutorialSystem
                 }
                 else
                 {
-                    // ALWAYS set the character to null since it may be destroyed any frame 
+                    // ALWAYS set the character to null since it may be destroyed any frame
                     // and we don't want to reference a missing character.
                     focusActor = null;
                     if (focusActor == null || focusActor.DisplayNameNumber != focusActorName)
@@ -459,7 +458,7 @@ namespace Boku.Common.TutorialSystem
                 string instructionStr = null;
 
                 // We only care about the non-modal text if there's no modal display.
-                // TODO We could think about displaying this under the modal display but we'd have to 
+                // TODO We could think about displaying this under the modal display but we'd have to
                 // add a drop shadow first to avoid cluttering things up.
                 if (!modalDisplay.Active)
                 {
@@ -561,7 +560,7 @@ namespace Boku.Common.TutorialSystem
             }   // end if tutorial mode active
 
             InGame.RestoreRenderTarget();
-        
+
         }   // end of PreRender()
 
         public static void Render()
@@ -659,9 +658,9 @@ namespace Boku.Common.TutorialSystem
         }   // end of Activate()
 
         /// <summary>
-        /// Take the text input, breaks it into seperate lines, 
+        /// Take the text input, breaks it into seperate lines,
         /// trims those lines, converts any leading colons into
-        /// spaces (1 colon == 4 spaces), and then recombines 
+        /// spaces (1 colon == 4 spaces), and then recombines
         /// the lines and returns the new string.
         /// Also takes null and returns an empty string.
         /// </summary>
@@ -782,7 +781,7 @@ namespace Boku.Common.TutorialSystem
             else if (GamePadInput.ActiveMode == GamePadInput.InputMode.GamePad)
             {
                 crumbs = crumbListGamepad;
-            } 
+            }
 
             // Start with the current mode.
             crumbList.Add(new CrumbNode(null, curGameMode, 0));
@@ -875,20 +874,11 @@ namespace Boku.Common.TutorialSystem
                     }
                     */
 
-#if !NETFX_CORE
-                    Debug.Print("cur " + TutorialManager.curGameMode.ToString() + " -> " + target.ToString());
-#endif
                     if(crumb==null)
                     {
-#if !NETFX_CORE
-                        Debug.Print("  null crumb");
-#endif
                     }
                     else
                     {
-#if !NETFX_CORE
-                        Debug.Print("  crumb target " + crumb.targetMode.ToString());
-#endif
                     }
                     crumb = null;
                 }
@@ -1014,7 +1004,7 @@ namespace Boku.Common.TutorialSystem
             {
                 // Calc rt height to allow for 4 lines of text using our font of choice.
                 // Calc rt width to match screen ratio.
-                
+
                 int height = 4 * font().LineSpacing;
                 // int width = (int)(height * BokuGame.bokuGame.GraphicsDevice.Viewport.Width / (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Height / (1.0f - kScreenFraction));
                 //width = (int)MathHelper.Min(width, BokuGame.bokuGame.GraphicsDevice.Viewport.Width);

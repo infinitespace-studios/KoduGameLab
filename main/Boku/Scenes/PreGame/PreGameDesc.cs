@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -169,7 +168,7 @@ namespace Boku
                 UI2D.Shared.GetFont Font = BokuGame.bokuGame.GraphicsDevice.Viewport.Height < 720 ? UI2D.Shared.GetGameFont18Bold : UI2D.Shared.GetGameFont24Bold;
                 blob = new TextBlob(Font, Terrain.Current.XmlWorldData.name +"\n\n" + Terrain.Current.XmlWorldData.description, (int)(BokuGame.bokuGame.GraphicsDevice.Viewport.Width / 2));
                 blob.Justification = Terrain.Current.XmlWorldData.descJustification;
-            
+
             }   // end of PreGameDesc Activate()
 
             protected override void Deactivate()
@@ -190,5 +189,3 @@ namespace Boku
     }   // end of class InGame
 
 }   // end of namespace Boku
-
-

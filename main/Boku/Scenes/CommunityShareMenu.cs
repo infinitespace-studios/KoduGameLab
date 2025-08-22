@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 using System;
 using System.IO;
 using System.Collections;
@@ -201,7 +200,6 @@ namespace Boku
             ModularMessageDialogManager.Instance.AddDialog(text, null, null, DeactivateMenu, labelB);
         }
 
-
         public void PopupOnCommunityShare()
         {
             var level = CurWorld;
@@ -377,6 +375,6 @@ namespace Boku
             state = States.Inactive;
         }   // End of Deactivate()
 
-    }   // end of class 
+    }   // end of class
 
 }   // end of namespace Boku

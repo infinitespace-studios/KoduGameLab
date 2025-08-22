@@ -19,7 +19,6 @@ namespace Xclna.Xna.Animation.Content
         private int maxBones;
         private int currentIndex = 0;
 
-
         private class MeshSplitPart
         {
             private MeshSplitter splitter;
@@ -208,7 +207,6 @@ namespace Xclna.Xna.Animation.Content
             {
                 part = new MeshSplitPart(this, geom, vertexStart);
 
-
                 currentIndex++;
                 MeshContent newMesh = part.Process();
                 vertexStart = part.VertexEndIndex;
@@ -218,8 +216,6 @@ namespace Xclna.Xna.Animation.Content
 
             }
         }
-
-
 
     }
 
@@ -243,7 +239,6 @@ namespace Xclna.Xna.Animation.Content
             this.maxBones = maxBonesPerMesh;
             this.root = modelRoot;
         }
-
 
         /// <summary>
         /// Splits the model meshes up based on the max number of bones.
@@ -314,7 +309,7 @@ namespace Xclna.Xna.Animation.Content
             {
                 ProcessNode(child);
             }
-            
+
         }
 
         private VertexChannel<BoneWeightCollection> GetWeightChannel(GeometryContent geom)
@@ -328,12 +323,6 @@ namespace Xclna.Xna.Animation.Content
             }
             return null;
         }
-
-
-
-
-
-
 
     }
 }

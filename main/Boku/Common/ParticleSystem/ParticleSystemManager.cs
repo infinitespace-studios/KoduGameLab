@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-
 //#define UPDATE_TIMERS
 
 using System;
@@ -154,7 +153,7 @@ namespace Boku.Common.ParticleSystem
 #if UPDATE_TIMERS
             updateTimer.Start();
 #endif
-            
+
             ExplosionManager.Update();
 
             int newNumParticles = 0;
@@ -319,7 +318,6 @@ namespace Boku.Common.ParticleSystem
             InspectSmokeEmitter.LoadContent(immediate);
             FanEmitter.LoadContent(immediate);
             InkEmitter.LoadContent(immediate);
-
 
         }   // end of ParticleSystemManager LoadContent()
 
