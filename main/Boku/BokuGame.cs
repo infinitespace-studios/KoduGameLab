@@ -711,7 +711,6 @@ namespace Boku
             //Debug.WriteLine("End LoadContent");
 
         }   // end of BokuGame LoadContent()
-#endif
 
         public void UnloadContent()
         {

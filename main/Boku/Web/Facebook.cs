@@ -167,7 +167,7 @@ namespace Boku.Web
 
             // TODO (scoy) Get the auth results from the browser before shutting down.
             string fullText = wb.DocumentText;
-            string[] lines = fullText.Split()
+            string[] lines = fullText.Split();
 
             if (fullScreen)
             {

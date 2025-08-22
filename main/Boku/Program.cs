@@ -31,12 +31,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Serialization;
 using BokuShared.Wire;
-#if !NETFX_CORE
-using System.Globalization;
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FULL SCREEN WINDOWED MODE FIX
-using System.Windows.Forms;
-// FULL SCREEN WINDOWED MODE FIX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#endif
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
@@ -113,21 +107,16 @@ namespace Boku
 
         /// <summary>
         /// The main entry point for the application.
+        /// <summary>
+        /// The main entry point for the application.
         /// </summary>
-#if NETFX_CORE
         static public void Main(string[] args)
-#else
-        // Must specify STA threading model to be allowed clipboard access.
-        [STAThread]
-        static public void Main(string[] args)
-#endif
         {
 #if GLOBAL_CATCH
             try
             {
 #endif
 
-#if NETFX_CORE
             Debug.Assert(false, "Need to figure out how to get version info");
             ThisVersion = new Version(1, 4, 182, 0);
             UpdateCode = "055B31F9-07F8-479b-875F-F03279DF595E";
@@ -142,48 +131,11 @@ namespace Boku
                 version = m.Groups["version"].Value;
             }
             */
-#else
-
-                ThisVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                Assembly asm = Assembly.GetExecutingAssembly();
-                var attr = (asm.GetCustomAttributes(typeof(GuidAttribute), true));
-                UpdateCode = (attr[0] as GuidAttribute).Value;
-#endif
 
                 // Fake command line args to test double-click to launch
                 //args = new string[3] { args[0], @"/Import", @"C:\Users\scoy\My Documents\New World 3, by Stephen Coy.Kodu2" };
 
                 CmdLine = new CmdLine(args);
-
-#if !NETFX_CORE
-                if (CmdLine.Exists("?") || CmdLine.Exists("HELP"))
-                {
-                    System.Windows.Forms.MessageBox.Show(
-                        "  /FPS \t- display FPS\r\n" +
-                        "  /F \t- full screen\r\n" +
-                        "  /S \t- sync refresh\r\n" +
-                        "  /W 1280 \t- width\r\n" +
-                        "  /H 1024 \t- height\r\n" +
-                        "  /EFFECTS \t- turn on depth of field and bloom effects\r\n" +
-                        "  /NOEFFECTS \t- turn off depth of field and bloom effects\r\n" +
-                        "  /NOAUDIO \t- turn off audio\r\n" +
-                        "  /PATH <save folder> \t- override save folder\r\n" +
-                        "  /UPDATE \t- check for updates\r\n" +
-                        "  /NOUPDATE \t- do not check for updates\r\n" +
-                        "  /INSTRUMENTATION \t- send usage information\r\n" +
-                        "  /NOINSTRUMENTATION \t- do not send usage information\r\n" +
-                        "  /IMPORT <filename> \t- unpack the kodu level package to your downloads area\r\n" +
-                        "  /LOGON \t- ask player for username\r\n" +
-                        "  /ANALYTICS \t- run analytics on game being loaded\r\n" +
-                        "  /LOCALIZATION <language> \t- report localization information that is missing in the specified language.\r\n" +
-                        "  /PIESIZE <int> \t- pie menu maximum size.\r\n" +
-                        "  /NOMICROBIT \t- Do not scan for attached BBC micro:bits\r\n" +
-                        "  /MICROBIT \"COM3 E:\"\t- Try to enable micro:bit with given com port and drive letter.  The quotes are required.\r\n" +
-                        "");
-
-                    return;
-                }
-#endif
 
                 {
                     // Initialize level import/export facility
@@ -195,19 +147,6 @@ namespace Boku
                     // pick it up the next time the user enters the load
                     // level menu.
                     Storage4.Init();
-#if !NETFX_CORE
-                    Storage4.StartupDir = Application.StartupPath;
-
-                    // Note, we need to get the user override location before
-                    // import otherwise we send the files to the wrong place.
-                    // We don't need to do this for WinRT since we can't change
-                    // the user location.
-                    BokuSettings settings = BokuSettings.Settings;
-                    if (!string.IsNullOrEmpty(settings.UserFolder))
-                    {
-                        Storage4.UserOverrideLocation = settings.UserFolder;
-                    }
-#endif
 
                     if (!LevelPackage.Initialize(CmdLine))
                     {
@@ -215,10 +154,6 @@ namespace Boku
                         return;
                     }
 
-#if !NETFX_CORE
-                    // Restore default state for now.
-                    Storage4.ResetUserOverrideLocation();
-#endif
                     // ====================================================
                 }
 

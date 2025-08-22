@@ -562,7 +562,7 @@ namespace Boku.Programming
 #endif
         }   // end of SendToPrinter()
 
-#if!NETFX_CORE
+#if !NETFX_CORE
         static System.IO.StreamReader fileToPrint;
         static System.Drawing.Font printFont;
         static System.Drawing.Printing.PrintDocument printDocument;
