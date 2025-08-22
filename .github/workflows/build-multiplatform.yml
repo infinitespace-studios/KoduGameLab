@@ -3,8 +3,6 @@ name: Build Kodu Game Lab (Multi-Platform)
 on:
   push:
     branches: [ monogame ]
-  pull_request:
-    branches: [ monogame ]
 
 jobs:
   build-windows:
