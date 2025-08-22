@@ -26,7 +26,6 @@ namespace Boku.Common
     public static partial class ContentLoader
     {
         #region Fields
-#if NETFX_CORE
         private static ContentManager contentManager;
 #endif
         private static bool defaultImmediate = true;
@@ -48,9 +47,6 @@ namespace Boku.Common
         {
 #if NETFX_CORE
             get { return contentManager ?? (contentManager = new ContentManager(BokuGame.bokuGame.Services)); }
-#else
-            get { return XNAControl.ContentManager; }
-#endif
         }
 
         public static bool DefaultImmediate

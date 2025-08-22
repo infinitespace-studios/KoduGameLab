@@ -287,59 +287,6 @@ namespace Cab
             int dist,
             int seektype);
 
-#if !NETFX_CORE
-        [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int FCICreate(
-            ref ERF perf,
-            FciFilePlacedFn pfnfcifp,
-            FciAllocFn pfna,
-            FciFreeFn pfnf,
-            FciOpenFn pfnopen,
-            FciReadFn pfnread,
-            FciWriteFn pfnwrite,
-            FciCloseFn pfnclose,
-            FciSeekFn pfnseek,
-            FciDeleteFn pfndelete,
-            FciGetTempFileFn pfnfcigtf,
-            ref CCAB pccab,
-            IntPtr pv);
-
-        [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool FCIAddFile(
-            int handle,
-            [MarshalAs(UnmanagedType.LPStr)]
-            string pszSourceFile,
-            [MarshalAs(UnmanagedType.LPStr)]
-            string pszFileName,
-            int fExecute,
-            FciGetNextCabinetFn pfnfcignc,
-            FciStatusFn pfnfcis,
-            FciGetOpenInfoFn pfnfcgoi,
-            ushort typeCompress);
-
-        [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool FCIFlushCabinet(
-            int handle,
-            int fGetNextCab,
-            FciGetNextCabinetFn pfnfcignc,
-            FciStatusFn pfnfcis);
-
-        [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool FCIFlushFolder(
-            int handle,
-            FciGetNextCabinetFn pfnfcignc,
-            FciStatusFn pfnfcis);
-
-        [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool FCIDestroy(
-            int handle);
-
-#endif
-
         [DllImport("cabinet.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr FDICreate(
             FdiAllocFn pfna,

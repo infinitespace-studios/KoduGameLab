@@ -20,11 +20,7 @@ namespace Boku.Analyses
         private int actors = 0;
         private int totalRules = 0;
         private int blankActors = 0;
-#if NETFX_CORE
         Dictionary<GameActor, int> rulesPerActor = new Dictionary<GameActor, int>();
-#else
-        Hashtable rulesPerActor = new Hashtable();
-#endif
         List<KeyValuePair<GameActor, int>> indentedRulesPerActor = new List<KeyValuePair<GameActor, int>>();
         List<KeyValuePair<GameActor, int>> notRulesPerActor = new List<KeyValuePair<GameActor, int>>();
         List<KeyValuePair<GameActor, int>> creatableActor = new List<KeyValuePair<GameActor, int>>();
@@ -103,11 +99,7 @@ namespace Boku.Analyses
                                     //check if the key we're jumping to exists
                                     if (!reached.ContainsKey(destination))
                                     {
-#if NETFX_CORE
             Debug.Assert(false, "Not Impl");
-#else
-                                        wf.logBlankJumps(actor, index, destination);
-#endif
                                         //we're jumping to a blank page...this is a different kind of error
                                         //TODO: Process later!!!
                                     }
@@ -126,11 +118,7 @@ namespace Boku.Analyses
                 {
                     if (de.Value == false)
                     {
-#if NETFX_CORE
             Debug.Assert(false, "Not Impl");
-#else
-                        wf.logUnreachable(actor, de.Key);
-#endif
                     }
                 }
 
@@ -177,11 +165,7 @@ namespace Boku.Analyses
                     }
                 }
             }
-#if NETFX_CORE
             Debug.Assert(false, "Not Impl");
-#else
-            wf.logTileUsage(usage);
-#endif
         }
 
         private void updateUsage(Dictionary<string, int> usage, string id)
@@ -198,84 +182,12 @@ namespace Boku.Analyses
 
         public void createSummary(string file)
         {
-#if NETFX_CORE
             Debug.Assert(false, "Not Impl");
-#else
-            //create summary
-            TextWriter tw = new StreamWriter(WriteToFile.directory
-                    + @"\" + InGame.XmlWorldData.id + @"analytics.txt");
-
-            foreach (DictionaryEntry de in rulesPerActor)
-            {
-                tw.WriteLine("Actor = {0}, Rules = {1}", (de.Key as GameActor).DisplayNameNumber, de.Value);
-            }
-            tw.WriteLine("Number of Actors = {0}", rulesPerActor.Count);
-            tw.WriteLine("Number of BlankActors = {0}", blankActors);
-            tw.WriteLine("Number of Rules = {0}", totalRules);
-            tw.WriteLine("Rules Per Actor (all) = {0}", ((double)totalRules / (double)rulesPerActor.Count).ToString("###0.00"));
-            tw.WriteLine("Rules Per Actor (populated) = {0}", ((double)totalRules / (double)(rulesPerActor.Count - blankActors)).ToString("###0.00"));
-            tw.Close();
-
-            wf.writeKode(file);
-#endif
         }
 
         public void summarize(string file)
         {
-#if NETFX_CORE
             Debug.Assert(false, "Not Impl");
-#else
-            wf.writeKode(file);
-
-            string f = WriteToFile.directory
-                    + @"\gatherData.csv";
-            string author = InGame.XmlWorldData.creator;
-            string date = InGame.XmlWorldData.lastWriteTime.ToString();
-            string line = "";
-            string delim = ", ";
-            string header = "";
-            line += author + delim;
-            header += "author" + delim;
-            line += date + delim;
-            header += "date" + delim;
-            line += InGame.XmlWorldData.id + delim;
-            header += "game" + delim;
-            line += rulesPerActor.Count + delim; //num actors
-            header += "actorCount" + delim;
-            line += totalRules + delim; // total rules
-            header += "ruleCount" + delim;
-            int indented = (from i in indentedRulesPerActor
-                            where i.Value > 0
-                            select i.Value).Sum();
-            line += indented + delim;// number of indented rules
-            header += "indentCount" + delim;
-            int not = (from i in notRulesPerActor
-                            where i.Value > 0
-                            select i.Value).Sum();
-            line += not + delim;// number of not rules
-            header += "notCount" + delim;
-            int creat = (from i in creatableActor
-                       where i.Value > 0
-                       select i.Value).Sum();
-            line += creat + delim;// number of creatable actors
-            header += "fromCreatable" + delim;
-            
-            if (File.Exists(f) == false)
-            {
-                using (StreamWriter sw = File.CreateText(f))
-                {
-                    sw.WriteLine(header);
-                    sw.Flush();
-                    sw.Close();
-                }
-            }
-            using (StreamWriter sw = File.AppendText(f))
-            {
-                sw.WriteLine(line);
-                sw.Flush();
-                sw.Close();
-            }
-#endif
         }
 
         //iterates over all actors

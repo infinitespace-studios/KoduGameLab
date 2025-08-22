@@ -1723,19 +1723,7 @@ namespace Boku
 #if !EXTERNAL
                 if (BokuGame.Running)
                 {
-#if !NETFX_CORE
-
-#if OUTPUT_KODE_TO_CLIPBOARD
-                    // Copy program to the clipboard (to aid help database generation)
-                    ExampleProgram program = ExampleProgram.FromBrain(parent.gameActor.Brain);
-                    System.IO.MemoryStream stream = new System.IO.MemoryStream();
-                    System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(ExampleProgram));
-                    serializer.Serialize(stream, program);
-                    stream.Position = 0;
-                    System.IO.StreamReader reader = new System.IO.StreamReader(stream);
-                    try { System.Windows.Forms.Clipboard.SetText(reader.ReadToEnd()); }
-                    catch { }
-#endif  // OUTPUT_KODE_TO_CLIPBOARD
+  // OUTPUT_KODE_TO_CLIPBOARD
 
 #endif  // !NETFX_CORE
                 }   // end if Running
@@ -1786,10 +1774,8 @@ namespace Boku
                 ShaderGlobals.SetValues(Editor.effect);
                 ShaderGlobals.SetCamera(Editor.effect, shared.camera);
 
-#if NETFX_CORE
                 // TODO (****) Not sure why this is needed for MG but not for XNA.
                 BokuGame.bokuGame.GraphicsDevice.Clear(ClearOptions.DepthBuffer, Color.Pink, 1.0f, 0);
-#endif
 
                 // Don't render editor UI when HelpCard is active.  It
                 // still works if you do but it looks more cluttered.

@@ -15,11 +15,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-#if !NETFX_CORE
-    using Microsoft.Xna.Framework.Net;
-#endif
-
-
 using Boku.Audio;
 using Boku.Base;
 using Boku.Fx;

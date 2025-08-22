@@ -19,15 +19,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-#if NETFX_CORE
     using System.Threading.Tasks;
     //using Windows.Foundation;
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.System;
-#else
-    using Microsoft.Xna.Framework.Net;
-#endif
 
 
 using Boku.Audio;
@@ -168,23 +164,10 @@ namespace Boku
 
                 menu.AddText(Strings.Localize("mainMenu.new"));
                 menu.AddText(Strings.Localize("mainMenu.play"));
-#if NETFX_CORE
                 menu.AddText(Strings.Localize("mainMenu.import"));
-#else
-                if (WinStoreHelpers.RunningAsUWP)
-                {
-                    menu.AddText(Strings.Localize("mainMenu.import"));
-                }
-#endif
                 menu.AddText(Strings.Localize("mainMenu.community"));
                 menu.AddText(Strings.Localize("mainMenu.options"));
                 menu.AddText(Strings.Localize("mainMenu.help"));
-#if !NETFX_CORE
-                // Once you run an app in Win8, you are never allowed to kill it.
-                // Only the system can kill it.
-                menu.AddText(Strings.Localize("mainMenu.exit"));
-#endif
-
                 // And then remove what we don't want.
                 if (!Program2.SiteOptions.CommunityEnabled)
                 {
@@ -246,11 +229,7 @@ namespace Boku
                     }
                     else
                     {
-#if NETFX_CORE
                         backgroundTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenuWidescreenMG");
-#else
-                        backgroundTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenuWidescreen");
-#endif
                     }
                 }
 
@@ -374,11 +353,7 @@ namespace Boku
                         if (shared.urlBox.Contains(mouseHit) ||
                             (null != touch && shared.urlBox.Contains(touch.position)))
                         {
-#if NETFX_CORE
                             Launcher.LaunchUriAsync(new Uri(KoduGameLabUrl));
-#else
-                            Process.Start(KoduGameLabUrl);
-#endif
                             MouseInput.Left.ClearAllWasPressedState();
                         }
 
@@ -495,11 +470,7 @@ namespace Boku
 
                     if (shared.urlBox.Contains(mouseHit) || (shared.urlBox.Contains(touchHit) && TouchInput.WasLastReleased))
                     {
-#if NETFX_CORE
                         Launcher.LaunchUriAsync(new Uri(KoduGameLabUrl));
-#else
-                        Process.Start(KoduGameLabUrl);
-#endif
                         MouseInput.Left.ClearAllWasPressedState();
                         inputHandled = true;
                     }
@@ -878,11 +849,7 @@ namespace Boku
                 dialog.Deactivate();
 
                 // Wave bye, bye.
-#if NETFX_CORE
                 Windows.UI.Xaml.Application.Current.Exit();
-#else
-                BokuGame.bokuGame.Exit();
-#endif
 
                 exitingKodu = true;
             };
@@ -908,11 +875,7 @@ namespace Boku
 
         }   // end of MainMenu c'tor
 
-#if NETFX_CORE
         public async void OnSelect(ModularMenu menu)
-#else
-        public void OnSelect(ModularMenu menu)
-#endif
         {
             menu.Active = false;
             string cur = menu.CurString;
@@ -963,7 +926,6 @@ namespace Boku
                 BokuGame.bokuGame.loadLevelMenu.Activate();
             }
 
-#if NETFX_CORE
             // IMPORT
             if (cur == Strings.Localize("mainMenu.import"))
             {
@@ -1042,15 +1004,9 @@ namespace Boku
                 Deactivate();
 
                 // Wave bye, bye.
-#if NETFX_CORE
                 Windows.UI.Xaml.Application.Current.Exit();
-#else
-                BokuGame.bokuGame.Exit();
-#endif
             }
         }   // end of OnSelect
-
-#if NETFX_CORE
 
         private async Task<bool> PickImportFilesAsync()
         {
@@ -1081,8 +1037,6 @@ namespace Boku
 
             return levelsImported;
         }   // end of PickImportFile()
-
-#endif
 
         private bool PickImportFiles()
         {

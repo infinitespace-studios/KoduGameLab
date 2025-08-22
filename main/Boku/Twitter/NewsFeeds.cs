@@ -13,14 +13,9 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
 
-#if NETFX_CORE
     using Windows.Data;
     using Windows.Web;
     using System.Runtime.Serialization.Json;
-#else
-    using System.Data;
-    using System.Web;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -87,12 +82,6 @@ namespace Boku
                 int itemCount = feedFetchCount;
                 string baseUrl =  Program2.SiteOptions.KGLUrl + "/API/GetLatestNews?tag=client";
                 string paramUrl = "&region=" + GetLangRegion();
-#if !NETFX_CORE
-                // TODO (****) This doesn't do anything anyway.  Should it be removed?
-                string paramRegionUrl = Thread.CurrentThread.CurrentCulture.Name;
-
-                paramRegionUrl = "-" + paramRegionUrl;
-#endif
                 Uri feedUri = CreateUpdateFeedURI(baseUrl + paramUrl, itemCount);
                 opStartTime = Time.GameTimeTotalSeconds + GET_TIMEOUT_SECS;
                 currentState = OpState.Retrieving;
@@ -122,7 +111,6 @@ namespace Boku
             string paramLang = Localizer.LocalLanguage;
             string paramRegion = "en-US";
 
-#if NETFX_CORE
             var preferredLanguages = Windows.Globalization.ApplicationLanguages.Languages;
             if (preferredLanguages.Count > 0)
             {
@@ -134,9 +122,6 @@ namespace Boku
             {
                 paramRegion = "en-US";
             }
-#else
-            paramRegion = Thread.CurrentThread.CurrentCulture.Name; // Should get "en-US" for local starts...
-#endif
 
             if (BokuSettings.Settings.Language != null && BokuSettings.Settings.Language.Length == 2)
             {
@@ -238,16 +223,11 @@ namespace Boku
             List<FeedMs> allFeeds = new List<FeedMs>();
             try
             {
-#if NETFX_CORE
                 // For some reason the WinRT Json Serializer doesn't want to 
                 // deserialize our objects so we'll just have to do it manually.
                 //var items = Deserialize<List<Dictionary<string, string>>>(rawGetData);
 
                 List<Dictionary<string, string>> items = HackDeserialize(rawGetData);
-#else
-                var js = new System.Web.Script.Serialization.JavaScriptSerializer();
-                var items = js.Deserialize<List<Dictionary<string, string>>>(rawGetData);
-#endif
 
                 //build news feed.
                 foreach (var item in items)
@@ -264,7 +244,6 @@ namespace Boku
             return allFeeds;
         }
 
-#if NETFX_CORE
         T Deserialize<T>(string json)
         {
             var bytes = Encoding.Unicode.GetBytes(json);
@@ -359,7 +338,6 @@ namespace Boku
 
             return index;
         }
-#endif
 
 
 /*

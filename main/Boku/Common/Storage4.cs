@@ -13,17 +13,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
 
-#if NETFX_CORE
     using Windows.Foundation;
     using Windows.Management;
     using Windows.Storage;
     using Windows.Storage.FileProperties;
     using Windows.Storage.Search;
     using Windows.Storage.Streams;
-    using Windows.System.UserProfile;
-#else
-    using System.Management;
-#endif 
+    using Windows.System.UserProfile; 
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,7 +41,6 @@ namespace Boku.Common
         All = TitleSpace | UserSpace
     }
 
-#if NETFX_CORE
     public static class MyExtensions
     {
         /// <summary>
@@ -75,7 +70,6 @@ namespace Boku.Common
             sw.Dispose();
         }
     }
-#endif
 
     public partial class Storage4
     {
@@ -88,11 +82,9 @@ namespace Boku.Common
 
         static string uniqueMachineID = String.Empty;   // Filled in during Init()
 
-#if NETFX_CORE
         static StorageFolder TitleSpaceFolder;          // Filled in during Init().
         static public StorageFolder UserSpaceFolder;    // In WinRT this is the app's local storage folder
         static StorageFolder TempFolder;
-#endif
 
         #endregion
 
@@ -153,7 +145,6 @@ namespace Boku.Common
             get { return uniqueMachineID; }
         }
 
-#if NETFX_CORE
         static string username = "";
         // Current username
         public static string Username
@@ -185,7 +176,6 @@ namespace Boku.Common
             }
             set { username = value; }
         }
-#endif
 
         #endregion
 
@@ -194,8 +184,6 @@ namespace Boku.Common
         //
         // NOTE : Trying to ifdef individual lines to get NETFX_CORE to work with .Net is 
         // too messy so I've just created two large sections.
-
-#if NETFX_CORE
 
         /// <summary>
         /// One time init of storage.
@@ -1177,7 +1165,6 @@ namespace Boku.Common
 #if IMPORT_DEBUG
                 LevelPackage.DebugPrint("FileExists threw an error");
                 LevelPackage.DebugPrint(e.ToString());
-#endif
             }
 
 #if IMPORT_DEBUG

@@ -6,38 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-#if !NETFX_CORE
-    using TouchHook;
-    using System.Windows.Forms;
-#endif
-
 namespace Boku.Common
 {
-#if !NETFX_CORE
-    public static class Input
-    {
-        #region Members
-        // Contains a list of touch objects which store the data sent from TouchHook messages
-        private static List<EventTouch> eventTouches = new List<EventTouch>();
-
-        // Contains the list of touches that are exposed to queries from the application.
-        // This list is populated during the Update() by the "eventTouches" list.
-        private static List<Touch> touchesThisFrame = new List<Touch>();
-
-        private static int touchCountThisFrame = 0;
-        private static bool isMultiTouchEnabled = false;
-        //private static float maxTimeBetweenTaps = 1.0f;
-
-        /// <summary>
-        /// Hook into low level windows messages related to raw touch data.
-        /// </summary>
-#if USE_MOUSE_IN_PLACE_OF_TOUCH
-        private static WM_MouseHook touchHook;
-#else
-        //private static WM_TouchHook messageTouchHook;
-        private static WM_TouchHook cwTouchHook;
-#endif
-
         #endregion Members
 
 

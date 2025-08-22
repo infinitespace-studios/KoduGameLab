@@ -42,13 +42,8 @@ using Boku.UI2D;
 using Boku.Input;
 using Boku.Audio;
 using Boku.Animatics;
-#if !NETFX_CORE
-    using TouchHook;
-#endif
-
 namespace Boku
 {
-#if NETFX_CORE
     // Faked up enum just ot get things to compile.  Values don't
     // matter since we're not trying to actually set presence.
     public enum GamerPresenceMode
@@ -60,7 +55,6 @@ namespace Boku
         AtMenu,
         LookingForGames,
     }
-#endif
 
     /// <summary>
     /// This is the running Sim and editors.
@@ -294,11 +288,6 @@ namespace Boku
 
             public void ResetLevelPlaySeconds()
             {
-#if !NETFX_CORE
-                //Debug.Print("-->played seconds on 'ResetLevel'.  Total play seconds: " + InGame.inGame.shared.GetLevelPlaySeconds());
-                //Debug.Print("*->loaded seconds on 'ResetLevel'.  Total loaded seconds: " + InGame.inGame.shared.GetLevelLoadedSeconds());
-#endif
-                
                 InGame.inGame.startTime = Time.GameTimeTotalSeconds;
                 InGame.inGame.pauseTime = InGame.inGame.startTime;
                 InGame.inGame.totalPauseTime = 0.0;
@@ -1749,9 +1738,7 @@ namespace Boku
                     BokuGame.Release(ref thumbRenderTarget);
 
                     int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
-#if NETFX_CORE
                     numSamples = 0;
-#endif
                     fullRenderTarget0 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, numSamples, RenderTargetUsage.PlatformContents);
                     fullRenderTarget1 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, numSamples, RenderTargetUsage.PlatformContents);
 
@@ -1970,13 +1957,6 @@ namespace Boku
                     
                 }
             }   // end of Update()
-
-#if !NETFX_CORE
-            void Callback_OpenMiniHub(AsyncOperation op)
-            {
-                InGame.inGame.SwitchToMiniHub();
-            }
-#endif
 
             public override void Activate()
             {
@@ -3736,10 +3716,6 @@ namespace Boku
 
         public static void ResetLevelLoadedTime()
         {
-#if !NETFX_CORE
-            //Debug.Print("-->loaded seconds pre 'ResetLevelLoaded'.  Total loaded seconds: " + InGame.inGame.shared.GetLevelLoadedSeconds());
-#endif
-
             InGame.inGame.loadTime = Time.GameTimeTotalSeconds;
             InGame.inGame.totalLoadedPauseTime = 0.0;
         }

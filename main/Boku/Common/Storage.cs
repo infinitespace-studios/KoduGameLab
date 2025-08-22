@@ -17,14 +17,8 @@ using Microsoft.Xna.Framework.Storage;
 
 using System.Xml.Serialization;
 
-#if !NETFX_CORE
-    using System.Management;
-    using Microsoft.Win32;
-#endif
-
 #if CLIENT
 using Boku.Common.Sharing;
-using System.Windows.Forms;
 #endif
 
 namespace Boku.Common

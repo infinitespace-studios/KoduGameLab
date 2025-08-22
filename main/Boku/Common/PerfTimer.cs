@@ -104,22 +104,9 @@ namespace Boku.Common
                     double max = 1000 * 1000 * (double)maxSample / (double)freq;
                     minSample = freq;
                     maxSample = 0;
-#if NETFX_CORE
                     Debug.WriteLine(label + " : " + ns.ToString("f2") + "ns");
                     //Debug.WriteLine("    min : " + minSample.ToString());
                     //Debug.WriteLine("    max : " + maxSample.ToString());
-#else
-                    if (ns > 1000 * 1000 || true)
-                    {
-                        Debug.Print(label + " : " + sampleLabel + " : " + (ns/1000.0/1000.0).ToString("f2") + "sec");
-                    }
-                    else
-                    {
-                        Debug.Print(label + " : " + sampleLabel + " : " + ns.ToString("f2") + "ns");
-                    }
-                    //Debug.Print("    min : " + minSample.ToString());
-                    //Debug.Print("    max : " + maxSample.ToString());
-#endif
                     //Console.WriteLine(label + " : " + ns.ToString("f2") + "ns" + "    min : " + min.ToString("f2") + "    max : " + max.ToString("f2"));
 
                     Reset();

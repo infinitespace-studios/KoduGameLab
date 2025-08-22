@@ -288,7 +288,6 @@ namespace Boku.Base
             //Debug.Print("    boundingBox = new BoundingBox(new Vector3(" + boundingBox.Min.X.ToString() + "f, " + boundingBox.Min.Y.ToString() + "f, " + boundingBox.Min.X.ToString() + "f), new Vector3(" + boundingBox.Max.X.ToString() + "f, " + boundingBox.Max.Y.ToString() + "f, " + boundingBox.Max.X.ToString() + "f));");
             //Debug.Print("    break;");
 
-#if NETFX_CORE
             // TODO (****) HACK HACK just hard code these to know values since
             // I can't figure out what's going wrong in the content processing.
             switch (bone.Name)
@@ -361,7 +360,6 @@ namespace Boku.Base
                     Debug.Assert(false, "Something is missing here...");
                     break;
             }
-#endif
 
         }
         public BoundingBox BoundingBox

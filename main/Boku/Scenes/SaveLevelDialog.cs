@@ -290,7 +290,6 @@ namespace Boku
                         prevAltPressed = altPressed;
                         TouchContact touch = TouchInput.GetOldestTouch();
 
-#if NETFX_CORE
                         // Prevent keyboard input from leaking though.
                         if (touch != null && VirtualKeyboard.Active && VirtualKeyboard.HitBox.Contains(touch.position))
                         {
@@ -1244,24 +1243,6 @@ namespace Boku
                         }
                         else if (shared.focus == Shared.InputFocus.Description)
                         {
-#if !NETFX_CORE
-                            // Copy?  Just copy the whole description to the clipboard since we don't
-                            // support any kind of selection.
-                            if (c == 3)
-                            {
-                                System.Windows.Forms.Clipboard.SetText(shared.descBlob.ScrubbedText);
-                            }
-
-                            // Paste?
-                            if (c == 22)
-                            {
-                                if (System.Windows.Forms.Clipboard.ContainsText())
-                                {
-                                    str = System.Windows.Forms.Clipboard.GetText();
-                                }
-                            }
-#endif
-
                             // With the description it's a bit different since this gets 
                             // broken up into multiple lines.  What we do here is break 
                             // the lines up and then scroll if we need to in order to
@@ -1546,21 +1527,14 @@ namespace Boku
             public override void Activate()
             {
                 KeyboardInput.OnKey = KeyInput;
-#if NETFX_CORE
                 Debug.Assert(false, "Does this work?  Why did we prefer winKeyboard?");
                 KeyboardInput.OnChar = TextInput;
-#else
-                BokuGame.bokuGame.winKeyboard.CharacterEntered = TextInput;
-#endif
             }
 
             public override void Deactivate()
             {
                 KeyboardInput.OnKey = null;
                 KeyboardInput.OnChar = null;
-#if !NETFX_CORE
-                BokuGame.bokuGame.winKeyboard.CharacterEntered = null;
-#endif
             }
 
             #endregion
@@ -1880,7 +1854,6 @@ namespace Boku
 
 #if NETFX_CORE
                 VirtualKeyboard.Render();
-#endif
             }   // end of SaveLevelDialog RenderObj Render()
 
             #endregion

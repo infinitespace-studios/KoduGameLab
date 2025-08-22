@@ -300,11 +300,6 @@ namespace Boku.SimWorld.Path
 
             Parameter(EffectParams.DiffuseTexture0).SetValue(diffuseTex0);
             Parameter(EffectParams.DiffuseTexture1).SetValue(diffuseTex1);
-#if !NETFX_CORE
-            Parameter(EffectParams.NormalTexture0).SetValue(normalTex0);
-            Parameter(EffectParams.NormalTexture1).SetValue(normalTex1);
-#endif
-
             Texture2D shadowTexture = InGame.inGame.ShadowCamera.ShadowTexture;
 
             // Sometimes after multiple device resets we can get here with

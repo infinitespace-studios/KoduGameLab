@@ -388,9 +388,6 @@ namespace Boku.Common.Xml
             }
             catch
             {
-#if !NETFX_CORE
-                Debug.Print("Fail to read file " + BokuGame.Settings.MediaPath + xmlWorldData.stuffFilename);
-#endif
                 data = null;
                 success = false;
             }

@@ -17,23 +17,14 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if NETFX_CORE
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.Storage.Streams;
 using Windows.System;
-#else
-using System.Windows.Forms;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-#if !NETFX_CORE
-using Microsoft.Xna.Framework.Net;
-#endif
-
-
 using Boku.Base;
 using Boku.Common;
 using Boku.Common.Gesture;
@@ -558,15 +549,6 @@ namespace Boku
                     }
 
 #if !HIDE_LIKES
-#if !NETFX_CORE
-                    // Not available for Win8 version since we haven't fixed the auth issue.
-
-                    // Likes (will need to auth first)
-                    popup.AddItem(Strings.Localize("loadLevelMenu.like"), PopupOnLike);
-
-                    // Comments (can read but needs auth to leave a new comment)
-                    popup.AddItem(Strings.Localize("loadLevelMenu.comments"), PopupOnComments);
-#endif
 #endif
 
                     // Always allow abuse reporting.  No longer allow un-reporting.
@@ -690,13 +672,8 @@ namespace Boku
                     }
 
                     string exportedFilename = null;
-#if NETFX_CORE
                     // Show WinRT happy save file dialog.
                     PickSaveFile(level);
-
-#else
-                    exportedFilename = ShowExportDialog(level);
-#endif
 
                     return exportedFilename;
 
@@ -706,7 +683,6 @@ namespace Boku
 
             }   // end of ExportSelectedLevel()
 
-#if NETFX_CORE
             private async void PickSaveFile(LevelMetadata level)
             {
                 FileSavePicker savePicker = new FileSavePicker();
@@ -738,63 +714,6 @@ namespace Boku
             }
 #endif
 
-#if !NETFX_CORE
-
-            /// <summary>
-            /// Shows dialog for exporting file.  Returns name chosen to export to.
-            /// </summary>
-            /// <param name="level"></param>
-            /// <returns>Filename we exported to, null if user backs out.</returns>
-            private string ShowExportDialog(LevelMetadata level)
-            {
-                // Create new SaveFileDialog.
-                SaveFileDialog DialogSave = new SaveFileDialog();
-
-                // Default file extension.
-                DialogSave.DefaultExt = "Kodu2";
-
-                // Available file extensions.
-                DialogSave.Filter = "Kodu files (*.Kodu2)|*.Kodu2";
-
-                // Adds a extension if the user does not.
-                DialogSave.AddExtension = true;
-
-                // Restores the selected directory, next time this is activated.
-                DialogSave.RestoreDirectory = true;
-
-                if (level.PreviousLink() != null || level.NextLink() != null)
-                {
-                    // Dialog title.
-                    DialogSave.Title = Strings.Localize("loadLevelMenu.exportMultiDialogTitle");
-                }
-                else
-                {
-                    // Dialog title.
-                    DialogSave.Title = Strings.Localize("loadLevelMenu.exportDialogTitle");
-                }
-
-                // Startup directory
-                DialogSave.InitialDirectory = @"c:/My Documents/Kodu";
-
-                // Set the default filename.
-                DialogSave.FileName = GenerateDefaultFileName(level, true);
-
-                string result = null;
-
-                // Show the dialog and process the result.
-                if (DialogSave.ShowDialog() == DialogResult.OK)
-                {
-                    ExportLevel(level, DialogSave.FileName, null);
-                    result = DialogSave.FileName;
-                }
-
-                DialogSave.Dispose();
-                DialogSave = null;
-
-                return result;
-            }   // end of ShowExportDialog()
-#endif
-
             private void Callback_ExportSelectedLevel(AsyncOperation op)
             {
                 LevelMetadata level = op.Param as LevelMetadata;
@@ -803,28 +722,16 @@ namespace Boku
                 string fileNameWithoutExtension = GenerateDefaultFileName(level, false);
 
                 // If this filename is already in use, add a unique digit on the end.
-#if NETFX_CORE
                 string fileName = String.Format("{0}.kodu2", fileNameWithoutExtension);
-#else
-                string fileName = String.Format("{0}.kodu2", fileNameWithoutExtension);
-#endif
                 int rev = 1;
                 while (true)
                 {
-#if NETFX_CORE
                     if (!Storage4.FileExists(LevelPackage.ExportsPath + fileName, StorageSource.UserSpace))
-#else
-                    if (!File.Exists(LevelPackage.ExportsPath + fileName))
-#endif
                     {
                         break;
                     }
 
-#if NETFX_CORE
                     fileName = String.Format("{0} ({1}).kodu2", fileNameWithoutExtension, rev);
-#else
-                    fileName = String.Format("{0} ({1}).kodu2", fileNameWithoutExtension, rev);
-#endif
                     rev += 1;
                 }
 
@@ -860,11 +767,7 @@ namespace Boku
                 {
                     string folderName = Utils.FolderNameFromFlags(level.Genres);
 
-#if NETFX_CORE
                     string fullPathToLevelFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, level.WorldId.ToString() + ".Xml");
-#else
-                    string fullPathToLevelFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, folderName, level.WorldId.ToString() + ".Xml");
-#endif
 
 #if EXPORT_DEBUG_HACK
                     {
@@ -876,43 +779,20 @@ namespace Boku
                                         "fullPath : " + fullPathToLevelFile;
                         var result = System.Windows.Forms.MessageBox.Show(message);
                     }
-#endif
 
                     levelFiles.Add(fullPathToLevelFile);
 
                     //load the xml so we can find the stuff, thumbnail and terrain file paths
                     XmlWorldData xml = XmlWorldData.Load(fullPathToLevelFile, XnaStorageHelper.Instance);
 
-#if !NETFX_CORE
-                    if (xml == null)
-                    {
-                        string message = "Failed to open for export:\n" + fullPathToLevelFile;
-                        var result = System.Windows.Forms.MessageBox.Show(message);
-
-                        return;
-                    }
-#endif
-
-#if NETFX_CORE
                     string fullPathToStuffFile = Path.Combine(BokuGame.Settings.MediaPath, xml.stuffFilename);
-#else
-                    string fullPathToStuffFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, xml.stuffFilename);
-#endif
 
                     stuffFiles.Add(fullPathToStuffFile);
 
-#if NETFX_CORE
                     string fullPathToThumbnailFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Dds");
-#else
-                    string fullPathToThumbnailFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Dds");
-#endif
                     thumbnailFiles.Add(fullPathToThumbnailFile);
 
-#if NETFX_CORE
                     string fullPathToScreenshotFile = Path.Combine(BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Jpg");
-#else
-                    string fullPathToScreenshotFile = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, folderName, xml.GetImageFilenameWithoutExtension() + ".Jpg");
-#endif
                     screenshotFiles.Add(fullPathToScreenshotFile);
 
 
@@ -922,11 +802,7 @@ namespace Boku
                     string partialPathToTerrainFile = Path.Combine(BokuGame.Settings.MediaPath, xml.xmlTerrainData2.virtualMapFile);
                     if (Storage4.FileExists(partialPathToTerrainFile, StorageSource.UserSpace))
                     {
-#if NETFX_CORE
                         fullPathToTerrainFile = partialPathToTerrainFile;
-#else
-                        fullPathToTerrainFile = Path.Combine(Storage4.UserLocation, partialPathToTerrainFile);
-#endif
                     }
                     terrainFiles.Add(fullPathToTerrainFile);
 
@@ -1136,22 +1012,6 @@ namespace Boku
                     if (exportedFilename != null)
                     {
                         // For WinRT we will show a dialog even though we are fullscreen.
-#if !NETFX_CORE
-                        // Only display message on fullscreen.  On windowed we 
-                        // use the SaveDialog instead.
-                        // TODO (****) *** Aren't we always windowed now?
-                        //if (Boku.BokuGame.Graphics.IsFullScreen)
-                        {
-                            if (parent.shared.CurWorld.LinkedFromLevel != null || parent.shared.CurWorld.LinkedToLevel != null)
-                            {
-                                parent.ShowLinkedLevelExportedDialog();
-                            }
-                            else
-                            {
-                                parent.ShowLevelExportedDialog(exportedFilename);
-                            }
-                        }
-#endif
                     }
                 }
             }
@@ -2268,26 +2128,14 @@ namespace Boku
 #if !HIDE_LIKES
                 if (shared.likesBox.LeftPressed(hit))
                 {
-#if NETFX_CORE
                     Debug.Assert(false, "Figure out how to launch IE from a URL in WinRT.");
-#else
-                    try
-                    {
-                        shared.PopupOnLike();
-                    }
-                    catch { }
-#endif
                 }
 
                 if (shared.commentsBox.LeftPressed(hit))
                 {
                     try
                     {
-#if NETFX_CORE
                         Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                        shared.PopupOnComments();
-#endif
                     }
                     catch { }
                 }
@@ -2297,11 +2145,7 @@ namespace Boku
                 {
                     try
                     {
-#if NETFX_CORE
                         Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                        shared.PopupOnDownload();
-#endif
                     }
                     catch { }
                 }
@@ -2585,13 +2429,7 @@ namespace Boku
                         {
                             try
                             {
-#if NETFX_CORE
                                 Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                                //Process.Start(shared.CurWorld.Permalink);
-
-                                shared.PopupOnLike();
-#endif
                             }
                             catch { }
                         }
@@ -2603,12 +2441,7 @@ namespace Boku
                         {
                             try
                             {
-#if NETFX_CORE
                                 Launcher.LaunchUriAsync(new Uri(shared.CurWorld.Permalink));
-#else
-                                //Process.Start(shared.CurWorld.Permalink);
-                                shared.PopupOnDownload();
-#endif
                             }
                             catch { }
                         }
@@ -2956,11 +2789,7 @@ namespace Boku
                     // Date and creator name.
                     Vector2 datePosition = pos;
                     DateTime localWriteTime = info.LastWriteTime.ToLocalTime();
-#if NETFX_CORE
                     string dateStr = localWriteTime.ToString() + " " + localWriteTime.ToString();
-#else
-                    string dateStr = localWriteTime.ToShortDateString() + " " + localWriteTime.ToShortTimeString();
-#endif
 
                     if (info.Creator != null)
                     {

@@ -34,9 +34,6 @@ namespace Boku.Common
 
                 if (BokuSettings.Settings.UseSystemFontRendering)
                 {
-#if !NETFX_CORE
-                    result = systemFont.LineSpacing;
-#endif
                 }
                 else
                 {
@@ -58,9 +55,6 @@ namespace Boku.Common
 
             if (BokuSettings.Settings.UseSystemFontRendering)
             {
-#if !NETFX_CORE
-                result = systemFont.MeasureString(text);
-#endif
             }
             else
             {

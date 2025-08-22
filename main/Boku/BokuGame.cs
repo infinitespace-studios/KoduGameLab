@@ -54,11 +54,7 @@ namespace Boku
     /// <summary>
     /// Boku, the story of a boy and his code.
     /// </summary>
-#if NETFX_CORE
     partial class BokuGame : Microsoft.Xna.Framework.Game
-#else
-    partial class BokuGame
-#endif
     {
         // instrumentation
         static object sessionTimerInstrument;
@@ -87,15 +83,8 @@ namespace Boku
         // SGI_MOD - picture support
         private static PictureManager pictureManager = new PictureManager();
 
-#if NETFX_CORE
         // For Win8 we'll try and replace all calls to WinKeyboard
-        // with ones from the KeyboardInput class.
-#else
-        /// <summary>
-        /// Winkeyboard object for reading processed keyboard input.
-        /// </summary>
-        public WinKeyboard winKeyboard = null;
-#endif        
+        // with ones from the KeyboardInput class.        
 
         //
         // Scenes, modes, whatever you want to call them.
@@ -200,36 +189,6 @@ namespace Boku
             set { bokuGame.screenPosition = value; }
         }
         
-#if !NETFX_CORE
-        bool isMouseVisible = true;
-        public bool IsMouseVisible
-        {
-            get { return isMouseVisible; }
-            set
-            {
-                if (isMouseVisible != value)
-                {
-                    isMouseVisible = value;
-                    if (isMouseVisible)
-                    {
-                        Cursor.Show();
-                    }
-                    else
-                    {
-                        Cursor.Hide();
-                    }
-                }
-            }
-        }
-#endif
-
-#if !NETFX_CORE
-        public bool IsActive
-        {
-            get { return XNAControl.Instance.Focused; }
-        }
-#endif
-
         public static bool objectListDirty
         {
             get { return listDirty; }
@@ -1049,74 +1008,6 @@ namespace Boku
         private void ScreenGrab()
         {
 // (TODO (****) BROKEN
-#if !NETFX_CORE
-            if (Actions.PrintScreen.WasPressed || Actions.ShiftPrintScreen.WasPressed || pictureManager.DoScreenGrab)
-            {
-                bool debugCapture = Actions.ShiftPrintScreen.WasPressed;
-
-                Actions.PrintScreen.ClearAllWasPressedState();
-                Actions.ShiftPrintScreen.ClearAllWasPressedState();
-
-                GraphicsDevice device = GraphicsDevice;
-                int width = device.PresentationParameters.BackBufferWidth;
-                int height = device.PresentationParameters.BackBufferHeight;
-
-                // Get the back buffer data.
-                Color[] data = new Color[width * height];
-                if (hidef)
-                {
-                    device.GetBackBufferData<Color>(data);
-                }
-                else
-                {
-                    InGame.inGame.FullRenderTarget0.GetData<Color>(data);
-                }
-
-                // Create a texture for it.
-                Texture2D screenGrab = new Texture2D(device, width, height);
-                screenGrab.SetData<Color>(data);
-
-                // Save texture to Jpg.
-                string fileName = ScreenGrabName();
-                Storage4.TextureSaveAsJpeg(screenGrab, fileName);
-
-                // If needed, save as PNG with transparency, if any.
-                if (debugCapture)
-                {
-                    fileName = fileName.Replace(".Jpg", ".png");
-                    Storage4.TextureSaveAsPng(screenGrab, fileName);
-                }
-
-                BokuGame.Release(ref screenGrab);
-
-                // Should we print?
-                bool print = KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.RightControl)
-                            || KeyboardInput.IsPressed(Microsoft.Xna.Framework.Input.Keys.LeftControl);
-                if (print)
-                {
-                    try
-                    {
-                        Process myProcess = new Process();
-                        string fullPath = Path.Combine(Storage4.UserLocation, fileName);
-
-                        myProcess.StartInfo.FileName = fullPath; 
-                        myProcess.StartInfo.Verb = "Print";
-                        myProcess.StartInfo.CreateNoWindow = true;
-                        myProcess.Start();
-                    }
-                    catch
-                    {
-                    }
-
-                }
-
-                // SGI_MOD - picture support
-                if (pictureManager.DoScreenGrab)
-                {
-                    pictureManager.ScreenGrabFinished();
-                }
-            }
-#endif
         }   // end of ScreenGrab()
 
         private string ScreenGrabName()

@@ -33,15 +33,6 @@ namespace Boku.Common
         public const Int32 WM_USER = 1024;
         public const Int32 WM_CSKEYBOARD = WM_USER + 192;
 
-#if !NETFX_CORE
-        [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "FindWindow")]
-        private static extern Int32 FindWindow(string _ClassName, string _WindowName);
-
-        //[System.Runtime.InteropServices.DllImport("User32.DLL")]
-        //public static extern bool PostMessage(Int32 hWnd, Int32 Msg, Int32 wParam, Int32 lParam);
-        // end of on screen....
-#endif
-
         // A class to allow us to map Keys values to characters.
         public class KeyCharMapping
         {
@@ -446,37 +437,8 @@ namespace Boku.Common
 
         public static void ShowOnScreenKeyboard()
         {
-#if NETFX_CORE
             VirtualKeyboard.Activate();
             //Debug.Assert(false, "Is this needed for Win8?");
-#else
-            try
-            {
-                Process tabTip = new Process();
-                tabTip.StartInfo.FileName = "C:\\Program Files\\Common Files\\Microsoft Shared\\ink\\TabTip";
-                tabTip.StartInfo.UseShellExecute = true;
-                tabTip.Start();
-            }
-            catch (Win32Exception e)
-            {
-                Debug.WriteLine("Could not show keyboard. NativeErrorCode: " + e.NativeErrorCode);
-
-                //If this fail we could fall back to the on screen keyboard
-                try
-                {
-                    Process oskProcess = new Process();
-                    oskProcess.StartInfo.UseShellExecute = true;
-                    oskProcess.StartInfo.FileName = @"c:\WINDOWS\system32\osk";
-                    oskProcess.Start();
-                }
-                catch (Win32Exception exception )
-                {
-                    //If this fail we could fall back to the on screen keyboard for Win7
-
-                    Debug.WriteLine("Could not show OSK keyboard. NativeErrorCode: " + exception.NativeErrorCode);
-                }
-            }
-#endif
         }
 
 
@@ -485,7 +447,6 @@ namespace Boku.Common
             // If this count isn't right, we may have accidentally deleted an entry.
             Debug.Assert(keyCharMap.Length == kNumKeys);
 
-#if NETFX_CORE
             // TODO Should we update wasTouched if the virtual keyboard was touched?
 
             // Get any input characters from the virutal keyboard and pass them on.
@@ -514,12 +475,6 @@ namespace Boku.Common
             {
                 return;
             }
-
-#else
-            // Ignore input if the game is not active.
-            if (!BokuGame.bokuGame.IsActive)
-                return;
-#endif
 
             KeyboardState curState = Keyboard.GetState();
 
@@ -836,11 +791,7 @@ namespace Boku.Common
 
             if (key >= Keys.A && key <= Keys.Z)
             {
-#if NETFX_CORE
                 Debug.Assert(false, "What's the proper way to test this?");
-#else
-                kbdShift ^= Console.CapsLock;
-#endif
             }
 
             result = kbdShift ? keyCharMap[(int)key].shift : keyCharMap[(int)key].normal;

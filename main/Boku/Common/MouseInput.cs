@@ -22,10 +22,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-#if !NETFX_CORE
-using System.Threading;
-#endif
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -333,15 +329,10 @@ namespace Boku.Common
 #if NETFX_CORE || !THREADED_MOUSE_INPUT               
                 MouseState state = Mouse.GetState();
 
-#if NETFX_CORE
                 // Looks like in .net 4.5 there is SystemParameters.SwapButtons but that 
                 // doesn't seem to work with WinRT.  Color me surprised.  SO just assume
                 // that the mouse buttons aren't swapped.
                 if (false)
-#else
-                // Adjust position for tutorial mode.
-                if (System.Windows.Forms.SystemInformation.MouseButtonsSwapped)
-#endif
                 {
                     // Swap buttons.
                     state = new MouseState(state.X - (int)BokuGame.ScreenPosition.X, state.Y - (int)BokuGame.ScreenPosition.Y, state.ScrollWheelValue, state.RightButton, state.MiddleButton, state.LeftButton, state.XButton1, state.XButton2);
@@ -389,18 +380,8 @@ namespace Boku.Common
                 prevPosition = curPosition;
                 curPosition = new Point(state.X, state.Y);
 
-#if NETFX_CORE
                 prevScrollValue = curScrollValue;
                 curScrollValue = state.ScrollWheelValue;
-#else
-                // NOTE: because of the WinPrc changes, this is the only way
-                // we get scroll info.  The Mouse.GetState() call always
-                // returns 0.
-                prevScrollValue = curScrollValue;
-                curScrollValue += accumulatedScrollValue;
-
-                accumulatedScrollValue = 0;
-#endif
 
                 if (!wasActive)
                 {

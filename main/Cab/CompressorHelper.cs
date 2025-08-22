@@ -9,7 +9,6 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 
-#if NETFX_CORE
     using System.Runtime.InteropServices;
     using System.Threading;
     using System.Threading.Tasks;
@@ -24,8 +23,6 @@ using System.Diagnostics;
 
 namespace Cab
 {
-
-#if NETFX_CORE
 
     // Summary:
     //     Defines constants for read, write, or read/write access to a file.
@@ -531,8 +528,6 @@ namespace Cab
 
     }   // end of File()
 
-#endif
-
     public interface ICompressorHelper
     {
         Stream Open(string filename, FileMode fileMode);
@@ -578,9 +573,6 @@ namespace Cab
 #if NETFX_CORE
             Guid guid = Guid.NewGuid();
             return guid.ToString() + ".tmp";
-#else
-            return Path.GetTempFileName();
-#endif
         }
     }
 
@@ -634,7 +626,6 @@ namespace Cab
                 isExpandable = false;
             }
 
-#if NETFX_CORE
             public void Close()
             {
                 if (!isOpened)
@@ -644,16 +635,6 @@ namespace Cab
                 }
                 isOpened = false;
             }
-#else
-            public override void Close()
-            {
-                if (!isOpened)
-                {
-                    //Why are we closing a closed stream?
-                }
-                isOpened = false;
-            }
-#endif
 
             public Stream Open(SeekOrigin seek)
             {
@@ -676,11 +657,7 @@ namespace Cab
             {
                 isOpened = false;
                 isDeleted = true;
-#if NETFX_CORE
                 Close();
-#else
-                base.Close();
-#endif
             }
         }
 
@@ -889,26 +866,17 @@ namespace Cab
 
                 Stream stream = pseudoFile.Open(SeekOrigin.Begin);
 
-#if NETFX_CORE
                 Stream file = File.Open(Path.Combine(path, name), FileMode.Create);
-#else
-                FileStream file = File.Open(Path.Combine(path, name), FileMode.Create);
-#endif
 
                 for (int j = 0; j < stream.Length; j++)
                 {
                     file.WriteByte((byte)stream.ReadByte());
                 }
 
-#if NETFX_CORE
                 stream.Flush();
                 stream.Dispose();
                 file.Flush();
                 file.Dispose();
-#else
-                stream.Close();
-                file.Close();
-#endif
             }
         }
     }   // end of class MemoryHelper

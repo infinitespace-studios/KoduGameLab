@@ -1177,88 +1177,10 @@ namespace Boku.Common.Xml
 
         #region refresh logic for design tools
 
-#if NETFX_CORE
         public void RefreshFromXML()
         {
             Debug.Assert(false, "Is this needed during runtime?");
         }
-#else
-
-        public void RefreshFromXML()
-        {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(System.IO.Directory.GetCurrentDirectory() + XmlFileName);
-
-            // note on persistence: the surface sets are in subnodes of the root xml document
-            // each surface set record will hold pointers to these subnodes
-            // when we save, we copy date back to the subnodes and then write the whole doc
-            // back to the file.
-            foreach (XmlNode node in xmlDoc.ChildNodes)
-            {
-                // look for the actor - should be one per file
-                if (node.Name == "XmlGameActor")
-                {
-                    foreach (XmlNode actorNode in node.ChildNodes)
-                    {
-                        // we currently rely on the surface sets being in the same order, as there is no
-                        // way for the user to reorder them and they should always be in load order
-                        if (actorNode.Name == "SurfaceSets")
-                        {
-                            int curSurfSet = 0;
-                            foreach (XmlNode surfSetNode in actorNode.ChildNodes)
-                            {
-                                if (surfSetNode.Name == "SurfaceSet")
-                                {
-                                    SurfaceSet curSet = this.SurfaceSets[curSurfSet];
-                                    RefreshSurfaceSet(surfSetNode, curSet);
-                                    curSurfSet++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Given an xml node and a surface set, parse the xml node and 
-        // update approprate fields of the surface set.
-        public void RefreshSurfaceSet(XmlNode surfSetXML, SurfaceSet surfSet)
-        {
-            // first get the properties of the surface set
-            foreach (XmlNode node in surfSetXML.ChildNodes)
-            {
-                if (node.Name == "Name")
-                {
-                    string name = node.InnerText;
-                    // keeping this around for validation; not doing anything with it at the moment.
-                }
-                if (node.Name == "SurfaceNames")
-                {
-                    string[] names = new string[8];
-                    int curName = 0;
-                    // now we're going to accumulate the names
-                    // of all the surfaces applied to the slots in this
-                    // model - note that order is paramount - different slots
-                    // correspond to different body parts of the bot
-                    foreach (XmlNode surfNameNode in node.ChildNodes)
-                    {
-                        System.Diagnostics.Debug.Assert(surfNameNode.Name == "string",
-                                                        "Expected string parsing SurfaceNames in XmlActor");
-                        names[curName++] = surfNameNode.InnerText;
-                    }
-                    surfSet.SurfaceNames = names;
-                }
-                else if (node.Name == "BumpDetailName")
-                {
-                    surfSet.BumpDetailName = node.InnerText;
-                }
-                else if (node.Name == "DirtMapName")
-                {
-                    surfSet.DirtMapName = node.InnerText;
-                }
-            }
-        }
-#endif
         #endregion
 
         /// <summary>

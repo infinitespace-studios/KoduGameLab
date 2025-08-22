@@ -2170,23 +2170,6 @@ namespace Boku.Base
 
             string str = String.Join(" ", effector.Reflex.SayStrings);
 
-#if !NETFX_CORE
-            if (playerId == GamePadSensor.PlayerId.All)
-            {
-                foreach (var bit in MicrobitManager.Microbits.Values)
-                {
-                    bit.ScrollText(str);
-                }
-            }
-            else
-            {
-                Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-                if (bit != null)
-                {
-                    bit.ScrollText(str);
-                }
-            }
-#endif
             return true;
         }
 
@@ -2271,30 +2254,6 @@ namespace Boku.Base
             PlayerModifier playerModifier = effector.GetPlayerModifierOrNull();
             GamePadSensor.PlayerId playerId = (playerModifier != null) ? playerModifier.playerIndex : GamePadSensor.PlayerId.All;
 
-#if !NETFX_CORE
-            List<MicroBitDisplayFrame> frames = new List<MicroBitDisplayFrame>();
-            foreach (var pattern in effector.Reflex.MicrobitPatterns)
-            {
-                MicroBitDisplayFrame frame = new MicroBitDisplayFrame(pattern.LEDs, pattern.Duration, pattern.Brightness);
-                frames.Add(frame);
-            }
-
-            if (playerId == GamePadSensor.PlayerId.All)
-            {
-                foreach (var bit in MicrobitManager.Microbits.Values)
-                {
-                    bit.PrintDisplayFrames(frames);
-                }
-            }
-            else
-            {
-                Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-                if (bit != null)
-                {
-                    bit.PrintDisplayFrames(frames);
-                }
-            }
-#endif
             return true;
         }
 
@@ -2307,26 +2266,6 @@ namespace Boku.Base
             int pin = int.Parse(effector.Reflex.Actuator.upid[effector.Reflex.Actuator.upid.Length - 1].ToString());
             pin -= 1;
 
-#if !NETFX_CORE
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                int value = 0;
-                foreach (var modifier in effector.Reflex.Modifiers)
-                {
-                    if (modifier.upid == "modifier.on")
-                    {
-                        value = 1;
-                    }
-                    else if (modifier.upid == "modifier.off")
-                    {
-                        value = 0;
-                    }
-                }
-
-                bit.SetPinValue(pin, value, Microbit.EPinOperatingMode.Digital);
-            }
-#endif
             return true;
         }
 
@@ -2340,32 +2279,6 @@ namespace Boku.Base
             int pin = int.Parse(effector.Reflex.Actuator.upid[effector.Reflex.Actuator.upid.Length - 1].ToString());
             pin -= 1;
 
-#if !NETFX_CORE
-            // Get the microbit.
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                // Calculate the frequency value from the score and score bucket modifiers present.
-                CalculatedScore score = CalculateModifierScore(effector.Reflex, false, 0);
-
-                // If no value was found on the rule, default to value of 1.
-                if (score.OpCount == 0)
-                {
-                    score.Value = 1;
-                }
-
-                // Get units
-                int multiplier = 1;
-                NumericModifier kHzModifier = effector.Reflex.GetModifier<NumericModifier>("modifier.frequencyunits.khz");
-                if (kHzModifier != null)
-                {
-                    multiplier = (int)kHzModifier.value;
-                }
-
-                // Set the frequency.
-                bit.SetPinPwmFrequency(pin, score.Value, multiplier);
-            }
-#endif
             return true;
         }
 
@@ -2379,27 +2292,6 @@ namespace Boku.Base
             int pin = int.Parse(effector.Reflex.Actuator.upid[effector.Reflex.Actuator.upid.Length - 1].ToString());
             pin -= 1;
 
-#if !NETFX_CORE
-            // Get the microbit.
-            Microbit bit = MicrobitExtras.GetMicrobitOrNull(playerId);
-            if (bit != null)
-            {
-                // Calculate the frequency value from the score and score bucket modifiers present.
-                CalculatedScore score = CalculateModifierScore(effector.Reflex, false, 0);
-
-                // If no value was found on the rule, default to value of 50%.
-                if (score.OpCount == 0)
-                {
-                    score.Value = 50;
-                }
-
-                // Clamp the value to a valid percentage value.
-                score.Value = MyMath.Clamp(score.Value, 0, 100);
-
-                // Set the pulse width.
-                bit.SetPinPwmDutyCycle(pin, score.Value / 100.0f);
-            }
-#endif
             return true;
         }
 

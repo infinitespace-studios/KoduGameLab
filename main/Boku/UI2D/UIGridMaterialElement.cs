@@ -176,57 +176,10 @@ namespace Boku.UI2D
             terrain.ParameterEdit(Terrain.EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
             terrain.ParameterEdit(Terrain.EffectParams.WarpCenter).SetValue(Vector4.Zero);
 
-#if NETFX_CORE
                 // Note: Indexing into shaders doesn't work with MG.  Apparently it
                 // was some hack done in XNA related to the Effect code they used.
                 // Anyway, instead of using this indexing we need to pick and set 
                 // the right technique which we do further down from here.
-#else
-            if (BokuSettings.Settings.PreferReach)
-            {
-                //Select the VS based on the number of point-lights
-                var lightNum = Boku.Fx.Luz.Count;
-                if (lightNum > 6)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(4);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(4);
-                }
-                else if (lightNum > 4)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(3);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(3);
-                }
-                else if (lightNum > 2)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(2);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(2);
-                }
-                else if (lightNum > 0)
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(1);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(1);
-                }
-                else
-                {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(0);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(0);
-                }
-
-                //Select the PS
-                terrain.ParameterColor(Terrain.EffectParams.PSIndex).SetValue(0);
-                terrain.ParameterEdit(Terrain.EffectParams.PSIndex).SetValue(0);
-            }
-            else // Shader Model v3
-            {
-                //SM3 only uses one VS
-                terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(5);
-                terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(5);
-
-                //Select the PS
-                terrain.ParameterColor(Terrain.EffectParams.PSIndex).SetValue(2);
-                terrain.ParameterEdit(Terrain.EffectParams.PSIndex).SetValue(2);
-            }
-#endif
 
             if (MaterialPicker.FabricMode)
             {
@@ -243,7 +196,6 @@ namespace Boku.UI2D
 
                 TerrainMaterial mat = TerrainMaterial.Get(materialIndex);
 
-#if NETFX_CORE
                 int lightNum = Boku.Fx.Luz.Count;
                 if (lightNum > 6)
                 {
@@ -265,9 +217,6 @@ namespace Boku.UI2D
                 {
                     effect.CurrentTechnique = effect.Techniques["TerrainColorPass_L0_FA_SM2"];
                 }
-#else
-                effect.CurrentTechnique = mat.TechniqueColor(TerrainMaterial.EffectTechs_FA.TerrainColorPass_FA);
-#endif
                 foreach (EffectPass pass in effect.CurrentTechnique.Passes)
                 {
                     pass.Apply();
@@ -298,7 +247,6 @@ namespace Boku.UI2D
 
                 TerrainMaterial mat = TerrainMaterial.Get(materialIndex);
                 
-#if NETFX_CORE
                 int lightNum = Boku.Fx.Luz.Count;
                 if (lightNum > 6)
                 {
@@ -320,9 +268,6 @@ namespace Boku.UI2D
                 {
                     effect.CurrentTechnique = effect.Techniques["TerrainColorPass_L0_FD_SM2"];
                 }
-#else
-                effect.CurrentTechnique = mat.TechniqueColor(TerrainMaterial.EffectTechs.TerrainColorPass);
-#endif
 
                 foreach (EffectPass pass in effect.CurrentTechnique.Passes)
                 {

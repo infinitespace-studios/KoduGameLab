@@ -12,15 +12,10 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml.Serialization;
 
-#if NETFX_CORE
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Compression;
 using Windows.Storage.Pickers;
-#else
-using Ionic.Zip;
-using System.IO.Packaging;
-#endif
 
 using Boku.Audio;
 using BokuShared;
@@ -65,41 +60,8 @@ namespace Boku.Common
             // Put the exported levels in an easier to find directory.
             exportsPath = "Exports";
 
-#if NETFX_CORE
             // Nothing to do here since folders are created automatically
             // when you write files in WinRT.
-#else
-            // If we can get to the user location, make sure the full path is created.
-            if (!Storage4.DirExists("", StorageSource.UserSpace))
-            {
-                Storage4.CreateDirectory("");
-            }
-
-            // Verify we can get to the user location.  If this fails it means the
-            // above code wasn't able to write to the user location.
-            if (!Storage4.DirExists("", StorageSource.UserSpace))
-            {
-                // User path is not found.  Fail.
-                System.Windows.Forms.MessageBox.Show(
-                    "The user's Save Folder cannot be accessed : " + Storage4.UserLocation
-                    + "\nPlease run the Configuration tool and change to a valid location.", 
-                    "Kodu : Save Folder Error",
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Asterisk);
-
-                return false;
-            }
-
-            // Create our working folders if necessary.
-            if (!Storage4.DirExists(importsPath, StorageSource.UserSpace))
-            {
-                Storage4.CreateDirectory(importsPath);
-            }
-            if (!Storage4.DirExists(exportsPath, StorageSource.UserSpace))
-            {
-                Storage4.CreateDirectory(exportsPath);
-            }
-#endif
 
             // If an import was specified on the command line, copy it to our imports folder.
             string srcName = cmdLine.GetString("Import", null);
@@ -111,11 +73,7 @@ namespace Boku.Common
             {
                 foreach (string str in cmdLine.MultiLine)
                 {
-#if NETFX_CORE
                     if (str.EndsWith(".kodu2", StringComparison.OrdinalIgnoreCase))
-#else
-                    if (str.EndsWith(".kodu2", StringComparison.InvariantCultureIgnoreCase))
-#endif
                     {
                         srcName = str;
                         break;
@@ -124,23 +82,10 @@ namespace Boku.Common
             }
 
 
-#if NETFX_CORE
             // No double click to import for WinRT.  Use Import option from main menu.
-#else
-            if (!String.IsNullOrEmpty(srcName) && File.Exists(srcName))
-            {
-                string dstFilename = Path.Combine(Storage4.UserLocation, "Imports", Path.GetFileName(srcName));
-                try
-                {
-                    File.Copy(srcName, dstFilename);
-                }
-                catch { }
-            }
-#endif
             return true;
         }
 
-#if NETFX_CORE
         /// <summary>
         /// Import all .kodu2 packages in the Imports folder into the Downloads bucket.
         /// </summary>
@@ -252,169 +197,6 @@ namespace Boku.Common
 
             return result;
         }   // end of ImportLevels2()
-#else
-        /// <summary>
-        /// Import all .kodu2 packages in the Imports folder into the Downloads bucket.
-        /// Note this is the non-WinRT version which uses ZipPackage rather than ZipArchive.
-        /// </summary>
-        /// <param name="importedLevels">A list of the levels we imported.  This is used on launch to just directly to the imported level.</param>
-        /// <returns>True if verything ok, false if one or more levels are from a newer version of Kodu.</returns>
-        public static bool ImportLevels2(List<Guid> importedLevels)
-        {
-            bool result = true;
-
-            // Get list of files in the imports folder.
-            string[] files = Storage4.GetFiles(importsPath, "*.kodu2", StorageSource.UserSpace);
-
-            if (files != null && files.Length > 0)
-            {
-                foreach (string filename in files)
-                {
-                    bool success = true;
-                    Guid guid = Guid.Empty;
-
-                    // Open file via DotNetZip and copy level info into proper place (DOWNLOADS folder)
-                    try
-                    {
-                        string path = Path.Combine(importsPath, filename);
-
-                        //System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
-                        //    "Importing file : " + path);
-
-                        using (ZipFile zip = ZipFile.Read(path))
-                        {
-                            foreach (ZipEntry e in zip)
-                            {
-                                string targetPath = @"Content\Xml\Levels";
-                                string mainFilePath = null;
-
-                                string partFullName = e.FileName;
-                                string partFilename = Path.GetFileName(partFullName);
-
-                                // If the zip file hase been hand edited we get entries for all the folders
-                                // as well as the files.  Skip over the folders.
-                                if (string.IsNullOrEmpty(partFilename))
-                                {
-                                    continue;
-                                }
-
-                                if (partFullName.StartsWith(LevelFolder))
-                                {
-                                    targetPath = Path.Combine(targetPath, DownloadsFolder, partFilename);
-                                    // Save path for testing version.
-                                    mainFilePath = targetPath;
-                                }
-                                else if (partFullName.StartsWith(StuffFolder))
-                                {
-                                    targetPath = Path.Combine(targetPath, DownloadsFolder, StuffFolder, partFilename);
-                                }
-                                else if (partFullName.StartsWith(ThumbnailFolder))
-                                {
-                                    targetPath = Path.Combine(targetPath, DownloadsFolder, partFilename);
-                                }
-                                else if (partFullName.StartsWith(TerrainFolder))
-                                {
-                                    // Note this is in in Downloads
-                                    targetPath = Path.Combine(targetPath, StuffFolder, HeightMapsFolder, partFilename);
-                                }
-                                else
-                                {
-                                    if (!partFilename.Equals("[Content_Types].xml", StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        Debug.Assert(false, "Unknown folder found while importing .kodu2 file : " + partFilename);
-                                    }
-                                    targetPath = null;
-                                }
-
-                                if (mainFilePath == null)
-                                {
-                                    // Not a main file, just copy over with no changes.
-                                    if (e != null && targetPath != null)
-                                    {
-                                        using (var reader = e.OpenReader())
-                                        {
-                                            byte[] bytes = new byte[reader.Length];
-                                            reader.Read(bytes, 0, (int)reader.Length);
-
-                                            Stream fileStream = Storage4.OpenWrite(targetPath);
-                                            fileStream.Write(bytes, 0, (int)reader.Length);
-                                            fileStream.Close();
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    // It's a main file so we need to:
-                                    //      Change the stuff file path from MyWorlds to Downloads.
-                                    //      Change genres to be Downloads rather than MyWorlds.
-                                    //      Check the version number and set result to false if it is newer than the client we're running.
-                                    Stream fileStream = Storage4.OpenWrite(targetPath);
-
-                                    using (StreamWriter sw = new StreamWriter(fileStream))
-                                    {
-                                        // Break file into lines.
-                                        string[] lines;
-                                        using (var reader = e.OpenReader())
-                                        {
-                                            byte[] bytes = new byte[reader.Length];
-                                            reader.Read(bytes, 0, (int)reader.Length);
-
-                                            System.Text.Encoding encoding = new System.Text.UTF8Encoding();
-                                            string fullFileString = encoding.GetString(bytes);
-
-                                            char[] seperators = { '\n', '\r' };
-                                            lines = fullFileString.Split(seperators);
-                                        }
-
-                                        for (int i = 0; i < lines.Length; i++)
-                                        {
-                                            string line = lines[i];
-
-                                            if (ProcessMainFileLine(ref line, ref guid, partFilename) == false)
-                                            {
-                                                result = false;
-                                            }
-
-                                            if (line != null && line.Length > 0)
-                                            {
-                                                sw.WriteLine(line);
-                                            }
-
-                                        }   // end of while loop over lines in file.
-                                    }   // end of using statements for StreamReader/Writer
-
-                                }   // end else for main files.
-
-                            }   // end loop over each entry.
-                        }   // end of using ZipFile
-                    }
-                    catch (Exception e)
-                    {
-                        if (e != null)
-                        {
-                            success = false;
-                        }
-                    }
-
-                    if (success)
-                    {
-                        // Add world to list of successful imports.
-                        if (importedLevels != null)
-                        {
-                            importedLevels.Add(guid);
-                        }
-
-                        // Remove the file from the Imports dir.
-                        string path = Path.Combine(importsPath, filename);
-                        Storage4.Delete(path);
-                    }   // end if success
-
-                }   // end loop over each file.
-            }   // end if any files
-
-            return result;
-        }   // end of ImportLevels2()
-#endif
 
         /// <summary>
         /// Filters a line from the main xml file for import.  An effort to 
@@ -504,7 +286,6 @@ namespace Boku.Common
             return result;
         }   // end of ProcessMainFileLine()
 
-#if NETFX_CORE
         /// <summary>
         /// Check if there are any .kodu packages in the imports folder.
         /// If there are figure out what to do with them since we can't read them.
@@ -634,23 +415,6 @@ namespace Boku.Common
             return result;
 
         }   // end of CopyMainXmlFile()
-
-#else
-
-#if IMPORT_DEBUG
-        static public void DebugPrint(string text)
-        {
-            string debugPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\ImportDebug.txt";
-            TextWriter tw = new StreamWriter(debugPath, true);
-            tw.WriteLine(text);
-            tw.Close();
-        }
-#else
-        static public void DebugPrint(string text)
-        {
-            // Do nothing...
-        }
-#endif
 
 
         /// <summary>
@@ -924,7 +688,6 @@ namespace Boku.Common
             return filenameWithoutExtension;
         }   // end of CreateExportFilename()
 
-#if NETFX_CORE
         /// <summary>
         /// Helper function to add file to existing archive.
         /// </summary>
@@ -952,27 +715,6 @@ namespace Boku.Common
                 }
             }
         }   // end of AddFileToZipArchive()
-#else
-        static void AddFileToZipPackage(Package package, string folder, string path)
-        {
-            string filename = Path.GetFileName(path);
-            //Uri partUri = new Uri(Path.Combine(folder, filename), UriKind.Relative);
-            Uri partUri = new Uri(@"/" + folder + "/" + filename, UriKind.Relative);
-            PackagePart part = package.CreatePart(partUri, System.Net.Mime.MediaTypeNames.Text.Xml, CompressionOption.Maximum);
-            Stream partStream = part.GetStream();
-            using (Stream fileStream = Storage4.OpenRead(path, StorageSource.All))
-            {
-                // May be null for imported files that don't have hires screenshot.
-                if (fileStream != null)
-                {
-                    fileStream.CopyTo(partStream);
-                }
-            }
-
-        }   // end of AddFileToZipPackage()
-
-
-#endif
 
         /// <summary>
         /// Export the given level, writing it to the Exports folder.
@@ -998,7 +740,6 @@ namespace Boku.Common
                             levelFiles.Count == thumbnailFiles.Count &&
                             levelFiles.Count == terrainFiles.Count);
 
-#if NETFX_CORE
             try
             {
                 // If we already have a valid output stream, use it.  Else use the filename.
@@ -1058,66 +799,6 @@ namespace Boku.Common
                 {
                 }
             }
-#else
-            /*
-            // Non-WinRT, use DotNetZip.
-            using (ZipFile zip = new ZipFile(fileName, Encoding.UTF8))
-            {
-                foreach (string path in levelFiles)
-                {
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        zip.AddFile(path, LevelFolder);
-                    }
-                }
-
-                Stream str = Storage4.Open(fileName, FileMode.Create);
-                zip.Save(str);
-            }
-            */
-            Stream stream = Storage4.Open(fileName, FileMode.Create);
-            using (Package package = ZipPackage.Open(stream, FileMode.Create))
-            {
-                foreach (string path in levelFiles)
-                {
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        AddFileToZipPackage(package, LevelFolder, path);
-                    }
-                }
-                foreach (string path in stuffFiles)
-                {
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        AddFileToZipPackage(package, StuffFolder, path);
-                    }
-                }
-                foreach (string path in thumbnailFiles)
-                {
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        AddFileToZipPackage(package, ThumbnailFolder, path);
-                    }
-                }
-                // Put screenshots in same folder as thumbnails.
-                foreach (string path in screenshotFiles)
-                {
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        AddFileToZipPackage(package, ThumbnailFolder, path);
-                    }
-                }
-                foreach (string path in terrainFiles)
-                {
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        AddFileToZipPackage(package, TerrainFolder, path);
-                    }
-                }
-
-            }   // end of using around archive.
-
-#endif
 
 #if WRITE_CAB_FILES
             // Create the cab archive.
@@ -1196,62 +877,5 @@ namespace Boku.Common
         }   // end of ExportLevel()
 
     }   // end of class LevelPackage
-
-#if !NETFX_CORE
-    class Compressor : Cab.Compressor
-    {
-        public Compressor() : base(new Cab.FileHelper()) { }
-
-        public override void Progress()
-        {
-            // TODO: Callback to renderer?
-        }
-    }
-
-    class Decompressor : Cab.Decompressor
-    {
-        // A Cab file may have more than a single level in it.  This is
-        // a list of the GUIDs of all the levels in the current file.
-        public List<Guid> ImportedLevels = new List<Guid>();
-
-        public Guid MostRecentImportedLevel;
-
-        public override void Progress()
-        {
-            // TODO: Callback to renderer?
-        }
-
-        public override bool QueryExpandFile(ref string filepath, ref string filename)
-        {
-            if (filepath.EndsWith(@"Level\"))
-            {
-                filepath = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, BokuGame.DownloadsPath);
-                MostRecentImportedLevel = new Guid(filename.Substring(0, filename.Length - 4));
-                ImportedLevels.Add(MostRecentImportedLevel);
-                // Write the level file with a .tmp extension, we'll copy it to its final filename in a post-process step wherein we fix some path information in the file.
-                filename += ".tmp";
-                return true;
-            }
-            else if (filepath.EndsWith(@"Stuff\"))
-            {
-                filepath = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, BokuGame.DownloadsStuffPath);
-                return true;
-            }
-            else if (filepath.EndsWith(@"Terrain\"))
-            {
-                filepath = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, BokuGame.TerrainPath);
-                return true;
-            }
-            else if (filepath.EndsWith(@"Thumbnail\"))
-            {
-                filepath = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, BokuGame.DownloadsPath);
-                return true;
-            }
-
-            return false;
-        }
-    }
-
-#endif
 
 }

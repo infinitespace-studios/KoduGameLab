@@ -502,12 +502,8 @@ namespace Boku.SimWorld.Terra
                 }
             }
 
-#if NETFX_CORE
             bw.Flush();
             bw.Dispose();
-#else
-            bw.Close();
-#endif
             Storage4.Close(fs);
         }
 
@@ -621,11 +617,7 @@ namespace Boku.SimWorld.Terra
                 }
             }
 
-#if NETFX_CORE
             br.Dispose();
-#else
-            br.Close();
-#endif
             fs.Dispose();
 
             mapSize.Z = kMaxHeight;

@@ -895,7 +895,6 @@ namespace Boku.Programming
                     position.X = (int)((cardFace.Texture.Width - labelSize.X)/2.0f);
                 }
 
-#if NETFX_CORE
                 if (scale.X == 1.0f)
                 {
                     TextHelper.DrawStringNoBatch(FontLabel, label, position, Color.Black);
@@ -927,11 +926,6 @@ namespace Boku.Programming
                     }
                     batch.End();
                 }
-#else
-                SysFont.StartBatch(null);
-                SysFont.DrawString(label, position, rect, FontLabel().systemFont, Color.Black, scale, outlineColor: new Color(248, 248, 248), outlineWidth: 1.5f);
-                SysFont.EndBatch();
-#endif
             }
 
             // Draw overlay if needed.

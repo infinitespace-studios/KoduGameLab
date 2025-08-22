@@ -9,10 +9,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
 
-#if NETFX_CORE
-#else
-    using System.Data;
-#endif
+
 
 using System.IO;
 

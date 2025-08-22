@@ -10,7 +10,6 @@ namespace Boku.Properties {
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
     internal sealed partial class Settings {
-#if NETFX_CORE
         // Note, adding this here means that it's no longer configurable.
         public string MediaPath = @"Content\";
 
@@ -23,7 +22,5 @@ namespace Boku.Properties {
                 return defaultInstance;
             }
         }
-
-#endif
     }
 }

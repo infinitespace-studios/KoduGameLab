@@ -223,17 +223,8 @@ namespace Boku.Common
             get { return maxWidth; }
             set 
             { 
-#if NETFX_CORE
                 maxWidth = (int)MathHelper.Min(value, 2048); 
                 dirty = true; 
-#else
-                value = (int)MathHelper.Min(value, SysFont.MaxWidth);
-                if (maxWidth != value)
-                {
-                    maxWidth = value;
-                    dirty = true;
-                }
-#endif
             }
         }
 
@@ -273,11 +264,7 @@ namespace Boku.Common
         public TextBlob(UI2D.Shared.GetFont Font, string rawText, int width)
         {
             this.GetFont = Font;
-#if NETFX_CORE
             this.maxWidth = (int)MathHelper.Min(width, 2048);
-#else
-            this.maxWidth = (int)MathHelper.Min(width, SysFont.MaxWidth);
-#endif
 
             this.rawText = rawText != null ? TextHelper.FilterInvalidCharacters(rawText) : "";
             if (!Censor.Scrub(this.rawText, ref scrubbedText))
@@ -678,7 +665,6 @@ namespace Boku.Common
                 }
             }
 
-#if NETFX_CORE
             // Scan through the text and pre-load any CardSpace textures which are normally lazy-created.
             // We have to do it here otherwise the begin/end pair from this code conflicts with the
             // begin/end pair used to render the texture.
@@ -697,11 +683,6 @@ namespace Boku.Common
 
             if(BokuSettings.Settings.UseSystemFontRendering)
             {
-#if !NETFX_CORE
-                // TODO (****) Need to fully update TextBlob so that it takes a camera.
-                SpriteCamera camera = null;
-                SysFont.StartBatch(camera);
-#endif
             }
             else
             {
@@ -738,24 +719,6 @@ namespace Boku.Common
                     {
                         if(BokuSettings.Settings.UseSystemFontRendering)
                         {
-#if !NETFX_CORE
-                            SystemFont font = GetFont().systemFont;
-                            RectangleF clipRect = new RectangleF(pos.X, pos.Y, lineWidth + 0.0f * outlineWidth, font.LineSpacing + 2.0f * outlineWidth);
-                            if (drawOutline)
-                            {
-                                SysFont.DrawString(word.str, pos, clipRect, font, color, scaling: Vector2.One, outlineColor: outlineColor, outlineWidth: outlineWidth);
-                            }
-                            else
-                            {
-                                if (drawShadow)
-                                {
-                                    SysFont.DrawString(word.str, pos + shadowOffset, clipRect, font, shadowColor, scaling: Vector2.One);
-                                }
-                                SysFont.DrawString(word.str, pos, clipRect, font, color, scaling: Vector2.One);
-                            }
-#if DEBUG_SPACING
-                            ssquad.Render(new Vector4(0, 1, 0, 0.5f), pos, new Vector2(word.width, Font().LineSpacing));
-#endif
 #endif
                         }
                         else
@@ -811,10 +774,6 @@ namespace Boku.Common
                         {
                             float keyFontSize = 30.0f;
                             string keyFontName = "Calibri";
-#if !NETFX_CORE
-                            System.Drawing.FontStyle keyFontStyle = System.Drawing.FontStyle.Regular;
-#endif
-
                             // Use the next smaller size font for keycap display.  Note this
                             // is really tied to whatever system fonts we happen to have.
                             UI2D.Shared.GetFont KeyFont = GetFont;
@@ -862,12 +821,6 @@ namespace Boku.Common
                             int indent = (word.width - (int)KeyFont().MeasureString(word.str).X) / 2;
                             if (BokuSettings.Settings.UseSystemFontRendering)
                             {
-#if !NETFX_CORE
-                                //SysFont.DrawString(word.str, pos + new Vector2(indent, 0), keyFontName, keyFontSize, keyFontStyle, new Color(40, 40, 40));
-                                SystemFont keyFont = new SystemFont(keyFontName, keyFontSize, keyFontStyle);
-                                RectangleF clipRect = new RectangleF(pos.X, pos.Y, maxWidth, keyFont.LineSpacing);
-                                SysFont.DrawString(word.str, pos + new Vector2(indent, 0), clipRect, keyFont, new Color(40, 40, 40));
-#endif
                             }
                             else
                             {
@@ -886,9 +839,6 @@ namespace Boku.Common
 
             if (BokuSettings.Settings.UseSystemFontRendering)
             {
-#if !NETFX_CORE
-                SysFont.EndBatch();
-#endif
             }
             else
             {
@@ -1555,9 +1505,6 @@ namespace Boku.Common
             // subtract off an esitmate of that padding so that wrapped text is closer to correct.
 #if !NETFX_CORE
             float estimatedPadding = GetFont().systemFont.Padding;
-#else
-            float estimatedPadding = 0;
-#endif
             estimatedPadding = 0;
             for (int i = 0; i < words.Count; i++)
             {

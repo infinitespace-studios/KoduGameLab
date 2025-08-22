@@ -9,11 +9,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Reflection;
 
-#if NETFX_CORE
     using Windows.Security;
-#else
-    using System.Security.Permissions;
-#endif
 
 /* Author: Neil Petrick
  * 
@@ -116,9 +112,6 @@ namespace TouchHook
             }
         }
 
-#if !NETFX_CORE
-        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-#endif
         protected int CoreHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             //Message msg = (Message)Marshal.PtrToStructure(lParam, typeof(Message));
