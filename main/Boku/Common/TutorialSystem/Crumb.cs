@@ -305,19 +305,12 @@ namespace Boku.Common.TutorialSystem
                 data = null;
                 if (e != null)
                 {
-#if !NETFX_CORE
                     string message = e.Message;
                     if (e.InnerException != null)
                     {
                         message += e.InnerException.Message;
                     }
-                    System.Windows.Forms.MessageBox.Show(
-                        message,
-                        "Error reading TutorialCrumbs.Xml",
-                        System.Windows.Forms.MessageBoxButtons.OK,
-                        System.Windows.Forms.MessageBoxIcon.Error
-                        );
-#endif
+                    System.Diagnostics.Debug.WriteLine("Error reading TutorialCrumbs.Xml: " + message);
                     }
             }
             finally

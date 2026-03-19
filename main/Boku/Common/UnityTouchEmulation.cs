@@ -6,14 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-#if !NETFX_CORE
     using TouchHook;
-    using System.Windows.Forms;
-#endif
 
 namespace Boku.Common
 {
-#if !NETFX_CORE
     public static class Input
     {
         #region Members
@@ -586,8 +582,6 @@ namespace Boku.Common
             }
         }
     }
-
-#endif
 
     public class Touch
     {

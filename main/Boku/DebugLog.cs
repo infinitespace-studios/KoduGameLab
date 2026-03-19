@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Text;
-using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Boku
 {
@@ -70,7 +70,7 @@ namespace Boku
                             }
                         }
 
-                        MessageBox.Show(msg);
+                        System.Diagnostics.Debug.WriteLine(msg);
 
                     }
                 }

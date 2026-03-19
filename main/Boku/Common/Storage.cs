@@ -17,14 +17,11 @@ using Microsoft.Xna.Framework.Storage;
 
 using System.Xml.Serialization;
 
-#if !NETFX_CORE
     using System.Management;
     using Microsoft.Win32;
-#endif
 
 #if CLIENT
 using Boku.Common.Sharing;
-using System.Windows.Forms;
 #endif
 
 namespace Boku.Common
@@ -272,11 +269,8 @@ namespace Boku.Common
                 // OpenContainer failed
                 success = false;
 
-                System.Windows.Forms.MessageBox.Show(
-                    "InitStorageContainer failure.",
-                    "InitStorageContainer failure.",
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Asterisk);
+                System.Diagnostics.Debug.WriteLine(
+                    "InitStorageContainer failure.");
 
             }
 
@@ -403,15 +397,13 @@ namespace Boku.Common
                     {
                         error += "\n" + e.InnerException.Message;
                     }
-                    System.Windows.Forms.MessageBox.Show(
-                        error
+                    System.Diagnostics.Debug.WriteLine(
+                        "WaitForStorage failure. "
+                        + error
                         + "\nfile : " + _testFile
                         + "\nspace : " + StorageSource.LocalSpace.ToString()
                         + "\npathBase : " + PathBase(StorageSource.LocalSpace)
-                        + "\npath : " + Combine(PathBase(StorageSource.LocalSpace), _testFile),
-                        "WaitForStorage failure.",
-                        System.Windows.Forms.MessageBoxButtons.OK,
-                        System.Windows.Forms.MessageBoxIcon.Asterisk);
+                        + "\npath : " + Combine(PathBase(StorageSource.LocalSpace), _testFile));
 #endif
                     Thread.Sleep(kFileOperationRetryWaitMs);    // Sleep perchance to dream while giving storage some cycles.
                 }
@@ -439,11 +431,8 @@ namespace Boku.Common
                 // where another attempt to init the storage will occur.
 
 #if !Xbox
-                System.Windows.Forms.MessageBox.Show(
-                    "retry count exceeded",
-                    "WaitForStorage failure.",
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Asterisk);
+                System.Diagnostics.Debug.WriteLine(
+                    "WaitForStorage failure. retry count exceeded");
 #endif
 
                 // Set flag so corrupt-storage dialog will be activated.
@@ -649,7 +638,7 @@ namespace Boku.Common
             }
             catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show(e.Message + "\n" + e.InnerException.Message);
+                System.Diagnostics.Debug.WriteLine(e.Message + "\n" + e.InnerException.Message);
             }
 #endif
 
@@ -750,13 +739,11 @@ namespace Boku.Common
             if ((source & StorageSource.TitleSpace) != 0)
             {
 #if !Xbox
-                System.Windows.Forms.MessageBox.Show(
-                    "\nsource = " + source.ToString()
+                System.Diagnostics.Debug.WriteLine(
+                    "OpenWrite failure, trying to write to title space."
+                    + "\nsource = " + source.ToString()
                     + "\nPathBase = " + PathBase(source)
-                    + "\n name = " + name,
-                    "OpenWrite failure, trying to write to title space.",
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Asterisk);
+                    + "\n name = " + name);
 #endif
 
                 throw new Exception("Storage may not write to title space.");
@@ -792,13 +779,11 @@ namespace Boku.Common
             if (stream == null)
             {
 #if !Xbox
-                System.Windows.Forms.MessageBox.Show(
-                    "\nsource = " + source.ToString() 
+                System.Diagnostics.Debug.WriteLine(
+                    "OpenWrite failure."
+                    + "\nsource = " + source.ToString() 
                     + "\nPathBase = " + PathBase(source) 
-                    + "\n name = " + name,
-                    "OpenWrite failure.",
-                    System.Windows.Forms.MessageBoxButtons.OK, 
-                    System.Windows.Forms.MessageBoxIcon.Asterisk);
+                    + "\n name = " + name);
 #endif
             }
 
