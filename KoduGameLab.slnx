@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Content/">
+    <Project Path="main\Content\Builder.csproj" />
+  </Folder>
+  <Project Path="main\Boku\boku.csproj" />
+  <Project Path="main\BokuShared\BokuShared.csproj" />
+</Solution>

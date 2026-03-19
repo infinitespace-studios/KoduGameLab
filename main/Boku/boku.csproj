@@ -1,86 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Boku</RootNamespace>
     <AssemblyName>Boku</AssemblyName>
+    <TargetFramework>net9.0</TargetFramework>
+    <RollForward>Major</RollForward>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
     <ApplicationIcon>256x.ico</ApplicationIcon>
-    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.*" />
-    <PackageReference Include="System.Resources.Extensions" Version="9.0.*" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.5-preview.*" />
   </ItemGroup>
-  <!-- <ItemGroup>
-    <Compile Include="..\BokuPreBoot\BokuSettings.cs">
-      <Link>BokuSettings.cs</Link>
-    </Compile>
-  <ItemGroup> -->
-    <!-- <ProjectReference Include="..\Cab\Cab.csproj">
-      <Project>{C8BDF127-1EEB-4874-8E3B-1D8D16431C6D}</Project>
-      <Name>Cab</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BokuShared\BokuShared.csproj">
-      <Project>{B32F36E3-F39D-4A82-9E33-57145A7141C3}</Project>
-      <Name>BokuShared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MicrobitNeedDriverDlg\MicrobitNeedDriverDlg.csproj">
-      <Project>{8104dae6-5b90-4b2d-99cb-fdf9eb6c94a3}</Project>
-      <Name>MicrobitNeedDriverDlg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TouchHook\TouchHook\TouchHook.csproj">
-      <Project>{B685FBCC-488C-4839-8636-8B034C94B65B}</Project>
-      <Name>TouchHook</Name>
-    </ProjectReference> 
-  </ItemGroup>-->
-  <!-- <ItemGroup>
-    <None Include="app.manifest" />
-    <None Include="Kodu_Game_Lab_Privacy_Statement.rtf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Options\1F2B5B79-6EB0-45c4-A8BD-0EBDF4EE10C3.opt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Options\C90D3C0E-D0B4-4aa6-B35D-0A1D9931FB38.opt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup> -->
-  <!-- <ItemGroup>
-    <EmbeddedResource Include="ErrorForm.resx">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainFormEvents.resx">
-      <DependentUpon>MainFormEvents.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StartupForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>StartupForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdateForm.resx">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Web\LoginDialog.resx">
-      <DependentUpon>LoginDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="XNAControl.resx">
-      <DependentUpon>XNAControl.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup> -->
+  <ItemGroup>
+    <ProjectReference Include="..\BokuShared\BokuShared.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="256x.ico" />
   </ItemGroup>
+  <Import Project="..\Content\BuildContent.targets" />
 </Project>
