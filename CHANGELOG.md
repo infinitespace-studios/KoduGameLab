@@ -35,3 +35,27 @@ All notable changes during the XNA → MonoGame 3.8.5 / .NET 9.0 port are docume
 - Removed legacy `Properties/AssemblyInfo.cs` (SDK-style auto-generates)
 - **Verified:** BokuShared builds successfully with only 2 pre-existing warnings
 
+## Phase 1: Remove WinForms Dependencies (Steps 1.1, 1.2, 1.5)
+
+### Step 1.1: Delete Pure WinForms Files
+Deleted 14 C# files and 7 .resx files:
+- `MainForm.cs`, `MainFormEvents.cs` — WinForms container for XNA rendering
+- `StartupForm.cs/.Designer.cs` — WinForms splash screen
+- `UpdateForm.cs/.Designer.cs` — Version update dialog
+- `ErrorForm.cs/.Designer.cs` — Crash report dialog
+- `Web/BrowserForm.cs/.Designer.cs` — Embedded web browser
+- `Web/LoginDialog.cs/.Designer.cs` — Login dialog form
+- `XNAControl.cs` — XNA rendering inside WinForms
+- All associated `.resx` resource files
+
+### Step 1.2: Delete WinForms Graphics Hosting
+- `GraphicsDeviceControl.cs` — already removed (not present)
+- `XNAControl.cs` — deleted (above)
+
+### Step 1.5: Delete WinStoreHelpers.cs
+- Deleted `Common/WinStoreHelpers.cs` (P/Invoke UWP detection, no longer needed)
+
+### Cleanup: Remove Legacy Properties
+- Deleted `Properties/` directory: AssemblyInfo.cs, Resources.resx/.Designer.cs, Settings files
+- SDK-style project auto-generates assembly info
+
