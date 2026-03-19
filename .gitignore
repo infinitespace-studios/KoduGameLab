@@ -227,3 +227,7 @@ project.lock.json
 main/BokuSetup/ApplicationSource/**
 main/BokuSetup/SourceDir/**
 
+
+# MonoGame Build Artifacts
+main/Content/bin/
+main/Content/obj/
