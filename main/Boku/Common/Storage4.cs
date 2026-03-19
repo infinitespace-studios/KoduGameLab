@@ -20,7 +20,6 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Storage;
 
 
 using Boku;

@@ -72,41 +72,8 @@ namespace Boku
             }
 
 
-            foreach (GraphicsAdapter ga in GraphicsAdapter.Adapters)
-            {
-                if (ga.IsDefaultAdapter)
-                {
-                    if (ga.IsProfileSupported(GraphicsProfile.Reach))
-                    {
-                        BokuGame.hwSupportsReach = true;
-                    }
-                    if (ga.IsProfileSupported(GraphicsProfile.HiDef))
-                    {
-                        BokuGame.hwSupportsHiDef = true;
-                    }
-
-                    break;
-                }
-            }
-
-            // Set HiDef iff HW supports AND user doesn't prefer Reach.
-            BokuGame.hidef = false;
-            if (BokuGame.hwSupportsHiDef && !BokuSettings.Settings.PreferReach)
-            {
-                BokuGame.hidef = true;
-            }
-            else
-            {
-                BokuSettings.ConstrainToReach();
-
-                // Limit max size to 2kx2k since in Reach.
-                MainForm.Instance.MaximumSize = new System.Drawing.Size(2048, 2048);
-            }
-
-
-
-            // Select right profile.
-            GraphicsProfile profile = BokuGame.HiDefProfile ? GraphicsProfile.HiDef : GraphicsProfile.Reach;
+            // Always use HiDef profile for MonoGame DesktopGL.
+            GraphicsProfile profile = GraphicsProfile.HiDef;
 
             //graphics.IsFullScreen = BokuSettings.Settings.FullScreen;
             //graphics.PreferredBackBufferWidth = BokuSettings.Settings.ResolutionX;

@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
 
 using Boku.Base;
 using Boku.Common;
@@ -285,11 +284,6 @@ namespace Boku
             {
                 pendingState = States.Active;
                 BokuGame.objectListDirty = true;
-
-                // Bring window to top.
-                bool prevTopMost = MainForm.Instance.TopMost;
-                MainForm.Instance.TopMost = true;
-                MainForm.Instance.TopMost = prevTopMost;
             }
         }
         override public void Deactivate()
@@ -298,11 +292,6 @@ namespace Boku
             {
                 pendingState = States.Inactive;
                 BokuGame.objectListDirty = true;
-
-                // Bring window to top.
-                bool prevTopMost = MainForm.Instance.TopMost;
-                MainForm.Instance.TopMost = true;
-                MainForm.Instance.TopMost = prevTopMost;
             }
         }
 

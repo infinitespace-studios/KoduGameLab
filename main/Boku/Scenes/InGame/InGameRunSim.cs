@@ -14,7 +14,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
 
 using Boku.Audio;
 using Boku.Base;
@@ -313,8 +312,8 @@ namespace Boku
                         if (swipeGesture.WasRecognized &&
                             swipeGesture.SwipeDirection == Directions.North)
                         {
-                            float halfWidth = (float)XNAControl.Instance.ClientSize.Width * 0.5f;
-                            float height = (float)XNAControl.Instance.ClientSize.Height;
+                            float halfWidth = (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Width * 0.5f;
+                            float height = (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Height;
 
                             //center half of the screen width-wise
                             float minX = halfWidth - (halfWidth * k_TouchExitAreaWidthPercent);
@@ -341,8 +340,8 @@ namespace Boku
                             TapGestureRecognizer hackTapGesture = TouchGestureManager.Get().TapGesture;
                             if (hackTapGesture.WasTapped())
                             {
-                                float halfWidth = (float)XNAControl.Instance.ClientSize.Width * 0.5f;
-                                float height = (float)XNAControl.Instance.ClientSize.Height;
+                                float halfWidth = (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Width * 0.5f;
+                                float height = (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Height;
 
                                 //center area of the screen width-wise
                                 float minX = halfWidth - (halfWidth * 0.1f);
@@ -543,8 +542,8 @@ namespace Boku
                     SwipeGestureRecognizer swipeGesture = TouchGestureManager.Get().SwipeGesture;
                     if ( bAllowCameraMovement && swipeGesture.IdentifiedFinger )
                     {
-                        float halfWidth = (float)XNAControl.Instance.ClientSize.Width * 0.5f;
-                        float height = (float)XNAControl.Instance.ClientSize.Height;
+                        float halfWidth = (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Width * 0.5f;
+                        float height = (float)BokuGame.bokuGame.GraphicsDevice.Viewport.Height;
 
                         //center half of the screen width-wise
                         float minX = halfWidth - (halfWidth * k_TouchExitAreaWidthPercent);

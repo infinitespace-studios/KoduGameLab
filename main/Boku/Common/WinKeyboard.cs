@@ -122,15 +122,8 @@ namespace Boku.Common
 
         public WinKeyboard(Form form)
         {
-            // Attach the input grabber to the window.
-            IntPtr mainformHandle = MainForm.Instance.Handle;
-            IntPtr xnaControlHandle = XNAControl.Instance.Handle;
-            AssignHandle(xnaControlHandle);
-
-            // Uncomment for forms based keyboard input.
-            //form.KeyPreview = true;
-            //form.KeyPress += new KeyPressEventHandler(KeyPressHandler);
-            //form.KeyDown += new KeyEventHandler(KeyDownHandler);
+            // Window handle hookup removed during MonoGame port.
+            // Input is now handled through MonoGame's input system.
         }
 
         #endregion

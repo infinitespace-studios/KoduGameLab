@@ -303,10 +303,8 @@ namespace Boku.Common
 #if USE_MOUSE_IN_PLACE_OF_TOUCH
             touchHook = new WM_MouseHook(BokuGame.bokuGame.Window.Handle);
 #else
-            IntPtr mainformHandle = MainForm.Instance.Handle;
-            IntPtr xnaControlHandle = XNAControl.Instance.Handle;
-            cwTouchHook = new WM_TouchHook(xnaControlHandle, TouchHook.HookType.WH_CALLWNDPROC);
-            //messageTouchHook = new WM_TouchHook(BokuGame.bokuGame.Window.Handle, TouchHook.HookType.WH_GETMESSAGE);
+            // Touch hook setup removed during MonoGame port.
+            // MainForm/XNAControl not available; touch input handled through MonoGame.
 #endif
             WM_TouchHook.DisableNativePressAndHoldGesture = true;
             //messageTouchHook.InstallHook();
@@ -516,16 +514,8 @@ namespace Boku.Common
 
         private static Vector2 ScreenToClient(int x, int y)
         {
-            Vector2 mainFormLocation = new Vector2(MainForm.Instance.Location.X, MainForm.Instance.Location.Y);
-            int marginX = (MainForm.Instance.Size.Width - MainForm.Instance.ClientSize.Width) / 2;
-            int marginY = MainForm.Instance.Size.Height - MainForm.Instance.ClientSize.Height - marginX;
-            // Margin values tuned by looking at my screen and seeing the dotsdisplay.
-            // Note that the display doesn't seem quite centered.  It changes depending on it's size.
-            // It's like it's not being rendered correctly.
-            marginX = 28;
-            marginY = 50;
-            Vector2 screenPos = mainFormLocation + new Vector2(marginX, marginY);
-            return new Vector2(x - screenPos.X, y - screenPos.Y);
+            // MainForm removed during MonoGame port. Use viewport-relative coordinates.
+            return new Vector2(x, y);
         }
 
         #endregion Utils

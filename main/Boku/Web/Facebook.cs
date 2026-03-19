@@ -31,10 +31,10 @@ namespace Boku.Web
         
         static UserInfo user = new UserInfo();
 
-        static BrowserForm form = null;
-        public static BrowserForm Form
+        // BrowserForm removed during MonoGame port.
+        public static object Form
         {
-            get { return form; }
+            get { return null; }
         }
 
         // Temporary

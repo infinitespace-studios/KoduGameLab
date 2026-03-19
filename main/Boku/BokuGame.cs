@@ -27,7 +27,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
 
 
 using Boku.Base;
@@ -62,6 +61,9 @@ namespace Boku
 
         public static int ThreadId;
         public static bool Running = true;
+
+        public static bool syncRefresh = false;
+        public static PresentInterval presentInterval = PresentInterval.Two;
 
         // Note: All these paths do NOT include Settings.MediaPath.
         public static string LevelsPath = @"Xml\Levels\";
@@ -119,24 +121,33 @@ namespace Boku
         private Vector2 screenPosition = Vector2.Zero;
 
         public static bool hwSupportsReach = false;
-        public static bool hwSupportsHiDef = false;
-        public static bool hidef = false;                   // Are we actually running in HiDef profile?
+        public static bool hwSupportsHiDef = true;
+        public static bool hidef = true;                    // Always running in HiDef profile with MonoGame.
+
+        private GraphicsDeviceManager _graphics;
+        private ContentManager _content;
+
+        /// <summary>
+        /// Content manager for loading game assets.
+        /// </summary>
+        public ContentManager Content
+        {
+            get { return _content; }
+        }
 
         #region Accessors
 
         public GraphicsDevice GraphicsDevice
         {
-            get { return graphics.GraphicsDevice; }
+            get { return _graphics.GraphicsDevice; }
         }
 
         /// <summary>
-        /// Is the game running in HiDef?  Based on a combination 
-        /// of the HW capability and the user preference.  This
-        /// should be checked in game rather than PreferReach.
+        /// Always returns true — MonoGame DesktopGL always uses HiDef profile.
         /// </summary>
         public static bool HiDefProfile
         {
-            get { return hidef; }
+            get { return true; }
         }
 
         /// <summary>
@@ -152,30 +163,13 @@ namespace Boku
                 if (bokuGame.screenSize != value)
                 {
                     bokuGame.screenSize = value;
-                    // If in Reach mode we want to limit the screenSize 
-                    // to 2048 in either direction since that's the 
-                    // texture (and rendertarget) size limit.
-                    // Try to keep proper aspect ratio.  In HiDef the limit
-                    // is 4096.
-                    if (HiDefProfile)
+                    // In HiDef the limit is 4096.
+                    float scale = 4096.0f / bokuGame.screenSize.X;
+                    scale = MathHelper.Min(scale, 4096.0f / bokuGame.screenSize.Y);
+                    if (scale < 1)
                     {
-                        float scale = 4096.0f / bokuGame.screenSize.X;
-                        scale = MathHelper.Min(scale, 4096.0f / bokuGame.screenSize.Y);
-                        if (scale < 1)
-                        {
-                            bokuGame.screenSize.X = (int)Math.Min(bokuGame.screenSize.X * scale, 4096);
-                            bokuGame.screenSize.Y = (int)Math.Min(bokuGame.screenSize.Y * scale, 4096);
-                        }
-                    }
-                    else
-                    {
-                        float scale = 2048.0f / bokuGame.screenSize.X;
-                        scale = MathHelper.Min(scale, 2048.0f / bokuGame.screenSize.Y);
-                        if (scale < 1)
-                        {
-                            bokuGame.screenSize.X = (int)Math.Min(bokuGame.screenSize.X * scale, 2048);
-                            bokuGame.screenSize.Y = (int)Math.Min(bokuGame.screenSize.Y * scale, 2048);
-                        }
+                        bokuGame.screenSize.X = (int)Math.Min(bokuGame.screenSize.X * scale, 4096);
+                        bokuGame.screenSize.Y = (int)Math.Min(bokuGame.screenSize.Y * scale, 4096);
                     }
                 }
             }
@@ -214,7 +208,7 @@ namespace Boku
 
         public bool IsActive
         {
-            get { return XNAControl.Instance.Focused; }
+            get { return true; }
         }
 
         public static bool objectListDirty
@@ -251,26 +245,7 @@ namespace Boku
         {
             LogContentFileLoaded(path);
 
-            T resource = default(T);
-
-            // If HiDef and an effect, try HiDef path first.
-            if (!BokuSettings.Settings.PreferReach && typeof(T) == typeof(Effect))
-            {
-                string hiDefPath = path.Replace("Content", "ContentHiDef");
-                try
-                {
-                    resource = ContentLoader.ContentManager.Load<T>(hiDefPath);
-                }
-                catch
-                {
-                    // Nothing to do here, shader must not be in HiDef build.
-                }
-            }
-
-            if (resource == null)
-            {
-                resource = ContentLoader.ContentManager.Load<T>(path);
-            }
+            T resource = ContentLoader.ContentManager.Load<T>(path);
 
             if (resource is Texture2D)
             {
@@ -320,19 +295,19 @@ namespace Boku
         }
 
         /// <summary>
-        /// Does the HW support HiDef?
+        /// Always true — MonoGame DesktopGL supports HiDef.
         /// </summary>
         public bool HwSupportsHiDef
         {
-            get { return hwSupportsHiDef; }
+            get { return true; }
         }
 
         /// <summary>
-        /// Does the HW support Reach?
+        /// Always true — MonoGame DesktopGL supports Reach.
         /// </summary>
         public bool HwSupportsReach
         {
-            get { return hwSupportsReach; }
+            get { return true; }
         }
 
         public static bool Logon
@@ -353,12 +328,20 @@ namespace Boku
             bokuGame = this;
             Auth.Init();
 
-            //Guide.SimulateTrialMode = true;
-            
-            // TODO (****) *** Do we need this code any more?
-            InitializeComponent();
-
         }   // end of BokuGame c'tor
+
+        /// <summary>
+        /// Prevent the system from clearing the backbuffer each frame.
+        /// </summary>
+        public void PreparingDeviceSettingsHandler(object sender, EventArgs e)
+        {
+            PreparingDeviceSettingsEventArgs args = e as PreparingDeviceSettingsEventArgs;
+            if (args != null)
+            {
+                GraphicsDeviceInformation info = args.GraphicsDeviceInformation;
+                info.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PlatformContents;
+            }
+        }
 
         public void Window_ClientSizeChanged(object sender, EventArgs e)
         {
@@ -369,6 +352,14 @@ namespace Boku
         //
         public void Initialize()
         {
+            // Graphics configuration (moved from Designer.cs).
+            _graphics.GraphicsProfile = GraphicsProfile.HiDef;
+            _graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
+            _graphics.IsFullScreen = false;
+            _graphics.SynchronizeWithVerticalRetrace = BokuGame.syncRefresh;
+            _graphics.PreferMultiSampling = BokuSettings.Settings.AntiAlias;
+            IsMouseVisible = true;
+
             /// Steve, uncomment this first line to simulate having 508,313,600MB less video memory
             //InGame.DebugCheckVideoMem(508313600); // Steve's line
             //InGame.DebugCheckVideoMem(0xffffffff); // This line will check how much video memory you really have
@@ -1049,15 +1040,9 @@ namespace Boku
                 int height = device.PresentationParameters.BackBufferHeight;
 
                 // Get the back buffer data.
+                // Always use HiDef path — get back buffer directly.
                 Color[] data = new Color[width * height];
-                if (hidef)
-                {
-                    device.GetBackBufferData<Color>(data);
-                }
-                else
-                {
-                    InGame.inGame.FullRenderTarget0.GetData<Color>(data);
-                }
+                device.GetBackBufferData<Color>(data);
 
                 // Create a texture for it.
                 Texture2D screenGrab = new Texture2D(device, width, height);

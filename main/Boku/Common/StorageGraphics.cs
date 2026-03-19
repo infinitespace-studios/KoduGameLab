@@ -13,7 +13,6 @@ using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Microsoft.Xna.Framework.Storage;
 
 using System.Xml.Serialization;
 #endregion Using

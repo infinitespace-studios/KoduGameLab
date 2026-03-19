@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Threading;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Storage;
 
 
 using System.Xml.Serialization;
@@ -196,30 +195,11 @@ namespace Boku.Common
             Shutdown();
 
             // Get the setup process started
-#if XBOX
-            if (BokuGame.bokuGame != null)
-            {
-                if (!requestOpen && !Guide.IsVisible)
-                {
-                    try
-                    {
-                        Guide.BeginShowStorageDeviceSelector(SelectDoneCallback, null);
-                        requestOpen = true;
-                    }
-                    catch
-                    {
-                        /// Probably the guide got opened but IsVisible wasn't
-                        /// set yet. We'll just try again later.
-                    }
-                }
-            }
-#else // PC is always playerOne
             if (!requestOpen)
             {
                 Guide.BeginShowStorageDeviceSelector(PlayerIndex.One, SelectDoneCallback, null);
                 requestOpen = true;
             }
-#endif
 
             // Selection pending
             return false;
@@ -233,19 +213,7 @@ namespace Boku.Common
         {
             bool success = true;
 
-#if XBOX
-            try
-            {
-                storageContainer = storageDevice.OpenContainer("Kodu Save");
-            }
-            catch
-            {
-                // Something failed so try again.
-                success = false;
-            }
-#else // PC
             storageContainer = storageDevice.OpenContainer("Boku");
-#endif // PC
 
             return success;
         }
@@ -292,11 +260,7 @@ namespace Boku.Common
                 if(!Storage.InitStorageContainer())
                 {
                     // OpenContainer failed so try again.
-                    if (!requestOpen
-#if CLIENT
-                        && !GamerServices.IsGuideVisible
-#endif
-                        )
+                    if (!requestOpen)
                     {
                         try
                         {
@@ -328,7 +292,6 @@ namespace Boku.Common
         {
             userLocal = storageContainer.Path;
 
-#if !XBOX
             // Instead of using the storageContainer's path we can
             // get the path from the user's registry.  This makes things
             // work much nicer with school systems which have redirected
@@ -336,7 +299,6 @@ namespace Boku.Common
             RegistryKey regKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders");
             userLocal = regKey.GetValue("Personal") as string;
             userLocal += @"\SavedGames\Boku\Player1";
-#endif
 
             if (userOverride != String.Empty)
             {
@@ -391,7 +353,6 @@ namespace Boku.Common
                 }
                 catch(Exception e)
                 {
-#if !Xbox
                     string error = e.Message;
                     if (e.InnerException != null && e.InnerException.Message != null)
                     {
@@ -404,7 +365,6 @@ namespace Boku.Common
                         + "\nspace : " + StorageSource.LocalSpace.ToString()
                         + "\npathBase : " + PathBase(StorageSource.LocalSpace)
                         + "\npath : " + Combine(PathBase(StorageSource.LocalSpace), _testFile));
-#endif
                     Thread.Sleep(kFileOperationRetryWaitMs);    // Sleep perchance to dream while giving storage some cycles.
                 }
 
@@ -430,10 +390,8 @@ namespace Boku.Common
                 // device.  This will cause everything to punt back to the MainMenu
                 // where another attempt to init the storage will occur.
 
-#if !Xbox
                 System.Diagnostics.Debug.WriteLine(
                     "WaitForStorage failure. retry count exceeded");
-#endif
 
                 // Set flag so corrupt-storage dialog will be activated.
                 corruptDevice = true;
@@ -454,19 +412,6 @@ namespace Boku.Common
             /// handle leak issue.
             if (dirty)
             {
-#if XBOX
-                ClearPaths();
-                // Dispose the container and then open a new one.
-                if (storageContainer != null)
-                {
-                    storageContainer.Dispose();
-                }
-                if (OpenContainer())
-                {
-                    SetPaths();
-                    CheckCookie();
-                }
-#endif // XBOX
                 dirty = false;
             }
         }
@@ -705,11 +650,7 @@ namespace Boku.Common
 
             if (stream == null)
             {
-#if XBOX
-                // Do nothing?
-#else
                 throw new FileNotFoundException(String.Format("File not found in {0}: {1}", sources, name));
-#endif
             }
 
             return stream;
@@ -738,13 +679,11 @@ namespace Boku.Common
         {
             if ((source & StorageSource.TitleSpace) != 0)
             {
-#if !Xbox
                 System.Diagnostics.Debug.WriteLine(
                     "OpenWrite failure, trying to write to title space."
                     + "\nsource = " + source.ToString()
                     + "\nPathBase = " + PathBase(source)
                     + "\n name = " + name);
-#endif
 
                 throw new Exception("Storage may not write to title space.");
             }
@@ -778,13 +717,11 @@ namespace Boku.Common
 
             if (stream == null)
             {
-#if !Xbox
                 System.Diagnostics.Debug.WriteLine(
                     "OpenWrite failure."
                     + "\nsource = " + source.ToString() 
                     + "\nPathBase = " + PathBase(source) 
                     + "\n name = " + name);
-#endif
             }
 
             return stream;
@@ -941,7 +878,6 @@ namespace Boku.Common
         /// <returns></returns>
         public static DateTime GetLastWriteTimeUtc(string name)
         {
-#if !XBOX
             if (Initialized && File.Exists(Combine(PathBase(StorageSource.UserSpace), name)))
             {
                 return File.GetLastWriteTimeUtc(Combine(PathBase(StorageSource.UserSpace), name));
@@ -951,7 +887,6 @@ namespace Boku.Common
 #else
             // Hm, how to implement correctly on Xbox...
             return new DateTime(0);
-#endif
         }
 
         /// <summary>
@@ -962,7 +897,6 @@ namespace Boku.Common
         /// <returns></returns>
         public static void SetLastWriteTimeUtc(string name, DateTime dateTimeUtc)
         {
-#if !XBOX
             if (Initialized && File.Exists(Combine(PathBase(StorageSource.UserSpace), name)))
             {
                 File.SetLastWriteTimeUtc(Combine(PathBase(StorageSource.UserSpace), name), dateTimeUtc);
@@ -973,7 +907,6 @@ namespace Boku.Common
             }
 #else
             // Hm, how to implement on Xbox...
-#endif
         }
 
         /// <summary>
@@ -1094,7 +1027,6 @@ namespace Boku.Common
             return list;
         }
 
-#if !XBOX360
         /// <summary>
         /// Find all files with given relative path and filter. Checks title space FIRST, then user.
         /// Only option we ever use is SearchTopLevelOnly, which seems to be default behavior 
@@ -1129,7 +1061,6 @@ namespace Boku.Common
 
             return list;
         }
-#endif // !XBOX360
 
 
         #endregion Generic Files
@@ -1322,7 +1253,6 @@ namespace Boku.Common
         private static string GetHashedMACAddress()
         {
             string MACAddress = String.Empty;
-#if !XBOX
             try
             {
                 ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
@@ -1341,7 +1271,6 @@ namespace Boku.Common
             catch
             {
             }
-#endif
             MACAddress = MACAddress.GetHashCode().ToString();
 
             return MACAddress;

@@ -16,7 +16,6 @@ using System.Text;
 using System.Linq;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Graphics;
 
 using Boku.Base;

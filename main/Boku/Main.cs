@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Storage;
 
 namespace Boku
 {
@@ -43,9 +42,6 @@ namespace Boku
 
         public void Render()
         {
-            GraphicsDevice device = XNAControl.Device;
-
-            device.Clear(Color.DarkSlateGray);
         }   // end of Render
 
         #endregion

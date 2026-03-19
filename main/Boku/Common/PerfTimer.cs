@@ -9,7 +9,6 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 
 namespace Boku.Common
@@ -20,11 +19,9 @@ namespace Boku.Common
     /// </summary>
     public class PerfTimer
     {
-        [DllImport("Kernel32.dll")]
-        private static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
-
-        [DllImport("Kernel32.dll")]
-        private static extern bool QueryPerformanceFrequency(out long lpFrequency);
+        private static readonly Stopwatch _stopwatch = Stopwatch.StartNew();
+        public static long GetTicks() => _stopwatch.ElapsedTicks;
+        public static long GetFrequency() => Stopwatch.Frequency;
 
 #if DO_PERF_TIMING
         private bool valid = true;
@@ -69,7 +66,7 @@ namespace Boku.Common
 #if DO_PERF_TIMING
             if (valid)
             {
-                QueryPerformanceCounter(out startTime);
+                startTime = GetTicks();
             }
 #endif
         }   // end of PerfTimer Start()
@@ -83,8 +80,7 @@ namespace Boku.Common
 #if DO_PERF_TIMING
             if (valid)
             {
-                long stopTime = 0;
-                QueryPerformanceCounter(out stopTime);
+                long stopTime = GetTicks();
                 long delta = stopTime - startTime;
                 //delta -= 7500L;     // Remove overhead of timer functions.  Note this is
                 // minimum overhead as opposed to average or maximum.
@@ -126,14 +122,9 @@ namespace Boku.Common
         private void Reset()
         {
 #if DO_PERF_TIMING
-            if (QueryPerformanceFrequency(out freq) == false)
-            {
-                // High-performance counter not supported.
-                valid = false;
-            }
+            freq = GetFrequency();
 
-            long curTime = 0;
-            QueryPerformanceCounter(out curTime);
+            long curTime = GetTicks();
             wallClockStart = (double)curTime / (double)freq;
 
             samples = 0;

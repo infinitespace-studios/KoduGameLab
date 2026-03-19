@@ -12,9 +12,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Net;
 
 using Boku.Base;
 using Boku.Fx;
@@ -334,12 +331,7 @@ namespace Boku
                 if (UpdateMessages())
                     return;
 
-                // If we signed out of LIVE, back out to the main menu.
-                if (!GamerServices.SignedInToLive)
-                {
-                    parent.ActivateMainMenu();
-                    return;
-                }
+                // GamerServices.SignedInToLive check removed — LIVE not available in MonoGame.
 
                 // If we are joining a share session by accepting an invite from the Dashboard, bail now; we're just waiting for this
                 // operation to complete then we'll open the sharing screen.
@@ -370,11 +362,7 @@ namespace Boku
                     return;
                 }
 
-                // Don't do any input processing if the guide is up.
-                if (GamerServices.IsGuideVisible)
-                {
-                    return;
-                }
+                // GamerServices guide check removed — not available in MonoGame.
 
                 // Check for mouse press on bottom tile.
                 // hit is in pixels in screen coords (before overscan adjustment)

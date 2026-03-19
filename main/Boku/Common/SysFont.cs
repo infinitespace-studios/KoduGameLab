@@ -216,7 +216,6 @@ namespace Boku.Common
 #if DEBUG_SPEW
                 string foo = "numCached:" + numCached.ToString() + " numRendered:" + numRendered.ToString() + " max:" + maxSize.ToString() + " frame:" + Time.FrameCounter.ToString();
                 BokuGame.DebugString = foo;
-                //WidgetTest.XNAControl.debugString = foo;
 #endif
 
                 frame = Time.FrameCounter;
