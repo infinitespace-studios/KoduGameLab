@@ -54,11 +54,7 @@ namespace Boku
     /// <summary>
     /// Boku, the story of a boy and his code.
     /// </summary>
-#if NETFX_CORE
-    partial class BokuGame : Microsoft.Xna.Framework.Game
-#else
     partial class BokuGame
-#endif
     {
         // instrumentation
         static object sessionTimerInstrument;
@@ -87,15 +83,10 @@ namespace Boku
         // SGI_MOD - picture support
         private static PictureManager pictureManager = new PictureManager();
 
-#if NETFX_CORE
-        // For Win8 we'll try and replace all calls to WinKeyboard
-        // with ones from the KeyboardInput class.
-#else
         /// <summary>
         /// Winkeyboard object for reading processed keyboard input.
         /// </summary>
         public WinKeyboard winKeyboard = null;
-#endif        
 
         //
         // Scenes, modes, whatever you want to call them.
@@ -200,7 +191,6 @@ namespace Boku
             set { bokuGame.screenPosition = value; }
         }
         
-#if !NETFX_CORE
         bool isMouseVisible = true;
         public bool IsMouseVisible
         {
@@ -221,14 +211,11 @@ namespace Boku
                 }
             }
         }
-#endif
 
-#if !NETFX_CORE
         public bool IsActive
         {
             get { return XNAControl.Instance.Focused; }
         }
-#endif
 
         public static bool objectListDirty
         {
@@ -1050,7 +1037,6 @@ namespace Boku
         private void ScreenGrab()
         {
 // (TODO (****) BROKEN
-#if !NETFX_CORE
             if (Actions.PrintScreen.WasPressed || Actions.ShiftPrintScreen.WasPressed || pictureManager.DoScreenGrab)
             {
                 bool debugCapture = Actions.ShiftPrintScreen.WasPressed;
@@ -1117,7 +1103,6 @@ namespace Boku
                     pictureManager.ScreenGrabFinished();
                 }
             }
-#endif
         }   // end of ScreenGrab()
 
         private string ScreenGrabName()
