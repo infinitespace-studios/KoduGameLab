@@ -7,12 +7,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-#if NETFX_CORE
-    using Windows.Graphics.Printing;
-#else
-    using System.Windows.Forms;
-#endif
-
 using System.IO;
 
 using System.Xml;
@@ -81,14 +75,7 @@ namespace Boku.Programming
                 // If this level is a tutorial, also print out the tutorial text.
                 TutorialManager.Print(tw);
 
-#if NETFX_CORE
-                tw.Flush();
-                tw.Dispose();
-#else
                 tw.Close();
-#endif
-
-                Instrumentation.IncrementCounter(Instrumentation.CounterId.PrintKode);
 
                 SendToPrinter(fullPath);
             }
@@ -125,12 +112,7 @@ namespace Boku.Programming
             {
                 PrintHeading(tw);
                 PrintActorProgramming(tw, actor);
-#if NETFX_CORE
-                tw.Flush();
-                tw.Dispose();
-#else
                 tw.Close();
-#endif
             
                 SendToPrinter(fullPath);
             }
@@ -152,11 +134,7 @@ namespace Boku.Programming
         static private TextWriter OpenFile(string fullPath)
         {
             TextWriter tw = null;
-#if NETFX_CORE
-            tw = Storage4.OpenStreamWriter(fullPath);
-#else
             tw = new StreamWriter(fullPath);
-#endif
 
             return tw;
         }   // end of OpenFile
@@ -190,11 +168,7 @@ namespace Boku.Programming
             tw.WriteLine(Strings.Localize("loadLevelMenu.title") + " : " + InGame.XmlWorldData.name);
             tw.WriteLine(Strings.Localize("loadLevelMenu.creator") + " : " + InGame.XmlWorldData.creator);
             tw.WriteLine(Strings.Localize("loadLevelMenu.description") + " : " + InGame.XmlWorldData.description);
-#if NETFX_CORE
-            tw.WriteLine(Strings.Localize("loadLevelMenu.date") + " : " + InGame.XmlWorldData.lastWriteTime.ToString() + " " + InGame.XmlWorldData.lastWriteTime.ToString());
-#else
             tw.WriteLine(Strings.Localize("loadLevelMenu.date") + " : " + InGame.XmlWorldData.lastWriteTime.ToShortDateString() + " " + InGame.XmlWorldData.lastWriteTime.ToShortTimeString());
-#endif
 
             tw.WriteLine("========");
         }   // end of PrintHeading()
@@ -494,131 +468,12 @@ namespace Boku.Programming
             return tiles;
         }   // end of GetTileString()
 
-#if NETFX_CORE
-        static void printManager_PrintTaskRequested(PrintManager printManager, PrintTaskRequestedEventArgs args)
-        {
-            PrintTask printTask = args.Request.CreatePrintTask("Kode", PrintTaskSourceRequested);
-        }
-
-        static void PrintTaskSourceRequested(PrintTaskSourceRequestedArgs args)
-        {
-            IPrintDocumentSource source = null;
-
-            // TODO How do we get from our text file to an IPrintDocumentSource???
-
-            args.SetSource(source);
-        }
-
-        static bool firstTime = true;
-#endif
         private static void SendToPrinter(string fullPath)
         {
-#if NETFX_CORE
-            // Do nothing here.  At least the users can go find the Kode.txt
-            // file on disk and print it manually.
-            /*
-            PrintManager printManager = PrintManager.GetForCurrentView();
-            if (firstTime)
-            {
-                printManager.PrintTaskRequested += printManager_PrintTaskRequested;
-                firstTime = false;
-            }
-
-            PrintManager.ShowPrintUIAsync();
-            */
-#else
-            try
-            {
-                DialogResult? print = DialogResult.OK;
-
-                // Skip the print dialog if in full screen mode.
-                // TODO (****) *** Aren't we always windowed now???
-                //if (!BokuGame.Graphics.IsFullScreen)
-                {
-                    PrintDialog dialog = new PrintDialog();
-
-                    print = dialog.ShowDialog();
-
-                    if (print == DialogResult.OK)
-                    {
-                        PageToPrinter(fullPath, dialog);
-                        /*
-                        Process myProcess = new Process();
-
-                        myProcess.StartInfo.FileName = fullPath;
-                        myProcess.StartInfo.Verb = "Print";
-                        myProcess.StartInfo.CreateNoWindow = true;
-                        myProcess.Start();
-                        */
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                if (e != null)
-                {
-                }
-            }
-#endif
+            // Printing is not supported in the cross-platform MonoGame build.
+            // The Kode text file has been saved to disk and can be printed manually.
+            Debug.WriteLine("Print output saved to: " + fullPath);
         }   // end of SendToPrinter()
-
-#if!NETFX_CORE
-        static System.IO.StreamReader fileToPrint;
-        static System.Drawing.Font printFont;
-        static System.Drawing.Printing.PrintDocument printDocument;
-
-        private static void PageToPrinter(string fullPath, PrintDialog dialog)
-        {
-            try
-            {
-                printDocument = new System.Drawing.Printing.PrintDocument();
-                // Set the output to go to the print the user picked.
-                printDocument.PrinterSettings = dialog.PrinterSettings;
-
-                printDocument.PrintPage += PrintDocumentPrintPage;
-
-                // This suppresses the status dialog which can cause full screen Kodu to minimize.
-                printDocument.PrintController = new System.Drawing.Printing.StandardPrintController();
-
-                fileToPrint = new System.IO.StreamReader(fullPath);
-                printFont = new System.Drawing.Font("Arial", 10);
-                printDocument.Print();
-                fileToPrint.Close();
-            }
-            catch (Exception e)
-            {
-                if (e != null)
-                {
-                }
-            }
-        }
-
-        private static void PrintDocumentPrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            float yPos = 0f;
-            int count = 0;
-            float leftMargin = e.MarginBounds.Left;
-            float topMargin = e.MarginBounds.Top;
-            string line = null;
-            float linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
-            while (count < linesPerPage)
-            {
-                line = fileToPrint.ReadLine();
-                if (line == null)
-                {
-                    break;
-                }
-                yPos = topMargin + count * printFont.GetHeight(e.Graphics);
-                e.Graphics.DrawString(line, printFont, System.Drawing.Brushes.Black, leftMargin, yPos, new System.Drawing.StringFormat());
-                count++;
-            }
-            if (line != null)
-            {
-                e.HasMorePages = true;
-            }
-        }
-
-#endif
 
         #endregion
 

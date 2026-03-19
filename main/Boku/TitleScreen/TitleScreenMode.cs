@@ -37,10 +37,8 @@ namespace Boku
         {
             public Camera camera = null;
 
-#if !NETFX_CORE
             public Video video = null;
             public VideoPlayer player = null;
-#endif
         }
 
         protected class UpdateObj : UpdateObject
@@ -75,10 +73,6 @@ namespace Boku
                     {
                         try
                         {
-#if NETFX_CORE
-                            // Switch to MainMenu.
-                            parent.DismissAndShowMain(null, null);
-#else
                             if (shared.video == null)
                             {
                                 // Start video.
@@ -104,7 +98,6 @@ namespace Boku
                                 // Switch to MainMenu.
                                 parent.DismissAndShowMain(null, null);
                             }
-#endif
                         }
                         catch (Exception e)
                         {
@@ -163,9 +156,7 @@ namespace Boku
             public override void Render(Camera camera)
             {
                 // Render the parent's list of objects using our local camera.
-#if !NETFX_CORE
                 if (shared.player == null)
-#endif
                 {
                 foreach (RenderObject obj in renderList)
                     {
@@ -173,7 +164,6 @@ namespace Boku
                     }
                 }
 
-#if !NETFX_CORE
                 if (shared.player != null && !shared.player.IsDisposed && shared.player.State == MediaState.Playing)
                 {
                     GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
@@ -191,7 +181,6 @@ namespace Boku
 
                     ssquad.Render(vid, pos, size, "TexturedNoAlpha");
                 }
-#endif
 
             }   // end of RenderObj Render()
             public override void Activate()
@@ -367,19 +356,6 @@ namespace Boku
             //if these conditions are both true, then we know the touch hardware isn't windows 8 compliant. this means 
             //we may see hardware like the infrared monitors that can't handle rotate gestures reliably.  Display a 
             //warning to the user that touch gestures may not perform in an ideal manner.
-#if false
-            if (TouchInput.TouchAvailable && TouchInput.MaxTouchCount < 5)
-            {
-#if !NETFX_CORE
-                System.Windows.Forms.MessageBox.Show(
-                    Strings.Localize("warning.noncomplianttouch"),
-                    Strings.Localize("warning.noncomplianttouch_title"),
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Warning);
-#endif
-            }
-#endif
-
             BokuGame.bokuGame.mainMenu.Activate();
 
             Deactivate();
@@ -415,11 +391,7 @@ namespace Boku
         private void OnTextDialogButton(TextDialog dialog)
         {
             Debug.Assert(false, "Need to remove this login path.  Not sure if anyone ever used it anyway.");
-#if NETFX_CORE
-            Storage4.Username = dialog.UserText;
-#else
             //GamerServices.CreatorName = dialog.UserText;
-#endif
             XmlOptionsData.Username = dialog.UserText;
         }
 

@@ -19,16 +19,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-#if NETFX_CORE
-    using System.Threading.Tasks;
-    //using Windows.Foundation;
-    using Windows.Storage;
-    using Windows.Storage.Pickers;
-    using Windows.System;
-#else
-    using Microsoft.Xna.Framework.Net;
-#endif
-
 
 using Boku.Audio;
 using Boku.Base;
@@ -168,22 +158,14 @@ namespace Boku
 
                 menu.AddText(Strings.Localize("mainMenu.new"));
                 menu.AddText(Strings.Localize("mainMenu.play"));
-#if NETFX_CORE
-                menu.AddText(Strings.Localize("mainMenu.import"));
-#else
                 if (WinStoreHelpers.RunningAsUWP)
                 {
                     menu.AddText(Strings.Localize("mainMenu.import"));
                 }
-#endif
                 menu.AddText(Strings.Localize("mainMenu.community"));
                 menu.AddText(Strings.Localize("mainMenu.options"));
                 menu.AddText(Strings.Localize("mainMenu.help"));
-#if !NETFX_CORE
-                // Once you run an app in Win8, you are never allowed to kill it.
-                // Only the system can kill it.
                 menu.AddText(Strings.Localize("mainMenu.exit"));
-#endif
 
                 // And then remove what we don't want.
                 if (!Program2.SiteOptions.CommunityEnabled)
@@ -246,11 +228,7 @@ namespace Boku
                     }
                     else
                     {
-#if NETFX_CORE
-                        backgroundTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenuWidescreenMG");
-#else
                         backgroundTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenuWidescreen");
-#endif
                     }
                 }
 
@@ -374,11 +352,7 @@ namespace Boku
                         if (shared.urlBox.Contains(mouseHit) ||
                             (null != touch && shared.urlBox.Contains(touch.position)))
                         {
-#if NETFX_CORE
-                            Launcher.LaunchUriAsync(new Uri(KoduGameLabUrl));
-#else
                             Process.Start(KoduGameLabUrl);
-#endif
                             MouseInput.Left.ClearAllWasPressedState();
                         }
 
@@ -495,11 +469,7 @@ namespace Boku
 
                     if (shared.urlBox.Contains(mouseHit) || (shared.urlBox.Contains(touchHit) && TouchInput.WasLastReleased))
                     {
-#if NETFX_CORE
-                        Launcher.LaunchUriAsync(new Uri(KoduGameLabUrl));
-#else
                         Process.Start(KoduGameLabUrl);
-#endif
                         MouseInput.Left.ClearAllWasPressedState();
                         inputHandled = true;
                     }
@@ -878,13 +848,7 @@ namespace Boku
                 dialog.Deactivate();
 
                 // Wave bye, bye.
-#if NETFX_CORE
-                Windows.UI.Xaml.Application.Current.Exit();
-#else
                 BokuGame.bokuGame.Exit();
-#endif
-
-                exitingKodu = true;
             };
 
             noCommunityMessage = new ModularMessageDialog(Strings.Localize("miniHub.noCommunityMessage"),
@@ -908,11 +872,7 @@ namespace Boku
 
         }   // end of MainMenu c'tor
 
-#if NETFX_CORE
-        public async void OnSelect(ModularMenu menu)
-#else
         public void OnSelect(ModularMenu menu)
-#endif
         {
             menu.Active = false;
             string cur = menu.CurString;
@@ -963,26 +923,6 @@ namespace Boku
                 BokuGame.bokuGame.loadLevelMenu.Activate();
             }
 
-#if NETFX_CORE
-            // IMPORT
-            if (cur == Strings.Localize("mainMenu.import"))
-            {
-                // Note this also switches to the LoadLevelMenu if any worlds are imported.
-                bool levelImported = await PickImportFilesAsync();
-                if (levelImported)
-                {
-                    Deactivate();
-                    // Switch to LoadLevelMenu which should also trigger a loading of the files in the Imports dir.
-                    BokuGame.bokuGame.loadLevelMenu.LocalLevelMode = LoadLevelMenu.LocalLevelModes.General;
-                    BokuGame.bokuGame.loadLevelMenu.ReturnToMenu = LoadLevelMenu.ReturnTo.MainMenu;
-                    BokuGame.bokuGame.loadLevelMenu.Activate();
-                }
-                else
-                {
-                    menu.Active = true;
-                }
-            }
-#endif
             if (WinStoreHelpers.RunningAsUWP)
             {
                 // IMPORT
@@ -1042,80 +982,17 @@ namespace Boku
                 Deactivate();
 
                 // Wave bye, bye.
-#if NETFX_CORE
-                Windows.UI.Xaml.Application.Current.Exit();
-#else
                 BokuGame.bokuGame.Exit();
-#endif
             }
         }   // end of OnSelect
 
-#if NETFX_CORE
-
-        private async Task<bool> PickImportFilesAsync()
-        {
-            bool levelsImported = false;
-
-            // Ask user for files to import.
-            FileOpenPicker filePicker = new FileOpenPicker();
-            filePicker.FileTypeFilter.Add(".kodu");
-            filePicker.FileTypeFilter.Add(".kodu2");
-            filePicker.ViewMode = PickerViewMode.List;
-            filePicker.SuggestedStartLocation = PickerLocationId.Desktop;
-            filePicker.SettingsIdentifier = "ImportPicker";
-            filePicker.CommitButtonText = Strings.Localize("mainMenu.importWorldsCommitButtonText");
-
-            IReadOnlyList<StorageFile> files = await filePicker.PickMultipleFilesAsync();
-
-            // Copy resulting files into Imports directory.
-            if (files != null && files.Count > 0)
-            {
-                foreach (StorageFile file in files)
-                {
-                    StorageFolder importsFolder = await Storage4.UserSpaceFolder.CreateFolderAsync(LevelPackage.importsPath, CreationCollisionOption.OpenIfExists);
-                    StorageFile fileCopy = await file.CopyAsync(importsFolder);
-                }
-
-                levelsImported = true;
-            }
-
-            return levelsImported;
-        }   // end of PickImportFile()
-
-#endif
-
         private bool PickImportFiles()
         {
-            bool levelsImported = false;
-
-            // Create the dialog.
-            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
-            dlg.Multiselect = true;
-            dlg.DefaultExt = ".Kodu2";
-            dlg.Filter = "Kodu Levels|*.Kodu2;*.Kodu";
-
-            // Activate dialog.
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog();
-            
-            if(result == System.Windows.Forms.DialogResult.OK)
-            {
-                // See if any files were selected and copy them to the imports folder.
-                string[] fullPaths = dlg.FileNames;
-                string[] filenames = dlg.SafeFileNames;
-
-                for(int i=0; i<fullPaths.Length; i++)
-                {
-                    if(File.Exists(fullPaths[i]))
-                    {
-                        string destFilename = Path.Combine(Storage4.UserLocation, LevelPackage.importsPath, filenames[i]);
-                        File.Copy(fullPaths[i], destFilename);
-
-                        levelsImported = true;
-                    }
-                }
-            }
-
-            return levelsImported;
+            // File import dialog not available in cross-platform MonoGame build.
+            // Users can manually copy .Kodu2 files to the imports directory.
+            Debug.WriteLine("File import dialog is not available on this platform.");
+            Debug.WriteLine("Copy .Kodu2 files to the imports directory manually.");
+            return false;
         }   // end of PickImportFiles()
 
         void Callback_Ping(object param)

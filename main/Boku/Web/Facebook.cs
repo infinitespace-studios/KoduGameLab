@@ -132,28 +132,13 @@ namespace Boku.Web
         static bool fullScreen = false;
 
         /// <summary>
-        /// Brings up a WinForm with an embedded browser for auth.
-        /// Also puts Kodu into windowed mode if needed.
+        /// Brings up a browser for Facebook auth.
+        /// Not available in cross-platform MonoGame build.
         /// </summary>
         public static void DisplayFacebookAuthForm()
         {
-            // If we're currently fullscreen we need to remember this
-            // and toggle out to windowed so the auth form will be
-            // displayed over the game.
-            // TODO (scoy) Should we also do this for picking a printer
-            // when we're fullscreen?
-            fullScreen = BokuGame.Graphics.IsFullScreen;
-            if (fullScreen)
-            {
-                BokuGame.Graphics.ToggleFullScreen();
-            }
-
-            form = new BrowserForm();
-            form.Show();
-            form.BringToFront();
-
-            form.Closed += FormClosedHandler;
-
+            // Facebook auth form is not available in cross-platform MonoGame build.
+            Debug.WriteLine("Facebook auth form is not available on this platform.");
         }   // end of DisplayFacebookAuthForm()
 
         /// <summary>
@@ -163,11 +148,8 @@ namespace Boku.Web
         /// <param name="e"></param>
         static void FormClosedHandler(object sender, System.EventArgs e)
         {
-            System.Windows.Forms.WebBrowser wb = Facebook.Form.WebBrowser;
-
-            // TODO (scoy) Get the auth results from the browser before shutting down.
-            string fullText = wb.DocumentText;
-            string[] lines = fullText.Split()
+            // Browser-based auth not available in cross-platform MonoGame build.
+            Debug.WriteLine("Facebook auth form closed.");
 
             if (fullScreen)
             {

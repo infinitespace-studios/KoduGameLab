@@ -10,21 +10,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-#if !NETFX_CORE
-using System.Management;
 using System.IO.Ports;
-using Microsoft.Win32.SafeHandles;
-#endif
 
 using Boku.Common;
 using Boku.Common.Xml;
 using Boku.Programming;
 
-#if !NETFX_CORE
-using MicrobitNeedDriverDlg;
-#endif
-
-#if !NETFX_CORE
 namespace Boku.Input
 {
     /// <summary>
@@ -321,32 +312,10 @@ namespace Boku.Input
         {
             DriverInstalled = true;
 
-            var form = new MicrobitNeedDriverDlgForm();
-            form.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            System.Windows.Forms.DialogResult dr = form.ShowModal(
-                Strings.Localize("microbitNeedsDriverDlg.title"),
-                Strings.Localize("microbitNeedsDriverDlg.message"),
-                Strings.Localize("microbitNeedsDriverDlg.linkLabel"),
-                Strings.Localize("microbitNeedsDriverDlg.cancelLabel"),
-                Strings.Localize("microbitNeedsDriverDlg.installLabel"),
-                MainForm.Instance);
-            if (dr == System.Windows.Forms.DialogResult.OK)
-            {
-                string filename = Path.Combine(Storage4.TitleLocation, @"Content", @"Microbit", @"mbedWinSerial_16466.exe");
-                Process proc = Process.Start(filename);
-
-                // Busy loop while driver is loading.
-                while (!proc.HasExited)
-                {
-                    System.Threading.Thread.Sleep(10);
-                }
-
-                // Refresh the list of attached microbits.
-                {
-                    System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(MicrobitManager.RefreshWorker));
-                    t.Start();
-                }
-            }
+            // Driver dialog not available in cross-platform MonoGame build.
+            // Log the need and skip the interactive dialog.
+            Debug.WriteLine("Microbit driver installation dialog is not available on this platform.");
+            Debug.WriteLine("Please install the microbit driver manually.");
         }   // end of ShowDriverDialog()
 
         /// <summary>
@@ -368,6 +337,5 @@ namespace Boku.Input
         }
     }
 }
-#endif
 
 

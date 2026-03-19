@@ -470,11 +470,7 @@ namespace Boku.SimWorld.Terra
             /*
             if (fs == null)
             {
-                System.Windows.Forms.MessageBox.Show(
-                    "User location : " + Storage4.UserLocation + "\nFilename : " + filename,
-                    "Error opening terrain file for write.",
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Asterisk);
+                Debug.WriteLine("Error opening terrain file for write. User location: " + Storage4.UserLocation + " Filename: " + filename);
             }
             */
 
@@ -502,12 +498,7 @@ namespace Boku.SimWorld.Terra
                 }
             }
 
-#if NETFX_CORE
-            bw.Flush();
-            bw.Dispose();
-#else
             bw.Close();
-#endif
             Storage4.Close(fs);
         }
 
@@ -621,11 +612,7 @@ namespace Boku.SimWorld.Terra
                 }
             }
 
-#if NETFX_CORE
-            br.Dispose();
-#else
             br.Close();
-#endif
             fs.Dispose();
 
             mapSize.Z = kMaxHeight;
