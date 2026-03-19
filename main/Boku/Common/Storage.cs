@@ -884,9 +884,6 @@ namespace Boku.Common
             }
 
             return File.GetLastWriteTimeUtc(Combine(PathBase(StorageSource.TitleSpace), name));
-#else
-            // Hm, how to implement correctly on Xbox...
-            return new DateTime(0);
         }
 
         /// <summary>
@@ -905,8 +902,6 @@ namespace Boku.Common
             {
                 File.SetLastWriteTimeUtc(Combine(PathBase(StorageSource.TitleSpace), name), dateTimeUtc);
             }
-#else
-            // Hm, how to implement on Xbox...
         }
 
         /// <summary>

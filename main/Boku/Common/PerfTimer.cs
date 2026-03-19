@@ -116,7 +116,6 @@ namespace Boku.Common
                     Reset();
                 }
             }
-#endif
         }   // end of PerfTimer Stop()
 
         private void Reset()

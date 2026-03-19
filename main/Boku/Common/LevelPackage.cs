@@ -558,10 +558,8 @@ namespace Boku.Common
 #if IMPORT_DEBUG
             DebugPrint("result is " + (result ? "good" : "bad"));
 #endif
-
             return result;
         }   // end of ImportLevels()
-#endif
 
         /// <summary>
         /// 
