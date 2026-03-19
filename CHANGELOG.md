@@ -59,3 +59,27 @@ Deleted 14 C# files and 7 .resx files:
 - Deleted `Properties/` directory: AssemblyInfo.cs, Resources.resx/.Designer.cs, Settings files
 - SDK-style project auto-generates assembly info
 
+## Phase 2: Resolve All NETFX_CORE Conditionals
+
+### Batch Resolution (85 files, 0 remaining)
+Resolved ALL 206+ `#if NETFX_CORE` / `#if !NETFX_CORE` preprocessor directives across 85 files:
+
+**Core infrastructure (11 files):**
+- `Storage4.cs` — Removed ~800 lines of Windows.Storage/StorageFolder API, Close() extensions
+- `Audio.cs` — Kept Path.Combine paths + AudioStopOptions.Immediate
+- `BokuGame.cs` — Kept WinKeyboard, IsMouseVisible, desktop paths
+- `BokuGame.Designer.cs` — Removed Win8 fullscreen/snapped mode
+- `ContentLoader.cs`, `GamePadInput.cs`, `KeyboardInput.cs`, `PerfTimer.cs`, `Settings.cs`, `GameListManager.cs`, `GraphicsDeviceService.cs`
+
+**UI/Scene files (21 files):**
+- `InGameRunSim.cs`, `OptionsMenu.cs` — `Application.Current.Exit()` → `BokuGame.bokuGame.Exit()`
+- Various UI dialogs, render objects, title screen — removed UWP paths
+
+**Remaining files (53 files):**
+- Font system, text blobs, sharing, hints, level browsers, localization, particle system
+- Tutorial system, XML data, analyses, animatics, base classes
+- Input/microbit, programming elements, terrain, twitter, web transactions
+- All resolved: UWP code removed, desktop code kept, guards removed
+
+**Verification:** `grep -rl "NETFX_CORE" main/Boku --include="*.cs"` returns 0 files
+
