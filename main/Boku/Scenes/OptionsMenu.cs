@@ -8,9 +8,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 
-#if NETFX_CORE
-using Windows.System;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -120,11 +117,7 @@ namespace Boku
                     // Deactivate dialog.
                     dialog.Deactivate();
 
-#if NETFX_CORE
-                    Windows.UI.Xaml.Application.Current.Exit();
-#else
                     BokuGame.bokuGame.Exit();
-#endif
                 };
                 changeLanguageMessage = new ModularMessageDialog(
                     Strings.Localize("optionsParams.changeLanguageMessage"),
@@ -670,11 +663,7 @@ namespace Boku
                 // Add the sorted languages to the UI element.
                 foreach(LocalizationResourceManager.SupportedLanguage lang in languageList)
                 {
-#if NETFX_CORE
-                    if(lang.NameInEnglish.Equals("hebrew", StringComparison.OrdinalIgnoreCase))
-#else
                     if (lang.NameInEnglish.Equals("hebrew", StringComparison.InvariantCultureIgnoreCase))
-#endif
                     {
                         // RtoL code seems to have trouble with NSM characters 0x05b0 and 0x05b4.
                         // Strip them out.
@@ -866,11 +855,7 @@ namespace Boku
             {
                 UIGridModularButtonElement.UIButtonElementEvent onA = delegate()
                 {
-#if NETFX_CORE
-                    Launcher.LaunchUriAsync(new Uri(Program2.SiteOptions.KGLUrl + @"/Link/PrivacyStatement"));
-#else
                     Process.Start(Program2.SiteOptions.KGLUrl + @"/Link/PrivacyStatement");
-#endif
                 };
 
                 showPrivacyStatement = new UIGridModularButtonElement(blob, Strings.Localize("optionsParams.viewPrivacyStatement"), Strings.Localize("optionsParams.viewButtonLabel"), onA, null, null);
