@@ -5,10 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if !NETFX_CORE
 using System.Drawing;
 using System.Drawing.Imaging;
-#endif
 using System.Text;
 
 using Microsoft.Xna.Framework;
@@ -17,7 +15,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Boku.Common
 {
-#if !NETFX_CORE
 
     using Point = Microsoft.Xna.Framework.Point;
     using Color = Microsoft.Xna.Framework.Color;
@@ -121,5 +118,4 @@ namespace Boku.Common
         }   // end of class BatchEntry
 
 	}   // end of class SysFont
-#endif
 }   // end of namespace Boku.Common

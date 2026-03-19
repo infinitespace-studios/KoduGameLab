@@ -13,14 +13,8 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
 
-#if NETFX_CORE
-    using Windows.Data;
-    using Windows.Web;
-    using System.Runtime.Serialization.Json;
-#else
     using System.Data;
     using System.Web;
-#endif
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -87,12 +81,10 @@ namespace Boku
                 int itemCount = feedFetchCount;
                 string baseUrl =  Program2.SiteOptions.KGLUrl + "/API/GetLatestNews?tag=client";
                 string paramUrl = "&region=" + GetLangRegion();
-#if !NETFX_CORE
                 // TODO (****) This doesn't do anything anyway.  Should it be removed?
                 string paramRegionUrl = Thread.CurrentThread.CurrentCulture.Name;
 
                 paramRegionUrl = "-" + paramRegionUrl;
-#endif
                 Uri feedUri = CreateUpdateFeedURI(baseUrl + paramUrl, itemCount);
                 opStartTime = Time.GameTimeTotalSeconds + GET_TIMEOUT_SECS;
                 currentState = OpState.Retrieving;
@@ -122,21 +114,7 @@ namespace Boku
             string paramLang = Localizer.LocalLanguage;
             string paramRegion = "en-US";
 
-#if NETFX_CORE
-            var preferredLanguages = Windows.Globalization.ApplicationLanguages.Languages;
-            if (preferredLanguages.Count > 0)
-            {
-                paramRegion = preferredLanguages[0];
-            }
-
-            // If no legit region is found, use a default.
-            if (string.IsNullOrEmpty(paramRegion))
-            {
-                paramRegion = "en-US";
-            }
-#else
             paramRegion = Thread.CurrentThread.CurrentCulture.Name; // Should get "en-US" for local starts...
-#endif
 
             if (BokuSettings.Settings.Language != null && BokuSettings.Settings.Language.Length == 2)
             {
@@ -238,16 +216,8 @@ namespace Boku
             List<FeedMs> allFeeds = new List<FeedMs>();
             try
             {
-#if NETFX_CORE
-                // For some reason the WinRT Json Serializer doesn't want to 
-                // deserialize our objects so we'll just have to do it manually.
-                //var items = Deserialize<List<Dictionary<string, string>>>(rawGetData);
-
-                List<Dictionary<string, string>> items = HackDeserialize(rawGetData);
-#else
                 var js = new System.Web.Script.Serialization.JavaScriptSerializer();
                 var items = js.Deserialize<List<Dictionary<string, string>>>(rawGetData);
-#endif
 
                 //build news feed.
                 foreach (var item in items)
@@ -264,102 +234,7 @@ namespace Boku
             return allFeeds;
         }
 
-#if NETFX_CORE
-        T Deserialize<T>(string json)
-        {
-            var bytes = Encoding.Unicode.GetBytes(json);
-            using (MemoryStream stream = new MemoryStream(bytes))
-            {
-                var serializer = new DataContractJsonSerializer(typeof(T));
-                return (T)serializer.ReadObject(stream);
-            }
-        }
 
-        List<Dictionary<string, string>> HackDeserialize(string data)
-        {
-            List<Dictionary<string, string>> items = new List<Dictionary<string, string>>();
-
-            int prevItemIndex = 0;
-            while (true)
-            {
-                int openBraceIndex = data.IndexOf('{', prevItemIndex);
-                if (openBraceIndex == -1)
-                {
-                    break;
-                }
-                int closeBraceIndex = data.IndexOf('}', openBraceIndex);
-
-                prevItemIndex = closeBraceIndex;
-
-                items.Add(ParseItem(data.Substring(openBraceIndex + 1, closeBraceIndex - openBraceIndex - 1)));
-            }
-
-            return items;
-        }
-
-        Dictionary<string, string> ParseItem(string data)
-        {
-            Dictionary<string, string> item = new Dictionary<string, string>();
-
-            int prevIndex = 0;
-            while (true)
-            {
-                int q0 = NextQuote(data, prevIndex);
-                if (q0 == -1)
-                {
-                    break;
-                }
-                int q1 = NextQuote(data, q0 + 1);
-                if (q1 == -1)
-                {
-                    break;
-                }
-                int q2 = NextQuote(data, q1 + 1);
-                if (q2 == -1)
-                {
-                    break;
-                }
-                int q3 = NextQuote(data, q2 + 1);
-                if (q3 == -1)
-                {
-                    break;
-                }
-
-                prevIndex = q3 + 1;
-
-                string key = data.Substring(q0 + 1, q1 - q0 - 1);
-                string value = data.Substring(q2 + 1, q3 - q2 - 1);
-                item.Add(key, value);
-            }
-
-            return item;
-        }
-
-        /// <summary>
-        /// Finds the next doublke quote in the string but
-        /// skips over escaped quotes, eg \"
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="startIndex"></param>
-        /// <returns></returns>
-        int NextQuote(string data, int startIndex)
-        {
-            int index = -1;
-
-            while (true)
-            {
-                index = data.IndexOf('"', startIndex);
-                // If quote not found or found at first character or found and is not escaped.
-                if (index < 1 ||  (index > 0 && data[index - 1] != '\\'))
-                {
-                    break;
-                }
-                startIndex = index + 1;
-            }
-
-            return index;
-        }
-#endif
 
 
 /*

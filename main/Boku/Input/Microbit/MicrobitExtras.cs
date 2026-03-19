@@ -10,9 +10,7 @@ using System.Text;
 using System.IO;
 using Microsoft.Xna.Framework;
 
-#if !NETFX_CORE
 using System.IO.Ports;
-#endif
 
 using Boku.Common;
 using Boku.Common.Xml;
@@ -66,7 +64,6 @@ namespace Boku.Input
             return false;
         }
 
-#if !NETFX_CORE
         public static Microbit GetMicrobitOrNull(GamePadSensor.PlayerId playerId)
         {
             // TODO @*******: Decide how to handle the PlayerId.All case, for now use player one.
@@ -79,6 +76,5 @@ namespace Boku.Input
             MicrobitManager.Microbits.TryGetValue((int)playerId, out microbit);
             return microbit;
         }
-#endif
     }
 }

@@ -10,10 +10,7 @@ using System.Xml.Serialization;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-#if NETFX_CORE
-    using Windows.Foundation;
-    using Windows.System;
-#endif
+
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -258,14 +255,7 @@ namespace Boku
                 if (focusIndex < HyperlinkList.Count)
                 {
                     string urlString = CreateURLFromTwitterLink(HyperlinkList[focusIndex]);
-#if NETFX_CORE
-                    Uri uri = new Uri(urlString);
-                    IAsyncOperation<bool> op = Launcher.LaunchUriAsync(uri);
-                    op.AsTask<bool>().Wait();
-                    bool result = op.GetResults();
-#else
                     Process.Start(urlString);
-#endif
                 }
             }
         }
@@ -298,14 +288,7 @@ namespace Boku
                             //make sure url starts with http://
                         if (!urlString.StartsWith("http://") && !urlString.StartsWith("https://"))
                             urlString = "http://" + urlString;
-#if NETFX_CORE
-                        Uri uri = new Uri(urlString);
-                        IAsyncOperation<bool> op = Launcher.LaunchUriAsync(uri);
-                        op.AsTask<bool>().Wait();
-                        bool result = op.GetResults();
-#else
                         Process.Start(urlString);
-#endif
                         return true;
                     }
                     else if (link.IsClickFocus)

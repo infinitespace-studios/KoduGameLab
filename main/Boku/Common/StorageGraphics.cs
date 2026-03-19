@@ -141,12 +141,7 @@ namespace Boku.Common
                     writer.Write(pixel.PackedValue);
                 }
 
-#if NETFX_CORE
-                writer.Flush();
-                writer.Dispose();
-#else
                 writer.Close();
-#endif
                 Close(stream);
 
             }
@@ -187,7 +182,6 @@ namespace Boku.Common
             {
                 // A super-hack for the PC
                 Debug.Assert(false);
-#if !NETFX_CORE
                 // TODO (****) save to dds no longer supported.  Try SaveAsPng() or SaveAsJpeg()
                 //tex.Save("TextureSaveToStream.dds", ImageFileFormat.Dds);
                 // Intentionally uses the filesystem API, not Storage class.
@@ -213,7 +207,6 @@ namespace Boku.Common
                 File.Delete("TextureSaveToStream.dds");
 
                 return true;
-#endif
             }
             return false;
 
@@ -505,11 +498,7 @@ namespace Boku.Common
                         break;
                 }
 
-#if NETFX_CORE
-                reader.Dispose();
-#else
                 reader.Close();
-#endif
                 Close(stream);
 
                 return tex;
