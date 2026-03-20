@@ -125,6 +125,8 @@ namespace Boku
         }
         #endregion
 
+        // TODO: MonoGame port — Effector type missing, commenting out dead override
+        /*
         protected override bool IDoDirectObjectVerb(GameThing.Verbs verb, GameThing subject, Effector effector)
         {
             bool supports = false;
@@ -144,6 +146,7 @@ namespace Boku
             }
             return supports;
         }
+        */
 
 
         protected bool DoOpen()
@@ -166,7 +169,7 @@ namespace Boku
             return true;
         }
 
-        protected override void OnNoiseLevelReset(GameTimer timer)
+        protected void OnNoiseLevelReset(GameTimer timer)
         {
             this.Classification.audioVolume = Classification.AudioVolume.Soft;
         }
@@ -226,9 +229,9 @@ namespace Boku
 
         #endregion
 
-        public override void InitDeviceResources(GraphicsDeviceManager graphics)
+        public override void InitDeviceResources(GraphicsDevice device)
         {
-            base.InitDeviceResources(graphics);
+            base.InitDeviceResources(device);
             LoadAnimations(renderObj.SRO);
         }
 

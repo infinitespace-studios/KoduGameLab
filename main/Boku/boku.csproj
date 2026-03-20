@@ -21,9 +21,12 @@
   <!-- Exclude nested legacy content pipeline projects from compilation -->
   <ItemGroup>
     <Compile Remove="AnimContentProc\**" />
-    <Compile Remove="AnimWindows\**" />
     <Compile Remove="Anim360\**" />
     <Compile Remove="TileProcessor\**" />
+    <!-- AnimWindows: include runtime animation, exclude pipeline/properties/visualization -->
+    <Compile Remove="AnimWindows\Content\**" />
+    <Compile Remove="AnimWindows\Properties\**" />
+    <Compile Remove="AnimWindows\Visualization\**" />
     <!-- Files depending on deleted projects/missing types (Step 4) -->
     <Compile Remove="Common\UnityTouchEmulation.cs" />
     <Compile Remove="BestCoding.cs" />
@@ -44,8 +47,6 @@
     <Compile Remove="SimWorld\PineCone.cs" />
     <Compile Remove="SimWorld\PineTree.cs" />
     <Compile Remove="SimWorld\SmallStoneBuilding.cs" />
-    <Compile Remove="SimWorld\AnimatedLRO.cs" />
-    <Compile Remove="SimWorld\GateBotLRO.cs" />
     <Compile Remove="SimWorld\Terra\Tile-backup with lots.cs" />
     <!-- Windows-only / WMI / deleted dependencies -->
     <Compile Remove="Common\WinKeyboard.cs" />
@@ -57,7 +58,6 @@
     <Compile Remove="Input\Microbit\Microbit.cs" />
     <Compile Remove="Input\Microbit\MicrobitExtras.cs" />
     <Compile Remove="SimWorld\GamePropLRO.cs" />
-    <Compile Remove="SimWorld\GateBot.cs" />
     <Compile Remove="Programming\TouchButtons.cs" />
     <Compile Remove="SimWorld\TopLevelPalette.cs" />
     <!-- Old/non-core with XNA method signature mismatches -->
