@@ -630,6 +630,8 @@ namespace Boku
         {
             Debug.Assert(false);
         }
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class TexturePicker
 
 }   // end of namespace Boku

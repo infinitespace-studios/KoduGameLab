@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Input;
 using Boku.Base;
 using Boku.Common;
 using Boku.Input;
+using Boku.UI2D;
 
 namespace Boku.SimWorld
 {

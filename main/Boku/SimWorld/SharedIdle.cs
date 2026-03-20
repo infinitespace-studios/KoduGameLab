@@ -46,7 +46,7 @@ namespace Boku.SimWorld
         #endregion Members
 
         #region Accessors
-        protected SharedAnimation SharedAnim
+        protected virtual SharedAnimation SharedAnim
         {
             get { return sharedAnim; }
         }

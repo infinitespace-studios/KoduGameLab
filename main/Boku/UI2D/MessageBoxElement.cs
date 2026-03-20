@@ -141,7 +141,7 @@ namespace Boku.UI2D
 
         }   // end of UIGridMessageBoxElement LoadContent()
 
-        public override void InitDeviceResources(GraphicsDeviceManager graphics)
+        public override void InitDeviceResources(GraphicsDevice device)
         {
             CreateRenderTargets(graphics);
         }
@@ -156,7 +156,7 @@ namespace Boku.UI2D
             BokuGame.Release(ref background);
         }   // end of UIGridMessageBoxElement UnloadContent()
 
-        public override void DeviceReset(GraphicsDeviceManager graphics)
+        public override void DeviceReset(GraphicsDevice device)
         {
             ReleaseRenderTargets();
             CreateRenderTargets(graphics);

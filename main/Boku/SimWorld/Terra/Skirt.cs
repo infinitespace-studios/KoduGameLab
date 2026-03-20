@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Input;
 
 using Boku.Base;
 using Boku.Common;
+using Boku.SimWorld.Terra;
 
 namespace Boku.SimWorld
 {
@@ -26,7 +27,7 @@ namespace Boku.SimWorld
         private int stride = 0;
         // unused 1/10/2008 mattmac // private int index = -1;
 
-        private Terrain.SkirtVertex[][] vertices = null;
+        private TerrainTree.SkirtVertex[][] vertices = null;
 
         #region Accessors
         public VertexBuffer[] VBuf
@@ -54,13 +55,13 @@ namespace Boku.SimWorld
         /// <param name="offset">The offset into the heightmap for this tile.</param>
         public Skirt(HeightMap heightMap, Point offset)
         {
-            stride = System.Runtime.InteropServices.Marshal.SizeOf(new Terrain.SkirtVertex());
+            stride = System.Runtime.InteropServices.Marshal.SizeOf(new TerrainTree.SkirtVertex());
 
             // Allocate local vertex array.
-            vertices = new Terrain.SkirtVertex[4][];
+            vertices = new TerrainTree.SkirtVertex[4][];
             for(int i=0; i<4; i++)
             {
-                vertices[i] = new Terrain.SkirtVertex[NumVertices];
+                vertices[i] = new TerrainTree.SkirtVertex[NumVertices];
             }
 
             vbuf = new VertexBuffer[4];
@@ -158,13 +159,13 @@ namespace Boku.SimWorld
             // Init vertex buffers.
             for (int i = 0; i < 4; i++)
             {
-                vbuf[i] = new VertexBuffer(device, typeof(Terrain.SkirtVertex), NumVertices, BufferUsage.WriteOnly);
+                vbuf[i] = new VertexBuffer(device, typeof(TerrainTree.SkirtVertex), NumVertices, BufferUsage.WriteOnly);
 
             // Copy local data to vertex buffer.
 #if !XBOX360
-            vbuf[i].SetData<Terrain.SkirtVertex>(vertices[i], 0, NumVertices ); //, SetDataOptions.Discard);
+            vbuf[i].SetData<TerrainTree.SkirtVertex>(vertices[i], 0, NumVertices ); //, SetDataOptions.Discard);
 #else
-            vbuf[i].SetData<Terrain.SkirtVertex>(vertices[i], 0, NumVertices ); // , SetDataOptions.None);
+            vbuf[i].SetData<TerrainTree.SkirtVertex>(vertices[i], 0, NumVertices ); // , SetDataOptions.None);
 #endif
         }
 
@@ -177,6 +178,11 @@ namespace Boku.SimWorld
                 BokuGame.Release(ref vbuf[i]);
             }
         }   // end of Skirt UnloadGraphicsContent()
+
+        public void LoadContent(bool immediate) { }
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void UnloadContent() { }
+        public void DeviceReset(GraphicsDevice device) { }
 
     }   // end of class Skirt
 

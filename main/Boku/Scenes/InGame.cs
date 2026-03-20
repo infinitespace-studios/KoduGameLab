@@ -41,7 +41,6 @@ using Boku.UI2D;
 using Boku.Input;
 using Boku.Audio;
 using Boku.Animatics;
-    using TouchHook;
 
 namespace Boku
 {

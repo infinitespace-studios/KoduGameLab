@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
@@ -97,6 +98,8 @@ namespace Boku
             {
             }
 
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void DeviceReset(GraphicsDevice device) { }
         }   // end of class MessageBox UpdateObj  
 
         protected class RenderObj : RenderObject
@@ -127,6 +130,8 @@ namespace Boku
             {
             }
 
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void DeviceReset(GraphicsDevice device) { }
         }   // end of class MessageBox RenderObj     
 
 
@@ -254,6 +259,8 @@ namespace Boku
             BokuGame.DeviceReset(shared.backdrop, graphics);
         }
 
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class MessageBox
 
 }   // end of namespace Boku

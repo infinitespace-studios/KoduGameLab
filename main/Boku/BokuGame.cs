@@ -53,7 +53,7 @@ namespace Boku
     /// <summary>
     /// Boku, the story of a boy and his code.
     /// </summary>
-    partial class BokuGame
+    partial class BokuGame : Microsoft.Xna.Framework.Game
     {
         // instrumentation
         static object sessionTimerInstrument;
@@ -810,7 +810,7 @@ namespace Boku
         /// Only used by Win8 version
         /// </summary>
         /// <param name="gameTime"></param>
-        protected override void Update(GameTime gameTime)
+        protected void Update(GameTime gameTime)
         {
             Update();
         }
@@ -819,7 +819,7 @@ namespace Boku
         /// Only used by Win8 version
         /// </summary>
         /// <param name="gameTime"></param>
-        protected override void Draw(GameTime gameTime)
+        protected void Draw(GameTime gameTime)
         {
             Draw();
         }

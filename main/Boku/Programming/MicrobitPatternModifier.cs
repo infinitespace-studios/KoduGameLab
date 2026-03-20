@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework.Input;
 
 using Boku.Base;
 using Boku.Common;
+using Boku.Input;
 
 namespace Boku.Programming
 {

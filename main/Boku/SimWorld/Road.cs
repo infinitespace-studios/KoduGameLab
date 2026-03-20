@@ -10,6 +10,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Boku.Common;
+using WayPoint = Boku.SimWorld.Path.WayPoint;
+using RoadGenerator = Boku.SimWorld.Path.RoadGenerator;
+using Terrain = Boku.SimWorld.Terra.Terrain;
+using HeightMap = Boku.SimWorld.Terra.HeightMap;
 using Boku.Base;
 
 namespace Boku.SimWorld

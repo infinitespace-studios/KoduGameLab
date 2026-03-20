@@ -460,6 +460,8 @@ namespace Boku
 
         #endregion
 
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class MessageDialog
 
 }   // end of namespace Boku

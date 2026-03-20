@@ -437,6 +437,8 @@ namespace Boku
 
         #endregion
 
+        public void InitDeviceResources(GraphicsDevice device) { }
+        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class LiveFeedDisplay
 
 }   // end of namespace Boku

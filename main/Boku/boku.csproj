@@ -14,6 +14,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.5-preview.*" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.*" />
+    <PackageReference Include="System.IO.Packaging" Version="9.0.*" />
+    <PackageReference Include="System.Management" Version="9.0.*" />
   </ItemGroup>
   <!-- Exclude nested legacy content pipeline projects from compilation -->
   <ItemGroup>
@@ -21,6 +24,52 @@
     <Compile Remove="AnimWindows\**" />
     <Compile Remove="Anim360\**" />
     <Compile Remove="TileProcessor\**" />
+    <!-- Files depending on deleted projects/missing types (Step 4) -->
+    <Compile Remove="Common\UnityTouchEmulation.cs" />
+    <Compile Remove="BestCoding.cs" />
+    <Compile Remove="Scenes\ShareHub.cs" />
+    <Compile Remove="Scenes\OldLoadLevelMenu.cs" />
+    <Compile Remove="Scenes\LiveFeedDisplay.cs" />
+    <Compile Remove="Web\Facebook.cs" />
+    <Compile Remove="Web\Trans\GetFacebookUser.cs" />
+    <Compile Remove="Web\Trans\PublishWorldToFacebook.cs" />
+    <Compile Remove="Programming\ActionArbitrator.cs" />
+    <Compile Remove="Programming\AudioSensor.cs" />
+    <Compile Remove="Programming\ScanSensor.cs" />
+    <Compile Remove="SimWorld\BigYucca2.cs" />
+    <Compile Remove="SimWorld\Cypress.cs" />
+    <Compile Remove="SimWorld\GiftBox.cs" />
+    <Compile Remove="SimWorld\Oak.cs" />
+    <Compile Remove="SimWorld\Palm1.cs" />
+    <Compile Remove="SimWorld\PineCone.cs" />
+    <Compile Remove="SimWorld\PineTree.cs" />
+    <Compile Remove="SimWorld\SmallStoneBuilding.cs" />
+    <Compile Remove="SimWorld\AnimatedLRO.cs" />
+    <Compile Remove="SimWorld\GateBotLRO.cs" />
+    <Compile Remove="SimWorld\Terra\Tile-backup with lots.cs" />
+    <!-- Windows-only / WMI / deleted dependencies -->
+    <Compile Remove="Common\WinKeyboard.cs" />
+    <Compile Remove="Common\LevelPackage.cs" />
+    <Compile Remove="Common\GamePadInputEvents.cs" />
+    <Compile Remove="Twitter\Tweet.cs" />
+    <Compile Remove="Twitter\NewsFeeds.cs" />
+    <Compile Remove="Input\Microbit\MicrobitManager.cs" />
+    <Compile Remove="Input\Microbit\Microbit.cs" />
+    <Compile Remove="Input\Microbit\MicrobitExtras.cs" />
+    <Compile Remove="SimWorld\GamePropLRO.cs" />
+    <Compile Remove="SimWorld\GateBot.cs" />
+    <Compile Remove="Programming\TouchButtons.cs" />
+    <Compile Remove="SimWorld\TopLevelPalette.cs" />
+    <!-- Old/non-core with XNA method signature mismatches -->
+    <Compile Remove="SimWorld\fireball.cs" />
+    <Compile Remove="SimWorld\LightColumn.cs" />
+    <Compile Remove="Common\ParticleSystem\FireballEmitter.cs" />
+    <Compile Remove="Common\ParticleSystem\GlorpEmitter.cs" />
+    <Compile Remove="Programming\TestTask.cs" />
+    <Compile Remove="Programming\CameraRelativeSelector.cs" />
+    <Compile Remove="UI2D\UIGridTextElement.cs" />
+    <Compile Remove="UI\PieLayout.cs" />
+    <Compile Remove="UI\SpiralLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BokuShared\BokuShared.csproj" />

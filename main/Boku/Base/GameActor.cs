@@ -3086,7 +3086,7 @@ namespace Boku.Base
         /// <summary>
         /// Return the shared paramaterization for this type of actor.
         /// </summary>
-        public XmlGameActor XmlActorParams
+        public virtual XmlGameActor XmlActorParams
         {
             get
             {
@@ -3434,6 +3434,8 @@ namespace Boku.Base
             #endregion      
         }
 
+        protected virtual void InitGameActorParams() { }
+
         protected virtual void ResetXmlParams(bool revivingDeadActor)
         {
             if (XmlActorParams.Friction != null)
@@ -3534,7 +3536,7 @@ namespace Boku.Base
 
         }   // end of ReactToCursor()
 
-        public Vector3 GlowPosition
+        public virtual Vector3 GlowPosition
         {
             get
             {
