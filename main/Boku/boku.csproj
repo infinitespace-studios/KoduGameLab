@@ -53,9 +53,6 @@
     <Compile Remove="Common\GamePadInputEvents.cs" />
     <Compile Remove="Twitter\Tweet.cs" />
     <Compile Remove="Twitter\NewsFeeds.cs" />
-    <Compile Remove="Input\Microbit\MicrobitManager.cs" />
-    <Compile Remove="Input\Microbit\Microbit.cs" />
-    <Compile Remove="Input\Microbit\MicrobitExtras.cs" />
     <Compile Remove="SimWorld\GamePropLRO.cs" />
     <Compile Remove="Programming\TouchButtons.cs" />
     <!-- Old/non-core with XNA method signature mismatches -->

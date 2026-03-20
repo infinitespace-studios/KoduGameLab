@@ -3121,6 +3121,14 @@ namespace Boku.Base
 
         public GameActor(
             string classificationName,
+            BaseChassis chassis,
+            GetModelInstance getModelInstance)
+            : this(classificationName, classificationName, chassis, getModelInstance, getModelInstance, null)
+        {
+        }
+
+        public GameActor(
+            string classificationName,
             string classificationRevealedName,
             BaseChassis chassis,
             GetModelInstance getModelInstance,
@@ -3192,7 +3200,7 @@ namespace Boku.Base
         /// new actor arises. Allocating memory in this function would defeat the
         /// entire reason for ActorFactory's existence.
         /// </summary>
-        public override void InitDefaults(bool revivingDeadActor)
+        public override void InitDefaults(bool revivingDeadActor = false)
         {
             // WARNING: NO CODE MAY APPEAR BEFORE CALL TO BASE. PUT YOUR ADDITIONS
             //          AT THE END OF THIS FUNCTION.

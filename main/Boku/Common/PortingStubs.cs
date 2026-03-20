@@ -1,5 +1,13 @@
 using Microsoft.Xna.Framework;
 
+namespace TileProcessor
+{
+    public class UIMeshData
+    {
+        public BoundingBox bBox;
+    }
+}
+
 namespace Boku.Common
 {
     public class WinKeyboard

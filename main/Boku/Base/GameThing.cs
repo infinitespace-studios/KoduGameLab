@@ -727,7 +727,7 @@ namespace Boku.Base
         /// new actor arises. Allocating memory in this function would defeat the
         /// entire reason for ActorFactory's existence.
         /// </summary>
-        public virtual void InitDefaults(bool revivingDeadActor)
+        public virtual void InitDefaults(bool revivingDeadActor = false)
         {
             // These values copied from constructor initializers above.
             state = State.Inactive;

@@ -63,7 +63,7 @@ namespace Boku.SimWorld
             string classificationName,
             BaseChassis chassis,
             GetModelInstance getModelInstance,
-            StaticActor staticActor)
+            StaticActor staticActor = null)
             : base(classificationName, classificationName, chassis, getModelInstance, getModelInstance, staticActor)
         {
             if (XmlActorParams.SharedIdleData != null)

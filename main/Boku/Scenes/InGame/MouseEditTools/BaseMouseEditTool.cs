@@ -472,7 +472,7 @@ namespace Boku.Scenes.InGame.MouseEditTools
         /// Check whether cursor should be displayed.
         /// </summary>
         /// <returns></returns>
-        protected virtual void CheckSelectCursor(bool alwaysShowCursor)
+        protected virtual void CheckSelectCursor(bool alwaysShowCursor = false)
         {
             /// The new pointy cursor seems always helpful, even if slightly
             /// redundant with the brush.

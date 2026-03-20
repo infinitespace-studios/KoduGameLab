@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 
 using System.IO.Ports;
+using System.Management;
 
 using Boku.Common;
 using Boku.Common.Xml;

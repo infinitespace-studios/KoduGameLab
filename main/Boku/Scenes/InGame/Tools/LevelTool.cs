@@ -84,7 +84,7 @@ namespace Boku.Scenes.InGame.Tools
         /// Override when to show/hide the 3d cursor.
         /// </summary>
         /// <returns></returns>
-        protected override void CheckSelectCursor(bool alwaysShowCursor)
+        protected override void CheckSelectCursor(bool alwaysShowCursor = false)
         {
             Brush2DManager.Brush2D brush = Brush2DManager.GetBrush(shared.editBrushIndex);
             if (brush == null)

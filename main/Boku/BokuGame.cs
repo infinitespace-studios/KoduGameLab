@@ -104,6 +104,8 @@ namespace Boku
 
         public static BokuGame bokuGame = null;             // Provide a ref to easily get back to the game object.
 
+        public WinKeyboard winKeyboard = new WinKeyboard(); // Stub for ported WinKeyboard
+
         public Random rnd = new Random();                   // Just because it's useful.
 
         private static bool logon = false;                  // should we have the user give us their username?

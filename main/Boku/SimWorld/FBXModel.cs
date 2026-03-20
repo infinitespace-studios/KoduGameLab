@@ -16,6 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Boku.Base;
+using TileProcessor;
 using Boku.Fx;
 using Boku.Common;
 using Boku.SimWorld.Collision;
