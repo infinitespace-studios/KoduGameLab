@@ -14,6 +14,9 @@ using WayPoint = Boku.SimWorld.Path.WayPoint;
 using RoadGenerator = Boku.SimWorld.Path.RoadGenerator;
 using Terrain = Boku.SimWorld.Terra.Terrain;
 using HeightMap = Boku.SimWorld.Terra.HeightMap;
+using HiWallGen = Boku.SimWorld.Path.HiWallGen;
+using HiWayGen = Boku.SimWorld.Path.HiWayGen;
+using CastleGen = Boku.SimWorld.Path.CastleGen;
 using Boku.Base;
 
 namespace Boku.SimWorld
@@ -380,7 +383,7 @@ namespace Boku.SimWorld
                             second = 0;
                         }
                         // Trim away any overlap between these two sections.
-                        if (!Road.Generator.Trim(sections[first], sections[second]))
+                        if (!road.Generator.Trim(sections[first], sections[second]))
                         {
                             // If the angle between these was too big to cause a trim
                             // then we need to insert a fan.
@@ -407,11 +410,7 @@ namespace Boku.SimWorld
             /// <param name="pC"></param>
             protected void MakeFan(WayPoint.Node node, Section first, Section second)
             {
-                RenderObj ro = Road.Generator.NewFan(node, first, second);
-                if (ro != null)
-                {
-                    fans.Add(ro);
-                }
+                road.Generator.NewFan(this, first, second, fans);
             }
         }
 
@@ -420,8 +419,8 @@ namespace Boku.SimWorld
             Terrain terrain = InGame.inGame.Terrain;
             HeightMap heightMap = terrain.HeightMap;
 
-            start -= terrain.Min;
-            end -= terrain.Min;
+            start -= Terrain.Min2D;
+            end -= Terrain.Min2D;
 
             Vector2 posMin;
             posMin.X = Math.Min(start.X, end.X);
@@ -437,8 +436,8 @@ namespace Boku.SimWorld
             posMax.X += smoothWidth.Y;
             posMax.Y += smoothWidth.Y;
 
-            posMin /= (terrain.Max - terrain.Min);
-            posMax /= (terrain.Max - terrain.Min);
+            posMin /= (Terrain.Max2D - Terrain.Min2D);
+            posMax /= (Terrain.Max2D - Terrain.Min2D);
 
             // Convert these to height map numbers.  Add 1 to the max values since
             // these will be used as loop limits.

@@ -33,12 +33,19 @@ namespace Boku
 
         private const int numIcons = 4;
 
-        private struct Vertex
+        private struct Vertex : IVertexType
         {
             private Vector2 position;
             private Vector2 uvScreen;
             private Vector2 uvFrame;
             private Vector2 uvIcons;
+
+            static VertexDeclaration _vertexDeclaration = new VertexDeclaration(elements);
+
+            public VertexDeclaration VertexDeclaration
+            {
+                get { return _vertexDeclaration; }
+            }
 
             public Vertex(Vector2 position, Vector2 uvScreen, Vector2 uvFrame, Vector2 uvIcons)
             {
@@ -53,10 +60,10 @@ namespace Boku
         // Declare the vertex structure we'll use.
         static private VertexElement[] elements = new VertexElement[]
         {
-            new VertexElement(0, 0, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.Position, 0),
-            new VertexElement(0, 8, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 0),     // Frame UV coords
-            new VertexElement(0, 16, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 1),    // Screen UV coords
-            new VertexElement(0, 24, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 2),    // Icon UV coords
+            new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
+            new VertexElement(8, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0),     // Frame UV coords
+            new VertexElement(16, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 1),    // Screen UV coords
+            new VertexElement(24, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 2),    // Icon UV coords
             // size == 32
         };
 
@@ -117,53 +124,35 @@ namespace Boku
                     {
                         Alpha = 1.0f;
                         {
-                            // frameWidth = fullFrameWidth;
-                            TwitchManager.GetFloat get = delegate(Object param) { return frameWidth; };
-                            TwitchManager.SetFloat set = delegate(float val, Object param) { frameWidth = val; };
-                            TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, fullFrameWidth, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                            twitch.Start();
+                            TwitchManager.Set<float> set = delegate(float val, Object param) { frameWidth = val; };
+                            TwitchManager.CreateTwitch<float>(frameWidth, fullFrameWidth, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                         }
                         {
-                            // centerWidth = fullWidth;
-                            TwitchManager.GetFloat get = delegate(Object param) { return centerWidth; };
-                            TwitchManager.SetFloat set = delegate(float val, Object param) { centerWidth = val; };
-                            TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, fullWidth, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                            twitch.Start();
+                            TwitchManager.Set<float> set = delegate(float val, Object param) { centerWidth = val; };
+                            TwitchManager.CreateTwitch<float>(centerWidth, fullWidth, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                         }
                         {
-                            // iconCenter = iconCenterBase;
-                            TwitchManager.GetFloat get = delegate(Object param) { return iconCenter; };
-                            TwitchManager.SetFloat set = delegate(float val, Object param) { iconCenter = val; };
-                            TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, iconCenterBase, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                            twitch.Start();
+                            TwitchManager.Set<float> set = delegate(float val, Object param) { iconCenter = val; };
+                            TwitchManager.CreateTwitch<float>(iconCenter, iconCenterBase, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                         }
                     }
                     else
                     {
                         Alpha = badgeAlpha;
                         {
-                            // frameWidth = 0;
-                            TwitchManager.GetFloat get = delegate(Object param) { return frameWidth; };
-                            TwitchManager.SetFloat set = delegate(float val, Object param) { frameWidth = val; };
-                            TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, 0.0f, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                            twitch.Start();
+                            TwitchManager.Set<float> set = delegate(float val, Object param) { frameWidth = val; };
+                            TwitchManager.CreateTwitch<float>(frameWidth, 0.0f, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                         }
                         {
-                            // centerWidth = 0;
-                            TwitchManager.GetFloat get = delegate(Object param) { return centerWidth; };
-                            TwitchManager.SetFloat set = delegate(float val, Object param) { centerWidth = val; };
-                            TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, 0.0f, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                            twitch.Start();
+                            TwitchManager.Set<float> set = delegate(float val, Object param) { centerWidth = val; };
+                            TwitchManager.CreateTwitch<float>(centerWidth, 0.0f, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                         }
                         {
-                            // iconCenter = centered over selected icon
                             float offsetUV = 1.0f / numIcons;
                             float baseUV = offsetUV / 2.0f;
                             float newCenter = baseUV + offsetUV * selectIndex;
-                            TwitchManager.GetFloat get = delegate(Object param) { return iconCenter; };
-                            TwitchManager.SetFloat set = delegate(float val, Object param) { iconCenter = val; };
-                            TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, newCenter, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                            twitch.Start();
+                            TwitchManager.Set<float> set = delegate(float val, Object param) { iconCenter = val; };
+                            TwitchManager.CreateTwitch<float>(iconCenter, newCenter, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                         }
                     }
                 }
@@ -181,32 +170,23 @@ namespace Boku
                     {
                         // Change previous selection to unselected color.
                         int oldIndex = selectIndex;
-                        TwitchManager.GetVector4 get = delegate(Object param) { return color[oldIndex]; };
-                        TwitchManager.SetVector4 set = delegate(Vector4 val, Object param) { color[oldIndex] = val; };
-                        TwitchManager.Vector4Twitch twitch = new TwitchManager.Vector4Twitch(get, set, unselectedColor, changeColorTime, TwitchCurve.Shape.EaseInOut);
-                        twitch.Start();
+                        TwitchManager.Set<Vector4> set = delegate(Vector4 val, Object param) { color[oldIndex] = val; };
+                        TwitchManager.CreateTwitch<Vector4>(color[oldIndex], unselectedColor, set, changeColorTime, TwitchCurve.Shape.EaseInOut);
                     }
                     select = value;
                     selectIndex = (int)select;
                     {
                         // Change new selection to selected color.
                         int newIndex = selectIndex;
-                        TwitchManager.GetVector4 get = delegate(Object param) { return color[newIndex]; };
-                        TwitchManager.SetVector4 set = delegate(Vector4 val, Object param) { color[newIndex] = val; };
-                        TwitchManager.Vector4Twitch twitch = new TwitchManager.Vector4Twitch(get, set, selectedColor, changeColorTime, TwitchCurve.Shape.EaseInOut);
-                        twitch.Start();
+                        TwitchManager.Set<Vector4> set = delegate(Vector4 val, Object param) { color[newIndex] = val; };
+                        TwitchManager.CreateTwitch<Vector4>(color[newIndex], selectedColor, set, changeColorTime, TwitchCurve.Shape.EaseInOut);
                     }
                     {
-                        // Move icon center.  We shouldn't see this changing when the palette in in "badge" mode 
-                        // but just in case we decide to use it this way, make sure the right icon is showing.
-                        // iconCenter = centered over selected icon
                         float offsetUV = 1.0f / numIcons;
                         float baseUV = offsetUV / 2.0f;
                         float newCenter = Open ? iconCenterBase : baseUV + offsetUV * selectIndex;
-                        TwitchManager.GetFloat get = delegate(Object param) { return iconCenter; };
-                        TwitchManager.SetFloat set = delegate(float val, Object param) { iconCenter = val; };
-                        TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, newCenter, openCloseTime, TwitchCurve.Shape.EaseInOut);
-                        twitch.Start();
+                        TwitchManager.Set<float> set = delegate(float val, Object param) { iconCenter = val; };
+                        TwitchManager.CreateTwitch<float>(iconCenter, newCenter, set, openCloseTime, TwitchCurve.Shape.EaseInOut);
                     }
                 }
             }
@@ -233,11 +213,8 @@ namespace Boku
                 if (alpha != value)
                 {
                     {
-                        // alpha = value;
-                        TwitchManager.GetFloat get = delegate(Object param) { return alpha; };
-                        TwitchManager.SetFloat set = delegate(float val, Object param) { alpha = val; };
-                        TwitchManager.FloatTwitch twitch = new TwitchManager.FloatTwitch(get, set, value, fadeInOutTime, TwitchCurve.Shape.EaseInOut);
-                        twitch.Start();
+                        TwitchManager.Set<float> set = delegate(float val, Object param) { alpha = val; };
+                        TwitchManager.CreateTwitch<float>(alpha, value, set, fadeInOutTime, TwitchCurve.Shape.EaseInOut);
                     }
                 }
             }
@@ -327,7 +304,7 @@ namespace Boku
             {
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
-                device.VertexDeclaration = decl;
+                // Set vertex declaration is handled by DrawUserPrimitives in MonoGame.
 
                 // Render all passes.
                 effect.Parameters["FrameTexture"].SetValue(frameTexture);
@@ -345,15 +322,12 @@ namespace Boku
                     effect.Parameters["Color" + i.ToString()].SetValue(color[i]);
                 }
 
-                effect.Begin();
                 for (int i = 0; i < effect.CurrentTechnique.Passes.Count; i++)
                 {
                     EffectPass pass = effect.CurrentTechnique.Passes[i];
-                    pass.Begin();
+                    pass.Apply();
                     device.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertices, 0, 6);
-                    pass.End();
                 }
-                effect.End();
 
             }   // end if Active
 
@@ -363,27 +337,27 @@ namespace Boku
         {
             if (effect == null)
             {
-                effect = BokuGame.ContentManager.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\TopLevelPalette");
+                effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\TopLevelPalette");
             }
 
             if (decl == null)
             {
-                decl = new VertexDeclaration(graphics.GraphicsDevice, elements);            
+                decl = new VertexDeclaration(elements);            
             }
 
             if (iconTexture == null)
             {
-                iconTexture = BokuGame.ContentManager.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\TopEditPalette\Icons");
+                iconTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\TopEditPalette\Icons");
             }
 
             if (screenTexture == null)
             {
-                screenTexture = BokuGame.ContentManager.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\TopEditPalette\Screen");
+                screenTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\TopEditPalette\Screen");
             }
 
             if (frameTexture == null)
             {
-                frameTexture = BokuGame.ContentManager.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\TopEditPalette\Frame");
+                frameTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\TopEditPalette\Frame");
             }
 
         }   // end of TopLevelPalette LoadGraphicsContent()
@@ -398,6 +372,23 @@ namespace Boku
             BokuGame.Release(ref frameTexture);
 
         }   // end of TopLevelPalette UnloadGraphicsContent()
+
+        public void LoadContent(bool immediate)
+        {
+        }
+
+        public void InitDeviceResources(GraphicsDevice device)
+        {
+        }
+
+        public void UnloadContent()
+        {
+            UnloadGraphicsContent();
+        }
+
+        public void DeviceReset(GraphicsDevice device)
+        {
+        }
 
     }   // end of class TopLevelPalette
 

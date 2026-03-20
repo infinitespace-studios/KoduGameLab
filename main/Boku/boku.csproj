@@ -50,7 +50,6 @@
     <Compile Remove="SimWorld\Terra\Tile-backup with lots.cs" />
     <!-- Windows-only / WMI / deleted dependencies -->
     <Compile Remove="Common\WinKeyboard.cs" />
-    <Compile Remove="Common\LevelPackage.cs" />
     <Compile Remove="Common\GamePadInputEvents.cs" />
     <Compile Remove="Twitter\Tweet.cs" />
     <Compile Remove="Twitter\NewsFeeds.cs" />
@@ -59,7 +58,6 @@
     <Compile Remove="Input\Microbit\MicrobitExtras.cs" />
     <Compile Remove="SimWorld\GamePropLRO.cs" />
     <Compile Remove="Programming\TouchButtons.cs" />
-    <Compile Remove="SimWorld\TopLevelPalette.cs" />
     <!-- Old/non-core with XNA method signature mismatches -->
     <Compile Remove="SimWorld\fireball.cs" />
     <Compile Remove="SimWorld\LightColumn.cs" />

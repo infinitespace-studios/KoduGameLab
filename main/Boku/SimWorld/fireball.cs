@@ -137,7 +137,7 @@ namespace Boku
         {
         }   // end of Fireball LoadContent()
 
-        public override void InitDeviceResources(GraphicsDeviceManager graphics)
+        public override void InitDeviceResources(GraphicsDevice device)
         {
         }
 

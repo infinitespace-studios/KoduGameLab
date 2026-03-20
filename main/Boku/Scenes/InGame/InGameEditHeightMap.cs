@@ -21,6 +21,7 @@ using Boku.Programming;
 using Boku.UI;
 using Boku.UI2D;
 using Boku.Input;
+using Boku.SimWorld.Terra;
 
 namespace Boku
 {
@@ -90,9 +91,10 @@ namespace Boku
                             shared.editBrushIndex, 
                             shared.editBrushPosition, 
                             shared.editBrushRadius, 
-                            0 + modeShift);
+                            (Terrain.EditMode)(0 + modeShift),
+                            1.0f);
                         shared.heightMapModified = true;
-                        InGame.inGame.IsLevelDirty = true;
+                        InGame.IsLevelDirty = true;
                     }
 
                     // Smooth
@@ -102,9 +104,10 @@ namespace Boku
                             shared.editBrushIndex, 
                             shared.editBrushPosition, 
                             shared.editBrushRadius, 
-                            2 + modeShift);
+                            (Terrain.EditMode)(2 + modeShift),
+                            1.0f);
                         shared.heightMapModified = true;
-                        InGame.inGame.IsLevelDirty = true;
+                        InGame.IsLevelDirty = true;
                     }
 
                     // Down
@@ -113,9 +116,11 @@ namespace Boku
                         InGame.inGame.terrain.RenderToHeightMap(
                             shared.editBrushIndex, 
                             shared.editBrushPosition, 
-                            shared.editBrushRadius, 1 + modeShift);
+                            shared.editBrushRadius, 
+                            (Terrain.EditMode)(1 + modeShift),
+                            1.0f);
                         shared.heightMapModified = true;
-                        InGame.inGame.IsLevelDirty = true;
+                        InGame.IsLevelDirty = true;
                     }
 
                 }   // end if we have input focus.

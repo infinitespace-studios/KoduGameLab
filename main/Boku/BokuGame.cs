@@ -85,10 +85,6 @@ namespace Boku
         // SGI_MOD - picture support
         private static PictureManager pictureManager = new PictureManager();
 
-        /// <summary>
-        /// Winkeyboard object for reading processed keyboard input.
-        /// </summary>
-        public WinKeyboard winKeyboard = null;
 
         //
         // Scenes, modes, whatever you want to call them.
@@ -125,22 +121,9 @@ namespace Boku
         public static bool hidef = true;                    // Always running in HiDef profile with MonoGame.
 
         private GraphicsDeviceManager _graphics;
-        private ContentManager _content;
-
-        /// <summary>
-        /// Content manager for loading game assets.
-        /// </summary>
-        public ContentManager Content
-        {
-            get { return _content; }
-        }
+        public static GraphicsDeviceManager Graphics { get; private set; }
 
         #region Accessors
-
-        public GraphicsDevice GraphicsDevice
-        {
-            get { return _graphics.GraphicsDevice; }
-        }
 
         /// <summary>
         /// Always returns true — MonoGame DesktopGL always uses HiDef profile.
@@ -184,31 +167,21 @@ namespace Boku
             get { return bokuGame.screenPosition; }
             set { bokuGame.screenPosition = value; }
         }
-        
-        bool isMouseVisible = true;
-        public bool IsMouseVisible
+
+        /// <summary>
+        /// Convenience accessor for ScreenSize.X (used by Tutorial code).
+        /// </summary>
+        public static int width
         {
-            get { return isMouseVisible; }
-            set
-            {
-                if (isMouseVisible != value)
-                {
-                    isMouseVisible = value;
-                    if (isMouseVisible)
-                    {
-                        Cursor.Show();
-                    }
-                    else
-                    {
-                        Cursor.Hide();
-                    }
-                }
-            }
+            get { return (int)ScreenSize.X; }
         }
 
-        public bool IsActive
+        /// <summary>
+        /// Convenience accessor for ScreenSize.Y (used by Tutorial code).
+        /// </summary>
+        public static int height
         {
-            get { return true; }
+            get { return (int)ScreenSize.Y; }
         }
 
         public static bool objectListDirty
@@ -326,6 +299,11 @@ namespace Boku
         public BokuGame()
         {
             bokuGame = this;
+
+            _graphics = new GraphicsDeviceManager(this);
+            Graphics = _graphics;
+            _graphics.PreparingDeviceSettings += PreparingDeviceSettingsHandler;
+
             Auth.Init();
 
         }   // end of BokuGame c'tor
@@ -350,7 +328,7 @@ namespace Boku
         //
         // Overrides from base game object starting with initialization.
         //
-        public void Initialize()
+        protected override void Initialize()
         {
             // Graphics configuration (moved from Designer.cs).
             _graphics.GraphicsProfile = GraphicsProfile.HiDef;
@@ -358,6 +336,7 @@ namespace Boku
             _graphics.IsFullScreen = false;
             _graphics.SynchronizeWithVerticalRetrace = BokuGame.syncRefresh;
             _graphics.PreferMultiSampling = BokuSettings.Settings.AntiAlias;
+            IsFixedTimeStep = false;
             IsMouseVisible = true;
 
             /// Steve, uncomment this first line to simulate having 508,313,600MB less video memory
@@ -415,6 +394,8 @@ namespace Boku
             stream.Position = 0;
             string settingsStr = Encoding.ASCII.GetString(stream.ToArray());
             Instrumentation.RecordDataItem(Instrumentation.DataItemId.SettingsXml, settingsStr);
+
+            base.Initialize();
 
         }   // end of BokuGame Initialize()
 
@@ -579,7 +560,7 @@ namespace Boku
         // The first time LoadContent is called by the framework, this will be true. For subsequent calls, it will be false.
         bool firstLoadContent = true;
 
-        public void LoadContent()
+        protected override void LoadContent()
         {
             //Debug.WriteLine("Begin LoadContent");
 
@@ -690,7 +671,7 @@ namespace Boku
 
         }   // end of BokuGame LoadContent()
 
-        public void UnloadContent()
+        protected override void UnloadContent()
         {
             //Debug.WriteLine("Begin UnloadContent");
 
@@ -807,19 +788,19 @@ namespace Boku
         }
 
         /// <summary>
-        /// Only used by Win8 version
+        /// MonoGame game loop override — delegates to parameterless Update().
         /// </summary>
         /// <param name="gameTime"></param>
-        protected void Update(GameTime gameTime)
+        protected override void Update(GameTime gameTime)
         {
             Update();
         }
 
         /// <summary>
-        /// Only used by Win8 version
+        /// MonoGame game loop override — delegates to parameterless Draw().
         /// </summary>
         /// <param name="gameTime"></param>
-        protected void Draw(GameTime gameTime)
+        protected override void Draw(GameTime gameTime)
         {
             Draw();
         }

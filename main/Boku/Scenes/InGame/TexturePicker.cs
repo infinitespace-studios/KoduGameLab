@@ -323,7 +323,6 @@ namespace Boku
                     TwitchManager.GetVector3 get = delegate(Object param) { return selectionPlate.Position; };
                     TwitchManager.SetVector3 set = delegate(Vector3 value, Object param) { selectionPlate.Position = value; };
                     TwitchManager.Vector3Twitch twitch = new TwitchManager.Vector3Twitch(get, set, newPosition, 0.25f, TwitchCurve.Shape.OvershootOut);
-                    twitch.Start();
 
                     grid0.Active = false;
                     grid1.Active = false;
@@ -353,26 +352,26 @@ namespace Boku
                 if (grid0.SelectionIndex.Y != curFocusIndex0)
                 {
                     curFocusIndex0 = grid0.SelectionIndex.Y;
-                    InGame.inGame.Terrain.ChangeTerrainTexture(0, files[curFocusIndex0]);
-                    InGame.inGame.IsLevelDirty = true;
+                    InGame.inGame.Terrain.ChangeTerrainTexture(0, files[curFocusIndex0].filename);
+                    InGame.IsLevelDirty = true;
                 }
                 if (grid1.SelectionIndex.Y != curFocusIndex1)
                 {
                     curFocusIndex1 = grid1.SelectionIndex.Y;
-                    InGame.inGame.Terrain.ChangeTerrainTexture(1, files[curFocusIndex1]);
-                    InGame.inGame.IsLevelDirty = true;
+                    InGame.inGame.Terrain.ChangeTerrainTexture(1, files[curFocusIndex1].filename);
+                    InGame.IsLevelDirty = true;
                 }
                 if (grid2.SelectionIndex.Y != curFocusIndex2)
                 {
                     curFocusIndex2 = grid2.SelectionIndex.Y;
-                    InGame.inGame.Terrain.ChangeTerrainTexture(2, files[curFocusIndex2]);
-                    InGame.inGame.IsLevelDirty = true;
+                    InGame.inGame.Terrain.ChangeTerrainTexture(2, files[curFocusIndex2].filename);
+                    InGame.IsLevelDirty = true;
                 }
                 if (grid3.SelectionIndex.Y != curFocusIndex3)
                 {
                     curFocusIndex3 = grid3.SelectionIndex.Y;
-                    InGame.inGame.Terrain.ChangeTerrainTexture(3, files[curFocusIndex3]);
-                    InGame.inGame.IsLevelDirty = true;
+                    InGame.inGame.Terrain.ChangeTerrainTexture(3, files[curFocusIndex3].filename);
+                    InGame.IsLevelDirty = true;
                 }
 
                 float outerRowAlpha = 0.3f;
@@ -621,17 +620,15 @@ namespace Boku
             BokuGame.Unload(grid3);
         }   // end of TexturePicker UnloadGraphicsContent()
 
-        public void InitDeviceResources(GraphicsDeviceManager graphics)
+        public void InitDeviceResources(GraphicsDevice device)
         {
             Debug.Assert(false);
         }
 
-        public void DeviceReset(GraphicsDeviceManager graphics)
+        public void DeviceReset(GraphicsDevice device)
         {
             Debug.Assert(false);
         }
-        public void InitDeviceResources(GraphicsDevice device) { }
-        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class TexturePicker
 
 }   // end of namespace Boku

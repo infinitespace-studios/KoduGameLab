@@ -474,6 +474,40 @@ namespace Boku.Common
             Twitch<Matrix>.KillAllTwitches();
         }
 
+        public delegate Vector3 GetVector3(Object param);
+        public delegate void SetVector3(Vector3 value, Object param);
+
+        public class Vector3Twitch
+        {
+            private GetVector3 get;
+            private SetVector3 set;
+            private Vector3 targetValue;
+            private float duration;
+            private TwitchCurve.Shape shape;
+            private Object param;
+
+            public Vector3Twitch(GetVector3 get, SetVector3 set, Vector3 targetValue, float duration, TwitchCurve.Shape shape, Object param = null)
+            {
+                this.get = get;
+                this.set = set;
+                this.targetValue = targetValue;
+                this.duration = duration;
+                this.shape = shape;
+                this.param = param;
+                Start();
+            }
+
+            private void Start()
+            {
+                Vector3 startValue = get(param);
+                TwitchManager.Set<Vector3> twitchSet = delegate(Vector3 val, Object p)
+                {
+                    set(val, p);
+                };
+                TwitchManager.CreateTwitch<Vector3>(startValue, targetValue, twitchSet, duration, shape, param, null);
+            }
+        }
+
     }   // end of class TwitchManager
 
 }   // end of namespace Boku.Common

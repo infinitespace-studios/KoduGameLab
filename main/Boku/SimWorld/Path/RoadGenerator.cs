@@ -111,6 +111,14 @@ namespace Boku.SimWorld.Path
         }
 
         /// <summary>
+        /// Return the smooth width range as a Vector2 (inner, outer).
+        /// </summary>
+        public virtual Vector2 SmoothWidth()
+        {
+            return new Vector2(0.5f, 1.0f);
+        }
+
+        /// <summary>
         /// Return true if objects are elevated by this road, else false
         /// </summary>
         /// <returns></returns>

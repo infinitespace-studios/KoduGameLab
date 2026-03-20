@@ -27,6 +27,7 @@ using Boku.Input;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
 using Boku.SimWorld.Terra;
+using Road = Boku.SimWorld.Path.Road;
 
 namespace Boku.Scenes.InGame.MouseEditTools
 {

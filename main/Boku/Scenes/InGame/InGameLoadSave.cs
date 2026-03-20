@@ -190,6 +190,18 @@ namespace Boku
             return BokuGame.Settings.MediaPath + BokuGame.MyWorldsPath + xmlWorldData.id.ToString() + @".Xml";
         }
 
+        public static string CurrentLevelFilename(bool includeExtension)
+        {
+            string result = CurrentLevelFilename();
+            if (!includeExtension && result != null)
+            {
+                int idx = result.LastIndexOf('.');
+                if (idx >= 0)
+                    result = result.Substring(0, idx);
+            }
+            return result;
+        }
+
         /// <summary>
         /// Saves the state of the current edit camera.
         /// </summary>
@@ -1046,6 +1058,11 @@ namespace Boku
         /// <param name="preserveScores">When true, this causes the score values not to be reset.  This is only used by the DO Reset-World verb since there is a seperate Reset-Scores tile.</param>
         /// <param name="removeCreatablesFromScene"></param>
         /// <param name="keepPersistentScores">This is true when the ResetSim call is for loading a linked level during run.</param>
+        public void ResetSim(bool preserveScores)
+        {
+            ResetSim(preserveScores, false, false);
+        }
+
         public void ResetSim(bool preserveScores, bool removeCreatablesFromScene, bool keepPersistentScores)
         {
             // Since preserveScores happens while executing a Reset action and keepPersistentScores 

@@ -125,7 +125,7 @@ namespace Boku
         {
             blob = new TextBlob(UI2D.Shared.GetGameFont24, "NEWSFEED", 150);
 
-            newsScroller = new ItemScroller(GetScrollBoxSize, new Color(0.0f, 0.0f, 0.0f, 0.0f), null, null);
+            newsScroller = new ItemScroller(Vector2.Zero, GetScrollBoxSize, new Color(0.0f, 0.0f, 0.0f, 0.0f), null, null);
         }   // end of c'tor
 
         public void Update(Camera camera)
@@ -341,7 +341,7 @@ namespace Boku
             ssquad.Render(cornerBR, baseColor, pos + baseSize - new Vector2(0.0f, cornerSize.Y), cornerSize, "TexturedRegularAlpha");
             ssquad.Render(baseColor, pos + new Vector2(baseSize.X, cornerSize.Y), new Vector2(cornerSize.X, baseSize.Y - (cornerSize.Y * 2)));
 
-            blob.RenderWithButtons(titlePos, greyTextColor, false, UIGridElement.Justification.Center);
+            blob.RenderWithButtons(titlePos, greyTextColor);
             ssquad.Render(Header_bg, iconPos, iconSize, "TexturedRegularAlpha");
 
         }
@@ -368,7 +368,7 @@ namespace Boku
         {
         }   // end of LiveFeedDisplay LoadContent()
 
-        public void InitDeviceResources(GraphicsDeviceManager graphics)
+        public void InitDeviceResources(GraphicsDevice device)
         {
             if (Header_bg == null)
             {
@@ -397,8 +397,8 @@ namespace Boku
         /// <summary>
         /// Recreate render targets
         /// </summary>
-        /// <param name="graphics"></param>
-        public void DeviceReset(GraphicsDeviceManager graphics)
+        /// <param name="device"></param>
+        public void DeviceReset(GraphicsDevice device)
         {
         }
 
@@ -437,8 +437,6 @@ namespace Boku
 
         #endregion
 
-        public void InitDeviceResources(GraphicsDevice device) { }
-        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class LiveFeedDisplay
 
 }   // end of namespace Boku

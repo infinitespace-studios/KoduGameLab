@@ -27,11 +27,23 @@ namespace Boku.Programming
     {
         #region Members
 
+        private int index;
+
         #endregion
 
         #region Accessors
 
+        public Vector3 Normal { get; set; }
+        public float Arc { get; set; }
+
         #endregion
+
+        public VisualDevice(int index)
+        {
+            this.index = index;
+            Normal = Vector3.Forward;
+            Arc = MathHelper.Pi;
+        }
 
     }   // end of class VisualDevice
 

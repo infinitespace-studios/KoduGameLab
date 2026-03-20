@@ -223,7 +223,7 @@ namespace Boku
                     }
                     else
                     {
-                        backgroundTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenuWidescreen");
+                        backgroundTexture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\MainMenuWidescreenMG");
                     }
                 }
 
@@ -844,6 +844,8 @@ namespace Boku
 
                 // Wave bye, bye.
                 BokuGame.bokuGame.Exit();
+
+                exitingKodu = true;
             };
 
             noCommunityMessage = new ModularMessageDialog(Strings.Localize("miniHub.noCommunityMessage"),

@@ -24,6 +24,13 @@ namespace Boku.SimWorld.Terra
 {
     public partial class Tile
     {
+        public const int TileSize = 17;
+
+        public static bool TileHidden(int i, int j)
+        {
+            return false;
+        }
+
         /// <summary>
         /// The different angles we draw the terrain cubes from, notably missing Bottom.
         /// </summary>

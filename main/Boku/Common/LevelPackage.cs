@@ -12,7 +12,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml.Serialization;
 
-using Ionic.Zip;
 using System.IO.Packaging;
 
 using Boku.Audio;
@@ -144,14 +143,14 @@ namespace Boku.Common
                         //System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
                         //    "Importing file : " + path);
 
-                        using (ZipFile zip = ZipFile.Read(path))
+                        using (ZipArchive zip = ZipFile.OpenRead(path))
                         {
-                            foreach (ZipEntry e in zip)
+                            foreach (ZipArchiveEntry e in zip.Entries)
                             {
                                 string targetPath = @"Content\Xml\Levels";
                                 string mainFilePath = null;
 
-                                string partFullName = e.FileName;
+                                string partFullName = e.FullName;
                                 string partFilename = Path.GetFileName(partFullName);
 
                                 // If the zip file hase been hand edited we get entries for all the folders
@@ -194,13 +193,13 @@ namespace Boku.Common
                                     // Not a main file, just copy over with no changes.
                                     if (e != null && targetPath != null)
                                     {
-                                        using (var reader = e.OpenReader())
+                                        using (var reader = e.Open())
                                         {
-                                            byte[] bytes = new byte[reader.Length];
-                                            reader.Read(bytes, 0, (int)reader.Length);
+                                            byte[] bytes = new byte[e.Length];
+                                            reader.Read(bytes, 0, (int)e.Length);
 
                                             Stream fileStream = Storage4.OpenWrite(targetPath);
-                                            fileStream.Write(bytes, 0, (int)reader.Length);
+                                            fileStream.Write(bytes, 0, (int)e.Length);
                                             fileStream.Close();
                                         }
                                     }
@@ -217,10 +216,10 @@ namespace Boku.Common
                                     {
                                         // Break file into lines.
                                         string[] lines;
-                                        using (var reader = e.OpenReader())
+                                        using (var reader = e.Open())
                                         {
-                                            byte[] bytes = new byte[reader.Length];
-                                            reader.Read(bytes, 0, (int)reader.Length);
+                                            byte[] bytes = new byte[e.Length];
+                                            reader.Read(bytes, 0, (int)e.Length);
 
                                             System.Text.Encoding encoding = new System.Text.UTF8Encoding();
                                             string fullFileString = encoding.GetString(bytes);
@@ -830,17 +829,12 @@ namespace Boku.Common
 
     }   // end of class LevelPackage
 
-    class Compressor : Cab.Compressor
+    class Compressor
     {
-        public Compressor() : base(new Cab.FileHelper()) { }
-
-        public override void Progress()
-        {
-            // TODO: Callback to renderer?
-        }
+        public virtual void Progress() { }
     }
 
-    class Decompressor : Cab.Decompressor
+    class Decompressor
     {
         // A Cab file may have more than a single level in it.  This is
         // a list of the GUIDs of all the levels in the current file.
@@ -848,19 +842,24 @@ namespace Boku.Common
 
         public Guid MostRecentImportedLevel;
 
-        public override void Progress()
+        public virtual void Progress() { }
+
+        public void Create() { }
+
+        public void Expand(string destFolderPath, string cabFilePath)
         {
-            // TODO: Callback to renderer?
+            // Cab decompression is no longer supported.
         }
 
-        public override bool QueryExpandFile(ref string filepath, ref string filename)
+        public void Destroy() { }
+
+        public virtual bool QueryExpandFile(ref string filepath, ref string filename)
         {
             if (filepath.EndsWith(@"Level\"))
             {
                 filepath = Path.Combine(Storage4.UserLocation, BokuGame.Settings.MediaPath, BokuGame.DownloadsPath);
                 MostRecentImportedLevel = new Guid(filename.Substring(0, filename.Length - 4));
                 ImportedLevels.Add(MostRecentImportedLevel);
-                // Write the level file with a .tmp extension, we'll copy it to its final filename in a post-process step wherein we fix some path information in the file.
                 filename += ".tmp";
                 return true;
             }

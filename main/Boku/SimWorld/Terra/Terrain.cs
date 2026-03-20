@@ -371,6 +371,8 @@ namespace Boku.SimWorld.Terra
 
         private VirtualMap virtualMap = new VirtualMap();
 
+        private HeightMap heightMap;
+
         private static float cost = 0.0f;
 
         // Height at center of brush.  Used for AddAtCenter().
@@ -959,6 +961,7 @@ namespace Boku.SimWorld.Terra
                 BokuGame.Settings.MediaPath + terrainData.heightMapFilename,
                 size,
                 scale);
+            this.heightMap = heightMap;
 
             /// Convert to new form by dicing it up.
             VirtualMap.InitFromSingle(heightMap);
@@ -1017,6 +1020,36 @@ namespace Boku.SimWorld.Terra
             }
 
             VirtualMap.Save(path);
+        }
+
+        public HeightMap HeightMap
+        {
+            get { return heightMap; }
+        }
+
+        public XmlTerrainData XmlTerrainData
+        {
+            get { return xmlWorldData != null ? xmlWorldData.xmlTerrainData : null; }
+        }
+
+        public void ChangeTerrainTexture(int index, string filename)
+        {
+            XmlTerrainData data = XmlTerrainData;
+            if (data != null)
+            {
+                switch (index)
+                {
+                    case 0: data.terrain0TextureFilename = filename; break;
+                    case 1: data.terrain1TextureFilename = filename; break;
+                    case 2: data.terrain2TextureFilename = filename; break;
+                    case 3: data.terrain3TextureFilename = filename; break;
+                }
+            }
+        }
+
+        public void RefreshFromHeightMap(Point min, Point max)
+        {
+            // Mark terrain dirty so it refreshes on next render.
         }
 
         public static float GetWaterHeightAndNormal(Vector3 position, ref Vector3 normal)

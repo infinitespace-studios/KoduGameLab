@@ -245,7 +245,7 @@ namespace Boku
             BokuGame.Load(shared.backdrop, immediate);
         }   // end of MessageBox LoadContent()
 
-        public void InitDeviceResources(GraphicsDeviceManager graphics)
+        public void InitDeviceResources(GraphicsDevice device)
         {
         }
 
@@ -254,13 +254,11 @@ namespace Boku
             BokuGame.Unload(shared.backdrop);
         }   // end of MessageBox UnloadContent()
 
-        public void DeviceReset(GraphicsDeviceManager graphics)
+        public void DeviceReset(GraphicsDevice device)
         {
-            BokuGame.DeviceReset(shared.backdrop, graphics);
+            BokuGame.DeviceReset(shared.backdrop, device);
         }
 
-        public void InitDeviceResources(GraphicsDevice device) { }
-        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class MessageBox
 
 }   // end of namespace Boku

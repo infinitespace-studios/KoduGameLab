@@ -94,7 +94,7 @@ namespace Boku
                     if (pad.Back.WasPressed)
                     {
                         GamePadInput.ClearAllWasPressedState();
-                        parent.ResetSim(CurrentLevelFilename());
+                        parent.ResetSim(false);
 
                         // Needed to make sure that deactivated objects are actually removed from
                         // the list otherwise they may get saved along with the newly activated ones.

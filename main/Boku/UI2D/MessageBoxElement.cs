@@ -143,7 +143,7 @@ namespace Boku.UI2D
 
         public override void InitDeviceResources(GraphicsDevice device)
         {
-            CreateRenderTargets(graphics);
+            CreateRenderTargets(device);
         }
 
         public override void UnloadContent()
@@ -159,12 +159,11 @@ namespace Boku.UI2D
         public override void DeviceReset(GraphicsDevice device)
         {
             ReleaseRenderTargets();
-            CreateRenderTargets(graphics);
+            CreateRenderTargets(device);
         }
 
-        private void CreateRenderTargets(GraphicsDeviceManager graphics)
+        private void CreateRenderTargets(GraphicsDevice device)
         {
-            GraphicsDevice device = graphics.GraphicsDevice;
 
             const int margin = 24;
             int w = (int)width;

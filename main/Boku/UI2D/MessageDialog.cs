@@ -441,7 +441,7 @@ namespace Boku
 
         }   // end of MessageDialog LoadContent();
 
-        public void InitDeviceResources(GraphicsDeviceManager graphics)
+        public void InitDeviceResources(GraphicsDevice device)
         {
             dirty = true;
         }   // end of InitDeviceResources()
@@ -452,7 +452,7 @@ namespace Boku
             BokuGame.Release(ref background);
         }
 
-        public void DeviceReset(GraphicsDeviceManager graphics)
+        public void DeviceReset(GraphicsDevice device)
         {
             dirty = true;
             RefreshTexture();
@@ -460,8 +460,6 @@ namespace Boku
 
         #endregion
 
-        public void InitDeviceResources(GraphicsDevice device) { }
-        public void DeviceReset(GraphicsDevice device) { }
     }   // end of class MessageDialog
 
 }   // end of namespace Boku

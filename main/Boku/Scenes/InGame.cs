@@ -93,6 +93,9 @@ namespace Boku
             public UIShim.RenderObj uiShim = null;
             public EditWorldParameters editWorldParameters = new EditWorldParameters();
             public EditObjectParameters editObjectParameters = new EditObjectParameters();
+            public TexturePicker texturePicker = null;
+            public TopLevelPalette topLevelPalette = null;
+            public int editBrushBase = 0;
             public WayPointEdit editWayPoint = new WayPointEdit();
 
             public ProgrammingHelpCard programmingHelpCard = null;
@@ -2750,6 +2753,8 @@ namespace Boku
             TerrainFlatten,
             TerrainRoughHill,
             DeleteObjects,
+            EditTexture,
+            TexturePicker,
 
             // Not really a valid mode but having this enum is useful for the ToolMenu.
             MiniHub,
@@ -2758,6 +2763,7 @@ namespace Boku
 
             SelectNextLevel,
 
+            NumModesInPalette,
             NumModes,
 
             None,   // Use to "clear" pendingUpdateMode.

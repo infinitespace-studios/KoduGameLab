@@ -308,8 +308,8 @@ namespace Boku.SimWorld
                             }
 
                             ibuf[i, j] = new IndexBuffer(BokuGame.bokuGame.GraphicsDevice,
-                                indices.Count * sizeof(ushort),
-                                BufferUsage.WriteOnly, IndexElementSize.SixteenBits);
+                                IndexElementSize.SixteenBits, indices.Count,
+                                BufferUsage.WriteOnly);
 
                             // Is there a way around this superfluous copy? We just
                             // want to go directly from indices into the index buffer.
@@ -393,8 +393,8 @@ namespace Boku.SimWorld
                 numQuads = numTris / 2;
                 SkirtDraw skirtDraw = new SkirtDraw();
                 skirtDraw.ibuf = new IndexBuffer(BokuGame.bokuGame.GraphicsDevice,
-                    numIndices * sizeof(ushort),
-                    BufferUsage.WriteOnly, IndexElementSize.SixteenBits);
+                    IndexElementSize.SixteenBits, numIndices,
+                    BufferUsage.WriteOnly);
 
                 // Is there a way around this superfluous copy? We just
                 // want to go directly from indices into the index buffer.
@@ -557,9 +557,9 @@ namespace Boku.SimWorld
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
             if (RenderWire)
-                device.RenderState.FillMode = FillMode.WireFrame;
+                device.RasterizerState = new RasterizerState { FillMode = FillMode.WireFrame };
 
-            device.Vertices[0].SetSource(VertexBuffer, 0, Stride);
+            device.SetVertexBuffer(VertexBuffer);
 
             effect.Begin();
 
@@ -600,7 +600,7 @@ namespace Boku.SimWorld
             effect.End();
 
             if (RenderWire)
-                device.RenderState.FillMode = FillMode.Solid;
+                device.RasterizerState = new RasterizerState { FillMode = FillMode.Solid };
         }
         /// <summary>
         /// Render the terrain skirts. Assumes effect parameters already properly set.
@@ -612,9 +612,9 @@ namespace Boku.SimWorld
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
             if (RenderWire)
-                device.RenderState.FillMode = FillMode.WireFrame;
+                device.RasterizerState = new RasterizerState { FillMode = FillMode.WireFrame };
 
-            device.Vertices[0].SetSource(skirtVBuf, 0, SkirtStride);
+            device.SetVertexBuffer(skirtVBuf);
 
             effect.Begin();
 
@@ -662,7 +662,7 @@ namespace Boku.SimWorld
             effect.End();
 
             if (RenderWire)
-                device.RenderState.FillMode = FillMode.Solid;
+                device.RasterizerState = new RasterizerState { FillMode = FillMode.Solid };
         }
 
         #endregion Renderable Versions

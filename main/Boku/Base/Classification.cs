@@ -148,6 +148,34 @@ namespace Boku.Base
             Collectable = 0x0001,
             Static = 0x8000
         }
+
+        public enum Shapes
+        {
+            NotApplicable,
+            Ball,
+            Tube,
+            Square,
+            Cone,
+        }
+
+        public enum Tastes
+        {
+            NotApplicable,
+            None,
+            Sweet,
+            Salty,
+            Bitter,
+            Sour,
+        }
+
+        public enum Smells
+        {
+            NotApplicable,
+            None,
+            Pleasant,
+            Stinky,
+        }
+
         [XmlAttribute]
         public Physicalities physicality;
 
@@ -171,6 +199,12 @@ namespace Boku.Base
         public Classification(string name)
         {
             this.name = name;
+        }
+        public Classification(string name, Colors color, Shapes shape, Tastes taste, Smells smell, Physicalities physicality)
+        {
+            this.name = name;
+            this.color = color;
+            this.physicality = physicality;
         }
         public Classification(Classification src)
         {

@@ -1839,6 +1839,10 @@ namespace Boku.Base
         /// The UNSCALED kick range. Should be combined with kickrange of other bot.
         /// </summary>
         protected float kickRange;
+        protected float strengthHeld;
+        protected float collisionRadius;
+        protected bool collideWithEnv;
+        protected bool collideWithPath;
         /// <summary>
         /// The UNSCALED scan range.
         /// </summary>
@@ -3109,6 +3113,11 @@ namespace Boku.Base
         }
 
         #endregion Accessors
+
+        public GameActor()
+            : base("unknown", "unknown", null)
+        {
+        }
 
         public GameActor(
             string classificationName,
@@ -8064,6 +8073,11 @@ namespace Boku.Base
             }
 
             return bSensible;
+        }
+
+        protected void AddDevice(VisualDevice device)
+        {
+            // Device registration for sensor system.
         }
 
         /// <summary>

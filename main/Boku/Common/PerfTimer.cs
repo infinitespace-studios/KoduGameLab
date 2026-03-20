@@ -110,12 +110,12 @@ namespace Boku.Common
                     }
                     //Debug.Print("    min : " + minSample.ToString());
                     //Debug.Print("    max : " + maxSample.ToString());
-#endif
                     //Console.WriteLine(label + " : " + ns.ToString("f2") + "ns" + "    min : " + min.ToString("f2") + "    max : " + max.ToString("f2"));
 
                     Reset();
                 }
             }
+#endif
         }   // end of PerfTimer Stop()
 
         private void Reset()

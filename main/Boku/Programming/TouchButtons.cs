@@ -105,11 +105,11 @@ namespace Boku.Programming
             }
         }
 
-        public static void InitDeviceResources(GraphicsDeviceManager graphics)
+        public static void InitDeviceResources(GraphicsDevice device)
         {
         }
 
-        public static void DeviceReset(GraphicsDeviceManager graphics)
+        public static void DeviceReset(GraphicsDevice device)
         {
         }
 
