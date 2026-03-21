@@ -6,6 +6,7 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Processors;
 using MonoGame.Framework.Content.Pipeline.Builder;
+using BokuContentProcessors;
 
 var contentCollectionArgs = new ContentBuilderParams()
 {
@@ -49,6 +50,10 @@ public class Builder : ContentBuilder
 
         // Exclude raw text/data files
         contentCollection.Exclude<WildcardRule>("Text/**/*");
+
+        // Process censor CSV files with custom pipeline
+        contentCollection.Include<WildcardRule>("Text/Censor/*.csv",
+            new CensorContentImporter(), new CensorContentProcessor());
 
         // Exclude WAV audio files for now (audio system needs XACT replacement)
         contentCollection.Exclude<WildcardRule>("**/*.wav");
