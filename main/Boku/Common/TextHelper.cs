@@ -1825,9 +1825,39 @@ namespace Boku.Common
             TextHelper.DrawString(Font, text, new Vector2(x, y), textColor);
         }   // end of TextHelper DrawStringWithShadow()
 
+        /// <summary>
+        /// SpriteFont overload for legacy code that passes SpriteFont instead of GetFont delegate.
+        /// </summary>
+        public static void SplitMessage(string inputMessage, int maxLineWidth, SpriteFont font, bool preserveCharacterCount, List<string> lines)
+        {
+            UI2D.Shared.GetFont fontDelegate = delegate() { return new FontWrapper { spriteFont = font }; };
+            SplitMessage(inputMessage, maxLineWidth, fontDelegate, preserveCharacterCount, lines);
+        }
 
         /// <summary>
-        /// Truncates and adds "..." to the string if longer than maxSize.
+        /// SpriteFont overload for DrawStringWithShadow.
+        /// </summary>
+        public static void DrawStringWithShadow(SpriteFont font, SpriteBatch batch, int x, int y, string text, Color textColor, Color shadowColor, bool invertDropShadow)
+        {
+            UI2D.Shared.GetFont fontDelegate = delegate() { return new FontWrapper { spriteFont = font }; };
+            DrawStringWithShadow(fontDelegate, batch, x, y, text, textColor, shadowColor, invertDropShadow);
+        }
+
+        /// <summary>
+        /// SpriteFont overload for DrawStringWithShadow with Vector2 position.
+        /// </summary>
+        public static void DrawStringWithShadow(SpriteFont font, SpriteBatch batch, Vector2 pos, string text, Color textColor, Color shadowColor, bool invertDropShadow)
+        {
+            DrawStringWithShadow(font, batch, (int)pos.X, (int)pos.Y, text, textColor, shadowColor, invertDropShadow);
+        }
+
+        /// <summary>
+        /// SpriteFont overload for CalcJustificationOffset that takes a SpriteFont.
+        /// </summary>
+        public static int CalcJustificationOffset(int margin, int width, int textWidth, SpriteFont font)
+        {
+            return CalcJustificationOffset(margin, width, textWidth, UIGridElement.Justification.Center);
+        }
         /// </summary>
         /// <param name="Font">Delegate to get font to use in measurements.</param>
         /// <param name="input"></param>
@@ -1985,6 +2015,44 @@ namespace Boku.Common
 
             return str;
         }   // end of FilterEmail()
+
+        /// <summary>
+        /// Legacy overload for tutorial code that uses BitmapFont and returns ArrayList.
+        /// </summary>
+        public static ArrayList SplitMessage(string inputMessage, int maxLineWidth, BitmapFont font)
+        {
+            ArrayList result = new ArrayList();
+            if (string.IsNullOrEmpty(inputMessage))
+                return result;
+            // Simple word-wrap: split on spaces
+            string[] words = inputMessage.Split(' ');
+            string currentLine = "";
+            foreach (string word in words)
+            {
+                string testLine = string.IsNullOrEmpty(currentLine) ? word : currentLine + " " + word;
+                if (font.MeasureString(testLine) > maxLineWidth && !string.IsNullOrEmpty(currentLine))
+                {
+                    result.Add(currentLine);
+                    currentLine = word;
+                }
+                else
+                {
+                    currentLine = testLine;
+                }
+            }
+            if (!string.IsNullOrEmpty(currentLine))
+                result.Add(currentLine);
+            return result;
+        }
+
+        /// <summary>
+        /// BitmapFont overload for DrawStringWithShadow (porting stub).
+        /// </summary>
+        public static void DrawStringWithShadow(BitmapFont font, int x, int y, string text, Color textColor, Color shadowColor, bool invertDropShadow)
+        {
+            // Porting stub - BitmapFont rendering not yet implemented for SpriteBatch.
+            font.DrawString(x, y, textColor, text);
+        }
 
     }   // end of class TextHelper
 }   // end of namespace Boku.Common

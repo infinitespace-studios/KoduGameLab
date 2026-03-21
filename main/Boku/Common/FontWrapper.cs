@@ -68,7 +68,15 @@ namespace Boku.Common
 
             return result;
         }   // end of MeasureString()
-    
+
+        /// <summary>
+        /// Implicit conversion to SpriteFont for legacy compatibility.
+        /// </summary>
+        public static implicit operator SpriteFont(FontWrapper wrapper)
+        {
+            return wrapper?.spriteFont;
+        }
+
     }   // end of class FontWrapper
 
 }   // end of namespace Boku.Common

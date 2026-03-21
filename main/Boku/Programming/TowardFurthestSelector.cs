@@ -77,7 +77,7 @@ namespace Boku.Programming
                     if (apply)
                     {
                         // radius should be from object
-                        actionSet.AddAttractor(AllocAttractor(target.Range, value, target.GameThing, reflex), 0.4f);
+                        actionSet.AddAttractor(Action.AllocAttractor(target.Range, value, target.GameThing, reflex), 0.4f);
                     }
                 }
             }

@@ -172,6 +172,7 @@ namespace Boku.Common
             InGamePaintTool,
             InGameSpikeyHillyTool,
             InGameSmoothLevelTool,
+            InGameSmoothHillyTool,
             InGameRaiseLowerTool,
             InGameDeleteTool,
 

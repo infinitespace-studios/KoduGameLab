@@ -21,6 +21,7 @@ using Boku.Programming;
 using Boku.UI;
 using Boku.UI2D;
 using Boku.Input;
+using Boku.Audio;
 
 namespace Boku
 {
@@ -89,7 +90,7 @@ namespace Boku
                     {
                         parent.terrain.UpdateSelectTexture(shared.editBrushTextureIndex, shared.editBrushPosition, shared.editBrushRadius, shared.editBrushIndex);
                         shared.textureSelectModified = true;
-                        InGame.inGame.IsLevelDirty = true;
+                        InGame.IsLevelDirty = true;
                     }
 
 

@@ -27,6 +27,8 @@ namespace Boku.Common
         private static BokuSettings instance = new BokuSettings();
         public static BokuSettings Settings { get { return instance; } }
         public static void Save() { }
+        public static void Save(object stream) { }
+        public bool LowModels { get; set; }
         public bool FullScreen { get; set; }
         public bool PostEffects { get; set; } = true;
         public bool Audio { get; set; } = true;
@@ -72,6 +74,35 @@ namespace Boku.Input
 {
     public interface IMicrobitTile
     {
+    }
+
+    public static class TouchInputStub
+    {
+        public static void Init() { }
+        public static void Update() { }
+        public static void ClearEvents() { }
+        public static Boku.Common.Touch[] touches { get { return System.Array.Empty<Boku.Common.Touch>(); } }
+    }
+}
+
+namespace Boku
+{
+    public static class OperatingSystemHelper
+    {
+        public static string GetOSVersionString() { return System.Environment.OSVersion.ToString(); }
+    }
+
+    public enum MultiSampleType
+    {
+        None = 0,
+    }
+}
+
+namespace Boku.Common.ParticleSystem
+{
+    public class FireballEmitter
+    {
+        public FireballEmitter(object particleSystemManager) { }
     }
 }
 

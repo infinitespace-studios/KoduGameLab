@@ -25,6 +25,17 @@ namespace Boku
 {
     public class Wisp : GameActor
     {
+        private static XmlGameActor xmlGameActor = null;
+        public static XmlGameActor XmlActor
+        {
+            get
+            {
+                if (xmlGameActor == null)
+                    xmlGameActor = XmlGameActor.Deserialize("Wisp");
+                return xmlGameActor;
+            }
+        }
+
         private PlasmaEmitter tail = null;
 
         public override Classification.Colors ClassColor

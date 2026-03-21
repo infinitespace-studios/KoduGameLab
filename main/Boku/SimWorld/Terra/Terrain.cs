@@ -802,6 +802,14 @@ namespace Boku.SimWorld.Terra
             PostBusy();
         }   // end of Terrain Update();
 
+        /// <summary>
+        /// Update the selected terrain texture at the given position and radius.
+        /// </summary>
+        public void UpdateSelectTexture(int textureIndex, Vector2 position, float radius, int brushIndex)
+        {
+            // Porting stub - terrain texture painting not yet implemented.
+        }
+
         public void TransitionToSky(int newSkyIndex, float transitionTime)
         {
             //check if another transition was running, if so, don't start another

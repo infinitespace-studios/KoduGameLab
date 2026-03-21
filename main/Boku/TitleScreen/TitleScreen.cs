@@ -56,6 +56,7 @@ namespace Boku
             private Texture2D backgroundTexture = null;
             private Texture2D dotTexture = null;
             private Texture2D waitTexture = null;
+            private Texture2D logoTexture = null;
 
             private float kMaxRadius = 32.0f;
 

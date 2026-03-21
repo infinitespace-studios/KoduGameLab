@@ -68,6 +68,22 @@ namespace Boku.Base
             cue.Stop(options);
         }
 
+        public void StopImmediate()
+        {
+            cue.Stop(AudioStopOptions.Immediate);
+        }
+
+        public void SetVolume(float vol)
+        {
+            cue.SetVariable("Volume", vol);
+        }
+
+        public bool Spatial
+        {
+            get { return thing != null; }
+            set { }
+        }
+
         public void Apply3D(AudioListener listener)
         {
             if (thing != null)

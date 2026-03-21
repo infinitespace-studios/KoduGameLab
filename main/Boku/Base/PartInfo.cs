@@ -199,8 +199,7 @@ namespace Boku.Base
         /// <returns>The extracted color.</returns>
         private Vector4 GetColor(EffectParameter param)
         {
-            float[] tmp = new float[3];
-            tmp = param.GetValueSingleArray(3);
+            float[] tmp = param.GetValueSingleArray();
 
             Vector4 result = new Vector4(tmp[0], tmp[1], tmp[2], 1.0f);
 

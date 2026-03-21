@@ -13,6 +13,7 @@ using Boku.Common;
 using Boku.Common.ParticleSystem;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
+using Road = Boku.SimWorld.Path.Road;
 using Boku.SimWorld.Terra;
 using Boku.SimWorld.Collision;
 using Boku.Fx;
@@ -466,7 +467,7 @@ namespace Boku.SimWorld.Chassis
             }
 
             // Check for collisions against walls.
-            List<Road.CollisionInfo> collisions = new List<Road.CollisionInfo>();
+            List<Boku.SimWorld.Path.Road.CollisionInfo> collisions = new List<Boku.SimWorld.Path.Road.CollisionInfo>();
             if (WayPoint.GetCollisions(collisionCenter, 1.0f, collisions))
             {
                 ExplodeWithoutHittingAnything(collisionCenter);

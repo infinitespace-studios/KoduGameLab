@@ -2012,8 +2012,8 @@ namespace Boku.Base
             get { return clusterRange;  }
         }
 
-        public AudioCue idleCue = null;
-        public AudioCue moveCue = null;
+        public Boku.Audio.AudioCue idleCue = null;
+        public Boku.Audio.AudioCue moveCue = null;
 
         // Provides glow around actor's head.
         protected bool glowing = false;
@@ -3974,7 +3974,7 @@ namespace Boku.Base
                     if (!hitInfo.Touching)
                     {
                         // Collision sound.
-                        Audio.Foley.PlayCollision(actor, hitInfo.Other);
+                        Boku.Audio.Foley.PlayCollision(actor, hitInfo.Other);
                     }
                 }
                 // No shield or sparks for apples or rocks.
@@ -4790,6 +4790,15 @@ namespace Boku.Base
                     //ApplyController(_animators, _currentAnim);
                 }
             }
+        }
+
+        /// <summary>
+        /// Overload accepting Xclna AnimationController for ported code.
+        /// </summary>
+        public void SetAnimation(Xclna.Xna.Animation.AnimationController controller)
+        {
+            // Xclna AnimationController is not BaseController-compatible; 
+            // store a reference but skip the Animatics pipeline.
         }
 
         /// <summary>
@@ -8111,7 +8120,7 @@ namespace Boku.Base
                 arc = MathHelper.TwoPi;
             }
 
-            VisualDevice visual = new VisualDevice();
+            VisualDevice visual = new VisualDevice(0);
             AddVisualDevice(visual);
         }
 

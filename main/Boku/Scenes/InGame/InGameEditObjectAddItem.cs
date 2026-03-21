@@ -18,6 +18,7 @@ using Microsoft.Xna.Framework.Input;
 using Boku.Base;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
+using Road = Boku.SimWorld.Path.Road;
 using Boku.Common;
 using Boku.Programming;
 using Boku.UI;

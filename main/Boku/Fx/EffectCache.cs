@@ -12,6 +12,8 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Boku.Common;
+
 namespace Boku.Fx
 {
     public class EffectCache<EffectParamsEnum, EffectTechsEnum> : EffectCacheWithTechs

@@ -78,6 +78,7 @@ namespace Boku
             public int curObjectColor = ColorPalette.GetIndexFromColor(Classification.Colors.White);    // The current color as displayed on our color palette.
 
             public bool heightMapModified = false;          // Booleans used to determine if we need to save out a user
+            public bool textureSelectModified = false;      // Whether the texture selection has been modified.
 
             public ParticleSystemManager particleSystemManager = new ParticleSystemManager();
             public Compass compass = new Compass();
@@ -2016,6 +2017,16 @@ namespace Boku
                                                         // the Autosave properly.
 
         #region Accessors
+
+        /// <summary>
+        /// Returns an enumerator over the current game things in the world.
+        /// </summary>
+        public IEnumerator GetGameThingEnumerator()
+        {
+            if (gameThingList != null)
+                return gameThingList.GetEnumerator();
+            return System.Linq.Enumerable.Empty<GameThing>().GetEnumerator();
+        }
 
         public double LevelPlaySeconds
         {

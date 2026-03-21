@@ -28,7 +28,7 @@ namespace Boku.UI2D
         private static Effect effect = null;
 
         private RenderTarget2D diffuse = null;
-        private Texture background = null;
+        private Texture2D background = null;
 
         private float width = 512;
         private float height = 302;
@@ -182,9 +182,10 @@ namespace Boku.UI2D
             diffuse = new RenderTarget2D(
                 device,
                 w, h,
-                1,
+                false,
                 SurfaceFormat.Color,
-                MultiSampleType.None, 0,
+                DepthFormat.None,
+                0,
                 RenderTargetUsage.PlatformContents);
             InGame.GetRT("MessageBoxElement", diffuse);
 
@@ -233,7 +234,7 @@ namespace Boku.UI2D
             }   // end of i loop over lines in list.
 
             // Load button textures.
-            Texture BButton = ButtonTextures.BButton;
+            Texture2D BButton = ButtonTextures.BButton;
 
             // Render the 'B' button.
             Vector2 size = new Vector2(56.0f, 56.0f);

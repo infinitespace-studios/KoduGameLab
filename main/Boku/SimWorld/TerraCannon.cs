@@ -24,6 +24,17 @@ namespace Boku
 {
     public class TerraCannon : GameActor
     {
+        private static XmlGameActor xmlGameActor = null;
+        public static XmlGameActor XmlActor
+        {
+            get
+            {
+                if (xmlGameActor == null)
+                    xmlGameActor = XmlGameActor.Deserialize("TerraCannon");
+                return xmlGameActor;
+            }
+        }
+
         public TerraCannon(string classificationName, BaseChassis chassis, GetModelInstance getModelInstance, StaticActor staticActor)
             : base(classificationName, classificationName, chassis, getModelInstance, getModelInstance, staticActor)
         {

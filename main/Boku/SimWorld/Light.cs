@@ -26,6 +26,17 @@ namespace Boku
 {
     public class Light : GameActor
     {
+        private static XmlGameActor xmlGameActor = null;
+        public static XmlGameActor XmlActor
+        {
+            get
+            {
+                if (xmlGameActor == null)
+                    xmlGameActor = XmlGameActor.Deserialize("Light");
+                return xmlGameActor;
+            }
+        }
+
         #region ChildClasses
         private class LuzAttach : GameActor.Attachment
         {

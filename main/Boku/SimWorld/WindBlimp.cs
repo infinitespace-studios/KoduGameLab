@@ -28,6 +28,17 @@ namespace Boku
 {
     public class WindBlimp : GameActor
     {
+        private static XmlGameActor xmlGameActor = null;
+        public static XmlGameActor XmlActor
+        {
+            get
+            {
+                if (xmlGameActor == null)
+                    xmlGameActor = XmlGameActor.Deserialize("WindBlimp");
+                return xmlGameActor;
+            }
+        }
+
         public WindBlimp(string classificationName, BaseChassis chassis, GetModelInstance getModelInstance, StaticActor staticActor)
             : base(classificationName, classificationName, chassis, getModelInstance, getModelInstance, staticActor) { }
 

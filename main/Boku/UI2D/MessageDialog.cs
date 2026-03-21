@@ -63,7 +63,7 @@ namespace Boku
         private static Effect effect = null;
 
         private RenderTarget2D diffuse = null;
-        private Texture background = null;      // Background image.
+        private Texture2D background = null;      // Background image.
 
         private float width = 512;              // Size of dialog in pixels.
         private float height = 302;             // Determined by size of background art and the fact that this

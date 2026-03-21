@@ -118,6 +118,47 @@ namespace Boku
 
         #endregion
 
+        #region Stubs for MainMenu compatibility
+
+        /// <summary>
+        /// Sets the dirty flag on the scroller.
+        /// </summary>
+        public bool Dirty
+        {
+            set
+            {
+                if (newsScroller != null)
+                    newsScroller.Dirty = true;
+            }
+        }
+
+        /// <summary>
+        /// Returns the current feed display size.
+        /// </summary>
+        public Vector2 FeedSize
+        {
+            get { return GetScrollBoxSize; }
+            set { /* stub */ }
+        }
+
+        /// <summary>
+        /// Returns the default scroll box size.
+        /// </summary>
+        public Vector2 ResetScrollBoxSize
+        {
+            get { return GetScrollBoxSize; }
+        }
+
+        /// <summary>
+        /// Tests whether a position is within the scroll window.
+        /// </summary>
+        public bool IsInScrollwindow(Vector2 pos)
+        {
+            return false;
+        }
+
+        #endregion
+
         #region Public
 
         // c'tor

@@ -308,6 +308,30 @@ namespace Xclna.Xna.Animation
             }
         }
 
+        /// <summary>
+        /// Gets the AnimationInfo object with the given name.
+        /// </summary>
+        public AnimationInfo this[string name]
+        {
+            get
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].Key == name)
+                        return list[i].Value;
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the number of animations in the collection.
+        /// </summary>
+        public int Count
+        {
+            get { return list.Count; }
+        }
+
     }
 
 

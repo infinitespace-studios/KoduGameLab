@@ -524,6 +524,33 @@ namespace Boku.Programming
             set { }
         }
 
+        /// <summary>
+        /// Furthest target, if any, in the target set.
+        /// </summary>
+        public SensorTarget Furthest
+        {
+            get
+            {
+                SortTargets(justGetFirst: false);
+                return nearestTargets.Count > 0 ? nearestTargets[nearestTargets.Count - 1] : null;
+            }
+        }
+
+        /// <summary>
+        /// Cull the target set to the furthest target from the game actor.
+        /// </summary>
+        public bool CullToFurthest(GameActor gameActor, Func<GameActor, Vector3, float, bool> blockedCheck)
+        {
+            SortTargets(justGetFirst: false);
+            if (nearestTargets.Count == 0)
+                return false;
+            // Keep only the furthest target.
+            SensorTarget furthest = nearestTargets[nearestTargets.Count - 1];
+            nearestTargets.Clear();
+            nearestTargets.Add(furthest);
+            return true;
+        }
+
         public SensorTargetSet()
         {
         }

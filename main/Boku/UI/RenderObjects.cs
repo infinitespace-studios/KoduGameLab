@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Boku.Common;
+using TileProcessor;
 
 namespace Boku.Base
 {

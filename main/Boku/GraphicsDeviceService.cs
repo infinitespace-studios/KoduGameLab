@@ -7,6 +7,8 @@ using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Boku.Common;
+
 // The IGraphicsDeviceService interface requires a DeviceCreated event, but we
 // always just create the device inside our constructor, so we have no place to
 // raise that event. The C# compiler warns us that the event is never used, but

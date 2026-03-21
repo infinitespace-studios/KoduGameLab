@@ -8,6 +8,8 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Xclna.Xna.Animation;
+
 namespace Boku.Animatics
 {
     public class AnimationInstance
@@ -25,6 +27,11 @@ namespace Boku.Animatics
         /// Dictionary of skin data.
         /// </summary>
         private SkinDataList skinList;
+
+        /// <summary>
+        /// Animation info collection from the model (for Xclna animation system).
+        /// </summary>
+        private AnimationInfoCollection animInfoCollection;
 
         /// <summary>
         /// Current animation controller.
@@ -154,6 +161,14 @@ namespace Boku.Animatics
         {
             get { return animDict.Length == 0; }
         }
+        /// <summary>
+        /// Dictionary-like accessor for animations by name (returns AnimationInfoCollection).
+        /// </summary>
+        public AnimationInfoCollection Animations
+        {
+            get { return animInfoCollection; }
+        }
+
         #endregion Accessors
 
         #region Public
@@ -178,6 +193,9 @@ namespace Boku.Animatics
             inst.skinList = SkinDataList.Extract(model);
             if (inst.skinList == null)
                 return null;
+
+            // Extract AnimationInfoCollection from model tag for Xclna animation system.
+            inst.animInfoCollection = AnimationInfoCollection.FromModel(model);
 
             if (!inst.Bind())
                 return null;

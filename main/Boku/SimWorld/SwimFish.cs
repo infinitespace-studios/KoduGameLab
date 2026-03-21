@@ -24,6 +24,17 @@ namespace Boku
 {
     public class SwimFish : GameActor
     {
+        private static XmlGameActor xmlGameActor = null;
+        public static XmlGameActor XmlActor
+        {
+            get
+            {
+                if (xmlGameActor == null)
+                    xmlGameActor = XmlGameActor.Deserialize("SwimFish");
+                return xmlGameActor;
+            }
+        }
+
         public enum MovementModes
         {
             WaterSurface, // surfaced, keep periscope above water

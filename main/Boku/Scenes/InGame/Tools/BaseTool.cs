@@ -102,6 +102,10 @@ namespace Boku.Scenes.InGame.Tools
             get { return stretchPhase; }
             set { stretchPhase = value; }
         }
+        protected bool StretchGoing
+        {
+            get { return stretchPhase == Phase.Going; }
+        }
         public bool Active
         {
             get { return active; }

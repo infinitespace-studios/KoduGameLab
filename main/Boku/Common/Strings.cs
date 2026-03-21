@@ -358,5 +358,55 @@ namespace Boku.Common
             return list.ToArray();
         }
         #endregion
+
+        #region Legacy Instance Pattern
+        private static StringsInstance _instance = new StringsInstance();
+        public static StringsInstance Instance { get { return _instance; } }
+
+        public class StringsInstance
+        {
+            public ToolStrings tools = new ToolStrings();
+            public LoadLevelMenuStrings loadLevelMenu = new LoadLevelMenuStrings();
+        }
+
+        public class ToolStrings
+        {
+            public string levelTool { get { return Strings.GetString("tools.levelTool") ?? "Level Tool"; } }
+            public string deleteTool { get { return Strings.GetString("tools.deleteTool") ?? "Delete Tool"; } }
+            public string roadTool { get { return Strings.GetString("tools.roadTool") ?? "Road Tool"; } }
+            public string hillTool { get { return Strings.GetString("tools.hillTool") ?? "Hill Tool"; } }
+            public string minMaxTool { get { return Strings.GetString("tools.minMaxTool") ?? "Min/Max Tool"; } }
+            public string paintMaterialTool { get { return Strings.GetString("tools.paintMaterialTool") ?? "Paint Material Tool"; } }
+        }
+
+        public class LoadLevelMenuStrings
+        {
+            public string missionsTab { get { return Strings.GetString("loadLevelMenu.missionsTab") ?? "Missions"; } }
+            public string myWorldsTab { get { return Strings.GetString("loadLevelMenu.myWorldsTab") ?? "My Worlds"; } }
+            public string starterWorldsTab { get { return Strings.GetString("loadLevelMenu.starterWorldsTab") ?? "Starter Worlds"; } }
+            public string downloadsTab { get { return Strings.GetString("loadLevelMenu.downloadsTab") ?? "Downloads"; } }
+            public string deleteWorld { get { return Strings.GetString("loadLevelMenu.deleteWorld") ?? "Delete World"; } }
+            public string oldSortBy { get { return Strings.GetString("loadLevelMenu.oldSortBy") ?? "Sort By: "; } }
+            public string world { get { return Strings.GetString("loadLevelMenu.world") ?? "World"; } }
+            public string separator { get { return Strings.GetString("loadLevelMenu.separator") ?? " | "; } }
+            public string oldCreator { get { return Strings.GetString("loadLevelMenu.oldCreator") ?? "Creator"; } }
+            public string rating { get { return Strings.GetString("loadLevelMenu.rating") ?? "Rating"; } }
+            public string date { get { return Strings.GetString("loadLevelMenu.date") ?? "Date"; } }
+            public string worldCount { get { return Strings.GetString("loadLevelMenu.worldCount") ?? " world"; } }
+            public string worldsCount { get { return Strings.GetString("loadLevelMenu.worldsCount") ?? " worlds"; } }
+        }
+
+        private static string GetString(string key)
+        {
+            if (strings != null && strings.ContainsKey(key))
+            {
+                var list = strings[key];
+                if (list != null && list.Count > 0)
+                    return list[0];
+            }
+            return null;
+        }
+        #endregion
+
     }   // end of class Strings
 }   // end of namespace Boku.Common

@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Boku.Common;
 using WayPoint = Boku.SimWorld.Path.WayPoint;
 using RoadGenerator = Boku.SimWorld.Path.RoadGenerator;
+using PathRoad = Boku.SimWorld.Path.Road;
 using Terrain = Boku.SimWorld.Terra.Terrain;
 using HeightMap = Boku.SimWorld.Terra.HeightMap;
 using HiWallGen = Boku.SimWorld.Path.HiWallGen;
@@ -209,22 +210,17 @@ namespace Boku.SimWorld
         /// <summary>
         /// The visual representation for a section of a path between two nodes
         /// </summary>
-        public class Section
+        public class Section : Boku.SimWorld.Path.Road.Section
         {
-            protected Road road;
-            protected WayPoint.Edge edge;
-            protected RenderObj renderObj;
+            protected new Road road;
+            protected new RenderObj renderObj;
 
             #region Accessors
-            public Road Road
+            public new Road Road
             {
                 get { return road; }
             }
-            public WayPoint.Edge Edge
-            {
-                get { return edge; }
-            }
-            public RenderObj RenderObj
+            public new RenderObj RenderObj
             {
                 get { return renderObj; }
                 set { renderObj = value; }
@@ -281,15 +277,14 @@ namespace Boku.SimWorld
         /// <summary>
         /// The joint between 2 or more edges within a path, at a node
         /// </summary>
-        public class Intersection
+        public class Intersection : Boku.SimWorld.Path.Road.Intersection
         {
-            protected Road road;
-            protected WayPoint.Node node;
-            protected List<Section> sections = new List<Section>();
-            protected List<RenderObj> fans = new List<RenderObj>();
+            protected new Road road;
+            protected new List<Section> sections = new List<Section>();
+            protected new List<PathRoad.RenderObj> fans = new List<PathRoad.RenderObj>();
 
             #region Accessors
-            public Road Road
+            public new Road Road
             {
                 get { return road; }
             }
@@ -297,7 +292,7 @@ namespace Boku.SimWorld
             {
                 get { return node; }
             }
-            public List<RenderObj> Fans
+            public new List<PathRoad.RenderObj> Fans
             {
                 get { return fans; }
             }
@@ -309,9 +304,9 @@ namespace Boku.SimWorld
             /// <param name="camera"></param>
             public void Render(Camera camera)
             {
-                foreach (RenderObj fan in Fans)
+                foreach (var fan in Fans)
                 {
-                    fan.Render(camera, Road);
+                    fan.Render(camera, null);
                 }
             }
 
@@ -320,7 +315,7 @@ namespace Boku.SimWorld
             /// </summary>
             public void Clear()
             {
-                foreach (RenderObj fan in Fans)
+                foreach (var fan in Fans)
                 {
                     fan.Clear();
                 }

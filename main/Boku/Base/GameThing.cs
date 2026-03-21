@@ -183,7 +183,7 @@ namespace Boku.Base
                                                     // Change via the accessor only, not directly.
         private GameThing thingBeingHeldByThisActor = null; // The thing (if any) being held by this actor.
 
-        protected List<AudioCue> audioCues = new List<AudioCue>();
+        protected List<Boku.Audio.AudioCue> audioCues = new List<Boku.Audio.AudioCue>();
 
         protected FBXModel.Setup preRender = null;
         protected Face face = null;
@@ -255,6 +255,11 @@ namespace Boku.Base
 
         #region Accessors
 
+        /// <summary>
+        /// Identifier string used by tutorial system.
+        /// </summary>
+        public string id { get; set; }
+
         public int Version
         {
             get { return version; }
@@ -286,7 +291,7 @@ namespace Boku.Base
             set { desiredMovement = value; }
         }
 
-        public List<AudioCue> AudioCues
+        public List<Boku.Audio.AudioCue> AudioCues
         {
             get { return audioCues; }
         }
@@ -1886,18 +1891,18 @@ namespace Boku.Base
             return true;
         }
 
-        public void OnAudioCueComplete(AudioCue cue)
+        public void OnAudioCueComplete(Boku.Audio.AudioCue cue)
         {
             audioCues.Remove(cue);
         }
 
-        protected AudioCue FindActiveAudioCue(string name)
+        protected Boku.Audio.AudioCue FindActiveAudioCue(string name)
         {
             if (!String.IsNullOrEmpty(name))
             {
                 for (int i = 0; i < audioCues.Count; ++i)
                 {
-                    AudioCue cue = audioCues[i];
+                    Boku.Audio.AudioCue cue = audioCues[i];
 
                     if (cue.Name.Equals(name))
                     {

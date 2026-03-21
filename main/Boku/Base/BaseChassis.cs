@@ -367,6 +367,7 @@ namespace Boku.Base
         public float Mass
         {
             get { return parent.Mass; }
+            set { parent.Mass = value; }
         }
 
         /// <summary>
@@ -400,6 +401,7 @@ namespace Boku.Base
         public virtual float DefaultEditHeight
         {
             get { return parent.DefaultEditHeight; }
+            set { parent.DefaultEditHeight = value; }
         }
 
         /// <summary>
@@ -1151,7 +1153,7 @@ namespace Boku.Base
                                 float kHardHitSpeed = 2.0f;
                                 bool hard = velocity.Length() > kHardHitSpeed;
                                 ushort t = feeler.TerrainMaterialInfo.TerrainType;
-                                Audio.Foley.PlayCollision(thing, t);
+                                Boku.Audio.Foley.PlayCollision(thing, t);
                                 soundPlayed = true;
                             }
 

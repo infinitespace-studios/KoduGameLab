@@ -191,7 +191,7 @@ namespace Boku.Common
         #region Public
         public static void Init()
         {
-            Input.Init();
+            Boku.Input.TouchInputStub.Init();
         }
 
         //static private bool skipShow = false;
@@ -203,12 +203,12 @@ namespace Boku.Common
                 //----------------------------------------------------------------------------------
                 // This is a stub until Unity support is added. Unity doesn't need its update called
                 //----------------------------------------------------------------------------------
-                Input.Update();
+                Boku.Input.TouchInputStub.Update();
                 //----------------------------------------------------------------------------------
                 // Please remove the above hack when Unity is integrated
                 //----------------------------------------------------------------------------------
 
-                Touch[] touchesThisFrame = Input.touches; //From touchesThisFrame list in UnityTouchEmulation.
+                Touch[] touchesThisFrame = Boku.Input.TouchInputStub.touches; //From touchesThisFrame list in UnityTouchEmulation.
 
                 // Sort the array of Touch objects on the fingerId
                 Array.Sort(touchesThisFrame, delegate(Touch touchZero, Touch touchOne)
@@ -299,7 +299,7 @@ namespace Boku.Common
                         "new:\n" + newTouchesThisFrameString + newTouchContactsString);
                      */
 
-                    Input.ClearEvents();
+                    Boku.Input.TouchInputStub.ClearEvents();
                     touchContacts.Clear();
                     wasReleased = false;
                     return;

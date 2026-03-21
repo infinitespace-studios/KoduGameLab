@@ -350,8 +350,8 @@ namespace Boku.UI2D
             x = (int)(x - strSize.X * scale * 0.5f + 0.5f);
 
             /// Shadow and text colors, with appropriate opacity.
-            Color darkGrey = new Color(10, 10, 10, byteAlpha);
-            Color transWhite = new Color(255, 255, 255, byteAlpha);
+            Color darkGrey = new Color((int)10, (int)10, (int)10, (int)byteAlpha);
+            Color transWhite = new Color((int)255, (int)255, (int)255, (int)byteAlpha);
 
             // Finally, just do it. Note that we can't put the batching any
             // higher up the food chain, because the generic grid doesn't know

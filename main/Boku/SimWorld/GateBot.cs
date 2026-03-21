@@ -52,6 +52,8 @@ namespace Boku
         }
 
         private GateModes gateMode = GateModes.Close;
+        private Boku.Animatics.AnimationInstance _animator;
+        private Boku.Common.ParticleSystem.FireballEmitter fireballEmitter;
 
         public GateBot()
             : base()

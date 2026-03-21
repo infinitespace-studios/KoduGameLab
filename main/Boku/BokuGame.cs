@@ -40,6 +40,7 @@ using Boku.Programming;
 using Boku.Input;
 using Boku.SimWorld;
 using Boku.SimWorld.Path;
+using Road = Boku.SimWorld.Path.Road;
 using Boku.SimWorld.Terra;
 using Boku.UI2D;
 using Boku.Audio;
@@ -60,6 +61,10 @@ namespace Boku
 
 
         public static int ThreadId;
+
+        // Font stubs for ported code
+        public static Boku.Common.BitmapFont fontBerlinSansFBDemiBold20 = new Boku.Common.BitmapFont();
+        public static Boku.Common.BitmapFont fontBerlinSansFBDemiBold24 = new Boku.Common.BitmapFont();
         public static bool Running = true;
 
         public static bool syncRefresh = false;

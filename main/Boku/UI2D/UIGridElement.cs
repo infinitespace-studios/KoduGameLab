@@ -90,6 +90,11 @@ namespace Boku.UI2D
         protected const float kDim = 0.6f;  // How much to dim the element when not selected.  Used by Modular* elements.
         protected float dim = kDim;         // Current amount of dimming.
 
+        /// <summary>
+        /// Fade level for the element (0 = fully transparent, 1 = fully opaque).
+        /// </summary>
+        public float Fade { get; set; } = 1.0f;
+
         protected bool dirty = true;        // Does this element need to be refreshed.
 
         protected UI2D.Shared.GetFont Font = null;  // Delegate which will return the font to use for this UI element.  This font returned

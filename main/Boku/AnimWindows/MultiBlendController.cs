@@ -105,11 +105,11 @@ namespace Xclna.Xna.Animation
                     if(ac.ContainsAnimationTrack(pose))
                     {
                         m = ac.GetCurrentBoneTransform(pose);
-                        transform += ac.Weight == 1.0f ? m : ac.Weight * m;
+                        transform += ac.Weight == 1.0f ? m : Matrix.Multiply(m, ac.Weight);
                     }
                     else
                     {
-                        transform += ac.Weight == 1.0f ? pose.DefaultTransform : ac.Weight * pose.DefaultTransform;
+                        transform += ac.Weight == 1.0f ? pose.DefaultTransform : Matrix.Multiply(pose.DefaultTransform, ac.Weight);
                     }
                 }
             }

@@ -497,7 +497,7 @@ namespace Boku.Common
                 Start();
             }
 
-            private void Start()
+            public void Start()
             {
                 Vector3 startValue = get(param);
                 TwitchManager.Set<Vector3> twitchSet = delegate(Vector3 val, Object p)
