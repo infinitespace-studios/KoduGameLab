@@ -61,6 +61,25 @@ public class Builder : ContentBuilder
         // Exclude Unicode data files
         contentCollection.Exclude<WildcardRule>("**/*.txt");
 
+        // Exclude shader include-only files (no techniques, included by other shaders)
+        contentCollection.Exclude<WildcardRule>("Shaders/Globals.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Fog.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/DOF.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Flex.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Face.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/skin.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Light.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Luz.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/PrepXform.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/EyeDist.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/StandardLight.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/SurfaceLight.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/WaterHeight.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/ShadowInc.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/ParticleSize.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/QuadUvToPos.fx");
+
         return contentCollection;
     }
 }
