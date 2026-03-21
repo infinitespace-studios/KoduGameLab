@@ -83,3 +83,28 @@ Resolved ALL 206+ `#if NETFX_CORE` / `#if !NETFX_CORE` preprocessor directives a
 
 **Verification:** `grep -rl "NETFX_CORE" main/Boku --include="*.cs"` returns 0 files
 
+
+## Build Milestone: C# Compilation SUCCESS
+
+### ✅ Build succeeds — 0 errors, 0 warnings
+`dotnet build main/Boku/boku.csproj -p:SkipContentBuild=true` — **BUILD SUCCEEDED**
+
+### Key fixes to reach compilation:
+- Restored `BokuGame : Microsoft.Xna.Framework.Game` inheritance (removed by NETFX_CORE cleanup)
+- Restored `Settings.MediaPath` and `Settings.Default` (were in NETFX_CORE block)
+- Added GameActor 3-param constructor for legacy subclasses
+- Added default parameter values for InitDefaults, CheckSelectCursor, SharedIdle ctor
+- Fixed GraphicsDeviceManager → GraphicsDevice parameter mismatches in INeedsDeviceReset implementations
+- Fixed UIGrid, AudioCue, KeyboardInput, Road, Color type ambiguities with using aliases
+- Added missing members to BokuGame, GameThing, UIGridElement, AudioCue, etc.
+- Created minimal stubs for BokuBot, Popsy, RockSRO (missing actor types)
+- Added PortingStubs.cs for WinKeyboard, BitmapFont, BokuSettings, UIMeshData
+- Added System.Drawing.Common, System.IO.Packaging, System.Management NuGet packages
+- Excluded ~25 files with missing base types or deleted project dependencies
+- AnimWindows (Xclna animation library) included for runtime animation support
+
+### Remaining work:
+- Content pipeline build (shaders need HLSL porting, audio needs XACT replacement)
+- Runtime testing
+- Shader porting (Phase 6)
+- Audio system replacement (Phase 5)
