@@ -72,10 +72,5 @@
   <ItemGroup>
     <EmbeddedResource Include="256x.ico" />
   </ItemGroup>
-  <!-- Copy XML data files to output (loaded at runtime, not through content pipeline) -->
-  <ItemGroup>
-    <None Include="..\Content\Assets\Xml\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="Content\Xml" />
-    <None Include="..\Content\Assets\Text\**\*" CopyToOutputDirectory="PreserveNewest" LinkBase="Content\Text" />
-  </ItemGroup>
   <Import Project="..\Content\BuildContent.targets" Condition="'$(SkipContentBuild)' != 'true'" />
 </Project>

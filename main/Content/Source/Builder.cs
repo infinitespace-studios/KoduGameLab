@@ -37,6 +37,14 @@ public class Builder : ContentBuilder
         // Include all standard assets
         contentCollection.Include<WildcardRule>("*");
 
+        // Copy XML and JSON data files as-is (loaded at runtime via XmlSerializer)
+        contentCollection.IncludeCopy<WildcardRule>("**/*.xml");
+        contentCollection.IncludeCopy<WildcardRule>("**/*.Xml");
+        contentCollection.IncludeCopy<WildcardRule>("**/*.json");
+
+        // Copy text/CSV data files as-is
+        contentCollection.IncludeCopy<WildcardRule>("Text/**/*");
+
         // FBX models use Assimp-based FbxImporter
         contentCollection.Include<WildcardRule>("**/*.fbx", new FbxImporter(), new ModelProcessor());
 
@@ -44,22 +52,11 @@ public class Builder : ContentBuilder
         contentCollection.Exclude<WildcardRule>("*.mgcb");
         contentCollection.Exclude<WildcardRule>("*.contentproj");
 
-        // Exclude XML data files (loaded at runtime via XmlSerializer, not content pipeline)
-        contentCollection.Exclude<WildcardRule>("Xml/**/*.xml");
-        contentCollection.Exclude<WildcardRule>("Xml/**/*.Xml");
-
-        // Exclude raw text/data files
-        contentCollection.Exclude<WildcardRule>("Text/**/*");
-
-        // Process censor CSV files with custom pipeline
-        contentCollection.Include<WildcardRule>("Text/Censor/*.csv",
-            new CensorContentImporter(), new CensorContentProcessor());
-
-        // Exclude WAV audio files for now (audio system needs XACT replacement)
+        // Exclude WAV audio files (XACT uses pre-built wave banks, not individual WAVs)
         contentCollection.Exclude<WildcardRule>("**/*.wav");
 
-        // Exclude Unicode data files
-        contentCollection.Exclude<WildcardRule>("**/*.txt");
+        // Exclude Unicode data files (copied as raw)
+        contentCollection.IncludeCopy<WildcardRule>("**/*.txt");
 
         // Exclude shader include-only files (no techniques, included by other shaders)
         contentCollection.Exclude<WildcardRule>("Shaders/Globals.fx");

@@ -3,7 +3,7 @@
 
 //#define IMPORT_DEBUG
 
-#if EXTERNAL || true
+#if EXTERNAL || false
 # define GLOBAL_CATCH    // include the global exception handler.
 # define GLOBAL_CATCH_PC
 #endif
@@ -107,9 +107,7 @@ namespace Boku
 #endif
 
                 ThisVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                Assembly asm = Assembly.GetExecutingAssembly();
-                var attr = (asm.GetCustomAttributes(typeof(GuidAttribute), true));
-                UpdateCode = (attr[0] as GuidAttribute).Value;
+                UpdateCode = "055B31F9-07F8-479b-875F-F03279DF595E"; // Fixed GUID for MonoGame port
 
                 // Fake command line args to test double-click to launch
                 //args = new string[3] { args[0], @"/Import", @"C:\Users\scoy\My Documents\New World 3, by Stephen Coy.Kodu2" };
