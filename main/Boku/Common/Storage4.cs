@@ -109,6 +109,55 @@ namespace Boku.Common
         #region Public
 
         /// <summary>
+        /// Normalize file path for cross-platform: fix separators and find case-insensitive match on Linux.
+        /// </summary>
+        private static string NormalizePath(string path)
+        {
+            if (path == null) return path;
+
+            // Fix backslash separators for Linux/macOS
+            path = path.Replace('\\', Path.DirectorySeparatorChar);
+
+            // If file exists with exact casing, use it
+            if (File.Exists(path) || Directory.Exists(path))
+                return path;
+
+            // On case-sensitive file systems, try to find the file with different casing
+            try
+            {
+                string dir = Path.GetDirectoryName(path);
+                string name = Path.GetFileName(path);
+                if (dir != null && Directory.Exists(dir))
+                {
+                    // Try files
+                    foreach (string f in Directory.GetFiles(dir))
+                    {
+                        if (string.Equals(Path.GetFileName(f), name, StringComparison.OrdinalIgnoreCase))
+                            return f;
+                    }
+                    // Try directories
+                    foreach (string d in Directory.GetDirectories(dir))
+                    {
+                        if (string.Equals(Path.GetFileName(d), name, StringComparison.OrdinalIgnoreCase))
+                            return d;
+                    }
+                }
+            }
+            catch { }
+
+            return path;
+        }
+
+        /// <summary>
+        /// Normalize a relative file path: fix separators for cross-platform.
+        /// </summary>
+        private static string FixPath(string filePath)
+        {
+            if (filePath == null) return filePath;
+            return filePath.Replace('\\', Path.DirectorySeparatorChar);
+        }
+
+        /// <summary>
         /// One time init of storage.
         /// </summary>
         public static void Init()
@@ -141,6 +190,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static Stream OpenRead(string filePath, StorageSource sources)
         {
+            filePath = FixPath(filePath);
             Stream stream = null;
 
             try
@@ -150,7 +200,7 @@ namespace Boku.Common
                 // Try UserSpace.
                 if ((sources & StorageSource.UserSpace) != 0)
                 {
-                    string fullPath = Path.Combine(UserLocation, filePath);
+                    string fullPath = NormalizePath(Path.Combine(UserLocation, filePath));
                     if (File.Exists(fullPath))
                     {
                         stream = File.OpenRead(fullPath);
@@ -160,7 +210,7 @@ namespace Boku.Common
                 // Try TitleSpace.
                 if (stream == null && (sources & StorageSource.TitleSpace) != 0)
                 {
-                    string fullPath = Path.Combine(TitleLocation, filePath);
+                    string fullPath = NormalizePath(Path.Combine(TitleLocation, filePath));
                     if (File.Exists(fullPath))
                     {
                         stream = File.OpenRead(fullPath);
@@ -188,6 +238,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static Stream OpenWrite(string filePath)
         {
+            filePath = FixPath(filePath);
             Stream stream = null;
 
             try
@@ -222,6 +273,7 @@ namespace Boku.Common
 
         public static Stream Open(string filePath, FileMode fileMode)
         {
+            filePath = FixPath(filePath);
             Stream stream = null;
 
             try
@@ -261,6 +313,7 @@ namespace Boku.Common
 
         public static String[] GetFiles(string path, StorageSource sources)
         {
+            path = FixPath(path);
             return GetFiles(path, null, sources, SearchOption.TopDirectoryOnly);
         }
 
@@ -345,6 +398,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static bool FileExists(string filePath, StorageSource sources)
         {
+            filePath = FixPath(filePath);
             bool result = false;
 
             try
@@ -354,14 +408,14 @@ namespace Boku.Common
                     // Test user space first.
                     if ((sources & StorageSource.UserSpace) != 0)
                     {
-                        string fullPath = Path.Combine(UserLocation, filePath);
+                        string fullPath = NormalizePath(Path.Combine(UserLocation, filePath));
                         result = File.Exists(fullPath);
                     }
 
                     // If not found, try title space.
                     if (result == false && (sources & StorageSource.TitleSpace) != 0)
                     {
-                        string fullPath = Path.Combine(TitleLocation, filePath);
+                        string fullPath = NormalizePath(Path.Combine(TitleLocation, filePath));
                         result = File.Exists(fullPath);
                     }
                 }
@@ -417,6 +471,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static bool DirExists(string path, StorageSource sources)
         {
+            path = FixPath(path);
             bool result = false;
 
             try
@@ -457,6 +512,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static void CreateDirectory(string dirPath)
         {
+            dirPath = FixPath(dirPath);
             try
             {
                 string fullPath = Path.Combine(UserLocation, dirPath);
@@ -481,6 +537,7 @@ namespace Boku.Common
         /// <returns>true on success</returns>
         public static bool Delete(string filePath)
         {
+            filePath = FixPath(filePath);
             bool result = false;
 
             try
@@ -515,6 +572,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static bool IsReadOnly(string filePath)
         {
+            filePath = FixPath(filePath);
             if (File.Exists(filePath))
             {
                 FileAttributes attr = File.GetAttributes(filePath);
@@ -533,6 +591,7 @@ namespace Boku.Common
         /// <param name="filePath"></param>
         public static void ClearReadOnly(string filePath)
         {
+            filePath = FixPath(filePath);
             if (File.Exists(filePath))
             {
                 FileAttributes attr = File.GetAttributes(filePath);
@@ -543,6 +602,7 @@ namespace Boku.Common
 
         public static string[] ReadAllLines(string filePath, StorageSource sources)
         {
+            filePath = FixPath(filePath);
             string[] lines = null;
 
             if ((sources & StorageSource.UserSpace) != 0)
@@ -574,6 +634,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static DateTime GetLastWriteTimeUtc(string filePath, StorageSource sources)
         {
+            filePath = FixPath(filePath);
             DateTime time = DateTime.MinValue;
 
             if ((sources & StorageSource.UserSpace) != 0)
@@ -604,6 +665,7 @@ namespace Boku.Common
         /// <returns></returns>
         public static void SetLastWriteTimeUtc(string filePath, DateTime dateTimeUtc)
         {
+            filePath = FixPath(filePath);
             if (FileExists(filePath, StorageSource.UserSpace))
             {
                 string fullPath = Path.Combine(UserLocation, filePath);
@@ -621,21 +683,30 @@ namespace Boku.Common
 
             try
             {
-                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-                ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                if (OperatingSystem.IsWindows())
                 {
-                    if (MACAddress == String.Empty) // only return MAC Address from first card
+                    ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                    ManagementObjectCollection moc = mc.GetInstances();
+                    foreach (ManagementObject mo in moc)
                     {
-                        if ((bool)mo["IPEnabled"] == true) MACAddress = mo["MacAddress"].ToString();
+                        if (MACAddress == String.Empty) // only return MAC Address from first card
+                        {
+                            if ((bool)mo["IPEnabled"] == true) MACAddress = mo["MacAddress"].ToString();
+                        }
+                        mo.Dispose();
                     }
-                    mo.Dispose();
-                }
 
-                MACAddress = MACAddress.Replace(":", "");
+                    MACAddress = MACAddress.Replace(":", "");
+                }
+                else
+                {
+                    // On non-Windows, use machine name as fallback
+                    MACAddress = Environment.MachineName;
+                }
             }
             catch
             {
+                MACAddress = Environment.MachineName;
             }
 
             MACAddress = MACAddress.GetHashCode().ToString();

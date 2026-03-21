@@ -423,7 +423,7 @@ namespace Boku
                         Storage4.UserOverrideLocation = settings.UserFolder;
                     }
 
-                    if (!XmlOptionsData.ShowMicrobitTiles)
+                    if (!XmlOptionsData.ShowMicrobitTiles && OperatingSystem.IsWindows())
                     {
                         // Scan for attached microbits (but don't connect to them yet). If any are found,
                         // RefreshDevices will modify XmlOptionsData to make the microbit programming tiles
