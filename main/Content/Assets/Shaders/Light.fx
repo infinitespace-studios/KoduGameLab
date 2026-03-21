@@ -34,7 +34,7 @@ sampler_state
 };
 
 
-shared texture  EnvironmentMap;
+texture  EnvironmentMap;
 
 samplerCUBE EnvMapSampler =
 sampler_state

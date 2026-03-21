@@ -5,6 +5,14 @@
 // StdMaterials -- Shaders to handle the standard materials from 3DS Max via Xbf Files
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 
 // The world view and projection matrices
@@ -208,24 +216,14 @@ technique DepthPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -233,24 +231,14 @@ technique DepthPassWithFlex
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthWithFlexVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthWithFlexVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -258,24 +246,14 @@ technique DepthPassCloud
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthWithSkinningVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -284,24 +262,14 @@ technique DepthPassWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthWithSkinningVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -309,24 +277,14 @@ technique DepthPassWithWind
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthWithWindVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthWithWindVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -412,25 +370,15 @@ technique ShadowPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ShadowPassVS();
-        PixelShader  = compile ps_2_0 ShadowPassPS();
+        VertexShader = compile VS_SHADERMODEL ShadowPassVS();
+        PixelShader  = compile PS_SHADERMODEL ShadowPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
 
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -438,24 +386,14 @@ technique ShadowPassWithFlex
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ShadowPassWithFlexVS();
-        PixelShader  = compile ps_2_0 ShadowPassPS();
+        VertexShader = compile VS_SHADERMODEL ShadowPassWithFlexVS();
+        PixelShader  = compile PS_SHADERMODEL ShadowPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -463,24 +401,14 @@ technique ShadowPassCloud
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ShadowPassWithSkinningVS();
-        PixelShader  = compile ps_2_0 ShadowPassPS();
+        VertexShader = compile VS_SHADERMODEL ShadowPassWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL ShadowPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -488,24 +416,14 @@ technique ShadowPassWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ShadowPassWithSkinningVS();
-        PixelShader  = compile ps_2_0 ShadowPassPS();
+        VertexShader = compile VS_SHADERMODEL ShadowPassWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL ShadowPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -513,24 +431,14 @@ technique ShadowPassWithWind
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ShadowPassWithWindVS();
-        PixelShader  = compile ps_2_0 ShadowPassPS();
+        VertexShader = compile VS_SHADERMODEL ShadowPassWithWindVS();
+        PixelShader  = compile PS_SHADERMODEL ShadowPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -637,24 +545,14 @@ technique BloomPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BloomPassVS();
-        PixelShader  = compile ps_2_0 BloomPassPS();
+        VertexShader = compile VS_SHADERMODEL BloomPassVS();
+        PixelShader  = compile PS_SHADERMODEL BloomPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -662,24 +560,14 @@ technique BloomPassWithFlex
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BloomPassWithFlexVS();
-        PixelShader  = compile ps_2_0 BloomPassPS();
+        VertexShader = compile VS_SHADERMODEL BloomPassWithFlexVS();
+        PixelShader  = compile PS_SHADERMODEL BloomPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -687,24 +575,14 @@ technique BloomPassCloud
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BloomPassWithSkinningVS();
-        PixelShader  = compile ps_2_0 BloomPassPS();
+        VertexShader = compile VS_SHADERMODEL BloomPassWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL BloomPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -712,24 +590,14 @@ technique BloomPassWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BloomPassWithSkinningVS();
-        PixelShader  = compile ps_2_0 BloomPassPS();
+        VertexShader = compile VS_SHADERMODEL BloomPassWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL BloomPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -737,24 +605,14 @@ technique BloomPassWithWind
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BloomPassWithWindVS();
-        PixelShader  = compile ps_2_0 BloomPassPS();
+        VertexShader = compile VS_SHADERMODEL BloomPassWithWindVS();
+        PixelShader  = compile PS_SHADERMODEL BloomPassPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 

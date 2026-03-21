@@ -310,6 +310,7 @@ namespace Boku
             _graphics = new GraphicsDeviceManager(this);
             Graphics = _graphics;
             _graphics.PreparingDeviceSettings += PreparingDeviceSettingsHandler;
+            Content.RootDirectory = "Content";
 
             Auth.Init();
 

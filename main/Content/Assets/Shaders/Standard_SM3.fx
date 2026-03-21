@@ -2,6 +2,14 @@
 // Licensed under the MIT license.
 
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #ifndef STANDARD_SM3_FX
 #define STANDARD_SM3_FX
 
@@ -320,24 +328,15 @@ technique TexturedColorPass_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorSimpTexVS_SM3();
-        PixelShader  = compile ps_3_0 TexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorSimpTexVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL TexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -346,24 +345,15 @@ technique NonTexturedColorPass_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorSimpVS_SM3();
-        PixelShader  = compile ps_3_0 NonTexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorSimpVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL NonTexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -371,24 +361,15 @@ technique NonTexturedColorPassCloud_SM3
 {
 	pass P0
 	{
-        VertexShader = compile vs_3_0 ColorWithSkinVS_SM3();
-        PixelShader  = compile ps_3_0 CloudColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorWithSkinVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL CloudColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
 	}
 }
 
@@ -396,24 +377,15 @@ technique NonTexturedColorPassWithFlex_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorWithFlexVS_SM3();
-        PixelShader  = compile ps_3_0 NonTexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorWithFlexVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL NonTexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -421,24 +393,15 @@ technique TexturedColorPassFace_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorSimpTexVS_SM3();
-        PixelShader  = compile ps_3_0 TexturedColorPSFace_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorSimpTexVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL TexturedColorPSFace_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -447,24 +410,15 @@ technique NonTexturedColorPassWithSkinning_SM3
 {
 	pass P0
 	{
-        VertexShader = compile vs_3_0 ColorWithSkinVS_SM3();
-        PixelShader  = compile ps_3_0 NonTexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorWithSkinVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL NonTexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
    	}
 }
 
@@ -472,24 +426,15 @@ technique TexturedColorPassWithSkinning_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorTexWithSkinVS_SM3();
-        PixelShader  = compile ps_3_0 TexturedColorPSFace_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorTexWithSkinVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL TexturedColorPSFace_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -497,24 +442,15 @@ technique NonTexturedColorPassWithWind_SM3
 {
 	pass P0
 	{
-        VertexShader = compile vs_3_0 ColorWithWindVS_SM3();
-        PixelShader  = compile ps_3_0 NonTexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorWithWindVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL NonTexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
    	}
 }
 
@@ -522,24 +458,15 @@ technique TexturedColorPassWithFlex_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorTexWithFlexVS_SM3();
-        PixelShader  = compile ps_3_0 TexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorTexWithFlexVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL TexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -548,24 +475,15 @@ technique TexturedColorPassFoliage_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 FoliageColorVS_SM3();
-        PixelShader  = compile ps_3_0 TexturedFoliageColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL FoliageColorVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL TexturedFoliageColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -574,24 +492,15 @@ technique NonTexturedColorPassFoliage_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 FoliageColorVS_SM3();
-        PixelShader  = compile ps_3_0 NonTexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL FoliageColorVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL NonTexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

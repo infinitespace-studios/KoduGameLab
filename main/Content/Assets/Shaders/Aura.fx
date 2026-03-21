@@ -8,6 +8,14 @@
 //
 // Vertex shader output structure for bloom pass
 //
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 struct VS_OUTPUT_AURA
 {
     float4 position     : POSITION;     // vertex position
@@ -96,24 +104,15 @@ technique Aura
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraSimpleVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraSimpleVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -121,24 +120,15 @@ technique AuraWithFlex
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithFlexVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithFlexVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -146,24 +136,15 @@ technique AuraCloud
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithSkinningVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -171,24 +152,15 @@ technique AuraWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithSkinningVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -196,24 +168,15 @@ technique AuraBokuFaceWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithSkinningVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -221,24 +184,15 @@ technique AuraWideFaceWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithSkinningVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -246,24 +200,15 @@ technique AuraTwoFaceWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithSkinningVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithSkinningVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -271,24 +216,15 @@ technique AuraWithWind
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 AuraWithWindVS();
-        PixelShader  = compile ps_2_0 AuraPS();
+        VertexShader = compile VS_SHADERMODEL AuraWithWindVS();
+        PixelShader  = compile PS_SHADERMODEL AuraPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 

@@ -2,6 +2,14 @@
 // Licensed under the MIT license.
 
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #ifndef DISTORT_H
 #define DISTORT_H
 
@@ -209,24 +217,15 @@ technique DistortionPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSSimple();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSSimple();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -237,24 +236,15 @@ technique DistortionPassWithFlex
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSFlex();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSFlex();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -262,24 +252,15 @@ technique DistortionPassCloud
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSSkinning();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSSkinning();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -287,24 +268,15 @@ technique DistortionPassWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSSkinning();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSSkinning();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -312,24 +284,15 @@ technique DistortionPassBokuFaceWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSSkinning();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSSkinning();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -337,24 +300,15 @@ technique DistortionPassWideFaceWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSSkinning();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSSkinning();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -362,24 +316,15 @@ technique DistortionPassTwoFaceWithSkinning
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSSkinning();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSSkinning();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -387,24 +332,15 @@ technique DistortionPassWithWind
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVSWind();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVSWind();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

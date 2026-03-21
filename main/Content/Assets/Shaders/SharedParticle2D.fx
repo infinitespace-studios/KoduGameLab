@@ -3,12 +3,20 @@
 
 
 //
-// SharedParticle2D -- A collection of shaders for textured, 2D particles which use the shared emitters.
+// SharedParticle2D -- A collection of shaders for textured, 2D particles which use the emitters.
 //
 
 //
 // Shared Globals.
 //
+
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
 
 #include "Globals.fx"
 #include "DOF.fx"
@@ -28,15 +36,15 @@ float2  Drag; // drag constant.x, minspeed.y
 float4 DiffuseColor; // tint for the whole system
 
 // Distortion specifics
-shared texture Bump;
-shared float BumpStrength = 1.0f;
-shared float BlurStrength = 1.0f;
-shared float4 BumpScroll = float4(0.0f, 0.0f, 0.0f, 0.0f);
-shared float4 BumpScale = float4(1.0f, 1.0f, 1.0f, 1.0f);
+texture Bump;
+float BumpStrength = 1.0f;
+float BlurStrength = 1.0f;
+float4 BumpScroll = float4(0.0f, 0.0f, 0.0f, 0.0f);
+float4 BumpScale = float4(1.0f, 1.0f, 1.0f, 1.0f);
 
 // Textures
 texture DiffuseTexture;
-shared texture DepthTexture;     // R channel is amount of DOF needed. G is W / DOF_FarPlane
+texture DepthTexture;     // R channel is amount of DOF needed. G is W / DOF_FarPlane
 
 //
 // Texture samplers
@@ -229,24 +237,15 @@ technique TexturedColorPassNormalAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -257,24 +256,15 @@ technique TexturedColorPassNormalAlphaDrag
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorDragVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorDragVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -285,24 +275,15 @@ technique TexturedColorPassPremultipliedAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -313,24 +294,15 @@ technique TexturedColorPassOneOneBlend
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = One;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -427,25 +399,15 @@ technique DistortionPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DistortVS();
-        PixelShader  = compile ps_2_0 DistortPS();
+        VertexShader = compile VS_SHADERMODEL DistortVS();
+        PixelShader  = compile PS_SHADERMODEL DistortPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        BlendOp = Max;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -489,24 +451,15 @@ technique BleepPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BleepVS();
-        PixelShader  = compile ps_2_0 BleepPS();
+        VertexShader = compile VS_SHADERMODEL BleepVS();
+        PixelShader  = compile PS_SHADERMODEL BleepPS();
 
         /* // Alpha test
-        AlphaRef = 10;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -550,24 +503,15 @@ technique BeamPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BeamVS();
-        PixelShader  = compile ps_2_0 BeamPS();
+        VertexShader = compile VS_SHADERMODEL BeamVS();
+        PixelShader  = compile PS_SHADERMODEL BeamPS();
 
         /* // Alpha test
-        AlphaRef = 10;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 

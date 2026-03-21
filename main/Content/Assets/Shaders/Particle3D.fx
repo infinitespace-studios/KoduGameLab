@@ -6,6 +6,14 @@
 // Particle3D -- A collection of shaders for non-textured, 3D particles.
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 
 #include "Fog.fx"
@@ -121,24 +129,15 @@ technique BasicColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 BasicPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL BasicPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -149,24 +148,15 @@ technique OpaqueColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 BasicPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL BasicPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -177,24 +167,15 @@ technique TransparentColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 BasicPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL BasicPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -205,24 +186,15 @@ technique TransparentColorPassNoZ
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 BasicPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL BasicPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -233,24 +205,15 @@ technique PremultAlphaGlowColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 PremultAlphaGlowPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL PremultAlphaGlowPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -310,24 +273,15 @@ technique DepthPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

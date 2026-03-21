@@ -2,25 +2,33 @@
 // Licensed under the MIT license.
 
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Terrain_FA.fx"
 
 #ifndef XBOX
 VertexShader ColorVS_FA[] =
 {
-	compile vs_2_0 ColorL0VS_FA_SM2(),
-	compile vs_2_0 ColorL2VS_FA_SM2(),
-	compile vs_2_0 ColorL4VS_FA_SM2(),
-	compile vs_2_0 ColorL6VS_FA_SM2(),
-	compile vs_2_0 ColorL10VS_FA_SM2(),
-	compile vs_3_0 ColorVS_FA_SM3(),
+	compile VS_SHADERMODEL ColorL0VS_FA_SM2(),
+	compile VS_SHADERMODEL ColorL2VS_FA_SM2(),
+	compile VS_SHADERMODEL ColorL4VS_FA_SM2(),
+	compile VS_SHADERMODEL ColorL6VS_FA_SM2(),
+	compile VS_SHADERMODEL ColorL10VS_FA_SM2(),
+	compile VS_SHADERMODEL ColorVS_FA_SM3(),
 };
 
 PixelShader ColorPS_FA[] =
 {
-	compile ps_2_0 ColorPS_FA_SM2(),
-	compile ps_2_0 Color2PS_FA_SM2(),
-	compile ps_3_0 ColorPS_FA_SM3(),
-	compile ps_3_0 Color2PS_FA_SM3(),
+	compile PS_SHADERMODEL ColorPS_FA_SM2(),
+	compile PS_SHADERMODEL Color2PS_FA_SM2(),
+	compile PS_SHADERMODEL ColorPS_FA_SM3(),
+	compile PS_SHADERMODEL Color2PS_FA_SM3(),
 };
 #endif
 
@@ -35,25 +43,16 @@ technique TerrainColorPass_FA
         VertexShader = (ColorVS_FA[VSIndex]);
         PixelShader  = (ColorPS_FA[PSIndex]);
 #else
-		VertexShader = compile vs_3_0 ColorVS_FA_SM3();
-		PixelShader = compile ps_3_0 ColorPS_FA_SM3();
+		VertexShader = compile VS_SHADERMODEL ColorVS_FA_SM3();
+		PixelShader = compile PS_SHADERMODEL ColorPS_FA_SM3();
 #endif        
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 //ToDo (DZ): We need to rethink the mechanisms
@@ -69,24 +68,15 @@ technique TerrainColorPass_FAMasked
         VertexShader = (ColorVS_FA[VSIndex]);
         PixelShader  = (ColorPS_FA[PSIndex + 1]);
 #else
-		VertexShader = compile vs_3_0 ColorVS_FA_SM3();
-		PixelShader = compile ps_3_0 Color2PS_FA_SM3();
+		VertexShader = compile VS_SHADERMODEL ColorVS_FA_SM3();
+		PixelShader = compile PS_SHADERMODEL Color2PS_FA_SM3();
 #endif       
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }

@@ -9,13 +9,13 @@
 float4x4 MatrixPalette[15];
 float4x4 RestPalette[15];
 
-shared float WindStrength = 1.0f;
+float WindStrength = 1.0f;
 
 #if 0 /// see comments below in WindStrength()
-shared float2 WindRemap;
-shared float4	Wind0;
-shared float4	Wind1;
-shared float4	Wind2;
+float2 WindRemap;
+float4	Wind0;
+float4	Wind1;
+float4	Wind2;
 #endif
 
 // This is passed into our vertex shader from Xna

@@ -5,6 +5,14 @@
 // UI2D -- Shaders for 2d UI elements
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 
 //
@@ -68,7 +76,7 @@ sampler_state
     AddressV = Clamp;
 };
 
-shared texture  EnvironmentMap;
+texture  EnvironmentMap;
 
 samplerCUBE EnvMapSampler =
 sampler_state
@@ -481,24 +489,15 @@ technique TexturedRegularAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedRegularAlphaPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedRegularAlphaPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -510,24 +509,15 @@ technique NormalMapped
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -535,24 +525,15 @@ technique NormalMappedWithEnv
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedWithEnvPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedWithEnvPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -560,24 +541,15 @@ technique NormalMappedNoAlphaInTextureNoZ
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedNoAlphaInTexturePS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedNoAlphaInTexturePS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -585,24 +557,15 @@ technique NormalMappedWithOverlay
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedWithOverlayPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedWithOverlayPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -610,24 +573,15 @@ technique NormalMappedNoTexture
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedNoTexturePS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedNoTexturePS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -635,24 +589,15 @@ technique NormalMappedNoZ
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -660,24 +605,15 @@ technique NormalMappedNoZWithOverlay
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedWithOverlayPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedWithOverlayPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -685,24 +621,15 @@ technique NormalMappedNoTextureNoZ
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 NormalMappedNoTexturePS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL NormalMappedNoTexturePS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -713,24 +640,15 @@ technique AltNormalMapped
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 AltNormalMappedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL AltNormalMappedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -741,24 +659,15 @@ technique AltNormalMappedPreMultAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 AltNormalMappedPreMultAlphaPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL AltNormalMappedPreMultAlphaPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -769,23 +678,14 @@ technique GreyFlat
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 GreyFlatPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL GreyFlatPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending (assumes pre-mult)
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }

@@ -2,6 +2,14 @@
 // Licensed under the MIT license.
 
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #ifndef ROAD_SM3_FX
 #define ROAD_SM3_FX
 
@@ -192,24 +200,15 @@ technique TexturedColorPass_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorVS_SM3();
-        PixelShader  = compile ps_3_0 TexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL TexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -218,24 +217,15 @@ technique NonTexturedColorPass_SM3
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 ColorVS_SM3();
-        PixelShader  = compile ps_3_0 NonTexturedColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL ColorVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL NonTexturedColorPS_SM3();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

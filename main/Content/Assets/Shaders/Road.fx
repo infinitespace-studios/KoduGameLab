@@ -5,6 +5,14 @@
 // StdMaterials -- Shaders to handle the standard materials from 3DS Max via Xbf Files
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 
 #include "Fog.fx"
@@ -117,19 +125,12 @@ technique Depth
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -177,19 +178,12 @@ technique ShadowPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ShadowPassVS();
-        PixelShader  = compile ps_2_0 ShadowPassPS();
+        VertexShader = compile VS_SHADERMODEL ShadowPassVS();
+        PixelShader  = compile PS_SHADERMODEL ShadowPassPS();
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -230,18 +224,11 @@ technique BloomPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 BloomPassVS();
-        PixelShader  = compile ps_2_0 BloomPassPS();
+        VertexShader = compile VS_SHADERMODEL BloomPassVS();
+        PixelShader  = compile PS_SHADERMODEL BloomPassPS();
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }

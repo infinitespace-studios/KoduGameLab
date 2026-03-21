@@ -4,6 +4,14 @@
 //
 // Billboard shader
 //
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 #include "Fog.fx"
 
@@ -92,24 +100,15 @@ technique NormalAlphaColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -120,24 +119,15 @@ technique NormalAlphaColorPassNoZ
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -148,24 +138,15 @@ technique PremultipliedAlphaColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -214,24 +195,15 @@ technique DepthPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 DepthVS();
-        PixelShader  = compile ps_2_0 DepthPS();
+        VertexShader = compile VS_SHADERMODEL DepthVS();
+        PixelShader  = compile PS_SHADERMODEL DepthPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = One;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

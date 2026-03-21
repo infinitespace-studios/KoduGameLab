@@ -2,6 +2,14 @@
 // Licensed under the MIT license.
 
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Terrain_FA.fx"
 
 // -----------------------------------------------------
@@ -119,20 +127,20 @@ float4 EditColor2PS_FA_SM3( COLOR_VS_EDIT_OUTPUT_FA_SM3 In ) : COLOR0
 #ifndef XBOX
 VertexShader EditColorVS_FA[] =
 {
-	compile vs_2_0 EditColorL0VS_FA_SM2(),
-	compile vs_2_0 EditColorL2VS_FA_SM2(),
-	compile vs_2_0 EditColorL4VS_FA_SM2(),
-	compile vs_2_0 EditColorL6VS_FA_SM2(),
-	compile vs_2_0 EditColorL10VS_FA_SM2(),
-	compile vs_3_0 EditColorVS_FA_SM3(),
+	compile VS_SHADERMODEL EditColorL0VS_FA_SM2(),
+	compile VS_SHADERMODEL EditColorL2VS_FA_SM2(),
+	compile VS_SHADERMODEL EditColorL4VS_FA_SM2(),
+	compile VS_SHADERMODEL EditColorL6VS_FA_SM2(),
+	compile VS_SHADERMODEL EditColorL10VS_FA_SM2(),
+	compile VS_SHADERMODEL EditColorVS_FA_SM3(),
 };
 
 PixelShader EditColorPS_FA[] = 
 {
-	compile ps_2_0 EditColorPS_FA_SM2(),
-	compile ps_2_0 EditColor2PS_FA_SM2(),
-	compile ps_3_0 EditColorPS_FA_SM3(),
-	compile ps_3_0 EditColor2PS_FA_SM3(),	
+	compile PS_SHADERMODEL EditColorPS_FA_SM2(),
+	compile PS_SHADERMODEL EditColor2PS_FA_SM2(),
+	compile PS_SHADERMODEL EditColorPS_FA_SM3(),
+	compile PS_SHADERMODEL EditColor2PS_FA_SM3(),	
 };
 #endif
 
@@ -147,24 +155,15 @@ technique TerrainEditMode_FA
         VertexShader = (EditColorVS_FA[VSIndex]);
         PixelShader  = (EditColorPS_FA[PSIndex]);
 #else
-		VertexShader = compile vs_3_0 EditColorVS_FA_SM3();
-		PixelShader = compile ps_3_0 EditColorPS_FA_SM3();
+		VertexShader = compile VS_SHADERMODEL EditColorVS_FA_SM3();
+		PixelShader = compile PS_SHADERMODEL EditColorPS_FA_SM3();
 #endif
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -181,25 +180,16 @@ technique TerrainEditMode_FAMasked
         VertexShader = (EditColorVS_FA[VSIndex]);
         PixelShader  = (EditColorPS_FA[PSIndex + 1]);
 #else
-		VertexShader = compile vs_3_0 EditColorVS_FA_SM3();
-		PixelShader = compile ps_3_0 EditColor2PS_FA_SM3();
+		VertexShader = compile VS_SHADERMODEL EditColorVS_FA_SM3();
+		PixelShader = compile PS_SHADERMODEL EditColor2PS_FA_SM3();
 #endif
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

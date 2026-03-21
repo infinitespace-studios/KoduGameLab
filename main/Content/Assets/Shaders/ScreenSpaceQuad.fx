@@ -9,6 +9,14 @@
 // Variables
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 float4 DiffuseColor;
 float DiffuseAlpha;
 
@@ -300,24 +308,15 @@ technique TexturedNoAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedNoAlphaPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedNoAlphaPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -328,24 +327,15 @@ technique TexturedRegularAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -356,24 +346,15 @@ technique TexturedDiffuseAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedAlphaPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedAlphaPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -384,24 +365,15 @@ technique TexturedRegularAlphaNoZ
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -412,24 +384,15 @@ technique TexturedPreMultAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -440,24 +403,15 @@ technique MaskTexturedRegularAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 MaskTexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL MaskTexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -468,24 +422,15 @@ technique MaskTexturedPreMultAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 MaskTexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL MaskTexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -496,24 +441,15 @@ technique YLimitTexturedRegularAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 YLimitTexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL YLimitTexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -524,24 +460,15 @@ technique YLimitTexturedPreMultAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 YLimitTexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL YLimitTexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -554,24 +481,15 @@ technique AdditiveBlend
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -582,24 +500,15 @@ technique AdditiveBlendWithAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 TexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL TexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = One;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -611,24 +520,15 @@ technique DropShadow
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 DropShadowPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL DropShadowPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -639,24 +539,15 @@ technique SolidColor
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 SolidColorPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL SolidColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -667,22 +558,15 @@ technique SolidColorNoAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 SolidColorPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL SolidColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -693,24 +577,15 @@ technique SolidColorWithDropShadow
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 SolidColorWithDropShadowPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL SolidColorWithDropShadowPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -721,30 +596,20 @@ technique Stencil
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 StencilPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL StencilPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = Zero;
-        DestBlend = One;
 
-        CullMode = None;
         
-        StencilEnable = true;
         StencilFunc = Always;
         StencilPass = Replace;
         StencilRef = 1;
 
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -755,24 +620,15 @@ technique Gradient
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 GradientPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL GradientPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -783,24 +639,15 @@ technique SplitTexturedRegularAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 SplitTexturedPS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL SplitTexturedPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 

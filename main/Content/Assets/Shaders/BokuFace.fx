@@ -8,6 +8,14 @@
 //
 // Variables
 //
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 float4  PupilOffset;        // UV offset for pupils.
 float4  PupilSize;          // X is scale factor for pupil size.
 texture EyeShapeTexture;
@@ -104,24 +112,14 @@ technique BokuFace
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 PS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL PS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = true;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = Less;
-        ZWriteEnable = false;
     }
 }
 

@@ -14,6 +14,14 @@
 //
 
 // The world view and projection matrices
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 float4x4 WorldViewProjMatrix;
 float4x4 WorldMatrix;
 
@@ -85,24 +93,15 @@ technique Default
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 PS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL PS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 

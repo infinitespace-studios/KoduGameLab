@@ -43,6 +43,19 @@ public class Builder : ContentBuilder
         contentCollection.Exclude<WildcardRule>("*.mgcb");
         contentCollection.Exclude<WildcardRule>("*.contentproj");
 
+        // Exclude XML data files (loaded at runtime via XmlSerializer, not content pipeline)
+        contentCollection.Exclude<WildcardRule>("Xml/**/*.xml");
+        contentCollection.Exclude<WildcardRule>("Xml/**/*.Xml");
+
+        // Exclude raw text/data files
+        contentCollection.Exclude<WildcardRule>("Text/**/*");
+
+        // Exclude WAV audio files for now (audio system needs XACT replacement)
+        contentCollection.Exclude<WildcardRule>("**/*.wav");
+
+        // Exclude Unicode data files
+        contentCollection.Exclude<WildcardRule>("**/*.txt");
+
         return contentCollection;
     }
 }

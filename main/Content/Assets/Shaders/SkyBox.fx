@@ -5,6 +5,14 @@
 //  SkyBox -- Renders the environment map as a sky box.
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 #include "StandardLight.fx" // for the environment map
 
@@ -178,24 +186,15 @@ technique EnvironmentMappedSkyBox
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 PS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL PS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -203,25 +202,16 @@ technique SkyBox
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        //PixelShader  = compile ps_2_0 GradientPS();
-        PixelShader  = compile ps_2_0 SmallDomePS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        //PixelShader  = compile PS_SHADERMODEL GradientPS();
+        PixelShader  = compile PS_SHADERMODEL SmallDomePS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
@@ -247,23 +237,14 @@ technique SkyBoxEffects
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 VS();
-        PixelShader  = compile ps_2_0 PSEffects();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader  = compile PS_SHADERMODEL PSEffects();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }

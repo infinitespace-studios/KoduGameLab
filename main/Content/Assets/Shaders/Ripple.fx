@@ -6,6 +6,14 @@
 // Particle3D -- A collection of shaders for non-textured, 3D particles.
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 
 #include "Fog.fx"
@@ -202,24 +210,15 @@ technique TexturedColorPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 ColorVS();
-        PixelShader  = compile ps_2_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL ColorVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 

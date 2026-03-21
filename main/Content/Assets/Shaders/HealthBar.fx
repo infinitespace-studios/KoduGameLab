@@ -5,6 +5,14 @@
 // HealthBar Shader
 //===
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Globals.fx"
 
 #include "Fog.fx"
@@ -102,18 +110,11 @@ technique T0
     pass P0
     {
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
 
-        VertexShader = compile vs_2_0 VS();
-        PixelShader = compile ps_2_0 PS();
+        VertexShader = compile VS_SHADERMODEL VS();
+        PixelShader = compile PS_SHADERMODEL PS();
     }
 
 }

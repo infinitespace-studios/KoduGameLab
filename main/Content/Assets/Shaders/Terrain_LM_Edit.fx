@@ -2,6 +2,14 @@
 // Licensed under the MIT license.
 
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Terrain_LM.fx"
 #include "Terrain_FA_Edit.fx"
 
@@ -53,24 +61,14 @@ technique TerrainEditMode
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 EditColorVS_SM3();
-        PixelShader  = compile ps_3_0 EditColorPS_SM3();
+        VertexShader = compile VS_SHADERMODEL EditColorVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL EditColorPS_SM3();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 //ToDo (DZ): We need to rethink the mechanisms
@@ -82,24 +80,14 @@ technique TerrainEditModeMasked
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 EditColorVS_SM3();
-        PixelShader  = compile ps_3_0 EditColor2PS_SM3();
+        VertexShader = compile VS_SHADERMODEL EditColorVS_SM3();
+        PixelShader  = compile PS_SHADERMODEL EditColor2PS_SM3();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

@@ -1,6 +1,14 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #define Debug_UseWhiteTexture;
 
 // =====================================================
@@ -356,24 +364,15 @@ technique TerrainDepthPass_FA
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 TerrainDepthVS_FA();
-        PixelShader  = compile ps_2_0 TerrainDepthPS_FA();
+        VertexShader = compile VS_SHADERMODEL TerrainDepthVS_FA();
+        PixelShader  = compile PS_SHADERMODEL TerrainDepthPS_FA();
 
         /* // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
         AlphaFunc = GreaterEqual; */
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

@@ -21,6 +21,14 @@
 // XBox360).
 // =====================================================
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 #include "Terrain.fx" //Included in Terrain_FA
 
 // -----------------------------------------------------
@@ -501,24 +509,14 @@ technique TerrainDepthPass
 {
     pass P0
     {
-        VertexShader = compile vs_2_0 TerrainDepthVS();
-        PixelShader  = compile ps_2_0 TerrainDepthPS();
+        VertexShader = compile VS_SHADERMODEL TerrainDepthVS();
+        PixelShader  = compile PS_SHADERMODEL TerrainDepthPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = CCW;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 
@@ -571,23 +569,13 @@ technique PreCursorPass
 {
 	pass P0
 	{
-		VertexShader = compile vs_2_0 PreCursorVS();
-		PixelShader = compile ps_2_0 PreCursorPS();
+		VertexShader = compile VS_SHADERMODEL PreCursorVS();
+		PixelShader = compile PS_SHADERMODEL PreCursorPS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = One;
-        DestBlend = One;
 
-        CullMode = None;
 
-        ZEnable = false;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
 	}
 }

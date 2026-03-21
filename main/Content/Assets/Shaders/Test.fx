@@ -9,12 +9,20 @@
 // Shared Globals.
 //
 // Light 0 is the key light, which shadows are based off of.
-shared float4   LightDirection0;  // Direction light is travelling.
-shared float4   LightColor0;
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
 
-shared float4   EyeLocation;
+float4   LightDirection0;  // Direction light is travelling.
+float4   LightColor0;
 
-shared texture  EnvironmentMap;
+float4   EyeLocation;
+
+texture  EnvironmentMap;
 
 //
 // Locals.
@@ -143,24 +151,14 @@ technique PosTex
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 PosTex_VS();
-        PixelShader  = compile ps_3_0 PosTex_PS();
+        VertexShader = compile VS_SHADERMODEL PosTex_VS();
+        PixelShader  = compile PS_SHADERMODEL PosTex_PS();
 
         // Alpha test
-        AlphaRef = 1;
-        AlphaTestEnable = false;
-        AlphaFunc = GreaterEqual;
 
         // Alpha blending
-        AlphaBlendEnable = false;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = true;
     }
 }
 

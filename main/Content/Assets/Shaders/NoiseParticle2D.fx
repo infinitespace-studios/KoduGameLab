@@ -10,6 +10,14 @@
 // Global variables
 //
 
+#if OPENGL
+    #define VS_SHADERMODEL vs_3_0
+    #define PS_SHADERMODEL ps_3_0
+#else
+    #define VS_SHADERMODEL vs_4_0_level_9_1
+    #define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
 float3 EyeLocation;
 float3 CameraUp;
 
@@ -233,19 +241,12 @@ technique TexturedColorPassNormalAlpha
 {
     pass P0
     {
-        VertexShader = compile vs_3_0 MultiSampleVS();
-        PixelShader  = compile ps_3_0 ColorPS();
+        VertexShader = compile VS_SHADERMODEL MultiSampleVS();
+        PixelShader  = compile PS_SHADERMODEL ColorPS();
 
         // Alpha blending
-        AlphaBlendEnable = true;
-        SrcBlend = SrcAlpha;
-        DestBlend = InvSrcAlpha;
 
-        CullMode = None;
 
-        ZEnable = true;
-        ZFunc = LessEqual;
-        ZWriteEnable = false;
     }
 }
 
