@@ -57,6 +57,12 @@ public class Builder : ContentBuilder
         contentCollection.Exclude<WildcardRule>("*.mgcb");
         contentCollection.Exclude<WildcardRule>("*.contentproj");
 
+        // Exclude orphaned font assets (not referenced by any C# code)
+        contentCollection.Exclude<WildcardRule>("Fonts/CreativeBlockBB24.spritefont");
+        contentCollection.Exclude<WildcardRule>("Fonts/CreativeBlockBB24Bold.spritefont");
+        contentCollection.Exclude<WildcardRule>("Fonts/LilyUPC24.spritefont");
+        contentCollection.Exclude<WildcardRule>("Fonts/SegoeUILight24.spritefont");
+
         // Exclude WAV audio files (XACT uses pre-built wave banks, not individual WAVs)
         contentCollection.Exclude<WildcardRule>("**/*.wav");
 
@@ -69,7 +75,7 @@ public class Builder : ContentBuilder
         contentCollection.Exclude<WildcardRule>("Shaders/DOF.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Flex.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Face.fx");
-        contentCollection.Exclude<WildcardRule>("Shaders/skin.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Skin.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Light.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Luz.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/PrepXform.fx");
@@ -81,6 +87,32 @@ public class Builder : ContentBuilder
         contentCollection.Exclude<WildcardRule>("Shaders/ShadowInc.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/ParticleSize.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/QuadUvToPos.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Aura.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Distort.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Ghost_Stand_SM3.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Ghost_SURF_SM3.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Road_SM2.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Road_SM3.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Standard_SM2.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Standard_SM3.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Surface_SM2.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Surface_SM3.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_FA.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_FA_Color.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_FA_Edit.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_FD.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_LM.fx");
+
+        // Exclude unused shaders (not loaded from C#, not included by any other shader)
+        contentCollection.Exclude<WildcardRule>("Shaders/BokuFace.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/DistortFilter.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/FontQuad.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Red.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Surface.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_LM_Color.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Terrain_LM_Edit.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/Test.fx");
+        contentCollection.Exclude<WildcardRule>("Shaders/TitleScreen.fx");
 
         return contentCollection;
     }

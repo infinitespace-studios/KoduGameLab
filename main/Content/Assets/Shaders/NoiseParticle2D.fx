@@ -40,7 +40,6 @@ float Sync;             // How much to scale the value that goes into the UV coo
 
 // Textures
 texture DiffuseTexture;
-texture NoiseTexture;
 
 //
 // Texture samplers
@@ -57,22 +56,14 @@ sampler_state
     AddressV = Clamp;
 };
 
-sampler2D NoiseTextureSampler =
-sampler_state
+// Math-based noise (replaces vertex texture fetch which is unsupported in vs_3_0 on OpenGL)
+float3 HashNoise3(float2 p)
 {
-    Texture = <NoiseTexture>;
-    MipFilter = Point;
-    MinFilter = Point;
-    MagFilter = Point;
-    /*
-    MipFilter = Linear;         // Most cards don't support VS texture filtering!
-    MinFilter = Linear;
-    MagFilter = Linear;
-    */
-
-    AddressU = WRAP;
-    AddressV = WRAP;
-};
+    float3 q = float3(dot(p, float2(127.1, 311.7)),
+                      dot(p, float2(269.5, 183.3)),
+                      dot(p, float2(419.2, 371.9)));
+    return frac(sin(q) * 43758.5453);
+}
 
 //
 // Vertex shader output structure
@@ -105,20 +96,20 @@ VS_OUTPUT MultiSampleVS(
 {
     VS_OUTPUT   Output;
     
-    // Add noise to position.
-    float4 uv = float4( 0, 0, 0, 0 );
-    uv.xy  = BaseUV;
-    uv.xy += position.xy * Sync;
-    float4 noise00 = tex2Dlod( NoiseTextureSampler, uv + float4( 0, 0, 0, 0 ) );
-    float4 noise10 = tex2Dlod( NoiseTextureSampler, uv + float4( Texel, 0, 0, 0 ) );
-    float4 noise01 = tex2Dlod( NoiseTextureSampler, uv + float4( 0, Texel, 0, 0 ) );
-    float4 noise11 = tex2Dlod( NoiseTextureSampler, uv + float4( Texel, Texel, 0, 0 ) );
+    // Add noise to position using math-based noise (bilinear-style interpolation).
+    float2 uv = BaseUV + position.xy * Sync;
+    float2 uvScaled = uv * 256.0f;
+    float2 uvFloor = floor(uvScaled) / 256.0f;
+    float2 fraction = frac(uvScaled);
+
+    float3 noise00 = HashNoise3(uvFloor);
+    float3 noise10 = HashNoise3(uvFloor + float2(Texel, 0));
+    float3 noise01 = HashNoise3(uvFloor + float2(0, Texel));
+    float3 noise11 = HashNoise3(uvFloor + float2(Texel, Texel));
     
-    float2 fraction = frac( uv.xy * 256.0f );
+    float3 noise = lerp(lerp(noise00, noise01, fraction.y), lerp(noise10, noise11, fraction.y), fraction.x);
     
-    float4 noise = lerp( lerp( noise00, noise01, fraction.y ), lerp( noise10, noise11, fraction.y ), fraction.x );
-    
-    position.xyz += 0.5f * Amplitude - Amplitude * noise.xyz;
+    position.xyz += 0.5f * Amplitude - Amplitude * noise;
     
     Output = ColorVS( position, tex, params );
     
@@ -135,12 +126,10 @@ VS_OUTPUT SingleSampleVS(
 {
     VS_OUTPUT   Output;
     
-    // Add noise to position.
-    float4 uv = float4( 0, 0, 0, 0 );
-    uv.xy  = BaseUV;
-    uv.xy += position.xy * 0.1f;
-    float4 noise = tex2Dlod( NoiseTextureSampler, uv );
-    position.xyz += 10.0f * noise.xyz;
+    // Add noise to position using math-based noise.
+    float2 uv = BaseUV + position.xy * 0.1f;
+    float3 noise = HashNoise3(uv);
+    position.xyz += 10.0f * noise;
 
     Output = ColorVS( position, tex, params );
     
