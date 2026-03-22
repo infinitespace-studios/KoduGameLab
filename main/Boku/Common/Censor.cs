@@ -38,6 +38,11 @@ namespace Boku.Common
             }
             else
             {
+                if (CensorContent == null)
+                {
+                    output = input;
+                    return false;
+                }
                 return CensorContent.Scrub(input, ref output);
             }
         }
@@ -47,13 +52,22 @@ namespace Boku.Common
         #region Private
 
         static CensorContent _CensorContent = null;
+        static bool _censorLoadFailed = false;
         static CensorContent CensorContent
         {
             get 
             {
-                if (_CensorContent == null)
+                if (_CensorContent == null && !_censorLoadFailed)
                 {
-                    _CensorContent = ContentLoader.ContentManager.Load<CensorContent>(BokuGame.Settings.MediaPath + @"Text\Censor\Profanity");
+                    try
+                    {
+                        _CensorContent = ContentLoader.ContentManager.Load<CensorContent>(BokuGame.Settings.MediaPath + @"Text/Censor/Profanity");
+                    }
+                    catch
+                    {
+                        _censorLoadFailed = true;
+                        System.Diagnostics.Debug.WriteLine("CensorContent not available — profanity filter disabled");
+                    }
                 }
                 return _CensorContent; 
             }

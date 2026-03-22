@@ -109,7 +109,8 @@ namespace Boku.Common
         #region Public
 
         /// <summary>
-        /// Normalize file path for cross-platform: fix separators and find case-insensitive match on Linux.
+        /// Normalize file path for cross-platform: fix separators and resolve
+        /// case-insensitive paths on Linux by walking each path segment.
         /// </summary>
         private static string NormalizePath(string path)
         {
@@ -118,34 +119,63 @@ namespace Boku.Common
             // Fix backslash separators for Linux/macOS
             path = path.Replace('\\', Path.DirectorySeparatorChar);
 
-            // If file exists with exact casing, use it
+            // If path exists exactly, no need to resolve
             if (File.Exists(path) || Directory.Exists(path))
                 return path;
 
-            // On case-sensitive file systems, try to find the file with different casing
+            // On case-sensitive file systems, resolve each segment
             try
             {
-                string dir = Path.GetDirectoryName(path);
-                string name = Path.GetFileName(path);
-                if (dir != null && Directory.Exists(dir))
+                string[] segments = path.Split(Path.DirectorySeparatorChar);
+                string resolved = segments[0]; // Start with root or first segment
+
+                // If absolute path, start from root
+                if (Path.IsPathRooted(path))
                 {
-                    // Try files
-                    foreach (string f in Directory.GetFiles(dir))
+                    resolved = segments[0] + Path.DirectorySeparatorChar;
+                    for (int i = 1; i < segments.Length; i++)
                     {
-                        if (string.Equals(Path.GetFileName(f), name, StringComparison.OrdinalIgnoreCase))
-                            return f;
-                    }
-                    // Try directories
-                    foreach (string d in Directory.GetDirectories(dir))
-                    {
-                        if (string.Equals(Path.GetFileName(d), name, StringComparison.OrdinalIgnoreCase))
-                            return d;
+                        resolved = ResolveSegment(resolved, segments[i]);
                     }
                 }
+                else
+                {
+                    // Relative path — resolve from first segment
+                    for (int i = 1; i < segments.Length; i++)
+                    {
+                        resolved = ResolveSegment(resolved, segments[i]);
+                    }
+                }
+                return resolved;
             }
             catch { }
 
             return path;
+        }
+
+        /// <summary>
+        /// Resolve a single path segment case-insensitively.
+        /// </summary>
+        private static string ResolveSegment(string basePath, string segment)
+        {
+            string combined = Path.Combine(basePath, segment);
+            if (File.Exists(combined) || Directory.Exists(combined))
+                return combined;
+
+            if (!Directory.Exists(basePath))
+                return combined;
+
+            try
+            {
+                foreach (string entry in Directory.GetFileSystemEntries(basePath))
+                {
+                    if (string.Equals(Path.GetFileName(entry), segment, StringComparison.OrdinalIgnoreCase))
+                        return entry;
+                }
+            }
+            catch { }
+
+            return combined;
         }
 
         /// <summary>

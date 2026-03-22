@@ -10,7 +10,7 @@ namespace Boku.Properties {
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
     internal sealed partial class Settings {
-        public string MediaPath = @"Content\";
+        public string MediaPath = @"";
 
         public bool LowModels { get; set; }
 
