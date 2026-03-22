@@ -780,7 +780,7 @@ namespace Boku.Common
                         {
                             float keyFontSize = 30.0f;
                             string keyFontName = "Calibri";
-                            System.Drawing.FontStyle keyFontStyle = System.Drawing.FontStyle.Regular;
+                            FontStyle keyFontStyle = FontStyle.Regular;
 
                             // Use the next smaller size font for keycap display.  Note this
                             // is really tied to whatever system fonts we happen to have.
@@ -830,7 +830,7 @@ namespace Boku.Common
                             if (BokuSettings.Settings.UseSystemFontRendering)
                             {
                                 //SysFont.DrawString(word.str, pos + new Vector2(indent, 0), keyFontName, keyFontSize, keyFontStyle, new Color(40, 40, 40));
-                                SystemFont keyFont = new SystemFont(keyFontName, keyFontSize, keyFontStyle);
+                                SystemFont keyFont = SysFont.GetSystemFont(keyFontName, keyFontSize, keyFontStyle);
                                 RectangleF clipRect = new RectangleF(pos.X, pos.Y, maxWidth, keyFont.LineSpacing);
                                 SysFont.DrawString(word.str, pos + new Vector2(indent, 0), clipRect, keyFont, new Color(40, 40, 40));
                             }
@@ -1516,7 +1516,7 @@ namespace Boku.Common
             // Calc width for all words.
             // Since SystemFont adds padding at the beginning and end of a rendered string we
             // subtract off an esitmate of that padding so that wrapped text is closer to correct.
-            float estimatedPadding = GetFont().systemFont.Padding;
+            float estimatedPadding = GetFont().systemFont?.Padding ?? 0f;
             estimatedPadding = 0;
             for (int i = 0; i < words.Count; i++)
             {

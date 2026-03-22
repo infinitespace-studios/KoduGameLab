@@ -45,6 +45,11 @@ public class Builder : ContentBuilder
         // Copy text/CSV data files as-is
         contentCollection.IncludeCopy<WildcardRule>("Text/**/*");
 
+        // Copy TTF font files as-is (used by FontStashSharp at runtime)
+        contentCollection.IncludeCopy<WildcardRule>("**/*.ttf");
+        contentCollection.IncludeCopy<WildcardRule>("**/*.TTF");
+        contentCollection.IncludeCopy<WildcardRule>("**/*.otf");
+
         // FBX models use Assimp-based FbxImporter
         contentCollection.Include<WildcardRule>("**/*.fbx", new FbxImporter(), new ModelProcessor());
 

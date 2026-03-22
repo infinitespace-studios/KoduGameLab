@@ -384,6 +384,7 @@ namespace Boku
             GamePadInput.Init();
             TouchInput.Init();
             Brush2DManager.Init();
+            SysFont.Init(GraphicsDevice);
             AuthUI.Init();
             GUIButtonManager.Init();
 
