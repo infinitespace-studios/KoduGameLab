@@ -66,6 +66,12 @@ public class Builder : ContentBuilder
         // Exclude WAV audio files (XACT uses pre-built wave banks, not individual WAVs)
         contentCollection.Exclude<WildcardRule>("**/*.wav");
 
+        // Exclude WMV video (replaced by OGV for cross-platform MonoGame)
+        contentCollection.Exclude<WildcardRule>("**/*.wmv");
+
+        // Copy OGV video as-is (loaded directly by MonoGame VideoPlayer at runtime)
+        contentCollection.IncludeCopy<WildcardRule>("**/*.ogv");
+
         // Exclude Unicode data files (copied as raw)
         contentCollection.IncludeCopy<WildcardRule>("**/*.txt");
 
