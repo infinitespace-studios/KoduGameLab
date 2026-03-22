@@ -3,7 +3,7 @@
 
 //#define IMPORT_DEBUG
 
-#if EXTERNAL || false
+#if EXTERNAL || true
 # define GLOBAL_CATCH    // include the global exception handler.
 # define GLOBAL_CATCH_PC
 #endif
@@ -108,6 +108,11 @@ namespace Boku
 
                 ThisVersion = Assembly.GetExecutingAssembly().GetName().Version;
                 UpdateCode = "055B31F9-07F8-479b-875F-F03279DF595E"; // Fixed GUID for MonoGame port
+
+                // Prevent Debug.Assert from showing modal dialogs / terminating on Linux.
+                // Redirect assert failures to console output instead.
+                System.Diagnostics.Trace.Listeners.Clear();
+                System.Diagnostics.Trace.Listeners.Add(new System.Diagnostics.ConsoleTraceListener());
 
                 // Fake command line args to test double-click to launch
                 //args = new string[3] { args[0], @"/Import", @"C:\Users\scoy\My Documents\New World 3, by Stephen Coy.Kodu2" };
@@ -474,16 +479,30 @@ namespace Boku
             }
             catch (Exception ex)
             {
-                // Write out a file to act as the crash cookie.
-                {
-                    Stream stream = Storage4.OpenWrite(MainMenu.CrashCookieFilename);
-                    byte[] buffer = { 42 };
-                    stream.Write(buffer, 0, 1);
-                    stream.Close();
-                }
+                // Write crash info to console
+                Console.Error.WriteLine("=== KODU CRASH REPORT ===");
+                Console.Error.WriteLine(ex.Message);
+                Console.Error.WriteLine(ex.StackTrace);
+                Console.Error.WriteLine("=========================");
 
-                // Be sure mouse cursor is on regardless of current input mode.
-                BokuGame.bokuGame.IsMouseVisible = true;
+                try
+                {
+                    // Write out a file to act as the crash cookie.
+                    Stream stream = Storage4.OpenWrite(MainMenu.CrashCookieFilename);
+                    if (stream != null)
+                    {
+                        byte[] buffer = { 42 };
+                        stream.Write(buffer, 0, 1);
+                        stream.Close();
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    BokuGame.bokuGame.IsMouseVisible = true;
+                }
+                catch { }
 
                 // Report the crash unless we're running the debugger.
                 if (!Debugger.IsAttached)

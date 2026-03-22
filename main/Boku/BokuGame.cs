@@ -225,30 +225,41 @@ namespace Boku
         {
             LogContentFileLoaded(path);
 
-            T resource = ContentLoader.ContentManager.Load<T>(path);
+            // Normalize path separators for cross-platform
+            path = path.Replace('\\', '/');
 
-            if (resource is Texture2D)
+            try
             {
-                // Protect against breakage on older video cards.
-                Texture2D tex = resource as Texture2D;
+                T resource = ContentLoader.ContentManager.Load<T>(path);
 
-                if (tex.LevelCount != 1)
+                if (resource is Texture2D)
                 {
-                    if (!MyMath.IsPowerOfTwo(tex.Width) || !MyMath.IsPowerOfTwo(tex.Height))
+                    // Protect against breakage on older video cards.
+                    Texture2D tex = resource as Texture2D;
+
+                    if (tex.LevelCount != 1)
                     {
-                        throw new Exception("Mipmapped texture is non-power-2 in size: " + path);
+                        if (!MyMath.IsPowerOfTwo(tex.Width) || !MyMath.IsPowerOfTwo(tex.Height))
+                        {
+                            throw new Exception("Mipmapped texture is non-power-2 in size: " + path);
+                        }
+                    }
+                    if (tex.Format == SurfaceFormat.Dxt1)
+                    {
+                        if (!MyMath.IsPowerOfTwo(tex.Width) || !MyMath.IsPowerOfTwo(tex.Height))
+                        {
+                            throw new Exception("DXT compressed texture is non-power-2 in size: " + path);
+                        }
                     }
                 }
-                if (tex.Format == SurfaceFormat.Dxt1)
-                {
-                    if (!MyMath.IsPowerOfTwo(tex.Width) || !MyMath.IsPowerOfTwo(tex.Height))
-                    {
-                        throw new Exception("DXT compressed texture is non-power-2 in size: " + path);
-                    }
-                }
+
+                return resource;
             }
-
-            return resource;
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine($"Warning: Failed to load content '{path}': {e.Message}");
+                return default(T);
+            }
         }
 
         public static void LogContentFileLoaded(string path)

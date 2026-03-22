@@ -263,6 +263,7 @@ namespace Boku.Fx
         /// <param name="effect"></param>
         public void SetToEffect(Effect effect)
         {
+            if (effect == null) return;
             if (LightList != null)
             {
                 for(int i = 0; i < LightList.Length; ++i)
@@ -288,7 +289,7 @@ namespace Boku.Fx
                 }
 
                 lightWrap = Wrap;
-                Parameter(EffectParams.Wrap).SetValue(ShaderGlobals.MakeWrapVec(Wrap));
+                Parameter(EffectParams.Wrap)?.SetValue(ShaderGlobals.MakeWrapVec(Wrap));
             }
         }
 

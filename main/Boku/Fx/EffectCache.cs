@@ -72,6 +72,7 @@ namespace Boku.Fx
              * is safe to assume that we want to load our techniques
              * even if no technique extension is given.
              */
+            if (effect == null) return;
             LoadTechniques(effect, "");
             base.Load(effect);
         }
@@ -153,6 +154,7 @@ namespace Boku.Fx
         /// <param name="effect"></param>
         virtual public void Load(Effect effect)
         {
+            if (effect == null) return;
             LoadParameters(effect);
         }
         /// <summary>
@@ -162,6 +164,7 @@ namespace Boku.Fx
         /// <param name="techniqueExt"></param>
         virtual public void Load(Effect effect, string techniqueExt)
         {
+            if (effect == null) return;
             LoadTechniques(effect, techniqueExt);
             LoadParameters(effect);
         }
@@ -222,6 +225,7 @@ namespace Boku.Fx
         /// <typeparam name="EffectParamsEnum">Must be either int or an enum</typeparam>
         public virtual EffectParameter Parameter(int idx)
         {
+            if (parameters == null) return null;
             return parameters[idx];
         }
 
@@ -262,7 +266,10 @@ namespace Boku.Fx
                 if (!String.IsNullOrEmpty(paramName))
                 {
                     parameters[i] = effect.Parameters[paramName];
-                    Debug.Assert(parameters[i] != null, String.Format("Parameter '{0}' not found in shader", ParamName(i)));
+                    if (parameters[i] == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Warning: Parameter '{paramName}' not found in shader");
+                    }
                 }
             }
         }

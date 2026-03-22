@@ -747,15 +747,7 @@ namespace Boku.Fx
             /// <param name="effect"></param>
             public void SetValues(Effect effect)
             {
-                //
-                // 2d UI
-                //
-
-                // Don't try and set params if the effect is disposed.  This can happen due to
-                // timing foo during device reset.  Really should clean this all out.  In the
-                // meantime can just return.  The effect should get replaced next frame and 
-                // all will once again be well.
-                if (effect.IsDisposed)
+                if (effect == null || effect.IsDisposed)
                 {
                     return;
                 }
