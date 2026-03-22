@@ -19,7 +19,7 @@ namespace Boku
 
         private bool communityEnabled;
 
-        private static readonly string MyFilename = @"Content\Xml\SiteOptions.Xml";
+        private static readonly string MyFilename = @"Content\Xml\SiteOptions.xml";
 
         private bool runningInDebugger;
 
@@ -148,7 +148,7 @@ namespace Boku
     /// </summary>
     public class SiteID
     {
-        private static readonly string MyFilename = @"Content\Xml\SiteID.Xml";
+        private static readonly string MyFilename = @"Content\Xml\SiteID.xml";
 
         public Guid Value;
 

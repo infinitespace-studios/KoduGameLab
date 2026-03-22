@@ -30,10 +30,10 @@ namespace Boku.Programming
     /// This class is a management/serializing class for the Programming Tiles
     /// 
     /// All Programming Elements exposed in the game as Programming Tiles are 
-    /// defined in the CardSpace.Xml file and read into this class.  Many of the 
+    /// defined in the CardSpace.xml file and read into this class.  Many of the 
     /// exposed Tiles use the same Programming Element class, just with different 
     /// properties.  
-    /// This CardSpace.Xml file allows for easy property management like changing 
+    /// This CardSpace.xml file allows for easy property management like changing 
     /// the Tiles text or icon without changing code.  Further, it includes 
     /// properties that allow a tile to be archived (hidden) and properties to 
     /// hint at how the tiles should be grouped.  

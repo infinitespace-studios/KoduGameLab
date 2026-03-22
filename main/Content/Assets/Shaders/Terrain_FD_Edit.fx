@@ -120,17 +120,7 @@ COLOR_VS_EDIT_OUTPUT_SM3 EditColorVS_SM3(
     return Output;
 }
 
-#ifndef XBOX
-VertexShader EditColorVS[] =
-{
-	compile VS_SHADERMODEL EditColorL0VS_SM2(),
-	compile VS_SHADERMODEL EditColorL2VS_SM2(),
-	compile VS_SHADERMODEL EditColorL4VS_SM2(),
-	compile VS_SHADERMODEL EditColorL6VS_SM2(),
-	compile VS_SHADERMODEL EditColorL10VS_SM2(),
-	compile VS_SHADERMODEL EditColorVS_SM3(),
-};
-#endif
+
 
 // -----------------------------------------------------
 // Edit mode pixel shaders
@@ -176,16 +166,6 @@ float4 EditColor2PS_SM3( COLOR_VS_EDIT_OUTPUT_SM3 In ) : COLOR0
 
 }   // end of EditColor2PS_SM3()
 
-#ifndef XBOX
-PixelShader EditColorPS[] = 
-{
-	compile PS_SHADERMODEL EditColorPS_SM2(),
-	compile PS_SHADERMODEL EditColor2PS_SM2(),
-	compile PS_SHADERMODEL EditColorPS_SM3(),
-	compile PS_SHADERMODEL EditColor2PS_SM3(),	
-};
-#endif
-
 // -----------------------------------------------------
 // Edit mode techniques
 // -----------------------------------------------------
@@ -193,13 +173,8 @@ technique TerrainEditMode
 {
     pass P0
     {
-#ifndef XBOX
-        VertexShader = (EditColorVS[VSIndex]);
-        PixelShader  = (EditColorPS[PSIndex]);
-#else
-		VertexShader = compile VS_SHADERMODEL EditColorVS_SM3();
-		PixelShader = compile PS_SHADERMODEL EditColorPS_SM3();
-#endif
+        VertexShader = compile VS_SHADERMODEL EditColorVS_SM3();
+        PixelShader = compile PS_SHADERMODEL EditColorPS_SM3();
 
         /* // Alpha test
         AlphaFunc = GreaterEqual; */
@@ -218,13 +193,8 @@ technique TerrainEditModeMasked
 {
     pass P0
     {
-#ifndef XBOX
-        VertexShader = (EditColorVS[VSIndex]);
-        PixelShader  = (EditColorPS[PSIndex + 1]);
-#else
-		VertexShader = compile VS_SHADERMODEL EditColorVS_SM3();
-		PixelShader = compile PS_SHADERMODEL EditColor2PS_SM3();
-#endif
+        VertexShader = compile VS_SHADERMODEL EditColorVS_SM3();
+        PixelShader = compile PS_SHADERMODEL EditColor2PS_SM3();
 
         /* // Alpha test
         AlphaFunc = GreaterEqual; */

@@ -12,26 +12,6 @@
 
 #include "Terrain_FA.fx"
 
-#ifndef XBOX
-VertexShader ColorVS_FA[] =
-{
-	compile VS_SHADERMODEL ColorL0VS_FA_SM2(),
-	compile VS_SHADERMODEL ColorL2VS_FA_SM2(),
-	compile VS_SHADERMODEL ColorL4VS_FA_SM2(),
-	compile VS_SHADERMODEL ColorL6VS_FA_SM2(),
-	compile VS_SHADERMODEL ColorL10VS_FA_SM2(),
-	compile VS_SHADERMODEL ColorVS_FA_SM3(),
-};
-
-PixelShader ColorPS_FA[] =
-{
-	compile PS_SHADERMODEL ColorPS_FA_SM2(),
-	compile PS_SHADERMODEL Color2PS_FA_SM2(),
-	compile PS_SHADERMODEL ColorPS_FA_SM3(),
-	compile PS_SHADERMODEL Color2PS_FA_SM3(),
-};
-#endif
-
 // -----------------------------------------------------
 // Color-pass techniques
 // -----------------------------------------------------
@@ -39,13 +19,8 @@ technique TerrainColorPass_FA
 {
     pass P0
     {
-#ifndef XBOX
-        VertexShader = (ColorVS_FA[VSIndex]);
-        PixelShader  = (ColorPS_FA[PSIndex]);
-#else
-		VertexShader = compile VS_SHADERMODEL ColorVS_FA_SM3();
-		PixelShader = compile PS_SHADERMODEL ColorPS_FA_SM3();
-#endif        
+        VertexShader = compile VS_SHADERMODEL ColorVS_FA_SM3();
+        PixelShader = compile PS_SHADERMODEL ColorPS_FA_SM3();
 
         /* // Alpha test
         AlphaFunc = GreaterEqual; */
@@ -64,13 +39,8 @@ technique TerrainColorPass_FAMasked
 {
     pass P0
     {
-#ifndef XBOX
-        VertexShader = (ColorVS_FA[VSIndex]);
-        PixelShader  = (ColorPS_FA[PSIndex + 1]);
-#else
-		VertexShader = compile VS_SHADERMODEL ColorVS_FA_SM3();
-		PixelShader = compile PS_SHADERMODEL Color2PS_FA_SM3();
-#endif       
+        VertexShader = compile VS_SHADERMODEL ColorVS_FA_SM3();
+        PixelShader = compile PS_SHADERMODEL Color2PS_FA_SM3();
 
         /* // Alpha test
         AlphaFunc = GreaterEqual; */
