@@ -67,6 +67,13 @@ namespace Boku.Common
             {
                 while (true)
                 {
+                    // Guard against early thread start before game is initialized
+                    if (BokuGame.bokuGame == null)
+                    {
+                        Thread.Sleep(100);
+                        continue;
+                    }
+
                     bool active = BokuGame.bokuGame.IsActive;
                     bool ignoreUntilReleased = false;
 
