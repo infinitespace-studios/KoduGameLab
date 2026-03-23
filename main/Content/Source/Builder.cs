@@ -75,6 +75,10 @@ public class Builder : ContentBuilder
         // Exclude Unicode data files (copied as raw)
         contentCollection.IncludeCopy<WildcardRule>("**/*.txt");
 
+        // copy raw files over.
+        contentCollection.IncludeCopy<WildcardRule>("**/*.raw");
+        contentCollection.IncludeCopy<WildcardRule>("**/*.Raw");
+
         // Exclude shader include-only files (no techniques, included by other shaders)
         contentCollection.Exclude<WildcardRule>("Shaders/Globals.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Fog.fx");
