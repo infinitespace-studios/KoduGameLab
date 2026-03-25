@@ -797,7 +797,8 @@ namespace Boku.Common
 
             if (key >= Keys.A && key <= Keys.Z)
             {
-                kbdShift ^= Console.CapsLock;
+                try { kbdShift ^= Console.CapsLock; }
+                catch (PlatformNotSupportedException) { }
             }
 
             result = kbdShift ? keyCharMap[(int)key].shift : keyCharMap[(int)key].normal;

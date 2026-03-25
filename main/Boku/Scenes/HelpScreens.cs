@@ -318,6 +318,9 @@ namespace Boku
                 // Clear the screen.
                 InGame.Clear(Color.Black);
 
+                if (shared.curTexture == null)
+                    return;
+
                 InGame.SetViewportToScreen();
 
                 // Display current help screen.

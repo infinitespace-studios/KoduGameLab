@@ -679,6 +679,7 @@ DEBUG ShaderParams [SkyBox]: 15 parameters
   - Color4 (Single)
   - EnvironmentMap (TextureCube)
 Warning: Failed to load content 'Video/Intro': The content file was not found.
+No application knows how to open URL C:%5CProgram%20Files%5CCommon%20Files%5CMicrosoft%20Shared%5Cink%5CTabTip (Error Domain=NSOSStatusErrorDomain Code=-10814 "kLSApplicationNotFoundErr: E.g. no application claims the file" UserInfo={_LSLine=1796, _LSFunction=runEvaluator}).
 DEBUG ShaderParams [(ad-hoc)]: 18 parameters
   - DiffuseColor (Single)
   - Alpha (Single)
@@ -698,13 +699,16 @@ DEBUG ShaderParams [(ad-hoc)]: 18 parameters
   - NormalMap (Texture2D)
   - EnvironmentMap (TextureCube)
   - OverlayTexture (Texture2D)
+No application knows how to open URL C:%5CProgram%20Files%5CCommon%20Files%5CMicrosoft%20Shared%5Cink%5CTabTip (Error Domain=NSOSStatusErrorDomain Code=-10814 "kLSApplicationNotFoundErr: E.g. no application claims the file" UserInfo={_LSLine=1796, _LSFunction=runEvaluator}).
+No application knows how to open URL C:%5CProgram%20Files%5CCommon%20Files%5CMicrosoft%20Shared%5Cink%5CTabTip (Error Domain=NSOSStatusErrorDomain Code=-10814 "kLSApplicationNotFoundErr: E.g. no application claims the file" UserInfo={_LSLine=1796, _LSFunction=runEvaluator}).
+No application knows how to open URL C:%5CProgram%20Files%5CCommon%20Files%5CMicrosoft%20Shared%5Cink%5CTabTip (Error Domain=NSOSStatusErrorDomain Code=-10814 "kLSApplicationNotFoundErr: E.g. no application claims the file" UserInfo={_LSLine=1796, _LSFunction=runEvaluator}).
 === KODU CRASH REPORT ===
 Object reference not set to an instance of an object.
    at Boku.Programming.CardSpace.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Programming/CardSpace.cs:line 1568
-   at Boku.BokuGame.StaticContent.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 510
+   at Boku.BokuGame.StaticContent.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 514
    at Boku.Common.ContentLoader.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Common/ContentLoader.cs:line 85
-   at Boku.BokuGame.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 1195
-   at Boku.BokuGame.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 701
+   at Boku.BokuGame.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 1199
+   at Boku.BokuGame.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 705
    at Microsoft.Xna.Framework.Game.Tick()
    at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
    at Boku.Program2.Main(String[] args) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Program.cs:line 468
@@ -715,10 +719,10 @@ Object reference not set to an instance of an object.
 Adapter: 
 
    at Boku.Programming.CardSpace.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Programming/CardSpace.cs:line 1568
-   at Boku.BokuGame.StaticContent.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 510
+   at Boku.BokuGame.StaticContent.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 514
    at Boku.Common.ContentLoader.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Common/ContentLoader.cs:line 85
-   at Boku.BokuGame.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 1195
-   at Boku.BokuGame.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 701
+   at Boku.BokuGame.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 1199
+   at Boku.BokuGame.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 705
    at Microsoft.Xna.Framework.Game.Tick()
    at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
    at Boku.Program2.Main(String[] args) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Program.cs:line 468

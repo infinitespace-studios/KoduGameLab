@@ -77,14 +77,16 @@ namespace Boku.Input
         {
             get
             {
-                return Console.CapsLock;
+                try { return Console.CapsLock; }
+                catch (PlatformNotSupportedException) { return false; }
             }
         }
         public bool NumLock
         {
             get
             {
-                return Console.NumberLock;
+                try { return Console.NumberLock; }
+                catch (PlatformNotSupportedException) { return false; }
             }
         }
         

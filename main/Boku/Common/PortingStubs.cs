@@ -13,6 +13,18 @@ namespace Boku.Common
     public class WinKeyboard
     {
         public KeyboardInput.KeyboardCharEvent CharacterEntered;
+
+        /// <summary>
+        /// Hook into MonoGame's Window.TextInput event to fire CharacterEntered.
+        /// Call this once after the GameWindow is available.
+        /// </summary>
+        public void HookTextInput(Microsoft.Xna.Framework.GameWindow window)
+        {
+            window.TextInput += (sender, e) =>
+            {
+                CharacterEntered?.Invoke(e.Character);
+            };
+        }
     }
 
     public class BitmapFont

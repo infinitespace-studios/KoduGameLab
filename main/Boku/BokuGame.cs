@@ -325,6 +325,10 @@ namespace Boku
             _graphics.PreparingDeviceSettings += PreparingDeviceSettingsHandler;
             Content.RootDirectory = "Content";
 
+            // Wire up MonoGame's cross-platform TextInput event to replace the
+            // Windows-only WinKeyboard. This handles CapsLock, dead keys, IME, etc.
+            winKeyboard.HookTextInput(Window);
+
             Auth.Init();
 
         }   // end of BokuGame c'tor
