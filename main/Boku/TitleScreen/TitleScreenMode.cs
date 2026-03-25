@@ -65,6 +65,15 @@ namespace Boku
                     obj.Update();
                 }
 
+                if (!done)
+                {
+                    System.Console.WriteLine("DEBUG TitleScreenMode: waiting for content load to complete...");
+                }
+                else if (parent.logonDialog.Active)
+                {
+                    System.Console.WriteLine("DEBUG TitleScreenMode: done but logonDialog is active, waiting...");
+                }
+
                 if (done && !parent.logonDialog.Active)
                 {
                     // Done loading, should we show the intro video?
@@ -349,12 +358,7 @@ namespace Boku
 
         public void DismissAndShowMain(Object sender, EventArgs args)
         {
-            //before we enter the main menu for the first time, do a check to see if:
-            // 1) touch input is available, and 
-            // 2) we have less than 5 max touch points
-            //if these conditions are both true, then we know the touch hardware isn't windows 8 compliant. this means 
-            //we may see hardware like the infrared monitors that can't handle rotate gestures reliably.  Display a 
-            //warning to the user that touch gestures may not perform in an ideal manner.
+            System.Console.WriteLine("DEBUG TitleScreenMode: DismissAndShowMain called — activating MainMenu");
             BokuGame.bokuGame.mainMenu.Activate();
 
             Deactivate();

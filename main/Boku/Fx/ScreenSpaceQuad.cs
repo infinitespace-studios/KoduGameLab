@@ -181,6 +181,12 @@ namespace Boku.Fx
         {
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
+            // Reset render states that SpriteBatch may have changed.
+            device.BlendState = BlendState.AlphaBlend;
+            device.DepthStencilState = DepthStencilState.None;
+            device.RasterizerState = RasterizerState.CullNone;
+            device.SamplerStates[0] = SamplerState.LinearClamp;
+
             UpdateVertices(position, size);
 
             if (texture == null || texture.IsDisposed || texture.GraphicsDevice.IsDisposed)
@@ -202,8 +208,9 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
+                catch (Exception _ssqEx)
                 {
+                    System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of ScreenSpaceQuad Render()
@@ -250,8 +257,8 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
-                {
+                catch (Exception _ssqEx)
+                { System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of ScreenSpaceQuad RenderWithMask()
@@ -299,8 +306,8 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
-                {
+                catch (Exception _ssqEx)
+                { System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of ScreenSpaceQuad RenderWithMask()
@@ -326,6 +333,12 @@ namespace Boku.Fx
         {
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
+            // Reset render states that SpriteBatch may have changed.
+            device.BlendState = BlendState.AlphaBlend;
+            device.DepthStencilState = DepthStencilState.None;
+            device.RasterizerState = RasterizerState.CullNone;
+            device.SamplerStates[0] = SamplerState.LinearClamp;
+
             UpdateVertices(position, size);
 
             if (effect == null)
@@ -346,8 +359,8 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
-                {
+                catch (Exception _ssqEx)
+                { System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of ScreenSpaceQuad Render()
@@ -381,8 +394,8 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
-                {
+                catch (Exception _ssqEx)
+                { System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of ScreenSpaceQuad RenderGradient()
@@ -412,8 +425,8 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
-                {
+                catch (Exception _ssqEx)
+                { System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of ScreenSpaceQuad RenderStencil()
@@ -448,8 +461,8 @@ namespace Boku.Fx
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
                 }
-                catch
-                {
+                catch (Exception _ssqEx)
+                { System.Console.WriteLine($"Warning: ScreenSpaceQuad draw failed: {_ssqEx.Message}");
                 }
             }
         }   // end of RenderSplitTexture()

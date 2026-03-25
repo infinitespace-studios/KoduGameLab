@@ -539,8 +539,17 @@ namespace Boku
             }
 
             public float fVal = -10.0f;
+            private bool debugLogged = false;
+            private int renderCallCount = 0;
             public override void Render(Camera camera)
             {
+                renderCallCount++;
+                if (!debugLogged && renderCallCount > 5)
+                {
+                    debugLogged = true;
+                    RenderTarget2D rtCheck = UI2D.Shared.RenderTargetDepthStencil1280_720;
+                    System.Console.WriteLine($"DEBUG MainMenu.Render[{renderCallCount}]: backgroundTexture={shared.backgroundTexture != null}, bgDisposed={shared.backgroundTexture?.IsDisposed}, waitingForStorage={shared.waitingForStorage}, skipFrames={skipFrames}, rt={rtCheck != null}, rtDisposed={rtCheck?.IsDisposed}");
+                }
                 GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
                 HelpOverlay.RefreshTexture();

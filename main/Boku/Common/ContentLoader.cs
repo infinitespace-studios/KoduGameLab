@@ -103,8 +103,15 @@ namespace Boku.Common
                     if (item != null)
                     {
                         // Perform the init
-                        item.InitDeviceResources(BokuGame.bokuGame.GraphicsDevice);
-                        BokuGame.Loaded(item);
+                        try
+                        {
+                            item.InitDeviceResources(BokuGame.bokuGame.GraphicsDevice);
+                            BokuGame.Loaded(item);
+                        }
+                        catch (Exception e)
+                        {
+                            System.Console.WriteLine($"Warning: InitDeviceResources failed for {item.GetType().Name}: {e.Message}");
+                        }
                     }
 
                     // Limit to 1/4 second of processing.
@@ -116,6 +123,7 @@ namespace Boku.Common
                 // All loads and inits complete?
                 if (startCount > 0 && queuedLoads.Count == 0 && queuedInits.Count == 0)
                 {
+                    System.Console.WriteLine("DEBUG ContentLoader: All loads and inits complete, firing OnLoadComplete");
                     // Make the completion callback.
                     if (OnLoadComplete != null)
                         OnLoadComplete();
@@ -124,6 +132,9 @@ namespace Boku.Common
             }
             else
             {
+                if (queuedLoads.Count > 0)
+                    System.Console.WriteLine($"DEBUG ContentLoader: Processing queued loads ({queuedLoads.Count} remaining)");
+
                 // Process queued loads
                 while (queuedLoads.Count > 0)
                 {
@@ -132,7 +143,14 @@ namespace Boku.Common
                     if (item != null)
                     {
                         // Perform load
-                        item.LoadContent(false);
+                        try
+                        {
+                            item.LoadContent(false);
+                        }
+                        catch (Exception e)
+                        {
+                            System.Console.WriteLine($"Warning: LoadContent failed for {item.GetType().Name}: {e.Message}");
+                        }
 
                         // Queue for init
                         queuedInits.Enqueue(item);
