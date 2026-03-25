@@ -1565,7 +1565,10 @@ p { page-break-before: always; }
             {
                 foreach(KeyValuePair<string, CardFace> kvp in CardSpace.Cards.cardFaces)
                 {
-                    BokuGame.Release(ref kvp.Value.Texture);
+                    if (kvp.Value != null && kvp.Value.Texture != null)
+                    {
+                        BokuGame.Release(ref kvp.Value.Texture);
+                    }
                 }
 
                 Cards.cardFaces.Clear();
