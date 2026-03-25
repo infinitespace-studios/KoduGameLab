@@ -334,7 +334,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color, 
                         DepthFormat.Depth24Stencil8, 0, 
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTargetDepthStencil1024_768", renderTargetDepthStencil1024_768);
                 }
                 return renderTargetDepthStencil1024_768;
@@ -358,7 +358,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.Depth24Stencil8, numSamples,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTargetDepthStencil1280_720", renderTargetDepthStencil1280_720);
                 }
                 return renderTargetDepthStencil1280_720;
@@ -381,7 +381,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget1920_540", renderTarget1920_540);
                 }
                 return renderTarget1920_540;
@@ -404,7 +404,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget1024_768", renderTarget1024_768);
                 }
                 return renderTarget1024_768; 
@@ -427,7 +427,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget512_512", renderTarget512_512);
                 }
                 return renderTarget512_512;
@@ -450,7 +450,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget512_302", renderTarget512_302);
                 }
                 return renderTarget512_302; 
@@ -473,7 +473,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget256_256", renderTarget256_256);
                 }
                 return renderTarget256_256;
@@ -495,7 +495,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget128_128", renderTarget128_128);
                 }
                 return renderTarget128_128;
@@ -518,7 +518,7 @@ namespace Boku.UI2D
                         width, height, false,
                         SurfaceFormat.Color,
                         DepthFormat.None, 0,
-                        RenderTargetUsage.PlatformContents);
+                        RenderTargetUsage.PreserveContents);
                     InGame.GetRT("UI2D.Shared:renderTarget64_64", renderTarget64_64);
                 }
                 return renderTarget64_64;
@@ -732,7 +732,7 @@ namespace Boku.UI2D
                 SurfaceFormat.Color,
                 DepthFormat.Depth24Stencil8,
                 0,
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
             InGame.GetRT("UI2D.Shared:renderTargetDepth1024_768", renderTargetDepthStencil1024_768);
 
             width = 1280;
@@ -746,7 +746,7 @@ namespace Boku.UI2D
                     width, height, false,
                     SurfaceFormat.Color,
                     DepthFormat.Depth24Stencil8, numSamples,
-                    RenderTargetUsage.PlatformContents);
+                    RenderTargetUsage.PreserveContents);
                 InGame.GetRT("UI2D.Shared:renderTargetDepthStencil1280_720", renderTargetDepthStencil1280_720);
             }
 
@@ -759,7 +759,7 @@ namespace Boku.UI2D
                     width, height, false,
                     SurfaceFormat.Color,
                     DepthFormat.None, 0,
-                    RenderTargetUsage.PlatformContents);
+                    RenderTargetUsage.PreserveContents);
                 InGame.GetRT("UI2D.Shared:renderTarget1920_540", renderTarget1920_540);
             }
 
@@ -771,7 +771,7 @@ namespace Boku.UI2D
                 SurfaceFormat.Color,
                 DepthFormat.None,
                 0,
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
             InGame.GetRT("UI2D.Shared:renderTarget1024_768", renderTarget1024_768);
 
             width = 512;
@@ -781,7 +781,7 @@ namespace Boku.UI2D
                 width, height, false,
                 SurfaceFormat.Color,
                 DepthFormat.None, 0,
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
             InGame.GetRT("UI2D.Shared:renderTarget512_512", renderTarget512_512);
 
             if (renderTarget512_302 == null)
@@ -793,7 +793,7 @@ namespace Boku.UI2D
                     width, height, false,
                     SurfaceFormat.Color,
                     DepthFormat.None, 0,
-                    RenderTargetUsage.PlatformContents);
+                    RenderTargetUsage.PreserveContents);
                 InGame.GetRT("UI2D.Shared:renderTarget512_302", renderTarget512_302);
             }
 
@@ -804,7 +804,7 @@ namespace Boku.UI2D
                 width, height, false,
                 SurfaceFormat.Color,
                 DepthFormat.None, 0,
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
             InGame.GetRT("UI2D.Shared:renderTarget256_256", renderTarget256_256);
 
             if (renderTarget128_128 == null)
@@ -816,7 +816,7 @@ namespace Boku.UI2D
                     width, height, false,
                     SurfaceFormat.Color,
                     DepthFormat.None, 0,
-                    RenderTargetUsage.PlatformContents);
+                    RenderTargetUsage.PreserveContents);
                 InGame.GetRT("UI2D.Shared:renderTarget128_128", renderTarget128_128);
             }
 
@@ -827,7 +827,7 @@ namespace Boku.UI2D
                 width, height, false,
                 SurfaceFormat.Color,
                 DepthFormat.None, 0,
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
             InGame.GetRT("UI2D.Shared:renderTarget64_64", renderTarget64_64);
 
         }

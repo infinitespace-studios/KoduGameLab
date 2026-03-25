@@ -1425,7 +1425,7 @@ p { page-break-before: always; }
                 SurfaceFormat.Color,
                 DepthFormat.None,
                 1, // Samples
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
 
             TextBlob blob = new TextBlob(UI2D.Shared.GetGameFont24Bold, "", 512);
             blob.LineSpacingAdjustment = 6;
@@ -1473,7 +1473,7 @@ p { page-break-before: always; }
                 SurfaceFormat.Color,
                 DepthFormat.None,
                 1, // Samples
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
 
             TextBlob blob = new TextBlob(UI2D.Shared.GetGameFont24Bold, "", 512);
             blob.LineSpacingAdjustment = 6;

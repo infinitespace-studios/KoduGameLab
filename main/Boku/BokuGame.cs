@@ -342,7 +342,7 @@ namespace Boku
             if (args != null)
             {
                 GraphicsDeviceInformation info = args.GraphicsDeviceInformation;
-                info.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PlatformContents;
+                info.PresentationParameters.RenderTargetUsage = RenderTargetUsage.PreserveContents;
             }
         }
 

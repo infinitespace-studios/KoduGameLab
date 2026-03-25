@@ -359,7 +359,7 @@ namespace Boku.UI2D
             }
 
             // Create the diffuse texture.  Leave it null if we have no text to render.
-            diffuse = new RenderTarget2D(device, w, h, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
+            diffuse = new RenderTarget2D(device, w, h, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
             InGame.GetRT("UIGrid2DTextElement", diffuse);
 
             InGame.SetRenderTarget(diffuse);

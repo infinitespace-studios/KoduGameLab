@@ -571,11 +571,15 @@ namespace Boku
                 // Clear the screen & z-buffer.
                 InGame.Clear(Color.Black);
 
-                // Apply the background.
-                ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
+                // Apply the background using SpriteBatch for MonoGame compatibility.
+                {
+                    SpriteBatch batch = UI2D.Shared.SpriteBatch;
+                    batch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
+                    batch.Draw(shared.backgroundTexture, new Rectangle(0, 0, (int)rtSize.X, (int)rtSize.Y), Color.White);
+                    batch.End();
+                }
 
-                Vector2 position = Vector2.Zero;
-                quad.Render(shared.backgroundTexture, position, rtSize, @"TexturedNoAlpha");
+                ScreenSpaceQuad quad = ScreenSpaceQuad.GetInstance();
 
                 Color textColor = new Color(21, 125, 178);
 
@@ -662,7 +666,10 @@ namespace Boku
                 {
                     ScreenWarp.FitRtToScreen(rtSize);
 
-                    quad.Render(rt, ScreenWarp.RenderPosition, ScreenWarp.RenderSize, @"TexturedNoAlpha");
+                    SpriteBatch batch = UI2D.Shared.SpriteBatch;
+                    batch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
+                    batch.Draw(rt, new Rectangle((int)ScreenWarp.RenderPosition.X, (int)ScreenWarp.RenderPosition.Y, (int)ScreenWarp.RenderSize.X, (int)ScreenWarp.RenderSize.Y), Color.White);
+                    batch.End();
                 }
 
                 // Render news feed.

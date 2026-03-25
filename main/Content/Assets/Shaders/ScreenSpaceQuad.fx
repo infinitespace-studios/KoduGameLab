@@ -12,15 +12,25 @@
 #if OPENGL
     #define VS_SHADERMODEL vs_3_0
     #define PS_SHADERMODEL ps_3_0
+    #define DECLARE_TEXTURE(Name, index) \
+        texture2D Name; \
+        sampler Name##Sampler : register(s##index) = sampler_state { Texture = (Name); }
+    #define SAMPLE_TEXTURE(Name, texCoord) tex2D(Name##Sampler, texCoord)
 #else
     #define VS_SHADERMODEL vs_4_0_level_9_1
     #define PS_SHADERMODEL ps_4_0_level_9_1
+    #define DECLARE_TEXTURE(Name, index) \
+        texture2D Name; \
+        sampler Name##Sampler : register(s##index) = sampler_state { Texture = (Name); }
+    #define SAMPLE_TEXTURE(Name, texCoord) tex2D(Name##Sampler, texCoord)
 #endif
 
 float4 DiffuseColor;
 float DiffuseAlpha;
 
-texture DiffuseTexture;
+// MonoGame uses SpriteTexture as the convention for binding textures
+// via Effect.Parameters on DesktopGL/OpenGL.
+DECLARE_TEXTURE(SpriteTexture, 0);
 texture ShadowMaskTexture;
 texture MaskTexture;
 float4 YLimits;
@@ -42,17 +52,6 @@ float4 Color4;
 //
 // Texture samplers
 //
-sampler2D DiffuseTextureSampler =
-sampler_state
-{
-    Texture = <DiffuseTexture>;
-    MipFilter = Linear;
-    MinFilter = Linear;
-    MagFilter = Linear;
-
-    AddressU = Clamp;
-    AddressV = Clamp;
-};
 sampler2D LeftTextureSampler =
 sampler_state
 {
@@ -128,7 +127,7 @@ VS( float2 pos : POSITION0,
 float4
 TexturedPS( VS_OUTPUT In ) : COLOR0
 {
-    float4 result = DiffuseColor * tex2D( DiffuseTextureSampler, In.textureUV );
+    float4 result = DiffuseColor * SAMPLE_TEXTURE(SpriteTexture, In.textureUV );
 
     return result;
 }   // end of TexturedPS()
@@ -136,7 +135,7 @@ TexturedPS( VS_OUTPUT In ) : COLOR0
 float4
 TexturedAlphaPS( VS_OUTPUT In ) : COLOR0
 {
-    float4 result = DiffuseColor * tex2D( DiffuseTextureSampler, In.textureUV );
+    float4 result = DiffuseColor * SAMPLE_TEXTURE(SpriteTexture, In.textureUV );
     result.a *= DiffuseAlpha;
 
     return result;
@@ -148,7 +147,7 @@ MaskTexturedPS( VS_OUTPUT In ) : COLOR0
 	float2 uv = In.textureUV;
 	//uv.y *= 0.75f;
 	float4 mask = tex2D( MaskTextureSampler, uv );
-    float4 result = mask.r * DiffuseColor * tex2D( DiffuseTextureSampler, In.textureUV );
+    float4 result = mask.r * DiffuseColor * SAMPLE_TEXTURE(SpriteTexture, In.textureUV );
 
     return result;
 }   // end of MaskTexturedPS()
@@ -159,7 +158,7 @@ YLimitTexturedPS( VS_OUTPUT In ) : COLOR0
 {
     float4 result = 0;
 	float2 uv = In.textureUV;
-    float4 text = tex2D( DiffuseTextureSampler, uv );
+    float4 text = SAMPLE_TEXTURE(SpriteTexture, uv );
 
     result = DiffuseColor * text;
 
@@ -174,7 +173,7 @@ float4
 TexturedNoAlphaPS( VS_OUTPUT In ) : COLOR0
 {
 	float4 result = DiffuseColor;
-	result.rgb *= tex2D( DiffuseTextureSampler, In.textureUV );
+	result.rgb *= SAMPLE_TEXTURE(SpriteTexture, In.textureUV );
 	return result;
 }
 
@@ -198,7 +197,7 @@ SplitTexturedPS( VS_OUTPUT In ) : COLOR0
 float4
 DropShadowPS( VS_OUTPUT In ) : COLOR0
 {
-    float4 diffuse = tex2D( DiffuseTextureSampler, In.textureUV );
+    float4 diffuse = SAMPLE_TEXTURE(SpriteTexture, In.textureUV );
     float4 mask = tex2D( ShadowMaskTextureSampler, In.textureUV );
     
     float4 result;

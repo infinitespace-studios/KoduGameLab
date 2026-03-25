@@ -116,7 +116,7 @@ namespace Boku.Fx
             UpdateVertices(position, size);
 
             effect.Parameters["DiffuseColor"].SetValue(new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-            effect.Parameters["DiffuseTexture"].SetValue(diffuse);
+            effect.Parameters["SpriteTexture"].SetValue(diffuse);
             effect.Parameters["ShadowMaskTexture"].SetValue(shadowMask);
 
             effect.CurrentTechnique = effect.Techniques["DropShadow"];
@@ -126,6 +126,7 @@ namespace Boku.Fx
             {
                 EffectPass pass = effect.CurrentTechnique.Passes[i];
                 pass.Apply();
+                
                 device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
             }
         }   // end of ScreenSpaceQuad RenderWithShadowMask()
@@ -185,7 +186,6 @@ namespace Boku.Fx
             device.BlendState = BlendState.AlphaBlend;
             device.DepthStencilState = DepthStencilState.None;
             device.RasterizerState = RasterizerState.CullNone;
-            device.SamplerStates[0] = SamplerState.LinearClamp;
 
             UpdateVertices(position, size);
 
@@ -195,7 +195,7 @@ namespace Boku.Fx
             }
 
             effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["DiffuseTexture"].SetValue(texture);
+            effect.Parameters["SpriteTexture"].SetValue(texture);
 
             effect.CurrentTechnique = effect.Techniques[technique];
 
@@ -243,7 +243,7 @@ namespace Boku.Fx
             UpdateVertices(position, size);
 
             effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["DiffuseTexture"].SetValue(texture);
+            effect.Parameters["SpriteTexture"].SetValue(texture);
             effect.Parameters["MaskTexture"].SetValue(mask);
 
             effect.CurrentTechnique = effect.Techniques[@"Mask" + technique];
@@ -253,6 +253,7 @@ namespace Boku.Fx
             {
                 EffectPass pass = effect.CurrentTechnique.Passes[i];
                 pass.Apply();
+                
                 try
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
@@ -292,7 +293,7 @@ namespace Boku.Fx
             UpdateVertices(position, size);
 
             effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["DiffuseTexture"].SetValue(texture);
+            effect.Parameters["SpriteTexture"].SetValue(texture);
             effect.Parameters["YLimits"].SetValue(limits);
 
             effect.CurrentTechnique = effect.Techniques[@"YLimit" + technique];
@@ -302,6 +303,7 @@ namespace Boku.Fx
             {
                 EffectPass pass = effect.CurrentTechnique.Passes[i];
                 pass.Apply();
+                
                 try
                 {
                     device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, localVerts, 0, 4, UI2D.Shared.QuadIndices, 0, 2);
@@ -337,7 +339,6 @@ namespace Boku.Fx
             device.BlendState = BlendState.AlphaBlend;
             device.DepthStencilState = DepthStencilState.None;
             device.RasterizerState = RasterizerState.CullNone;
-            device.SamplerStates[0] = SamplerState.LinearClamp;
 
             UpdateVertices(position, size);
 
@@ -474,6 +475,15 @@ namespace Boku.Fx
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\ScreenSpaceQuad");
+
+                // Debug: dump available parameters and techniques
+                var sb = new System.Text.StringBuilder();
+                sb.AppendLine($"DEBUG ScreenSpaceQuad effect: {effect.Parameters.Count} parameters, {effect.Techniques.Count} techniques");
+                foreach (var p in effect.Parameters)
+                    sb.AppendLine($"  param: {p.Name} ({p.ParameterType})");
+                foreach (var t in effect.Techniques)
+                    sb.AppendLine($"  tech: {t.Name}");
+                System.Console.Write(sb.ToString());
             }
         }   // end of ScreenSpaceQuad LoadContent()
 

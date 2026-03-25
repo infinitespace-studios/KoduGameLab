@@ -186,7 +186,7 @@ namespace Boku.UI2D
                 SurfaceFormat.Color,
                 DepthFormat.None,
                 0,
-                RenderTargetUsage.PlatformContents);
+                RenderTargetUsage.PreserveContents);
             InGame.GetRT("MessageBoxElement", diffuse);
 
             // Save off the current depth buffer.

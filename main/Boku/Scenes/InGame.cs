@@ -1734,32 +1734,32 @@ namespace Boku
                     BokuGame.Release(ref thumbRenderTarget);
 
                     int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
-                    fullRenderTarget0 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, numSamples, RenderTargetUsage.PlatformContents);
-                    fullRenderTarget1 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, numSamples, RenderTargetUsage.PlatformContents);
+                    fullRenderTarget0 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, numSamples, RenderTargetUsage.PreserveContents);
+                    fullRenderTarget1 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, numSamples, RenderTargetUsage.PreserveContents);
 
                     int shadowTargetSize = 1024;
-                    shadowFullRenderTarget = new RenderTarget2D(device, shadowTargetSize, shadowTargetSize, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                    shadowSmallRenderTarget0 = new RenderTarget2D(device, shadowTargetSize / 4, shadowTargetSize / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                    shadowSmallRenderTarget1 = new RenderTarget2D(device, shadowTargetSize / 4, shadowTargetSize / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
+                    shadowFullRenderTarget = new RenderTarget2D(device, shadowTargetSize, shadowTargetSize, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                    shadowSmallRenderTarget0 = new RenderTarget2D(device, shadowTargetSize / 4, shadowTargetSize / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                    shadowSmallRenderTarget1 = new RenderTarget2D(device, shadowTargetSize / 4, shadowTargetSize / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
 
                     ShadowCamera.LoadShadowMask(@"Textures\shadowmask");
 
                     if (BokuSettings.Settings.PostEffects)
                     {
-                        effectsRenderTarget = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, 1, RenderTargetUsage.PlatformContents);
+                        effectsRenderTarget = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth24Stencil8, 1, RenderTargetUsage.PreserveContents);
                     }
 
                     if (DistortionManager.EnabledSM3)
                     {
-                        distortRenderTarget0 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                        distortRenderTarget1 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
+                        distortRenderTarget0 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                        distortRenderTarget1 = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
                     }
 
                     // Create several rendertargets 1/16 the size of the original.
-                    smallRenderTarget0 = new RenderTarget2D(device, width / 4, height / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                    smallNoEffect = new RenderTarget2D(device, width / 4, height / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                    smallEffectThumb = new RenderTarget2D(device, width / 4, height / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                    thumbRenderTarget = new RenderTarget2D(device, 128, 128, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
+                    smallRenderTarget0 = new RenderTarget2D(device, width / 4, height / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                    smallNoEffect = new RenderTarget2D(device, width / 4, height / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                    smallEffectThumb = new RenderTarget2D(device, width / 4, height / 4, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                    thumbRenderTarget = new RenderTarget2D(device, 128, 128, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
 
                     SetRenderTarget(smallEffectThumb);
                     Clear(Color.Black);
@@ -1770,9 +1770,9 @@ namespace Boku
                     if (BokuSettings.Settings.PostEffects)
                     {
                         // And a couple 1/16 the size of the small ones.
-                        bloomRenderTarget = new RenderTarget2D(device, width / 16, height / 16, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                        glowRenderTarget = new RenderTarget2D(device, width / 16, height / 16, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
-                        tinyRenderTarget0 = new RenderTarget2D(device, width / 16, height / 16, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PlatformContents);
+                        bloomRenderTarget = new RenderTarget2D(device, width / 16, height / 16, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                        glowRenderTarget = new RenderTarget2D(device, width / 16, height / 16, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+                        tinyRenderTarget0 = new RenderTarget2D(device, width / 16, height / 16, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
                     }
 
                 }
