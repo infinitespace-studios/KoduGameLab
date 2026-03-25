@@ -320,6 +320,8 @@ namespace Boku
 
             _graphics = new GraphicsDeviceManager(this);
             Graphics = _graphics;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
             _graphics.PreparingDeviceSettings += PreparingDeviceSettingsHandler;
             Content.RootDirectory = "Content";
 

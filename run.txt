@@ -700,11 +700,11 @@ DEBUG ShaderParams [(ad-hoc)]: 18 parameters
   - OverlayTexture (Texture2D)
 === KODU CRASH REPORT ===
 Object reference not set to an instance of an object.
-   at Boku.HelpScreens.RenderObj.Render(Camera camera) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Scenes/HelpScreens.cs:line 326
-   at Boku.GameListManager.Render() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/GameListManager.cs:line 104
-   at Boku.BokuGame.Draw() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 951
-   at Boku.BokuGame.Draw(GameTime gameTime) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 825
-   at Microsoft.Xna.Framework.Game.DoDraw(GameTime gameTime)
+   at Boku.Programming.CardSpace.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Programming/CardSpace.cs:line 1568
+   at Boku.BokuGame.StaticContent.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 510
+   at Boku.Common.ContentLoader.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Common/ContentLoader.cs:line 85
+   at Boku.BokuGame.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 1195
+   at Boku.BokuGame.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 701
    at Microsoft.Xna.Framework.Game.Tick()
    at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
    at Boku.Program2.Main(String[] args) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Program.cs:line 468
@@ -714,11 +714,11 @@ Object reference not set to an instance of an object.
 1.0.0.0
 Adapter: 
 
-   at Boku.HelpScreens.RenderObj.Render(Camera camera) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Scenes/HelpScreens.cs:line 326
-   at Boku.GameListManager.Render() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/GameListManager.cs:line 104
-   at Boku.BokuGame.Draw() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 951
-   at Boku.BokuGame.Draw(GameTime gameTime) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 825
-   at Microsoft.Xna.Framework.Game.DoDraw(GameTime gameTime)
+   at Boku.Programming.CardSpace.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Programming/CardSpace.cs:line 1568
+   at Boku.BokuGame.StaticContent.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 510
+   at Boku.Common.ContentLoader.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Common/ContentLoader.cs:line 85
+   at Boku.BokuGame.Unload(INeedsDeviceReset foo) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 1195
+   at Boku.BokuGame.UnloadContent() in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/BokuGame.cs:line 701
    at Microsoft.Xna.Framework.Game.Tick()
    at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
    at Boku.Program2.Main(String[] args) in /Users/dean/Documents/Sandbox/dellis1972/KoduGameLab/main/Boku/Program.cs:line 468
