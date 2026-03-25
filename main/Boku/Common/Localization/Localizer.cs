@@ -15,8 +15,8 @@ namespace Boku.Common.Localization
     public static class Localizer
     {
         public const string DefaultLanguage = LocalizationResourceManager.DefaultLanguage;
-        public const string DefaultLanguageDir = LocalizationResourceManager.DefaultLanguageDir;
-        private const string languageDir = LocalizationResourceManager.LanguageDir;
+        public static readonly string DefaultLanguageDir = LocalizationResourceManager.DefaultLanguageDir;
+        private static readonly string languageDir = LocalizationResourceManager.LanguageDir;
         public static bool ShouldReportMissing = false;
 
         private static TextWriter reportWriter;

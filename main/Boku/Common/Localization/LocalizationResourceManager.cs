@@ -28,11 +28,11 @@ namespace Boku.Common.Localization
     public class LocalizationResourceManager
     {
         #region Constants
-        public const string LanguageDir = @"Content\Xml\Localizable";
+        public static readonly string LanguageDir = Path.Combine("Content", "Xml", "Localizable");
         public const string DefaultLanguage = "EN"; //The English ISO 639-1 language code
-        public const string DefaultLanguageDir = LanguageDir + @"\" + DefaultLanguage;
+        public static readonly string DefaultLanguageDir = Path.Combine(LanguageDir, DefaultLanguage);
         private const string LocalesFileName = @"Locales.xml";
-        private const string LocalesFilePath = LanguageDir + @"\" + LocalesFileName;
+        private static readonly string LocalesFilePath = Path.Combine(LanguageDir, LocalesFileName);
         private static readonly string LocalesUrl = Program2.SiteOptions.KGLUrl + "/API/Locales";
         private const int Timeout = 5000;
         #endregion

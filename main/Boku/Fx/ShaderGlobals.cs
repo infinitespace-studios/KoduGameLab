@@ -644,6 +644,7 @@ namespace Boku.Fx
             private string envTextureName = @"Textures\EnvBrian";
 
             private Dictionary<string, Effect> effectDict;
+            private HashSet<string> debugLoggedEffects = new HashSet<string>();
 
             #region Parameter Caching
             public enum EffectParams
@@ -734,7 +735,7 @@ namespace Boku.Fx
             {
                 foreach (KeyValuePair<string, Effect> kvp in effectDict)
                 {
-                    SetValues(kvp.Value);
+                    SetValues(kvp.Key, kvp.Value);
                 }
             }
 
@@ -744,41 +745,58 @@ namespace Boku.Fx
             /// TODO (****) Can this be made more efficient?  Right now it sets every parameter
             /// every time it is called even though they may not have changed.
             /// </summary>
+            /// <param name="effectName">Name the effect was registered with.</param>
             /// <param name="effect"></param>
-            public void SetValues(Effect effect)
+            public void SetValues(string effectName, Effect effect)
             {
                 if (effect == null || effect.IsDisposed)
                 {
                     return;
                 }
 
-                // All from Globals.fx
-                if (effect.Parameters["UILightDirection0"] != null)
+                // One-time debug dump of each effect's available parameters.
+                if (!debugLoggedEffects.Contains(effectName))
                 {
-                    effect.Parameters["UILightDirection0"].SetValue(shared.light0.Direction);
-                    effect.Parameters["UILightColor0"].SetValue(shared.light0.Color);
-                    effect.Parameters["UILightDirection1"].SetValue(shared.light1.Direction);
-                    effect.Parameters["UILightColor1"].SetValue(shared.light1.Color);
-                    effect.Parameters["UILightDirection2"].SetValue(shared.light2.Direction);
-                    effect.Parameters["UILightColor2"].SetValue(shared.light2.Color);
+                    debugLoggedEffects.Add(effectName);
+                    var paramNames = new System.Text.StringBuilder();
+                    paramNames.AppendLine($"DEBUG ShaderParams [{effectName}]: {effect.Parameters.Count} parameters");
+                    foreach (var p in effect.Parameters)
+                    {
+                        paramNames.AppendLine($"  - {p.Name} ({p.ParameterType})");
+                    }
+                    System.Console.Write(paramNames.ToString());
+                }
 
-                    effect.Parameters["FogColor"].SetValue(new Vector3(0.75f, 0.88f, 0.95f/*, 1.0f*/));  // Hazy, light blue.
-                    effect.Parameters["FogVector"].SetValue(FogVector);
+                // UI lights — only present on UI-specific shaders (e.g. UI2D)
+                effect.Parameters["UILightDirection0"]?.SetValue(shared.light0.Direction);
+                effect.Parameters["UILightColor0"]?.SetValue(shared.light0.Color);
+                effect.Parameters["UILightDirection1"]?.SetValue(shared.light1.Direction);
+                effect.Parameters["UILightColor1"]?.SetValue(shared.light1.Color);
+                effect.Parameters["UILightDirection2"]?.SetValue(shared.light2.Direction);
+                effect.Parameters["UILightColor2"]?.SetValue(shared.light2.Color);
 
-                    effect.Parameters["EyeLocation"].SetValue(new Vector4(InGame.inGame.shared.camera.ActualFrom, 1.0f));
-                    effect.Parameters["CameraDir"].SetValue(new Vector4(InGame.inGame.shared.camera.ViewDir, 1.0f));
-                    effect.Parameters["CameraUp"].SetValue(new Vector4(InGame.inGame.shared.camera.ViewUp, 1.0f));
-                    effect.Parameters["WorldToCamera"].SetValue(InGame.inGame.shared.camera.ViewMatrix);
+                // Fog — present on Billboard, Standard, Terrain, Particle3D, etc.
+                effect.Parameters["FogColor"]?.SetValue(new Vector3(0.75f, 0.88f, 0.95f));  // Hazy, light blue.
+                effect.Parameters["FogVector"]?.SetValue(FogVector);
 
-                    effect.Parameters["BloomColor"].SetValue(Vector4.One);
-                    effect.Parameters["BloomStrength"].SetValue(3.00f);
+                // Camera and DOF — present on Standard, Terrain, Particle3D, etc.
+                if (InGame.inGame?.shared?.camera != null)
+                {
+                    effect.Parameters["EyeLocation"]?.SetValue(new Vector4(InGame.inGame.shared.camera.ActualFrom, 1.0f));
+                    effect.Parameters["CameraDir"]?.SetValue(new Vector4(InGame.inGame.shared.camera.ViewDir, 1.0f));
+                    effect.Parameters["CameraUp"]?.SetValue(new Vector4(InGame.inGame.shared.camera.ViewUp, 1.0f));
+                    effect.Parameters["WorldToCamera"]?.SetValue(InGame.inGame.shared.camera.ViewMatrix);
 
                     float focalDist = InGame.inGame.shared.camera.GetFocalDistance();
-                    effect.Parameters["DOF_NearPlane"].SetValue(0.0f);         // currently not used.
-                    effect.Parameters["DOF_FocalPlane"].SetValue(focalDist);   // Distance at which everything is in focus.  ie blur starts here.
-                    effect.Parameters["DOF_FarPlane"].SetValue(100.0f);        // Far distance at which blur is max.
-                    effect.Parameters["DOF_MaxBlur"].SetValue(0.8f);           // Max amount of blur, only applies to far plane.
+                    effect.Parameters["DOF_NearPlane"]?.SetValue(0.0f);
+                    effect.Parameters["DOF_FocalPlane"]?.SetValue(focalDist);
+                    effect.Parameters["DOF_FarPlane"]?.SetValue(100.0f);
+                    effect.Parameters["DOF_MaxBlur"]?.SetValue(0.8f);
                 }
+
+                // Bloom
+                effect.Parameters["BloomColor"]?.SetValue(Vector4.One);
+                effect.Parameters["BloomStrength"]?.SetValue(3.00f);
 
                 //
                 // InGame
@@ -1174,7 +1192,7 @@ namespace Boku.Fx
         /// <param name="effect"></param>
         public static void SetValues(Effect effect)
         {
-            BokuGame.bokuGame.shaderGlobals.renderObj.SetValues(effect);
+            BokuGame.bokuGame.shaderGlobals.renderObj.SetValues("(ad-hoc)", effect);
         }
 
         /// <summary>

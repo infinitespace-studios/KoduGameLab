@@ -65,7 +65,7 @@ namespace Boku.Programming
         }
 
         #region Constants
-        private const string xmlFileName = @"Content\Xml\CardSpace.xml";
+        private static readonly string xmlFileName = Path.Combine("Content", "Xml", "CardSpace.xml");
         #endregion
 
         private static Dictionary<string, List<string>> localizationDictionary;

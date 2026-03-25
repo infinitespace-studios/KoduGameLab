@@ -42,6 +42,10 @@ public class Builder : ContentBuilder
         contentCollection.IncludeCopy<WildcardRule>("**/*.Xml");
         contentCollection.IncludeCopy<WildcardRule>("**/*.json");
 
+        // Copy level thumbnail DDS files as-is (loaded at runtime via Storage4.TextureLoad)
+        contentCollection.IncludeCopy<WildcardRule>("Xml/Levels/**/*.dds");
+        contentCollection.IncludeCopy<WildcardRule>("Xml/Levels/**/*.Dds");
+
         // Copy text/CSV data files as-is
         contentCollection.IncludeCopy<WildcardRule>("Text/**/*");
 

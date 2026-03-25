@@ -147,7 +147,7 @@ namespace Boku.Common
                         {
                             foreach (ZipArchiveEntry e in zip.Entries)
                             {
-                                string targetPath = @"Content\Xml\Levels";
+                                string targetPath = Path.Combine("Content", "Xml", "Levels");
                                 string mainFilePath = null;
 
                                 string partFullName = e.FullName;

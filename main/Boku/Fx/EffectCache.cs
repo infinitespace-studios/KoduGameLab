@@ -260,6 +260,7 @@ namespace Boku.Fx
         {
             int numParams = NumParams;
             parameters = new EffectParameter[numParams];
+            int missingCount = 0;
             for (int i = 0; i < numParams; ++i)
             {
                 var paramName = ParamName(i);
@@ -268,9 +269,13 @@ namespace Boku.Fx
                     parameters[i] = effect.Parameters[paramName];
                     if (parameters[i] == null)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Warning: Parameter '{paramName}' not found in shader");
+                        missingCount++;
                     }
                 }
+            }
+            if (missingCount > 0)
+            {
+                System.Diagnostics.Debug.WriteLine($"EffectCache: {missingCount} parameter(s) not found in effect (expected by cache enum but optimized out by shader compiler)");
             }
         }
 

@@ -71,15 +71,15 @@ namespace Boku
         public static PresentInterval presentInterval = PresentInterval.Two;
 
         // Note: All these paths do NOT include Settings.MediaPath.
-        public static string LevelsPath = @"Xml\Levels\";
-        public static string DownloadsPath = LevelsPath + @"Downloads\";
-        public static string DownloadsStuffPath = LevelsPath + @"Downloads\Stuff\";
-        public static string UnDoPath = LevelsPath + @"MyWorlds\AutoSave" + Storage4.UniqueMachineID + @"\";
-        public static string MyWorldsPath = LevelsPath + @"MyWorlds\";
-        public static string MyWorldsStuffPath = LevelsPath + @"MyWorlds\Stuff\";
-        public static string BuiltInWorldsPath = LevelsPath + @"BuiltInWorlds\";
-        public static string SharedStuffPath = LevelsPath + @"Stuff\";
-        public static string TerrainPath = SharedStuffPath + @"TerrainHeightMaps\";
+        public static string LevelsPath = Path.Combine("Xml", "Levels") + Path.DirectorySeparatorChar;
+        public static string DownloadsPath = Path.Combine(LevelsPath, "Downloads") + Path.DirectorySeparatorChar;
+        public static string DownloadsStuffPath = Path.Combine(LevelsPath, "Downloads", "Stuff") + Path.DirectorySeparatorChar;
+        public static string UnDoPath = Path.Combine(LevelsPath, "MyWorlds", "AutoSave" + Storage4.UniqueMachineID) + Path.DirectorySeparatorChar;
+        public static string MyWorldsPath = Path.Combine(LevelsPath, "MyWorlds") + Path.DirectorySeparatorChar;
+        public static string MyWorldsStuffPath = Path.Combine(LevelsPath, "MyWorlds", "Stuff") + Path.DirectorySeparatorChar;
+        public static string BuiltInWorldsPath = Path.Combine(LevelsPath, "BuiltInWorlds") + Path.DirectorySeparatorChar;
+        public static string SharedStuffPath = Path.Combine(LevelsPath, "Stuff") + Path.DirectorySeparatorChar;
+        public static string TerrainPath = Path.Combine(SharedStuffPath, "TerrainHeightMaps") + Path.DirectorySeparatorChar;
 
         private static Audio.Audio gameAudio;
         public static GameListManager gameListManager;   // Holds the top-level lists for all game objects.
@@ -421,7 +421,7 @@ namespace Boku
 
         public void LoadSurfaces()
         {
-            Surfaces = SurfaceDict.Load(@"Content\Xml\Actors\SurfaceDict.xml", XnaStorageHelper.Instance);
+            Surfaces = SurfaceDict.Load(Path.Combine("Content", "Xml", "Actors", "SurfaceDict.xml"), XnaStorageHelper.Instance);
         }
 
 

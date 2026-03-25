@@ -178,7 +178,7 @@ namespace Boku.Input
         {
         }
 
-        protected const string MapFolder = @"\Content\Xml\CommandMaps\";
+        protected static readonly string MapFolder = Path.Combine("", "Content", "Xml", "CommandMaps") + Path.DirectorySeparatorChar;
         public void Serialize(string filepath)
         {
             string pathName = MapFolder + filepath;

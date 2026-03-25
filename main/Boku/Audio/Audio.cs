@@ -76,7 +76,7 @@ namespace Boku.Audio
             {
                 try
                 {
-                    engine = new AudioEngine(Path.Combine(Storage4.TitleLocation, @"Content\Audio\Kodu.xgs"));
+                    engine = new AudioEngine(Path.Combine(Storage4.TitleLocation, "Content", "Audio", "Kodu.xgs"));
 
                     listener = new AudioListener();
                     emitter = new AudioEmitter();
@@ -84,8 +84,8 @@ namespace Boku.Audio
                     // Load these early and synchronously so that the title screen
                     // can play the startup sound while we asynchronously load
                     // additional assets, including the "real" sound and wave banks.
-                    startupWavebank = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, @"Content\Audio\Startup Wave Bank.xwb"));
-                    startupSoundbank = new SoundBank(engine, Path.Combine(Storage4.TitleLocation, @"Content\Audio\Startup Sound Bank.xsb"));
+                    startupWavebank = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, "Content", "Audio", "Startup Wave Bank.xwb"));
+                    startupSoundbank = new SoundBank(engine, Path.Combine(Storage4.TitleLocation, "Content", "Audio", "Startup Sound Bank.xsb"));
 
                     // Load these later.
                     //inMemoryWavebank = new WaveBank(engine, @"Content\Audio\In Memory Wave Bank.xwb");
@@ -123,7 +123,7 @@ namespace Boku.Audio
                 {
                     try
                     {
-                        inMemoryWavebank = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, @"Content\Audio\in memory wave bank.xwb"));
+                        inMemoryWavebank = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, "Content", "Audio", "in memory wave bank.xwb"));
                     }
                     catch (Exception e)
                     {
@@ -136,7 +136,7 @@ namespace Boku.Audio
                 {
                     try
                     {
-                        inMemoryWavebank2 = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, @"Content\Audio\in memory wave bank2.xwb"));
+                        inMemoryWavebank2 = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, "Content", "Audio", "in memory wave bank2.xwb"));
                     }
                     catch (Exception e)
                     {
@@ -149,7 +149,7 @@ namespace Boku.Audio
                 {
                     try
                     {
-                        streamingWavebank = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, @"Content\Audio\streaming wave bank.xwb"), 0, 16);
+                        streamingWavebank = new WaveBank(engine, Path.Combine(Storage4.TitleLocation, "Content", "Audio", "streaming wave bank.xwb"), 0, 16);
                     }
                     catch (Exception e)
                     {
@@ -163,7 +163,7 @@ namespace Boku.Audio
                 {
                     try
                     {
-                        soundbank = new SoundBank(engine, Path.Combine(Storage4.TitleLocation, @"Content\Audio\sound bank.xsb"));
+                        soundbank = new SoundBank(engine, Path.Combine(Storage4.TitleLocation, "Content", "Audio", "sound bank.xsb"));
                     }
                     catch (Exception e)
                     {

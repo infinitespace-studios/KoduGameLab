@@ -92,7 +92,7 @@ namespace Boku.Common
             // Mirroring data.
             //
 
-            string[] mirrorData = Storage4.ReadAllLines(@"Content\Xml\Unicode\BidiMirroring.txt", StorageSource.TitleSpace);
+            string[] mirrorData = Storage4.ReadAllLines(Path.Combine("Content", "Xml", "Unicode", "BidiMirroring.txt"), StorageSource.TitleSpace);
 
             if (mirrorData != null)
             {
@@ -117,7 +117,7 @@ namespace Boku.Common
                 }   // end of loop over each line.
             }
 
-            string[] unicodeData = Storage4.ReadAllLines(@"Content\Xml\Unicode\UnicodeData.txt", StorageSource.TitleSpace);
+            string[] unicodeData = Storage4.ReadAllLines(Path.Combine("Content", "Xml", "Unicode", "UnicodeData.txt"), StorageSource.TitleSpace);
 
             if (unicodeData != null)
             {

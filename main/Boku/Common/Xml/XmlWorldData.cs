@@ -328,8 +328,8 @@ namespace Boku.Common.Xml
                 id = Guid.NewGuid();
 
             // Append stuff path to legacy worlds
-            if (stuffFilename != null && stuffFilename != String.Empty && !stuffFilename.Contains(@"\"))
-                stuffFilename = @"Xml\Levels\Stuff\" + stuffFilename;
+            if (stuffFilename != null && stuffFilename != String.Empty && !stuffFilename.Contains(Path.DirectorySeparatorChar) && !stuffFilename.Contains('/'))
+                stuffFilename = Path.Combine("Xml", "Levels", "Stuff", stuffFilename);
 
             return true;
         }

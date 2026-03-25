@@ -1260,9 +1260,9 @@ namespace Boku.SimWorld
                     if (m != null)
                         models.Add(m);
                 }
-                catch (ContentLoadException)
+                catch (Exception e)
                 {
-                    /// Guess we don't have one.
+                    System.Console.WriteLine($"Warning: Failed to load content '{lowName}': {e.Message}");
                 }
                 if (!BokuSettings.Settings.PreferReach || (models.Count == 0))
                 {
@@ -1272,13 +1272,18 @@ namespace Boku.SimWorld
                         if (m != null)
                             models.Add(m);
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
+                        System.Console.WriteLine($"Warning: Failed to load content '{resourceName}': {e.Message}");
                     }
+                }
+                if (models.Count == 0)
+                {
+                    System.Console.WriteLine($"Fail: No models loaded for '{resourceName}' (tried '{lowName}' and '{resourceName}')");
                 }
             }
 
-            if (infoLists == null)
+            if (infoLists == null && models.Count > 0)
             {
                 infoLists = new List<List<PartInfo>>[2];
                 for (int i = 0; i < models.Count; ++i)

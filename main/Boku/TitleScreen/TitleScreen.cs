@@ -114,7 +114,9 @@ namespace Boku
 
 
                 Vector2 backgroundSize = new Vector2(backgroundTexture.Width, backgroundTexture.Height);
-                Vector2 logoSize = new Vector2(logoTexture.Width, logoTexture.Height);
+                Vector2 logoSize = logoTexture != null
+                    ? new Vector2(logoTexture.Width, logoTexture.Height)
+                    : Vector2.Zero;
                 Vector2 position = (screenSize - backgroundSize) / 2.0f;
                 // Clamp to pixels.
                 position.X = (int)position.X;
@@ -144,11 +146,14 @@ namespace Boku
                     }
 
                     // MS logo.
-                    position = (screenSize - logoSize) / 2.0f + new Vector2(0, screenSize.Y / 4.0f);
-                    // Clamp to pixels.
-                    position.X = (int)position.X;
-                    position.Y = (int)position.Y;
-                    batch.Draw(logoTexture, position, Color.White);
+                    if (logoTexture != null)
+                    {
+                        position = (screenSize - logoSize) / 2.0f + new Vector2(0, screenSize.Y / 4.0f);
+                        // Clamp to pixels.
+                        position.X = (int)position.X;
+                        position.Y = (int)position.Y;
+                        batch.Draw(logoTexture, position, Color.White);
+                    }
 
                     // If in wait mode, show texture.
                     if (shared.waitMode)

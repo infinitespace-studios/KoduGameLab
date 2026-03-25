@@ -67,14 +67,25 @@ namespace Boku.Common
             {
                 while (true)
                 {
-                    // Guard against early thread start before game is initialized
-                    if (BokuGame.bokuGame == null)
+                    // Guard against early thread start before game is fully initialized.
+                    // BokuGame.bokuGame may be non-null (set in constructor) while
+                    // MonoGame's internal platform is still null (set during Run()),
+                    // so IsActive can throw even after the null check passes.
+                    bool active;
+                    try
+                    {
+                        if (BokuGame.bokuGame == null)
+                        {
+                            Thread.Sleep(100);
+                            continue;
+                        }
+                        active = BokuGame.bokuGame.IsActive;
+                    }
+                    catch (NullReferenceException)
                     {
                         Thread.Sleep(100);
                         continue;
                     }
-
-                    bool active = BokuGame.bokuGame.IsActive;
                     bool ignoreUntilReleased = false;
 
                     MouseState state = Mouse.GetState();
