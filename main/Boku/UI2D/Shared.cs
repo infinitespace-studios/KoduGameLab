@@ -352,7 +352,9 @@ namespace Boku.UI2D
                 {
                     int width = 1280;
                     int height = 720;
-                    int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
+                    // MainMenu RT only holds 2D content; MSAA wastes resolves and breaks
+                    // SpriteBatch.Draw sampling on MonoGame DesktopGL. Always use 1 sample.
+                    int numSamples = 1;
                     renderTargetDepthStencil1280_720 = new RenderTarget2D(
                         BokuGame.bokuGame.GraphicsDevice,
                         width, height, false,
@@ -739,7 +741,9 @@ namespace Boku.UI2D
             height = 720;
             if (renderTargetDepthStencil1280_720 == null)
             {
-                int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
+                // MainMenu RT only holds 2D content; MSAA wastes resolves and breaks
+                // SpriteBatch.Draw sampling on MonoGame DesktopGL. Always use 1 sample.
+                int numSamples = 1;
 
                 renderTargetDepthStencil1280_720 = new RenderTarget2D(
                     device,
