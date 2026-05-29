@@ -332,6 +332,7 @@ namespace Boku.Fx
                 if (partyEffect == null)
                 {
                     partyEffect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Particle2D");
+                    ShaderDefaultValues.ApplyParticle2DDefaults(partyEffect);
                     effectCache.Load(PartyEffect, "");
                 }
 

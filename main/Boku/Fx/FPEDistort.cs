@@ -175,6 +175,7 @@ namespace Boku.Fx
                 if (effect == null)
                 {
                     effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\FPEDistort");
+                    ShaderDefaultValues.ApplyFpeDistortDefaults(effect);
                     effectCache.Load(Effect, "");
                 }
 

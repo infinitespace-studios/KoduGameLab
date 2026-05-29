@@ -1244,6 +1244,7 @@ namespace Boku.SimWorld
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Standard");
+                ShaderDefaultValues.ApplyDistortDefaults(effect);
                 ShaderGlobals.RegisterEffect("Standard", effect);
 
                 effectCache.Load(Effect, TechniqueExt);

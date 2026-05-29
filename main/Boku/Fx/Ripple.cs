@@ -539,6 +539,7 @@ namespace Boku.Fx
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Ripple");
+                ShaderDefaultValues.ApplyRippleDefaults(effect);
                 ShaderGlobals.RegisterEffect("Ripple", effect);
                 effectCache.Load(effect);
             }

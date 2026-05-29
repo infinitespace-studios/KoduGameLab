@@ -318,6 +318,7 @@ namespace Boku.Common.ParticleSystem
             if (effect2d == null)
             {
                 effect2d = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Particle2D");
+                ShaderDefaultValues.ApplyParticle2DDefaults(effect2d);
                 effectCache2d.Load(effect2d);
             }
 

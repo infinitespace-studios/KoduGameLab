@@ -69,6 +69,7 @@ namespace Boku.Common
         {
             // Init the effect.
             effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Utils");
+            ShaderDefaultValues.ApplyUtilsDefaults(effect);
             ShaderGlobals.RegisterEffect("Utils", effect);
 
             ramps = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Ramps");

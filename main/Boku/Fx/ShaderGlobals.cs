@@ -972,6 +972,7 @@ namespace Boku.Fx
                 if (effect == null)
                 {
                     effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Standard");
+                    ShaderDefaultValues.ApplyDistortDefaults(effect);
                     ShaderGlobals.RegisterEffect("Standard", effect);
 
                     effectCache.Load(effect);
@@ -1457,6 +1458,7 @@ namespace Boku.Fx
         public static void RegisterEffect(string name, Effect effect)
         {
             UnregisterEffect(name);
+            ShaderDefaultValues.ApplySharedDefaults(effect);
             BokuGame.bokuGame.shaderGlobals.renderObj.EffectDict.Add(name, effect);
         }
 

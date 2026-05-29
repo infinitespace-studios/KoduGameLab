@@ -228,6 +228,7 @@ namespace Boku.SimWorld.Path
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Road");
+                ShaderDefaultValues.ApplyDistortDefaults(effect);
                 ShaderGlobals.RegisterEffect("Road", effect);
             }
         }

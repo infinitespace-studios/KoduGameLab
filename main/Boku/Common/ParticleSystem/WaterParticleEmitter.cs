@@ -215,6 +215,7 @@ namespace Boku.Common.ParticleSystem
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\NoiseParticle2D");
+                ShaderDefaultValues.ApplyNoiseParticle2DDefaults(effect);
 
                 technique = effect.Techniques[@"TexturedColorPassNormalAlpha"];
 

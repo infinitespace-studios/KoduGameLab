@@ -162,6 +162,7 @@ namespace Boku.UI
                 if (effect == null)
                 {
                     effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Standard");
+                    ShaderDefaultValues.ApplyDistortDefaults(effect);
                     ShaderGlobals.RegisterEffect("Standard", effect);
                 }
 

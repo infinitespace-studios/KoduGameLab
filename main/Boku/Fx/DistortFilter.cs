@@ -134,6 +134,7 @@ namespace Boku.Fx
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\" + effectName);
+                ShaderDefaultValues.ApplyDistortFilterDefaults(effect);
             }
             if (filter == null)
             {

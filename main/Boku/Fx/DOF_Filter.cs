@@ -138,6 +138,7 @@ namespace Boku.Fx
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\DOF_Filter");
+                ShaderDefaultValues.ApplyDofFilterDefaults(effect);
                 ShaderGlobals.RegisterEffect("DOF_Filter", effect);
             }
 
