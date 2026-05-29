@@ -96,7 +96,7 @@ namespace Boku.Fx
                 position.X - size.X * 0.5f, // x offset
                 -position.Y + size.Y * 0.5f); // y offset
 
-            effect.Parameters["UvToPos"].SetValue(uvToPos);
+            effect.Parameters["UvToPos"]?.SetValue(uvToPos);
 
         }   // end of CameraSpaceQuad SetUvToPos()
 
@@ -143,12 +143,12 @@ namespace Boku.Fx
             SetUvToPos(position, size);
 
             Matrix worldMatrix = Matrix.Identity;
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldMatrix * camera.ViewProjectionMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldMatrix * camera.ViewProjectionMatrix);
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["DiffuseTexture"].SetValue(texture);
-            effect.Parameters["Alpha"].SetValue(alpha);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
+            effect.Parameters["DiffuseTexture"]?.SetValue(texture);
+            effect.Parameters["Alpha"]?.SetValue(alpha);
 
             effect.CurrentTechnique = effect.Techniques[technique];
 
@@ -168,10 +168,10 @@ namespace Boku.Fx
             SetUvToPos(position, size);
 
             Matrix worldMatrix = Matrix.Identity;
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldMatrix * camera.ViewProjectionMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldMatrix * camera.ViewProjectionMatrix);
 
-            effect.Parameters["DiffuseColor"].SetValue(color);
+            effect.Parameters["DiffuseColor"]?.SetValue(color);
 
             effect.CurrentTechnique = effect.Techniques[@"Stencil"];
 
