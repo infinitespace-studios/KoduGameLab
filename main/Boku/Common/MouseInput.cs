@@ -353,6 +353,8 @@ namespace Boku.Common
                     MouseWorker worker = new MouseWorker();
 
                     mouseWorkerThread = new Thread(new ThreadStart(worker.SampleMouseState));
+                    mouseWorkerThread.IsBackground = true;
+                    mouseWorkerThread.Name = "MouseInput.SampleMouseState";
                     mouseWorkerThread.Start();
 
                     initialized = true;

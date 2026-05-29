@@ -1114,7 +1114,7 @@ namespace Boku
         // Game loop is over, exiting.
         //
 
-        public void EndRun()
+        protected override void EndRun()
         {
             // Adding an empty try/catch here because I'm seeing null dref exceptions
             // in the error log but I'm not sure what's causing it.
@@ -1159,9 +1159,9 @@ namespace Boku
 
         }   // end of BokuGame EndRun()
 
-        protected void OnExiting(object sender, EventArgs args)
+        protected override void OnExiting(object sender, ExitingEventArgs args)
         {
-            //base.OnExiting(sender, args);
+            base.OnExiting(sender, args);
         }   // end of BokuGame OnExiting()
 
         //

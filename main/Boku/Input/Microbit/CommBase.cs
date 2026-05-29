@@ -535,7 +535,8 @@ namespace Boku.Input
             rxException = null;
             rxExceptionReported = false;
             rxThread = new Thread(new ThreadStart(this.ReceiveThread));
-            rxThread.Name = "CommBaseRx";
+            rxThread.IsBackground = true;
+            rxThread.Name = "Microbit.RxThread";
             rxThread.Priority = ThreadPriority.AboveNormal;
             rxThread.Start();
 

@@ -556,6 +556,8 @@ namespace Boku.Input
             {
                 _status = EDeviceStatus.FLASHING;
                 Thread t = new Thread(new ThreadStart(FlashIt));
+                t.IsBackground = true;
+                t.Name = "Microbit.FlashIt";
                 t.Start();
             }
         }
