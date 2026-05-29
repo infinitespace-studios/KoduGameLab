@@ -119,7 +119,6 @@ public class Builder : ContentBuilder
 
         // Exclude unused shaders (not loaded from C#, not included by any other shader)
         contentCollection.Exclude<WildcardRule>("Shaders/BokuFace.fx");
-        contentCollection.Exclude<WildcardRule>("Shaders/DistortFilter.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/FontQuad.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Red.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Surface.fx");
