@@ -143,6 +143,8 @@ namespace Boku.Fx
     abstract public class EffectCache
     {
         #region MEMBERS
+        private static readonly HashSet<string> missingParameterLogMessages = new HashSet<string>();
+
         private EffectTechnique[] techniques = null;
         private EffectParameter[] parameters = null;
         #endregion MEMBERS
@@ -229,6 +231,118 @@ namespace Boku.Fx
             return parameters[idx];
         }
 
+        public bool TrySet(int idx, Matrix value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Matrix[] value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Vector2 value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Vector3 value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Vector3[] value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Vector4 value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Vector4[] value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, float value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, float[] value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, int value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, bool value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Texture value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, Texture2D value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
+        public bool TrySet(int idx, TextureCube value)
+        {
+            EffectParameter parameter = Parameter(idx);
+            if (parameter == null) return false;
+            parameter.SetValue(value);
+            return true;
+        }
+
         #region ABSTRACT
         /// <summary>
         /// Derived class must provide the number of parameters.
@@ -260,7 +374,7 @@ namespace Boku.Fx
         {
             int numParams = NumParams;
             parameters = new EffectParameter[numParams];
-            int missingCount = 0;
+            List<string> missing = new List<string>();
             for (int i = 0; i < numParams; ++i)
             {
                 var paramName = ParamName(i);
@@ -269,13 +383,25 @@ namespace Boku.Fx
                     parameters[i] = effect.Parameters[paramName];
                     if (parameters[i] == null)
                     {
-                        missingCount++;
+                        missing.Add(paramName);
                     }
                 }
             }
-            if (missingCount > 0)
+            if (missing.Count > 0)
             {
-                System.Diagnostics.Debug.WriteLine($"EffectCache: {missingCount} parameter(s) not found in effect (expected by cache enum but optimized out by shader compiler)");
+                string effectIdentifier = effect.CurrentTechnique != null ? effect.CurrentTechnique.Name : null;
+                if (String.IsNullOrEmpty(effectIdentifier))
+                {
+                    effectIdentifier = !String.IsNullOrEmpty(effect.Name) ? effect.Name : effect.GetType().Name;
+                }
+                string message = $"EffectCache [{effectIdentifier}]: missing parameters: {String.Join(", ", missing)}";
+                lock (missingParameterLogMessages)
+                {
+                    if (missingParameterLogMessages.Add(message))
+                    {
+                        System.Diagnostics.Debug.WriteLine(message);
+                    }
+                }
             }
         }
 

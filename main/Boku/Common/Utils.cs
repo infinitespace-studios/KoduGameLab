@@ -575,14 +575,14 @@ namespace Boku.Common
                 : manager.Technique(ParticleSystemManager.EffectTech3d.TransparentColorPass);
 
             // Set parameters.
-            manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(1.0f);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(color);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(Vector4.Zero);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.SpecularColor).SetValue(new Vector4(0.9f));
-            manager.Parameter(ParticleSystemManager.EffectParams3d.SpecularPower).SetValue(16.0f);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(color.W);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, 1.0f);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, color);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, Vector4.Zero);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.SpecularColor, new Vector4(0.9f));
+            manager.TrySet(ParticleSystemManager.EffectParams3d.SpecularPower, 16.0f);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, color.W);
 
-            manager.Parameter(ParticleSystemManager.EffectParams3d.Shininess).SetValue(0.4f);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.Shininess, 0.4f);
 
             // Set up world matrix.
             Matrix worldMatrix = Matrix.CreateScale(radii);

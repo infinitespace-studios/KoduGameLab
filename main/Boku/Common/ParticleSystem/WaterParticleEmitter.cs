@@ -105,7 +105,7 @@ namespace Boku.Common.ParticleSystem
             Amplitude,
             Sync,
         };
-        private EffectCache effectCache = new EffectCache<EffectParams>();
+        private static EffectCache effectCache = new EffectCache<EffectParams>();
         private EffectParameter Parameter(EffectParams param)
         {
             return effectCache.Parameter((int)param);
@@ -411,25 +411,25 @@ namespace Boku.Common.ParticleSystem
                 effect.CurrentTechnique = technique;
 
                 // Set up common rendering values.
-                Parameter(EffectParams.DiffuseColor).SetValue(Color);
-                Parameter(EffectParams.WaterColor).SetValue(new Vector4(0.15f, 0.55f, 0.82f, 10.0f));
+                effectCache.TrySet((int)(EffectParams.DiffuseColor), Color);
+                effectCache.TrySet((int)(EffectParams.WaterColor), new Vector4(0.15f, 0.55f, 0.82f, 10.0f));
 
                 // Set up world matrix.
                 Matrix worldMatrix = Matrix.Identity;
                 Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
-                Parameter(EffectParams.DiffuseTexture).SetValue(texture);
-                Parameter(EffectParams.NoiseTexture).SetValue(noiseTexture);
+                effectCache.TrySet((int)(EffectParams.DiffuseTexture), texture);
+                effectCache.TrySet((int)(EffectParams.NoiseTexture), noiseTexture);
 
-                Parameter(EffectParams.EyeLocation).SetValue(camera.ActualFrom);
-                Parameter(EffectParams.CameraUp).SetValue(camera.ViewUp);
+                effectCache.TrySet((int)(EffectParams.EyeLocation), camera.ActualFrom);
+                effectCache.TrySet((int)(EffectParams.CameraUp), camera.ViewUp);
 
-                Parameter(EffectParams.WorldMatrix).SetValue(worldMatrix);
-                Parameter(EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
+                effectCache.TrySet((int)(EffectParams.WorldMatrix), worldMatrix);
+                effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
 
-                Parameter(EffectParams.BaseUV).SetValue(baseUV);
-                Parameter(EffectParams.Amplitude).SetValue(1.0f);
-                Parameter(EffectParams.Sync).SetValue(0.01f);
+                effectCache.TrySet((int)(EffectParams.BaseUV), baseUV);
+                effectCache.TrySet((int)(EffectParams.Amplitude), 1.0f);
+                effectCache.TrySet((int)(EffectParams.Sync), 0.01f);
 
                 device.SetVertexBuffer(vbuf);
                 device.Indices = ibuf;

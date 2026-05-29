@@ -1020,9 +1020,9 @@ namespace Boku.Common
             Vector3 diff = scoreEffect.curr - camera.ActualFrom;
             float dist = diff.Length();
 
-            Parameter(EffectParams.ScoreAlpha).SetValue(scoreEffect.alpha);
-            Parameter(EffectParams.ScoreColor).SetValue(Classification.ColorVector4(scoreEffect.color));
-            Parameter(EffectParams.ScoreColorDarken).SetValue(kScoreColorDarken);
+            effectCache.TrySet((int)(EffectParams.ScoreAlpha), scoreEffect.alpha);
+            effectCache.TrySet((int)(EffectParams.ScoreColor), Classification.ColorVector4(scoreEffect.color));
+            effectCache.TrySet((int)(EffectParams.ScoreColorDarken), kScoreColorDarken);
 
             device.SetVertexBuffer(vertexBuf);
             device.Indices = UI2D.Shared.QuadIndexBuff;
@@ -1049,9 +1049,9 @@ namespace Boku.Common
 
                 Vector2 scoreSize = new Vector2(crt.surface.Width, crt.surface.Height) * distanceScalar;
 
-                Parameter(EffectParams.WorldViewProj).SetValue(worldViewProj);
-                Parameter(EffectParams.ScoreSize).SetValue(scoreSize);
-                Parameter(EffectParams.ScoreTexture).SetValue(crt.surface);
+                effectCache.TrySet((int)(EffectParams.WorldViewProj), worldViewProj);
+                effectCache.TrySet((int)(EffectParams.ScoreSize), scoreSize);
+                effectCache.TrySet((int)(EffectParams.ScoreTexture), crt.surface);
 
                 Effect.CurrentTechnique.Passes[0].Apply();
 

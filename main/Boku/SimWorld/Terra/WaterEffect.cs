@@ -124,46 +124,46 @@ namespace Boku.SimWorld.Terra
             Matrix cameraToNDC = camera.ProjectionMatrix;
 
             Matrix worldToNDC = localToWorld * worldToCamera * cameraToNDC;
-            Parameter(EffectParams.WorldToNDC).SetValue(worldToNDC);
-            Parameter(EffectParams.BumpMap).SetValue(bumpMap);
+            effectCache.TrySet((int)(EffectParams.WorldToNDC), worldToNDC);
+            effectCache.TrySet((int)(EffectParams.BumpMap), bumpMap);
 
             float waveCycle = (float)Time.GameTimeTotalSeconds;
-            Parameter(EffectParams.WaveCycle).SetValue(waveCycle);
+            effectCache.TrySet((int)(EffectParams.WaveCycle), waveCycle);
 
-            Parameter(EffectParams.WaveCenter).SetValue(new Vector2(127.0f, 600.0f));
+            effectCache.TrySet((int)(EffectParams.WaveCenter), new Vector2(127.0f, 600.0f));
 
-            Parameter(EffectParams.HalfSize).SetValue(CubeSize * 0.5f);
+            effectCache.TrySet((int)(EffectParams.HalfSize), CubeSize * 0.5f);
             const double WaveLength = 15.0;
-            Parameter(EffectParams.InverseWaveLength).SetValue((float)(2.0 * Math.PI / WaveLength));
+            effectCache.TrySet((int)(EffectParams.InverseWaveLength), (float)(2.0 * Math.PI / WaveLength));
 
-            Parameter(EffectParams.NeighborCutoff).SetValue(
+            effectCache.TrySet((int)(EffectParams.NeighborCutoff), 
                 Terrain.WaterBusy ? 0.75f : 0.25f);
         }
         public void SetupWaterEffect(Water.Definition def, float baseHeight)
         {
             /// Give the water a shot at setting up body specific parameters.
-            Parameter(EffectParams.Color).SetValue(def.Color);
-            Parameter(EffectParams.BaseHeight).SetValue(baseHeight);
-            Parameter(EffectParams.WaveHeight).SetValue(Terrain.WaveHeight);
-            Parameter(EffectParams.Fresnel).SetValue(def.Fresnel);
-            Parameter(EffectParams.Shininess).SetValue(def.Shininess);
-            Parameter(EffectParams.Emissive).SetValue(def.Emissive);
-            Parameter(EffectParams.TextureTile).SetValue(def.TextureTiling);
+            effectCache.TrySet((int)(EffectParams.Color), def.Color);
+            effectCache.TrySet((int)(EffectParams.BaseHeight), baseHeight);
+            effectCache.TrySet((int)(EffectParams.WaveHeight), Terrain.WaveHeight);
+            effectCache.TrySet((int)(EffectParams.Fresnel), def.Fresnel);
+            effectCache.TrySet((int)(EffectParams.Shininess), def.Shininess);
+            effectCache.TrySet((int)(EffectParams.Emissive), def.Emissive);
+            effectCache.TrySet((int)(EffectParams.TextureTile), def.TextureTiling);
 
             ShaderGlobals.FixExplicitBloom(def.ExplicitBloom);
         }
         private void SetupWaterFaceEffect(int face)
         {
             float halfSize = CubeSize * 0.5f;
-            Parameter(EffectParams.ToNeighbor).SetValue(toNeighbors[face] * CubeSize);
-            Parameter(EffectParams.IsTop).SetValue(face == (int)Tile.Face.Top ? 2.0f : 0.0f);
-            Parameter(EffectParams.NeighborSelect).SetValue(neighborSelect[face]);
+            effectCache.TrySet((int)(EffectParams.ToNeighbor), toNeighbors[face] * CubeSize);
+            effectCache.TrySet((int)(EffectParams.IsTop), face == (int)Tile.Face.Top ? 2.0f : 0.0f);
+            effectCache.TrySet((int)(EffectParams.NeighborSelect), neighborSelect[face]);
 
-            Parameter(EffectParams.UVToX).SetValue(uvToX[face] * halfSize);
-            Parameter(EffectParams.UVToY).SetValue(uvToY[face] * halfSize);
+            effectCache.TrySet((int)(EffectParams.UVToX), uvToX[face] * halfSize);
+            effectCache.TrySet((int)(EffectParams.UVToY), uvToY[face] * halfSize);
 
-            Parameter(EffectParams.BumpToWorld).SetValue(bumpToWorld[face]);
-            Parameter(EffectParams.LightDir).SetValue(lightDir[face]);
+            effectCache.TrySet((int)(EffectParams.BumpToWorld), bumpToWorld[face]);
+            effectCache.TrySet((int)(EffectParams.LightDir), lightDir[face]);
         }
         private void EndWaterEffect()
         {

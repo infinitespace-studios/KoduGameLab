@@ -98,6 +98,22 @@ namespace Boku.Common.ParticleSystem
         {
             return effectCache2d.Parameter((int)param);
         }
+        public bool TrySet(EffectParams2d param, Matrix value)
+        {
+            return effectCache2d.TrySet((int)param, value);
+        }
+        public bool TrySet(EffectParams2d param, Vector4 value)
+        {
+            return effectCache2d.TrySet((int)param, value);
+        }
+        public bool TrySet(EffectParams2d param, float value)
+        {
+            return effectCache2d.TrySet((int)param, value);
+        }
+        public bool TrySet(EffectParams2d param, Texture2D value)
+        {
+            return effectCache2d.TrySet((int)param, value);
+        }
         public EffectTechnique Technique(EffectTech2d tech)
         {
             return effectCache2d.Technique((int)tech);
@@ -113,6 +129,22 @@ namespace Boku.Common.ParticleSystem
         public EffectParameter Parameter(EffectParams3d param)
         {
             return effectCache3d.Parameter((int)param);
+        }
+        public bool TrySet(EffectParams3d param, Matrix value)
+        {
+            return effectCache3d.TrySet((int)param, value);
+        }
+        public bool TrySet(EffectParams3d param, Vector4 value)
+        {
+            return effectCache3d.TrySet((int)param, value);
+        }
+        public bool TrySet(EffectParams3d param, float value)
+        {
+            return effectCache3d.TrySet((int)param, value);
+        }
+        public bool TrySet(EffectParams3d param, Texture2D value)
+        {
+            return effectCache3d.TrySet((int)param, value);
         }
         public EffectTechnique Technique(EffectTech3d tech)
         {

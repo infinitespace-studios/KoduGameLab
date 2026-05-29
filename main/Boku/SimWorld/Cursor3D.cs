@@ -231,16 +231,16 @@ namespace Boku
                 Matrix projMatrix = camera.ProjectionMatrix;
 
                 Matrix worldViewProjMatrix = l2w * viewMatrix * projMatrix;
-                Parameter(EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
-                Parameter(EffectParams.WorldMatrix).SetValue(l2w);
-                Parameter(EffectParams.LocalToModel).SetValue(Matrix.Identity);
+                effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
+                effectCache.TrySet((int)(EffectParams.WorldMatrix), l2w);
+                effectCache.TrySet((int)(EffectParams.LocalToModel), Matrix.Identity);
 
-                //Parameter(EffectParams.DiffuseTexture).SetValue(texture);
+                //effectCache.TrySet((int)(EffectParams.DiffuseTexture), texture);
 
-                Parameter(EffectParams.DiffuseColor).SetValue(diffuse);
-                Parameter(EffectParams.SpecularColor).SetValue(Color.White.ToVector4());
-                Parameter(EffectParams.EmissiveColor).SetValue(Color.Black.ToVector4());
-                Parameter(EffectParams.SpecularPower).SetValue(32.0f);
+                effectCache.TrySet((int)(EffectParams.DiffuseColor), diffuse);
+                effectCache.TrySet((int)(EffectParams.SpecularColor), Color.White.ToVector4());
+                effectCache.TrySet((int)(EffectParams.EmissiveColor), Color.Black.ToVector4());
+                effectCache.TrySet((int)(EffectParams.SpecularPower), 32.0f);
 
                 int cursorIndex = cone ? 1 : 0;
 

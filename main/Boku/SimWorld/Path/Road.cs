@@ -543,8 +543,8 @@ namespace Boku.SimWorld.Path
                         device.RasterizerState = UI2D.Shared.RasterStateWireframe;
                     }
 
-                    RoadStdRenderObj.Parameter(RoadStdRenderObj.EffectParams.WorldViewProjMatrix).SetValue(camera.ViewProjectionMatrix);
-                    RoadStdRenderObj.Parameter(RoadStdRenderObj.EffectParams.WorldMatrix).SetValue(Matrix.Identity);
+                    RoadStdRenderObj.TrySet(RoadStdRenderObj.EffectParams.WorldViewProjMatrix, camera.ViewProjectionMatrix);
+                    RoadStdRenderObj.TrySet(RoadStdRenderObj.EffectParams.WorldMatrix, Matrix.Identity);
 
                     effect.CurrentTechnique = technique;
 

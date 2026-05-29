@@ -539,21 +539,21 @@ namespace Boku.Common.ParticleSystem
 
                 Vector4 diffuseColor = ShaderGlobals.ParticleTint(IsEmissive);
                 diffuseColor *= Color;
-                manager.Parameter(ParticleSystemManager.EffectParams2d.DiffuseColor).SetValue(diffuseColor);
+                manager.TrySet(ParticleSystemManager.EffectParams2d.DiffuseColor, diffuseColor);
 
                 // Set up world matrix.
                 Matrix worldMatrix = Matrix.Identity;
                 Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
-                manager.Parameter(ParticleSystemManager.EffectParams2d.DiffuseTexture).SetValue(Texture);
+                manager.TrySet(ParticleSystemManager.EffectParams2d.DiffuseTexture, Texture);
 
-                manager.Parameter(ParticleSystemManager.EffectParams2d.EyeLocation).SetValue(new Vector4(camera.ActualFrom, 1.0f));
-                manager.Parameter(ParticleSystemManager.EffectParams2d.CameraUp).SetValue(new Vector4(camera.ViewUp, 1.0f));
+                manager.TrySet(ParticleSystemManager.EffectParams2d.EyeLocation, new Vector4(camera.ActualFrom, 1.0f));
+                manager.TrySet(ParticleSystemManager.EffectParams2d.CameraUp, new Vector4(camera.ViewUp, 1.0f));
 
-                manager.Parameter(ParticleSystemManager.EffectParams2d.WorldMatrix).SetValue(worldMatrix);
-                manager.Parameter(ParticleSystemManager.EffectParams2d.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
-                manager.Parameter(ParticleSystemManager.EffectParams2d.TileOffset).SetValue(NumTiles > 0 ? 1.0f / (float)NumTiles : 1.0f);
-                manager.Parameter(ParticleSystemManager.EffectParams2d.ParticleRadius).SetValue(
+                manager.TrySet(ParticleSystemManager.EffectParams2d.WorldMatrix, worldMatrix);
+                manager.TrySet(ParticleSystemManager.EffectParams2d.WorldViewProjMatrix, worldViewProjMatrix);
+                manager.TrySet(ParticleSystemManager.EffectParams2d.TileOffset, NumTiles > 0 ? 1.0f / (float)NumTiles : 1.0f);
+                manager.TrySet(ParticleSystemManager.EffectParams2d.ParticleRadius, 
                     ShaderGlobals.MakeParticleSizeLimit(1.0f, 0.0f, 100.0f * endRadius));
 
                 ShaderGlobals.FixExplicitBloom(ExplicitBloom);

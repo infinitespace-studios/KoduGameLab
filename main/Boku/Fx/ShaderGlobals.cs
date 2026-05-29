@@ -166,7 +166,7 @@ namespace Boku.Fx
             public void SetToEffect(Matrix localToWorld)
             {
                 float strength = WindAt(localToWorld.Translation);
-                Parameter(EffectParams.WindStrength).SetValue(strength);
+                effectCache.TrySet((int)(EffectParams.WindStrength), strength);
             }
             /// <summary>
             /// CPU version of the GPU wind strength function in skin.fx.

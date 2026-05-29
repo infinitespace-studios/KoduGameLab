@@ -91,7 +91,7 @@ namespace Boku.SimWorld
             MatrixPalette, // transform from palette space to root space
             RestPalette, // alternate (subdued) version of MatrixPalette, for blending
         };
-        private EffectCache effectCache = new EffectCache<EffectParams>();
+        private static EffectCache effectCache = new EffectCache<EffectParams>();
         private EffectParameter Parameter(EffectParams param)
         {
             return effectCache.Parameter((int)param);
@@ -362,17 +362,17 @@ namespace Boku.SimWorld
 
                 if (animator != null && animator.Palette != null)
                 {
-                    Parameter(EffectParams.MatrixPalette).SetValue(animator.Palette);
+                    effectCache.TrySet((int)(EffectParams.MatrixPalette), animator.Palette);
                     Matrix[] restPalette = RestPalettes[lod];
-                    Parameter(EffectParams.RestPalette).SetValue(restPalette);
+                    effectCache.TrySet((int)(EffectParams.RestPalette), restPalette);
                 }
 
                 ShaderGlobals.SetUpWind(rootToWorld);
-                Parameter(EffectParams.WorldMatrix).SetValue(rootToWorld);
-                Parameter(EffectParams.WorldMatrixInverseTranspose).SetValue(Matrix.Transpose(Matrix.Invert(rootToWorld)));
+                effectCache.TrySet((int)(EffectParams.WorldMatrix), rootToWorld);
+                effectCache.TrySet((int)(EffectParams.WorldMatrixInverseTranspose), Matrix.Transpose(Matrix.Invert(rootToWorld)));
                 Matrix rootToProjMatrix = rootToWorld * camera.ViewProjectionMatrix;
-                Parameter(EffectParams.WorldViewProjMatrix).SetValue(rootToProjMatrix);
-                Parameter(EffectParams.GlowEmissiveColor).SetValue(GlowEmissiveColor);
+                effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), rootToProjMatrix);
+                effectCache.TrySet((int)(EffectParams.GlowEmissiveColor), GlowEmissiveColor);
 
                 for (int j = 0; j < mesh.MeshParts.Count; j++)
                 {
@@ -394,7 +394,7 @@ namespace Boku.SimWorld
                             ? animator.LocalToWorld(mesh.ParentBone.Index)
                             : mesh.ParentBone.Transform;
                     }
-                    Parameter(EffectParams.LocalToModel).SetValue(localToModel);
+                    effectCache.TrySet((int)(EffectParams.LocalToModel), localToModel);
 
                     if (DisplayCollisions || partInfo.Render)
                     {
@@ -429,18 +429,18 @@ namespace Boku.SimWorld
                             else
                             {
                                 Texture2D diffuseTexture = PartTexture(partInfo);
-                                Parameter(EffectParams.DiffuseTexture).SetValue(diffuseTexture);
+                                effectCache.TrySet((int)(EffectParams.DiffuseTexture), diffuseTexture);
                                 Effect.CurrentTechnique = effectCache.Technique(InGame.inGame.renderEffects, diffuseTexture != null);
                             }
 
                             Vector4 diffuseColor = PartColor(partInfo, DiffuseColor);
 
-                            Parameter(EffectParams.DiffuseColor).SetValue(new Vector4(diffuseColor.X, diffuseColor.Y, diffuseColor.Z, 1.0f));
-                            Parameter(EffectParams.Shininess).SetValue(Shininess * diffuseColor.W);
+                            effectCache.TrySet((int)(EffectParams.DiffuseColor), new Vector4(diffuseColor.X, diffuseColor.Y, diffuseColor.Z, 1.0f));
+                            effectCache.TrySet((int)(EffectParams.Shininess), Shininess * diffuseColor.W);
 
-                            Parameter(EffectParams.SpecularColor).SetValue(partInfo.SpecularColor);
-                            Parameter(EffectParams.EmissiveColor).SetValue(partInfo.EmissiveColor);
-                            Parameter(EffectParams.SpecularPower).SetValue(partInfo.SpecularPower);
+                            effectCache.TrySet((int)(EffectParams.SpecularColor), partInfo.SpecularColor);
+                            effectCache.TrySet((int)(EffectParams.EmissiveColor), partInfo.EmissiveColor);
+                            effectCache.TrySet((int)(EffectParams.SpecularPower), partInfo.SpecularPower);
 
                             // HACKHACK  XNA 4 is much pickier than XNA 3.1 about having valid data for
                             // all vertex shader inputs.  So, if we find a case where we don't have the 
@@ -851,12 +851,12 @@ namespace Boku.SimWorld
                         {
                             if (pack.animator != lastAnim)
                             {
-                                EffectCache effectCache = pack.model.effectCache;
-                                effectCache.Parameter((int)EffectParams.MatrixPalette).SetValue(
+                                EffectCache effectCache = FBXModel.effectCache;
+                                effectCache.TrySet((int)EffectParams.MatrixPalette,
                                     pack.animator.Palette);
                                 if (pack.lod > 0)
                                 {
-                                    effectCache.Parameter((int)EffectParams.RestPalette).SetValue(
+                                    effectCache.TrySet((int)EffectParams.RestPalette,
                                         pack.model.restPalettes[pack.lod]);
                                 }
 
@@ -974,21 +974,21 @@ namespace Boku.SimWorld
                     ? animator.LocalToWorld(mesh.ParentBone.Index)
                     : mesh.ParentBone.Transform;
             }
-            Parameter(EffectParams.LocalToModel).SetValue(localToModel);
+            effectCache.TrySet((int)(EffectParams.LocalToModel), localToModel);
 
             ShaderGlobals.SetUpWind(pack.rootToWorld);
-            Parameter(EffectParams.WorldMatrix).SetValue(pack.rootToWorld);
-            Parameter(EffectParams.WorldMatrixInverseTranspose).SetValue(Matrix.Transpose(Matrix.Invert(pack.rootToWorld)));
+            effectCache.TrySet((int)(EffectParams.WorldMatrix), pack.rootToWorld);
+            effectCache.TrySet((int)(EffectParams.WorldMatrixInverseTranspose), Matrix.Transpose(Matrix.Invert(pack.rootToWorld)));
 
             Matrix rootToProjMatrix = pack.rootToWorld * camera.ViewProjectionMatrix;
-            Parameter(EffectParams.WorldViewProjMatrix).SetValue(rootToProjMatrix);
+            effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), rootToProjMatrix);
 
 
             ModelMeshPart part = mesh.MeshParts[pack.partIdx];
 
             Texture2D diffuseTexture = PartTexture(partInfo);
-            Parameter(EffectParams.DiffuseTexture).SetValue(diffuseTexture);
-            Parameter(EffectParams.GlowEmissiveColor).SetValue(pack.glowEmissiveColor);
+            effectCache.TrySet((int)(EffectParams.DiffuseTexture), diffuseTexture);
+            effectCache.TrySet((int)(EffectParams.GlowEmissiveColor), pack.glowEmissiveColor);
 
             // HACKHACK  XNA 4 is much pickier than XNA 3.1 about having valid data for
             // all vertex shader inputs.  So, if we find a case where we don't have the 
@@ -1069,30 +1069,30 @@ namespace Boku.SimWorld
                     ? animator.LocalToWorld(mesh.ParentBone.Index)
                     : mesh.ParentBone.Transform;
             }
-            Parameter(EffectParams.LocalToModel).SetValue(localToModel);
+            effectCache.TrySet((int)(EffectParams.LocalToModel), localToModel);
 
             ShaderGlobals.SetUpWind(pack.rootToWorld);
-            Parameter(EffectParams.WorldMatrix).SetValue(pack.rootToWorld);
-            Parameter(EffectParams.WorldMatrixInverseTranspose).SetValue(Matrix.Transpose(Matrix.Invert(pack.rootToWorld)));
+            effectCache.TrySet((int)(EffectParams.WorldMatrix), pack.rootToWorld);
+            effectCache.TrySet((int)(EffectParams.WorldMatrixInverseTranspose), Matrix.Transpose(Matrix.Invert(pack.rootToWorld)));
 
             Matrix rootToProjMatrix = pack.rootToWorld * camera.ViewProjectionMatrix;
-            Parameter(EffectParams.WorldViewProjMatrix).SetValue(rootToProjMatrix);
+            effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), rootToProjMatrix);
 
 
             ModelMeshPart part = mesh.MeshParts[pack.partIdx];
 
             Texture2D diffuseTexture = PartTexture(partInfo);
-            Parameter(EffectParams.DiffuseTexture).SetValue(diffuseTexture);
-            Parameter(EffectParams.GlowEmissiveColor).SetValue(GlowEmissiveColor);
+            effectCache.TrySet((int)(EffectParams.DiffuseTexture), diffuseTexture);
+            effectCache.TrySet((int)(EffectParams.GlowEmissiveColor), GlowEmissiveColor);
 
             Vector4 diffuseColor = PartColor(partInfo, pack.diffuseColor);
 
-            Parameter(EffectParams.DiffuseColor).SetValue(new Vector4(diffuseColor.X, diffuseColor.Y, diffuseColor.Z, 1.0f));
-            Parameter(EffectParams.Shininess).SetValue(Shininess * diffuseColor.W);
+            effectCache.TrySet((int)(EffectParams.DiffuseColor), new Vector4(diffuseColor.X, diffuseColor.Y, diffuseColor.Z, 1.0f));
+            effectCache.TrySet((int)(EffectParams.Shininess), Shininess * diffuseColor.W);
 
-            Parameter(EffectParams.SpecularColor).SetValue(partInfo.SpecularColor);
-            Parameter(EffectParams.EmissiveColor).SetValue(partInfo.EmissiveColor);
-            Parameter(EffectParams.SpecularPower).SetValue(partInfo.SpecularPower);
+            effectCache.TrySet((int)(EffectParams.SpecularColor), partInfo.SpecularColor);
+            effectCache.TrySet((int)(EffectParams.EmissiveColor), partInfo.EmissiveColor);
+            effectCache.TrySet((int)(EffectParams.SpecularPower), partInfo.SpecularPower);
 
             // HACKHACK  XNA 4 is much pickier than XNA 3.1 about having valid data for
             // all vertex shader inputs.  So, if we find a case where we don't have the 

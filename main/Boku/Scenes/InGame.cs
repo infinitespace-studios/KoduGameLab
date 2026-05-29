@@ -50,6 +50,8 @@ namespace Boku
     /// </summary>
     public partial class InGame : GameObject, INeedsDeviceReset
     {
+        private static HashSet<Type> _loggedRenderExceptionTypes = new();
+
         public class Shared : INeedsDeviceReset
         {
             #region Members
@@ -809,8 +811,13 @@ namespace Boku
                                 }
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            if (!_loggedRenderExceptionTypes.Contains(ex.GetType()))
+                            {
+                                _loggedRenderExceptionTypes.Add(ex.GetType());
+                                System.Console.WriteLine($"InGame.Render exception ({ex.GetType().Name}): {ex.Message}\n{ex.StackTrace}");
+                            }
                         }
 
                         /*
@@ -856,8 +863,14 @@ namespace Boku
                             Texture2D t = fullRenderTarget0;
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        if (!_loggedRenderExceptionTypes.Contains(ex.GetType()))
+                        {
+                            _loggedRenderExceptionTypes.Add(ex.GetType());
+                            System.Console.WriteLine($"InGame.Render exception ({ex.GetType().Name}): {ex.Message}\n{ex.StackTrace}");
+                        }
+
                         // If not, don't try and skip this frame.
                         skipFrame = false;
                     }

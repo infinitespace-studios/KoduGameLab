@@ -168,12 +168,12 @@ namespace Boku.UI2D
 
             Matrix worldViewProjMatrix = world * cam.ViewProjectionMatrix;
 
-            terrain.ParameterColor(Terrain.EffectParams.WorldMatrix).SetValue(worldMatrix);
-            terrain.ParameterColor(Terrain.EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
-            terrain.ParameterColor(Terrain.EffectParams.WarpCenter).SetValue(Vector4.Zero);
-            terrain.ParameterEdit(Terrain.EffectParams.WorldMatrix).SetValue(worldMatrix);
-            terrain.ParameterEdit(Terrain.EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
-            terrain.ParameterEdit(Terrain.EffectParams.WarpCenter).SetValue(Vector4.Zero);
+            terrain.TrySetColor(Terrain.EffectParams.WorldMatrix, worldMatrix);
+            terrain.TrySetColor(Terrain.EffectParams.WorldViewProjMatrix, worldViewProjMatrix);
+            terrain.TrySetColor(Terrain.EffectParams.WarpCenter, Vector4.Zero);
+            terrain.TrySetEdit(Terrain.EffectParams.WorldMatrix, worldMatrix);
+            terrain.TrySetEdit(Terrain.EffectParams.WorldViewProjMatrix, worldViewProjMatrix);
+            terrain.TrySetEdit(Terrain.EffectParams.WarpCenter, Vector4.Zero);
 
             if (BokuSettings.Settings.PreferReach)
             {
@@ -181,50 +181,50 @@ namespace Boku.UI2D
                 var lightNum = Boku.Fx.Luz.Count;
                 if (lightNum > 6)
                 {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(4);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(4);
+                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 4);
+                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 4);
                 }
                 else if (lightNum > 4)
                 {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(3);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(3);
+                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 3);
+                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 3);
                 }
                 else if (lightNum > 2)
                 {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(2);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(2);
+                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 2);
+                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 2);
                 }
                 else if (lightNum > 0)
                 {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(1);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(1);
+                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 1);
+                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 1);
                 }
                 else
                 {
-                    terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(0);
-                    terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(0);
+                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 0);
+                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 0);
                 }
 
                 //Select the PS
-                terrain.ParameterColor(Terrain.EffectParams.PSIndex).SetValue(0);
-                terrain.ParameterEdit(Terrain.EffectParams.PSIndex).SetValue(0);
+                terrain.TrySetColor(Terrain.EffectParams.PSIndex, 0);
+                terrain.TrySetEdit(Terrain.EffectParams.PSIndex, 0);
             }
             else // Shader Model v3
             {
                 //SM3 only uses one VS
-                terrain.ParameterColor(Terrain.EffectParams.VSIndex).SetValue(5);
-                terrain.ParameterEdit(Terrain.EffectParams.VSIndex).SetValue(5);
+                terrain.TrySetColor(Terrain.EffectParams.VSIndex, 5);
+                terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 5);
 
                 //Select the PS
-                terrain.ParameterColor(Terrain.EffectParams.PSIndex).SetValue(2);
-                terrain.ParameterEdit(Terrain.EffectParams.PSIndex).SetValue(2);
+                terrain.TrySetColor(Terrain.EffectParams.PSIndex, 2);
+                terrain.TrySetEdit(Terrain.EffectParams.PSIndex, 2);
             }
 
             if (MaterialPicker.FabricMode)
             {
                 var cubeSize = 1f;
-                terrain.ParameterColor(Terrain.EffectParams.InvCubeSize).SetValue(new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
-                terrain.ParameterEdit(Terrain.EffectParams.InvCubeSize).SetValue(new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
+                terrain.TrySetColor(Terrain.EffectParams.InvCubeSize, new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
+                terrain.TrySetEdit(Terrain.EffectParams.InvCubeSize, new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
 
                 #region Fabric
                 device.SetVertexBuffer(vBuff_FA);
@@ -249,8 +249,8 @@ namespace Boku.UI2D
             {
                 #region Cube
                 var cubeSize = 1.0f;
-                terrain.ParameterColor(Terrain.EffectParams.InvCubeSize).SetValue(new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
-                terrain.ParameterEdit(Terrain.EffectParams.InvCubeSize).SetValue(new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
+                terrain.TrySetColor(Terrain.EffectParams.InvCubeSize, new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
+                terrain.TrySetEdit(Terrain.EffectParams.InvCubeSize, new Vector3(cubeSize, 1.0f / cubeSize, cubeSize * 0.5f));
 
                 Tile.CheckIndices(new Point(32, 32));
 

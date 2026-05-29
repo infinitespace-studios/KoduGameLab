@@ -233,23 +233,23 @@ namespace Boku.Fx
 
             Vector2 rotRate = new Vector2((float)(Math.PI * 2.0 / 3.0), (float)(-Math.PI * 2.0 / 1.8));
 
-            Parameter(EffectParams.WaveCycle).SetValue(waveCycle);
-            Parameter(EffectParams.WaveHeight).SetValue(waveHeight);
-            Parameter(EffectParams.InverseWaveLength).SetValue(invWaveLength);
-            Parameter(EffectParams.WaveCenter).SetValue(waveCenter);
-            Parameter(EffectParams.WaveSpeed).SetValue(waveSpeed);
-            Parameter(EffectParams.RotRate).SetValue(rotRate);
+            effectCache.TrySet((int)(EffectParams.WaveCycle), waveCycle);
+            effectCache.TrySet((int)(EffectParams.WaveHeight), waveHeight);
+            effectCache.TrySet((int)(EffectParams.InverseWaveLength), invWaveLength);
+            effectCache.TrySet((int)(EffectParams.WaveCenter), waveCenter);
+            effectCache.TrySet((int)(EffectParams.WaveSpeed), waveSpeed);
+            effectCache.TrySet((int)(EffectParams.RotRate), rotRate);
 
             float halfCube = Terrain.Current.CubeSize * 0.5f;
-            Parameter(EffectParams.HalfCube).SetValue(halfCube);
-            Parameter(EffectParams.RippleTex).SetValue(texture);
+            effectCache.TrySet((int)(EffectParams.HalfCube), halfCube);
+            effectCache.TrySet((int)(EffectParams.RippleTex), texture);
 
             float currentTime = (float)(Time.GameTimeTotalSeconds - timeOffset);
-            Parameter(EffectParams.CurrentTime).SetValue(currentTime);
+            effectCache.TrySet((int)(EffectParams.CurrentTime), currentTime);
 
             Vector4 tint = new Vector4(1.0f, 1.0f, 1.0f, 0.6f);
             tint *= ShaderGlobals.ParticleTint(false);
-            Parameter(EffectParams.Tint).SetValue(tint);
+            effectCache.TrySet((int)(EffectParams.Tint), tint);
 
             SetupAges();
         }
@@ -268,27 +268,27 @@ namespace Boku.Fx
             /// When the top is fully down
             float T5 = 1.0f;
 
-            Parameter(EffectParams.UVAge).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.UVAge), new Vector4(
                 1 / (T5 - T0), -T0 / (T5 - T0), // scale and offset for bot uv
                 1 / (T5 - T0), -T0 / (T5 - T0) // scale and offset for top uv
                 ));
 
-            Parameter(EffectParams.UpDownAgeBot).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.UpDownAgeBot), new Vector4(
                 1 / (T1 - T0), -T0 / (T3 - T0), // scale and offset for up on bot
                 -1 / (T3 - T2), T3 / (T3 - T2) // scale and offset for down on bot
                 ));
 
-            Parameter(EffectParams.UpDownAgeMid).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.UpDownAgeMid), new Vector4(
                 1 / (T3 - T2), -T2 / (T3 - T2), // scale and offset for up on mid
                 -1 / (T4 - T3), T4 / (T4 - T3) // scale and offset for down on mid
                 ));
 
-            //Parameter(EffectParams.UpDownAgeTop).SetValue(new Vector4(
+            //effectCache.TrySet((int)(EffectParams.UpDownAgeTop), new Vector4(
             //    1 / (T4 - T3), -T3 / (T4 - T3), // scale and offset for up on top
             //    -1 / (T5 - T4), T5 / (T5 - T4) // scale and offset for down on top
             //    ));
 
-            Parameter(EffectParams.UpDownAgeTop).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.UpDownAgeTop), new Vector4(
                 1 / (T1 - T0), -T0 / (T1 - T0), // scale and offset for up on top
                 -1 / (T5 - T4), T5 / (T5 - T4) // scale and offset for down on top
                 ));
@@ -303,7 +303,7 @@ namespace Boku.Fx
 
                 Debug.Assert(InGame.inGame.renderEffects == InGame.RenderEffect.Normal);
 
-                Parameter(EffectParams.WorldViewProjMatrix).SetValue(camera.ViewProjectionMatrix);
+                effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), camera.ViewProjectionMatrix);
 
                 SetupWater();
 

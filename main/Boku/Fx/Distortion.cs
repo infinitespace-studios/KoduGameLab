@@ -289,16 +289,16 @@ namespace Boku.Fx
             {
                 Matrix preWorld = Matrix.CreateScale(scale);
 
-                Parameter(EffectParams.PreWorld).SetValue(preWorld);
-                Parameter(EffectParams.Opacity).SetValue(scales * opacity);
+                effectCache.TrySet((int)(EffectParams.PreWorld), preWorld);
+                effectCache.TrySet((int)(EffectParams.Opacity), scales * opacity);
 
-                Parameter(EffectParams.BloomColor).SetValue(bumpTint);
+                effectCache.TrySet((int)(EffectParams.BloomColor), bumpTint);
 
                 Debug.Assert(Bloom, "No other reason for rendering in SM2");
 
                 RenderObj.Render(camera);
 
-                Parameter(EffectParams.PreWorld).SetValue(Matrix.Identity);
+                effectCache.TrySet((int)(EffectParams.PreWorld), Matrix.Identity);
             }
         }
 
@@ -314,9 +314,9 @@ namespace Boku.Fx
             {
                 Matrix preWorld = Matrix.CreateScale(scale);
 
-                Parameter(EffectParams.DepthTexture).SetValue(effectsImage);
-                Parameter(EffectParams.PreWorld).SetValue(preWorld);
-                Parameter(EffectParams.Opacity).SetValue(scales * opacity);
+                effectCache.TrySet((int)(EffectParams.DepthTexture), effectsImage);
+                effectCache.TrySet((int)(EffectParams.PreWorld), preWorld);
+                effectCache.TrySet((int)(EffectParams.Opacity), scales * opacity);
 
                 if (bump != null)
                 {
@@ -325,12 +325,12 @@ namespace Boku.Fx
 
                 if (Bloom)
                 {
-                    Parameter(EffectParams.BloomColor).SetValue(bumpTint);
+                    effectCache.TrySet((int)(EffectParams.BloomColor), bumpTint);
                 }
 
                 RenderObj.Render(camera);
 
-                Parameter(EffectParams.PreWorld).SetValue(Matrix.Identity);
+                effectCache.TrySet((int)(EffectParams.PreWorld), Matrix.Identity);
             }
         }
         #endregion Public
@@ -483,13 +483,13 @@ namespace Boku.Fx
             bumpScroll += Time.GameTimeFrameSeconds * bumpRate;
             bumpScroll = MyMath.Wrap(bumpScroll);
 
-            Parameter(EffectParams.BumpTexture).SetValue(bump);
-            Parameter(EffectParams.BumpScroll).SetValue(bumpScroll);
-            Parameter(EffectParams.BumpScale).SetValue(bumpScale);
-            Parameter(EffectParams.BumpStrength).SetValue(bumpStrength);
-            Parameter(EffectParams.BumpTransU).SetValue(transU);
-            Parameter(EffectParams.BumpTransV).SetValue(transV);
-            Parameter(EffectParams.BumpTint).SetValue(bumpTint);
+            effectCache.TrySet((int)(EffectParams.BumpTexture), bump);
+            effectCache.TrySet((int)(EffectParams.BumpScroll), bumpScroll);
+            effectCache.TrySet((int)(EffectParams.BumpScale), bumpScale);
+            effectCache.TrySet((int)(EffectParams.BumpStrength), bumpStrength);
+            effectCache.TrySet((int)(EffectParams.BumpTransU), transU);
+            effectCache.TrySet((int)(EffectParams.BumpTransV), transV);
+            effectCache.TrySet((int)(EffectParams.BumpTint), bumpTint);
         }
         #endregion Internal
     }

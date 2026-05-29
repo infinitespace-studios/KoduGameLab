@@ -195,19 +195,19 @@ namespace Boku.Common.ParticleSystem
                     Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
                     // Set radius.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(startRadius * scale);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.WorldMatrix).SetValue(worldMatrix);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, startRadius * scale);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.WorldMatrix, worldMatrix);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.WorldViewProjMatrix, worldViewProjMatrix);
 
                     // Set alpha.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(1.0f);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, 1.0f);
 
                     // Set color.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(color);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(Vector4.Zero);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, color);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, Vector4.Zero);
 
                     // Set glow factor.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.GlowFactor).SetValue(0.1f);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.GlowFactor, 0.1f);
 
                     effect.CurrentTechnique.Passes[0].Apply();
 
@@ -215,7 +215,7 @@ namespace Boku.Common.ParticleSystem
                 }
 
                 // Set glow factor for shells.
-                manager.Parameter(ParticleSystemManager.EffectParams3d.GlowFactor).SetValue(1.5f);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.GlowFactor, 1.5f);
 
                 for (int i = 0; i < particleList.Count; i++)
                 {
@@ -224,16 +224,16 @@ namespace Boku.Common.ParticleSystem
                     Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
                     // Set radius.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(particle.radius);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.WorldMatrix).SetValue(worldMatrix);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, particle.radius);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.WorldMatrix, worldMatrix);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.WorldViewProjMatrix, worldViewProjMatrix);
 
                     // Set alpha.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(particle.alpha);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, particle.alpha);
 
                     // Set color
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(particle.color);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(Vector4.Zero);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, particle.color);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, Vector4.Zero);
 
                     effect.CurrentTechnique.Passes[0].Apply();
 

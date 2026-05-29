@@ -461,27 +461,27 @@ namespace Boku.SimWorld.Terra
         {
             if (forUI)
             {
-                ParameterColor(EffectParams.BotUVWToUV).SetValue(UIBotUVWToUV);
-                ParameterColor(EffectParams.TopUVWToUV).SetValue(UITopUVWToUV);
-                ParameterEdit(EffectParams.BotUVWToUV).SetValue(UIBotUVWToUV);
-                ParameterEdit(EffectParams.TopUVWToUV).SetValue(UITopUVWToUV);
+                effectCacheColor.TrySet((int)(EffectParams.BotUVWToUV), UIBotUVWToUV);
+                effectCacheColor.TrySet((int)(EffectParams.TopUVWToUV), UITopUVWToUV);
+                effectCacheEdit.TrySet((int)(EffectParams.BotUVWToUV), UIBotUVWToUV);
+                effectCacheEdit.TrySet((int)(EffectParams.TopUVWToUV), UITopUVWToUV);
             }
             else
             {
-                ParameterColor(EffectParams.BotUVWToUV).SetValue(BotUVWToUV);
-                ParameterColor(EffectParams.TopUVWToUV).SetValue(TopUVWToUV);
-                ParameterEdit(EffectParams.BotUVWToUV).SetValue(BotUVWToUV);
-                ParameterEdit(EffectParams.TopUVWToUV).SetValue(TopUVWToUV);
+                effectCacheColor.TrySet((int)(EffectParams.BotUVWToUV), BotUVWToUV);
+                effectCacheColor.TrySet((int)(EffectParams.TopUVWToUV), TopUVWToUV);
+                effectCacheEdit.TrySet((int)(EffectParams.BotUVWToUV), BotUVWToUV);
+                effectCacheEdit.TrySet((int)(EffectParams.TopUVWToUV), TopUVWToUV);
             }
 
             Setup(forUI);
         }
         public void SetupTop_FD(bool forUI)
         {
-            ParameterColor(EffectParams.BotTex).SetValue(BotTex[(int)Tile.Face.Top]);
-            ParameterColor(EffectParams.TopTex).SetValue(TopTex[(int)Tile.Face.Top]);
-            ParameterEdit(EffectParams.BotTex).SetValue(BotTex[(int)Tile.Face.Top]);
-            ParameterEdit(EffectParams.TopTex).SetValue(TopTex[(int)Tile.Face.Top]);
+            effectCacheColor.TrySet((int)(EffectParams.BotTex), BotTex[(int)Tile.Face.Top]);
+            effectCacheColor.TrySet((int)(EffectParams.TopTex), TopTex[(int)Tile.Face.Top]);
+            effectCacheEdit.TrySet((int)(EffectParams.BotTex), BotTex[(int)Tile.Face.Top]);
+            effectCacheEdit.TrySet((int)(EffectParams.TopTex), TopTex[(int)Tile.Face.Top]);
 
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
@@ -491,10 +491,10 @@ namespace Boku.SimWorld.Terra
         }
         public void SetupSides_FD(bool forUI)
         {
-            ParameterColor(EffectParams.BotTex).SetValue(BotTex[(int)Tile.Face.Front]);
-            ParameterColor(EffectParams.TopTex).SetValue(TopTex[(int)Tile.Face.Front]);
-            ParameterEdit(EffectParams.BotTex).SetValue(BotTex[(int)Tile.Face.Front]);
-            ParameterEdit(EffectParams.TopTex).SetValue(TopTex[(int)Tile.Face.Front]);
+            effectCacheColor.TrySet((int)(EffectParams.BotTex), BotTex[(int)Tile.Face.Front]);
+            effectCacheColor.TrySet((int)(EffectParams.TopTex), TopTex[(int)Tile.Face.Front]);
+            effectCacheEdit.TrySet((int)(EffectParams.BotTex), BotTex[(int)Tile.Face.Front]);
+            effectCacheEdit.TrySet((int)(EffectParams.TopTex), TopTex[(int)Tile.Face.Front]);
 
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
@@ -527,23 +527,23 @@ namespace Boku.SimWorld.Terra
         {
             if (forUI)
             {
-                ParameterEdit(EffectParams_FA.BotUVWToUV_FA).SetValue(UIBotUVWToUV[(int)Tile.Face.Top]);
-                ParameterEdit(EffectParams_FA.TopUVWToUV_FA).SetValue(UITopUVWToUV[(int)Tile.Face.Top]);
-                ParameterColor(EffectParams_FA.BotUVWToUV_FA).SetValue(UIBotUVWToUV[(int)Tile.Face.Top]);
-                ParameterColor(EffectParams_FA.TopUVWToUV_FA).SetValue(UITopUVWToUV[(int)Tile.Face.Top]);
+                effectCacheEdit.TrySet((int)(EffectParams_FA.BotUVWToUV_FA), UIBotUVWToUV[(int)Tile.Face.Top]);
+                effectCacheEdit.TrySet((int)(EffectParams_FA.TopUVWToUV_FA), UITopUVWToUV[(int)Tile.Face.Top]);
+                effectCacheColor.TrySet((int)(EffectParams_FA.BotUVWToUV_FA), UIBotUVWToUV[(int)Tile.Face.Top]);
+                effectCacheColor.TrySet((int)(EffectParams_FA.TopUVWToUV_FA), UITopUVWToUV[(int)Tile.Face.Top]);
             }
             else
             {
-                ParameterEdit(EffectParams_FA.BotUVWToUV_FA).SetValue(BotUVWToUV[(int)Tile.Face.Top]);
-                ParameterEdit(EffectParams_FA.TopUVWToUV_FA).SetValue(TopUVWToUV[(int)Tile.Face.Top]);
-                ParameterColor(EffectParams_FA.BotUVWToUV_FA).SetValue(BotUVWToUV[(int)Tile.Face.Top]);
-                ParameterColor(EffectParams_FA.TopUVWToUV_FA).SetValue(TopUVWToUV[(int)Tile.Face.Top]);
+                effectCacheEdit.TrySet((int)(EffectParams_FA.BotUVWToUV_FA), BotUVWToUV[(int)Tile.Face.Top]);
+                effectCacheEdit.TrySet((int)(EffectParams_FA.TopUVWToUV_FA), TopUVWToUV[(int)Tile.Face.Top]);
+                effectCacheColor.TrySet((int)(EffectParams_FA.BotUVWToUV_FA), BotUVWToUV[(int)Tile.Face.Top]);
+                effectCacheColor.TrySet((int)(EffectParams_FA.TopUVWToUV_FA), TopUVWToUV[(int)Tile.Face.Top]);
             }
 
-            ParameterEdit(EffectParams.BotTex).SetValue(BotTex[(int)Tile.Face.Top]);
-            ParameterEdit(EffectParams.TopTex).SetValue(TopTex[(int)Tile.Face.Top]);
-            ParameterColor(EffectParams.BotTex).SetValue(BotTex[(int)Tile.Face.Top]);
-            ParameterColor(EffectParams.TopTex).SetValue(TopTex[(int)Tile.Face.Top]);
+            effectCacheEdit.TrySet((int)(EffectParams.BotTex), BotTex[(int)Tile.Face.Top]);
+            effectCacheEdit.TrySet((int)(EffectParams.TopTex), TopTex[(int)Tile.Face.Top]);
+            effectCacheColor.TrySet((int)(EffectParams.BotTex), BotTex[(int)Tile.Face.Top]);
+            effectCacheColor.TrySet((int)(EffectParams.TopTex), TopTex[(int)Tile.Face.Top]);
 
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
             //Set address mode for texture samplers
@@ -558,41 +558,41 @@ namespace Boku.SimWorld.Terra
         /// </summary>
         public void Setup(bool forUI)
         {
-            ParameterEdit(EffectParams.BotBumpStrength).SetValue(
+            effectCacheEdit.TrySet((int)(EffectParams.BotBumpStrength), 
                     new Vector4(BotBumpStrength * 2.0f,
                                 BotBumpStrength * -1.0f,
                                 2.0f,
                                 -1.0f));
-            ParameterEdit(EffectParams.TopBumpStrength).SetValue(
+            effectCacheEdit.TrySet((int)(EffectParams.TopBumpStrength), 
                     new Vector4(TopBumpStrength * 2.0f,
                                 TopBumpStrength * -1.0f,
                                 2.0f,
                                 -1.0f));
-            ParameterEdit(EffectParams.BotColor).SetValue(Color);
-            ParameterEdit(EffectParams.BotGloss).SetValue(Gloss);
-            ParameterEdit(EffectParams.BotEmissive).SetValue(BotEmissive);
-            ParameterEdit(EffectParams.TopColor).SetValue(TopColor);
-            ParameterEdit(EffectParams.TopGloss).SetValue(TopGloss);
-            ParameterEdit(EffectParams.TopEmissive).SetValue(TopEmissive);
-            ParameterEdit(EffectParams.SpecularPower).SetValue(5.0f);
+            effectCacheEdit.TrySet((int)(EffectParams.BotColor), Color);
+            effectCacheEdit.TrySet((int)(EffectParams.BotGloss), Gloss);
+            effectCacheEdit.TrySet((int)(EffectParams.BotEmissive), BotEmissive);
+            effectCacheEdit.TrySet((int)(EffectParams.TopColor), TopColor);
+            effectCacheEdit.TrySet((int)(EffectParams.TopGloss), TopGloss);
+            effectCacheEdit.TrySet((int)(EffectParams.TopEmissive), TopEmissive);
+            effectCacheEdit.TrySet((int)(EffectParams.SpecularPower), 5.0f);
 
-            ParameterColor(EffectParams.BotBumpStrength).SetValue(
+            effectCacheColor.TrySet((int)(EffectParams.BotBumpStrength), 
             new Vector4(BotBumpStrength * 2.0f,
                         BotBumpStrength * -1.0f,
                         2.0f,
                         -1.0f));
-            ParameterColor(EffectParams.TopBumpStrength).SetValue(
+            effectCacheColor.TrySet((int)(EffectParams.TopBumpStrength), 
                     new Vector4(TopBumpStrength * 2.0f,
                                 TopBumpStrength * -1.0f,
                                 2.0f,
                                 -1.0f));
-            ParameterColor(EffectParams.BotColor).SetValue(Color);
-            ParameterColor(EffectParams.BotGloss).SetValue(Gloss);
-            ParameterColor(EffectParams.BotEmissive).SetValue(BotEmissive);
-            ParameterColor(EffectParams.TopColor).SetValue(TopColor);
-            ParameterColor(EffectParams.TopGloss).SetValue(TopGloss);
-            ParameterColor(EffectParams.TopEmissive).SetValue(TopEmissive);
-            ParameterColor(EffectParams.SpecularPower).SetValue(5.0f);
+            effectCacheColor.TrySet((int)(EffectParams.BotColor), Color);
+            effectCacheColor.TrySet((int)(EffectParams.BotGloss), Gloss);
+            effectCacheColor.TrySet((int)(EffectParams.BotEmissive), BotEmissive);
+            effectCacheColor.TrySet((int)(EffectParams.TopColor), TopColor);
+            effectCacheColor.TrySet((int)(EffectParams.TopGloss), TopGloss);
+            effectCacheColor.TrySet((int)(EffectParams.TopEmissive), TopEmissive);
+            effectCacheColor.TrySet((int)(EffectParams.SpecularPower), 5.0f);
         }
 
         /// <summary>

@@ -221,10 +221,10 @@ namespace Boku.Common
 
                 Vector3 forward = Vector3.Normalize(new Vector3(camera.ViewDir.X, camera.ViewDir.Y, 0));
 
-                Parameter(EffectParams.BackTexture).SetValue(BackTexture);
-                Parameter(EffectParams.LifeTexture).SetValue(LifeTexture);
-                Parameter(EffectParams.BackSize).SetValue(kBackSize);
-                Parameter(EffectParams.LifeSize).SetValue(kLifeSize);
+                effectCache.TrySet((int)(EffectParams.BackTexture), BackTexture);
+                effectCache.TrySet((int)(EffectParams.LifeTexture), LifeTexture);
+                effectCache.TrySet((int)(EffectParams.BackSize), kBackSize);
+                effectCache.TrySet((int)(EffectParams.LifeSize), kLifeSize);
 
                 Array arr = actors.ToArray();
                 Array.Sort(arr, new GameActorCompare(camera));
@@ -341,9 +341,9 @@ namespace Boku.Common
 
             float lifePct = (float)actor.HitPoints / (float)actor.MaxHitPoints;
 
-            Parameter(EffectParams.WorldViewProj).SetValue(worldViewProj);
-            Parameter(EffectParams.LifeTint).SetValue(GetLifeTint(lifePct));
-            Parameter(EffectParams.LifePct).SetValue(lifePct);
+            effectCache.TrySet((int)(EffectParams.WorldViewProj), worldViewProj);
+            effectCache.TrySet((int)(EffectParams.LifeTint), GetLifeTint(lifePct));
+            effectCache.TrySet((int)(EffectParams.LifePct), lifePct);
 
             device.SetVertexBuffer(vertexBuf);
             device.Indices = UI2D.Shared.QuadIndexBuff;
