@@ -663,13 +663,14 @@ namespace Boku
                 InGame.SetViewportToScreen();
 
                 // Copy the rendered scene to the backbuffer.
+                // Use ScreenSpaceQuad (not SpriteBatch.Draw) — MonoGame DesktopGL's
+                // SpriteBatch path for sampling our PreserveContents render targets
+                // produces black; every other scene (LoadLevelMenu, TextEditor, etc.)
+                // already uses quad.Render(rt, ..., "TexturedNoAlpha") for this blit.
                 {
                     ScreenWarp.FitRtToScreen(rtSize);
 
-                    SpriteBatch batch = UI2D.Shared.SpriteBatch;
-                    batch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
-                    batch.Draw(rt, new Rectangle((int)ScreenWarp.RenderPosition.X, (int)ScreenWarp.RenderPosition.Y, (int)ScreenWarp.RenderSize.X, (int)ScreenWarp.RenderSize.Y), Color.White);
-                    batch.End();
+                    quad.Render(rt, ScreenWarp.RenderPosition, ScreenWarp.RenderSize, @"TexturedNoAlpha");
                 }
 
                 // Render news feed.
