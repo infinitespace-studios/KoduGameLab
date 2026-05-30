@@ -3558,7 +3558,10 @@ namespace Boku.Base
             get
             {
                 Vector3 pos = XmlActorParams.GlowPosition.Offset;
-                if ((glowBoneIndex >= 0) && (Animators != null))
+                // glowBoneIndex >= 0 implies Animators.Sample was non-null at setup time,
+                // but the underlying AnimatorList can be replaced via SetAnimators so
+                // re-check Sample here as well — empty AnimatorLists return null for Sample.
+                if ((glowBoneIndex >= 0) && (Animators != null) && (Animators.Sample != null))
                 {
                     pos = Vector3.Transform(pos, Animators.Sample.LocalToWorld(glowBoneIndex));
                 }
@@ -4525,7 +4528,12 @@ namespace Boku.Base
         protected virtual void EnableAttachments(bool start)
         {
             glowEmitter.AddToManager();
-            if ((XmlActorParams.GlowPosition.Bone != "") && (Animators != null))
+            // Also guard against Animators.Sample being null: AnimatorList.Sample
+            // returns null when the model failed to produce any per-LOD AnimationInstance
+            // (see AnimatorList.MakeAnimator). This shows up under MonoGame when the
+            // content pipeline didn't bring across the model's animations — we still
+            // want the actor to spawn, just without a bone-attached glow position.
+            if ((XmlActorParams.GlowPosition.Bone != "") && (Animators != null) && (Animators.Sample != null))
             {
                 glowBoneIndex = Animators.Sample.BoneIndex(XmlActorParams.GlowPosition.Bone);
             }
