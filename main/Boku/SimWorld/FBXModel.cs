@@ -1257,7 +1257,7 @@ namespace Boku.SimWorld
                 string lowName = modelName + "Low";
                 try
                 {
-                    Model m = BokuGame.Load<Model>(BokuGame.Settings.MediaPath + lowName);
+                    Model m = BokuGame.Load<Model>(BokuGame.Settings.MediaPath + lowName, optionalMissing: true);
                     if (m != null)
                         models.Add(m);
                 }

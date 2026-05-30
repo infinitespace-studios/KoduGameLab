@@ -221,7 +221,7 @@ namespace Boku
         static Dictionary<string, int> loadedContent = new Dictionary<string, int>();
 #endif
 
-        public static T Load<T>(string path)
+        public static T Load<T>(string path, bool optionalMissing = false)
         {
             LogContentFileLoaded(path);
 
@@ -257,9 +257,19 @@ namespace Boku
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine($"Warning: Failed to load content '{path}': {e.Message}");
+                if (!optionalMissing || !IsContentFileNotFound(e))
+                {
+                    System.Diagnostics.Debug.WriteLine($"Warning: Failed to load content '{path}': {e.Message}");
+                }
+
                 return default(T);
             }
+        }
+
+        private static bool IsContentFileNotFound(Exception e)
+        {
+            return e is ContentLoadException
+                && e.Message.Contains("The content file was not found", StringComparison.OrdinalIgnoreCase);
         }
 
         public static void LogContentFileLoaded(string path)

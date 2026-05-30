@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
+  <Target Name="CleanContent" BeforeTargets="BeforeBuild">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)/bin/Content;$(MSBuildProjectDirectory)/obj/Content" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.5-preview.*" />
     <PackageReference Include="MonoGame.Framework.Native" Version="3.8.5-preview.*">
@@ -13,7 +17,7 @@
     </PackageReference>
     <PackageReference Include="MonoGame.Library.Assimp" Version="5.3.1.3" />
     <PackageReference Include="MonoGame.Library.FreeType" Version="2.13.2.3" />
-    <PackageReference Include="MonoGame.Library.MojoShader" Version="1.0.0.4" />
+    <PackageReference Include="MonoGame.Library.MojoShader" Version="1.0.0.5" />
     <PackageReference Include="MonoGame.Tool.Basisu" Version="2.0.2.1" />
     <PackageReference Include="MonoGame.Tool.Crunch" Version="1.0.4.7" />
     <PackageReference Include="MonoGame.Tool.Dxc" Version="1.8.2505.11" />
