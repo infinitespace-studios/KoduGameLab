@@ -168,57 +168,10 @@ namespace Boku.UI2D
 
             Matrix worldViewProjMatrix = world * cam.ViewProjectionMatrix;
 
-            terrain.TrySetColor(Terrain.EffectParams.WorldMatrix, worldMatrix);
             terrain.TrySetColor(Terrain.EffectParams.WorldViewProjMatrix, worldViewProjMatrix);
             terrain.TrySetColor(Terrain.EffectParams.WarpCenter, Vector4.Zero);
-            terrain.TrySetEdit(Terrain.EffectParams.WorldMatrix, worldMatrix);
             terrain.TrySetEdit(Terrain.EffectParams.WorldViewProjMatrix, worldViewProjMatrix);
             terrain.TrySetEdit(Terrain.EffectParams.WarpCenter, Vector4.Zero);
-
-            if (BokuSettings.Settings.PreferReach)
-            {
-                //Select the VS based on the number of point-lights
-                var lightNum = Boku.Fx.Luz.Count;
-                if (lightNum > 6)
-                {
-                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 4);
-                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 4);
-                }
-                else if (lightNum > 4)
-                {
-                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 3);
-                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 3);
-                }
-                else if (lightNum > 2)
-                {
-                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 2);
-                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 2);
-                }
-                else if (lightNum > 0)
-                {
-                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 1);
-                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 1);
-                }
-                else
-                {
-                    terrain.TrySetColor(Terrain.EffectParams.VSIndex, 0);
-                    terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 0);
-                }
-
-                //Select the PS
-                terrain.TrySetColor(Terrain.EffectParams.PSIndex, 0);
-                terrain.TrySetEdit(Terrain.EffectParams.PSIndex, 0);
-            }
-            else // Shader Model v3
-            {
-                //SM3 only uses one VS
-                terrain.TrySetColor(Terrain.EffectParams.VSIndex, 5);
-                terrain.TrySetEdit(Terrain.EffectParams.VSIndex, 5);
-
-                //Select the PS
-                terrain.TrySetColor(Terrain.EffectParams.PSIndex, 2);
-                terrain.TrySetEdit(Terrain.EffectParams.PSIndex, 2);
-            }
 
             if (MaterialPicker.FabricMode)
             {

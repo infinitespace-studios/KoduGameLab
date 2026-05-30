@@ -235,7 +235,6 @@ namespace Boku.Fx
         private enum EffectParams
         {
             WorldViewProjMatrix,
-            WorldMatrix,
 
             Center,
             Age,
@@ -245,7 +244,6 @@ namespace Boku.Fx
             Tint0,
             Tint1,
             CrossTexture,
-            AxialTexture,
         };
         private static EffectCache effectCache = new EffectCache<EffectParams>();
         private static EffectParameter Parameter(EffectParams param)
@@ -264,7 +262,6 @@ namespace Boku.Fx
         #endregion Parameter Caching
 
         private static Texture2D crossTexture = null;
-        private static Texture2D axialTexture = null;
         #endregion Members
 
         #region Accessors
@@ -272,11 +269,6 @@ namespace Boku.Fx
         {
             get { return crossTexture; }
             set { crossTexture = value; }
-        }
-        private static Texture2D AxialTexture
-        {
-            get { return axialTexture; }
-            set { axialTexture = value; }
         }
         #endregion Accessors
 
@@ -294,7 +286,6 @@ namespace Boku.Fx
 
         public static void Render(Camera camera)
         {
-            effectCache.TrySet((int)(EffectParams.WorldMatrix), Matrix.Identity);
             effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), camera.ViewProjectionMatrix);
             effectCache.TrySet((int)(EffectParams.CrossTexture), CrossTexture);
 

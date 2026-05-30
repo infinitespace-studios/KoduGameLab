@@ -547,10 +547,6 @@ namespace Boku.Common.ParticleSystem
 
                 manager.TrySet(ParticleSystemManager.EffectParams2d.DiffuseTexture, Texture);
 
-                manager.TrySet(ParticleSystemManager.EffectParams2d.EyeLocation, new Vector4(camera.ActualFrom, 1.0f));
-                manager.TrySet(ParticleSystemManager.EffectParams2d.CameraUp, new Vector4(camera.ViewUp, 1.0f));
-
-                manager.TrySet(ParticleSystemManager.EffectParams2d.WorldMatrix, worldMatrix);
                 manager.TrySet(ParticleSystemManager.EffectParams2d.WorldViewProjMatrix, worldViewProjMatrix);
                 manager.TrySet(ParticleSystemManager.EffectParams2d.TileOffset, NumTiles > 0 ? 1.0f / (float)NumTiles : 1.0f);
                 manager.TrySet(ParticleSystemManager.EffectParams2d.ParticleRadius, 

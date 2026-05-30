@@ -96,10 +96,8 @@ namespace Boku.Common.ParticleSystem
             DiffuseColor,
             WaterColor,
             DiffuseTexture,
-            NoiseTexture,
             EyeLocation,
             CameraUp,
-            WorldMatrix,
             WorldViewProjMatrix,
             BaseUV,
             Amplitude,
@@ -420,12 +418,10 @@ namespace Boku.Common.ParticleSystem
                 Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
                 effectCache.TrySet((int)(EffectParams.DiffuseTexture), texture);
-                effectCache.TrySet((int)(EffectParams.NoiseTexture), noiseTexture);
 
                 effectCache.TrySet((int)(EffectParams.EyeLocation), camera.ActualFrom);
                 effectCache.TrySet((int)(EffectParams.CameraUp), camera.ViewUp);
 
-                effectCache.TrySet((int)(EffectParams.WorldMatrix), worldMatrix);
                 effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
 
                 effectCache.TrySet((int)(EffectParams.BaseUV), baseUV);

@@ -46,9 +46,6 @@ namespace Boku.Common.ParticleSystem
         {
             DiffuseColor,
             DiffuseTexture,
-            EyeLocation,
-            CameraUp,
-            WorldMatrix,
             WorldViewProjMatrix,
             TileOffset,
             CurrentTime,

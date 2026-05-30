@@ -44,7 +44,6 @@ namespace Boku.SimWorld.Terra
             TopGloss,
             BotEmissive,
             TopEmissive,
-            SpecularPower,
             BotTex,
             TopTex,            
             BotBumpStrength,
@@ -574,7 +573,6 @@ namespace Boku.SimWorld.Terra
             effectCacheEdit.TrySet((int)(EffectParams.TopColor), TopColor);
             effectCacheEdit.TrySet((int)(EffectParams.TopGloss), TopGloss);
             effectCacheEdit.TrySet((int)(EffectParams.TopEmissive), TopEmissive);
-            effectCacheEdit.TrySet((int)(EffectParams.SpecularPower), 5.0f);
 
             effectCacheColor.TrySet((int)(EffectParams.BotBumpStrength), 
             new Vector4(BotBumpStrength * 2.0f,
@@ -592,7 +590,6 @@ namespace Boku.SimWorld.Terra
             effectCacheColor.TrySet((int)(EffectParams.TopColor), TopColor);
             effectCacheColor.TrySet((int)(EffectParams.TopGloss), TopGloss);
             effectCacheColor.TrySet((int)(EffectParams.TopEmissive), TopEmissive);
-            effectCacheColor.TrySet((int)(EffectParams.SpecularPower), 5.0f);
         }
 
         /// <summary>

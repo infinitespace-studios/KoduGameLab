@@ -389,10 +389,15 @@ namespace Boku.Fx
             }
             if (missing.Count > 0)
             {
-                string effectIdentifier = effect.CurrentTechnique != null ? effect.CurrentTechnique.Name : null;
+                string effectName = !String.IsNullOrEmpty(effect.Name) ? effect.Name : null;
+                string techniqueName = effect.CurrentTechnique != null ? effect.CurrentTechnique.Name : null;
+                string effectIdentifier = !String.IsNullOrEmpty(techniqueName)
+                    && !String.Equals(techniqueName, "T0", StringComparison.Ordinal)
+                        ? techniqueName
+                        : effectName;
                 if (String.IsNullOrEmpty(effectIdentifier))
                 {
-                    effectIdentifier = !String.IsNullOrEmpty(effect.Name) ? effect.Name : effect.GetType().Name;
+                    effectIdentifier = effect.GetType().Name;
                 }
                 string message = $"EffectCache [{effectIdentifier}]: missing parameters: {String.Join(", ", missing)}";
                 lock (missingParameterLogMessages)

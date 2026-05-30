@@ -28,7 +28,6 @@ namespace Boku.SimWorld.Terra
             BumpMap, // global
             WaveCycle, // global
             WaveCenter, // global
-            HalfSize, // global
             InverseWaveLength, // global, 2 * PI / WaveLength
             TextureTile, // global 1.0f / texture size in world space
             NeighborCutoff, // global, 0.25 for normal, 0.75 for edit mode (glass walls at holes)
@@ -132,7 +131,6 @@ namespace Boku.SimWorld.Terra
 
             effectCache.TrySet((int)(EffectParams.WaveCenter), new Vector2(127.0f, 600.0f));
 
-            effectCache.TrySet((int)(EffectParams.HalfSize), CubeSize * 0.5f);
             const double WaveLength = 15.0;
             effectCache.TrySet((int)(EffectParams.InverseWaveLength), (float)(2.0 * Math.PI / WaveLength));
 

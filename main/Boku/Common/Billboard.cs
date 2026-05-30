@@ -42,7 +42,6 @@ namespace Boku.Common
         protected enum EffectParams
         {
             WorldViewProjMatrix,
-            WorldMatrix,
             DiffuseTexture,
         };
         private static EffectCache effectCache = new EffectCache<EffectParams>();
@@ -249,8 +248,6 @@ namespace Boku.Common
 
             Matrix worldViewProjMatrix = transformThis.World * viewMatrix * projMatrix;
             effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
-            effectCache.TrySet((int)(EffectParams.WorldMatrix), transformThis.World);
-
             device.SetVertexBuffer(vbuf);
             device.Indices = UI2D.Shared.QuadIndexBuff;
 

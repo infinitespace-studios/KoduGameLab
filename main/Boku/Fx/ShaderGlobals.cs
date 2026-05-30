@@ -649,20 +649,12 @@ namespace Boku.Fx
             #region Parameter Caching
             public enum EffectParams
             {
-                UILightDirection0,
-                UILightColor0,
-                UILightDirection1,
-                UILightColor1,
-                UILightDirection2,
-                UILightColor2,
                 EyeLocation,
                 CameraDir,
-                CameraUp,
                 WorldToCamera,
 
                 LightWrap,
                 Shininess,
-                ShadowAttenuation,
                 BloomColor,
 
                 EnvironmentMap,
@@ -670,12 +662,9 @@ namespace Boku.Fx
                 FogColor,
                 FogVector,
 
-                DOF_NearPlane,
                 DOF_FocalPlane,
                 DOF_FarPlane,
                 DOF_MaxBlur,
-
-                BloomStrength,
 
                 PreWorld,
             };
@@ -1458,6 +1447,10 @@ namespace Boku.Fx
         public static void RegisterEffect(string name, Effect effect)
         {
             UnregisterEffect(name);
+            if (String.IsNullOrEmpty(effect.Name))
+            {
+                effect.Name = name;
+            }
             ShaderDefaultValues.ApplySharedDefaults(effect);
             BokuGame.bokuGame.shaderGlobals.renderObj.EffectDict.Add(name, effect);
         }

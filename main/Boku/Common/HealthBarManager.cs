@@ -41,7 +41,6 @@ namespace Boku.Common
             LifeTint,
             LifePct,
             BackSize,
-            LifeSize,
         }
         #endregion
 
@@ -49,7 +48,6 @@ namespace Boku.Common
         const float kLifeBarScalarY = 0.6875f;
 
         private /*const*/ static Vector2 kBackSize;
-        private /*const*/ static Vector2 kLifeSize;
         private static List<GameActor> actors;
         private static List<int> freelist;
 
@@ -224,7 +222,6 @@ namespace Boku.Common
                 effectCache.TrySet((int)(EffectParams.BackTexture), BackTexture);
                 effectCache.TrySet((int)(EffectParams.LifeTexture), LifeTexture);
                 effectCache.TrySet((int)(EffectParams.BackSize), kBackSize);
-                effectCache.TrySet((int)(EffectParams.LifeSize), kLifeSize);
 
                 Array arr = actors.ToArray();
                 Array.Sort(arr, new GameActorCompare(camera));
@@ -394,9 +391,6 @@ namespace Boku.Common
 
             // Scale background frame to be of length one on the long side (width).
             kBackSize = new Vector2(BackTexture.Width, BackTexture.Height) / (float)BackTexture.Width;
-
-            // Scale life bar image to fit inside the background frame (original images are of equal size).
-            kLifeSize = new Vector2(kBackSize.X * kLifeBarScalarX, kBackSize.Y * kLifeBarScalarY);
 
             vertexBuf = new VertexBuffer(device, typeof(VertexPositionTexture), 4, BufferUsage.WriteOnly);
             VertexPositionTexture[] verts = new VertexPositionTexture[4] {
