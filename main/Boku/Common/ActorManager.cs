@@ -22,7 +22,7 @@ namespace Boku.Common
     /// </summary>
     public static class ActorManager
     {
-        private const string XmlActorsListFileName = @"Content\xml\Actors.xml";
+        private const string XmlActorsListFileName = @"Xml\Actors.xml";
 
         public readonly static IDictionary<string, StaticActor> Actors = new Dictionary<string, StaticActor>(StringComparer.OrdinalIgnoreCase);
 

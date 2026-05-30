@@ -1058,10 +1058,10 @@ namespace Boku
                     {
                         // Create a list of filenames including oth my files and downloaded files.
                         string folderName = Utils.FolderNameFromFlags(Genres.MyWorlds);
-                        string[] myFilenames = Storage4.GetFiles("Content\\" + folderName, StorageSource.All);
+                        string[] myFilenames = Storage4.GetFiles(folderName, StorageSource.All);
 
                         folderName = Utils.FolderNameFromFlags(Genres.Downloads);
-                        string[] downloadFilenames = Storage4.GetFiles("Content\\" + folderName, StorageSource.All);
+                        string[] downloadFilenames = Storage4.GetFiles(folderName, StorageSource.All);
 
                         string[] filenames = new string[myFilenames.Length + downloadFilenames.Length];
 

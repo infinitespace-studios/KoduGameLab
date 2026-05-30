@@ -427,7 +427,7 @@ namespace Boku
 
         public void LoadSurfaces()
         {
-            Surfaces = SurfaceDict.Load(Path.Combine("Content", "Xml", "Actors", "SurfaceDict.xml"), XnaStorageHelper.Instance);
+            Surfaces = SurfaceDict.Load(Path.Combine("Xml", "Actors", "SurfaceDict.xml"), XnaStorageHelper.Instance);
         }
 
 

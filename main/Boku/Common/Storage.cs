@@ -324,7 +324,7 @@ namespace Boku.Common
         /// <summary>
         /// The name of our test cookie file.
         /// </summary>
-        private static string _testFile = Path.Combine("Content", "Xml", "Kookie.dat");
+        private static string _testFile = Path.Combine("Xml", "Kookie.dat");
 
         #endregion Sys Mgmt - Init and Shutdown and Update
 

@@ -103,7 +103,20 @@ namespace BokuShared
                 if (data != null)
                     (data as XmlData<XmlDataClass>).OnLoadFromFile(filename);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                // Don't crash on a single bad file, but DO surface it. Previously this
+                // catch was empty, which made every XML parse / OnLoad failure look
+                // identical to "file not found" — a silent return of null that bubbled
+                // all the way up to "user picks a world, gets bumped back to the menu
+                // with no explanation". Log loud enough that future agents can grep it.
+                System.Console.WriteLine(
+                    "Warning: XmlData.Load failed for '" + filename + "': "
+                    + ex.GetType().Name + ": " + ex.Message
+                    + (ex.InnerException != null
+                        ? " | Inner: " + ex.InnerException.GetType().Name + ": " + ex.InnerException.Message
+                        : ""));
+            }
             finally
             {
                 storage.Close(stream);

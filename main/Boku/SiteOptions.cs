@@ -19,7 +19,7 @@ namespace Boku
 
         private bool communityEnabled;
 
-        private static readonly string MyFilename = Path.Combine("Content", "Xml", "SiteOptions.xml");
+        private static readonly string MyFilename = Path.Combine("Xml", "SiteOptions.xml");
 
         private bool runningInDebugger;
 
@@ -133,6 +133,13 @@ namespace Boku
 
             Stream stream = Storage4.OpenRead(MyFilename, sources);
 
+            if (stream == null)
+            {
+                // SiteOptions is optional config; missing file is not fatal.
+                // Return a defaults instance so the rest of startup can proceed.
+                return new SiteOptions();
+            }
+
             SiteOptions result = (SiteOptions)xml.Deserialize(stream);
 
             stream.Close();
@@ -148,7 +155,7 @@ namespace Boku
     /// </summary>
     public class SiteID
     {
-        private static readonly string MyFilename = Path.Combine("Content", "Xml", "SiteID.xml");
+        private static readonly string MyFilename = Path.Combine("Xml", "SiteID.xml");
 
         public Guid Value;
 

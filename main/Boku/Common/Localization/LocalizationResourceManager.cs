@@ -28,7 +28,7 @@ namespace Boku.Common.Localization
     public class LocalizationResourceManager
     {
         #region Constants
-        public static readonly string LanguageDir = Path.Combine("Content", "Xml", "Localizable");
+        public static readonly string LanguageDir = Path.Combine("Xml", "Localizable");
         public const string DefaultLanguage = "EN"; //The English ISO 639-1 language code
         public static readonly string DefaultLanguageDir = Path.Combine(LanguageDir, DefaultLanguage);
         private const string LocalesFileName = @"Locales.xml";

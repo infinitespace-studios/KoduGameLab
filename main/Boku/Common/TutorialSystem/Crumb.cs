@@ -135,7 +135,7 @@ namespace Boku.Common.TutorialSystem
 
             // Get the actual crumb list.  This contains all the mode links.
             // Note, since this no longer contains strings it is no longer inthe Localizable folder...
-            string filename = Path.Combine(@"Content\Xml", crumbsFilename);
+            string filename = Path.Combine(@"Xml", crumbsFilename);
             if (Storage4.FileExists(filename, StorageSource.TitleSpace))
             {
                 crumbList = Load(filename, StorageSource.TitleSpace);
