@@ -359,7 +359,11 @@ namespace Boku.UI2D
             }
 
             // Create the diffuse texture.  Leave it null if we have no text to render.
-            diffuse = new RenderTarget2D(device, w, h, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+            // numSamples must be 0 (not 1): see Shared.cs RenderTargetDepthStencil1280_720
+            // comment. Passing 1 hits a MonoGame OpenGL bug that attaches an MSAA renderbuffer
+            // to the FBO but never resolves it back to the texture, so the RT silently swallows
+            // every draw and SetData becomes the only way to write to it.
+            diffuse = new RenderTarget2D(device, w, h, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
             InGame.GetRT("UIGrid2DTextElement", diffuse);
 
             InGame.SetRenderTarget(diffuse);
