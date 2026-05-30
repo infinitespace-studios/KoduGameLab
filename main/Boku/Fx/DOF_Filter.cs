@@ -67,11 +67,20 @@ namespace Boku.Fx
             effect.Parameters["DistortTexture1"]?.SetValue(distortImage1);
 
             // Experimental minimum blur amount for Matt.
-            float maxBlur = effect.Parameters["DOF_MaxBlur"].GetValueSingle();
-            float minBlur = 0.2f;
-            //float minBlur = 0.0f;
-            float blurScale = (maxBlur - minBlur) / (maxBlur - 0.0f);
-            effect.Parameters["DOF_MinBlur"]?.SetValue(new Vector2(minBlur, blurScale));
+            // DOF_MaxBlur is not declared in DOF_Filter.fx (only DOF_MinBlur is), so MGFX
+            // strips it and effect.Parameters["DOF_MaxBlur"] is null. The whole purpose of
+            // this block is to rescale DOF_MinBlur so a minBlur value renormalises the depth
+            // range — that math is meaningless without DOF_MaxBlur, so just skip and let
+            // DOF_MinBlur keep its shader default (0, 1) which is the identity transform.
+            var maxBlurParam = effect.Parameters["DOF_MaxBlur"];
+            if (maxBlurParam != null)
+            {
+                float maxBlur = maxBlurParam.GetValueSingle();
+                float minBlur = 0.2f;
+                //float minBlur = 0.0f;
+                float blurScale = (maxBlur - minBlur) / (maxBlur - 0.0f);
+                effect.Parameters["DOF_MinBlur"]?.SetValue(new Vector2(minBlur, blurScale));
+            }
 
             // Adjustement needed to deal with the confusion that
             // arises when 

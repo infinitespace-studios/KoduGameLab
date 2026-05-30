@@ -117,9 +117,13 @@ namespace Boku.UI
                     effect.Parameters["Shininess"]?.SetValue(1.0f);
                     effect.Parameters["ShadowAttenuation"]?.SetValue(0.5f);
 
-                    // Temp disable of blur
-                    float dof_maxBlur = effect.Parameters["DOF_MaxBlur"].GetValueSingle();
-                    effect.Parameters["DOF_MaxBlur"]?.SetValue(0.0f);
+                    // Temp disable of blur.
+                    // DOF_MaxBlur may not exist on the active effect (DOF_Filter.fx doesn't
+                    // declare it; see DOF_Filter.cs for the same null-guard pattern). Skip
+                    // the save/restore dance entirely if the parameter has been DCE'd.
+                    var dofMaxBlurParam = effect.Parameters["DOF_MaxBlur"];
+                    float dof_maxBlur = dofMaxBlurParam != null ? dofMaxBlurParam.GetValueSingle() : 0.0f;
+                    dofMaxBlurParam?.SetValue(0.0f);
 
                     // Temporarily disable any batching. We want our stuff
                     // rendered immediatately.
