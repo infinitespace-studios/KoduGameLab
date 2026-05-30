@@ -297,6 +297,17 @@ namespace Boku
                     }
                     else
                     {
+                        GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
+
+                        // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                        // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                        // XNA used to implicitly restore device state across this boundary; MonoGame does
+                        // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                        device.BlendState        = BlendState.Opaque;
+                        device.DepthStencilState = DepthStencilState.Default;
+                        device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                        device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                         // Render menu using local camera.
                         shared.camera.Resolution = new Point((int)BokuGame.ScreenSize.X, (int)BokuGame.ScreenSize.Y);
                         shared.camera.Update();

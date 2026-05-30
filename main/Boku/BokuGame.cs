@@ -941,6 +941,10 @@ namespace Boku
 
         public static string DebugString = "";
 
+        // RenderObject entries can run immediately after SpriteBatch UI has ended.
+        // MonoGame keeps SpriteBatch's Blend/Depth/Sampler state where XNA often
+        // restored defaults, so any renderer that transitions back to opaque 3D
+        // must reset device state before issuing primitives.
         public void Draw()
         {
 

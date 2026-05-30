@@ -613,6 +613,15 @@ namespace Boku
                     batch.End();
                     shared.urlBox.Set(pos, pos + size);
 
+                    // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                    // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                    // XNA used to implicitly restore device state across this boundary; MonoGame does
+                    // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                    device.BlendState        = BlendState.Opaque;
+                    device.DepthStencilState = DepthStencilState.Default;
+                    device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                    device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                     // Hide the menu if auth UI is active.  Just keeps things cleaner.
                     if (!AuthUI.IsModalActive)
                     {

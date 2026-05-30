@@ -3063,12 +3063,30 @@ namespace Boku
                         quad.Render(rightBumper, shared.rightBumperPosition, new Vector2(96, 96), "TexturedRegularAlpha");
                     }
 
+                    // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                    // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                    // XNA used to implicitly restore device state across this boundary; MonoGame does
+                    // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                    device.BlendState        = BlendState.Opaque;
+                    device.DepthStencilState = DepthStencilState.Default;
+                    device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                    device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                     shared.bucketsGrid.Render(shared.camera);
                 }
 
                 // Render the file list grid.
                 if (shared.levelGrid != null)
                 {
+                    // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                    // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                    // XNA used to implicitly restore device state across this boundary; MonoGame does
+                    // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                    device.BlendState        = BlendState.Opaque;
+                    device.DepthStencilState = DepthStencilState.Default;
+                    device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                    device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                     shared.levelGrid.Render(shared.camera);
                 }
 
@@ -3143,6 +3161,15 @@ namespace Boku
                 // Render search box
                 shared.textLineEditor.Render(camera);
 
+                // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                // XNA used to implicitly restore device state across this boundary; MonoGame does
+                // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                device.BlendState        = BlendState.Opaque;
+                device.DepthStencilState = DepthStencilState.Default;
+                device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                 shared.sortList.Render(shared.camera);
                 shared.popup.Render(shared.camera);
 
@@ -3153,6 +3180,15 @@ namespace Boku
                     UIGridLevelElement e = (UIGridLevelElement)shared.levelGrid.SelectionElement;
                     if (e != null)
                     {
+                        // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                        // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                        // XNA used to implicitly restore device state across this boundary; MonoGame does
+                        // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                        device.BlendState        = BlendState.Opaque;
+                        device.DepthStencilState = DepthStencilState.Default;
+                        device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                        device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                         e.Render(shared.camera);
 
                         if (GamePadInput.ActiveMode == GamePadInput.InputMode.GamePad)
@@ -3174,6 +3210,15 @@ namespace Boku
                 }
 
                 // Render the tag picker after the in-focus tile to ensure that it's on top.
+                // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                // XNA used to implicitly restore device state across this boundary; MonoGame does
+                // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                device.BlendState        = BlendState.Opaque;
+                device.DepthStencilState = DepthStencilState.Default;
+                device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                 shared.tagPicker.Render(shared.camera);
 
                 InGame.RestoreRenderTarget();
