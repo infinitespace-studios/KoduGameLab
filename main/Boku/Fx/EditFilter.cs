@@ -60,7 +60,7 @@ namespace Boku.Fx
                 -max.X, // x offset
                 min.Y); // y offset
 
-            effect.Parameters["UvToPos"].SetValue(uvToPos);
+            effect.Parameters["UvToPos"]?.SetValue(uvToPos);
 
         }   // end of BaseFilter SetUvToPos()
 
@@ -98,9 +98,9 @@ namespace Boku.Fx
             // Store away the current channels.
 
 
-            effect.Parameters["SourceTexture"].SetValue(source);
-            effect.Parameters["Color"].SetValue(color);
-            effect.Parameters["Alpha"].SetValue(alpha);
+            effect.Parameters["SourceTexture"]?.SetValue(source);
+            effect.Parameters["Color"]?.SetValue(color);
+            effect.Parameters["Alpha"]?.SetValue(alpha);
 
             effect.CurrentTechnique = effect.Techniques["Edit"];
 

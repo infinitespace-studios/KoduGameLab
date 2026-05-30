@@ -100,11 +100,11 @@ namespace Boku.Fx
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
             Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
-            effect.Parameters[ "WorldViewProjMatrix" ].SetValue(worldViewProjMatrix);
-            effect.Parameters[ "WorldMatrix" ].SetValue(worldMatrix);
-            effect.Parameters[ "Texture" ].SetValue(texture);
-            effect.Parameters[ "Alpha" ].SetValue(alpha);
-            effect.Parameters[ "Tint" ].SetValue(tint);
+            effect.Parameters[ "WorldViewProjMatrix" ]?.SetValue(worldViewProjMatrix);
+            effect.Parameters[ "WorldMatrix" ]?.SetValue(worldMatrix);
+            effect.Parameters[ "Texture" ]?.SetValue(texture);
+            effect.Parameters[ "Alpha" ]?.SetValue(alpha);
+            effect.Parameters[ "Tint" ]?.SetValue(tint);
 
             effect.CurrentTechnique = effect.Techniques[ "TexturedNormalAlpha" ];
 
@@ -152,12 +152,12 @@ namespace Boku.Fx
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
             Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-            effect.Parameters["Texture"].SetValue(texture);
-            effect.Parameters["AlphaMap"].SetValue(alphaMap);
-            effect.Parameters["Alpha"].SetValue(alpha);
-            effect.Parameters["Tint"].SetValue(tint);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+            effect.Parameters["Texture"]?.SetValue(texture);
+            effect.Parameters["AlphaMap"]?.SetValue(alphaMap);
+            effect.Parameters["Alpha"]?.SetValue(alpha);
+            effect.Parameters["Tint"]?.SetValue(tint);
 
             effect.CurrentTechnique = effect.Techniques["TexturedWithAlphaMap"];
 

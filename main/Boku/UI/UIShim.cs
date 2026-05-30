@@ -112,14 +112,14 @@ namespace Boku.UI
                     // Set up standard UI lighting for any wrapped objects.
 
                     string oldRig = BokuGame.bokuGame.shaderGlobals.PushLightRig(ShaderGlobals.UIRigName);
-                    effect.Parameters["EyeLocation"].SetValue(new Vector4(shared.camera.ActualFrom, 1.0f));
+                    effect.Parameters["EyeLocation"]?.SetValue(new Vector4(shared.camera.ActualFrom, 1.0f));
 
-                    effect.Parameters["Shininess"].SetValue(1.0f);
-                    effect.Parameters["ShadowAttenuation"].SetValue(0.5f);
+                    effect.Parameters["Shininess"]?.SetValue(1.0f);
+                    effect.Parameters["ShadowAttenuation"]?.SetValue(0.5f);
 
                     // Temp disable of blur
                     float dof_maxBlur = effect.Parameters["DOF_MaxBlur"].GetValueSingle();
-                    effect.Parameters["DOF_MaxBlur"].SetValue(0.0f);
+                    effect.Parameters["DOF_MaxBlur"]?.SetValue(0.0f);
 
                     // Temporarily disable any batching. We want our stuff
                     // rendered immediatately.
@@ -138,7 +138,7 @@ namespace Boku.UI
                     InGame.inGame.PopBatching(batch);
 
                     // Restore the real DOF_MaxBlur. 
-                    effect.Parameters["DOF_MaxBlur"].SetValue(dof_maxBlur);
+                    effect.Parameters["DOF_MaxBlur"]?.SetValue(dof_maxBlur);
 
                     BokuGame.bokuGame.shaderGlobals.PopLightRig(oldRig);
                 }

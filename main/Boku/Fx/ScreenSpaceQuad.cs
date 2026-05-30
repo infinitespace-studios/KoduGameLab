@@ -115,9 +115,9 @@ namespace Boku.Fx
 
             UpdateVertices(position, size);
 
-            effect.Parameters["DiffuseColor"].SetValue(new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-            effect.Parameters["SpriteTexture"].SetValue(diffuse);
-            effect.Parameters["ShadowMaskTexture"].SetValue(shadowMask);
+            effect.Parameters["DiffuseColor"]?.SetValue(new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+            effect.Parameters["SpriteTexture"]?.SetValue(diffuse);
+            effect.Parameters["ShadowMaskTexture"]?.SetValue(shadowMask);
 
             effect.CurrentTechnique = effect.Techniques["DropShadow"];
 
@@ -144,8 +144,8 @@ namespace Boku.Fx
 
             UpdateVertices(position, size);
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["ShadowMaskTexture"].SetValue(shadowMask);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
+            effect.Parameters["ShadowMaskTexture"]?.SetValue(shadowMask);
 
             effect.CurrentTechnique = effect.Techniques["SolidColorWithDropShadow"];
 
@@ -194,8 +194,8 @@ namespace Boku.Fx
                 return;
             }
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["SpriteTexture"].SetValue(texture);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
+            effect.Parameters["SpriteTexture"]?.SetValue(texture);
 
             effect.CurrentTechnique = effect.Techniques[technique];
 
@@ -242,9 +242,9 @@ namespace Boku.Fx
 
             UpdateVertices(position, size);
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["SpriteTexture"].SetValue(texture);
-            effect.Parameters["MaskTexture"].SetValue(mask);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
+            effect.Parameters["SpriteTexture"]?.SetValue(texture);
+            effect.Parameters["MaskTexture"]?.SetValue(mask);
 
             effect.CurrentTechnique = effect.Techniques[@"Mask" + technique];
 
@@ -292,9 +292,9 @@ namespace Boku.Fx
 
             UpdateVertices(position, size);
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["SpriteTexture"].SetValue(texture);
-            effect.Parameters["YLimits"].SetValue(limits);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
+            effect.Parameters["SpriteTexture"]?.SetValue(texture);
+            effect.Parameters["YLimits"]?.SetValue(limits);
 
             effect.CurrentTechnique = effect.Techniques[@"YLimit" + technique];
 
@@ -347,7 +347,7 @@ namespace Boku.Fx
                 LoadContent(true);
             }
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
 
             effect.CurrentTechnique = effect.Techniques[technique];
 
@@ -378,11 +378,11 @@ namespace Boku.Fx
             Vector2 size = new Vector2(device.Viewport.Width, device.Viewport.Height);
             UpdateVertices(position, size);
 
-            effect.Parameters["Color0"].SetValue(gradient[0]);
-            effect.Parameters["Color1"].SetValue(gradient[1]);
-            effect.Parameters["Color2"].SetValue(gradient[2]);
-            effect.Parameters["Color3"].SetValue(gradient[3]);
-            effect.Parameters["Color4"].SetValue(gradient[4]);
+            effect.Parameters["Color0"]?.SetValue(gradient[0]);
+            effect.Parameters["Color1"]?.SetValue(gradient[1]);
+            effect.Parameters["Color2"]?.SetValue(gradient[2]);
+            effect.Parameters["Color3"]?.SetValue(gradient[3]);
+            effect.Parameters["Color4"]?.SetValue(gradient[4]);
 
             effect.CurrentTechnique = effect.Techniques["Gradient"];
 
@@ -413,7 +413,7 @@ namespace Boku.Fx
 
             UpdateVertices(position, size);
 
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
 
             effect.CurrentTechnique = effect.Techniques["Stencil"];
 
@@ -449,9 +449,9 @@ namespace Boku.Fx
             UpdateVertices(position, size);
 
             effect.CurrentTechnique = effect.Techniques["SplitTexturedRegularAlpha"];
-            effect.Parameters["LeftTexture"].SetValue(leftTexture);
-            effect.Parameters["RightTexture"].SetValue(rightTexture);
-            effect.Parameters["T"].SetValue(t);
+            effect.Parameters["LeftTexture"]?.SetValue(leftTexture);
+            effect.Parameters["RightTexture"]?.SetValue(rightTexture);
+            effect.Parameters["T"]?.SetValue(t);
 
             // Render all passes.
             for (int i = 0; i < effect.CurrentTechnique.Passes.Count; i++)

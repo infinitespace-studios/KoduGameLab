@@ -641,8 +641,8 @@ namespace Boku.Base
 
             Matrix worldViewProjMatrix = worldMatrix * viewProjMatrix;
 
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
 
             //
             //FillMode tempFillMode = device.RenderState.FillMode;
@@ -672,13 +672,13 @@ namespace Boku.Base
 
                     if (noOverlay)
                     {
-                        effect.Parameters["OverlayTexture"].SetValue(partInfo.DiffuseTexture);      // Foreground texture.
+                        effect.Parameters["OverlayTexture"]?.SetValue(partInfo.DiffuseTexture);      // Foreground texture.
                         effect.CurrentTechnique = effect.Techniques["OneTextureColorPass"];
                     }
                     else
                     {
-                        effect.Parameters["OverlayTexture"].SetValue(partInfo.OverlayTexture);      // Foreground texture, ie the icon itself.
-                        effect.Parameters["DiffuseTexture"].SetValue(partInfo.DiffuseTexture);      // Background texture, soft glow.
+                        effect.Parameters["OverlayTexture"]?.SetValue(partInfo.OverlayTexture);      // Foreground texture, ie the icon itself.
+                        effect.Parameters["DiffuseTexture"]?.SetValue(partInfo.DiffuseTexture);      // Background texture, soft glow.
 
                         effect.CurrentTechnique = effect.Techniques["TwoTextureColorPass"];
                     }
@@ -691,15 +691,15 @@ namespace Boku.Base
                     }
                     else
                     {
-                        effect.Parameters["OverlayTexture"].SetValue(partInfo.OverlayTexture);      // Foreground texture.
+                        effect.Parameters["OverlayTexture"]?.SetValue(partInfo.OverlayTexture);      // Foreground texture.
                         effect.CurrentTechnique = effect.Techniques["OneTextureColorPass"];
                     }
                 }
 
-                effect.Parameters["DiffuseColor"].SetValue(partInfo.DiffuseColor);
-                effect.Parameters["SpecularColor"].SetValue(partInfo.SpecularColor);
-                effect.Parameters["EmissiveColor"].SetValue(partInfo.EmissiveColor);
-                effect.Parameters["SpecularPower"].SetValue(partInfo.SpecularPower);
+                effect.Parameters["DiffuseColor"]?.SetValue(partInfo.DiffuseColor);
+                effect.Parameters["SpecularColor"]?.SetValue(partInfo.SpecularColor);
+                effect.Parameters["EmissiveColor"]?.SetValue(partInfo.EmissiveColor);
+                effect.Parameters["SpecularPower"]?.SetValue(partInfo.SpecularPower);
 
                 effect.CurrentTechnique.Passes[0].Apply();
 

@@ -78,7 +78,7 @@ namespace Boku
                         * (float)Math.Cos(5.0f * Time.GameTimeTotalSeconds + flexOffset);
             }
 
-            model.Effect.Parameters["Flex"].SetValue(flex);
+            model.Effect.Parameters["Flex"]?.SetValue(flex);
         }
 
     }   // end of class SwimFish

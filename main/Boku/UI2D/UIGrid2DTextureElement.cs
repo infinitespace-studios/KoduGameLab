@@ -263,18 +263,18 @@ namespace Boku.UI2D
             if (altShader)
             {
                 effect.CurrentTechnique = effect.Techniques["AltNormalMapped"];
-                effect.Parameters["DiffuseTexture"].SetValue(diffuse);
+                effect.Parameters["DiffuseTexture"]?.SetValue(diffuse);
             }
             else if(altPreMultAlphaShader)
             {
                 effect.CurrentTechnique = effect.Techniques["AltNormalMappedPreMultAlpha"];
-                effect.Parameters["DiffuseTexture"].SetValue(diffuse);
+                effect.Parameters["DiffuseTexture"]?.SetValue(diffuse);
             }
             else if (greyFlatShader)
             {
                 effect.CurrentTechnique = effect.Techniques["GreyFlat"];
-                effect.Parameters["DiffuseTexture"].SetValue(diffuse);
-                effect.Parameters["Grey"].SetValue(grey);
+                effect.Parameters["DiffuseTexture"]?.SetValue(diffuse);
+                effect.Parameters["Grey"]?.SetValue(grey);
             }
             else
             {
@@ -301,7 +301,7 @@ namespace Boku.UI2D
                         else
                         {
                             effect.CurrentTechnique = effect.Techniques["NormalMappedNoZWithOverlay"];
-                            effect.Parameters["OverlayTexture"].SetValue(overlayTexture);
+                            effect.Parameters["OverlayTexture"]?.SetValue(overlayTexture);
                         }
                     }
                     else
@@ -313,21 +313,21 @@ namespace Boku.UI2D
                         else
                         {
                             effect.CurrentTechnique = effect.Techniques["NormalMappedWithOverlay"];
-                            effect.Parameters["OverlayTexture"].SetValue(overlayTexture);
+                            effect.Parameters["OverlayTexture"]?.SetValue(overlayTexture);
                         }
                     }
-                    effect.Parameters["DiffuseTexture"].SetValue(diffuse);
+                    effect.Parameters["DiffuseTexture"]?.SetValue(diffuse);
                 }
             }
 
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldMatrix * camera.ViewProjectionMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldMatrix * camera.ViewProjectionMatrix);
 
-            effect.Parameters["Alpha"].SetValue(Alpha);
-            effect.Parameters["DiffuseColor"].SetValue(baseColor);
-            effect.Parameters["SpecularColor"].SetValue(specularColor);
-            effect.Parameters["SpecularPower"].SetValue(specularPower);
-            effect.Parameters["NormalMap"].SetValue(normalMap);
+            effect.Parameters["Alpha"]?.SetValue(Alpha);
+            effect.Parameters["DiffuseColor"]?.SetValue(baseColor);
+            effect.Parameters["SpecularColor"]?.SetValue(specularColor);
+            effect.Parameters["SpecularPower"]?.SetValue(specularPower);
+            effect.Parameters["NormalMap"]?.SetValue(normalMap);
 
             geometry.Render(effect);
 

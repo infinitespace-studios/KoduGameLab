@@ -109,17 +109,17 @@ namespace Boku.UI2D
 
                 effect.CurrentTechnique = effect.Techniques["TexturedRegularAlpha"];
 
-                effect.Parameters["DiffuseTexture"].SetValue(backgroundTexture);
+                effect.Parameters["DiffuseTexture"]?.SetValue(backgroundTexture);
 
                 // Calc position from lowerLeftCorner.
                 Vector3 trans = new Vector3(lowerLeftCorner.X + (width - edgeSize) / 2.0f, lowerLeftCorner.Y + (height - edgeSize) / 2.0f, 0.0f);
                 worldMatrix.Translation = trans;
 
-                effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-                effect.Parameters["WorldViewProjMatrix"].SetValue(worldMatrix * camera.ViewProjectionMatrix);
+                effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldMatrix * camera.ViewProjectionMatrix);
 
-                effect.Parameters["Alpha"].SetValue(1.0f);
-                effect.Parameters["DiffuseColor"].SetValue(Vector4.One);
+                effect.Parameters["Alpha"]?.SetValue(1.0f);
+                effect.Parameters["DiffuseColor"]?.SetValue(Vector4.One);
 
                 geometry.Render(effect);
 

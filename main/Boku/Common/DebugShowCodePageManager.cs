@@ -142,14 +142,14 @@ namespace Boku.Common
                                 Effect effect = ThoughtBalloonManager.Effect;
 
                                 Matrix worldViewProjMatrix = world * camera.ViewMatrix * camera.ProjectionMatrix;
-                                effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-                                effect.Parameters["WorldMatrix"].SetValue(world);
+                                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+                                effect.Parameters["WorldMatrix"]?.SetValue(world);
 
-                                effect.Parameters["ContentTexture"].SetValue(texture);
+                                effect.Parameters["ContentTexture"]?.SetValue(texture);
 
-                                effect.Parameters["Size"].SetValue(size);
-                                effect.Parameters["Alpha"].SetValue(1.0f);
-                                effect.Parameters["BorderColor"].SetValue(Vector4.One);
+                                effect.Parameters["Size"]?.SetValue(size);
+                                effect.Parameters["Alpha"]?.SetValue(1.0f);
+                                effect.Parameters["BorderColor"]?.SetValue(Vector4.One);
 
                                 device.SetVertexBuffer(vbuf);
                                 device.Indices = UI2D.Shared.QuadIndexBuff;

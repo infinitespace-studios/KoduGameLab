@@ -43,7 +43,7 @@ namespace Boku.Common.ParticleSystem
             base.PreRender(camera);
 
             Vector2 decay = new Vector2(drag, minSpeed);
-            Effect.Parameters["Drag"].SetValue(decay);
+            Effect.Parameters["Drag"]?.SetValue(decay);
         }
 
         #endregion Public

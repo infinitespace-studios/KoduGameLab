@@ -57,10 +57,10 @@ namespace Boku.Fx
             // This is the width and height of a pixel in texture space.
             Vector2 pixelSize = new Vector2(1.0f / device.Viewport.Width, 1.0f / device.Viewport.Height);
 
-            effect.Parameters["SourceTexture"].SetValue(source);
-            effect.Parameters["PixelSize"].SetValue(pixelSize);
-            effect.Parameters["Weights"].SetValue(weights);
-            effect.Parameters["Offsets"].SetValue(offsets);
+            effect.Parameters["SourceTexture"]?.SetValue(source);
+            effect.Parameters["PixelSize"]?.SetValue(pixelSize);
+            effect.Parameters["Weights"]?.SetValue(weights);
+            effect.Parameters["Offsets"]?.SetValue(offsets);
 
             effect.CurrentTechnique = effect.Techniques[horizontal ? "GaussianHorizontal" : "GaussianVertical"];
 

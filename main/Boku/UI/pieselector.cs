@@ -745,17 +745,17 @@ namespace Boku.UI
                 Matrix projMatrix = camera.ProjectionMatrix;
 
                 Matrix worldViewProjMatrix = worldMatrix * viewMatrix * projMatrix;
-                effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-                effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+                effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
 
                 // used for debugging
-                //effect.Parameters["DiffuseTexture"].SetValue(texture);
+                //effect.Parameters["DiffuseTexture"]?.SetValue(texture);
 
-                effect.Parameters["DiffuseColor"].SetValue(this.diffuse);
-                effect.Parameters["SpecularColor"].SetValue(new Vector4(0.12f, 0.12f, 0.12f, 1.0f));
-                effect.Parameters["EmissiveColor"].SetValue(new Vector4(0.01f, 0.01f, 0.01f, 1.0f));
-                effect.Parameters["SpecularPower"].SetValue(4.0f);
-                effect.Parameters["Shininess"].SetValue(0.0f);
+                effect.Parameters["DiffuseColor"]?.SetValue(this.diffuse);
+                effect.Parameters["SpecularColor"]?.SetValue(new Vector4(0.12f, 0.12f, 0.12f, 1.0f));
+                effect.Parameters["EmissiveColor"]?.SetValue(new Vector4(0.01f, 0.01f, 0.01f, 1.0f));
+                effect.Parameters["SpecularPower"]?.SetValue(4.0f);
+                effect.Parameters["Shininess"]?.SetValue(0.0f);
 
                 if (InGame.inGame.renderEffects != InGame.RenderEffect.Normal)
                 {

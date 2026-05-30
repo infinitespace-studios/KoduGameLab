@@ -207,7 +207,7 @@ namespace Xclna.Xna.Animation
                 }
                 set
                 {
-                    lightEnabledParam.SetValue(value);
+                    lightEnabledParam?.SetValue(value);
                 }
             }
 
@@ -222,7 +222,7 @@ namespace Xclna.Xna.Animation
                 }
                 set
                 {
-                    lightDirParam.SetValue(Vector3.Normalize(value));
+                    lightDirParam?.SetValue(Vector3.Normalize(value));
                 }
             }
 
@@ -241,7 +241,7 @@ namespace Xclna.Xna.Animation
                 set
                 {
 
-                    specColorParam.SetValue(value);
+                    specColorParam?.SetValue(value);
                 }
             }
 
@@ -256,7 +256,7 @@ namespace Xclna.Xna.Animation
                 }
                 set
                 {
-                    difColorParam.SetValue(value);
+                    difColorParam?.SetValue(value);
                 }
             }
         }
@@ -272,7 +272,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                texParam.SetValue(value);
+                texParam?.SetValue(value);
             }
         }
 
@@ -287,7 +287,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                fogStartParam.SetValue(value);
+                fogStartParam?.SetValue(value);
             }
         }
 
@@ -303,7 +303,7 @@ namespace Xclna.Xna.Animation
             set
             {
             
-                fogEndParam.SetValue(value);
+                fogEndParam?.SetValue(value);
             }
         }
 
@@ -318,7 +318,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                fogEnabledParam.SetValue(value); 
+                fogEnabledParam?.SetValue(value);
             }
         }
 
@@ -333,7 +333,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                fogColorParam.SetValue(value);
+                fogColorParam?.SetValue(value);
             }
         }
 
@@ -348,7 +348,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                alphaParam.SetValue(value);
+                alphaParam?.SetValue(value);
             }
         }
 
@@ -363,7 +363,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                texEnabledParam.SetValue(value);
+                texEnabledParam?.SetValue(value);
             }
         }
 
@@ -378,7 +378,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                paletteParam.SetValue(value);
+                paletteParam?.SetValue(value);
             }
 
         }
@@ -428,7 +428,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                ambientParam.SetValue(value);
+                ambientParam?.SetValue(value);
             }
 
         }
@@ -444,7 +444,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                specColorParam.SetValue(value);
+                specColorParam?.SetValue(value);
             }
         }
 
@@ -459,7 +459,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                specPowerParam.SetValue(value);
+                specPowerParam?.SetValue(value);
             }
         }
 
@@ -474,7 +474,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                diffuseParam.SetValue(value);
+                diffuseParam?.SetValue(value);
             }
         }
 
@@ -489,7 +489,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                lightEnabledParam.SetValue(value);
+                lightEnabledParam?.SetValue(value);
             }
         }
 
@@ -504,7 +504,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                emissiveParam.SetValue(value);
+                emissiveParam?.SetValue(value);
             }
         }
 
@@ -519,7 +519,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                worldParam.SetValue(value);
+                worldParam?.SetValue(value);
             }
         }
 
@@ -537,8 +537,8 @@ namespace Xclna.Xna.Animation
             {
                 Matrix inverseView = Matrix.Invert(value);
                 Vector3.Transform(ref zero, ref inverseView, out eye);
-                viewParam.SetValue(value);
-                eyeParam.SetValue(eye);
+                viewParam?.SetValue(value);
+                eyeParam?.SetValue(eye);
             }
         }
 
@@ -553,7 +553,7 @@ namespace Xclna.Xna.Animation
             }
             set
             {
-                projectionParam.SetValue(value);
+                projectionParam?.SetValue(value);
             }
         }
 

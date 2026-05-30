@@ -463,8 +463,8 @@ namespace Boku
                 //InGame.Clear(Color.Pink);
 
                 // Render menu using local camera.
-                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["EyeLocation"].SetValue(new Vector4(camera.From, 1.0f));
-                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["CameraUp"].SetValue(new Vector4(camera.Up, 1.0f));
+                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["EyeLocation"]?.SetValue(new Vector4(camera.From, 1.0f));
+                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["CameraUp"]?.SetValue(new Vector4(camera.Up, 1.0f));
 
                 backPlate.Render(camera);
                 selectionPlate.Render(camera);

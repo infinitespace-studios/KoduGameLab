@@ -320,23 +320,23 @@ namespace Boku.Common.ParticleSystem
                     effect.CurrentTechnique = effect.Techniques[@"BeamPass"];
 
                     // Set up common rendering values.
-                    effect.Parameters["CurrentTime"].SetValue((float)Time.GameTimeTotalSeconds);
+                    effect.Parameters["CurrentTime"]?.SetValue((float)Time.GameTimeTotalSeconds);
 
                     // Set up world matrix.
                     Matrix worldMatrix = Matrix.Identity;
                     Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
-                    effect.Parameters["DiffuseTexture"].SetValue(texture);
-                    effect.Parameters["EyeLocation"].SetValue(new Vector4(camera.ActualFrom, 1.0f));
-                    effect.Parameters["CameraUp"].SetValue(new Vector4(camera.ViewUp, 1.0f));
-                    effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-                    effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
+                    effect.Parameters["DiffuseTexture"]?.SetValue(texture);
+                    effect.Parameters["EyeLocation"]?.SetValue(new Vector4(camera.ActualFrom, 1.0f));
+                    effect.Parameters["CameraUp"]?.SetValue(new Vector4(camera.ViewUp, 1.0f));
+                    effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+                    effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
 
                     float radius = 0.2f;
                     float minPix = 3.0f;
                     float maxPix = 6.0f;
                     Vector4 pixelLimit = ShaderGlobals.MakeParticleSizeLimit(radius, minPix, maxPix);
-                    effect.Parameters["ParticleRadius"].SetValue(pixelLimit);
+                    effect.Parameters["ParticleRadius"]?.SetValue(pixelLimit);
 
                     device.Indices = ibuf;
 

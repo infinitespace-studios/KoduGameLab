@@ -92,13 +92,13 @@ namespace Boku.SimWorld
             rightDir *= scale;
             upDir *= scale / camera.AspectRatio;
 
-            effect.Parameters["ViewDir"].SetValue(viewDir);
-            effect.Parameters["UpDir"].SetValue(upDir);
-            effect.Parameters["RightDir"].SetValue(rightDir);
-            effect.Parameters["Eye"].SetValue(camera.ActualFrom);
+            effect.Parameters["ViewDir"]?.SetValue(viewDir);
+            effect.Parameters["UpDir"]?.SetValue(upDir);
+            effect.Parameters["RightDir"]?.SetValue(rightDir);
+            effect.Parameters["Eye"]?.SetValue(camera.ActualFrom);
 
-            effect.Parameters["DomeCenter"].SetValue(Center);
-            effect.Parameters["DomeRadius"].SetValue(Radius);
+            effect.Parameters["DomeCenter"]?.SetValue(Center);
+            effect.Parameters["DomeRadius"]?.SetValue(Radius);
 
             if (Terrain.Current.SkyTransitioning)
             {
@@ -114,11 +114,11 @@ namespace Boku.SimWorld
                 }
 
                 //apply a lerped gradient
-                effect.Parameters["Color0"].SetValue(currentGradient[0]);
-                effect.Parameters["Color1"].SetValue(currentGradient[1]);
-                effect.Parameters["Color2"].SetValue(currentGradient[2]);
-                effect.Parameters["Color3"].SetValue(currentGradient[3]);
-                effect.Parameters["Color4"].SetValue(currentGradient[4]);
+                effect.Parameters["Color0"]?.SetValue(currentGradient[0]);
+                effect.Parameters["Color1"]?.SetValue(currentGradient[1]);
+                effect.Parameters["Color2"]?.SetValue(currentGradient[2]);
+                effect.Parameters["Color3"]?.SetValue(currentGradient[3]);
+                effect.Parameters["Color4"]?.SetValue(currentGradient[4]);
             }
             else
             {
@@ -130,11 +130,11 @@ namespace Boku.SimWorld
                     currentGradient[i] = gradient[i];
                 }
 
-                effect.Parameters["Color0"].SetValue(currentGradient[0]);
-                effect.Parameters["Color1"].SetValue(currentGradient[1]);
-                effect.Parameters["Color2"].SetValue(currentGradient[2]);
-                effect.Parameters["Color3"].SetValue(currentGradient[3]);
-                effect.Parameters["Color4"].SetValue(currentGradient[4]);
+                effect.Parameters["Color0"]?.SetValue(currentGradient[0]);
+                effect.Parameters["Color1"]?.SetValue(currentGradient[1]);
+                effect.Parameters["Color2"]?.SetValue(currentGradient[2]);
+                effect.Parameters["Color3"]?.SetValue(currentGradient[3]);
+                effect.Parameters["Color4"]?.SetValue(currentGradient[4]);
             }
 
             if (effects)

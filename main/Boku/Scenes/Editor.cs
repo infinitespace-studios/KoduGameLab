@@ -1782,14 +1782,14 @@ namespace Boku
                 if (!(InGame.inGame.shared.programmingHelpCard.Active || InGame.inGame.shared.addItemHelpCard.Active || InGame.inGame.shared.textEditor.Active || InGame.inGame.shared.microbitPatternEditor.Active || InGame.inGame.shared.editObjectParameters.Active || InGame.inGame.shared.editWorldParameters.Active))
                 {
 
-                    Editor.effect.Parameters["LightDirection0"].SetValue(new Vector4(Vector3.Normalize(new Vector3(4.0f, -4.0f, -11.5f)), 1.0f));
-                    Editor.effect.Parameters["LightColor0"].SetValue(new Vector3(1.0f, 1.0f, 1.0f));
-                    Editor.effect.Parameters["EyeLocation"].SetValue(new Vector4(shared.camera.From, 1.0f));
+                    Editor.effect.Parameters["LightDirection0"]?.SetValue(new Vector4(Vector3.Normalize(new Vector3(4.0f, -4.0f, -11.5f)), 1.0f));
+                    Editor.effect.Parameters["LightColor0"]?.SetValue(new Vector3(1.0f, 1.0f, 1.0f));
+                    Editor.effect.Parameters["EyeLocation"]?.SetValue(new Vector4(shared.camera.From, 1.0f));
 
-                    Editor.effect.Parameters["Shininess"].SetValue(1.0f);
-                    Editor.effect.Parameters["ShadowAttenuation"].SetValue(0.5f);
+                    Editor.effect.Parameters["Shininess"]?.SetValue(1.0f);
+                    Editor.effect.Parameters["ShadowAttenuation"]?.SetValue(0.5f);
 
-                    //effect.Parameters["EnvironmentMap"].SetValue(envTexture);
+                    //effect.Parameters["EnvironmentMap"]?.SetValue(envTexture);
 
                     // Render the parent's list of objects using our local camera.
                     // Do this first so it writes beneath the task icon.

@@ -755,8 +755,8 @@ namespace Boku
                 InGame.Clear(backgroundColor);
 
                 // Set up params for rendering UI with this camera.
-                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["EyeLocation"].SetValue(new Vector4(shared.camera.From, 1.0f));
-                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["CameraUp"].SetValue(new Vector4(shared.camera.Up, 1.0f));
+                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["EyeLocation"]?.SetValue(new Vector4(shared.camera.From, 1.0f));
+                BokuGame.bokuGame.shaderGlobals.Effect.Parameters["CameraUp"]?.SetValue(new Vector4(shared.camera.Up, 1.0f));
 
                 // Render the active grid using the local camera.
                 UIGrid curGrid = shared.GetGridFromCurTab();
