@@ -21,10 +21,10 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Setup Wine
-      uses monogame/monogame-actions/install-wine@v1
+      uses: monogame/monogame-actions/install-wine@v1
     
     - name: Setup MS Fonts
-      uses monogame/monogame-actions/install-fonts@v1
+      uses: monogame/monogame-actions/install-fonts@v1
 
     - name: Restore dependencies
       run: dotnet restore main/Content/Builder.csproj
