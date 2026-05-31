@@ -131,13 +131,13 @@ namespace Boku.SimWorld.Path
             effect.CurrentTechnique = effect.Techniques["OpaqueColorPass"];
 
             // Set parameters.
-            effect.Parameters["Radius"].SetValue(1.0f);
-            effect.Parameters["DiffuseColor"].SetValue(WayPoint.GetCurrentColor());
-            effect.Parameters["SpecularColor"].SetValue(new Vector4(0.9f));
-            effect.Parameters["SpecularPower"].SetValue(16.0f);
-            effect.Parameters["Alpha"].SetValue(1.0f);
+            effect.Parameters["Radius"]?.SetValue(1.0f);
+            effect.Parameters["DiffuseColor"]?.SetValue(WayPoint.GetCurrentColor());
+            effect.Parameters["SpecularColor"]?.SetValue(new Vector4(0.9f));
+            effect.Parameters["SpecularPower"]?.SetValue(16.0f);
+            effect.Parameters["Alpha"]?.SetValue(1.0f);
 
-            effect.Parameters["Shininess"].SetValue(0.4f);
+            effect.Parameters["Shininess"]?.SetValue(0.4f);
 
             // Render a small network
             Vector3 p0 = new Vector3(-0.5f, -0.4f, 0.4f);

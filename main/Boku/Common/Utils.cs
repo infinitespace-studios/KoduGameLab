@@ -69,6 +69,7 @@ namespace Boku.Common
         {
             // Init the effect.
             effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Utils");
+            ShaderDefaultValues.ApplyUtilsDefaults(effect);
             ShaderGlobals.RegisterEffect("Utils", effect);
 
             ramps = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Ramps");
@@ -98,8 +99,8 @@ namespace Boku.Common
             Matrix projMatrix = camera.ProjectionMatrix;
 
             Matrix worldViewProjMatrix = worldMatrix * viewMatrix * projMatrix;
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
 
             // Create the vertices.
             UtilsVertex[] verts = new UtilsVertex[2];
@@ -147,8 +148,8 @@ namespace Boku.Common
                 Matrix projMatrix = camera.ProjectionMatrix;
 
                 Matrix worldViewProjMatrix = localToWorld * viewMatrix * projMatrix;
-                effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-                effect.Parameters["WorldMatrix"].SetValue(localToWorld);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+                effect.Parameters["WorldMatrix"]?.SetValue(localToWorld);
 
                 // Create the vertices.
                 if (vertsScratch.Length < pts.Count)
@@ -202,8 +203,8 @@ namespace Boku.Common
                 Matrix projMatrix = camera.ProjectionMatrix;
 
                 Matrix worldViewProjMatrix = localToWorld * viewMatrix * projMatrix;
-                effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-                effect.Parameters["WorldMatrix"].SetValue(localToWorld);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+                effect.Parameters["WorldMatrix"]?.SetValue(localToWorld);
 
                 // Create the vertices.
                 if (vertsScratch.Length < pts.Count)
@@ -256,8 +257,8 @@ namespace Boku.Common
             Matrix projMatrix = camera.ProjectionMatrix;
 
             Matrix worldViewProjMatrix = viewMatrix * projMatrix;
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(Matrix.Identity);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(Matrix.Identity);
 
             effect.CurrentTechnique = effect.Techniques["VtxColor"];
 
@@ -286,8 +287,8 @@ namespace Boku.Common
                 Matrix projMatrix = camera.ProjectionMatrix;
 
                 Matrix worldViewProjMatrix = localToWorld * viewMatrix * projMatrix;
-                effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-                effect.Parameters["WorldMatrix"].SetValue(localToWorld);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+                effect.Parameters["WorldMatrix"]?.SetValue(localToWorld);
 
                 int numSegs = pts.Count / 2;
                 int numTris = numSegs * 2;
@@ -296,15 +297,15 @@ namespace Boku.Common
 
                 effect.CurrentTechnique = effect.Techniques["RunwayAlphaBack"];
 
-                effect.Parameters["RunCount"].SetValue(5.0f);
-                effect.Parameters["RunPhase"].SetValue(0.0f);
-                effect.Parameters["RunEndColor"].SetValue(Vector4.UnitW);
-                effect.Parameters["Ramps"].SetValue(white);
+                effect.Parameters["RunCount"]?.SetValue(5.0f);
+                effect.Parameters["RunPhase"]?.SetValue(0.0f);
+                effect.Parameters["RunEndColor"]?.SetValue(Vector4.UnitW);
+                effect.Parameters["Ramps"]?.SetValue(white);
 
                 Vector2 runSkinny = new Vector2(
                     1.0f / camera.Resolution.X,
                     1.0f / camera.Resolution.Y) * 1.0f;
-                effect.Parameters["RunWidth"].SetValue(runSkinny);
+                effect.Parameters["RunWidth"]?.SetValue(runSkinny);
 
                 ShaderGlobals.FixExplicitBloom(0.0f);
 
@@ -312,15 +313,15 @@ namespace Boku.Common
 
                 effect.CurrentTechnique = effect.Techniques["RunwayAlpha"];
 
-                effect.Parameters["RunCount"].SetValue(1.666f);
-                effect.Parameters["RunPhase"].SetValue(0.0f);
-                effect.Parameters["RunEndColor"].SetValue(color);
-                effect.Parameters["Ramps"].SetValue(white);
+                effect.Parameters["RunCount"]?.SetValue(1.666f);
+                effect.Parameters["RunPhase"]?.SetValue(0.0f);
+                effect.Parameters["RunEndColor"]?.SetValue(color);
+                effect.Parameters["Ramps"]?.SetValue(white);
 
                 Vector2 runWidth = new Vector2(
                     1.0f / camera.Resolution.X,
                     1.0f / camera.Resolution.Y) * 4.0f;
-                effect.Parameters["RunWidth"].SetValue(runWidth);
+                effect.Parameters["RunWidth"]?.SetValue(runWidth);
 
                 DrawPrimRunwayVerts(numTris);
 
@@ -349,13 +350,13 @@ namespace Boku.Common
             Matrix projMatrix = camera.ProjectionMatrix;
 
             Matrix worldViewProjMatrix = viewMatrix * projMatrix;
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(Matrix.Identity);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(Matrix.Identity);
 
-            effect.Parameters["RunCount"].SetValue(0.666f);
-            effect.Parameters["RunPhase"].SetValue(phase);
-            effect.Parameters["RunEndColor"].SetValue(colorOff);
-            effect.Parameters["Ramps"].SetValue(ramps);
+            effect.Parameters["RunCount"]?.SetValue(0.666f);
+            effect.Parameters["RunPhase"]?.SetValue(phase);
+            effect.Parameters["RunEndColor"]?.SetValue(colorOff);
+            effect.Parameters["Ramps"]?.SetValue(ramps);
 
             DrawPrimRunwayVerts(numTris);
 
@@ -366,7 +367,7 @@ namespace Boku.Common
             Vector2 runWidth = new Vector2(
                 1.0f / camera.Resolution.X,
                 1.0f / camera.Resolution.Y) * 4.0f;
-            effect.Parameters["RunWidth"].SetValue(runWidth);
+            effect.Parameters["RunWidth"]?.SetValue(runWidth);
 
             DrawPrimRunwayVerts(numTris);
 
@@ -575,14 +576,14 @@ namespace Boku.Common
                 : manager.Technique(ParticleSystemManager.EffectTech3d.TransparentColorPass);
 
             // Set parameters.
-            manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(1.0f);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(color);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(Vector4.Zero);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.SpecularColor).SetValue(new Vector4(0.9f));
-            manager.Parameter(ParticleSystemManager.EffectParams3d.SpecularPower).SetValue(16.0f);
-            manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(color.W);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, 1.0f);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, color);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, Vector4.Zero);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.SpecularColor, new Vector4(0.9f));
+            manager.TrySet(ParticleSystemManager.EffectParams3d.SpecularPower, 16.0f);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, color.W);
 
-            manager.Parameter(ParticleSystemManager.EffectParams3d.Shininess).SetValue(0.4f);
+            manager.TrySet(ParticleSystemManager.EffectParams3d.Shininess, 0.4f);
 
             // Set up world matrix.
             Matrix worldMatrix = Matrix.CreateScale(radii);

@@ -37,8 +37,8 @@ namespace Boku.Fx
 
             SetUvToPos();
 
-            effect.Parameters["Attenuation"].SetValue(attenuation);
-            effect.Parameters["SourceTexture"].SetValue(source);
+            effect.Parameters["Attenuation"]?.SetValue(attenuation);
+            effect.Parameters["SourceTexture"]?.SetValue(source);
 
             effect.CurrentTechnique = effect.Techniques[technique];
 

@@ -116,9 +116,9 @@ namespace Boku.Fx
                 /// If this happened more than once a frame, it might be worth using
                 /// the EffectCache.
                 string dirParm = "LightDirection" + which.ToString();
-                effect.Parameters[dirParm].SetValue(Direction);
+                effect.Parameters[dirParm]?.SetValue(Direction);
                 string colorParm = "LightColor" + which.ToString();
-                effect.Parameters[colorParm].SetValue(Color);
+                effect.Parameters[colorParm]?.SetValue(Color);
             }
             #endregion Public
         }
@@ -279,12 +279,12 @@ namespace Boku.Fx
                     string dirParam = "LightDirection" + i.ToString();
                     if (effect.Parameters[dirParam] != null)
                     {
-                        effect.Parameters[dirParam].SetValue(new Vector4(light.Direction, maxChan));
+                        effect.Parameters[dirParam]?.SetValue(new Vector4(light.Direction, maxChan));
                     }
                     string colorParam = "LightColor" + i.ToString();
                     if (effect.Parameters[colorParam] != null)
                     {
-                        effect.Parameters[colorParam].SetValue(light.Color);
+                        effect.Parameters[colorParam]?.SetValue(light.Color);
                     }
                 }
 
@@ -300,17 +300,17 @@ namespace Boku.Fx
                 string dirParam = "LightDirection" + i.ToString();
                 if (effect.Parameters[dirParam] != null)
                 {
-                    effect.Parameters[dirParam].SetValue(lightDir[i]);
+                    effect.Parameters[dirParam]?.SetValue(lightDir[i]);
                 }
                 string colorParam = "LightColor" + i.ToString();
                 if (effect.Parameters[colorParam] != null)
                 {
-                    effect.Parameters[colorParam].SetValue(lightColors[i]);
+                    effect.Parameters[colorParam]?.SetValue(lightColors[i]);
                 }
             }
             if (effect.Parameters["LightWrap"] != null)
             {
-                effect.Parameters["LightWrap"].SetValue(ShaderGlobals.MakeWrapVec(lightWrap));
+                effect.Parameters["LightWrap"]?.SetValue(ShaderGlobals.MakeWrapVec(lightWrap));
             }
 
         }   // end of SetToEffectWhileTransitioning()
@@ -345,7 +345,7 @@ namespace Boku.Fx
                 lightWrap = sourceLightWrap * (1.0f - lerpAmount) + Wrap * (lerpAmount);
 
                 /*
-                effect.Parameters["LightWrap"].SetValue(ShaderGlobals.MakeWrapVec(lightWrap));
+                effect.Parameters["LightWrap"]?.SetValue(ShaderGlobals.MakeWrapVec(lightWrap));
                 */
             }
         }

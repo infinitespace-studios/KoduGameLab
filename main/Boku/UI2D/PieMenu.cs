@@ -994,8 +994,8 @@ namespace Boku.UI
 
             Matrix worldViewProjMatrix = worldMatrix * viewMatrix * projMatrix;
 
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
 
 
             Vector4 baseColor = PieSelector.RenderObjSlice.ColorNormal;
@@ -1011,11 +1011,11 @@ namespace Boku.UI
                 baseColor.W = alphaLevel;
 
 
-            effect.Parameters["DiffuseColor"].SetValue(baseColor);
-            effect.Parameters["SpecularColor"].SetValue(new Vector4(0.12f, 0.12f, 0.12f, alphaLevel));
-            effect.Parameters["EmissiveColor"].SetValue(new Vector4(0.01f, 0.01f, 0.01f, alphaLevel));
-            effect.Parameters["SpecularPower"].SetValue(4.0f);
-            effect.Parameters["Shininess"].SetValue(0.0f);
+            effect.Parameters["DiffuseColor"]?.SetValue(baseColor);
+            effect.Parameters["SpecularColor"]?.SetValue(new Vector4(0.12f, 0.12f, 0.12f, alphaLevel));
+            effect.Parameters["EmissiveColor"]?.SetValue(new Vector4(0.01f, 0.01f, 0.01f, alphaLevel));
+            effect.Parameters["SpecularPower"]?.SetValue(4.0f);
+            effect.Parameters["Shininess"]?.SetValue(0.0f);
 
             if (InGame.inGame.renderEffects != InGame.RenderEffect.Normal)
             {

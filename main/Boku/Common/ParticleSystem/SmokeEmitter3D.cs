@@ -191,12 +191,12 @@ namespace Boku.Common.ParticleSystem
                 // Set up common rendering values.
                 effect.CurrentTechnique = manager.Technique(ParticleSystemManager.EffectTech3d.PremultAlphaGlowColorPass);
 
-                manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(color.ToVector4());
+                manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, color.ToVector4());
 
                 // Set up world matrix.
                 Matrix worldMatrix = Matrix.Identity;
 
-                manager.Parameter(ParticleSystemManager.EffectParams3d.GlowFactor).SetValue(0.5f);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.GlowFactor, 0.5f);
 
                 for (int i = 0; i < particleList.Count; i++)
                 {
@@ -206,13 +206,13 @@ namespace Boku.Common.ParticleSystem
                     worldMatrix.Translation = particle.position;
                     Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(particle.radius);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, particle.radius);
 
                     // Set alpha.
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(particle.alpha);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, particle.alpha);
 
                     // Set color
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(particle.color.ToVector4());
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, particle.color.ToVector4());
 
                     sphere.Render(camera, ref worldMatrix, effect);
 

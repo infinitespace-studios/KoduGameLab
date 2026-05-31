@@ -3,15 +3,21 @@
 /// Builds content according to the Content Collection Strategy defined in the Builder class.
 /// </summary>
 
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Processors;
 using MonoGame.Framework.Content.Pipeline.Builder;
 using BokuContentProcessors;
 
+static string GetContentRoot([CallerFilePath] string sourceFilePath = "")
+{
+    return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(sourceFilePath)!, ".."));
+}
+
 var contentCollectionArgs = new ContentBuilderParams()
 {
     Mode = ContentBuilderMode.Builder,
-    WorkingDirectory = $"{AppContext.BaseDirectory}../../../",
+    WorkingDirectory = GetContentRoot(),
     SourceDirectory = "Assets",
     Platform = TargetPlatform.DesktopGL
 };
@@ -119,7 +125,6 @@ public class Builder : ContentBuilder
 
         // Exclude unused shaders (not loaded from C#, not included by any other shader)
         contentCollection.Exclude<WildcardRule>("Shaders/BokuFace.fx");
-        contentCollection.Exclude<WildcardRule>("Shaders/DistortFilter.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/FontQuad.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Red.fx");
         contentCollection.Exclude<WildcardRule>("Shaders/Surface.fx");

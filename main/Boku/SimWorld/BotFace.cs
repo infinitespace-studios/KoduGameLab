@@ -111,7 +111,7 @@ namespace Boku.SimWorld
             EyePupilLeftTexture,
             EyePupilRightTexture,
         };
-        protected EffectCache effectCache = null;
+        protected static EffectCache effectCache = null;
         protected EffectParameter Parameter(EffectParams param)
         {
             return effectCache.Parameter((int)param);
@@ -141,7 +141,7 @@ namespace Boku.SimWorld
         }
         public override void SetupForRender(FBXModel model)
         {
-            Parameter(EffectParams.FaceBkg).SetValue(BackgroundColor);
+            effectCache.TrySet((int)(EffectParams.FaceBkg), BackgroundColor);
 
             float pupilSize = PupilSize;
             if (emotionalState == FaceState.Dead)
@@ -154,9 +154,9 @@ namespace Boku.SimWorld
             Vector2 pupilOffRight = new Vector2(
                 (pupilOffsetRight.X + PupilCenter.X - 0.5f) * pupilScaleRight + 0.5f,
                 (pupilOffsetRight.Y - PupilCenter.Y - 0.5f) * pupilScaleRight + 0.5f);
-            Parameter(EffectParams.PupilScale).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.PupilScale), new Vector4(
                 pupilScaleLeft, pupilScaleLeft, pupilScaleRight, pupilScaleRight));
-            Parameter(EffectParams.PupilOffset).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.PupilOffset), new Vector4(
                 pupilOffLeft.X, pupilOffLeft.Y, pupilOffRight.X, pupilOffRight.Y));
 
             /// Transform 0.5,0.5 from texture space to uv space, to find
@@ -169,8 +169,8 @@ namespace Boku.SimWorld
                 (0.5f - pupilOffRight.Y) / pupilScaleRight);
             SetLids(leftCenter, rightCenter);
 
-            Parameter(EffectParams.EyePupilLeftTexture).SetValue(PupilLeftTexture());
-            Parameter(EffectParams.EyePupilRightTexture).SetValue(PupilRightTexture());
+            effectCache.TrySet((int)(EffectParams.EyePupilLeftTexture), PupilLeftTexture());
+            effectCache.TrySet((int)(EffectParams.EyePupilRightTexture), PupilRightTexture());
         }
 
         #endregion Public
@@ -271,7 +271,7 @@ namespace Boku.SimWorld
 
             Vector4 plane = new Vector4(norm.X, norm.Y, dist, center.X);
 
-            Parameter(param).SetValue(plane);
+            effectCache.TrySet((int)(param), plane);
         }
 
         protected void UpdateAsymmetry(float dt)

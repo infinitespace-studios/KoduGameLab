@@ -556,6 +556,8 @@ namespace Boku.Input
             {
                 _status = EDeviceStatus.FLASHING;
                 Thread t = new Thread(new ThreadStart(FlashIt));
+                t.IsBackground = true;
+                t.Name = "Microbit.FlashIt";
                 t.Start();
             }
         }
@@ -570,7 +572,7 @@ namespace Boku.Input
             try
             {
                 _flashStatus = EFlashStatus.FLASH_IN_PROGRESS;
-                string filename = Path.Combine(Storage4.TitleLocation, @"Content", @"Microbit", DriverFilename);
+                string filename = Path.Combine(Storage4.TitleLocation, @"Microbit", DriverFilename);
                 File.Copy(filename, Path.Combine(Drive, DriverFilename));
                 _status = EDeviceStatus.FLASHED;
                 _flashStatus = EFlashStatus.FLASH_SUCCESSFUL;

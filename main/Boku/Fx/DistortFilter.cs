@@ -73,24 +73,24 @@ namespace Boku.Fx
 
             if (underWater && (filterStrength > 0.0f))
             {
-                effect.Parameters["Bump"].SetValue(filter);
-                effect.Parameters["BumpScroll"].SetValue(filterScroll);
-                effect.Parameters["BumpScale"].SetValue(filterScale);
-                effect.Parameters["BumpStrength"].SetValue(filterStrength);
-                effect.Parameters["WaterColor"].SetValue(filterColor);
+                effect.Parameters["Bump"]?.SetValue(filter);
+                effect.Parameters["BumpScroll"]?.SetValue(filterScroll);
+                effect.Parameters["BumpScale"]?.SetValue(filterScale);
+                effect.Parameters["BumpStrength"]?.SetValue(filterStrength);
+                effect.Parameters["WaterColor"]?.SetValue(filterColor);
 
                 float waveCycle = (float)Time.GameTimeTotalSeconds;
-                effect.Parameters["WaveCycle"].SetValue(waveCycle);
+                effect.Parameters["WaveCycle"]?.SetValue(waveCycle);
 
-                effect.Parameters["WaveCenter"].SetValue(new Vector2(127.0f, 600.0f));
+                effect.Parameters["WaveCenter"]?.SetValue(new Vector2(127.0f, 600.0f));
 
                 const double WaveLength = 15.0;
-                effect.Parameters["InverseWaveLength"].SetValue((float)(2.0 * Math.PI / WaveLength));
+                effect.Parameters["InverseWaveLength"]?.SetValue((float)(2.0 * Math.PI / WaveLength));
 
-                effect.Parameters["WaveHeight"].SetValue(Terrain.WaveHeight);
+                effect.Parameters["WaveHeight"]?.SetValue(Terrain.WaveHeight);
 
-                effect.Parameters["BaseHeight"].SetValue(baseHeight);
-                effect.Parameters["CubeSize"].SetValue(
+                effect.Parameters["BaseHeight"]?.SetValue(baseHeight);
+                effect.Parameters["CubeSize"]?.SetValue(
                     new Vector3(
                         Terrain.Current.CubeSize, 
                         1.0f / Terrain.Current.CubeSize,
@@ -99,9 +99,9 @@ namespace Boku.Fx
 
                 float dw = camera.NearClip / camera.ProjectionMatrix.M11;
                 Vector3 nearPlaneToCamera = new Vector3(dw, dh, -camera.NearClip);
-                effect.Parameters["NearPlaneToCamera"].SetValue(nearPlaneToCamera);
+                effect.Parameters["NearPlaneToCamera"]?.SetValue(nearPlaneToCamera);
 
-                effect.Parameters["CameraToWorld"].SetValue(Matrix.Invert(camera.ViewMatrix));
+                effect.Parameters["CameraToWorld"]?.SetValue(Matrix.Invert(camera.ViewMatrix));
 
                 Render("Distort");
             }
@@ -134,6 +134,7 @@ namespace Boku.Fx
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\" + effectName);
+                ShaderDefaultValues.ApplyDistortFilterDefaults(effect);
             }
             if (filter == null)
             {

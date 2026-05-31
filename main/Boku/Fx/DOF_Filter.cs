@@ -47,7 +47,7 @@ namespace Boku.Fx
             Vector2 pixelSize = new Vector2(
                 1.0f / device.Viewport.Width,
                 1.0f / device.Viewport.Height);
-            effect.Parameters["PixelSize"].SetValue(pixelSize);
+            effect.Parameters["PixelSize"]?.SetValue(pixelSize);
 
             const float pixelOffset = 0.5f;
             //const float pixelOffset = 0.0f;            
@@ -56,34 +56,43 @@ namespace Boku.Fx
                 pixelOffset / device.Viewport.Height,
                 -pixelOffset / device.Viewport.Width,
                 -pixelOffset / device.Viewport.Height);
-            effect.Parameters["FullOffset"].SetValue(fullOffset);
+            effect.Parameters["FullOffset"]?.SetValue(fullOffset);
 
-            effect.Parameters["FullTexture"].SetValue(fullImage);
-            effect.Parameters["BlurTexture"].SetValue(blurImage);
-            effect.Parameters["BloomTexture"].SetValue(bloomImage);
-            effect.Parameters["GlowTexture"].SetValue(glowImage);
-            effect.Parameters["DepthTexture"].SetValue(effectsImage);
-            effect.Parameters["DistortTexture0"].SetValue(distortImage0);
-            effect.Parameters["DistortTexture1"].SetValue(distortImage1);
+            effect.Parameters["FullTexture"]?.SetValue(fullImage);
+            effect.Parameters["BlurTexture"]?.SetValue(blurImage);
+            effect.Parameters["BloomTexture"]?.SetValue(bloomImage);
+            effect.Parameters["GlowTexture"]?.SetValue(glowImage);
+            effect.Parameters["DepthTexture"]?.SetValue(effectsImage);
+            effect.Parameters["DistortTexture0"]?.SetValue(distortImage0);
+            effect.Parameters["DistortTexture1"]?.SetValue(distortImage1);
 
             // Experimental minimum blur amount for Matt.
-            float maxBlur = effect.Parameters["DOF_MaxBlur"].GetValueSingle();
-            float minBlur = 0.2f;
-            //float minBlur = 0.0f;
-            float blurScale = (maxBlur - minBlur) / (maxBlur - 0.0f);
-            effect.Parameters["DOF_MinBlur"].SetValue(new Vector2(minBlur, blurScale));
+            // DOF_MaxBlur is not declared in DOF_Filter.fx (only DOF_MinBlur is), so MGFX
+            // strips it and effect.Parameters["DOF_MaxBlur"] is null. The whole purpose of
+            // this block is to rescale DOF_MinBlur so a minBlur value renormalises the depth
+            // range — that math is meaningless without DOF_MaxBlur, so just skip and let
+            // DOF_MinBlur keep its shader default (0, 1) which is the identity transform.
+            var maxBlurParam = effect.Parameters["DOF_MaxBlur"];
+            if (maxBlurParam != null)
+            {
+                float maxBlur = maxBlurParam.GetValueSingle();
+                float minBlur = 0.2f;
+                //float minBlur = 0.0f;
+                float blurScale = (maxBlur - minBlur) / (maxBlur - 0.0f);
+                effect.Parameters["DOF_MinBlur"]?.SetValue(new Vector2(minBlur, blurScale));
+            }
 
             // Adjustement needed to deal with the confusion that
             // arises when 
             Vector2 screenScale = new Vector2(fullImage.Width / BokuGame.ScreenSize.X, fullImage.Height / BokuGame.ScreenSize.Y);
-            effect.Parameters["ScreenScale"].SetValue(screenScale);
+            effect.Parameters["ScreenScale"]?.SetValue(screenScale);
 
             Vector2 fullScreen = BokuGame.ScreenPosition + BokuGame.ScreenSize;
             Vector2 depthSampleOffset = -BokuGame.ScreenPosition / fullScreen;
             Vector2 depthSampleScale = fullScreen / BokuGame.ScreenSize;
 
-            effect.Parameters["DepthSampleOffset"].SetValue(depthSampleOffset);
-            effect.Parameters["DepthSampleScale"].SetValue(depthSampleScale);
+            effect.Parameters["DepthSampleOffset"]?.SetValue(depthSampleOffset);
+            effect.Parameters["DepthSampleScale"]?.SetValue(depthSampleScale);
 
             if (bloomImage != null)
             {
@@ -128,7 +137,7 @@ namespace Boku.Fx
                 -1.0f - pixelWidth,     // x offset
                 1.0f + pixelHeight);    // y offset
 
-            effect.Parameters["UvToPos"].SetValue(uvToPos);
+            effect.Parameters["UvToPos"]?.SetValue(uvToPos);
 
         }   // end of BaseFilter SetUvToPos()
 
@@ -138,6 +147,7 @@ namespace Boku.Fx
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\DOF_Filter");
+                ShaderDefaultValues.ApplyDofFilterDefaults(effect);
                 ShaderGlobals.RegisterEffect("DOF_Filter", effect);
             }
 

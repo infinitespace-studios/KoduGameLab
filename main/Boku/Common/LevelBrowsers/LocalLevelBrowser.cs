@@ -114,6 +114,8 @@ namespace Boku.Common
         {
             running = true;
             thread = new Thread(new ThreadStart(ReadLevelsProc));
+            thread.IsBackground = true;
+            thread.Name = "LocalLevelBrowser.ReadLevelsProc";
             thread.Start();
         }
 

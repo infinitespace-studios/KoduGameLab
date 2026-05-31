@@ -134,8 +134,8 @@ namespace Boku.Fx
 
             if (effect.Parameters["LightPosition"] != null)
             {
-                effect.Parameters["LightPosition"].SetValue(positions);
-                effect.Parameters["LightColor"].SetValue(colors);
+                effect.Parameters["LightPosition"]?.SetValue(positions);
+                effect.Parameters["LightColor"]?.SetValue(colors);
             }
         }
 

@@ -168,16 +168,16 @@ namespace Boku.Fx
                 Vector4 glowColor = firstPerson.GlowEmitter.Color;
                 glowColor.W *= intensity.X;
 
-                Parameter(EffectParams.GlowColor).SetValue(glowColor);
+                effectCache.TrySet((int)(EffectParams.GlowColor), glowColor);
                 // uv.xy = pos * PosToUV.xz + PosToUV.yw;
-                Parameter(EffectParams.PosToUV).SetValue(
+                effectCache.TrySet((int)(EffectParams.PosToUV), 
                     new Vector4(
                         0.5f * size.X,
                         0.5f,
                         0.5f / camera.AspectRatio * size.X,
                         0.5f));
 
-                Parameter(EffectParams.Mask).SetValue(Mask);
+                effectCache.TrySet((int)(EffectParams.Mask), Mask);
 
                 return true;
             }

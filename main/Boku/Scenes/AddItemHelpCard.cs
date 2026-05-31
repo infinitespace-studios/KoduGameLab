@@ -484,29 +484,29 @@ namespace Boku
                 // Set up effect for rendering tiles.
                 effect.CurrentTechnique = effect.Techniques["NormalMappedNoTexture"];
 
-                effect.Parameters["Alpha"].SetValue(1.0f);
-                effect.Parameters["SpecularColor"].SetValue(Vector4.Zero);
-                effect.Parameters["SpecularPower"].SetValue(16.0f);
-                effect.Parameters["NormalMap"].SetValue(normalMap);
+                effect.Parameters["Alpha"]?.SetValue(1.0f);
+                effect.Parameters["SpecularColor"]?.SetValue(Vector4.Zero);
+                effect.Parameters["SpecularPower"]?.SetValue(16.0f);
+                effect.Parameters["NormalMap"]?.SetValue(normalMap);
 
                 // Render tiles.
                 Matrix world = Matrix.Identity;
                 world.Translation = new Vector3(-3.4f, 2.5f, 0.0f);
-                effect.Parameters["WorldMatrix"].SetValue(world);
-                effect.Parameters["WorldViewProjMatrix"].SetValue(world * shared.camera.ViewProjectionMatrix);
-                effect.Parameters["DiffuseColor"].SetValue(new Vector4(1.0f, 1.0f, 1.0f, 0.2f));
+                effect.Parameters["WorldMatrix"]?.SetValue(world);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(world * shared.camera.ViewProjectionMatrix);
+                effect.Parameters["DiffuseColor"]?.SetValue(new Vector4(1.0f, 1.0f, 1.0f, 0.2f));
                 glassTile.Render(effect);
 
                 world.Translation = new Vector3(1.15f, 2.5f, 0.0f);
-                effect.Parameters["WorldMatrix"].SetValue(world);
-                effect.Parameters["WorldViewProjMatrix"].SetValue(world * shared.camera.ViewProjectionMatrix);
-                effect.Parameters["DiffuseColor"].SetValue(new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+                effect.Parameters["WorldMatrix"]?.SetValue(world);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(world * shared.camera.ViewProjectionMatrix);
+                effect.Parameters["DiffuseColor"]?.SetValue(new Vector4(1.0f, 1.0f, 1.0f, 1.0f));
                 descTile.Render(effect);
 
                 world.Translation = new Vector3(0.0f, -1.1f, 0.0f);
-                effect.Parameters["WorldMatrix"].SetValue(world);
-                effect.Parameters["WorldViewProjMatrix"].SetValue(world * shared.camera.ViewProjectionMatrix);
-                effect.Parameters["DiffuseColor"].SetValue(new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+                effect.Parameters["WorldMatrix"]?.SetValue(world);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(world * shared.camera.ViewProjectionMatrix);
+                effect.Parameters["DiffuseColor"]?.SetValue(new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
                 examplesTile.Render(effect);
 
                 // Render highlights on tiles.

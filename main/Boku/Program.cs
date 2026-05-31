@@ -157,7 +157,16 @@ namespace Boku
                     // pick it up the next time the user enters the load
                     // level menu.
                     Storage4.Init();
-                    Storage4.StartupDir = AppContext.BaseDirectory;
+                    // Storage4.TitleLocation is the root for *shipped* asset reads going
+                    // through Storage4.OpenRead (Xml world files, text dialogs, terrain
+                    // heightmaps, etc.). The MonoGame ContentManager already prefixes its
+                    // RootDirectory ("Content") for ContentManager.Load calls, but Storage4
+                    // does not, so without this Content/ suffix every Storage4 read of
+                    // shipped content silently 404s (XmlData.Load swallows the exception
+                    // and returns null). Symptom: e.g. New World → pick world → bumped back
+                    // to menu because BuiltInWorlds/<guid>.Xml is unreachable.
+                    // User-space paths are unaffected (UserLocation is separate).
+                    Storage4.StartupDir = Path.Combine(AppContext.BaseDirectory, "Content");
 
                     // Note, we need to get the user override location before
                     // import otherwise we send the files to the wrong place.

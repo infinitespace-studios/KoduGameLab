@@ -221,7 +221,7 @@ namespace Boku
         static Dictionary<string, int> loadedContent = new Dictionary<string, int>();
 #endif
 
-        public static T Load<T>(string path)
+        public static T Load<T>(string path, bool optionalMissing = false)
         {
             LogContentFileLoaded(path);
 
@@ -257,9 +257,19 @@ namespace Boku
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine($"Warning: Failed to load content '{path}': {e.Message}");
+                if (!optionalMissing || !IsContentFileNotFound(e))
+                {
+                    System.Diagnostics.Debug.WriteLine($"Warning: Failed to load content '{path}': {e.Message}");
+                }
+
                 return default(T);
             }
+        }
+
+        private static bool IsContentFileNotFound(Exception e)
+        {
+            return e is ContentLoadException
+                && e.Message.Contains("The content file was not found", StringComparison.OrdinalIgnoreCase);
         }
 
         public static void LogContentFileLoaded(string path)
@@ -427,7 +437,7 @@ namespace Boku
 
         public void LoadSurfaces()
         {
-            Surfaces = SurfaceDict.Load(Path.Combine("Content", "Xml", "Actors", "SurfaceDict.xml"), XnaStorageHelper.Instance);
+            Surfaces = SurfaceDict.Load(Path.Combine("Xml", "Actors", "SurfaceDict.xml"), XnaStorageHelper.Instance);
         }
 
 
@@ -941,6 +951,10 @@ namespace Boku
 
         public static string DebugString = "";
 
+        // RenderObject entries can run immediately after SpriteBatch UI has ended.
+        // MonoGame keeps SpriteBatch's Blend/Depth/Sampler state where XNA often
+        // restored defaults, so any renderer that transitions back to opaque 3D
+        // must reset device state before issuing primitives.
         public void Draw()
         {
 
@@ -1114,7 +1128,7 @@ namespace Boku
         // Game loop is over, exiting.
         //
 
-        public void EndRun()
+        protected override void EndRun()
         {
             // Adding an empty try/catch here because I'm seeing null dref exceptions
             // in the error log but I'm not sure what's causing it.
@@ -1159,9 +1173,9 @@ namespace Boku
 
         }   // end of BokuGame EndRun()
 
-        protected void OnExiting(object sender, EventArgs args)
+        protected override void OnExiting(object sender, ExitingEventArgs args)
         {
-            //base.OnExiting(sender, args);
+            base.OnExiting(sender, args);
         }   // end of BokuGame OnExiting()
 
         //

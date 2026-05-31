@@ -175,6 +175,7 @@ namespace Boku.Fx
                 if (effect == null)
                 {
                     effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\FPEDistort");
+                    ShaderDefaultValues.ApplyFpeDistortDefaults(effect);
                     effectCache.Load(Effect, "");
                 }
 
@@ -207,23 +208,23 @@ namespace Boku.Fx
                 GameActor firstPerson = CameraInfo.FirstPersonActor;
                 Debug.Assert(firstPerson != null, "Shouldn't get this far into render when not first person");
 
-                Parameter(EffectParams.BumpTint).SetValue(color);
+                effectCache.TrySet((int)(EffectParams.BumpTint), color);
 
                 // uv.xy = pos * PosToUV.xz + PosToUV.yw;
-                Parameter(EffectParams.PosToUV).SetValue(
+                effectCache.TrySet((int)(EffectParams.PosToUV), 
                     new Vector4(
                         0.5f,
                         0.5f,
                         0.5f / camera.AspectRatio,
                         0.5f));
 
-                Parameter(EffectParams.Mask).SetValue(Mask);
-                Parameter(EffectParams.BumpTexture).SetValue(Bump);
+                effectCache.TrySet((int)(EffectParams.Mask), Mask);
+                effectCache.TrySet((int)(EffectParams.BumpTexture), Bump);
 
                 bumpScroll += Time.GameTimeFrameSeconds * bumpRate;
                 bumpScroll = MyMath.Wrap(bumpScroll);
-                Parameter(EffectParams.BumpScroll).SetValue(bumpScroll);
-                Parameter(EffectParams.BumpScale).SetValue(bumpScale);
+                effectCache.TrySet((int)(EffectParams.BumpScroll), bumpScroll);
+                effectCache.TrySet((int)(EffectParams.BumpScale), bumpScale);
 
                 return true;
             }

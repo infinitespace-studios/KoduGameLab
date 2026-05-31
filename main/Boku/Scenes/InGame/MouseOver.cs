@@ -934,10 +934,10 @@ namespace Boku
                     Matrix worldMatrix = Matrix.Identity;
                     worldMatrix.Translation = pos;
 
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(color);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(color);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(color.W);
-                    manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(radius);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, color);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, color);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, color.W);
+                    manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, radius);
 
                     sphere.Render(camera, ref worldMatrix, effect);
 

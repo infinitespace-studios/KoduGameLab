@@ -71,6 +71,18 @@ namespace Boku.Input
         {
             List<MicrobitDesc> descs = new List<MicrobitDesc>();
 
+            // System.Management's WMI APIs are Windows-only and throw
+            // PlatformNotSupportedException as soon as ManagementPath.DefaultPath
+            // is touched on macOS/Linux. The first ManagementObjectSearcher call
+            // below sits outside the function's inner try/catch, so without this
+            // guard the exception escapes the background RefreshWorker thread and
+            // tears the whole process down. Microbit hardware support isn't
+            // available on non-Windows anyway; return an empty list.
+            if (!OperatingSystem.IsWindows())
+            {
+                return descs;
+            }
+
             //
             // Find the COM ports.
             //

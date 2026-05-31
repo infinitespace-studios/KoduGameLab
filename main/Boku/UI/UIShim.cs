@@ -112,14 +112,18 @@ namespace Boku.UI
                     // Set up standard UI lighting for any wrapped objects.
 
                     string oldRig = BokuGame.bokuGame.shaderGlobals.PushLightRig(ShaderGlobals.UIRigName);
-                    effect.Parameters["EyeLocation"].SetValue(new Vector4(shared.camera.ActualFrom, 1.0f));
+                    effect.Parameters["EyeLocation"]?.SetValue(new Vector4(shared.camera.ActualFrom, 1.0f));
 
-                    effect.Parameters["Shininess"].SetValue(1.0f);
-                    effect.Parameters["ShadowAttenuation"].SetValue(0.5f);
+                    effect.Parameters["Shininess"]?.SetValue(1.0f);
+                    effect.Parameters["ShadowAttenuation"]?.SetValue(0.5f);
 
-                    // Temp disable of blur
-                    float dof_maxBlur = effect.Parameters["DOF_MaxBlur"].GetValueSingle();
-                    effect.Parameters["DOF_MaxBlur"].SetValue(0.0f);
+                    // Temp disable of blur.
+                    // DOF_MaxBlur may not exist on the active effect (DOF_Filter.fx doesn't
+                    // declare it; see DOF_Filter.cs for the same null-guard pattern). Skip
+                    // the save/restore dance entirely if the parameter has been DCE'd.
+                    var dofMaxBlurParam = effect.Parameters["DOF_MaxBlur"];
+                    float dof_maxBlur = dofMaxBlurParam != null ? dofMaxBlurParam.GetValueSingle() : 0.0f;
+                    dofMaxBlurParam?.SetValue(0.0f);
 
                     // Temporarily disable any batching. We want our stuff
                     // rendered immediatately.
@@ -138,7 +142,7 @@ namespace Boku.UI
                     InGame.inGame.PopBatching(batch);
 
                     // Restore the real DOF_MaxBlur. 
-                    effect.Parameters["DOF_MaxBlur"].SetValue(dof_maxBlur);
+                    effect.Parameters["DOF_MaxBlur"]?.SetValue(dof_maxBlur);
 
                     BokuGame.bokuGame.shaderGlobals.PopLightRig(oldRig);
                 }
@@ -162,6 +166,7 @@ namespace Boku.UI
                 if (effect == null)
                 {
                     effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Standard");
+                    ShaderDefaultValues.ApplyDistortDefaults(effect);
                     ShaderGlobals.RegisterEffect("Standard", effect);
                 }
 

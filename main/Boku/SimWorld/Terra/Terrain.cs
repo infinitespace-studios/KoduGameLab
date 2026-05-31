@@ -96,8 +96,7 @@ namespace Boku.SimWorld.Terra
         //EffectParameters
         public enum EffectParams_FD
         {
-            Normals = EffectParamsLength,
-            BumpToWorld,
+            BumpToWorld = EffectParamsLength,
             Inversion,
         }
         public EffectParameter ParameterColor(EffectParams_FD param)
@@ -112,12 +111,12 @@ namespace Boku.SimWorld.Terra
         //Parameter helpers
         public void SetGlobalParams_FD()
         {
-            ParameterColor(EffectParams_FD.Inversion).SetValue(Inversion);
-            ParameterColor(EffectParams_FD.Normals).SetValue(Tile.FaceNormals);
-            ParameterColor(EffectParams_FD.BumpToWorld).SetValue(BumpToWorld);
-            ParameterEdit(EffectParams_FD.Inversion).SetValue(Inversion);
-            ParameterEdit(EffectParams_FD.Normals).SetValue(Tile.FaceNormals);
-            ParameterEdit(EffectParams_FD.BumpToWorld).SetValue(BumpToWorld);
+            effectCacheColor.TrySet((int)(EffectParams_FD.Inversion), Inversion);
+            effectColor.Parameters["Normals"]?.SetValue(Tile.FaceNormals);
+            effectCacheColor.TrySet((int)(EffectParams_FD.BumpToWorld), BumpToWorld);
+            effectCacheEdit.TrySet((int)(EffectParams_FD.Inversion), Inversion);
+            effectEdit.Parameters["Normals"]?.SetValue(Tile.FaceNormals);
+            effectCacheEdit.TrySet((int)(EffectParams_FD.BumpToWorld), BumpToWorld);
         }
         public void SetMaterialParams_FD(ushort matIdx, bool forUI)
         {
@@ -181,8 +180,7 @@ namespace Boku.SimWorld.Terra
             // ToDo (DZ): We may need to rethink this effect cache 
             // thing... It seems very fragile to have this "10" 
             // constant.
-            Inversion_FA = EffectParamsLength + 10,
-            BumpToWorld_FA,
+            BumpToWorld_FA = EffectParamsLength + 10,
         }
         public EffectParameter ParameterColor(EffectParams_FA param)
         {
@@ -196,10 +194,10 @@ namespace Boku.SimWorld.Terra
         //Parameter helpers
         public void SetGlobalParams_FA()
         {
-            ParameterColor(EffectParams_FA.Inversion_FA).SetValue(Inversion[(int)Tile.Face.Top]);
-            ParameterColor(EffectParams_FA.BumpToWorld_FA).SetValue(BumpToWorld[(int)Tile.Face.Top]);
-            ParameterEdit(EffectParams_FA.Inversion_FA).SetValue(Inversion[(int)Tile.Face.Top]);
-            ParameterEdit(EffectParams_FA.BumpToWorld_FA).SetValue(BumpToWorld[(int)Tile.Face.Top]);
+            effectColor.Parameters["Inversion_FA"]?.SetValue(Inversion[(int)Tile.Face.Top]);
+            effectCacheColor.TrySet((int)(EffectParams_FA.BumpToWorld_FA), BumpToWorld[(int)Tile.Face.Top]);
+            effectEdit.Parameters["Inversion_FA"]?.SetValue(Inversion[(int)Tile.Face.Top]);
+            effectCacheEdit.TrySet((int)(EffectParams_FA.BumpToWorld_FA), BumpToWorld[(int)Tile.Face.Top]);
         }
         public void SetMaterialParams_FA(ushort matIdx, bool forUI)
         {
@@ -258,7 +256,6 @@ namespace Boku.SimWorld.Terra
             EditBrushTexture,
             EditBrushStart,
             EditBrushStartToEnd,
-            EditBrushRadius,
             EditBrushToParam,
             EditBrushScaleOff,
             InvCubeSize,
@@ -266,14 +263,11 @@ namespace Boku.SimWorld.Terra
             ShadowMask,
             ShadowTextureOffsetScale,
             ShadowMaskOffsetScale,
-            VSIndex,
-            PSIndex,
             WorldViewProjMatrix,
-            WorldMatrix,
             LightWrap,
             WarpCenter,
         }
-        private const int EffectParamsLength = 17;
+        private const int EffectParamsLength = 13;
         private enum EffectTechs
         {
             TerrainDepthPass = InGame.RenderEffect.Normal,
@@ -285,9 +279,41 @@ namespace Boku.SimWorld.Terra
         {
             return effectCacheColor.Parameter((int)param);
         }
+        public bool TrySetColor(EffectParams param, Matrix value)
+        {
+            return effectCacheColor.TrySet((int)param, value);
+        }
+        public bool TrySetColor(EffectParams param, Vector3 value)
+        {
+            return effectCacheColor.TrySet((int)param, value);
+        }
+        public bool TrySetColor(EffectParams param, Vector4 value)
+        {
+            return effectCacheColor.TrySet((int)param, value);
+        }
+        public bool TrySetColor(EffectParams param, int value)
+        {
+            return effectCacheColor.TrySet((int)param, value);
+        }
         public EffectParameter ParameterEdit(EffectParams param)
         {
             return effectCacheEdit.Parameter((int)param);
+        }
+        public bool TrySetEdit(EffectParams param, Matrix value)
+        {
+            return effectCacheEdit.TrySet((int)param, value);
+        }
+        public bool TrySetEdit(EffectParams param, Vector3 value)
+        {
+            return effectCacheEdit.TrySet((int)param, value);
+        }
+        public bool TrySetEdit(EffectParams param, Vector4 value)
+        {
+            return effectCacheEdit.TrySet((int)param, value);
+        }
+        public bool TrySetEdit(EffectParams param, int value)
+        {
+            return effectCacheEdit.TrySet((int)param, value);
         }
         private static EffectCache effectCacheColor;
         private static EffectCache effectCacheEdit;
@@ -2035,18 +2061,17 @@ namespace Boku.SimWorld.Terra
                 }
             }
 
-            ParameterEdit(EffectParams.EditBrushTexture).SetValue(brush.Texture);
-            ParameterEdit(EffectParams.EditBrushStart).SetValue(brushStart);
-            ParameterEdit(EffectParams.EditBrushStartToEnd).SetValue(brushPosition - brushStart);
-            ParameterEdit(EffectParams.EditBrushRadius).SetValue(brushRadius);
+            effectCacheEdit.TrySet((int)(EffectParams.EditBrushTexture), brush.Texture);
+            effectCacheEdit.TrySet((int)(EffectParams.EditBrushStart), brushStart);
+            effectCacheEdit.TrySet((int)(EffectParams.EditBrushStartToEnd), brushPosition - brushStart);
             Vector2 toParam = brushPosition - brushStart;
             float lenSq = toParam.LengthSquared();
             if (lenSq > 0.0f)
                 toParam /= toParam.LengthSquared();
-            ParameterEdit(EffectParams.EditBrushToParam).SetValue(toParam);
+            effectCacheEdit.TrySet((int)(EffectParams.EditBrushToParam), toParam);
             /// Note this nasty scaling, because brushRadius is really brushDiameter.
             Vector2 scaleOff = new Vector2(0.5f / (brushRadius * 0.5f), 0.5f);
-            ParameterEdit(EffectParams.EditBrushScaleOff).SetValue(scaleOff);
+            effectCacheEdit.TrySet((int)(EffectParams.EditBrushScaleOff), scaleOff);
 
             bool editMode = (brush.Type & Brush2DManager.BrushType.Selection) == 0;
 
@@ -2112,7 +2137,7 @@ namespace Boku.SimWorld.Terra
             Matrix worldMatrix = Matrix.Identity;
 
             Matrix worldViewProjMatrix = worldMatrix * viewMatrix * projMatrix;
-            ParameterEdit(EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
+            effectCacheEdit.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
 
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
@@ -2220,24 +2245,22 @@ namespace Boku.SimWorld.Terra
                 device.RasterizerState = UI2D.Shared.RasterStateWireframe;
 
             //Set shadow params
-            ParameterColor(EffectParams.ShadowTexture).SetValue(InGame.inGame.ShadowCamera.ShadowTexture);
-            ParameterColor(EffectParams.ShadowMask).SetValue(InGame.inGame.ShadowCamera.ShadowMask);
-            ParameterColor(EffectParams.ShadowTextureOffsetScale).SetValue(InGame.inGame.ShadowCamera.OffsetScale);
-            ParameterColor(EffectParams.ShadowMaskOffsetScale).SetValue(InGame.inGame.ShadowCamera.MaskOffsetScale);
-            ParameterEdit(EffectParams.ShadowTexture).SetValue(InGame.inGame.ShadowCamera.ShadowTexture);
-            ParameterEdit(EffectParams.ShadowMask).SetValue(InGame.inGame.ShadowCamera.ShadowMask);
-            ParameterEdit(EffectParams.ShadowTextureOffsetScale).SetValue(InGame.inGame.ShadowCamera.OffsetScale);
-            ParameterEdit(EffectParams.ShadowMaskOffsetScale).SetValue(InGame.inGame.ShadowCamera.MaskOffsetScale);
+            effectCacheColor.TrySet((int)(EffectParams.ShadowTexture), InGame.inGame.ShadowCamera.ShadowTexture);
+            effectCacheColor.TrySet((int)(EffectParams.ShadowMask), InGame.inGame.ShadowCamera.ShadowMask);
+            effectCacheColor.TrySet((int)(EffectParams.ShadowTextureOffsetScale), InGame.inGame.ShadowCamera.OffsetScale);
+            effectCacheColor.TrySet((int)(EffectParams.ShadowMaskOffsetScale), InGame.inGame.ShadowCamera.MaskOffsetScale);
+            effectCacheEdit.TrySet((int)(EffectParams.ShadowTexture), InGame.inGame.ShadowCamera.ShadowTexture);
+            effectCacheEdit.TrySet((int)(EffectParams.ShadowMask), InGame.inGame.ShadowCamera.ShadowMask);
+            effectCacheEdit.TrySet((int)(EffectParams.ShadowTextureOffsetScale), InGame.inGame.ShadowCamera.OffsetScale);
+            effectCacheEdit.TrySet((int)(EffectParams.ShadowMaskOffsetScale), InGame.inGame.ShadowCamera.MaskOffsetScale);
 
             //Set WorldViewProjMatrix param
             Matrix viewMatrix = camera.ViewMatrix;
             Matrix projMatrix = camera.ProjectionMatrix;
             Matrix worldMatrix = Matrix.Identity;
             Matrix worldViewProjMatrix = worldMatrix * viewMatrix * projMatrix;
-            ParameterColor(EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
-            ParameterColor(EffectParams.WorldMatrix).SetValue(worldMatrix);
-            ParameterEdit(EffectParams.WorldViewProjMatrix).SetValue(worldViewProjMatrix);
-            ParameterEdit(EffectParams.WorldMatrix).SetValue(worldMatrix);
+            effectCacheColor.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
+            effectCacheEdit.TrySet((int)(EffectParams.WorldViewProjMatrix), worldViewProjMatrix);
 
             //Set WarpCenter
             float worldRadius = (Max - Min).Length() * 0.5f;
@@ -2247,63 +2270,18 @@ namespace Boku.SimWorld.Terra
                 camera.ActualFrom,
                 1.0f / range
                 );
-            ParameterColor(EffectParams.WarpCenter).SetValue(warpCenter);
-            ParameterEdit(EffectParams.WarpCenter).SetValue(warpCenter);
+            effectCacheColor.TrySet((int)(EffectParams.WarpCenter), warpCenter);
+            effectCacheEdit.TrySet((int)(EffectParams.WarpCenter), warpCenter);
 
             //Set cube size params
             var cubeSize = VirtualMap.CubeSize;
             var halfCS = cubeSize * 0.5f;
-            ParameterColor(EffectParams.InvCubeSize).SetValue(new Vector3(cubeSize, 1.0f / cubeSize, halfCS));
-            ParameterEdit(EffectParams.InvCubeSize).SetValue(new Vector3(cubeSize, 1.0f / cubeSize, halfCS));
+            effectCacheColor.TrySet((int)(EffectParams.InvCubeSize), new Vector3(cubeSize, 1.0f / cubeSize, halfCS));
+            effectCacheEdit.TrySet((int)(EffectParams.InvCubeSize), new Vector3(cubeSize, 1.0f / cubeSize, halfCS));
 
             //Calculate the max face dot
             float fov = camera.AspectRatio >= 1.0f ? camera.Fov * camera.AspectRatio : camera.Fov;
             float maxFaceDot = (float)Math.Cos((Math.PI - fov) / 2.0);
-
-            if (BokuSettings.Settings.PreferReach)
-            {
-                //Select the VS based on the number of point-lights
-                var lightNum = Luz.Count;
-                if (lightNum > 6)
-                {
-                    ParameterColor(EffectParams.VSIndex).SetValue(4);
-                    ParameterEdit(EffectParams.VSIndex).SetValue(4);
-                }
-                else if (lightNum > 4)
-                {
-                    ParameterColor(EffectParams.VSIndex).SetValue(3);
-                    ParameterEdit(EffectParams.VSIndex).SetValue(3);
-                }
-                else if (lightNum > 2)
-                {
-                    ParameterColor(EffectParams.VSIndex).SetValue(2);
-                    ParameterEdit(EffectParams.VSIndex).SetValue(2);
-                }
-                else if (lightNum > 0)
-                {
-                    ParameterColor(EffectParams.VSIndex).SetValue(1);
-                    ParameterEdit(EffectParams.VSIndex).SetValue(1);
-                }
-                else
-                {
-                    ParameterColor(EffectParams.VSIndex).SetValue(0);
-                    ParameterEdit(EffectParams.VSIndex).SetValue(0);
-                }
-
-                //Select the PS
-                ParameterColor(EffectParams.PSIndex).SetValue(0);
-                ParameterEdit(EffectParams.PSIndex).SetValue(0);
-            }
-            else // Shader Model v3
-            {
-                //SM3 only uses one VS
-                ParameterColor(EffectParams.VSIndex).SetValue(5);
-                ParameterEdit(EffectParams.VSIndex).SetValue(5);
-
-                //Select the PS
-                ParameterColor(EffectParams.PSIndex).SetValue(2);
-                ParameterEdit(EffectParams.PSIndex).SetValue(2);
-            }
 
 #if Debug_CountTerrainVerts
             VertCounter_Debug = 0;
@@ -2334,8 +2312,8 @@ namespace Boku.SimWorld.Terra
                     {
                         // This is the selection material. It will always be the last material rendered.
                         matIdx = selectedIdx;
-                        ParameterColor(EffectParams.EditBrushScaleOff).SetValue(new Vector2(0.0f, 0.5f));
-                        ParameterEdit(EffectParams.EditBrushScaleOff).SetValue(new Vector2(0.0f, 0.5f));
+                        effectCacheColor.TrySet((int)(EffectParams.EditBrushScaleOff), new Vector2(0.0f, 0.5f));
+                        effectCacheEdit.TrySet((int)(EffectParams.EditBrushScaleOff), new Vector2(0.0f, 0.5f));
                         editMode = true;
                     }
                     else
@@ -2433,8 +2411,8 @@ namespace Boku.SimWorld.Terra
                     {
                         // This is the selection material. It will always be the last material rendered.
                         matIdx = selectedIdx;
-                        ParameterColor(EffectParams.EditBrushScaleOff).SetValue(new Vector2(0.0f, 0.5f));
-                        ParameterEdit(EffectParams.EditBrushScaleOff).SetValue(new Vector2(0.0f, 0.5f));
+                        effectCacheColor.TrySet((int)(EffectParams.EditBrushScaleOff), new Vector2(0.0f, 0.5f));
+                        effectCacheEdit.TrySet((int)(EffectParams.EditBrushScaleOff), new Vector2(0.0f, 0.5f));
                         editMode = true;
                     }
                     else

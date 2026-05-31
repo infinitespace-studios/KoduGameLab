@@ -100,7 +100,7 @@ namespace Boku
 
                 #region BotGroup1
                 {
-                    RenderObject group = new ActorMenuItem(uiSelector, null, @"Textures\Tiles\group.botsI", null, size, radialOffset);
+                    RenderObject group = new ActorMenuItem(uiSelector, null, "group.botsI", null, size, radialOffset);
 
                     UiSelector selectorGroup = new PieSelector(group, "Sim.EditObjects.PickToken");
 
@@ -128,7 +128,7 @@ namespace Boku
                 #region BotGroup2
                 // some might think a subroutine would be a better way to structure this...
                 {
-                    RenderObject group = new ActorMenuItem(uiSelector, null, @"Textures\Tiles\group.botsII", null, size, radialOffset);
+                    RenderObject group = new ActorMenuItem(uiSelector, null, "group.botsII", null, size, radialOffset);
 
                     UiSelector selectorGroup = new PieSelector(group, "Sim.EditObjects.PickToken");
 
@@ -154,7 +154,7 @@ namespace Boku
 
                 #region objects group (star, coin, heart)
                 {
-                    RenderObject group = new ActorMenuItem(uiSelector, null, @"Textures\Tiles\group.objects", null, size, radialOffset);
+                    RenderObject group = new ActorMenuItem(uiSelector, null, "group.objects", null, size, radialOffset);
 
                     UiSelector selectorGroup = new PieSelector(group, "Sim.EditObjects.PickToken");
 
@@ -294,7 +294,7 @@ namespace Boku
                 #region waypoint group
                 if(!ignorePaths)
                 {
-                    RenderObject group = new ActorMenuItem(uiSelector, null, @"Textures\Tiles\modifier.waypointwhite", null, size, radialOffset);
+                    RenderObject group = new ActorMenuItem(uiSelector, null, "modifier.waypointwhite", null, size, radialOffset);
 
                     UiSelector selectorGroup = new PieSelector(group, "Sim.EditObjects.PickToken");
 

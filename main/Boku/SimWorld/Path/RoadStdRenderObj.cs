@@ -197,6 +197,10 @@ namespace Boku.SimWorld.Path
         {
             return effectCache.Parameter((int)param);
         }
+        static public bool TrySet(EffectParams param, Matrix value)
+        {
+            return effectCache.TrySet((int)param, value);
+        }
         #endregion EffectCaching
 
         /// <summary>
@@ -224,6 +228,7 @@ namespace Boku.SimWorld.Path
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Road");
+                ShaderDefaultValues.ApplyDistortDefaults(effect);
                 ShaderGlobals.RegisterEffect("Road", effect);
             }
         }
@@ -290,18 +295,18 @@ namespace Boku.SimWorld.Path
                 device.RasterizerState = UI2D.Shared.RasterStateWireframe;
 
             Vector4 color = DiffuseColor * road.Path.RGBColor;
-            Parameter(EffectParams.DiffuseColor).SetValue(color);
-            Parameter(EffectParams.SpecularColor).SetValue(SpecularColor);
-            Parameter(EffectParams.EmissiveColor).SetValue(EmissiveColor);
-            Parameter(EffectParams.SpecularPower).SetValue(SpecularPower);
-            Parameter(EffectParams.Shininess).SetValue(Shininess);
+            effectCache.TrySet((int)(EffectParams.DiffuseColor), color);
+            effectCache.TrySet((int)(EffectParams.SpecularColor), SpecularColor);
+            effectCache.TrySet((int)(EffectParams.EmissiveColor), EmissiveColor);
+            effectCache.TrySet((int)(EffectParams.SpecularPower), SpecularPower);
+            effectCache.TrySet((int)(EffectParams.Shininess), Shininess);
 
-            Parameter(EffectParams.UVXfm).SetValue(uvXfm);
+            effectCache.TrySet((int)(EffectParams.UVXfm), uvXfm);
 
-            Parameter(EffectParams.DiffuseTexture0).SetValue(diffuseTex0);
-            Parameter(EffectParams.DiffuseTexture1).SetValue(diffuseTex1);
-            Parameter(EffectParams.NormalTexture0).SetValue(normalTex0);
-            Parameter(EffectParams.NormalTexture1).SetValue(normalTex1);
+            effectCache.TrySet((int)(EffectParams.DiffuseTexture0), diffuseTex0);
+            effectCache.TrySet((int)(EffectParams.DiffuseTexture1), diffuseTex1);
+            effectCache.TrySet((int)(EffectParams.NormalTexture0), normalTex0);
+            effectCache.TrySet((int)(EffectParams.NormalTexture1), normalTex1);
 
             Texture2D shadowTexture = InGame.inGame.ShadowCamera.ShadowTexture;
 
@@ -319,12 +324,12 @@ namespace Boku.SimWorld.Path
             }
 
             Texture2D shadowMask = InGame.inGame.ShadowCamera.ShadowMask;
-            Parameter(EffectParams.ShadowTexture).SetValue(shadowTexture);
-            Parameter(EffectParams.ShadowMask).SetValue(shadowMask);
+            effectCache.TrySet((int)(EffectParams.ShadowTexture), shadowTexture);
+            effectCache.TrySet((int)(EffectParams.ShadowMask), shadowMask);
             Vector4 offsetScale = InGame.inGame.ShadowCamera.OffsetScale;
-            Parameter(EffectParams.ShadowTextureOffsetScale).SetValue(offsetScale);
+            effectCache.TrySet((int)(EffectParams.ShadowTextureOffsetScale), offsetScale);
             offsetScale = InGame.inGame.ShadowCamera.MaskOffsetScale;
-            Parameter(EffectParams.ShadowMaskOffsetScale).SetValue(offsetScale);
+            effectCache.TrySet((int)(EffectParams.ShadowMaskOffsetScale), offsetScale);
 
             effect.CurrentTechnique.Passes[0].Apply();
 

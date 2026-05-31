@@ -65,7 +65,7 @@ namespace Boku.Common
 
             public void SampleMouseState()
             {
-                while (true)
+                while (!mouseWorkerStopRequested)
                 {
                     // Guard against early thread start before game is fully initialized.
                     // BokuGame.bokuGame may be non-null (set in constructor) while
@@ -210,6 +210,10 @@ namespace Boku.Common
         public static List<MouseState2> MouseStateQueue = new List<MouseState2>();
         private static MouseState prevMouseState = new MouseState();
         private static Thread mouseWorkerThread;
+        // Set by StopMouseWorkerThread on shutdown; the worker loop checks this
+        // and exits cleanly. Replaces the old Thread.Abort() approach which is
+        // unsupported on .NET Core / .NET 9 (throws PlatformNotSupportedException).
+        private static volatile bool mouseWorkerStopRequested = false;
 #endif
 
         #endregion
@@ -353,6 +357,8 @@ namespace Boku.Common
                     MouseWorker worker = new MouseWorker();
 
                     mouseWorkerThread = new Thread(new ThreadStart(worker.SampleMouseState));
+                    mouseWorkerThread.IsBackground = true;
+                    mouseWorkerThread.Name = "MouseInput.SampleMouseState";
                     mouseWorkerThread.Start();
 
                     initialized = true;
@@ -432,7 +438,21 @@ namespace Boku.Common
         public static void StopMouseWorkerThread()
         {
 #if THREADED_MOUSE_INPUT
-            mouseWorkerThread.Abort();
+            // Thread.Abort is unsupported on .NET Core / .NET 9 (throws
+            // PlatformNotSupportedException). Signal the worker to exit its
+            // sampling loop and give it a brief window to do so. The thread is
+            // already marked IsBackground = true (see Update() above) so even
+            // without an explicit join the process will tear it down on exit;
+            // the join is just polite.
+            mouseWorkerStopRequested = true;
+            try
+            {
+                mouseWorkerThread?.Join(100);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Warning: MouseInput worker join failed: " + ex.Message);
+            }
 #endif
         }   // end of StopMouseWorkerThread()
 

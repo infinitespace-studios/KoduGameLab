@@ -37,7 +37,7 @@ namespace Boku.SimWorld
             EyePupilRightTexture,
             EyeBrowRightTexture,
         };
-        protected EffectCache effectCache = null;
+        protected static EffectCache effectCache = null;
         protected EffectParameter Parameter(EffectParams param)
         {
             return effectCache.Parameter((int)param);
@@ -80,7 +80,7 @@ namespace Boku.SimWorld
 
         public override void SetupForRender(FBXModel model)
         {
-            Parameter(EffectParams.FaceBkg).SetValue(BackgroundColor);
+            effectCache.TrySet((int)(EffectParams.FaceBkg), BackgroundColor);
 
             float pupilScaleLeft = 1.0f / (pupilSizeLeft * PupilSize);
             Vector2 pupilOffLeft = new Vector2(
@@ -90,9 +90,9 @@ namespace Boku.SimWorld
             Vector2 pupilOffRight = new Vector2(
                 (pupilOffsetRight.X + PupilCenter.X - 0.5f) * pupilScaleRight + 0.5f,
                 (pupilOffsetRight.Y - PupilCenter.Y - 0.5f) * pupilScaleRight + 0.5f);
-            Parameter(EffectParams.PupilScale).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.PupilScale), new Vector4(
                 pupilScaleLeft, pupilScaleLeft, pupilScaleRight, pupilScaleRight));
-            Parameter(EffectParams.PupilOffset).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.PupilOffset), new Vector4(
                 pupilOffLeft.X, pupilOffLeft.Y, pupilOffRight.X, pupilOffRight.Y));
 
             float browScaleLeft = 1.0f / BrowSize;
@@ -103,17 +103,17 @@ namespace Boku.SimWorld
             Vector2 browOffRight = new Vector2(
                 (browOffsetRight.X - BrowCenter.X - 0.5f) * browScaleRight + 0.5f,
                 (browOffsetRight.Y - BrowCenter.Y - 0.5f) * browScaleRight + 0.5f);
-            Parameter(EffectParams.BrowScale).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.BrowScale), new Vector4(
                 browScaleLeft, browScaleLeft, browScaleRight, browScaleRight));
-            Parameter(EffectParams.BrowOffset).SetValue(new Vector4(
+            effectCache.TrySet((int)(EffectParams.BrowOffset), new Vector4(
                 browOffLeft.X, browOffLeft.Y, browOffRight.X, browOffRight.Y));
 
-            Parameter(EffectParams.EyeShapeLeftTexture).SetValue(ShapeLeftTexture());
-            Parameter(EffectParams.EyePupilLeftTexture).SetValue(PupilLeftTexture());
-            Parameter(EffectParams.EyeBrowLeftTexture).SetValue(BrowLeftTexture());
-            Parameter(EffectParams.EyeShapeRightTexture).SetValue(ShapeRightTexture());
-            Parameter(EffectParams.EyePupilRightTexture).SetValue(PupilRightTexture());
-            Parameter(EffectParams.EyeBrowRightTexture).SetValue(BrowRightTexture());
+            effectCache.TrySet((int)(EffectParams.EyeShapeLeftTexture), ShapeLeftTexture());
+            effectCache.TrySet((int)(EffectParams.EyePupilLeftTexture), PupilLeftTexture());
+            effectCache.TrySet((int)(EffectParams.EyeBrowLeftTexture), BrowLeftTexture());
+            effectCache.TrySet((int)(EffectParams.EyeShapeRightTexture), ShapeRightTexture());
+            effectCache.TrySet((int)(EffectParams.EyePupilRightTexture), PupilRightTexture());
+            effectCache.TrySet((int)(EffectParams.EyeBrowRightTexture), BrowRightTexture());
         }
         #endregion Public
 

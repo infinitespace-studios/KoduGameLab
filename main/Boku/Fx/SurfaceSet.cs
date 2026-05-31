@@ -56,7 +56,7 @@ namespace Boku.Fx
             BumpDetail,
             DirtMap,
         };
-        private EffectCache effectCache = new EffectCache<EffectParams>();
+        private static EffectCache effectCache = new EffectCache<EffectParams>();
         private EffectParameter Parameter(EffectParams param)
         {
             return effectCache.Parameter((int)param);
@@ -215,25 +215,25 @@ namespace Boku.Fx
                 }
             }
 
-            Parameter(EffectParams.Diffuse3_Bloom1).SetValue(
+            effectCache.TrySet((int)(EffectParams.Diffuse3_Bloom1), 
                 Diffuse3_Bloom1_Scratch);
 
-            Parameter(EffectParams.Emissive3_Wrap1).SetValue(
+            effectCache.TrySet((int)(EffectParams.Emissive3_Wrap1), 
                 Emissive3_Wrap1_Scratch);
 
-            Parameter(EffectParams.SpecCol3_Pow1).SetValue(
+            effectCache.TrySet((int)(EffectParams.SpecCol3_Pow1), 
                 SpecCol3_Pow1_Scratch);
 
-            Parameter(EffectParams.Aniso2_EnvInt1_Unused1).SetValue(
+            effectCache.TrySet((int)(EffectParams.Aniso2_EnvInt1_Unused1), 
                 Aniso2_EnvInt1_Unused1_Scratch);
 
-            Parameter(EffectParams.Bump_Tile1_Int1_Unused2).SetValue(
+            effectCache.TrySet((int)(EffectParams.Bump_Tile1_Int1_Unused2), 
                 Bump_Tile1_Int1_Unused2_Scratch);
 
             // TODO (****) Why is this null???
             if (Parameter(EffectParams.BumpDetail) != null)
             {
-                Parameter(EffectParams.BumpDetail).SetValue(BumpDetail);
+                effectCache.TrySet((int)(EffectParams.BumpDetail), BumpDetail);
             }
 
             Texture2D dmap = DirtMap;
@@ -255,7 +255,7 @@ namespace Boku.Fx
             // TODO (****) Why is this ever null?
             if (Parameter(EffectParams.DirtMap) != null)
             {
-                Parameter(EffectParams.DirtMap).SetValue(dmap);
+                effectCache.TrySet((int)(EffectParams.DirtMap), dmap);
             }
         }
         /// <summary>

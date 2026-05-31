@@ -1331,7 +1331,7 @@ namespace Boku.UI
 
             // add some adornments since groups have no model of a tile
             UiSelector.ItemData itemData = parentSelector[indexItem];
-            Billboard adornment = new Billboard(parentSelector, @"Textures\Tiles\empty_tile", new Vector2(1.0f, 1.0f));
+            Billboard adornment = new Billboard(parentSelector, "empty_tile", new Vector2(1.0f, 1.0f));
             transformRender = adornment as ITransform;
             if (transformRender != null)
             {

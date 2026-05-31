@@ -182,7 +182,7 @@ namespace Xclna.Xna.Animation
                     Matrix[] meshPalette = palette[i];
                     try
                     {
-                        matrixPaletteParams[i].SetValue(meshPalette);
+                        matrixPaletteParams[i]?.SetValue(meshPalette);
                     }
                     catch
                     {
@@ -341,12 +341,12 @@ namespace Xclna.Xna.Animation
                         foreach (Effect effect in mesh.Effects)
                         {
                    
-                                worldParams[index].SetValue(
+                                worldParams[index]?.SetValue(
                
                                     world);
                             
 
-                            matrixPaletteParams[index].SetValue(palette[i]);
+                            matrixPaletteParams[index]?.SetValue(palette[i]);
                             index++;
                         }
                     }
@@ -355,7 +355,7 @@ namespace Xclna.Xna.Animation
                         foreach (Effect effect in mesh.Effects)
                         {
 
-                            worldParams[index].SetValue(pose[mesh.ParentBone.Index] * world);
+                            worldParams[index]?.SetValue(pose[mesh.ParentBone.Index] * world);
                             index++;
                         }
                     }

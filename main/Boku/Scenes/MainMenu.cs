@@ -613,6 +613,15 @@ namespace Boku
                     batch.End();
                     shared.urlBox.Set(pos, pos + size);
 
+                    // MonoGame: SpriteBatch.End() leaves DepthStencilState=None, BlendState=AlphaBlend,
+                    // SamplerStates[0]=LinearClamp — none of which are correct for opaque 3D draws.
+                    // XNA used to implicitly restore device state across this boundary; MonoGame does
+                    // not, so the 3D scene must reset explicitly. See todo/02-R2-render-state-reset.md.
+                    device.BlendState        = BlendState.Opaque;
+                    device.DepthStencilState = DepthStencilState.Default;
+                    device.RasterizerState   = RasterizerState.CullCounterClockwise;
+                    device.SamplerStates[0]  = SamplerState.LinearWrap;
+
                     // Hide the menu if auth UI is active.  Just keeps things cleaner.
                     if (!AuthUI.IsModalActive)
                     {
@@ -663,13 +672,14 @@ namespace Boku
                 InGame.SetViewportToScreen();
 
                 // Copy the rendered scene to the backbuffer.
+                // Use ScreenSpaceQuad (not SpriteBatch.Draw) — MonoGame DesktopGL's
+                // SpriteBatch path for sampling our PreserveContents render targets
+                // produces black; every other scene (LoadLevelMenu, TextEditor, etc.)
+                // already uses quad.Render(rt, ..., "TexturedNoAlpha") for this blit.
                 {
                     ScreenWarp.FitRtToScreen(rtSize);
 
-                    SpriteBatch batch = UI2D.Shared.SpriteBatch;
-                    batch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
-                    batch.Draw(rt, new Rectangle((int)ScreenWarp.RenderPosition.X, (int)ScreenWarp.RenderPosition.Y, (int)ScreenWarp.RenderSize.X, (int)ScreenWarp.RenderSize.Y), Color.White);
-                    batch.End();
+                    quad.Render(rt, ScreenWarp.RenderPosition, ScreenWarp.RenderSize, @"TexturedNoAlpha");
                 }
 
                 // Render news feed.

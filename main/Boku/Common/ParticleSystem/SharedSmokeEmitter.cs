@@ -264,20 +264,20 @@ namespace Boku.Common.ParticleSystem
             }
 
             // Set up common rendering values.
-            effect.Parameters["CurrentTime"].SetValue((float)Time.GameTimeTotalSeconds);
+            effect.Parameters["CurrentTime"]?.SetValue((float)Time.GameTimeTotalSeconds);
 
             // Set up world matrix.
             Matrix worldMatrix = Matrix.Identity;
             Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
 
             Vector4 diffuseColor = ShaderGlobals.ParticleTint(false);
-            effect.Parameters["DiffuseColor"].SetValue(diffuseColor);
-            effect.Parameters["DiffuseTexture"].SetValue(texture);
-            effect.Parameters["EyeLocation"].SetValue(new Vector4(camera.ActualFrom, 1.0f));
-            effect.Parameters["CameraUp"].SetValue(new Vector4(camera.ViewUp, 1.0f));
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["ParticleRadius"].SetValue(
+            effect.Parameters["DiffuseColor"]?.SetValue(diffuseColor);
+            effect.Parameters["DiffuseTexture"]?.SetValue(texture);
+            effect.Parameters["EyeLocation"]?.SetValue(new Vector4(camera.ActualFrom, 1.0f));
+            effect.Parameters["CameraUp"]?.SetValue(new Vector4(camera.ViewUp, 1.0f));
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["ParticleRadius"]?.SetValue(
                 ShaderGlobals.MakeParticleSizeLimit(1.0f, 0.0f, 200.0f));
 
             // Cloned from DistortFilter.  Another casualty of the removal of gloabl shader values.
@@ -285,14 +285,14 @@ namespace Boku.Common.ParticleSystem
             Vector4 filterScale = new Vector4(0.5f, 0.5f, 0.5f, 0.5f);
             float filterStrength = 0.2f;
 
-            effect.Parameters["BumpScroll"].SetValue(filterScroll);
-            effect.Parameters["BumpScale"].SetValue(filterScale);
-            effect.Parameters["BumpStrength"].SetValue(filterStrength);
+            effect.Parameters["BumpScroll"]?.SetValue(filterScroll);
+            effect.Parameters["BumpScale"]?.SetValue(filterScale);
+            effect.Parameters["BumpStrength"]?.SetValue(filterStrength);
             
-            effect.Parameters["DepthTexture"].SetValue(InGame.inGame.EffectsRenderTarget);
-            //effect.Parameters["Bump"].SetValue(DistortFilter.BumpTexture);
-            effect.Parameters["Bump"].SetValue(DistortionManager.Bump);
-            effect.Parameters["DOF_FarPlane"].SetValue(100.0f);
+            effect.Parameters["DepthTexture"]?.SetValue(InGame.inGame.EffectsRenderTarget);
+            //effect.Parameters["Bump"]?.SetValue(DistortFilter.BumpTexture);
+            effect.Parameters["Bump"]?.SetValue(DistortionManager.Bump);
+            effect.Parameters["DOF_FarPlane"]?.SetValue(100.0f);
 
             device.Indices = ibuf;
 
@@ -327,6 +327,7 @@ namespace Boku.Common.ParticleSystem
             if (effect == null)
             {
                 effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\SharedParticle2D");
+                ShaderDefaultValues.ApplyParticle2DDefaults(effect);
             }
 
             if (texture == null)

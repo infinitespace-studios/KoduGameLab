@@ -122,11 +122,11 @@ namespace Boku.SimWorld
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
             Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
 
             // Render all passes.
-            effect.Parameters["DiffuseTexture"].SetValue(texture);
+            effect.Parameters["DiffuseTexture"]?.SetValue(texture);
             effect.CurrentTechnique = effect.Techniques["NormalAlphaColorPassNoZ"];
 
             device.SetVertexBuffer(vbuf);

@@ -307,19 +307,19 @@ namespace Boku
                 // Set vertex declaration is handled by DrawUserPrimitives in MonoGame.
 
                 // Render all passes.
-                effect.Parameters["FrameTexture"].SetValue(frameTexture);
-                effect.Parameters["ScreenTexture"].SetValue(screenTexture);
-                effect.Parameters["IconTexture"].SetValue(iconTexture);
+                effect.Parameters["FrameTexture"]?.SetValue(frameTexture);
+                effect.Parameters["ScreenTexture"]?.SetValue(screenTexture);
+                effect.Parameters["IconTexture"]?.SetValue(iconTexture);
 
-                effect.Parameters["Alpha"].SetValue(Alpha);
+                effect.Parameters["Alpha"]?.SetValue(Alpha);
 
                 effect.CurrentTechnique = effect.Techniques["Normal"];
 
-                effect.Parameters["NumIcons"].SetValue((float)numIcons);
+                effect.Parameters["NumIcons"]?.SetValue((float)numIcons);
 
                 for (int i = 0; i < numIcons; i++)
                 {
-                    effect.Parameters["Color" + i.ToString()].SetValue(color[i]);
+                    effect.Parameters["Color" + i.ToString()]?.SetValue(color[i]);
                 }
 
                 for (int i = 0; i < effect.CurrentTechnique.Passes.Count; i++)

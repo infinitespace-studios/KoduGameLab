@@ -145,8 +145,8 @@ namespace Boku.Common.ParticleSystem
             GraphicsDevice device = BokuGame.bokuGame.GraphicsDevice;
 
             Matrix worldViewProjMatrix = worldMatrix * camera.ViewProjectionMatrix;
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldViewProjMatrix);
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldViewProjMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
 
             PreDraw(device);
 

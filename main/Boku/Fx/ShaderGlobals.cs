@@ -166,7 +166,7 @@ namespace Boku.Fx
             public void SetToEffect(Matrix localToWorld)
             {
                 float strength = WindAt(localToWorld.Translation);
-                Parameter(EffectParams.WindStrength).SetValue(strength);
+                effectCache.TrySet((int)(EffectParams.WindStrength), strength);
             }
             /// <summary>
             /// CPU version of the GPU wind strength function in skin.fx.
@@ -649,20 +649,12 @@ namespace Boku.Fx
             #region Parameter Caching
             public enum EffectParams
             {
-                UILightDirection0,
-                UILightColor0,
-                UILightDirection1,
-                UILightColor1,
-                UILightDirection2,
-                UILightColor2,
                 EyeLocation,
                 CameraDir,
-                CameraUp,
                 WorldToCamera,
 
                 LightWrap,
                 Shininess,
-                ShadowAttenuation,
                 BloomColor,
 
                 EnvironmentMap,
@@ -670,12 +662,9 @@ namespace Boku.Fx
                 FogColor,
                 FogVector,
 
-                DOF_NearPlane,
                 DOF_FocalPlane,
                 DOF_FarPlane,
                 DOF_MaxBlur,
-
-                BloomStrength,
 
                 PreWorld,
             };
@@ -819,16 +808,16 @@ namespace Boku.Fx
 
                 if (effect.Parameters["Shininess"] != null) // In StandardLight.fx
                 {
-                    effect.Parameters["Shininess"].SetValue(1.0f);
+                    effect.Parameters["Shininess"]?.SetValue(1.0f);
                 }
                 if (effect.Parameters["ShadowAttenuation"] != null) // In Light.fx
                 {
-                    effect.Parameters["ShadowAttenuation"].SetValue(0.7f);
+                    effect.Parameters["ShadowAttenuation"]?.SetValue(0.7f);
                 }
 
                 if (effect.Parameters["EnvironmentMap"] != null)    // In light.fx and others.
                 {
-                    effect.Parameters["EnvironmentMap"].SetValue(envTexture);
+                    effect.Parameters["EnvironmentMap"]?.SetValue(envTexture);
                 }
 
 
@@ -868,19 +857,19 @@ namespace Boku.Fx
 
                 if (effect.Parameters["EyeLocation"] != null)
                 {
-                    effect.Parameters["EyeLocation"].SetValue(new Vector4(camera.ActualFrom, 1.0f));
+                    effect.Parameters["EyeLocation"]?.SetValue(new Vector4(camera.ActualFrom, 1.0f));
                 }
                 if (effect.Parameters["CameraUp"] != null)
                 {
-                    effect.Parameters["CameraUp"].SetValue(new Vector4(camera.ViewUp, 1.0f));
+                    effect.Parameters["CameraUp"]?.SetValue(new Vector4(camera.ViewUp, 1.0f));
                 }
                 if (effect.Parameters["CameraDir"] != null)
                 {
-                    effect.Parameters["CameraDir"].SetValue(new Vector4(camera.ViewDir, 1.0f));
+                    effect.Parameters["CameraDir"]?.SetValue(new Vector4(camera.ViewDir, 1.0f));
                 }
                 if (effect.Parameters["WorldToCamera"] != null)
                 {
-                    effect.Parameters["WorldToCamera"].SetValue(camera.ViewMatrix);
+                    effect.Parameters["WorldToCamera"]?.SetValue(camera.ViewMatrix);
                 }
             }
 
@@ -892,7 +881,7 @@ namespace Boku.Fx
 
                     if (effect.Parameters["EnvironmentMap"] != null)
                     {
-                        effect.Parameters["EnvironmentMap"].SetValue(map);
+                        effect.Parameters["EnvironmentMap"]?.SetValue(map);
                     }
                 }
             }
@@ -905,7 +894,7 @@ namespace Boku.Fx
 
                     if (effect.Parameters["EnvironmentMap"] != null)
                     {
-                        effect.Parameters["EnvironmentMap"].SetValue(envTexture);
+                        effect.Parameters["EnvironmentMap"]?.SetValue(envTexture);
                     }
                 }
             }
@@ -918,7 +907,7 @@ namespace Boku.Fx
 
                     if (effect.Parameters["BloomColor"] != null)
                     {
-                        effect.Parameters["BloomColor"].SetValue(color);
+                        effect.Parameters["BloomColor"]?.SetValue(color);
                     }
                 }
                         
@@ -932,7 +921,7 @@ namespace Boku.Fx
 
                     if (effect.Parameters["BloomColor"] != null)
                     {
-                        effect.Parameters["BloomColor"].SetValue(Vector4.One);
+                        effect.Parameters["BloomColor"]?.SetValue(Vector4.One);
                     }
                 }
             }
@@ -972,6 +961,7 @@ namespace Boku.Fx
                 if (effect == null)
                 {
                     effect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Standard");
+                    ShaderDefaultValues.ApplyDistortDefaults(effect);
                     ShaderGlobals.RegisterEffect("Standard", effect);
 
                     effectCache.Load(effect);
@@ -1457,6 +1447,11 @@ namespace Boku.Fx
         public static void RegisterEffect(string name, Effect effect)
         {
             UnregisterEffect(name);
+            if (String.IsNullOrEmpty(effect.Name))
+            {
+                effect.Name = name;
+            }
+            ShaderDefaultValues.ApplySharedDefaults(effect);
             BokuGame.bokuGame.shaderGlobals.renderObj.EffectDict.Add(name, effect);
         }
 

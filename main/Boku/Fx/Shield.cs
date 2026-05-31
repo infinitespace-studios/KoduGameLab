@@ -88,11 +88,11 @@ namespace Boku.Fx
 
                     /// Set effect parameters here.
                     float ageParm = 2.0f - 2.0f / (Age + 1.0f);
-                    Parameter(EffectParams.Age).SetValue(ageParm);
-                    Parameter(EffectParams.Center).SetValue(new Vector4(WorldCenter, Radius));
-                    Parameter(EffectParams.TexU).SetValue(TexU);
-                    Parameter(EffectParams.TexV).SetValue(TexV);
-                    Parameter(EffectParams.TexW).SetValue(TexW);
+                    effectCache.TrySet((int)(EffectParams.Age), ageParm);
+                    effectCache.TrySet((int)(EffectParams.Center), new Vector4(WorldCenter, Radius));
+                    effectCache.TrySet((int)(EffectParams.TexU), TexU);
+                    effectCache.TrySet((int)(EffectParams.TexV), TexV);
+                    effectCache.TrySet((int)(EffectParams.TexW), TexW);
 
                     float colorParm = 1.0f - Age;
                     colorParm *= colorParm * colorParm;
@@ -100,8 +100,8 @@ namespace Boku.Fx
                     Vector4 tint0 = new Vector4(0.5f * Tint.X, 1.0f * Tint.Y, 0.6f * Tint.Z, 1.0f);
                     Vector4 tint1 = new Vector4(Tint, 1.0f);
                     Vector4 tint = tint0 + (tint1 - tint0) * colorParm;
-                    Parameter(EffectParams.Tint0).SetValue(tint);
-                    Parameter(EffectParams.Tint1).SetValue(tint);
+                    effectCache.TrySet((int)(EffectParams.Tint0), tint);
+                    effectCache.TrySet((int)(EffectParams.Tint1), tint);
 
                     sphere.DrawPrim(effect);
                 }
@@ -235,7 +235,6 @@ namespace Boku.Fx
         private enum EffectParams
         {
             WorldViewProjMatrix,
-            WorldMatrix,
 
             Center,
             Age,
@@ -245,7 +244,6 @@ namespace Boku.Fx
             Tint0,
             Tint1,
             CrossTexture,
-            AxialTexture,
         };
         private static EffectCache effectCache = new EffectCache<EffectParams>();
         private static EffectParameter Parameter(EffectParams param)
@@ -264,7 +262,6 @@ namespace Boku.Fx
         #endregion Parameter Caching
 
         private static Texture2D crossTexture = null;
-        private static Texture2D axialTexture = null;
         #endregion Members
 
         #region Accessors
@@ -272,11 +269,6 @@ namespace Boku.Fx
         {
             get { return crossTexture; }
             set { crossTexture = value; }
-        }
-        private static Texture2D AxialTexture
-        {
-            get { return axialTexture; }
-            set { axialTexture = value; }
         }
         #endregion Accessors
 
@@ -294,9 +286,8 @@ namespace Boku.Fx
 
         public static void Render(Camera camera)
         {
-            Parameter(EffectParams.WorldMatrix).SetValue(Matrix.Identity);
-            Parameter(EffectParams.WorldViewProjMatrix).SetValue(camera.ViewProjectionMatrix);
-            Parameter(EffectParams.CrossTexture).SetValue(CrossTexture);
+            effectCache.TrySet((int)(EffectParams.WorldViewProjMatrix), camera.ViewProjectionMatrix);
+            effectCache.TrySet((int)(EffectParams.CrossTexture), CrossTexture);
 
             effect.CurrentTechnique = Technique(InGame.inGame.renderEffects);
 

@@ -535,7 +535,8 @@ namespace Boku.Input
             rxException = null;
             rxExceptionReported = false;
             rxThread = new Thread(new ThreadStart(this.ReceiveThread));
-            rxThread.Name = "CommBaseRx";
+            rxThread.IsBackground = true;
+            rxThread.Name = "Microbit.RxThread";
             rxThread.Priority = ThreadPriority.AboveNormal;
             rxThread.Start();
 
@@ -574,7 +575,13 @@ namespace Boku.Input
             Win32Com.CancelIo(hPort);
             if (rxThread != null)
             {
-                rxThread.Abort();
+                // Thread.Abort throws PlatformNotSupportedException on .NET Core / .NET 9.
+                // The CancelIo above should already have unblocked WaitCommEvent so the
+                // thread can exit on its own; Join with a short timeout covers it.
+                // Keep the Abort attempt for legacy .NET Framework runtimes where it
+                // still works, but swallow the unsupported-platform exception cleanly.
+                try { rxThread.Abort(); }
+                catch (PlatformNotSupportedException) { /* expected on .NET 5+ */ }
                 //Improve robustness of Close in case were followed by Open:
                 rxThread.Join(100);
                 rxThread = null;

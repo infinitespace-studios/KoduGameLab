@@ -49,7 +49,7 @@ namespace Boku.UI2D
             public NewWorldLevel(string LevelGuid)
             {
                 this.LevelGuid = LevelGuid;
-                ThumbnailName = Path.Combine("Content", "Xml", "Levels", "BuiltInWorlds", LevelGuid + ".dds");
+                ThumbnailName = Path.Combine("Xml", "Levels", "BuiltInWorlds", LevelGuid + ".dds");
 
                 Box = new AABB2D();
 

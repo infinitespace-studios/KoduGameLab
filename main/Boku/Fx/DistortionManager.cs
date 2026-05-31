@@ -210,12 +210,12 @@ namespace Boku.Fx
             }
             InGame.inGame.renderEffects = InGame.RenderEffect.DistortionPass;
 
-            Parameter(EffectParams.DepthTexture).SetValue(effectsImage);
-            Parameter(EffectParams.Bump).SetValue(Bump);
-            Parameter(EffectParams.BlurStrength).SetValue(blurStrength);
-            Parameter(EffectParams.BumpScroll).SetValue(bumpScroll);
-            Parameter(EffectParams.BumpScale).SetValue(bumpScale);
-            Parameter(EffectParams.BumpStrength).SetValue(bumpStrength);
+            effectCache.TrySet((int)(EffectParams.DepthTexture), effectsImage);
+            effectCache.TrySet((int)(EffectParams.Bump), Bump);
+            effectCache.TrySet((int)(EffectParams.BlurStrength), blurStrength);
+            effectCache.TrySet((int)(EffectParams.BumpScroll), bumpScroll);
+            effectCache.TrySet((int)(EffectParams.BumpScale), bumpScale);
+            effectCache.TrySet((int)(EffectParams.BumpStrength), bumpStrength);
 
             InGame.inGame.ParticleSystemManager.Render(camera, BaseEmitter.Use.Distort);
 
@@ -332,6 +332,7 @@ namespace Boku.Fx
                 if (partyEffect == null)
                 {
                     partyEffect = BokuGame.Load<Effect>(BokuGame.Settings.MediaPath + @"Shaders\Particle2D");
+                    ShaderDefaultValues.ApplyParticle2DDefaults(partyEffect);
                     effectCache.Load(PartyEffect, "");
                 }
 

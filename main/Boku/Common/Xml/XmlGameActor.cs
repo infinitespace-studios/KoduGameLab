@@ -406,7 +406,7 @@ namespace Boku.Common.Xml
 
         #region Members
         [XmlIgnore]
-        private static readonly string Prefix = Path.Combine("Content", "Xml", "Actors") + Path.DirectorySeparatorChar;
+        private static readonly string Prefix = Path.Combine("Xml", "Actors") + Path.DirectorySeparatorChar;
         [XmlIgnore]
         private const string Suffix = @".xml";
 

@@ -445,11 +445,11 @@ namespace Boku.SimWorld.Path
                 Vector4 renderColor = color;
 
                 // Set parameters.
-                manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(currentRadius);
-                manager.Parameter(ParticleSystemManager.EffectParams3d.SpecularColor).SetValue(new Vector4(0.9f));
-                manager.Parameter(ParticleSystemManager.EffectParams3d.SpecularPower).SetValue(16.0f);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, currentRadius);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.SpecularColor, new Vector4(0.9f));
+                manager.TrySet(ParticleSystemManager.EffectParams3d.SpecularPower, 16.0f);
 
-                manager.Parameter(ParticleSystemManager.EffectParams3d.Shininess).SetValue(0.4f);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.Shininess, 0.4f);
 
                 // Set up world matrix.
                 Matrix worldMatrix = Matrix.Identity;
@@ -488,9 +488,9 @@ namespace Boku.SimWorld.Path
                     darkColor = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
                     emissiveColor = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
                 }
-                manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(darkColor);
-                manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(emissiveColor);
-                manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(0.25f);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, darkColor);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, emissiveColor);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, 0.25f);
 
                 sphere.Render(camera, ref worldMatrix, effect);
 
@@ -498,10 +498,10 @@ namespace Boku.SimWorld.Path
                     ? manager.Technique(ParticleSystemManager.EffectTech3d.OpaqueColorPass)
                     : manager.Technique(ParticleSystemManager.EffectTech3d.TransparentColorPass);
 
-                manager.Parameter(ParticleSystemManager.EffectParams3d.Radius).SetValue(radius);
-                manager.Parameter(ParticleSystemManager.EffectParams3d.DiffuseColor).SetValue(renderColor);
-                manager.Parameter(ParticleSystemManager.EffectParams3d.EmissiveColor).SetValue(Vector4.Zero);
-                manager.Parameter(ParticleSystemManager.EffectParams3d.Alpha).SetValue(Alpha);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.Radius, radius);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.DiffuseColor, renderColor);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.EmissiveColor, Vector4.Zero);
+                manager.TrySet(ParticleSystemManager.EffectParams3d.Alpha, Alpha);
 
                 // Render
                 sphere.Render(camera, ref worldMatrix, effect);

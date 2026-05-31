@@ -352,7 +352,17 @@ namespace Boku.UI2D
                 {
                     int width = 1280;
                     int height = 720;
-                    int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
+                    // IMPORTANT: pass 0 (not 1) for preferredMultiSampleCount.
+                    // MonoGame's GetClampedMultisampleCount(1) returns 0 so RenderTarget2D.MultiSampleCount
+                    // becomes 0, BUT PlatformCreateRenderTarget on OpenGL checks the UNCLAMPED parameter
+                    // with `if (preferredMultiSampleCount > 0)` and takes the multisample renderbuffer
+                    // branch — attaching an MSAA renderbuffer to the FBO instead of the texture. All
+                    // draws then go to the renderbuffer, and because MultiSampleCount is clamped to 0
+                    // the resolve step on SetRenderTarget(null) never runs, leaving the texture empty.
+                    // Symptom: shared RT silently swallows Clear/Draw while SetData (which writes the
+                    // texture directly) still works.
+                    // See MonoGame GraphicsDevice.OpenGL.cs:639 / RenderTarget2D.OpenGL.cs.
+                    int numSamples = 0;
                     renderTargetDepthStencil1280_720 = new RenderTarget2D(
                         BokuGame.bokuGame.GraphicsDevice,
                         width, height, false,
@@ -739,7 +749,13 @@ namespace Boku.UI2D
             height = 720;
             if (renderTargetDepthStencil1280_720 == null)
             {
-                int numSamples = BokuSettings.Settings.AntiAlias ? 8 : 1;
+                // Use 0 (not 1) for preferredMultiSampleCount: passing 1 triggers a MonoGame
+                // OpenGL bug where PlatformCreateRenderTarget allocates an MSAA color
+                // renderbuffer (because `preferredMultiSampleCount > 0` is checked unclamped)
+                // but the resolve to texture never runs (because `MultiSampleCount` is clamped
+                // to 0 by GetClampedMultisampleCount). Net effect: all draws into the RT are
+                // silently lost; only SetData (which writes the texture directly) works.
+                int numSamples = 0;
 
                 renderTargetDepthStencil1280_720 = new RenderTarget2D(
                     device,

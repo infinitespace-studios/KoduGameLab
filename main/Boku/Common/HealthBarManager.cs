@@ -41,7 +41,6 @@ namespace Boku.Common
             LifeTint,
             LifePct,
             BackSize,
-            LifeSize,
         }
         #endregion
 
@@ -49,7 +48,6 @@ namespace Boku.Common
         const float kLifeBarScalarY = 0.6875f;
 
         private /*const*/ static Vector2 kBackSize;
-        private /*const*/ static Vector2 kLifeSize;
         private static List<GameActor> actors;
         private static List<int> freelist;
 
@@ -221,10 +219,9 @@ namespace Boku.Common
 
                 Vector3 forward = Vector3.Normalize(new Vector3(camera.ViewDir.X, camera.ViewDir.Y, 0));
 
-                Parameter(EffectParams.BackTexture).SetValue(BackTexture);
-                Parameter(EffectParams.LifeTexture).SetValue(LifeTexture);
-                Parameter(EffectParams.BackSize).SetValue(kBackSize);
-                Parameter(EffectParams.LifeSize).SetValue(kLifeSize);
+                effectCache.TrySet((int)(EffectParams.BackTexture), BackTexture);
+                effectCache.TrySet((int)(EffectParams.LifeTexture), LifeTexture);
+                effectCache.TrySet((int)(EffectParams.BackSize), kBackSize);
 
                 Array arr = actors.ToArray();
                 Array.Sort(arr, new GameActorCompare(camera));
@@ -341,9 +338,9 @@ namespace Boku.Common
 
             float lifePct = (float)actor.HitPoints / (float)actor.MaxHitPoints;
 
-            Parameter(EffectParams.WorldViewProj).SetValue(worldViewProj);
-            Parameter(EffectParams.LifeTint).SetValue(GetLifeTint(lifePct));
-            Parameter(EffectParams.LifePct).SetValue(lifePct);
+            effectCache.TrySet((int)(EffectParams.WorldViewProj), worldViewProj);
+            effectCache.TrySet((int)(EffectParams.LifeTint), GetLifeTint(lifePct));
+            effectCache.TrySet((int)(EffectParams.LifePct), lifePct);
 
             device.SetVertexBuffer(vertexBuf);
             device.Indices = UI2D.Shared.QuadIndexBuff;
@@ -394,9 +391,6 @@ namespace Boku.Common
 
             // Scale background frame to be of length one on the long side (width).
             kBackSize = new Vector2(BackTexture.Width, BackTexture.Height) / (float)BackTexture.Width;
-
-            // Scale life bar image to fit inside the background frame (original images are of equal size).
-            kLifeSize = new Vector2(kBackSize.X * kLifeBarScalarX, kBackSize.Y * kLifeBarScalarY);
 
             vertexBuf = new VertexBuffer(device, typeof(VertexPositionTexture), 4, BufferUsage.WriteOnly);
             VertexPositionTexture[] verts = new VertexPositionTexture[4] {

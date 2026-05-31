@@ -38,8 +38,8 @@ namespace Boku.Fx
 
             SetUvToPos();
 
-            effect.Parameters["ThresholdValue"].SetValue(threshold);
-            effect.Parameters["SourceTexture"].SetValue(source);
+            effect.Parameters["ThresholdValue"]?.SetValue(threshold);
+            effect.Parameters["SourceTexture"]?.SetValue(source);
 
             effect.CurrentTechnique = effect.Techniques["Threshold"];
 

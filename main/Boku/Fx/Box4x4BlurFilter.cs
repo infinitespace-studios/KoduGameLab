@@ -42,8 +42,8 @@ namespace Boku.Fx
             // This is the width and height of a pixel in texture space.
             Vector2 pixelSize = new Vector2(1.0f / device.Viewport.Width, 1.0f / device.Viewport.Height);
 
-            effect.Parameters["SourceTexture"].SetValue(source);
-            effect.Parameters["PixelSize"].SetValue(pixelSize);
+            effect.Parameters["SourceTexture"]?.SetValue(source);
+            effect.Parameters["PixelSize"]?.SetValue(pixelSize);
 
             effect.CurrentTechnique = effect.Techniques["Box4x4Blur"];
 
@@ -95,7 +95,7 @@ namespace Boku.Fx
                 uvToSource.Z = left / source.Width;
                 uvToSource.W = 0.0f;
             }
-            effect.Parameters["UvToSource"].SetValue(uvToSource);
+            effect.Parameters["UvToSource"]?.SetValue(uvToSource);
 
         }
 

@@ -78,7 +78,7 @@ namespace Boku.Base
                 -1.0f - pixelWidth,     // x offset
                 1.0f + pixelHeight);    // y offset
 
-            effect.Parameters["UvToPos"].SetValue(uvToPos);
+            effect.Parameters["UvToPos"]?.SetValue(uvToPos);
 
         }   // end of BaseFilter SetUvToPos()
 

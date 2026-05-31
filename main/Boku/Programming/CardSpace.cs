@@ -65,7 +65,7 @@ namespace Boku.Programming
         }
 
         #region Constants
-        private static readonly string xmlFileName = Path.Combine("Content", "Xml", "CardSpace.xml");
+        private static readonly string xmlFileName = Path.Combine("Xml", "CardSpace.xml");
         #endregion
 
         private static Dictionary<string, List<string>> localizationDictionary;
@@ -772,6 +772,17 @@ namespace Boku.Programming
                 }
                 else
                 {
+                    const string prefixA = @"Textures\Tiles\";
+                    const string prefixB = @"Textures/Tiles/";
+                    if (imagefile.StartsWith(prefixA, StringComparison.OrdinalIgnoreCase))
+                    {
+                        imagefile = imagefile.Substring(prefixA.Length);
+                    }
+                    else if (imagefile.StartsWith(prefixB, StringComparison.OrdinalIgnoreCase))
+                    {
+                        imagefile = imagefile.Substring(prefixB.Length);
+                    }
+
                     try
                     {
                         texture = BokuGame.Load<Texture2D>(BokuGame.Settings.MediaPath + @"Textures\Tiles\" + imagefile);

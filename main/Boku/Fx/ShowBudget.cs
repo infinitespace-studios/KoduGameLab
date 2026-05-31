@@ -123,11 +123,11 @@ namespace Boku.Fx
 
             effect.CurrentTechnique = budgetTechnique;
 
-            Parameter(EffectParams.Color).SetValue(color);
-            Parameter(EffectParams.Height).SetValue(height);
-            Parameter(EffectParams.Transform).SetValue(transform);
-            Parameter(EffectParams.Background).SetValue(background);
-            Parameter(EffectParams.Mask).SetValue(mask);
+            effectCache.TrySet((int)(EffectParams.Color), color);
+            effectCache.TrySet((int)(EffectParams.Height), height);
+            effectCache.TrySet((int)(EffectParams.Transform), transform);
+            effectCache.TrySet((int)(EffectParams.Background), background);
+            effectCache.TrySet((int)(EffectParams.Mask), mask);
 
             DrawPrim(device);
 
@@ -286,9 +286,9 @@ namespace Boku.Fx
                 //float intensity = MyMath.SmoothStep(0.0f, 1.0f, borderIntensity) * color.W;
                 float intensity = borderIntensity * color.W;
                 Vector4 colorParam = new Vector4(borderColor * intensity, intensity);
-                Parameter(EffectParams.BorderGlowColor).SetValue(colorParam);
-                Parameter(EffectParams.Glow).SetValue(glow);
-                Parameter(EffectParams.Transform).SetValue(transform);
+                effectCache.TrySet((int)(EffectParams.BorderGlowColor), colorParam);
+                effectCache.TrySet((int)(EffectParams.Glow), glow);
+                effectCache.TrySet((int)(EffectParams.Transform), transform);
 
                 DrawPrim(device);
             }

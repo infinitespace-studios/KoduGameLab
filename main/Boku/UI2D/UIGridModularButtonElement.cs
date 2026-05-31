@@ -275,17 +275,17 @@ namespace Boku.UI2D
         {
             effect.CurrentTechnique = effect.Techniques["NormalMappedWithEnv"];
             
-            effect.Parameters["DiffuseTexture"].SetValue(diffuse);
+            effect.Parameters["DiffuseTexture"]?.SetValue(diffuse);
 
-            effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-            effect.Parameters["WorldViewProjMatrix"].SetValue(worldMatrix * camera.ViewProjectionMatrix);
+            effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+            effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldMatrix * camera.ViewProjectionMatrix);
 
-            effect.Parameters["Alpha"].SetValue(alpha);
-            effect.Parameters["DiffuseColor"].SetValue(new Vector4(dim, dim, dim, 1.0f));
-            effect.Parameters["SpecularColor"].SetValue(specularColor);
-            effect.Parameters["SpecularPower"].SetValue(specularPower);
+            effect.Parameters["Alpha"]?.SetValue(alpha);
+            effect.Parameters["DiffuseColor"]?.SetValue(new Vector4(dim, dim, dim, 1.0f));
+            effect.Parameters["SpecularColor"]?.SetValue(specularColor);
+            effect.Parameters["SpecularPower"]?.SetValue(specularPower);
 
-            effect.Parameters["NormalMap"].SetValue(normalMap);
+            effect.Parameters["NormalMap"]?.SetValue(normalMap);
 
             geometry.Render(effect);
 

@@ -802,15 +802,15 @@ namespace Boku.UI2D
                 // Black background.
                 effect.CurrentTechnique = effect.Techniques["NormalMappedNoTexture"];
 
-                effect.Parameters["WorldMatrix"].SetValue(worldMatrix);
-                effect.Parameters["WorldViewProjMatrix"].SetValue(worldMatrix * camera.ViewProjectionMatrix);
+                effect.Parameters["WorldMatrix"]?.SetValue(worldMatrix);
+                effect.Parameters["WorldViewProjMatrix"]?.SetValue(worldMatrix * camera.ViewProjectionMatrix);
 
-                effect.Parameters["Alpha"].SetValue(1.0f);
-                effect.Parameters["DiffuseColor"].SetValue(new Vector4(0, 0, 0, 1));
-                effect.Parameters["SpecularColor"].SetValue(new Vector4(0.2f, 0.2f, 0.2f, 1.0f));
-                effect.Parameters["SpecularPower"].SetValue(32.0f);
+                effect.Parameters["Alpha"]?.SetValue(1.0f);
+                effect.Parameters["DiffuseColor"]?.SetValue(new Vector4(0, 0, 0, 1));
+                effect.Parameters["SpecularColor"]?.SetValue(new Vector4(0.2f, 0.2f, 0.2f, 1.0f));
+                effect.Parameters["SpecularPower"]?.SetValue(32.0f);
 
-                effect.Parameters["NormalMap"].SetValue(normalMap);
+                effect.Parameters["NormalMap"]?.SetValue(normalMap);
 
                 geometry.Render(effect);
 
